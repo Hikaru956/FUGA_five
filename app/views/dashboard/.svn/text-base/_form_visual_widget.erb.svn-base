@@ -1,0 +1,28 @@
+<% if @item.id.blank? %>
+<div class="control-group">
+	<label class="control-label" for="item_widget_type">ウィジッドのタイプ</label>
+	<div class="controls">
+		<select name="item[widget_type]" id="item_widget_type">
+			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_STRING %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_STRING%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_STRING)%></option>
+			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_TEXT %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_TEXT%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_TEXT)%></option>
+			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_CODE %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_CODE%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_CODE)%></option>
+			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_LINK %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_LINK%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_LINK)%></option>
+			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_PHOTO %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_PHOTO%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_PHOTO)%></option>
+			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_PHOTOS %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_PHOTOS%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_PHOTOS)%></option>
+		</select>
+	</div>
+</div>					
+<% end %>
+
+<div class="control-group">
+	<label class="control-label" for="item_titles">ウィジットのタイトル</label>
+	<div class="controls">
+		<%= text_field 'item', 'title', :placeholder=>"ヘッドテキスト、ロゴ画像等", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="item_description">入力するデータの説明</label>
+	<div class="controls">
+		<%= text_area  'item', 'description', :rows=>"5", :class=>"span4", :placeholder=>"文字数、画像サイズ等" %>
+	</div>
+</div>

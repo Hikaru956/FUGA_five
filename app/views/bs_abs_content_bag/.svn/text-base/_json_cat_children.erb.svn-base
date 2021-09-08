@@ -1,0 +1,10 @@
+<%
+parent.children.each do |item|
+	cat_hash = Hash.new
+	cat_hash[:id] = item.id
+	cat_hash[:parent] = item.parent.id
+	cat_hash[:text] = item.name
+	cat_array <<  cat_hash.to_json
+%>		
+	<%= render :partial=>'json_cat_children', :locals=>{:cat_array=>cat_array, :parent=>item}	unless item.children.blank? %>	
+<% end %>

@@ -1,0 +1,32 @@
+<div class="control-group">
+	<label class="control-label" for="color[is_public]">公開設定</label>
+	<div class="controls">
+		<label class="radio inline">
+			<input type="radio" id="color[is_public]" name="color[is_public]" value="1" <% if @color.is_public %>checked<% end %>>
+			公開
+		</label>
+		<label class="radio inline">
+			<input type="radio" id="color[is_public]" name="color[is_public]" value="0" <% if !@color.is_public %>checked<% end %>>
+			非公開
+		</label>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="login">カラー・スキーム名</label>
+	<div class="controls">
+		<%= text_field 'color', 'name', :placeholder=>"カラー・スキーム名を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="description">説明文</label>
+	<div class="controls">
+		<%= text_area  'color', 'description', :rows=>"5", :class=>"span4" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="login">アセット・パス</label>
+	<div class="controls">
+		<%= text_field 'color', 'repository_path', :placeholder=>"アセット・パスを入力", :autocomplete => "off" %>
+	</div>
+</div>

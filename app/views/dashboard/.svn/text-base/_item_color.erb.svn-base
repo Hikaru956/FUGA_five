@@ -1,0 +1,32 @@
+<div class="thumbnail">
+	<div class="caption">
+		<% if temp_local.position==1 %>
+			<span class="pull-right"><i class="icon-spinner icon-spin icon-large"></i></span>
+		<% end %>
+		<p class="wewll" style="text-align:center;">
+			<%= (temp_local.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"color_higher",	:id=>temp_local) %>
+			<%= temp_local.position %>
+			<%= (temp_local.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"color_lower",	:id=>temp_local) %>				
+		</p>
+	</div>
+	<div  style="text-align:center;">
+		<a href="<%= url_for(:action=>'color_show', :id=>temp_local) %>">
+			<% key_photo = temp_local.photo %>
+			<% unless key_photo.blank? %>
+				<%= image_tag(url_for_file_column(key_photo, :image, "thumb")) %>
+			<% else %>
+				<img src="http://placehold.it/320x240&amp;text=No Photo">
+	    	<% end %>
+		</a>
+	</div>
+    <div class="caption">
+        <h4>
+        	<% unless temp_local.wsite_color_deploys.blank? %>
+		    	<span class="pull-right"><span class="badge badge-success"><%= temp_local.wsite_color_deploys.size%></span></span>
+			<% end %>
+        	<%= scheme_state_icons(temp_local) %>
+        	<%= truncate(model_name(temp_local), :length=>50) %>
+		</h4>
+		<p><%= h truncate(temp_local.description, :length=>20) %></p>
+    </div>
+</div>

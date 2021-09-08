@@ -1,0 +1,46 @@
+<div class="control-group">
+	<label class="control-label" for="wsite_keywords">サイト・キーワード</label>
+	<div class="controls">
+		<%= text_field 'shop', 'wsite_keywords', :placeholder=>"サイト・キーワードを入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="job_title">サイトの説明</label>
+	<div class="controls">
+		<%= text_field 'shop', 'wsite_description_shop', :placeholder=>"サイトの説明を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="wsite_telephone">問い合わせ電話番号</label>
+	<div class="controls">
+		<%= text_field 'shop', 'wsite_telephone', :placeholder=>"電話番号を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="wsite_email">メールアドレス</label>
+	<div class="controls">
+		<%= text_field 'shop', 'wsite_email', :placeholder=>"メールアドレスを入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="shop[use_disqus]">ブログコメント</label>
+	<div class="controls">
+		<label class="radio inline">
+			<input type="radio" id="shop[use_disqus]" name="shop[use_disqus]" value="1" <% if @shop.use_disqus %>checked<% end %>>
+			使用する
+		</label>
+		<label class="radio inline">
+			<input type="radio" id="shop[use_disqus]" name="shop[use_disqus]" value="0" <% if !@shop.use_disqus %>checked<% end %>>
+			使用しない
+		</label>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="wsite_email">コピーライト</label>
+	<div class="controls">
+		<%= text_field 'shop', 'copyright_notice', :placeholder=>"カスタム・コピーライト表示", :autocomplete => "off" %>
+	</div>
+</div>
+
+
+

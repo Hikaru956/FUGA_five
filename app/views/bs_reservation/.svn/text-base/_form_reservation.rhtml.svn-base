@@ -1,0 +1,62 @@
+	<%= hidden_field 'item', 'shop_id' %>
+	<div class="control-group">
+		<label class="control-label" for="start_hour">開始時刻</label>
+		<div class="controls">
+			<select name="start_hour" class="span2">
+				<% for hour in @shop.business_hour_from..(@shop.business_hour_until-1) %>
+					<%
+						hour_count = hour
+						if @item.reserved_on.hour < @shop.business_hour_from
+							hour_count-=24
+						end
+					%>
+				  	<option value="<%=hour%>" <% if @item.reserved_on.hour==hour_count %>selected<% end %>>
+						<%= (Time.mktime(@item.reserved_on.year,@item.reserved_on.month,@item.reserved_on.day, 0, 0, 0)+(hour*60*60)).strftime("%l:%M %p") %>
+					</option>
+				<% end %>
+			</select>
+			:
+			<select name="start_min"  class="span1">
+			  <option <% if @item.reserved_on.min==0 %>selected<% end %>>00</option>
+			  <option <% if @item.reserved_on.min==15 %>selected<% end %>>15</option>
+			  <option <% if @item.reserved_on.min==30 %>selected<% end %>>30</option>
+			  <option <% if @item.reserved_on.min==45 %>selected<% end %>>45</option>
+			</select>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="start_hour">時間</label>
+		<div class="controls">
+			<select name="item[min_period]"  class="span3">
+			  <option value="30"  <% if @item.min_period==30 %>selected<% end %>>30分　　　</option>
+			  <option value="45"  <% if @item.min_period==45 %>selected<% end %>>45分　　　</option>
+			  <option value="60"  <% if @item.min_period==60 %>selected<% end %>>60分　　　</option>
+			  <option value="75"  <% if @item.min_period==75 %>selected<% end %>>1時間30分</option>
+			  <option value="120" <% if @item.min_period==120 %>selected<% end %>>2時間</option>
+			  <option value="150" <% if @item.min_period==150 %>selected<% end %>>2時間30分</option>
+			  <option value="180" <% if @item.min_period==180 %>selected<% end %>>3時間</option>
+			  <option value="240" <% if @item.min_period==240 %>selected<% end %>>4時間</option>
+			  <option value="360" <% if @item.min_period==360 %>selected<% end %>>6時間</option>
+			  <option value="480" <% if @item.min_period==480 %>selected<% end %>>8時間</option>
+			</select>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="in_charge">担当</label>
+			<% 
+			    c = Condition.new
+			    c.and("staffs.staff_status", ">=", Staff::STAFF_HELPER)
+				staffs = @shop.staffs.find(:all, :conditions => c.where, :order=>["position asc, alt_id asc"])
+		 		options = staffs.map{ | s | [ s.name, s.id] }
+				options.unshift(["-- 未設定 --　", '']) 
+			%>
+			<div class="controls">
+				<%= collection_select(:item, :staff_id, options, :last, :first)%>
+			</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="item_memo_1">連絡事項</label>
+		<div class="controls">
+			<%= text_area  'item', 'memo_1', {:class=>"input-xxlarge" , :rows => 5}  %>
+		</div>
+	</div>

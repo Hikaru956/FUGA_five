@@ -1,0 +1,56 @@
+<div class="thumbnail">
+	<div class="caption">
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+			<p class="wewll" style="text-align:center;">
+				<%= (photo.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"photo_staff_higher",	:id=>photo) %>
+				<%= photo.position %>
+				<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"photo_staff_lower",		:id=>photo) %>				
+			</p>
+		<% end %>
+	</div>
+	<%= image_tag(url_for_file_column(photo, :image, "thumb")) %>
+	<div class="caption">
+		<p><%=photo.info%></p>
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+			<p class="text-center">
+				<a class="btn btn-success btn-small" data-toggle="modal" href="#modal_edit_photo_<%=photo.id%>">	<i class="icon-info-sign"></i>&nbsp;キャプション</a>
+				<a class="btn btn-danger btn-small"  data-toggle="modal" href="#modal_delete_photo_<%=photo.id%>">	<i class="icon-trash"></i>&nbsp;削除確認</a>
+			</p>
+		<% end %>
+	</div>
+</div>
+
+<%= form_tag url_for(:action=>"update_staff_photo", :id=>photo), {:class=>"modal hide fade form-horizontal", :id=>"modal_edit_photo_#{photo.id}"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">キャプション編集</h3>
+	</div>
+	<div class="modal-body">
+		<div class="control-group">
+			<label class="control-label" for="job_title">写真の説明</label>
+			<div class="controls">
+				<%= text_area  'photo', 'info', :rows=>"5" %>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<div id="modal_delete_photo_<%=photo.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">削除確認</h3>
+  </div>
+  <div class="modal-body">
+    <p>写真を削除します。よろしいですか？</p>
+  </div>
+  <div class="modal-footer">
+	<%= form_tag({:action => 'delete_staff_photo', :id=>photo}, :class=>"form-horizontal")  do %>
+		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+  	<%end%>  	
+  </div>
+</div>

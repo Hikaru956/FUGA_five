@@ -1,0 +1,32 @@
+<div class="control-group">
+	<label class="control-label" for="layout[is_public]">公開設定</label>
+	<div class="controls">
+		<label class="radio inline">
+			<input type="radio" id="layout[is_public]" name="layout[is_public]" value="1" <% if @layout.is_public %>checked<% end %>>
+			公開
+		</label>
+		<label class="radio inline">
+			<input type="radio" id="layout[is_public]" name="layout[is_public]" value="0" <% if !@layout.is_public %>checked<% end %>>
+			非公開
+		</label>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="login">レイアウト・スキーム名</label>
+	<div class="controls">
+		<%= text_field 'layout', 'name', :placeholder=>"レイアウト・スキーム名を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="description">説明文</label>
+	<div class="controls">
+		<%= text_area  'layout', 'description', :rows=>"5", :class=>"span4" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="login">アセット・パス</label>
+	<div class="controls">
+		<%= text_field 'layout', 'repository_path', :placeholder=>"アセット・パスを入力", :autocomplete => "off" %>
+	</div>
+</div>

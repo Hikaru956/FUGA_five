@@ -1,0 +1,40 @@
+<header class="subhead" id="overview">
+	<h3>予約管理</h3>
+</header>
+
+<ul id="tab_nav" class="nav nav-tabs">
+	<li class="active">	<a href="<%= url_for(:action=>'reservation', 	:target_date=>@target_date) %>"><i class="icon-list"></i>&nbsp;予約</a></li>
+	<li>				<a href="<%= url_for(:action=>'birthday',		:target_date=>@target_date) %>"><i class="icon-gift"></i>&nbsp;誕生日</a></li>
+</ul>
+
+<div id="sandbox"></div>				
+
+<p class="lead">
+	<%= @target_date%>&nbsp;(<%=wday(@target_date)%>)
+	&nbsp;
+	<span class="btn-group">
+		<span class="btn-toolbar" style="margin: 0;">
+		  <span class="btn-group">
+		  	<% prev_url = url_for(:action=>"reservation", :target_date=>(@target_date-1))%>
+		    <a href="<%= prev_url %>" class="btn btn-small"><i class="icon-chevron-left"></i>&nbsp;前日</a>
+		  	<% today_url = url_for(:action=>"reservation")%>
+		    <a href="<%= today_url %>" class="btn btn-small btn-info">今日</a>
+		  	<% next_url = url_for(:action=>"reservation", :target_date=>(@target_date+1))%>
+		    <a href="<%= next_url %>" class="btn btn-small">翌日&nbsp;<i class="icon-chevron-right"></i></a>
+		  </span>
+		  <span class="btn-group">
+		  	<% calendar_url = url_for(:action=>"reservation_calendar", :target_date=>@target_date)%>
+		    <a href="<%= calendar_url %>" class="btn btn-success btn-small"><i class="icon-calendar"></i>&nbsp;カレンダー</a>
+		  </span>
+		</span>
+	</span>
+</p>
+
+<% if @target_date < Time.now.to_date %>
+	<div class="alert alert-info">
+		<span class="stext-error"><i class='icon-exclamation-sign'></i>&nbsp;表示情報は過去の日付のものです。</span>
+	</div>
+<% end %>
+
+<%= render :partial=>"timelines_quarter"%>
+

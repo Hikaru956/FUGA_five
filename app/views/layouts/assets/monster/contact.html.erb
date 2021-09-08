@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title><%= model_title(@seed) %> - <%= @website.name %></title>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster/head_logic" %>
+    </head>
+    <body>
+        <div class="spinner">
+        </div>
+        <!--============================== header =================================-->
+        <header>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/header" %>
+        </header>
+        <div class="bg-content">
+            <!--============================== content =================================-->
+            <div id="content" class="content-extra">
+                <div class="ic">
+                </div>
+                <div class="row-1">
+                    <div class="container">
+                        <br/>
+                        <script src="http://maps.google.com/maps/api/js?sensor=true&language=ja">
+                        </script>
+                        <style>
+                            #map {
+                                width: 100%;
+                                height: 450px;
+                                margin-bottom: 15px;
+                            }
+                        </style>
+                        <style>
+                            #map img {
+                                max-width: none;
+                            }
+                        </style>
+                        <div class="row">
+                            <div class="span12">
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>"><i class="icon-home"></i></a>
+                                    </li>
+                                    <li class="active">
+                                        <%= model_title(@seed) %>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="box">
+                                <div class="span12">
+                                    <hr><h2 class="intro-text text-center"><strong><%= model_name(@website) %></strong></h2>
+                                    <hr>
+                                </div>
+                                <div class="span8">
+                                    <% if @website.gps? %>
+                                    <div id="map">
+                                    </div>
+                                    <% end %>
+                                </div>
+                                <div class="span4">
+						        	<% unless @website.wsite_telephone.blank? %>
+										<h4>
+							                <i class="icon-phone-sign"></i>
+											<a href="tel:<%=@website.wsite_telephone %>"><%=@website.wsite_telephone %></a>
+										</h4>
+						            <% end %>
+									<% unless @website.wsite_description_business.blank? %><%=raw @website.wsite_description_business%><% end %>
+						            <p>
+										<% unless @website.wsite_email.blank? %>
+						                    <i class="icon-envelope"></i>
+											<strong><a href="mailto:<%=@website.wsite_email %>"><%=h truncate(@website.wsite_email, :length=>40) %></a></strong>
+										<% end %>
+										<div class="text-center">
+											<% unless @website.wsite_email.blank? %>
+												<a href="mailto:<%=@website.wsite_email %>?subject=問い合わせ&amp;body=ご記入ください" class="btn btn-info btn-mini"><i class="icon-home"></i>&nbsp;問い合わせ</a>
+											<% end %>
+											<% unless @website.google_calendar_url.blank? %>
+												<a href="<%=@website.google_calendar_url %>" class="btn btn-info btn-mini" target="_blank"><i class="icon-calendar"></i>&nbsp;店舗カレンダー</a>
+											<% end %>
+										</div>
+						            </p>
+						            <p>
+						                <i class="icon-compass"></i>
+										<%=model_name(@website) %>
+						                <br>
+										<% unless @website.address_1.blank? %>
+						                    <%=@website.address_1 %>
+						                    <br>
+										<% end %>
+										<% unless @website.address_2.blank? %>
+						                    <%=@website.address_2 %>
+						                    <br>
+										<% end %>
+						            </p>
+                                </div>
+                                <div class="clearfix">
+                                </div>
+                            </div>
+                        </div>
+                        <% @staffs = @website.public_staffs %>
+                        <% unless @staffs.blank? %>
+                        <div class="row">
+                            <div class="span12">
+                                <h2 class="page-header">スタッフ</h2>
+                            </div>
+                            <% @staffs.each do | staff | @staff = staff%>
+                            <div class="span4">
+                                <div class="thumbnail">
+                                    <% key_photo = key_photo(@staff) %>
+                                    <% unless key_photo.blank? %>
+                                    <%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
+                                    <% else %>
+                                    <img src="http://placehold.it/750x450&amp;text=No Face Photo"><% end %>
+                                    <h3><%= model_name(@staff) %>
+                                        <small>
+                                            <%= h @staff.job_title %>
+                                        </small>
+                                    </h3>
+                                    <p>
+                                        <a href="<%= url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key) %>" class="btn btn-primary">Read</a>
+                                    </p>
+                                    <ul class="list-inline list-social text-right">
+							        	<% unless @staff.social_facebook_uri.blank? %>
+								            <li class="tooltip-social facebook-link">
+								                <a href="<%= @staff.social_facebook_uri%>" data-toggle="tooltip" data-placement="top" title="Facebook" target='_blank'><i class="icon-facebook-sign icon-2x"></i></a>
+								            </li>
+										<% end %>
+							        	<% unless @staff.social_gplus_uri.blank? %>
+								            <li class="tooltip-social google-plus-link">
+								                <a href="<%= @staff.social_gplus_uri %>" data-toggle="tooltip" data-placement="top" title="Google+" target='_blank'><i class="icon-google-plus-sign icon-2x"></i></a>
+								            </li>
+										<% end %>
+							        	<% unless @staff.social_twitter_uri.blank? %>
+								            <li class="tooltip-social twitter-link">
+								                <a href="<%= @staff.social_twitter_uri %>" data-toggle="tooltip" data-placement="top" title="Twitter" target='_blank'><i class="icon-twitter-sign icon-2x"></i></a>
+								            </li>
+										<% end %>
+							        	<% unless @staff.social_instagram_uri.blank? %>
+								            <li class="tooltip-social instagram-link">
+								                <a href="<%= @staff.social_instagram_uri %>" data-toggle="tooltip" data-placement="top" title="Instagram" target='_blank'><i class="icon-instagram icon-2x"></i></a>
+								            </li>
+										<% end %>
+							        	<% unless @staff.social_pinterest_uri.blank? %>
+								            <li class="tooltip-social pinterest-link">
+								                <a href="<%= @staff.social_pinterest_uri %>" data-toggle="tooltip" data-placement="top" title="Pinterest" target='_blank'><i class="icon-pinterest-sign icon-2x"></i></a>
+								            </li>
+										<% end %>
+							        	<% unless @staff.social_tumblr_uri.blank? %>
+								            <li class="tooltip-social tumblr-link">
+								                <a href="<%= @staff.social_tumblr_uri %>" data-toggle="tooltip" data-placement="top" title="Tumblr" target='_blank'><i class="icon-tumblr-sign icon-2x"></i></a>
+								            </li>
+										<% end %>
+                                    </ul>
+                                </div>
+                            </div>
+                            <% end %>
+                        </div>
+                        <% end %>
+
+						<% unless @website.google_calendar_emb_frame_code.blank? %>
+                        	<hr/>
+                            <div class="span12" align="center">
+								<%= raw @website.google_calendar_emb_frame_code %>
+							</div>
+                        	<hr/>
+						<% end %>
+
+                        <% if @website.gps? %>
+                        <script>
+                                		    var latlng = new google.maps.LatLng(<%= @website.lat %>, <%= @website.lng %>);
+                                		    var options = {
+                                		        zoom: 14,
+                                		        center: latlng,
+                                		        mapTypeId: google.maps.MapTypeId.ROADMAP
+                                		    }
+                                		    var map = new google.maps.Map(document.getElementById('map'), options);
+                                			
+                                			var shop_marker; 
+                                		    shop_marker = new google.maps.Marker({
+                                		        position:latlng,
+                                		        map: map
+                                		    });
+                                		
+                        </script>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--============================== footer =================================-->
+        <footer>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/footer" %>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+<%=
+require 'date'
+require 'date/holiday'
+
+today = Time.now
+calendar({:year => @target_date.year, :month => @target_date.month}) do |d|
+	cell_attrs = {:class => 'reservation day'}
+	
+	is_future = false
+	if today.year==d.year && today.month==d.month && today.day==d.day
+	  cell_attrs = {:class =>'reservation today' }
+	elsif d.to_time < today.to_time
+	  cell_attrs = ((d.national_holiday? || d.wday==0)? {:class => 'reservation holiday_passed'}: {:class => 'reservation day'})
+	else
+	  cell_attrs = ((d.national_holiday? || d.wday==0)? {:class => 'reservation holiday'}: {:class => 'reservation future_day'})
+	  is_future = true
+	end
+
+
+	@finder_range_from  = Time.mktime(d.year, d.month, d.day, @shop.business_hour_from,0,0) 
+	@finder_range_until = Time.mktime(d.year, d.month, d.day, @shop.business_hour_until,59,59) 
+	reservations = Reservation.in_range(@finder_range_from, @finder_range_until, @shop)
+
+	list_url = url_for(:action=>'reservation', :target_date=>d)
+	cell_text = "<a href='#{list_url}'>"
+	cell_text << "<span class='calendar_day'>#{d.mday}&nbsp</span><br/>"
+	unless reservations.blank?
+		cell_text << "<span class='badge badge-success'>#{reservations.size}</span>" 
+	end
+	cell_text << "</a>" 
+
+	[cell_text, cell_attrs]
+end
+%>

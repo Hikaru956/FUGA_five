@@ -1,0 +1,31 @@
+<header class="subhead" id="overview">
+	<h3>誕生日</h3>
+</header>
+
+<ul id="tab_nav" class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:action=>'reservation', 	:target_date=>@target_date) %>"><i class="icon-list"></i>&nbsp;予約</a></li>
+	<li class="active">	<a href="<%= url_for(:action=>'birthday',		:target_date=>@target_date) %>"><i class="icon-gift"></i>&nbsp;誕生日</a></li>
+</ul>
+
+<div class="row">
+	<div class="span3">
+		<%= stylesheet_link_tag "calendar_bs" %>
+		
+		<div class="letterMonth"><%= (@target_date.to_date.month) %></div>
+		<% if false %>
+		<div class="letterYear"><%= (@target_date.to_date.year) %></div>
+		<% end %>
+		<br/>
+		<div style="text-align:center;">
+			<div class="btn-group">
+					<%= link_to("<i class='icon-arrow-left'></i>", 	{:action=>'birthday_calendar', :target_date=>(@target_date.to_date)<<1}, :class=>"btn btn-middle") %>
+					<%= link_to("今月", 								{:action=>'birthday_calendar'}, :class=>"btn btn-middle") %>
+					<%= link_to("<i class='icon-arrow-right'></i>", {:action=>'birthday_calendar', :target_date=>(@target_date.to_date)>>1}, :class=>"btn btn-middle") %>
+			</div>		
+		</div>		
+		<br/>
+	</div>
+	<div class="span9">
+		<%= render :partial=>"birthday_calendar"%>
+	</div>
+</div>

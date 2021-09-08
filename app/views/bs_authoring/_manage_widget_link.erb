@@ -1,0 +1,60 @@
+<% @widget_bag = @visual_widget.get_bag_for(@website) %>
+<% unless @widget_bag.blank? %>
+	<h4>
+		<div class="pull-right">
+			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit_<%=@widget_bag.id%>">
+				<i class="icon-pencil"></i>&nbsp;
+	  			編集
+			</a>
+		</div>
+		<%= @visual_widget.position %>
+		:
+		[<%= widget_type_string(@visual_widget.widget_type) %>]	
+		<%= model_title(@visual_widget) %>
+	</h4>
+	<blockquote><%= h @visual_widget.description %></blockquote>
+	<% unless @widget_bag.data_url.blank? %>
+	<p>タイトル : <%= h @widget_bag.data_string %></p>
+	<p>
+		リンク先 : <%= h @widget_bag.data_url %>
+		(<%= (@widget_bag.data_boolean)? "新規ウィンドウで開く": "既存のウィンドウで開く" %>)
+	</p>
+	<% end %>
+	<%= form_tag url_for(:action=>"update_widget_bag", :id=>@widget_bag), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit_#{@widget_bag.id}"} do -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">表示設定 : <%= @visual_widget.position %></h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="item_data_string"><%= model_title(@visual_widget) %></label>
+				<div class="controls">
+					<%= text_field 'widget_bag', 'data_string', :autocomplete => "off", :placeholder=>"リンクタイトルを入力"  %>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="item_data_string">リンクアドレス</label>
+				<div class="controls">
+					<%= text_field 'widget_bag', 'data_url', :autocomplete => "off", :placeholder=>"リンク先のアドレスを入力"  %>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="widget_bag_data_boolean">ターゲット</label>
+				<div class="controls">
+					<label class="radio inline">
+						<input type="radio" id="widget_bag[data_boolean]" name="widget_bag[data_boolean]" value="1" <% if @widget_bag.data_boolean %>checked<% end %>>
+						新規ウィンドウで開く
+					</label>
+					<label class="radio inline">
+						<input type="radio" id="widget_bag[data_boolean]" name="widget_bag[data_boolean]" value="0" <% if !@widget_bag.data_boolean %>checked<% end %>>
+						既存のウィンドウで開く
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+	    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+<% end %>

@@ -1,0 +1,66 @@
+	<p class="lead">
+		予約情報
+	</p>
+
+	<dl class="dl-horizontal">
+	  <dt>予約時刻</dt>
+	  <dd>
+	  	<%= @item.reserved_on.strftime("%l:%M %p") %>
+	  	〜
+	  	<%= @item.reserved_until.strftime("%l:%M %p") %>
+		
+		<% unless @item.customer.blank? %>
+			<% if @item.customer.is_happy_birthday?(@item.reserved_on.to_date) %>
+				<span class=" pull-right text-success">
+					<i class='icon-gift'></i>
+					HBD
+					【誕生日 : <%= @item.customer.birthday.strftime("%m-%d") %>】
+				</span>
+			<% end %>
+		<% end %>
+	　</dd>
+	</dl>
+	
+	<dl class="dl-horizontal">
+	  <dt>担当</dt>
+	  <dd>
+	  	<%= (@item.staff.blank?)? "": model_name(@item.staff) %>
+	  </dd>
+	</dl>
+
+	<% if @shop.option_customer_management %>
+		<dl class="dl-horizontal">
+		  <dt>お客様</dt>
+		  <dd>
+		  	<%= (@item.customer.blank?)? "指定無し": @item.customer.name %>
+			<% unless @item.customer.blank? %>
+				<%= link_to("<i class='icon-remove'></i>&nbsp;関連解除",
+					{:action=>"release_reservation_customer", :id=>@item}, 
+					:confirm=>"この予約とお客様との関連付けを解除します。よろしいですか?",
+					:method=>'post') %>
+			<% end %>		
+			<div style="margin-top:10px;">
+			  	<% if @item.customer.blank? %>
+					<%= link_to_remote("<i class='icon-search'></i>&nbsp;顧客検索",
+						{:url=>{:action=>"search_reservation_customer", :id=>@item}}, 
+						:class=>"btn btn-mini btn-success") %>
+					<%= link_to_remote("<i class='icon-plus'></i>&nbsp;新規顧客",
+						{:url=>{:action=>"new_reservation_customer", :id=>@item}}, 
+						:class=>"btn btn-mini btn-inverse") %>
+				<% else %>
+					<%= link_to("<i class='icon-circle-arrow-right'></i>&nbsp;顧客情報",
+						{:controller=>"bs_customer", :action=>"show_property", :id=>@item.customer}, 
+						:class=>"btn btn-mini btn-info") %>
+				<% end %>
+			</div>
+		  </dd>
+		</dl>
+	<% end %>
+	
+	<div id="sandbox"></div>
+
+	<dl class="dl-horizontal">
+	  <dt>予約受付メモ</dt>
+	  <dd><% unless @item.memo_1.blank? %><pre><%=@item.memo_1%></pre><% end %></dd>
+	</dl>
+	

@@ -1,0 +1,78 @@
+<header class="subhead" id="overview">
+	<h3>誕生日</h3>
+</header>
+
+<ul id="tab_nav" class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:action=>'reservation', 	:target_date=>@target_date) %>"><i class="icon-list"></i>&nbsp;予約</a></li>
+	<li class="active">	<a href="<%= url_for(:action=>'birthday',		:target_date=>@target_date) %>"><i class="icon-gift"></i>&nbsp;誕生日</a></li>
+</ul>
+
+<p class="lead">
+	<%= @target_date.strftime("%m-%d")%>
+	&nbsp;
+	<span class="btn-group">
+		<span class="btn-toolbar" style="margin: 0;">
+		  <span class="btn-group">
+		  	<% prev_url = url_for(:action=>"birthday", :target_date=>(@target_date-1))%>
+		    <a href="<%= prev_url %>" class="btn btn-small"><i class="icon-chevron-left"></i>&nbsp;前日</a>
+		  	<% today_url = url_for(:action=>"birthday")%>
+		    <a href="<%= today_url %>" class="btn btn-small btn-info">今日</a>
+		  	<% next_url = url_for(:action=>"birthday", :target_date=>(@target_date+1))%>
+		    <a href="<%= next_url %>" class="btn btn-small">翌日&nbsp;<i class="icon-chevron-right"></i></a>
+		  </span>
+		  <span class="btn-group">
+		  	<% calendar_url = url_for(:action=>"birthday_calendar", :target_date=>(@target_date))%>
+		    <a href="<%= calendar_url %>" class="btn btn-success btn-small"><i class="icon-calendar"></i>&nbsp;カレンダー</a>
+		  </span>
+		</span>
+	</span>
+</p>
+
+<%
+	birthday_key_string = @target_date.strftime("-%m-%d")
+	c = Condition.new
+	c.and("birthday", "LIKE", "%"+birthday_key_string )
+	c.and "shop_id", @shop.id	unless @shop.blank?
+	@items = Customer.find(:all, :conditions => c.where) 
+%>
+<% if @items.blank? %>
+	<p>誕生日の方はいらっしゃいません。</p>
+<% else %>
+	<table class="table table-bordered table-hover">
+		<thead>
+			<th>お客様</th>
+			<th>ふりがな</th>
+			<th>誕生日</th>
+			<th>登録店舗</th>
+		</thead>
+		<tbody>
+			<% @items.each do | @item | %>
+			<tr>
+				<td>
+				  	<% customer_url = url_for(:controller=>"bs_customer", :action=>"show_property", :id=>@item)%>
+				    <a href="<%= customer_url %>">
+						<i class="icon-circle-arrow-right"></i> 
+						<%= @item.name %>
+				    </a>
+				</td>
+				<td><% unless @item.furigana.blank? %><small><%= @item.furigana %></small><% end %></td>
+				<td style="text-align:right">
+			    	<%= @item.birthday.strftime("%Y-%m-%d") %>
+					(<%= wday(@item.birthday) %>)
+					生まれ
+					<%
+						birth_date = Time.parse(@item.birthday.strftime("%Y-%m-%d"))
+						my_age = sprintf("%d",((Time.now - birth_date) / 60 / 60 / 24)/365)				
+					%>
+					,
+					<strong>
+						<%= my_age %>
+					</strong>
+					歳
+				</td>
+				<td style="text-align:center;"><% unless @item.shop.blank? %><small><%= @item.shop.name %></small><% end %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>

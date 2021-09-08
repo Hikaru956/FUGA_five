@@ -1,0 +1,29 @@
+<div class="control-group">
+	<label class="control-label" for="item_reservation_range_from">役割</label>
+	<div class="controls">
+		<select name="user[role]" id="user_role">
+			<option <% if @user.role==User::ROLE_MANAGER %>selected<% end %> value="<%=User::ROLE_MANAGER%>"><%= label_user_role(User::ROLE_MANAGER)%></option>
+			<option <% if @user.role==User::ROLE_BLOGGER %>selected<% end %> value="<%=User::ROLE_BLOGGER%>"><%= label_user_role(User::ROLE_BLOGGER)%></option>
+			<option <% if @user.role==User::ROLE_BLOCKED %>selected<% end %> value="<%=User::ROLE_BLOCKED%>"><%= label_user_role(User::ROLE_BLOCKED)%></option>
+		</select>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="login">表示名</label>
+	<div class="controls">
+		<%= text_field 'user', 'name', :placeholder=>"表示名を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="login">ログイン</label>
+	<div class="controls">
+		<%= text_field 'user', 'login', :placeholder=>"ログインIDを入力", :autocomplete => "off" %>
+		<span class="help-block">3文字以上。他のシステムを含めて登録済みのログインIDは使用できません。</span>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="email">メールアドレス</label>
+	<div class="controls">
+		<%= text_field 'user', 'email', :placeholder=>"メールアドレスを入力", :autocomplete => "off" %>
+	</div>
+</div>

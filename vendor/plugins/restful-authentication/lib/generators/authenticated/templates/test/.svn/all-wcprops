@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/lib/generators/authenticated/templates/test
+END
+unit_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/lib/generators/authenticated/templates/test/unit_test.rb
+END
+functional_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/lib/generators/authenticated/templates/test/functional_test.rb
+END
+model_functional_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/lib/generators/authenticated/templates/test/model_functional_test.rb
+END
+mailer_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/lib/generators/authenticated/templates/test/mailer_test.rb
+END

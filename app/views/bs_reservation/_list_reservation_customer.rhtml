@@ -1,0 +1,69 @@
+<div class="well control-group">
+	<p class="lead">顧客検索</p>
+	<% unless @search_string.blank? %>
+		<i class="icon-search"></i>
+		[
+		<%=@search_string%>
+		]
+	<% end %>
+
+	<table class="table table-hover table-bordered">
+		<colgroup>
+          <col class="span1">
+          <col class="span2">
+        </colgroup>
+		<tbody>
+			<tr class="success">
+				<td>電話番号</td>
+				<td>氏名</td>
+			</tr>
+			<% @items.each do | customer | %>
+			<tr>
+				<td><%= customer.telephone %></td>
+				<td>
+					<spam class="pull-right">
+						<% if customer.is_happy_birthday?(@reservation.reserved_on.to_date) %>
+							<span class="text-success">
+								<i class="icon-gift"></i>
+								HBD
+							</span>
+						<% end %>
+						<%= link_to("<i class='icon-link'></i>&nbsp;引当",
+							{:action=>"map_reservation_customer", :id=>@reservation, :customer=>customer}, 
+							:class=>"btn btn-mini btn-inverse", :method=>'post') %>
+					</spam>
+					<b><%= customer.name %></b>
+					<% unless customer.furigana.blank? %>
+					(
+					<%= customer.furigana %>
+					)
+					<% end %>
+					&nbsp;様
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+	<% if @items.blank? %>
+		<p class="text-error">
+			該当するお客様が見つかりません。
+		</p>
+	<% end %>
+	
+	<%= will_paginate @items, :renderer => RemoteLinkRenderer,
+                              	:update => "sandbox",
+                              	:params => {:id=>@reservation, :search_string=>@search_string},
+								:prev_label=>'&#171;前', :next_label=>'次&#187;',
+                              	:method => :get %>
+
+	<div class="form-actions">
+		<%= link_to_remote("<i class='icon-search'></i>&nbsp;再検索",
+			{:url=>{:action=>"search_reservation_customer", :id=>@reservation, :search_string=>@search_string}}, 
+			:class=>"btn btn-small btn-success") %>
+		<%= link_to_remote("<i class='icon-arrow-left'></i>&nbsp;キャンセル",
+			{:url=>{:action=>"clear_sandbox", :id=>@reservation}}, 
+			:class=>"btn btn-small") %>
+  	</div>
+</div>
+<hr/>

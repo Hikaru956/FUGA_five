@@ -1,0 +1,114 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>レイアウト管理</h3>
+</header>
+	
+
+<ul class="breadcrumb">
+  <li>					<%= link_to "一覧",	:controller=>"dashboard", :action=>"layout_list" %>&nbsp;<span class="divider">/</span></li>
+  <li class="active">	<%= model_name(@layout) %></li>
+</ul>
+
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:action=>'layout_show', 	:id=>@layout) %>">レイアウト情報</a></li>
+	<li class="active">	<a href="<%= url_for(:action=>'widget_list', 	:id=>@layout) %>">Visual Widget</a></li>
+</ul>
+
+<h3>
+	<p class="pull-right">
+		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
+			<i class="icon-plus"></i>&nbsp;
+			Widget 登録
+		</a>
+	</p>
+	Widget リスト
+</h3>
+
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th class="span4">Widgetキー</th>
+			<th class="span2">タイプ</th>
+			<th class="span6">タイトル</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @layout.visual_widgets.each do | widget | %>
+			<tr>
+				<td>
+					<%= (widget.first?)?	"△":	link_to("▲", :action=>"widget_higher",	:id=>widget) %>
+					<%= (widget.last?)? 	"▽": 	link_to("▼", :action=>"widget_lower", 	:id=>widget) %>
+					<%= widget.hash_key %>
+				</td>
+				<td><%= widget_type_string(widget.widget_type) %></td>
+				<td>
+					<span class="pull-right">
+						<a class="btn btn-mini btn-danger"  	data-toggle="modal" href="#modalDelete_<%=widget.id%>">	<i class="icon-remove"></i></a>
+					</span> 
+					<a class="btn btn-mini btn-success"  	data-toggle="modal" href="#modalEdit_<%=widget.id%>">		<i class="icon-pencil"></i></a>
+					<strong><%= model_title(widget) %></strong>
+					<% unless widget.description.blank? %>
+						<br/><br/>
+						<pre><%= h widget.description %></pre>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<!-- modalNew -->
+<%= form_tag url_for(:action=>"widget_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+	<% 
+		@item = VisualWidget.new
+		@item.layout_scheme = @layout 
+	%>
+	<%= hidden_field 'item', 'layout_scheme_id' %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">Visual Widget 登録</h3>
+	</div>
+	<div class="modal-header">
+		<%= render :partial=>"form_visual_widget" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<% @layout.visual_widgets.each do | item | @item = item %>
+	<!-- modalEdit -->
+	<%= form_tag url_for(:action=>"widget_update", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit_#{@item.id}"} do -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">Visual Widget 設定</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_visual_widget" %>
+		</div>
+		<div class="modal-footer">
+	    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;設定</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+	
+	<!-- modalDelete -->
+	<%= form_tag url_for(:action=>"widget_delete", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete_#{@item.id}"} do -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">Visual Widget 設定</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+				「<%= model_title(@item) %>」を削除します。<br/>
+				利用者がこのWidgetに設定した全ての要素も削除されます。<br/>
+				よろしいですか？
+			</p>
+		</div>
+		<div class="modal-footer">
+	    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
+<% end %>

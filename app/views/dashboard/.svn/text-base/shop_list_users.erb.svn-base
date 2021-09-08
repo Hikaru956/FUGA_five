@@ -1,0 +1,76 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>レジストリー</h3>
+</header>
+	
+
+<ul class="breadcrumb">
+  <li><%= link_to "レジストリー", 					:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@item.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@item) %></li>
+</ul>
+
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show_shop', 	:id=>@item) %>">店舗情報</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@item) %>">店舗スタッフ</a></li>
+	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@item) %>">店舗ユーザー</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+</ul>
+
+<h4>
+	<p class="pull-right">
+		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
+			<i class="icon-plus"></i>&nbsp;
+			ユーザー登録
+		</a>
+	</p>
+	店舗ユーザー一覧
+</h4>
+<% if @users.blank? %>
+	<p class="text-error">ユーザーが登録されていません</p>
+<% else %>
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr class="info">
+				<th class="span2">役割</th>
+				<th class="span3"><span class="pull-right"><span class="badge badge-success"><%= @users.size %></span></span>表示名</th>
+				<th class="span3"><span class="pull-right"><span class="badge badge-success"><%= @users.size %></span></span>ログイン</th>
+				<th class="span4">Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @users.each do | user | %>
+				<tr>
+					<td><%=label_user_role(user.role)%></td>
+					<td><%=model_name(user)%></td>
+					<td>
+						<% url = url_for(:action=>"shop_show_user", :id=>user) %>
+						<a href="<%=url%>">
+							<i class='icon-chevron-sign-right'></i>
+							<%= user.login %>
+						</a>
+					</td>
+					<td><%= user.email %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+
+<!-- modalNew -->
+<%= form_tag url_for(:action=>"shop_create_user", :shop_id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+	<% @user = User.new %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">新規ユーザー登録</h3>
+	</div>
+	<div class="modal-header">
+		<%= render :partial=>"form_user" %>
+		<%= render :partial=>"form_user_password" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+

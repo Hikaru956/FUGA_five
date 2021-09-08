@@ -1,0 +1,120 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3><%= model_title(@item) %></h3>
+</header>
+
+<ul class="breadcrumb">
+  <li><%= link_to "ストリーム", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <% @item.content_category.category_path(true).each do |category | %>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+  <% end %>
+  <li class="active"><%= model_title(@item) %></li>
+</ul>
+
+<h4>
+	<div class="pull-right">
+		<p>
+			<% url_back = url_for(:action=>"content_category", :id=>@item.content_category, :page=>@page) %>
+			<a class="btn btn-small" href="<%=url_back%>">
+				<i class="icon-arrow-left"></i>&nbsp;
+				戻る
+			</a>
+			<% url_new = url_for(:action=>"edit_leaf", :id=>@item) %>
+			<a class="btn btn-success btn-small" href="<%=url_new%>">
+				<i class="icon-pencil"></i>&nbsp;
+				編集
+			</a>
+			<a class="btn btn-danger btn-small"  data-toggle="modal" href="#modal_delete">
+				<i class="icon-trash"></i>&nbsp;
+				削除確認
+			</a>
+		</p>
+	</div>
+	<%= leaf_state_icons(@item) %>
+	<%= model_title(@item) %>
+</h4>
+<blockquote>
+  <p>
+	<% unless @item.description_3.blank? %>
+		<%=  raw h(@item.description_3) %>
+	<% end %>
+  	<small>
+	  	on
+	  	<%= @item.publish_from.strftime("%Y-%m-%d") %>
+		<% unless @item.staff.blank? %>
+			by
+			<%= model_name(@item.staff) %>
+		<% end %>
+  	</small>
+  </p>
+</blockquote>
+
+<div class="row-fluid">
+	<% unless @item.description.blank? %>
+		<%=  raw @item.description %>
+	<% end %>
+</div>
+
+<hr/>
+
+<div class="row-fluid">
+
+	<h4>
+		<p class="pull-right">
+			<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>">
+				<i class="icon-camera"></i>&nbsp;
+				写真追加
+			</a>
+		</p>
+		記事で使用する画像
+	</h4>
+	<p>
+	  <small>記事で使用する画像は予め追加してください。先頭の写真が一覧表示の際の代表写真になります。</small>
+	</p>	
+	
+	<% array = @item.photos.find(:all, :order=>"position asc").in_groups_of(3, false)%>
+	<% for i in 0..(array.size-1) %>
+		<% @lines = array[i] %>
+	    <ul class="thumbnails">
+	        <li class="span4">
+	        	<% if @lines.size>=1 %>
+					<%= render :partial=>"item_photo", :locals => {:photo => @lines[0]} %>
+				<% end %>
+			</li>		
+	        <li class="span4">
+	        	<% if @lines.size>=2 %>
+					<%= render :partial=>"item_photo", :locals => {:photo => @lines[1]} %>
+				<% end %>
+			</li>		
+	        <li class="span4">
+	        	<% if @lines.size>=3 %>
+					<%= render :partial=>"item_photo", :locals => {:photo => @lines[2]} %>
+				<% end %>
+			</li>		
+        </ul>
+	<% end %>
+	<p>
+		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>">
+			<i class="icon-camera"></i>&nbsp;
+			写真追加
+		</a>
+	</p>
+</div>
+
+
+<div id="modal_delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">削除確認</h3>
+  </div>
+  <div class="modal-body">
+    <p>記事を削除します。よろしいですか？</p>
+  </div>
+  <div class="modal-footer">
+	<%= form_tag({:action => 'delete_leaf', :id=>@item}, :class=>"form-horizontal")  do %>
+		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+  	<%end%>  	
+  </div>
+</div>
+

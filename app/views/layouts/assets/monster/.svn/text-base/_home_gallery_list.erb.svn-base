@@ -1,0 +1,21 @@
+<% 
+	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_GALLERY)
+	gallery_bags =  type_root.public_bags 
+%>
+
+<% unless gallery_bags.blank? %>
+	<ul class="thumbnails thumbnails-1">
+	    <li class="span3">
+			<%= render :partial=>"#{LayoutScheme.asset_root}/monster/home_gallery_list_item", :locals => {:temp_local => gallery_bags[0]}  if gallery_bags.size>=1 %>
+	    </li>
+	    <li class="span3">
+			<%= render :partial=>"#{LayoutScheme.asset_root}/monster/home_gallery_list_item", :locals => {:temp_local => gallery_bags[1]}  if gallery_bags.size>=2 %>
+	    </li>
+	    <li class="span3">
+			<%= render :partial=>"#{LayoutScheme.asset_root}/monster/home_gallery_list_item", :locals => {:temp_local => gallery_bags[2]}  if gallery_bags.size>=3 %>
+	    </li>
+	    <li class="span3">
+			<%= render :partial=>"#{LayoutScheme.asset_root}/monster/home_gallery_list_item", :locals => {:temp_local => gallery_bags[3]}  if gallery_bags.size>=4 %>
+	    </li>
+	</ul>
+<% end %>

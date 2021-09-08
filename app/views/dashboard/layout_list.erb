@@ -1,0 +1,64 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<p class="pull-right">
+		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
+			<i class="icon-plus"></i>&nbsp;
+			レイアウト・スキーム登録
+		</a>
+	</p>
+	<h3>レイアウト管理</h3>
+</header>
+	
+
+
+<ul class="breadcrumb">
+  <li class="active">一覧</li>
+</ul>
+
+<h4>
+	<i class="icon-windows"></i>
+	レイアウト・スキーム
+</h4>
+
+<% if @layouts.blank? %>
+	<div class="alert alert-block">
+		 <strong>Warning!</strong> 項目がありません。
+	</div>
+<% else %>
+	<div class="row-fluid">
+		<% array = @layouts.in_groups_of(3, false)%>
+		<% for i in 0..(array.size-1) %>
+			<% @lines = array[i] %>
+		    <ul class="thumbnails">
+		        <li class="span4">
+		        	<%= render :partial=>"item_layout", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
+				</li>		
+		        <li class="span4">
+		        	<%= render :partial=>"item_layout", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
+				</li>		
+		        <li class="span4">
+		        	<%= render :partial=>"item_layout", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
+				</li>		
+	        </ul>
+		<% end %>
+	</div>
+<% end %>
+
+<!-- modalNew -->
+<%= form_tag url_for(:action=>"layout_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+	<% 
+		@layout = LayoutScheme.new
+	%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">レイアウト・スキーム登録</h3>
+	</div>
+	<div class="modal-header">
+		<%= render :partial=>"form_layout" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+

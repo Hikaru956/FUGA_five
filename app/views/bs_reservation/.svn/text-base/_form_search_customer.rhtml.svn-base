@@ -1,0 +1,8 @@
+	<div class="control-group">
+		<label class="control-label" for="search_string">検索文字列</label>
+		<div class="controls">
+			<%= text_field_tag 'search_string', @search_string, :placeholder=>"電話番号、氏名の一部を入力" %>
+			<span class="help-inline">電話番号は半角数字、ハイフン不要</span>
+		</div>
+	</div>
+

@@ -1,0 +1,17 @@
+<h4>予約概要</h4>
+<% if @item.shop.option_customer_management %>
+	<% unless @item.customer.blank? %>
+		<h4>
+		<%= @item.customer.name %>
+		様
+		</h4>
+	<% end %>
+<% end %>
+
+<%=@item.reserved_on.strftime("%Y/%m/%d %H:%M") %>
+〜
+<%=@item.reserved_until.strftime("%H:%M") %><br/>
+
+<% unless @item.memo_1.blank? %>
+	<p class="meta"><%= truncate(@item.memo_1,40) %></p>
+<% end %>

@@ -1,0 +1,91 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<% if current_user.role==User::ROLE_SUPER %>
+		<p class="pull-right">
+			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
+				<i class="icon-plus"></i>&nbsp;
+				レジストリー登録
+			</a>
+		</p>
+	<% end %>
+	<h3>レジストリー</h3>
+</header>
+
+<% if @items.blank? %>
+	<p class="text-error">レジストリーが見つかりません。</p>
+<% else %>
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr class="info">
+				<th class="span4">
+					<span class="pull-right"><span class="badge badge-success"><%= Company.count %></span></span>
+					レジストリー名
+				</th>
+				<th class="span3"><strong><span class="pull-right"><span class="badge badge-success"><%= Shop.count %></span></span>店舗数</th>
+				<th class="span3">ディスク</th>
+				<th class="span2">固定ページ</th>
+			</tr>
+		<head>
+		<tbody>
+			<% @items.each do | company | @company = company %>
+				<tr>
+					<td>
+						<% url = url_for(:action=>"company_show", :id=>@company) %>
+						<a href="<%=url%>">
+							<i class='icon-chevron-sign-right'></i>
+							<%= model_name(@company) %>
+						</a>
+					<td style="text-align:right"><%= @company.shops.size %></td>
+
+					<% 
+						company_room_size_mb = @company.room_size_mb
+						company_photo_size 	 = @company.photo_size
+						rate = (company_room_size_mb.blank?||company_room_size_mb==0)? 0 : (company_photo_size*100)/(company_room_size_mb*1024*1024)
+						
+						room_class = "muted"
+						room_class = "label-warning"	if rate>60
+						room_class = "label-important"	if rate>80
+					%>
+					<td style="text-align:right">
+						<% url = url_for(:action=>"company_list_shop", :id=>@company) %>
+						<a href="<%=url%>">
+							<i class='icon-chevron-sign-right'></i>
+							<%= number_to_human_size(company_photo_size)  %>
+							/						
+							<%= (company_room_size_mb.blank?)? "無制限": number_to_human_size(company_room_size_mb*1024*1024) %>
+						</a>
+						<span class="label <%=room_class%>"><%= rate.to_i%>%</span>
+					</td>
+					<td style="text-align:right">
+						<%
+						 	f_pages = 0
+						 	@company.shops.each do | shop |
+					 		fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop) 
+					 		f_pages += fix_pages_bag.content_leafs.size
+					 		end 
+						%>
+						<%= f_pages %>
+						ページ
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<%= will_paginate(@items, :params=> {:action=>'company_index', :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% end %>
+
+<!-- modalNewShop -->
+<%= form_tag url_for(:action=>"company_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">新規レジストリー登録</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_company" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+ 

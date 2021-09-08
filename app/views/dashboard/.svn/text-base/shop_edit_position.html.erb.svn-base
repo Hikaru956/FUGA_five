@@ -1,0 +1,151 @@
+<style>
+    #map {
+        width: 100%;
+        height: 450px;
+    }
+</style>
+<style>
+	 #map img { max-width: none; }
+</style>
+
+
+<header class="subhead" id="overview">
+	<h3>レジストリー</h3>
+</header>
+	
+
+<ul class="breadcrumb">
+  <li><%= link_to "レジストリー", 						:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@item.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@item) %></li>
+</ul>
+
+<ul class="nav nav-tabs">
+	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show_shop', 	:id=>@item) %>">店舗情報</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@item) %>">店舗スタッフ</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@item) %>">店舗ユーザー</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+</ul>
+
+<div class="form-horizontal well">
+	<fieldset>
+		<legend>最寄りの地点を入力</legend>
+		<div class="control-group">
+			<label class="control-label" for="alt_id">住所/ランドマーク</label>
+			<div class="controls">
+				<i class="icon-search"></i>
+				<input class="input-large search-query" type="text" id="address">
+				<input class="btn btn-primary" type="button" value="検索" onclick="moveMap();">
+				</div>
+		</div>
+	</fieldset>
+</div>
+
+
+<%= form_tag url_for(:action=>"shop_update_position", :id=>@item), :class=>"form-horizontal" do -%>
+	<%= hidden_field_tag 'lat', @item.lat %>
+	<%= hidden_field_tag 'lng', @item.lng %>
+	<table class="table table-bordered">
+		<tbody>
+			<tr class="warning">
+				<td>
+					<strong><%= model_name(@item) %></strong>
+					<span class="pull-right">
+						<button type="submit" class="btn btn-success btn-small"><i class="icon-ok"></i>&nbsp;&nbsp;ピンの位置に設定</button>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td><div id="map"></div></td>
+			</tr>
+		</tbody>
+	</table>
+<% end %>
+
+<div class="well">
+	<a class="btn btn-middle btn-warn" href="<%= url_for(:action=>'company_show_shop', :id=>@item) %>">
+	<i class="icon-arrow-left"></i>&nbsp;
+		戻る
+	</a>
+	
+	<% if @item.gps? %>
+		&nbsp;<span class="divider">|</span>&nbsp;
+		<a class="btn btn-middle btn-danger"  data-toggle="modal" href="#modalDeletePosition">
+		<i class="icon-remove"></i>&nbsp;
+			位置をクリア
+		</a>
+	<% end %>
+</div>
+
+<script>
+	<% if @item.gps? %>
+	    var latlng = new google.maps.LatLng(<%= @item.lat %>, <%= @item.lng %>);
+	<% else %>
+	    var latlng = new google.maps.LatLng(35.681382, 139.766084);
+	<% end %>
+    var options = {
+        zoom: 14,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(document.getElementById('map'), options);
+	
+	var shop_marker; 
+	<% if @item.gps? %>
+	    shop_marker = new google.maps.Marker({
+	        position:latlng,
+	        map: map
+	    });
+	<% end %>
+	
+	google.maps.event.addListener(map, 'click', function(event) {
+			if (shop_marker!=null) { shop_marker.setMap(null); }
+            shop_marker = new google.maps.Marker({
+                position: event.latLng,
+                map: map
+            });
+			document.getElementById('lat').value = event.latLng.lat();	
+			document.getElementById('lng').value = event.latLng.lng();	
+    })
+	
+    function moveMap() {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'address': document.getElementById('address').value
+        }, function(result, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.panTo(result[0].geometry.location);
+				/*
+                var marker = new google.maps.Marker({
+                    position: result[0].geometry.location,
+                    map: map
+                });
+                */
+            } else {
+                alert("見つかりませんでした。");
+            }
+        });
+    }
+</script>
+
+<!-- modalDeletePosition -->
+<%= form_tag url_for(:action=>"shop_delete_position", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"modalDeletePosition"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">位置をクリア</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			「<%= model_name(@item) %>」
+			の位置情報（緯度、経度）をクリアします<br/>
+			よろしいですか？
+		</p>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;実行</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+	</div>
+<% end %>
+
+
+

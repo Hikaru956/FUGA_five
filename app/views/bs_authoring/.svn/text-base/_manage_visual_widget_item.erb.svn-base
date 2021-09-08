@@ -1,0 +1,16 @@
+<div class="well">
+	<% type = @visual_widget.widget_type %>
+    <% if 		type==VisualWidget::WIDGET_TYPE_STRING 	%>
+		<%= render :partial=>'bs_authoring/manage_widget_string'%>    
+    <% elsif 	type==VisualWidget::WIDGET_TYPE_TEXT 	%>   
+		<%= render :partial=>'bs_authoring/manage_widget_text'%>    
+    <% elsif 	type==VisualWidget::WIDGET_TYPE_CODE 	%>    
+		<%= render :partial=>'bs_authoring/manage_widget_code'%>    
+    <% elsif 	type==VisualWidget::WIDGET_TYPE_LINK 	%>    
+		<%= render :partial=>'bs_authoring/manage_widget_link'%>    
+    <% elsif 	type==VisualWidget::WIDGET_TYPE_PHOTO 	%>    
+		<%= render :partial=>'bs_authoring/manage_widget_photo'%>    
+    <% elsif 	type==VisualWidget::WIDGET_TYPE_PHOTOS 	%>
+		<%= render :partial=>'bs_authoring/manage_widget_photos'%>    
+	<% end %>    
+</div>

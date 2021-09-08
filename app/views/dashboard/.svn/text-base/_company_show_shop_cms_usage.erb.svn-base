@@ -1,0 +1,25 @@
+<table class="table table-hover table-bordered">
+	<thead>
+		<tr>
+			<th class="span3">記事・項目数</th>
+			<th class="span3">画像ファイル</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% root_cat = ContentCategory.shop_root(@shop) %>
+		<tr>
+			<td><div  class="text-right"><%= commify(root_cat.total_leafs.size.to_s) %></div></td>
+			<td>
+				<div  class="text-right">
+					<% total_photos = root_cat.total_photos %>
+					<%= total_photos.size %>
+					<% 
+						photo_sum_size = 0
+						total_photos.each{ |photo|  photo_sum_size+=photo.my_size }	unless total_photos.blank?
+					%> 
+					【<%= number_to_human_size(photo_sum_size)  %>】							
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>

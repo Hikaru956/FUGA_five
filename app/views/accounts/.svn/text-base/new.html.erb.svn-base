@@ -1,0 +1,75 @@
+<style>
+ahtml, abody {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+#full-screen-background-image {
+  z-index: -999;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+#wrapper {
+  position: relative;
+  width: 760px;
+  min-height:200px;
+  margin: 100px auto 0;
+  color: #f5f5f5;
+  background: rgba(0, 0, 0, 0.50);
+  padding:20px 30px;
+}
+</style>
+
+<%
+	num = Time.now.to_i%4
+%>
+
+
+<%= image_tag("backgrounds/#{num}.jpg", :id=>"full-screen-background-image") %>
+
+
+<!-- === Masthead === -->
+<header class="jumbotron subhead" id="overview">
+	<h2></h2>
+	<p class="lead"></p>
+</header>
+
+<%= form_tag account_path, :class=>"form-horizontal well" do %>
+	<fieldset>
+	    <legend>ログイン</legend>
+	    <label>システムを使用するにはログイン認証が必要です。</label>
+		<br/>
+		<div class="control-group">
+			<label class="control-label" for="alt_id">ログインID</label>
+			<div class="controls">
+				<%= text_field_tag 'login', @login, :placeholder=>"ログインIDを入力" %>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="name">パスワード</label>
+			<div class="controls">
+				<%= password_field_tag 'password', nil, :placeholder=>"パスワードを入力" %></p>
+			</div>
+		</div>
+		<!--
+		<div class="control-group">
+			<label class="control-label" for="optionsCheckbox">&nbsp;</label>
+			<div class="controls">
+				<label class="checkbox">
+				<%= check_box_tag 'remember_me', '1', @remember_me %>	
+				次回の入力を省略
+				</label>
+			</div>
+		</div>
+		-->				
+		<div class="form-actions">
+        	<button type="submit" class="btn btn-primary">ログイン</button>
+      	</div>
+	</fieldset>
+<% end -%>

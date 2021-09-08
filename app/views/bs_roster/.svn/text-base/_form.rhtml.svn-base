@@ -1,0 +1,39 @@
+<div class="control-group">
+	<label class="control-label" for="login">表示名</label>
+	<div class="controls">
+		<%= text_field 'item', 'name', :placeholder=>"表示名を入力", :autocomplete => "off" %>
+	</div>
+</div>
+
+<%= hidden_field 'item', 'shop_id' %>
+<% if false %>
+<div class="control-group">
+	<label class="control-label" for="login">対象店舗</label>
+	<div class="controls">
+		<%
+			shops = Shop.find(:all, :order=>"alt_id asc, name asc").map{ | c | [ c.name, c.id] }
+		%>
+		<%= collection_select(:item, :shop_id, shops, :last, :first)%>
+	</div>
+</div>
+<% end %>
+
+<%
+	option_hours = Array @shop.business_hour_from..@shop.business_hour_until
+	h_options = []
+	option_hours.each do  |h|
+	  h_options << [h.to_s+':00', h]
+	end	
+%>
+<div class="control-group">
+	<label class="control-label" for="login">始業時刻</label>
+	<div class="controls">
+		<%= collection_select('item', 'start_hour', h_options, :last, :first)%>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="login">終業時刻</label>
+	<div class="controls">
+		<%= collection_select('item', 'until_hour', h_options, :last, :first)%>
+	</div>
+</div>

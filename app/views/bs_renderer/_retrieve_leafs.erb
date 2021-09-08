@@ -1,0 +1,51 @@
+<!-- First, Enum., leafs in there -->
+<%
+	sons = seed.sons
+	sons << seed
+	c = ContentLeaf.public_leafs_condition
+#	c.and "content_leafs.content_category_id", 'IN', sons
+	@leafs = seed.content_leafs.find(:all, :conditions=>c.where, :order=>'position asc') 
+%>
+
+<% unless @leafs.blank? %>
+	<h4><i class='icon-folder-close'></i>&nbsp;<%=model_name(seed) %></h4>
+	<% unless seed.description.blank? %>
+		<pre><%= seed.description %></pre>
+	<% end %>
+	
+	
+	
+	<table class="table table-hover">
+		<% if false %>
+		<tr>
+			<thead>
+				<th colspan='2'><%=model_name(seed) %></th>
+			</thead>
+		</tr>
+		<% end %>
+		<% @leafs.each do | leaf | %>
+			<tr>
+				<td class="span8">
+					<h5>
+						<i class='icon-caret-right'></i>
+						<%= model_title(leaf) %>
+					</h5>
+					<% unless leaf.description.blank? %>
+					<pre><%= raw leaf.description %></pre>
+					<% end %>
+				</td>
+				<td class="span4 text-right" style="text-align:right;">
+					<% if false %>
+					  	¥
+						<%= (leaf.integer_field.blank?)? "設定なし": commify(leaf.integer_field.to_s) %>
+					<% end %>					
+					<%= raw leaf.description_2 %>
+				</td>
+			</tr>	
+		<% end %>
+	</table>	
+<% end %>	
+
+<% seed.children.each do |sub| %>
+	<%= render :partial=>'bs_renderer/retrieve_leafs', :locals=>{:seed=>sub} %>
+<% end %>

@@ -1,0 +1,25 @@
+<div class="form-horizontal">
+	<%= form_tag url_for(:action=>"list"), :class=>"form-horizontal well" do -%>
+	<fieldset>
+		<legend>顧客検索</legend>
+			<div class="control-group">
+				<label>顧客ID</label>
+				<input class="search-query, span3" type="text" id="search_alt" name="search_alt" value="<%= @search_alt %>" placeholder="顧客IDの一部を入力">
+			</div>
+			<div class="control-group">
+				<label>お名前</label>
+				<input class="search-query, span3" type="text" id="search_name" name="search_name" value="<%= @search_name %>" placeholder="お名前の一部を入力">
+			</div>
+			<div class="control-group">
+				<label>ふりがな</label>
+				<input class="search-query, span3" type="text" id="search_furigana" name="search_furigana" value="<%= @search_furigana %>" placeholder="ふりがなの一部を入力">
+			</div>
+			<div class="control-group">
+				<label>電話番号</label>
+				<input class="search-query, span3" type="text" id="search_telephone" name="search_telephone" value="<%= @search_telephone %>" placeholder="電話番号一部を入力">
+			</div>
+			<button type="submit" class="btn btn-primary"><i class="icon-search"></i>&nbsp;&nbsp;検索</button>
+			<a class="btn" href="<%= url_for(:action=>'index') %>">リセット</a>
+	</fieldset>
+	<% end %>
+</div>

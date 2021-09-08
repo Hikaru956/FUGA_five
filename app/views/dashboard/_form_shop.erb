@@ -1,0 +1,49 @@
+<div class="control-group">
+	<label class="control-label" for="shop_alt_id">店舗ID</label>
+	<div class="controls">
+		<%= text_field 'shop', 'alt_id', :placeholder=>"店舗IDを入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="name">店舗名</label>
+	<div class="controls">
+		<%= text_field 'shop', 'name', :placeholder=>"店舗名を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="item_reservation_range_from">営業時間</label>
+	<div class="controls form-inline">
+		<select class="span2" name="shop[business_hour_from]" id="shop_business_hour_from">
+			<option <% if @shop.business_hour_from==8  %>selected<% end %> value="9">08:00 AM</option>
+			<option <% if @shop.business_hour_from==9  %>selected<% end %> value="9">09:00 AM</option>
+			<option <% if @shop.business_hour_from==10 %>selected<% end %> value="10">10:00 AM</option>
+			<option <% if @shop.business_hour_from==11 %>selected<% end %> value="11">11:00 AM</option>
+			<option <% if @shop.business_hour_from==12 %>selected<% end %> value="12">12:00 PM</option>
+			<option <% if @shop.business_hour_from==13 %>selected<% end %> value="13"> 1:00 PM</option>
+		</select>
+		〜
+		<select class="span2" name="shop[business_hour_until]" id="shop_business_hour_until">
+			<option <% if @shop.business_hour_until==19 %>selected<% end %> value="19">07:00 PM</option>
+			<option <% if @shop.business_hour_until==20 %>selected<% end %> value="20">08:00 PM</option>
+			<option <% if @shop.business_hour_until==21 %>selected<% end %> value="21">09:00 PM</option>
+			<option <% if @shop.business_hour_until==22 %>selected<% end %> value="22">10:00 PM</option>
+			<option <% if @shop.business_hour_until==23 %>selected<% end %> value="23">11:00 PM</option>
+			<option <% if @shop.business_hour_until==24 %>selected<% end %> value="24">12:00 AM</option>
+			<option <% if @shop.business_hour_until==25 %>selected<% end %> value="25">01:00 AM</option>
+		</select>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="alt_id">郵便番号</label>
+	<div class="controls">
+		<%= text_field 'shop', 'postal', :placeholder=>"電話番号を半角数字で入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="alt_id">住所</label>
+	<div class="controls">
+		<%= text_field 'shop', 'address_1', :placeholder=>"住所を入力", :autocomplete => "off" %>
+	</div>
+</div>
+

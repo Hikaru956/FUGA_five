@@ -1,0 +1,25 @@
+<% if true %>
+	<% 
+	cat_array = Array.new
+	@items.each do |item|
+		cat_hash = Hash.new
+		cat_hash[:id] = item.id
+		cat_hash[:parent] = "#"
+		cat_hash[:text] = item.name
+		cat_array <<  cat_hash.to_json
+	%>		
+		<%= render :partial=>'json_cat_children', :locals=>{:cat_array=>cat_array, :parent=>item}	unless item.children.blank? %>	
+	<% end %>
+[<%= raw cat_array.map{|s| s}.join(',') %>]	
+	
+<% end %>	
+
+<% if false %>
+[
+	{"id":"60","parent":"#", "text":"GRANDROOT","children":[]},
+	{"id":"61","parent":"60", "text":"TEST-CHILD","children":[]},
+	{"id":"62","parent":"60", "text":"TEST-GRANDCHILD","children":[]},
+	{"id":"130","parent":"60", "text":"TEST\u30ab\u30c6\u30b4\u30ea\u30fc","children":[]}
+]
+<% end %>	
+

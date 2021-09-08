@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li>
+                <a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>"><i class="icon-home"></i></a>
+            </li>
+			<% unless @seed.content_category.has_only_a_public_bag? %>
+	            <li>
+	                <a href="<%= url_for(:action=>'gallery_index', :id=>@seed.content_category,	:wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a>
+	            </li>
+			<% end %>
+            <% @seed.content_category.category_path(true).each do |category | %>
+            <li>
+                <%= link_to category.category_label, :action=>"gallery_list", :id=>category, :wkey=>@website.wsite_hash_key%>
+            </li>
+            <% end %>
+            <li class="active">
+                <%= model_title(@seed) %>
+            </li>
+        </ol>
+        <h1 class="page-header">
+			<div class="pull-right">
+				<% url_back = url_for(:action=>"portfolio_list", :id=>@seed.content_category, :page=>@page, :wkey=>@website.wsite_hash_key) %>
+				<a class="btn btn-small btn-primary" href="<%=url_back%>">
+					<i class="icon-arrow-left"></i>&nbsp;
+					戻る
+				</a>
+			</div>
+        	<%= h model_title(@seed) %>
+		</h1>
+    </div>
+</div>
+
+<% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+	<div class="row">
+	    <div class="col-lg-12">
+			<blockquote>
+			    by <a href="<%=url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>
+			</blockquote>
+	    </div>
+	</div>
+<% end %>
+
+<div class="row">
+    <div class="col-md-6">
+		<div  style="text-align:center;">
+		<% key_photo = key_photo(@seed) %>
+		<% unless key_photo.blank? %>
+			<div class="thumbnail thumbnail-1"><%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %></div>
+    	<% end %>
+		</div>
+    </div>
+    <div class="col-md-6">
+    	<% unless @seed.description.blank?		%><%= raw @seed.description %><% end %>
+    </div>
+</div>
+
+<% @photos = @seed.photos %>
+<% unless @photos.blank? %>
+	<hr/>
+    <div class="row">
+	    <div class="col-lg-12">
+	    	<% @photos.each do | photo | %>
+		        <div class="col-sm-6 col-lg-6 col-md-6">
+		            <%= render :partial=>"bs_renderer/item_gallery_photo", :locals => {:temp_local => photo} %>
+		        </div>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+
+<div class="row">
+	<div class="col-lg-12">
+		<hr/>
+		<div class="row-fluid"><%= render :partial=>'layouts/social_buttons'%></div>
+	</div>
+</div>
+

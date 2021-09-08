@@ -1,0 +1,10 @@
+<div class="thumbnail">
+	<%= image_tag(url_for_file_column(photo, :image, 'thumb')) %>
+	<% if false %>
+		<% unless photo.info.blank? %>
+			<div class="caption">
+				<p><%= h photo.info%></p>
+			</div>
+		<% end %>
+	<% end %>
+</div>

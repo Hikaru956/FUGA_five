@@ -1,0 +1,114 @@
+<%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>@item} %>
+
+<div class="control-group">
+	<%= text_field  'item', 'title', :class=>"input-block-level", :placeholder=>"項目のタイトルを入力します。", :autocomplete=>false%>
+</div>
+
+<% if true %>
+	<div class="control-group">
+		<%= text_field  'item', 'description_2', 	{:class=>"no-rich input-block-level" , :length => 20, :autocomplete=>false, :placeholder=>"価格情報を入力します。"}  %>
+	</div>
+	<div class="control-group">
+		<%= text_area  'item', 'description', 		{:class=>"no-rich input-block-level" , :rows => 10, :autocomplete=>false, :placeholder=>"項目の説明を入力します。"}  %>
+	</div>
+<% end %>
+
+<% if false %>
+<div class="control-group">
+	<label class="control-label" for="item_integer_field">価格</label>
+	<div class="controls">
+		<div class="input-prepend input-append">
+			  <span class="add-on">¥</span>
+			  <input class="span2" id="item_integer_field" name=item[integer_field] value="<%=@item.integer_field%>" type="text">
+		</div>
+	</div>
+</div>
+<% end %>
+
+<% 
+	bag_roots = ContentCategory.type_root(@shop, ContentCategory::TYPE_PORTFOLIO).children
+%>
+<% if bag_roots.size==1 %>
+	<% @item.content_bag 		= bag_roots[0].content_bag %>
+	<%= hidden_field 'item', 'content_bag_id' %>
+<% else %>
+	<div class="control-group">
+		<label class="control-label" for="in_charge">ストリーム</label>
+			<div class="controls">
+				<%= collection_select(:item, :content_bag_id, bag_roots.map{ | s | [ s.content_bag.id, s.content_bag.name] }, :first, :last) %>
+			</div>
+	</div>
+<% end %>
+
+<div class="control-group">
+	<label class="control-label" for="item[is_public]">公開設定</label>
+	<div class="controls">
+		<label class="radio inline">
+			<input type="radio" id="item[is_public]" name="item[is_public]" value="1" <% if @item.is_public %>checked<% end %>>
+			公開
+		</label>
+		<label class="radio inline">
+			<input type="radio" id="item[is_public]" name="item[is_public]" value="0" <% if !@item.is_public %>checked<% end %>>
+			非公開
+		</label>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="item_alt_id">カテゴリー</label>
+	<div class="controls">
+		<%
+		cat_options = Array.new
+		cat_options << @item.content_category.category_path(true)[0]
+		%>
+	    <%= tree_select(cat_options, 'item', 'content_category_id', @item.content_category.id) %> 
+	</div>
+</div>
+
+<% if false %>
+<% 
+    c = Condition.new
+	c.and "staffs.staff_status",'!=', Staff::STAFF_BLOCKED
+	@staffs = @shop.staffs.find(:all, :conditions => c.where)
+		options = @staffs.map{ | s | [ s.name, s.id] }
+	options.unshift(["-- 指定なし --　", '']) 
+%>
+<div class="control-group">
+	<label class="control-label" for="item_staff_id">スタッフ</label>
+	<div class="controls">
+		<%= collection_select(:item, :staff_id, options, :last, :first)%>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="item_telephone">公開開始日</label>
+	<div class="controls controls-row">
+		<input class="span2" type="text" id="datepicker_from", name="item[publish_from]", value="<%= @item.publish_from %>", placeholder="yyyy-mm-dd">
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="item_telephone">公開終了日</label>
+	<div class="controls controls-row">
+		<input class="span2" type="text" id="datepicker_until", name="item[publish_until]", value="<%= @item.publish_until %>", placeholder="yyyy-mm-dd">
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+	　$("#datepicker_from").datepicker({
+		dateFormat: "yy-mm-dd",
+		showButtonPanel: true
+	　});
+	});
+	$(function(){
+	　$("#datepicker_until").datepicker({
+		dateFormat: "yy-mm-dd",
+		showButtonPanel: true
+	　});
+	});
+</script>
+
+<% end %>
+
+

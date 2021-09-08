@@ -1,0 +1,46 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:action=>'company_show_shop') %>">店舗情報</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_staffs') %>">店舗スタッフ</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_users') %>">店舗ユーザー</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_show_website') %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a></li>
+	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+		<li class="active">	<a href="<%= url_for(:action=>'shop_site_navigation') %>">ナビゲーション</a></li>
+	<% end %>
+</ul>
+
+<h4>
+	<p class="pull-right">
+		<a class="btn btn-small" href="<%= url_for(:action=>'shop_site_navigation') %>">
+			<i class="icon-remove"></i>&nbsp;
+			キャンセル
+		</a>
+		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'list_page_photo', :id=>@item) %>">
+			<i class="icon-camera"></i>&nbsp;
+			素材一覧
+		</a>
+	</p>
+	<%=model_title(@item)%>
+	:
+	固定ページ編集
+</h4>
+
+
+
+
+<%= form_tag url_for(:action=>"update_fix_page", :id=>@item), :class=>"form-horizontal well" do -%>
+	<fieldset>
+		<legend>ページ設定</legend>
+		<%= render :partial=>"form_fixed_page_content" %>
+		<div class="form-actions">
+        	<button type="submit" class="btn btn-small btn-success"><i class="icon-refresh"></i>&nbsp;&nbsp;更新</button>
+			<% url_cancel = url_for(:action=>"shop_site_navigation") %>							
+	  		<a class="btn btn-small" href="<%= url_cancel %>"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
+      	</div>
+	</fieldset>
+<% end -%>
+

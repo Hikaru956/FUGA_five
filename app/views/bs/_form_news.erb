@@ -1,0 +1,25 @@
+<div class="control-group">
+	<%= text_field  'item', 'title', :placeholder=>"記事のタイトル", :autocomplete=>false%>
+</div>
+<div class="control-group">
+	<%= text_area  'item', 'description', {:class=>"input-xxlarge" , :rows => 5, :autocomplete=>false}  %>
+</div>
+<hr/>
+
+<% 
+	c = Condition.new
+	c.and "content_leafs.content_category_id", 'IN', ContentCategory.type_root(@shop, ContentCategory::TYPE_NEWS).children
+	bag_roots = ContentCategory.type_root(@shop, ContentCategory::TYPE_NEWS).children
+%>
+<% if bag_roots.size==1 %>
+	<% @item.content_bag 		= bag_roots[0].content_bag %>
+	<%= hidden_field 'item', 'content_bag_id' %>
+<% else %>
+	<div class="control-group">
+		<label class="control-label" for="in_charge">ストリーム</label>
+			<div class="controls">
+				<%= collection_select(:item, :content_bag_id, bag_roots.map{ | s | [ s.content_bag.id, s.content_bag.name] }, :last, :first) %>
+			</div>
+	</div>
+<% end %>
+

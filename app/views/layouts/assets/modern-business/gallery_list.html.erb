@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title><%=model_name(@seed) %> - <%= @website.name %></title>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/modern-business/head_logic" %>
+  </head>
+
+  <body>
+	<%= render :partial=>"#{LayoutScheme.asset_root}/modern-business/navigation" %>
+    
+    <div class="container">
+    	<br/>
+		<%= yield %>
+    </div><!-- /.container -->
+
+    <div class="container">
+		<%= render :partial=>"#{LayoutScheme.asset_root}/modern-business/footer" %>
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+	<script type="text/javascript" src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+	<%= javascript_include_tag "assets/modern-business/modern-business.js"%>
+  </body>
+</html>

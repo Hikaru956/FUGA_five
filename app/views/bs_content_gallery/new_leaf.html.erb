@@ -1,0 +1,25 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>ギャラリー項目</h3>
+</header>
+
+<ul class="breadcrumb">
+  <li><%= link_to "ストリーム", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <% @item.content_category.category_path(true).each do | category | %>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+  <% end %>
+  <li class="active">新規登録</li>
+</ul>
+
+<%= form_tag url_for(:action=>"create_leaf"), :class=>"form-horizontal well" do -%>
+	<%= hidden_field 		'item', 'shop_id' %>
+	<fieldset>
+		<legend>新規登録</legend>
+		<%= render :partial=>"form_leaf" %>
+		<div class="form-actions">
+        	<button type="submit" class="btn btn-small btn-success"><i class="icon-plus"></i>&nbsp;&nbsp;登録</button>
+			<% url_cancel = url_for(:action=>"content_category", :id=>@item.content_category) %>							
+	  		<a class="btn btn-small" href="<%= url_cancel %>"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
+      	</div>
+	</fieldset>
+<% end -%>

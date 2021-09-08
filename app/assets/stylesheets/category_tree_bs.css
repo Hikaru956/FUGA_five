@@ -1,0 +1,67 @@
+div.tree {
+  width: 50%;
+}
+
+#tree ul {
+  list-style-type: none;
+  list-style-position: inside;
+  padding: 0px;
+  margin: 0 0 0 2em;
+}
+
+#tree li {
+  padding: 3px 0px 3px 0px;
+  margin: 0;
+}
+
+a.toggle_show {
+  text-decoration: none;
+  font-size: 100%;
+  color: #000;
+}
+
+a.toggle_hide {
+  text-decoration: none;
+  font-size: 100%;
+  color: #000;
+}
+
+a.tree_action {
+  text-decoration: none;
+  font-size: 100%;
+  color: #0AA;
+}
+
+a.tree_action:hover {
+  text-decoration: none;
+  font-size: 100%;
+  color: #AA0;
+}
+
+.handle {
+  text-decoration: none;
+  font-size: 100%;
+  color: #eee;
+  background-color: #956;
+  cursor: move;
+}
+
+a.toggle_show:hover,
+a.toggle_hide:hover {
+  color: #fff;
+}
+
+.handle:hover,
+a.action:hover {
+  color: #fff;
+  background-color: #880;
+}
+
+li.Doo>ul {
+}
+li.Doo a {
+  background-color: #888;
+}
+li.Doo li a {
+  background:none;
+}

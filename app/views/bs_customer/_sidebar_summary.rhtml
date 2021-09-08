@@ -1,0 +1,36 @@
+<div class="alert alert-success">
+	<h5>今後の予約</h5>
+	<% if @shop.option_reservation_management %>
+		<% reservations = @item.reservations.find(:all, :conditions=>["reserved_on >= ?", Time.now], :order=>"reserved_on desc") %>
+		<% unless reservations.blank? %>
+			<% reservations.each do |reservation| %>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								<i class='icon-list'></i>
+								<%= reservation.reserved_on.strftime("%Y-%m-%d")%>
+								(<%= wday(reservation.reserved_on) %>)
+								<%= reservation.reserved_on.strftime("%H:%M〜")%>
+							</td>
+						<tr>
+						<tr>
+							<td>
+								<%= (reservation.staff.blank?)? '': "担当 : "+model_name(reservation.staff) %>
+								<span class="btn-group">
+								<%= link_to("<i class='icon-arrow-right'></i>",
+									{:controller=>"bs_reservation", :action=>"reservation", :target_date=>reservation.reserved_on}, 
+									:class=>"btn btn-mini", :title=>"予約表") %>
+								</span>
+							</td>
+						<tr>
+					<tbody>
+				</table>
+			<% end %>
+		<% else %>
+			<p>予約が登録されていません。</p>
+		<% end %>
+	<% else %>
+		<p>予約管理機能を利用すると、お客様の今後の予約を表示することが出来ます。</p>
+	<% end %>
+</div>

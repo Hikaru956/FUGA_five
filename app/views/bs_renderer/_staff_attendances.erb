@@ -1,0 +1,58 @@
+	<div class="row">
+        <div class="span12 box">
+	        <div class="span2"></div>
+	        <div class="span8">
+	<hr/>
+				<h4>出勤ステータス</h4>
+				<table class="table table-hover table-bordered" >
+					<thead>
+						<tr>
+							<th class="span4">
+								<span class="pull-right">
+									<a href="<%= url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key, :target_date=>(@target_date-1)) %>"><i class="icon-chevron-sign-left"></i></a>
+									<a href="<%= url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key) %>">今週</a>
+									<a href="<%= url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key, :target_date=>(@target_date+7)) %>"><i class="icon-chevron-sign-right"></i></a>
+								</span>
+								日付
+							</th>
+							<th class="span8">
+								<span class="pull-right">
+						        	<% unless @website.wsite_telephone.blank? %>
+										<a href="tel:<%=@website.wsite_telephone %>">
+											<i class="icon-phone-sign"></i>
+											<%=@website.wsite_telephone %>
+										</a>
+						            <% end %>
+								</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% today = Time.now.to_date %>
+						<% 7.times do |d| %>
+							<% my_date = (@target_date+(d-1)) %>
+							<% attendances = @seed.attendances.find_all_by_attend_on(my_date) %>
+							<tr>
+								<td>
+									<% if my_date==today %>
+										<strong><%= my_date.strftime("%Y-%m-%d")%> (<%=wday(my_date)%>)</strong>
+									<% else %>
+										<%= my_date.strftime("%Y-%m-%d")%> (<%=wday(my_date)%>)
+									<% end %>
+									<%= raw("<i class='icon-flag'></i>") if my_date.national_holiday? %>
+								</td>
+								<td>
+									<% unless attendances.blank? %>
+										<i class="icon-spinner icon-spin icon-large"></i>
+										<%= attendances.map{|a| (a.start_hour.to_s)+":00〜"+(a.until_hour.to_s)+":00"}.join(',') %>
+									<% end %>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>		
+	        	
+	        </div>
+	        <div class="span2"></div>
+		</div>	        	
+	</div>	        	

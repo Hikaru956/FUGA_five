@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/lib
+END
+authentication.rb
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/lib/authentication.rb
+END
+authorization.rb
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/lib/authorization.rb
+END
+trustification.rb
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/lib/trustification.rb
+END

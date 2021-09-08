@@ -1,0 +1,102 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<div class="pull-right">
+		<p>
+			<div class="btn-toolbar" style="margin: 0;">
+				<% if false %>
+					<% @bag_roots = [@parent_category.my_bag_root_category] %>
+					<% unless @bag_roots.blank? %>
+						<a class="btn btn-primary btn-small"  data-toggle="modal" href="#modal_new">
+							<i class="icon-folder-open"></i>&nbsp;
+						</a>
+					<%end%>  	
+				<% end %>
+				<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
+				<a class="btn btn-success btn-small" href="<%=url_new%>">
+					<i class="icon-plus"></i>&nbsp;
+					記事登録
+				</a>
+				<% if false %>
+					<% if @parent_category.category_type==ContentCategory::TYPE_BAG_ROOT %>
+						<% url_edit = url_for(:action=>"content_category_tree", :id=>@parent_category) %>
+						<a class="btn btn-warning btn-small" href="<%=url_edit%>">
+							<i class="icon-wrench"></i>&nbsp;
+							カテゴリー
+						</a>
+					<% end %>
+				<% end %>
+            </div>
+		</p>
+	</div>
+	<h3><%= @parent_category.category_label %></h3>
+</header>
+
+<ul class="breadcrumb">
+  <li><%= link_to "ストリーム", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <% @parent_category.category_path.each do | category | %>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+  <% end %>
+  <li class="active"><%= @parent_category.category_label %></li>
+</ul>
+
+<% if @parent_category.my_bag_root_category.content_bag.is_public==false  %>
+	<div class="alert alert-block">
+		 <strong>Warning!</strong> 非公開ストリームです。
+	</div>
+<% end %>
+
+<% if @leafs.blank? %>
+	<% if @parent_category.children.blank? %>
+		<h4>項目一覧</h4>
+		<div class="alert alert-block">
+			 <strong>Warning!</strong> 項目がありません。
+		</div>
+	<% end %>
+<% else %>
+
+	<% @total_size = @parent_category.content_leafs.size %>
+
+	<h4>項目一覧</h4>
+	<div class="row-fluid">
+		<% array = @leafs.in_groups_of(3, false)%>
+		<% for i in 0..(array.size-1) %>
+			<% @lines = array[i] %>
+		    <ul class="thumbnails">
+		        <li class="span4">
+		        	<%= render :partial=>"item_leaf", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
+				</li>		
+		        <li class="span4">
+		        	<%= render :partial=>"item_leaf", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
+				</li>		
+		        <li class="span4">
+		        	<%= render :partial=>"item_leaf", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
+				</li>		
+	        </ul>
+		<% end %>
+	</div>
+	<%= will_paginate(@leafs, :params=> {:action=>'content_category', :id=>@parent_category, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% end %>
+
+<% unless @bag_roots.blank? %>
+	<%= form_tag({:action=>"content_category", :id=>nil}, :class=>"form-horizontal")  do %>
+		<div id="modal_new" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">カテゴリー選択</h3>
+			</div>
+			<div class="modal-body">
+				<div class="control-group">
+					<label class="control-label" for="wsite_keywords">カテゴリー</label>
+					<div class="controls">
+					    <%= tree_select_tag(@bag_roots, 'id', (@parent_category.blank?)? "": @parent_category.id)   %> 
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+				<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+			</div>
+		</div>
+	<%end%>  	
+<%end%>  	
+

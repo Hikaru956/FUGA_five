@@ -1,0 +1,40 @@
+<% @widget_bag = @visual_widget.get_bag_for(@website) %>
+<% unless @widget_bag.blank? %>
+	<h4>
+		<div class="pull-right">
+			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit_<%=@widget_bag.id%>">
+				<i class="icon-pencil"></i>&nbsp;
+	  			編集
+			</a>
+		</div>
+		<%= @visual_widget.position %>
+		:
+		[<%= widget_type_string(@visual_widget.widget_type) %>]	
+		<%= model_title(@visual_widget) %>
+	</h4>
+	<blockquote><%= h @visual_widget.description %></blockquote>
+	<% unless @widget_bag.data_string.blank? %>
+		<pre><%= h @widget_bag.data_string %> </pre>
+	<% end %>
+	<%= form_tag url_for(:action=>"update_widget_bag", :id=>@widget_bag), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit_#{@widget_bag.id}"} do -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">表示設定 : <%= @visual_widget.position %></h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="item_data_string"><%= model_title(@visual_widget) %></label>
+				<div class="controls">
+					<%= text_area  'widget_bag', 'data_text', :rows=>"12", :class=>"span12", :placeholder=>"テキストを入力" %>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+	    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+<% end %>
+
+
+

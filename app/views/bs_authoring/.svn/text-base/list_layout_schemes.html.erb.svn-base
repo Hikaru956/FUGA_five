@@ -1,0 +1,28 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<p class="pull-right">
+		<a class="btn btn-small" href="<%= url_for(:action=>'index') %>">
+			<i class="icon-arrow-left"></i>
+			戻る
+		</a>
+	</p>
+	<h3>レイアウト選択</h3>
+</header>
+
+<div class="row-fluid">
+	<% array = @items.in_groups_of(3, false)%>
+	<% for i in 0..(array.size-1) %>
+		<% @lines = array[i] %>
+	    <ul class="thumbnails">
+	        <li class="span4">
+	        	<%= render :partial=>"layout_item", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
+			</li>		
+	        <li class="span4">
+	        	<%= render :partial=>"layout_item", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
+			</li>		
+	        <li class="span4">
+	        	<%= render :partial=>"layout_item", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
+			</li>		
+        </ul>
+	<% end %>
+</div>

@@ -1,0 +1,73 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<% if current_user.has_permission?(User::ROLE_SUPER) %>
+		<p class="pull-right">
+			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
+				<i class="icon-plus"></i>&nbsp;
+				ユーザー登録
+			</a>
+		</p>
+	<% end %>
+	<h3>管理ユーザー設定</h3>
+</header>
+	
+
+
+<ul class="breadcrumb">
+  <li class="active">一覧</li>
+</ul>
+
+
+<% if @users.blank? %>
+	<p class="text-error">ユーザーが登録されていません</p>
+<% else %>
+	<table class="table table-hover table-bordered">
+		<tbody>
+			<tr class="info">
+				<td class="span2"><strong>ロール</strong></td>
+				<td class="span2"><strong>表示名</strong></td>
+				<td class="span3"><strong>ログイン</strong></td>
+				<td class="span3"><strong>Email</strong></td>
+			</tr>
+			<% @users.each do | user | %>
+				<tr <% if user.banned? %>class="error"<%end%>>
+					<td><%=label_user_role(user.role)%></td>
+					<td><%=model_name(user)%></td>
+					<td>
+						<% if user.banned? %>
+							<span class="pull-right"><i class="icon-ban-circle"></i></span>
+						<% end %>
+						<% url = url_for(:action=>"user_show", :id=>user) %>
+						<a href="<%=url%>">
+							<i class='icon-chevron-sign-right'></i>
+							<%= user.login %>
+						</a>
+					</td>
+					<td><%= user.email %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+
+<!-- modalNew -->
+<%= form_tag url_for(:action=>"user_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+	<% 
+		@user = User.new
+		@user.role = User::ROLE_SALES 
+	%>
+	<%= hidden_field 'user', 'role' %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">新規ユーザー登録</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_user_super" %>
+		<%= render :partial=>"form_user_password" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+

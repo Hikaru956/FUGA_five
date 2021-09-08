@@ -1,0 +1,52 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<p class="pull-right">
+		<a class="btn btn-small" href="<%= url_for(:action=>'manage_widget') %>">
+			<i class="icon-arrow-left"></i>
+			戻る
+		</a>
+	</p>
+	<h3>
+		<%= @widget_bag.visual_widget.position %>
+		:
+		[<%= widget_type_string(@widget_bag.visual_widget.widget_type) %>]
+		<%= model_title(@widget_bag.visual_widget) %>
+	</h3>
+	<blockquote><%= h @widget_bag.visual_widget.description %></blockquote>
+
+<style type="text/css">@import url(/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
+
+<!-- Third party script for BrowserPlus runtime (Google Gears included in Gears runtime now) -->
+<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+
+<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+<script type="text/javascript" src="/plupload/js/plupload.full.js"></script>
+<script type="text/javascript" src="/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="/plupload/js/i18n/ja.js"></script>
+
+<script type="text/javascript">
+// Convert divs to queue widgets when the DOM is ready
+$(function() {
+	// Setup html5 version
+	$("#html5_uploader").pluploadQueue({
+		// General settings
+		runtimes : 'html5',
+		url : "/<%=params[:controller]%>/create_widget_bag_photo?id=<%=@widget_bag.id%>",
+		max_file_size : '10mb',
+		//chunk_size : '1mb',
+		unique_names : true,
+
+		// Resize images on clientside if we can
+		//resize : {width : 320, height : 240, quality : 90},
+
+		// Specify what files to browse for
+		filters : [
+			{title : "Image files", extensions : "jpg,jpeg,gif,png"}
+		]
+	});
+});
+</script>
+
+<div class="row-fluid">
+	<div id="html5_uploader">You browser doesn't support native upload. Try Firefox, Chrome or Safari.</div>	
+</div>

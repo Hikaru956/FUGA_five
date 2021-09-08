@@ -1,0 +1,20 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<p class="pull-right">
+		<a class="btn btn-small" href="<%= url_for(:action=>'index') %>">
+			<i class="icon-arrow-left"></i>
+			戻る
+		</a>
+	</p>
+	<h3>
+		表示設定
+		:
+		<%= model_name(@layout) %>
+	</h3>
+</header>
+
+<div class="row-fluid">
+	<% @layout.visual_widgets.each do | visual_widget | @visual_widget = visual_widget %>
+		<%= render :partial=>"bs_authoring/manage_visual_widget_item" %>
+	<% end %>
+</div>

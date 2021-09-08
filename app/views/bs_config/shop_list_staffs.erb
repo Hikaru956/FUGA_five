@@ -1,0 +1,88 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:action=>'company_show_shop') %>">店舗情報</a></li>
+	<li class="active">	<a href="<%= url_for(:action=>'shop_list_staffs') %>">店舗スタッフ</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_users') %>">店舗ユーザー</a></li>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<li>				<a href="<%= url_for(:action=>'shop_show_website') %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a></li>
+		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+			<li>				<a href="<%= url_for(:action=>'shop_site_navigation') %>">ナビゲーション</a></li>
+		<% end %>
+	<% end %>
+</ul>
+
+<h4>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+	<p class="pull-right">
+		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
+			<i class="icon-plus"></i>&nbsp;
+			スタッフ登録
+		</a>
+	</p>
+	<% end %>
+	店舗スタッフ一覧
+</h4>
+
+<% if @staffs.blank? %>
+	<p class="text-error">店舗スタッフが登録されていません</p>
+<% else %>
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr>
+				<th class="span4"><span class="pull-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
+				<th class="span4">職位/タイトル</th>
+				<th class="span4">ソーシャル</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @staffs.each do | staff | %>
+				<tr>
+					<td>
+						<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+							<span class="pull-right">
+								<%= (staff.first?)?	"△":	link_to("▲", :action=>"staff_higher",	:id=>staff) %>
+								<%= (staff.last?)? 	"▽": 	link_to("▼", :action=>"staff_lower", 	:id=>staff) %>
+							</span>
+						<% end %>						
+						
+						<% url = url_for(:action=>"shop_show_staff", :id=>staff) %>
+						<a href="<%=url%>">
+							<%= icon_staff_status(staff.staff_status) %>
+							<%= model_name(staff) %>
+						</a>
+					</td>
+					<td><%=staff.job_title%></td>
+					<td>
+						<%= raw('<i class="icon-facebook-sign icon-large"></i>')		unless staff.social_facebook_uri.blank? %>
+						<%= raw('<i class="icon-google-plus-sign icon-large"></i>')	unless staff.social_gplus_uri.blank? %>
+						<%= raw('<i class="icon-twitter-sign icon-large"></i>')		unless staff.social_twitter_uri.blank? %>
+						<%= raw('<i class="icon-instagram icon-large"></i>')		unless staff.social_instagram_uri.blank? %>
+						<%= raw('<i class="icon-pinterest-sign icon-large"></i>')	unless staff.social_pinterest_uri.blank? %>
+						<%= raw('<i class="icon-tumblr-sign icon-large"></i>')		unless staff.social_tumblr_uri.blank? %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+
+<!-- modalNew -->
+<%= form_tag url_for(:action=>"shop_create_staff"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+	<% @staff = Staff.new %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">新規スタッフ登録</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_staff" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+

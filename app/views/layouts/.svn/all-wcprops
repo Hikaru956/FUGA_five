@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/956_Inc/956/svn/!svn/ver/2351/fuga_326/app/views/layouts
+END
+_blank_navigation.erb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/layouts/_blank_navigation.erb
+END
+_sales_navigation.erb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/layouts/_sales_navigation.erb
+END
+_tiny_mce.erb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/956_Inc/956/svn/!svn/ver/2071/fuga_326/app/views/layouts/_tiny_mce.erb
+END
+_social_buttons.erb
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/layouts/_social_buttons.erb
+END
+_owner_navigation.erb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/956_Inc/956/svn/!svn/ver/2052/fuga_326/app/views/layouts/_owner_navigation.erb
+END
+_super_navigation.erb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/956_Inc/956/svn/!svn/ver/2071/fuga_326/app/views/layouts/_super_navigation.erb
+END
+_user_navigation.erb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/956_Inc/956/svn/!svn/ver/2052/fuga_326/app/views/layouts/_user_navigation.erb
+END
+_fuga_footer.erb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/layouts/_fuga_footer.erb
+END
+fuga_map.erb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/956_Inc/956/svn/!svn/ver/2053/fuga_326/app/views/layouts/fuga_map.erb
+END
+fuga_wo_jq.erb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/layouts/fuga_wo_jq.erb
+END
+fuga.erb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/956_Inc/956/svn/!svn/ver/2872/fuga_326/app/views/layouts/fuga.erb
+END
+fuga_assets.erb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/956_Inc/956/svn/!svn/ver/2053/fuga_326/app/views/layouts/fuga_assets.erb
+END

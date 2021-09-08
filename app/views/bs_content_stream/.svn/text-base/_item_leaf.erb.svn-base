@@ -1,0 +1,32 @@
+<div class="thumbnail">
+	<div  style="text-align:center;">
+		<a href="<%= url_for(:action=>'show_leaf', :id=>temp_local, :page=>@page) %>">
+			<% key_photo = key_photo(temp_local) %>
+			<% unless key_photo.blank? %>
+				<%= image_tag(url_for_file_column(key_photo, :image, "thumb")) %>
+			<% else %>
+				<img src="http://placehold.it/320x240&amp;text=No Photo">
+	    	<% end %>
+		</a>
+	</div>
+    <div class="caption">
+        <h4>
+        	<span class='pull-right'><span class="label label-success"><%=temp_local.content_category.category_label%></span></span>
+        	<%= leaf_state_icons(temp_local) %>
+        	<%= truncate(model_title(temp_local), :length=>30) %>
+		</h4>
+		<p>
+        	<% unless temp_local.description_3.blank? %>
+ 	           <%= h temp_local.description_3 %>
+        	<% else %>
+ 	           <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>50) %>
+           <% end %>
+		</p>
+        <p>
+		  	<%= temp_local.publish_from.strftime("%Y-%m-%d") %>
+			<% unless temp_local.staff.blank? %>
+				<%= model_name(temp_local.staff) %>
+			<% end %>
+		</p>
+    </div>
+</div>

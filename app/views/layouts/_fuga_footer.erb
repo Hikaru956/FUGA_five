@@ -1,0 +1,17 @@
+<p>
+	&copy; <%=Time.now.year%>  <%= BRAND_NAME %><br/>
+	<% unless current_user.blank? %>
+		<small>
+			[
+			<%= label_user_role(current_user.role)%>
+			<% unless current_user.shop.blank? %>
+				@
+				<%= model_name(current_user.shop) %>
+			<% end %>
+			<% unless current_user.company.blank? %>
+				<%= ('. '+model_name(current_user.company)) %>
+			<% end %>
+			]
+		</small>
+	<% end %>
+</p>

@@ -1,0 +1,47 @@
+<%
+	require 'date'
+	require 'date/holiday'
+%>
+<%
+	roster_timeline_classes = roster_timeline_classes(@shop, @probe_date,
+											 (@shop.option_reservation_management)? @reservation_map[@probe_date]: [], @roster_map[@probe_date])
+%>
+<tr id="<%=@target_date.strftime('%Y-%m-%d')%>">
+	<th class="head_date_label">
+		<%= @probe_date.strftime("%m-%d") %>
+		(<span class="<%=(@probe_date.national_holiday? || @probe_date.wday==0)? 'holiday': 'flat'%>"><%=wday(@probe_date)%></span>)
+		<%= "<i class='icon-flag'></i>" if @probe_date.national_holiday? %>
+		<br/>
+			<span class="pull-right">
+				<% if @shop.option_reservation_management %>
+					<span class="btn-group">
+					<%= link_to("<i class='icon-list'></i>",
+						{:controller=>"bs_reservation", :action=>"reservation", :target_date=>@probe_date}, 
+						:class=>"btn btn-mini", :title=>"予約表") %>
+					</span>
+				<% end %>
+				<span class="btn-group">
+					<%= link_to("<i class='icon-circle-blank'></i>",
+							{:action=>"day_on", :id=>@staff, :target_date=>@probe_date},
+							:confirm=>"#{@probe_date.strftime('%m-%d')}(#{wday(@probe_date)}) を「#{@shop.name}:全日出勤」とします。よろしいですか?", 
+							:method=>'post',
+							:class=>"btn btn-info btn-mini", :title=>"全日出勤") %>
+					<%= link_to("<i class='icon-remove'></i>",
+							{:action=>"day_off", :id=>@staff, :target_date=>@probe_date},
+							:confirm=>"#{@probe_date.strftime('%m-%d')}(#{wday(@probe_date)}) を「全休」とします。よろしいですか?", 
+							:method=>'post',
+							:class=>"btn btn-error btn-mini", :title=>"全休") %>
+				</span>
+				<span class="btn-group">
+					<%= link_to("<i class='icon-cogs'></i>",
+						{:action=>"edit_business", :id=>@staff, :target_date=>@probe_date}, 
+						:class=>"btn btn-success btn-mini") %>
+				</span>
+			</span>
+	</th>
+	<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
+		<td class="<%=roster_timeline_classes[i*2]%>"></td>
+		<td class="<%=roster_timeline_classes[i*2+1]%>"></td>
+	<% end %>
+</tr>
+

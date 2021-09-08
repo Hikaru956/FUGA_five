@@ -1,0 +1,13 @@
+<a href="<%= url_for(:action=>'portfolio_list', :id=>temp_local,	:wkey=>@website.wsite_hash_key) %>">
+	<div class="thumbnail">
+	    <div class="caption">
+	        <h4>
+				<i class="icon-folder-close"></i>
+	        	<%= truncate(temp_local.title, :length=>50) %>
+			</h4>
+			<% unless temp_local.description.blank? %>
+			<p><%= h truncate(temp_local.description, :length=>20) %></p>
+			<% end %>
+	    </div>
+	</div>
+</a>

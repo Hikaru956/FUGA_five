@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication
+END
+CHANGELOG
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/CHANGELOG
+END
+README.textile
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/README.textile
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/LICENSE
+END
+Rakefile
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/Rakefile
+END
+restful-authentication.gemspec
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/restful-authentication.gemspec
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/TODO
+END
+init.rb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2033/fuga_326/vendor/plugins/restful-authentication/init.rb
+END

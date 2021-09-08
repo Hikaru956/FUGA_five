@@ -1,0 +1,70 @@
+<header class="subhead" id="overview">
+	<h3>勤務表</h3>
+</header>
+
+<ul class="breadcrumb">
+  <li><a href="<%= url_for(:controller=>'bs_attendance', 	:action=>'index') %>">勤務表</a> <span class="divider">/</span></li>
+  <li><a href="<%= url_for(:controller=>'bs_roster', 		:action=>'index') %>">シフト設定</a> <span class="divider">/</span></li>
+  <li class="active">シフト項目</li>
+</ul>
+
+<p class="lead">
+	<span class="pull-right">
+		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
+			<i class="icon-plus"></i>&nbsp;
+			項目登録
+		</a>
+	</span>
+	シフト項目
+</p>
+
+<table class="table">
+	<tr>
+		<th>項目名</th>
+		<th>対象店舗</th>
+		<th>始業時刻</th>
+		<th>終業時刻</th>
+		<th></th>
+	</tr>
+	<% @items.each do | item | %>
+		<tr>
+			<td>
+				<span class="pull-right">
+					<%= (item.first?)?	"△":	link_to("▲", :action=>"move_higher",	:id=>item) %>
+					<%= (item.last?)? 	"▽": 	link_to("▼", :action=>"move_lower", 	:id=>item) %>
+				</span>
+				
+				<% url = url_for(:action=>"show", :id=>item) %>
+				<a href="<%=url%>">
+					<i class='icon-chevron-sign-right'></i>
+					<%= item.name %>
+				</a>
+			</td>
+			<td><%= item.shop.name %></td>
+			<td><%= item.start_hour %>:00</td>
+			<td><%= item.until_hour %>:00</td>
+		</tr>
+	<% end %>
+</table>
+
+<!-- modalNew -->
+<%= form_tag url_for(:action=>"create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+	<% 
+		@item = RosterLabel.new
+		@item.shop 		 = @shop
+		@item.start_hour = @shop.business_hour_from 
+		@item.until_hour = @shop.business_hour_until
+	%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">シフト項目登録</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-arrow-left"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+

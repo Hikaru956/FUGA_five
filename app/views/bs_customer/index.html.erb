@@ -1,0 +1,27 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<div class="pull-right">
+		<p>
+			<a class="btn btn-success btn-small"  data-toggle="modal" href="#modal_new_customer">
+				<i class="icon-plus"></i>&nbsp;
+				お客様登録
+			</a>
+		</p>
+	</div>
+	<h3>顧客管理</h3>
+</header>
+
+
+<div class="row">
+	<div class="span4">
+		<%= render :partial=>"sidebar"%>
+	</div>
+
+	<div class="span8">
+		<div class="alert alert-success">
+		  条件を設定して、顧客を検索して下さい。
+		</div>
+	</div>
+</div>
+
+<%= render :partial=>"modal_new_customer" %>

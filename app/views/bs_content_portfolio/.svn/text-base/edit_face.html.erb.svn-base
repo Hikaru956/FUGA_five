@@ -1,0 +1,91 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<div class="pull-right">
+		<p>
+			<div class="btn-toolbar" style="margin: 0;">
+            </div>
+		</p>
+	</div>
+	<h3><%= @parent_category.web_page.name%></h3>
+</header>
+
+<ul class="breadcrumb">
+  <li><%= link_to "ストリーム", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <% @parent_category.category_path.each do | category | %>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+  <% end %>
+  <li class="active"><%= @parent_category.category_label %></li>
+</ul>
+
+  	
+<h4>
+	<div class="pull-right">
+		<p>
+			<% url_back = url_for(:action=>"content_root") %>
+			<a class="btn btn-small" href="<%=url_back%>">
+				<i class="icon-arrow-left"></i>&nbsp;
+				戻る
+			</a>
+		</p>
+	</div>
+	表紙写真
+</h4>
+
+<div class="row-fluid">
+	<% array = @parent_category.photos.find(:all, :order=>"position asc").in_groups_of(3, false)%>
+	<% for i in 0..(array.size-1) %>
+		<% @lines = array[i] %>
+	    <ul class="thumbnails">
+	        <li class="span4">
+	        	<% if @lines.size>=1 %>
+					<%= render :partial=>"item_face_photo", :locals => {:photo => @lines[0]} %>
+				<% end %>
+			</li>		
+	        <li class="span4">
+	        	<% if @lines.size>=2 %>
+					<%= render :partial=>"item_face_photo", :locals => {:photo => @lines[1]} %>
+				<% end %>
+			</li>		
+	        <li class="span4">
+	        	<% if @lines.size>=3 %>
+					<%= render :partial=>"item_face_photo", :locals => {:photo => @lines[2]} %>
+				<% end %>
+			</li>		
+        </ul>
+	<% end %>
+</div>
+<hr/>
+<style type="text/css">@import url(/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
+
+<!-- Third party script for BrowserPlus runtime (Google Gears included in Gears runtime now) -->
+<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+
+<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+<script type="text/javascript" src="/plupload/js/plupload.full.js"></script>
+<script type="text/javascript" src="/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="/plupload/js/i18n/ja.js"></script>
+
+<script type="text/javascript">
+// Convert divs to queue widgets when the DOM is ready
+$(function() {
+	// Setup html5 version
+	$("#html5_uploader").pluploadQueue({
+		// General settings
+		runtimes : 'html5',
+		url : "/<%=params[:controller]%>/create_face_photo?id=<%=@parent_category.id%>",
+		max_file_size : '10mb',
+		//chunk_size : '1mb',
+		unique_names : true,
+
+		// Resize images on clientside if we can
+		//resize : {width : 320, height : 240, quality : 90},
+
+		// Specify what files to browse for
+		filters : [
+			{title : "Image files", extensions : "jpg,jpeg,gif,png"}
+		]
+	});
+});
+</script>
+<div id="html5_uploader">You browser doesn't support native upload. Try Firefox, Chrome or Safari.</div>
+

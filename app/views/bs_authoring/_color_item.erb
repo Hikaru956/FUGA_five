@@ -1,0 +1,39 @@
+<div class="thumbnail">
+	<% key_photo = temp_local.photo %>
+	<% unless key_photo.blank? %>
+		<%= image_tag(url_for_file_column(key_photo, :image, "thumb")) %>
+	<% else %>
+		<img src="http://placehold.it/320x240&amp;text=No Photo">
+	<% end %>
+
+    <div class="caption">
+        <h3>
+        	<% if @website.wsite_color_deploy_id==temp_local.id %>
+				<i class='icon-spinner icon-spin', title="運用中"></i>
+        	<% end %>
+        	<% unless temp_local.is_public? %><%= scheme_state_icons(temp_local) %><% end %>
+        	<%= model_name(temp_local) %>
+		</h3>
+		<p><%=temp_local.description%></p>
+    	<% if @website.wsite_color_edit_id==temp_local.id %>
+            <p>
+				<% if @website.wsite_color_deploy_id!=@website.wsite_color_edit_id%>
+	            	<%= link_to(raw("<i class='icon-hand-right'></i>&nbsp;適用"), {:action=>'color_for_deploy', :id=>temp_local}, {:class=>"btn btn-info btn-small", :method=>:post}) %>
+	            	<%= link_to(raw("<i class='icon-remove'></i>&nbsp;試用解除"), {:action=>'color_for_nil'}, {:class=>"btn btn-danger btn-small", :method=>:post}) %>
+				<% else %>
+	            	<%= link_to(raw("<i class='icon-globe'></i>&nbsp;運用サイト表示"), {:controller=>'bs_renderer'}, {:class=>"btn btn-success btn-small", :target=>"_blank?"}) %>
+	            	<%= link_to(raw("<i class='icon-hand-right'></i>&nbsp;適用"), {:action=>'color_for_deploy', :id=>temp_local}, {:class=>"btn btn-info btn-small", :method=>:post}) %>
+				<% end %>
+			</p>
+		<% elsif @website.wsite_color_deploy_id==temp_local.id %>
+			<h4>
+				<%= link_to(raw("<i class='icon-globe'></i>&nbsp;運用サイト表示"), {:controller=>'bs_renderer', :action=>'index', :wkey=>@website.wsite_hash_key}, {:class=>"btn btn-success btn-small", :target=>"_blank?"}) %>
+			</h4>
+		<% else %>
+            <p>
+            	<%= link_to(raw("<i class='icon-pencil'></i>&nbsp;試用"), {:action=>'color_for_edit', :id=>temp_local}, {:class=>"btn btn-primary btn-small", :method=>:post}) %>
+			</p>
+		<% end %>
+        </p>
+    </div>
+</div>

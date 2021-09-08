@@ -1,0 +1,61 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:action=>'company_show_shop') %>">店舗情報</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_staffs') %>">店舗スタッフ</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_users') %>">店舗ユーザー</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_show_website') %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a></li>
+	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+		<li class="active">	<a href="<%= url_for(:action=>'shop_site_navigation') %>">ナビゲーション</a></li>
+	<% end %>
+</ul>
+
+<h4>
+	<p class="pull-right">
+		<a class="btn btn-small" href="<%= url_for(:action=>'edit_fix_page', :id=>@item) %>">
+			<i class="icon-arrow-left"></i>&nbsp;
+			戻る
+		</a>
+		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_page_photo', :id=>@item) %>">
+			<i class="icon-camera"></i>&nbsp;
+			素材追加
+		</a>
+	</p>
+	<%=model_title(@item)%>
+	:
+	画像素材
+</h4>
+
+<div class="row-fluid">
+	<% array = @item.photos.find(:all, :order=>"position asc").in_groups_of(3, false)%>
+	<% for i in 0..(array.size-1) %>
+		<% @lines = array[i] %>
+	    <ul class="thumbnails">
+	        <li class="span4">
+	        	<% if @lines.size>=1 %>
+					<%= render :partial=>"item_fixed_page_photo", :locals => {:photo => @lines[0]} %>
+				<% end %>
+			</li>		
+	        <li class="span4">
+	        	<% if @lines.size>=2 %>
+					<%= render :partial=>"item_fixed_page_photo", :locals => {:photo => @lines[1]} %>
+				<% end %>
+			</li>		
+	        <li class="span4">
+	        	<% if @lines.size>=3 %>
+					<%= render :partial=>"item_fixed_page_photo", :locals => {:photo => @lines[2]} %>
+				<% end %>
+			</li>		
+        </ul>
+		<p class="pull-xright">
+			<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>">
+				<i class="icon-camera"></i>&nbsp;
+				写真追加
+			</a>
+		</p>
+	<% end %>
+</div>
+

@@ -1,0 +1,23 @@
+<% link_url = url_for(:action=>'portfolio_show', :id=>temp_local, :page=>@page,	:wkey=>@website.wsite_hash_key) %>
+<div class="thumbnail">
+	<div  style="text-align:center;">
+		<a href="<%= link_url %>">
+			<% key_photo = key_photo(temp_local) %>
+			<% unless key_photo.blank? %>
+				<%= image_tag(url_for_file_column(key_photo, :image, "thumb")) %>
+	    	<% end %>
+		</a>
+	</div>
+	<div class="caption">
+		<% unless temp_local.integer_field.blank? %>
+		<h4 class="pull-right"><%= "¥ "+commify(temp_local.integer_field.to_s) %></h4>
+		<% end %>
+		<h4>
+			<a href="<%= link_url %>">
+        	<%= truncate(model_title(temp_local), :length=>50) %>
+			</a>
+		</h4>
+		<p><%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>20) %></p>
+        <a class="btn btn-primary" href="<%= link_url %>">Read More <i class="icon-angle-right"></i></a>
+    </div>    	
+</div>

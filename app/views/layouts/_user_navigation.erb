@@ -1,0 +1,71 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="<%= url_for(:controller=>'bs_config', :action=>'company_show_shop') %>"><%=BRAND_NAME%></a>
+			<% unless current_user.blank? %>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+					<% 
+						#hikaru
+						if false
+							c = Condition.new
+							c.and "content_categories.is_public", true 
+							c.and "content_categories.category_type", ">=", ContentCategory::TYPE_NEWS 
+							c.and "content_categories.category_type", "<=", ContentCategory::TYPE_PORTFOLIO
+							navs = @shop.content_categories.find(:all, :conditions=>c.where, :order=>"position asc")
+						end
+						
+						navs = @shop.content_categories.where('content_categories.is_public =? AND content_categories.category_type >= ? AND content_categories.category_type <= ?', true, ContentCategory::TYPE_NEWS ,ContentCategory::TYPE_PORTFOLIO).order(position: :asc)
+					%>
+					<% navs.each do | nav | %>
+						<li>
+							<% if nav.category_type==ContentCategory::TYPE_NEWS %>		<a href="<%= url_for(:controller=>'bs_content_news', 		:action=>'content_root', :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
+							<% if nav.category_type==ContentCategory::TYPE_STREAM %>	<a href="<%= url_for(:controller=>'bs_content_stream', 		:action=>'content_root', :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
+							<% if nav.category_type==ContentCategory::TYPE_GALLERY %>	<a href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
+							<% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %>	<a href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root', :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
+						</li>
+					<% end %>
+					<% unless MAKE_SECRET_FUGA_OPTION %>
+	                    <% if @shop.option_reservation_management %>	<li><a href="/bs_reservation/index"	>予約</a></li><% end %>
+	                    <% if @shop.option_customer_management %>		<li><a href="/bs_customer/index"	>顧客</a></li><% end %>
+						<% if @shop.option_attendance_management %>		<li><a href="/bs_attendance/index"	>勤怠</a></li><% end %>
+					<% end %>
+                </ul>
+				<ul class="nav pull-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<%= model_name(current_user) %>
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<% if current_user.has_permission?(User::ROLE_BLOGGER) %>
+								<li><a href="<%= url_for(:controller=>'bs_config', :action=>'index') %>"><i class="icon-wrench"></i>&nbsp;店舗設定</a></li>
+								<% if false %>
+									<li class="divider"></li>
+									<li><a href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>"><i class="icon-sitemap"></i>&nbsp;ナビゲーション</a></li>
+									<li><a href="<%= url_for(:action=>'shop_site_navigation') %>"><i class="icon-globe"></i>&nbsp;デザイン</a></li>
+								<% end %>
+								<li class="divider"></li>
+							<% end %>
+							<li><a href="/accounts/destroy"><i class="icon-off"></i>&nbsp;ログアウト</a></li>
+							<% if current_user.role>=User::ROLE_SALES %>
+								<li class="divider"></li>
+								<li><%= link_to raw("<i class='icon-signout'></i>&nbsp;&nbsp;ダッシュボードに戻る"), {:controller=>'dashboard', :action=>'roll_back', :id=>current_user.shop}, :method=>:post %></li>
+							<% end %>
+							<% if current_user.role==User::ROLE_OWNER %>
+								<li class="divider"></li>
+								<li><%= link_to raw("<i class='icon-signout'></i>&nbsp;&nbsp;店舗選択"), {:controller=>'owner', :action=>'switch_shop'}, :method=>:post %></li>
+							<% end %>
+						</ul>
+					</li>						
+				</ul>						
+            </div><!--/.nav-collapse -->
+			<% end %>
+        </div>
+    </div>
+</div>

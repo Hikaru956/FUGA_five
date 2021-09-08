@@ -1,0 +1,32 @@
+<header class="subhead" id="overview">
+	<h3>予約管理</h3>
+</header>
+
+<ul id="tab_nav" class="nav nav-tabs">
+	<li class="active">	<a href="<%= url_for(:action=>'reservation', 	:target_date=>@target_date) %>"><i class="icon-list"></i>&nbsp;予約</a></li>
+	<li>				<a href="<%= url_for(:action=>'birthday',		:target_date=>@target_date) %>"><i class="icon-gift"></i>&nbsp;誕生日</a></li>
+</ul>
+
+<%=javascript_include_tag :defaults %>
+<p class="lead">
+	<%= @target_date%>&nbsp;(<%=wday(@target_date)%>)
+</p>
+
+<div class="well">
+	<span class="pull-right">
+		<%= link_to('<i class="icon-trash"></i>&nbsp;予約削除', 
+			{:action=>"delete_reservation", :id=>@item}, 
+			{:method=>"post", :confirm=>"この予約を削除します。よろしいですか？", :class=>"btn btn-small btn-danger"})%>
+	</span>
+
+	<fieldset class="form-horizontal">
+		<%= render :partial=>"reservation_view" %>
+		<div class="form-actions">
+			<%= link_to('<i class="icon-pencil"></i>&nbsp;編集', 
+				{:action=>"edit_reservation", :id=>@item}, 
+				{:class=>"btn btn-small btn-warning"})%>
+		  	<% back_url = url_for(:action=>"reservation", :target_date=>(@target_date))%>
+		    <a href="<%= back_url %>" class="btn btn-small"><i class="icon-chevron-left"></i>&nbsp;戻る</a>
+		</div>
+	</fieldset>
+</div>

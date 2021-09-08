@@ -1,0 +1,15 @@
+<% form_remote_tag({:url=>{:action=>"list_reservation_customer", :id=>@reservation}, :html=>{:class=>"form-horizontal well"}}) do -%>
+	<fieldset class="form-horizontal">
+		<legend>
+			お客様を検索
+		</legend>
+		
+		<%= render :partial=>"form_search_customer"%>
+		<div class="form-actions">
+        	<button type="submit" class="btn btn-small btn-success"><i class="icon-search"></i>&nbsp;&nbsp;検索</button>
+			<%= link_to_remote("<i class='icon-arrow-left'></i>&nbsp;キャンセル",
+				{:url=>{:action=>"clear_sandbox"}}, 
+				:class=>"btn btn-small") %>
+      	</div>
+	</fieldset>
+<% end -%>

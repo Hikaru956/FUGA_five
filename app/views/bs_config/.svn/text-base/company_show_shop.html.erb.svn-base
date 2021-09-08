@@ -1,0 +1,219 @@
+<style>
+    #map {
+        width: 100%;
+        height: 277px;
+    }
+</style>
+<style>
+	 #map img { max-width: none; }
+</style>
+
+
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+
+<ul class="nav nav-tabs">
+	<li class="active">	<a href="<%= url_for(:action=>'company_show_shop') %>">店舗情報</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_staffs') %>">店舗スタッフ</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_users') %>">ユーザー</a></li>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<li>				<a href="<%= url_for(:action=>'shop_show_website') %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a></li>
+		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+			<li>				<a href="<%= url_for(:action=>'shop_site_navigation') %>">ナビゲーション</a></li>
+		<% end %>
+	<% end %>
+</ul>
+
+<div class="row">
+	<div class="span8">
+		<h4>
+			<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+				<span class="pull-right">
+					<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+						<i class="icon-pencil"></i>&nbsp;
+							編集
+					</a>
+				</span>
+			<% end %>
+			店舗情報
+		</h4>
+
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td class="span3">名称</td>
+					<td class="span9">
+						<%= model_name(@shop) %>
+					</td>
+				</tr>
+				<tr>
+					<td>営業時間</td>
+					<td>
+						<%= @shop.operation_from.strftime("%l:%M %p")%>
+						〜
+						<%= @shop.operation_until.strftime("%l:%M %p")%>
+					</td>
+				</tr>
+				<tr>
+					<td>郵便番号</td><td><%= @shop.postal %></td>
+				</tr>
+				<tr>
+					<td>住所</td><td><%= @shop.address_1 %></td>
+				</tr>
+				<% if false %>
+				<tr>
+					<td>電話番号</td><td><%= @shop.telephone_1 %></td>
+				</tr>
+				<tr>
+					<td>メール</td><td><%= @shop.wsite_email %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		<h4>
+			<span class="pull-right">
+				<a class="btn btn-small btn-success" href="<%= url_for(:action=>'company_edit_shop') %>">
+					<i class="icon-pencil"></i>&nbsp;編集
+				</a>
+			</span>
+			店舗説明文
+		</h4>
+		<div class="well">
+			<%= raw(@shop.wsite_description_business) %>
+		</div>
+
+		<% unless MAKE_SECRET_FUGA_OPTION %>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th colspan="2">
+						オプション
+					</th>
+				</tr>
+				<tr>
+					<td class="span3">勤怠管理</td>
+					<td class="span9">
+						<%= (@shop.option_attendance_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
+					</td>
+				</tr>
+				<tr>
+					<td>簡易予約管理</td>
+					<td>
+						<%= (@shop.option_reservation_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
+					</td>
+				</tr>
+				<tr>
+					<td>顧客管理</td>
+					<td>
+						<%= (@shop.option_customer_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
+					</td>
+				</tr>
+				<% if false %>
+				<tr>
+					<td>売上管理</td>
+					<td>
+						<%= (@shop.option_sales_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>		
+		<div class="pull-riｓght muted"><small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
+		<% end %>
+
+	</div>
+	<div class="span4">
+		<h5>
+			<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+			<span class="pull-right">
+				<% url_edit_position = url_for(:action=>"shop_edit_position") %>							
+		  		<a class="btn btn-mini btn-info" href="<%= url_edit_position %>">
+					<i class="icon-globe"></i>&nbsp;
+		  			設定
+				</a>
+			</span>
+			<% end %>
+			位置情報
+		</h5>
+		
+		<% if @shop.gps? %>
+			<div id="map"></div>
+		<% else %>
+			<div class="alert alert-block">
+			  <h4>Warning!</h4>
+			  位置情報が未設定です。
+			</div>
+		<% end%>
+		
+		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
+			<div class="btn-toolbar text-center">
+			  <div class="btn-group">
+					<a class="btn btn-small btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank">
+						<i class="icon-share"></i>
+						サイト表示
+					</a>
+					<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+						<a class="btn btn-small btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>">
+							<i class="icon-globe"></i>
+							サイト編集
+						</a>
+					<% end %>
+			  </div>
+			</div>
+		<% end%>
+
+	</div>
+</div>
+
+
+<!-- modalEdit -->
+<%= form_tag url_for(:action=>"company_update_shop", :id=>@shop), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">店舗情報編集</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_shop" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<script>
+    var latlng = new google.maps.LatLng(<%= @shop.lat %>, <%= @shop.lng %>);
+    var options = {
+        zoom: 14,
+        center: latlng,
+		disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(document.getElementById('map'), options);
+
+	var marker = new google.maps.Marker({
+            position: latlng,
+            map: map
+        });	
+    
+    function moveMap() {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'address': document.getElementById('address').value
+        }, function(result, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.panTo(result[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    position: result[0].geometry.location,
+                    map: map
+                });
+            } else {
+                alert("見つかりませんでした。");
+            }
+        });
+    }
+</script>

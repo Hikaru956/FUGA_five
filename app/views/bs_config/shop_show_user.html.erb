@@ -1,0 +1,139 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:action=>'company_show_shop') %>">店舗情報</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_staffs') %>">店舗スタッフ</a></li>
+	<li class="active">	<a href="<%= url_for(:action=>'shop_list_users') %>">店舗ユーザー</a></li>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<li>				<a href="<%= url_for(:action=>'shop_show_website') %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a></li>
+		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+			<li>				<a href="<%= url_for(:action=>'shop_site_navigation') %>">ナビゲーション</a></li>
+		<% end %>
+	<% end %>
+</ul>
+
+<ul class="breadcrumb">
+  <li><%= link_to "一覧", url_for(:action=>'shop_list_users', :id=>@user.shop)  %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@user) %></li>
+</ul>
+
+<h4>
+	<span class="pull-right">
+		<a class="btn btn-small btn-warn" href="<%= url_for(:action=>'shop_list_users', :id=>@user.shop) %>">
+		<i class="icon-arrow-left"></i>&nbsp;
+			一覧
+		</a>
+		<% if current_user==@user || current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+			<i class="icon-pencil"></i>&nbsp;
+  			編集
+		</a>
+		<% end %>
+	</span>
+	店舗ユーザー情報
+</h4>
+
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td>役割</td><td><%= label_user_role(@user.role)%></td>
+		</tr>
+		<tr>
+			<td>表示名</td><td><%= model_name(@user)%></td>
+		</tr>
+		<tr <% if @user.banned? %>class="error"<%end%>>
+			<td class="span3">ログイン</td>
+			<td class="span9">
+				<%= @user.login %>
+				<% if @user.banned? %>
+					<br/>
+					<small>
+						<i class="icon-ban-circle"></i>
+						アカウントがブロックされています。
+						ユーザー情報の更新（パスワード更新等）が必要です。
+					</small>
+				<% end %>
+			</td>
+		</tr>
+		<% if true %>
+		<tr>
+			<td>メールアドレス</td>
+			<td><%= @user.email %></td>
+		</tr>
+		<% end %>
+
+		<% if current_user==@user || current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<tr>
+			<td>パスワード</td>
+			<td>
+				<a class="btn btn-small btn-warning"  data-toggle="modal" href="#modalEditPassword">
+				<i class="icon-refresh"></i>&nbsp;
+					パスワード再発行
+				</a>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<% unless @user==current_user %>
+	<div class="well">
+		<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
+		<i class="icon-trash"></i>&nbsp;
+			削除確認
+		</a>
+	</div>
+<% end %>
+				
+
+
+<!-- modalEdit -->
+<%= form_tag url_for(:action=>"shop_user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">ユーザー編集</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_user" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<!-- modalEditPassword -->
+<%= form_tag url_for(:action=>"shop_user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEditPassword"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">パスワード再発行</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_user_password" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<!-- modalDeleteUser -->
+<%= form_tag url_for(:action=>"shop_user_delete", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">ユーザー削除</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			「<%= @user.login %>」を削除します。<br/>
+			よろしいですか？
+		</p>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+	</div>
+<% end %>

@@ -1,0 +1,39 @@
+# -*- encoding : utf-8 -*-
+# Load the rails application
+require File.expand_path('../application', __FILE__)
+
+# Initialize the rails application
+Fuga326::Application.initialize!
+
+BRAND_NAME = "swifty"
+
+COLOR_ASSETS = "/stylesheets/colors"
+LAYOUT_ASSETS = "layouts/assets"
+
+ROOM_SIZE_MB_INIT  = 1024
+
+CalendarDateSelect.format = :hyphen_ampm
+
+require 'date'
+#hikaru
+require 'holidays'
+#require 'date/holiday'
+
+#TagList.delimiter = ","
+
+require 'will_paginate'
+PER_PAGE=20
+
+BIRTHDAY_BIAS_DAYS = 30
+
+CONTENT_CATEGORY_TITLE_HOME       = "ホーム" 
+CONTENT_CATEGORY_TITLE_NEWS       = "ニュース" 
+CONTENT_CATEGORY_TITLE_STREAM     = "ブログ" 
+CONTENT_CATEGORY_TITLE_GALLERY    = "ギャラリー"
+CONTENT_CATEGORY_TITLE_PORTFOLIO  = "価格表"
+CONTENT_CATEGORY_TITLE_INFO       = "店舗案内" 
+CONTENT_CATEGORY_TITLE_ANONYMOUS  = "その他" 
+
+MAKE_SECRET_FUGA_OPTION = true
+
+USER_AUTH_FAIL_COUNT = 3

@@ -1,0 +1,1 @@
+<%= render :file=>'bs_renderer/stream_show.html.erb'%>

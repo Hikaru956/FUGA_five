@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile.structure-1.0.1.min.css">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+	<!-- Load Queue widget CSS and jQuery -->
+	<style type="text/css">@import url(js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	
+	<!-- Third party script for BrowserPlus runtime (Google Gears included in Gears runtime now) -->
+	<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+	
+	<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+	<script type="text/javascript" src="js/plupload.full.js"></script>
+	<script type="text/javascript" src="js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+	<script type="text/javascript" src="js/i18n/ja.js"></script>
+	
+    <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+
+	<script type="text/javascript">
+	// Convert divs to queue widgets when the DOM is ready
+	$(function() {
+		// Setup html5 version
+		$("#html5_uploader").pluploadQueue({
+			// General settings
+			runtimes : 'html5',
+			url : 'upload.php',
+			max_file_size : '10mb',
+			chunk_size : '1mb',
+			unique_names : true,
+	
+			// Resize images on clientside if we can
+			resize : {width : 320, height : 240, quality : 90},
+	
+			// Specify what files to browse for
+			filters : [
+				{title : "Image files", extensions : "jpg,jpeg,gif,png"}
+			]
+		});
+	});
+	</script>
+</head> 
+
+<body> 
+	<div data-role="page" data-theme="c">
+	
+		<div data-role="header">
+		    <h1>仕入管理</h1> 
+		</div>
+	
+		<div data-role="content">
+			<h4>HTML 5 runtime</h4>
+			<div id="html5_uploader">You browser doesn't support native upload. Try Firefox 3 or Safari 4.</div>
+		</div>
+
+	</div>
+</body>
+</html>

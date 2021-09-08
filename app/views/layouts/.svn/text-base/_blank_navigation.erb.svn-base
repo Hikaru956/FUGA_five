@@ -1,0 +1,29 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/dashboard/index"><%=BRAND_NAME%></a>
+			<% if logged_in? %>
+            <div class="nav-collapse collapse">
+				<ul class="nav pull-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<%= label_user_role(current_user.role) %>
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="<%= url_for(:controller=>'dashboard', :action=>'user_show', :id=>current_user) %>"><i class="icon-user"></i>&nbsp;マイアカウント</a></li>
+							<li class="divider"></li>
+							<li><a href="/accounts/destroy"><i class="icon-off"></i>&nbsp;ログアウト</a></li>
+						</ul>
+					</li>						
+				</ul>						
+            </div><!--/.nav-collapse -->
+			<% end %>
+        </div>
+    </div>
+</div>

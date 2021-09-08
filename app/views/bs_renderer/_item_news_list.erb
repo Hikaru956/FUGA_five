@@ -1,0 +1,29 @@
+<% link_url = url_for(:action=>'news_show', :id=>@leaf, :wkey=>@website.wsite_hash_key) %>
+<div class="row">
+    <div class="col-lg-6 col-md-6">
+        <div class="thumbnail">
+            <% key_photo = key_photo(@leaf) %>
+            <% unless key_photo.blank? %>
+            <%= image_tag(url_for_file_column(key_photo, :image, 'panel'), :class=>"img-responsive") %>
+            <% else %>
+            <img class="img-responsive" src="http://placehold.it/700x300&amp;text=<%=@leaf.publish_from.strftime('%Y-%m-%d')%>"><% end %>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6">
+        <h3><a href="<%= link_url %>"><%= h model_title(@leaf) %></a></h3>
+        <h4><% unless @leaf.staff.blank?  || @leaf.staff.staff_status==Staff::STAFF_BLOCKED %>
+            <p class="lead">
+                by <%= h model_name(@leaf.staff) %>
+            </p>
+            <% end %>
+        </h4>
+        <p>
+            <i class="icon-time"></i>&nbsp;<%= publish_label(@leaf) %>
+        </p>
+        <p>
+            <%= h  truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>50) %>
+        </p>
+        <a class="btn btn-primary" href="<%= link_url %>">Read More <i class="icon-angle-right"></i></a>
+    </div>
+</div>
+<hr>

@@ -1,0 +1,34 @@
+<header class="subhead" id="overview">
+	<h3>予約管理</h3>
+</header>
+
+<ul id="tab_nav" class="nav nav-tabs">
+	<li class="active">	<a href="<%= url_for(:action=>'reservation', 	:target_date=>@target_date) %>"><i class="icon-list"></i>&nbsp;予約</a></li>
+	<li>				<a href="<%= url_for(:action=>'birthday',		:target_date=>@target_date) %>"><i class="icon-gift"></i>&nbsp;誕生日</a></li>
+</ul>
+
+<div class="row">
+	<div class="span3">
+		<%= stylesheet_link_tag "calendar_bs" %>
+		
+		<div class="letterMonth"><%= (@target_date.to_date.month) %></div>
+		<div class="letterYear">
+			<%= link_to("<i class='icon-double-angle-left'></i>", 	{:action=>'reservation_calendar', :target_date=>(@target_date.to_date)<<12, :shop_id=>@shop}) %>
+			<%= (@target_date.to_date.year) %>
+			<%= link_to("<i class='icon-double-angle-right'></i>", 	{:action=>'reservation_calendar', :target_date=>(@target_date.to_date)>>12, :shop_id=>@shop}) %>
+		</div>
+		<br/>
+		<div style="text-align:center;">
+			<div class="btn-group">
+					<%= link_to("<i class='icon-arrow-left'></i>", 	{:action=>'reservation_calendar', :shop_id=>@shop, :target_date=>(@target_date.to_date)<<1}, :class=>"btn btn-middle") %>
+					<%= link_to("今月", 								{:action=>'reservation_calendar', :shop_id=>@shop}, :class=>"btn btn-middle") %>
+					<%= link_to("<i class='icon-arrow-right'></i>", {:action=>'reservation_calendar', :shop_id=>@shop, :target_date=>(@target_date.to_date)>>1}, :class=>"btn btn-middle") %>
+			</div>		
+		</div>		
+
+		<hr/>
+	</div>
+	<div class="span9">
+		<%= render :partial=>"reservation_calendar"%>
+	</div>
+</div>

@@ -1,0 +1,51 @@
+<!-- Modal -->
+<div id="modal_new_customer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">お客様登録</h3>
+  </div>
+  <% 
+	@item = Customer.new
+	@item.shop 		= @current_user.shop
+	@item.company	= @current_user.company
+  %>
+  <div class="modal-body">
+	<%= form_tag({:action => 'create_customer'}, :class=>"form-horizontal")  do %>
+		<%= hidden_field 'item', 'company_id'%>
+		<%= hidden_field 'item', 'shop_id'%>
+	  <div class="control-group">
+	    <label class="control-label" for="item_alt_id">顧客ID</label>
+	    <div class="controls">
+	    	<%= text_field  'item', 'alt_id', :placeholder=>"お客様のID"%>
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+	    <label class="control-label" for="item_name">氏名</label>
+	    <div class="controls">
+	    	<%= text_field  'item', 'name', :placeholder=>"お客様のお名前"%>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="item_furigana">ふりがな</label>
+	    <div class="controls">
+		  <%= text_field  'item', 'furigana', :placeholder=>"ふりがな" %>
+	    </div>
+	  </div>
+	  
+	  <div class="control-group">
+	    <label class="control-label" for="item_telephone">電話番号</label>
+	    <div class="controls">
+		  <%= text_field  'item', 'telephone', :placeholder=>"電話番号" %>
+	    </div>
+	  </div>
+	  
+	  <div class="control-group">
+	    <div class="controls">
+			<button type="submit" class="btn btn-success"><i class="icon-plus"></i> 登録</button>
+	    </div>
+	  </div>
+	<%end%>  	
+  </div>
+</div>
+

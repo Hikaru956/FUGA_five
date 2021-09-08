@@ -1,0 +1,35 @@
+<div class="thumbnail">
+	<div class="caption">
+		<p class="wewll" style="text-align:center;">
+			<%= (photo.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"widget_bag_photo_higher",	:id=>photo) %>
+			<%= photo.position %>
+			<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"widget_bag_photo_lower",	:id=>photo) %>				
+		</p>
+	</div>
+	<% unless photo.blank? %>
+		<%= image_tag(url_for_file_column(photo, :image, "thumb")) %>
+	<% else %>
+		<img src="http://placehold.it/320x240&amp;text=No Photo">
+	<% end %>
+	<div class="caption text-center">
+		<p>
+			<a class="btn btn-danger btn-small"  data-toggle="modal" href="#modal_delete_photo_<%=photo.id%>">	<i class="icon-trash"></i>&nbsp;削除確認</a>
+		</p>
+	</div>
+</div>
+
+<div id="modal_delete_photo_<%=photo.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">削除確認</h3>
+  </div>
+  <div class="modal-body">
+    <p>写真を削除します。よろしいですか？</p>
+  </div>
+  <div class="modal-footer">
+	<%= form_tag({:action => 'delete_widget_bag_photo', :id=>photo}, :class=>"form-horizontal")  do %>
+		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+  	<%end%>  	
+  </div>
+</div>

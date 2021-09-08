@@ -1,0 +1,16 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>勤怠管理</h3>
+</header>
+
+<p class="lead">
+	<%= @target_date.year %>&nbsp;年
+	<%= @target_date.month %>&nbsp;月
+	【
+	<%= truncate(@staff.name, 10) %>
+	】
+</p>
+
+<%= render :partial=>"roster_summary" %>
+
+<%= render :partial=>"edit_business" %>

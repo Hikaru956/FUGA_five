@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/956_Inc/956/svn/!svn/ver/2351/fuga_326/app/controllers
+END
+bs_content_stream_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/controllers/bs_content_stream_controller.rb
+END
+bs_content_gallery_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/controllers/bs_content_gallery_controller.rb
+END
+accounts_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/956_Inc/956/svn/!svn/ver/2351/fuga_326/app/controllers/accounts_controller.rb
+END
+bs_authoring_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2060/fuga_326/app/controllers/bs_authoring_controller.rb
+END
+bs_reservation_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/controllers/bs_reservation_controller.rb
+END
+bs_customer_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/controllers/bs_customer_controller.rb
+END
+dashboard_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/controllers/dashboard_controller.rb
+END
+bs_config_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/controllers/bs_config_controller.rb
+END
+tooltip_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/controllers/tooltip_controller.rb
+END
+bs_content_news_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2060/fuga_326/app/controllers/bs_content_news_controller.rb
+END
+bs_renderer_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2469/fuga_326/app/controllers/bs_renderer_controller.rb
+END
+owner_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/956_Inc/956/svn/!svn/ver/2039/fuga_326/app/controllers/owner_controller.rb
+END
+bs_attendance_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/controllers/bs_attendance_controller.rb
+END
+bs_content_portfolio_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/956_Inc/956/svn/!svn/ver/2127/fuga_326/app/controllers/bs_content_portfolio_controller.rb
+END
+bs_abs_content_bag_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/956_Inc/956/svn/!svn/ver/2351/fuga_326/app/controllers/bs_abs_content_bag_controller.rb
+END
+users_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/controllers/users_controller.rb
+END
+bs_roster_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/controllers/bs_roster_controller.rb
+END
+application_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2464/fuga_326/app/controllers/application_controller.rb
+END
+bs_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/controllers/bs_controller.rb
+END

@@ -1,0 +1,120 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<div class="pull-right">
+		<a class="btn btn-small" href="<%=url_for(:action=>"content_category", :id=>@parent_category)%>">
+			<i class="icon-arrow-left"></i>&nbsp;戻る</a>
+	</div>
+	<h3><%= @parent_category.category_label %> : カテゴリー編集</h3>
+</header>
+
+<ul class="breadcrumb">
+  <li><%= link_to "ストリーム", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to @parent_category.category_label, :action=>"content_category", :id=>@parent_category %>&nbsp;<span class="divider">/</span></li>
+  <li class="active">カテゴリー編集</li>
+</ul>
+
+<div>
+	<a class="btn btn-success btn-small"  data-toggle="modal" href="#modalNew"><i class="icon-plus"></i>&nbsp;新規登録</a>
+	<button type="button" class="btn btn-warning btn-small" onclick="demo_rename();"><i class="icon-pencil"></i> 変更</button>
+	<button type="button" class="btn btn-danger btn-small" onclick="demo_delete();"><i class="icon-trash"></i> 削除</button>
+</div>
+
+<div id="event_result"><br/></div>
+
+<div id="category_trees"></div>
+
+<!-- Modal -->
+<div id="modalNew" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<%= form_tag({:action => 'content_category_create', :parent_id=>@parent_category}, :class=>"form-horizontal")  do %>
+		<%
+		    @item                 = ContentCategory.new
+		    @item.shop            = @shop
+		    @item.parent          = @parent_category
+		    @item.web_page        = @parent_category.web_page 
+		    @item.category_type   = ContentCategory::TYPE_CATEGORY
+		%>
+		<%= hidden_field 'item', 'shop_id' %>
+		<%= hidden_field 'item', 'parent_id' %>
+		<%= hidden_field 'item', 'web_page_id' %>
+		<%= hidden_field 'item', 'category_type' %>
+
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">新規カテゴリー登録</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="item_title">カテゴリー</label>
+				<div class="controls controls-row">
+					<%= text_field 'item', 'title', :placeholder=>"カテゴリー名称", :autocomplete => "off" %>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-plus"></i>&nbsp;&nbsp;登録</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+function demo_rename() {
+	var ref = $('#category_trees').jstree(true),
+		sel = ref.get_selected();
+	if(!sel.length) { return false; }
+	sel = sel[0];
+	ref.edit(sel);
+};
+function demo_delete() {
+	var ref = $('#category_trees').jstree(true),
+		sel = ref.get_selected();
+	if(!sel.length) { return false; }
+	ref.delete_node(sel);
+};
+
+$('#category_trees')  // listen for event
+  .on('changed.jstree', function (e, data) {
+    var i, j, r = [];
+    for(i = 0, j = data.selected.length; i < j; i++) {
+      r.push(data.instance.get_node(data.selected[i]).text);
+    }
+//    $('#event_result').html('Selected: ' + r.join(', '));
+  })
+  .on('move_node.jstree', function (e, data) {
+//    $('#event_result').html('MoveNode: ' + 'node='+data.node.id + '/ parent='+data.parent + '/ position='+data.position);
+	<% update_url = url_for(:action=>'move_cat') %>
+    $.get("<%=update_url%>", { id: data.node.id, parent: data.parent, position: data.position } );
+  })
+  .on('rename_node.jstree', function (e, data) {
+//    $('#event_result').html('RenameNode: ' + 'node='+data.node.id + '/ parent='+data.parent + '/ position='+data.position);
+	<% rename_url = url_for(:action=>'rename_cat') %>
+    $.get("<%=rename_url%>", { id: data.node.id, text: data.text } );
+  })
+  .on('delete_node.jstree', function (e, data) {
+//    $('#event_result').html('RenameNode: ' + 'node='+data.node.id + '/ parent='+data.parent + '/ position='+data.position);
+	<% delete_url = url_for(:action=>'delete_cat') %>
+    $.get("<%=delete_url%>", { id: data.node.id } );
+  })
+  // create the instance
+  .jstree({
+  "core" : {
+    "animation" : 0,
+    "check_callback" : true,
+	"multiple" : false,
+    "themes" : { "stripes" : true },
+    'data' : {
+		<% url = url_for(:controller=>'bs_abs_content_bag', :action=>'json_cat', :parent=>@parent_category.id) %>
+		'url' : "<%= url %>",
+		'data' : function (node) {
+			return { 'id' : node.id };
+		},
+    }
+  },
+  "plugins" : [
+    "dnd",
+    "state", "wholerow"
+  ]
+});
+//]]>
+</script>

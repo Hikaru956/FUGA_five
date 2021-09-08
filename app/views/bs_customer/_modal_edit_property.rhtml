@@ -1,0 +1,82 @@
+<!-- Modal -->
+<div id="modal_edit_property" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">顧客情報編集</h3>
+  </div>
+
+  <div class="modal-body">
+	<%= form_tag({:action => 'update_customer', :id=>@item}, :class=>"form-horizontal")  do %>
+	  <div class="control-group">
+	    <label class="control-label" for="item_alt_id">顧客ID</label>
+	    <div class="controls">
+	    	<%= text_field  'item', 'alt_id', :placeholder=>"お客様のID"%>
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+	    <label class="control-label" for="item_name">氏名</label>
+	    <div class="controls">
+	    	<%= text_field  'item', 'name', :placeholder=>"お客様のお名前"%>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="item_furigana">ふりがな</label>
+	    <div class="controls">
+		  <%= text_field  'item', 'furigana', :placeholder=>"ふりがな" %>
+	    </div>
+	  </div>
+	  
+	  <div class="control-group">
+	    <label class="control-label" for="item_telephone">電話番号</label>
+	    <div class="controls">
+		  <%= text_field  'item', 'telephone', :placeholder=>"電話番号" %>
+	    </div>
+	  </div>
+	  
+	  <div class="control-group">
+	    <label class="control-label" for="item_telephone">誕生日と現年齢</label>
+	    <div class="controls controls-row">
+			<input class="span2" type="text" id="datepicker", name="birthday_string", value="<%= @item.birthday %>", placeholder="yyyy-mm-dd">
+			<% 
+				my_age = nil
+				unless @item.birthday.blank?
+					birth_date = Time.parse(@item.birthday.strftime("%Y-%m-%d"))
+					my_age = sprintf("%d",((Time.now - birth_date) / 60 / 60 / 24)/365)				
+				end
+			%>
+			<input class="span1" type="text" id="new_age", name="new_age" value="<%=@item.age%>"><span class="help-inline">歳</span>
+	    </div>
+	  </div>
+
+	<% if false %>
+	  <div class="control-group">
+	    <label class="control-label" for="item_postal_code">郵便番号</label>
+	    <div class="controls">
+		  <%= text_field  'item', 'postal_code', :placeholder=>"郵便番号" %>
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+	    <label class="control-label" for="item_email">住所</label>
+	    <div class="controls">
+		  <%= text_area  'item', 'address', {:placeholder=>"住所", :rows => 3} %>
+	    </div>
+	  </div>
+	<% end %>
+	  <div class="control-group">
+	    <label class="control-label" for="item_email">メールアドレス</label>
+	    <div class="controls">
+		  <%= text_field  'item', 'email', :placeholder=>"メールアドレス" %>
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+	    <div class="controls">
+			<button type="submit" class="btn btn-primary"><i class="icon-refresh"></i> 更新</button>
+	    </div>
+	  </div>
+	<%end%>  	
+  </div>
+</div>
+

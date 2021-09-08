@@ -1,0 +1,12 @@
+<a href="<%= url_for(:action=>'content_category', :id=>temp_local) %>">
+	<div class="thumbnail">
+	    <div class="caption">
+	        <h4>
+	        	<span class='pull-right'><span class="badge badge-success"><%= temp_local.content_leafs.size %></span></span>
+				<i class="icon-folder-close"></i>
+	        	<%= truncate(temp_local.title, :length=>50) %>
+			</h4>
+			<p><%= h truncate(strip_tags(temp_local.description), :length=>20) %></p>
+	    </div>
+	</div>
+</a>

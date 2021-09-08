@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>ホーム - <%= @website.name %></title>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/head_logic" %>
+
+    <!-- Add custom CSS here -->
+    <%= stylesheet_link_tag "/stylesheets/assets/stylish-portfolio/stylish-portfolio.css" %>
+	<style type="text/css">
+	<!--
+		/* Full Page Image Header Area */
+		.header {
+		  display: table;
+		  height: 100%;
+		  width: 100%;
+		  position: relative;
+	      	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "2cef44b0dd9692c245f132685b20f313") %>
+			<% if widget_bag.blank? || !widget_bag.is_valid? %>
+				  background: url(/images/assets/stylish-portfolio/bg.jpg) no-repeat center center fixed; 
+			<% else %>
+				  background: url(<%= url_for_file_column(widget_bag.photos[0], :image) %>) no-repeat center center fixed; 
+			<% end %>			
+		  -webkit-background-size: cover;
+		  -moz-background-size: cover;
+		  -o-background-size: cover;
+		  background-size: cover;
+		}
+
+		/* Callout */
+		.callout {
+		  color: #ffffff;
+		  display: table;
+		  height: 400px;
+		  width: 100%;
+	      	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "e3cb98852eec58ecbee79a6640f6f0ba") %>
+			<% if widget_bag.blank? || !widget_bag.is_valid? %>
+				  background: url(/images/assets/stylish-portfolio/section-two.jpg) no-repeat center center fixed; 
+			<% else %>
+				  background: url(<%= url_for_file_column(widget_bag.photos[0], :image) %>) no-repeat center center fixed; 
+			<% end %>			
+		  -webkit-background-size: cover;
+		  -moz-background-size: cover;
+		  -o-background-size: cover;
+		  background-size: cover;
+		}
+	-->
+	</style>
+
+  </head>
+
+  <body>
+
+	<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/navigation_home" %>
+	  
+    <!-- Full Page Image Header Area -->
+    <div id="top" class="header">
+      <div class="vert-text">
+        <h1>
+
+	      	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "527a3266c376ced4044eb1e72151c717") %>
+			<% if widget_bag.blank? || !widget_bag.is_valid? %>
+	        	<img src="http://placehold.it/200x200&amp;text=Logo-S">
+			<% else %>
+				<img src="<%= url_for_file_column(widget_bag.photos[0], :image) %>" title=<%=model_name(@website) %>>
+			<% end %>			
+			<br/>
+			<i class="icon-double-angle-down"></i>
+		</h1>
+      </div>
+    </div>
+    <!-- /Full Page Image Header Area -->
+
+    <!-- Intro -->
+    <div id="intro" class="intro">
+      <div class="container">
+		<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/home_shop_info"%>
+      </div>
+    </div>
+    <!-- /Intro -->
+  
+    <!-- Services -->
+    <div id="services" class="services">
+      <div class="container">
+		<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/home_latest_news"%>
+      </div>
+    </div>
+    <!-- /Services -->
+
+    <!-- Callout -->
+    <div class="callout">
+      <div class="vert-text">
+        <h1>
+          	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "7ea11543a486332edd763b1bab738f55") %>
+			<% if widget_bag.blank? || !widget_bag.is_valid? %>
+	        	A Dramatic Text Area
+			<% else %>
+				<%= widget_bag.data_string %>
+			<% end %>			
+		</h1>
+      </div>
+    </div>
+    <!-- /Callout -->
+
+
+    <!-- Call to Action -->
+    <div class="call-to-action">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+        	<% unless @website.wsite_telephone.blank? %>
+	            <a href="tel:<%=@website.wsite_telephone %>" class="btn btn-lg btn-info"><i class='icon-phone-sign'></i></a>
+			<% end %>
+        	<% unless @website.wsite_email.blank? %>
+	            <a href="mailto:<%=@website.wsite_email %>" class="btn btn-lg btn-primary"><i class='icon-envelope'></i></a>
+			<% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Call to Action -->
+
+	<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/footer" %>
+	
+  <!-- Bootstrap core JavaScript -->
+  <!-- Placed at the end of the document so the pages load faster -->
+	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+	<script type="text/javascript" src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+
+  <!-- Custom JavaScript for the Side Menu - Put in a custom JS file if you want to clean this up -->
+  <script>
+      $("#menu-close").click(function(e) {
+          e.preventDefault();
+          $("#sidebar-wrapper").toggleClass("active");
+      });
+  </script>
+  <script>
+      $("#menu-toggle").click(function(e) {
+          e.preventDefault();
+          $("#sidebar-wrapper").toggleClass("active");
+      });
+  </script>
+  <script>
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+          if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+              || location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+              $('html,body').animate({
+                scrollTop: target.offset().top
+              }, 1000);
+              return false;
+            }
+          }
+        });
+      });
+    </script>
+
+  </body>
+
+</html>

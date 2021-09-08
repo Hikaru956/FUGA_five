@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/956_Inc/956/svn/!svn/ver/2215/fuga_326/app/views/bs_customer
+END
+_sidebar.erb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_customer/_sidebar.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_customer/index.html.erb
+END
+list.erb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/956_Inc/956/svn/!svn/ver/2215/fuga_326/app/views/bs_customer/list.erb
+END
+_modal_edit_property.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_customer/_modal_edit_property.rhtml
+END
+show_property.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_customer/show_property.rhtml
+END
+_sidebar_summary.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_customer/_sidebar_summary.rhtml
+END
+_modal_new_customer.erb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_customer/_modal_new_customer.erb
+END

@@ -1,0 +1,24 @@
+<%= form_tag({:action => 'content_category_create', :parent_id=>@parent_category}, :class=>"well form-horizontal")  do %>
+	<%= hidden_field 'item', 'shop_id' %>
+	<%= hidden_field 'item', 'parent_id' %>
+	<%= hidden_field 'item', 'web_page_id' %>
+	<%= hidden_field 'item', 'category_type' %>
+	<legend>新規カテゴリー登録</legend>
+	<div class="control-group">
+		<label class="control-label" for="item_title">カテゴリー</label>
+		<div class="controls">
+			<%= text_field  'item', 'title', :placeholder=>"カテゴリー名称"%>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<div class="controls">
+			<button type="submit" class="btn btn-success"><i class="icon-plus"></i>&nbsp;登録</button>
+			<%= link_to_remote(
+				'<i class="icon-remove"></i>&nbsp;キャンセル', 
+				{ :url => {:action=>'clear_sandbox'}}, :class=>"btn") %>
+		</div>
+	</div>
+<% end %>
+
+<hr/>

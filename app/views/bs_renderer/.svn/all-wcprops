@@ -1,0 +1,209 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/956_Inc/956/svn/!svn/ver/2249/fuga_326/app/views/bs_renderer
+END
+_staff_attendances.erb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/_staff_attendances.erb
+END
+_item_news_list.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_renderer/_item_news_list.erb
+END
+_item_portfolio_list.erb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_renderer/_item_portfolio_list.erb
+END
+_item_gallery_photo.erb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/_item_gallery_photo.erb
+END
+_site_controls.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/_site_controls.erb
+END
+gallery_index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/gallery_index.html.erb
+END
+stream_list.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2249/fuga_326/app/views/bs_renderer/stream_list.html.erb
+END
+contact.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/956_Inc/956/svn/!svn/ver/2249/fuga_326/app/views/bs_renderer/contact.html.erb
+END
+stream_show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_renderer/stream_show.html.erb
+END
+_retrieve_leafs.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2157/fuga_326/app/views/bs_renderer/_retrieve_leafs.erb
+END
+_item_news_photo.erb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2062/fuga_326/app/views/bs_renderer/_item_news_photo.erb
+END
+_item_portfolio_bag.erb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/_item_portfolio_bag.erb
+END
+_item_stream_list.erb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_renderer/_item_stream_list.erb
+END
+news_index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/news_index.html.erb
+END
+_item_gallery_list.erb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_renderer/_item_gallery_list.erb
+END
+news_list.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/956_Inc/956/svn/!svn/ver/2215/fuga_326/app/views/bs_renderer/news_list.html.erb
+END
+portfolio_list.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2215/fuga_326/app/views/bs_renderer/portfolio_list.html.erb
+END
+news_show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_renderer/news_show.html.erb
+END
+portfolio_show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_renderer/portfolio_show.html.erb
+END
+_item_stream_bag.erb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/_item_stream_bag.erb
+END
+_item_portfolio_list_category.erb
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_renderer/_item_portfolio_list_category.erb
+END
+news_feed.rss.builder
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2218/fuga_326/app/views/bs_renderer/news_feed.rss.builder
+END
+_item_gallery_bag.erb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/_item_gallery_bag.erb
+END
+stream_index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/stream_index.html.erb
+END
+fix.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/956_Inc/956/svn/!svn/ver/2060/fuga_326/app/views/bs_renderer/fix.html.erb
+END
+home.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/home.html.erb
+END
+gallery_list.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2215/fuga_326/app/views/bs_renderer/gallery_list.html.erb
+END
+_item_news_bag.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/_item_news_bag.erb
+END
+stream_feed.rss.builder
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2218/fuga_326/app/views/bs_renderer/stream_feed.rss.builder
+END
+gallery_show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_renderer/gallery_show.html.erb
+END
+_item_portfolio_photo.erb
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/956_Inc/956/svn/!svn/ver/2062/fuga_326/app/views/bs_renderer/_item_portfolio_photo.erb
+END
+_item_gallery_list_category.erb
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_renderer/_item_gallery_list_category.erb
+END
+staff.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/956_Inc/956/svn/!svn/ver/2249/fuga_326/app/views/bs_renderer/staff.html.erb
+END
+portfolio_index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_renderer/portfolio_index.html.erb
+END

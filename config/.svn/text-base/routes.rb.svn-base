@@ -1,0 +1,103 @@
+# -*- encoding : utf-8 -*-
+Fuga326::Application.routes.draw do
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
+
+#  map.logout '/logout', :controller => 'accounts', :action => 'destroy'
+#  map.login '/login', :controller => 'accounts', :action => 'new'
+#  map.register '/register', :controller => 'users', :action => 'create'
+#  map.signup '/signup', :controller => 'users', :action => 'new'
+#  map.resources :users
+
+#  map.resource :account
+
+  # Sample of regular route:
+  #   match 'products/:id' => 'catalog#view'
+  # Keep in mind you can assign values other than :controller and :action
+
+  # Sample of named route:
+  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # This route can be invoked with purchase_url(:id => product.id)
+
+  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
+  resources :users
+  resource :account, :only => [:new, :create, :destroy]
+
+#  match 'signup'    => 'users#new',         :as => :signup
+#  match 'register'  => 'users#create',      :as => :register
+  match 'login'     => 'accounts#new',      :as => :login
+  match 'logout'    => 'accounts#destroy',  :as => :logout
+  
+  match 'home'            => 'bs_renderer#home',          :as => :home
+
+  match 'news_list'       => 'bs_renderer#news_index',    :as => :news_list
+  match 'news'            => 'bs_renderer#news_list',     :as => :news
+  match 'news_show'       => 'bs_renderer#news_show',     :as => :news_show
+  
+  match 'streams'         => 'bs_renderer#stream_index',  :as => :streams
+  match 'articles'        => 'bs_renderer#stream_list',   :as => :articles
+  match 'article'         => 'bs_renderer#stream_show',   :as => :article
+
+  match 'news_feed'       => 'bs_renderer#news_feed',     :as => :news_feed
+  match 'stream_feed'     => 'bs_renderer#stream_feed',   :as => :stream_feed
+  
+  match 'collcetions'     => 'bs_renderer#gallery_index', :as => :collcetions
+  match 'galleries'       => 'bs_renderer#gallery_list',  :as => :galleries
+  match 'browse'          => 'bs_renderer#gallery_show',  :as => :browse
+
+  match 'menu_list'       => 'bs_renderer#portfolio_index',   :as => :menu_list
+  match 'menu_table'      => 'bs_renderer#portfolio_list',    :as => :menu_table
+  match 'menu_show'       => 'bs_renderer#portfolio_show',    :as => :menu_show
+
+  match 'contact_us'      => 'bs_renderer#contact',           :as => :contact_us
+  match 'staff'           => 'bs_renderer#staff',             :as => :staff
+
+  match 'fix'             => 'bs_renderer#fix',               :as => :fix
+
+#  match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
+
+  # Sample resource route with options:
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
+  #   end
+
+  # Sample resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
+
+  # Sample resource route with more complex sub-resources
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', :on => :collection
+  #     end
+  #   end
+
+  # Sample resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
+
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  # root :to => 'welcome#index'
+  root :to => 'dashboard#index'
+  
+  # See how all your routes lay out with "rake routes"
+
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  match ':controller(/:action(/:id))(.:format)'
+end

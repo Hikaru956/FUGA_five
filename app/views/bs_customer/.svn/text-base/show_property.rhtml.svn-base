@@ -1,0 +1,151 @@
+
+<ul class="breadcrumb">
+	<li><%= link_to "顧客管理", :action=>"index" %>&nbsp;<span class="divider">/</span></li>
+  	<li class="active"><%= @item.name %></li>
+</ul>
+
+
+<header class="subhead" id="overview">
+	<h3><%= @item.name %></h3>
+</header>
+
+<div class="row">
+    <div class="span8">
+		<p class="pull-right">
+			<a class="btn btn-danger btn-small"  data-toggle="modal" href="#modal_delete">
+				<i class="icon-trash"></i>&nbsp;
+				削除確認
+			</a>
+		</p>
+		<p class="lead">基本情報</p>
+    	
+		<table class="table table-bordered">
+			<tbody>
+				<% if false %>
+				<tr>
+					<th>登録店舗</th>
+					<td><%= @item.shop.name unless @item.shop.blank? %></td>
+				</tr>
+				<% end %>
+				<tr>
+					<th>顧客番号</th>
+					<td><%= @item.alt_id %></td>
+				</tr>
+				<tr>
+					<th class="span2">氏名</th>
+					<td><%= @item.name %></td>
+				</tr>
+				<tr>
+					<th>ふりがな</th>
+					<td><small><%= @item.furigana %></small></td>
+				</tr>
+				<tr>
+					<th>電話</th>
+					<td><%= @item.telephone %></td>
+				</tr>
+				<tr>
+					<th>誕生日</th>
+					<td>
+						<% if @item.is_happy_birthday? %>
+							<span class="pull-right text-success">
+								<i class="icon-gift"></i>
+								HBD
+							</span>
+						<% end %>
+						<% unless @item.birthday.blank? %>
+					    	<%= @item.birthday.strftime("%Y-%m-%d") %>
+							(<%= wday(@item.birthday) %>)
+							生まれ
+							【
+						    <a href="#modal_adjust_age" data-toggle="modal">
+								<%= @item.age %> 歳 
+								<i class="icon-cog"></i> 
+							</a>
+							】
+						<% end %>
+					</td>
+				</tr>
+				<% if false %>
+				<tr>
+					<th>郵便番号</th>
+					<td><%= @item.postal_code %></td>
+				</tr>
+				<tr>
+					<th>住所</th>
+					<td><%= @item.address %></td>
+				</tr>
+				<% end %>
+				<tr>
+					<th>メールアドレス</th>
+					<td>
+						<% unless @item.email.blank? %>
+							<%= @item.email  %>
+							<%= mail_to( @item.email, image_tag("commons/message_16x16.png",:title=> 'メール作成', :class=>'icon_align') ) %>
+						<% end %>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="text-left">
+			<a class="btn btn-primary btn-small" data-toggle="modal" href="#modal_edit_property">
+				<i class="icon-edit"></i>&nbsp;
+				編集
+			</a>
+		</p>
+    </div>
+    <div class="span4">
+    	<%= render :partial=>"sidebar_summary" %>
+    </div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+	　$("#datepicker").datepicker({
+		dateFormat: "yy-mm-dd",
+		showButtonPanel: true
+	　});
+	});
+</script>
+
+<!-- Modal -->
+<div id="modal_adjust_age" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">年齢修正</h3>
+  </div>
+  <div class="modal-body">
+    <p>現在の満年齢を入力して下さい。</p>
+	<% update_age_url = url_for(:action=>"update_customer_age", :id=>@item) %>
+	<%= form_tag({:action => 'update_customer_age', :id=>@item}, :class=>"form-horizontal")  do %>
+	  <div class="control-group">
+	    <label class="control-label" for="new_age">年齢</label>
+	    <div class="controls">
+	      <input type="text" id="new_age" name="new_age" placeholder="年齢を入力" value=<%= @item.age %>>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <div class="controls">
+			<button type="submit" class="btn btn-primary"><i class="icon-refresh"></i> 更新</button>
+	    </div>
+	  </div>
+	<%end%>  	
+  </div>
+</div>
+
+<div id="modal_delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">削除確認</h3>
+  </div>
+  <div class="modal-body">
+    <p>お客さまのデータを削除します。よろしいですか？</p>
+  </div>
+  <div class="modal-footer">
+	<%= form_tag({:action => 'delete_customer', :id=>@item}, :class=>"form-horizontal")  do %>
+		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+  	<%end%>  	
+  </div>
+</div>
+
+<%= render :partial=>"modal_edit_property" %>

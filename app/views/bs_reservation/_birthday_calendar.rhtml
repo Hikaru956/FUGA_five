@@ -1,0 +1,37 @@
+<%=
+require 'date'
+require 'date/holiday'
+
+today = Time.now
+calendar({:year => @target_date.year, :month => @target_date.month}) do |d|
+	cell_attrs = {:class => 'reservation day'}
+	
+	is_future = false
+	if today.year==d.year && today.month==d.month && today.day==d.day
+	  cell_attrs = {:class =>'reservation today' }
+	elsif d.to_time < today.to_time
+	  cell_attrs = ((d.national_holiday? || d.wday==0)? {:class => 'reservation holiday_passed'}: {:class => 'reservation day'})
+	else
+	  cell_attrs = ((d.national_holiday? || d.wday==0)? {:class => 'reservation holiday'}: {:class => 'reservation future_day'})
+	  is_future = true
+	end
+
+
+	birthday_key_string = Time.mktime(d.year, d.month, d.day, 0,0,0).to_date.strftime("-%m-%d")
+	c = Condition.new
+	c.and("birthday", "LIKE", "%"+birthday_key_string )
+#	customers = @shop.customers.find(:all, :conditions => c.where) 
+	birthday_key_string = Time.mktime(d.year, d.month, d.day, 0,0,0).to_date.strftime("%m%d")
+	customers = @shop.customers.find(:all, :conditions=>["date_format(birthday,'%m%d')=?", birthday_key_string]) 
+
+	list_url = url_for(:action=>'birthday', :id=>@shop, :target_date=>d)
+	cell_text = "<a href='#{list_url}'>"
+	cell_text << "<span class='calendar_day'>#{d.mday}&nbsp</span><br/>"
+	unless customers.blank?
+		cell_text << "<span class='badge badge-success'>#{customers.size}</span>" 
+	end
+	cell_text << "</a>" 
+
+	[cell_text, cell_attrs]
+end
+%>

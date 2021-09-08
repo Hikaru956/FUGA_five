@@ -1,0 +1,45 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:action=>'company_show_shop') %>">店舗情報</a></li>
+	<li class="active">	<a href="<%= url_for(:action=>'shop_list_staffs') %>">店舗スタッフ</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_users') %>">店舗ユーザー</a></li>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<li>				<a href="<%= url_for(:action=>'shop_show_website') %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a></li>
+		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+			<li>				<a href="<%= url_for(:action=>'shop_site_navigation') %>">ナビゲーション</a></li>
+		<% end %>
+	<% end %>
+</ul>
+
+<ul class="breadcrumb">
+  <li><%= link_to "一覧", url_for(:action=>'shop_list_staffs', :id=>@staff.shop)  %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@staff) %></li>
+</ul>
+
+<h4>
+	<span class="pull-right">
+		<a class="btn btn-small btn-success" href="<%= url_for(:action=>'shop_show_staff', :id=>@staff) %>">
+			<i class="icon-arrow-left"></i>&nbsp;戻る
+		</a>
+	</span>
+	自己紹介
+</h4>
+
+<%= form_tag url_for(:action=>"shop_staff_update", :id=>@staff), :class=>"form-horizontal well" do -%>
+	<%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>@staff} %>
+	<fieldset>
+		<div class="control-group">
+			<%= text_area  'staff', 'description', {:class=>"input-block-level rich" , :rows => 10, :autocomplete=>false, :placeholder=>"記事の本文を入力します。"}  %>
+		</div>
+		<div class="form-actions">
+        	<button type="submit" class="btn btn-small btn-success"><i class="icon-refresh"></i>&nbsp;&nbsp;更新</button>
+			<% url_cancel = url_for(:action=>'shop_show_staff', :id=>@staff) %>							
+	  		<a class="btn btn-small" href="<%= url_cancel %>"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
+      	</div>
+	</fieldset>
+<% end -%>
+

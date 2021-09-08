@@ -1,0 +1,20 @@
+<%= form_tag({:action => 'content_category_update', :id=>@item}, :class=>"well form-horizontal")  do %>
+	<legend>カテゴリー編集</legend>
+	<div class="control-group">
+		<label class="control-label" for="item_title">カテゴリー</label>
+		<div class="controls">
+			<%= text_field  'item', 'title', :placeholder=>"カテゴリー名称"%>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<div class="controls">
+			<button type="submit" class="btn btn-primary"><i class="icon-refresh"></i> 更新</button>
+			<%= link_to_remote(
+				'キャンセル', 
+				{ :url => {:action=>'clear_sandbox'}}, :class=>"btn") %>
+		</div>
+	</div>
+<% end %>
+
+<hr/>

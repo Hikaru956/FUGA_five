@@ -1,0 +1,87 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<div class="pull-right">
+		<p>
+			<div class="btn-toolbar" style="margin: 0;">
+              <div class="btn-group">
+				<a class="btn btn-success btn-small"  data-toggle="modal" href="#modal_new">
+					<i class="icon-plus"></i>&nbsp;
+					記事登録
+				</a>
+              </div><!-- /btn-group -->
+              <div class="btn-group">
+                <button class="btn btn-inverse btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-gear"></i> <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">ストリーム</a></li>
+				  <!--
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+				  -->
+                </ul>
+              </div><!-- /btn-group -->
+            </div>
+		</p>
+	</div>
+	<h3>ニュース</h3>
+</header>
+
+<% @items.each do | @item | %>
+	<ul class="media-list">
+	  <li class="media">
+	    <a class="pull-left" href="#">
+	      <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADJ0lEQVR4Ae1a70/aQBh+RCysK+m6KTISkxHUOQdqNk22ZJt/ux+2zGzOCP5ADSFFJViRH6MrVorbtXVSvE8c8YO5u4Ry9/buufd93ue9+9Kxer3+Fxy3EMexe6ELAoQCOGdAlADnAoBQgFAA5wyIEuBcAOIQFCUgSoBzBkQJcC4AcQuIEhAlwDkDogQ4F4C4BUQJ8F4C4VEIuG6dYidXhGnfICRrmMsuIhmTApBXON76haoFJDOrSGvBd4Fpge5DYAbgqS57CdhVbP4ooGV3EZHD6Fo17G9uo3nT38Ms70FvWLBtCx0n8KI/ZbD3EJiDO1AjZgU0yzpsAqelP+B9SoFROsZlh/DpxunS6tSQO2rc29BBObeFU7MHeXoBK2mFKGQbF1YPUwvvMNVkwby3xZBDZgU43Z63lXm+h28bGzg870BLpfDsltLKbh4WNGSyMwGXwkjOPIdlWaiVCjg4zBOFtGE5Cl5ORcGGGYBn6DIScI2LS1LYpHXNNrok7bZpYPfrdxjXJPmNY+zXeohns0jI/hbjIZ+ZsDaHpaRMVlo4O3EVMo7Z1QwUsGO6frA2RgIkqLEJb8/E8hesr69jVh0nYwsGyWjpQPfehSwDRb3u9RtnJdQ7/jkQX1xAzLOSh5rGq5jrxmiY/+GG/WckgLgr+UsjkpvZEJSnt9onZqfru1EtFlCqtr2BZego/ybyIK1ZLMK3kkFLx2nHM4+E6SMM/7z1eviFygsNqFSh57aBRASVinskTmBSjWHy4yek3O9OxsjtcLmPzT0D8TeryExHgT9l7JRa3lxVDaHVslH4eYj459dgxhze/bsVzAqITi9iaYYI2W5A16vkHADi88tIkKs+LEURjZAfUccTyS+VCUkmOnFQzB95c+XkW6ytrUB1XbFPkC+3wYZ5FwtTZ2zUb4ScjokrUtrhiIIos54GfX8IzMEd+qORCehDPc4ecwk8znBprwUBNCd8WYQC+Mo3Ha1QAM0JXxahAL7yTUcrFEBzwpdFKICvfNPRCgXQnPBlEQrgK990tEIBNCd8WYQC+Mo3Ha1QAM0JXxahAL7yTUfLvQL+ARgfdFGDImVzAAAAAElFTkSuQmCC">
+	    </a>
+	    <div class="media-body">
+	      <span class="pull-right">
+			<span class="label label-inverse">公開終了</span>
+			<span class="label label-warning">公開待ち</span>
+	      	<span class="label">非公開</span>
+			<span class="label label-info">公開中</span>
+	      </span>		
+			
+	      <h4 class="media-heading"><%= truncate(@item.title, :length=>50) %></h4>
+	      <p><%= truncate(@item.description, :length=>100) %></p>
+	    </div>
+	  </li>
+	</ul>
+	<%= will_paginate(@items, 	:params=> { :action=>'list_news', :page=>@page, :hash_bag=>@bag.hash }, :prev_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% end %>
+<% if @items.blank?  %>
+	<div class="alert alert-block">
+		<h4>Warning!</h4>
+		<p>記事が登録されていません。</p>
+	</div>
+<% end %>
+
+<!-- Modal -->
+<div id="modal_new" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">記事登録</h3>
+  </div>
+  <% 
+	@item 				= ContentLeaf.new
+	@item.shop 			= @current_user.shop
+	@item.publish_from	= Time.now.to_date
+  %>
+  <div class="modal-body">
+	<%= form_tag({:action => 'create_news'}, :class=>"form-horizontal")  do %>
+		<%= hidden_field_tag 	'hash_bag',  @bag.hash %>
+		<%= hidden_field 		'item', 'shop_id' %>
+
+		<%= render :partial=>"form_news"%>
+	  
+
+
+
+		<button type="submit" class="btn btn-success"><i class="icon-plus"></i> 登録</button>
+	  <div class="control-group">
+	    <div class="controls">
+	    </div>
+	  </div>
+	<%end%>  	
+  </div>
+</div>
+

@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/956_Inc/956/svn/!svn/ver/2157/fuga_326/app/helpers
+END
+bs_authoring_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_authoring_helper.rb
+END
+bs_reservation_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_reservation_helper.rb
+END
+bs_customer_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_customer_helper.rb
+END
+jcode.rb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/jcode.rb
+END
+dashboard_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/dashboard_helper.rb
+END
+bs_config_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_config_helper.rb
+END
+bs_renderer_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/956_Inc/956/svn/!svn/ver/2157/fuga_326/app/helpers/bs_renderer_helper.rb
+END
+bs_content_news_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_content_news_helper.rb
+END
+bs_attendance_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_attendance_helper.rb
+END
+owner_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/owner_helper.rb
+END
+tooltip_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/tooltip_helper.rb
+END
+bs_content_portfolio_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_content_portfolio_helper.rb
+END
+bs_abs_content_bag_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_abs_content_bag_helper.rb
+END
+remote_link_renderer.rb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/956_Inc/956/svn/!svn/ver/2038/fuga_326/app/helpers/remote_link_renderer.rb
+END
+users_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/users_helper.rb
+END
+bs_roster_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_roster_helper.rb
+END
+application_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/956_Inc/956/svn/!svn/ver/2071/fuga_326/app/helpers/application_helper.rb
+END
+bs_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_helper.rb
+END
+bs_content_stream_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_content_stream_helper.rb
+END
+calendar_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/calendar_helper.rb
+END
+bs_content_gallery_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/bs_content_gallery_helper.rb
+END
+accounts_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/helpers/accounts_helper.rb
+END

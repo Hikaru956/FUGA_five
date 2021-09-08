@@ -1,0 +1,15 @@
+<% unless photo.blank? %>
+
+    <div class="thumbnail thumbnail-1">
+        <div class=""  align="center">
+			<%= image_tag(url_for_file_column(photo, :image, 'panel')) %>
+		</div>
+		<% unless photo.info.blank? %>
+			<section>
+				<p><%=photo.info%></p>
+			</section>
+		<% end %>
+    </div>
+
+<% end %>
+

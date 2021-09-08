@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/956_Inc/956/svn/!svn/ver/2253/fuga_326/db/migrate
+END
+20131211020042_create_content_leafs.rb
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131211020042_create_content_leafs.rb
+END
+20131202022211_create_customers.rb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131202022211_create_customers.rb
+END
+20140325234124_add_disqus_feature.rb
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/956_Inc/956/svn/!svn/ver/2066/fuga_326/db/migrate/20140325234124_add_disqus_feature.rb
+END
+20131211022607_create_content_categories.rb
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131211022607_create_content_categories.rb
+END
+20131219140413_create_photos.rb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131219140413_create_photos.rb
+END
+20131127011655_create_companies.rb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131127011655_create_companies.rb
+END
+20131129003413_create_layout_schemes.rb
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131129003413_create_layout_schemes.rb
+END
+20131202061952_create_reservations.rb
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131202061952_create_reservations.rb
+END
+20140429073339_add_user_try_count.rb
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/db/migrate/20140429073339_add_user_try_count.rb
+END
+20131129003356_create_color_schemes.rb
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131129003356_create_color_schemes.rb
+END
+20131127013206_create_shops.rb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2253/fuga_326/db/migrate/20131127013206_create_shops.rb
+END
+20131211020007_create_content_bags.rb
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131211020007_create_content_bags.rb
+END
+20131128053650_create_staffs.rb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131128053650_create_staffs.rb
+END
+20131210032652_create_roster_labels.rb
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131210032652_create_roster_labels.rb
+END
+20140624080211_add_copyright_notice_for_shop.rb
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/956_Inc/956/svn/!svn/ver/2157/fuga_326/db/migrate/20140624080211_add_copyright_notice_for_shop.rb
+END
+20150331000136_add_social_instagram.rb
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/956_Inc/956/svn/!svn/ver/2249/fuga_326/db/migrate/20150331000136_add_social_instagram.rb
+END
+20140107120631_create_visual_widget_bags.rb
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20140107120631_create_visual_widget_bags.rb
+END
+20131202062955_create_attendances.rb
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131202062955_create_attendances.rb
+END
+20131210083716_create_web_pages.rb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131210083716_create_web_pages.rb
+END
+20140107081924_create_visual_widgets.rb
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20140107081924_create_visual_widgets.rb
+END
+20131127014706_create_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2023/fuga_326/db/migrate/20131127014706_create_users.rb
+END
+20140331084552_add_some_web_properties_for_shop.rb
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/956_Inc/956/svn/!svn/ver/2071/fuga_326/db/migrate/20140331084552_add_some_web_properties_for_shop.rb
+END

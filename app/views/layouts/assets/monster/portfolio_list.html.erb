@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title><%=model_name(@seed) %>- <%= @website.name %></title>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster/head_logic" %>
+    </head>
+    <body>
+        <div class="spinner">
+        </div>
+        <!--============================== header =================================-->
+        <header>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/header" %>
+        </header>
+        <div class="bg-content">
+            <!--============================== content =================================-->
+            <div id="content" class="content-extra">
+                <div class="ic">
+                </div>
+                <div class="row-1">
+                    <div class="container">
+                        <br/>
+                        <div class="row">
+                            <div class="span12">
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <a href="<%= url_for(:action=>'index', 											:wkey=>@website.wsite_hash_key) %>"><i class="icon-home"></i></a>
+                                    </li>
+								    <% unless @seed.my_type_root_category.has_only_a_public_bag? %>
+	                                    <li>
+	                                        <a href="<%= url_for(:action=>'portfolio_index', :id=>@seed.my_type_root_category,	:wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a>
+	                                    </li>
+									<% end %>
+                                    <% @seed.category_path.each do | category | %>
+                                    <li>
+                                        <%= link_to category.category_label, :action=>"portfolio_list", :id=>category, :wkey=>@website.wsite_hash_key %>
+                                    </li>
+                                    <% end %>
+                                    <li class="active">
+                                        <%=model_name(@seed) %>
+                                    </li>
+                                </ol>
+                                <h1 class="page-header"><%= model_name(@seed.my_bag_root_category.content_bag) %>
+                                    <small>
+                                        <%=h @seed.my_bag_root_category.content_bag.description %>
+                                    </small>
+                                </h1>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="span12">
+								<%= render :partial=>"bs_renderer/retrieve_leafs", :locals=>{:seed=>@seed }%>       
+							</div>
+						</div>
+						
+						
+						<% if false %>
+						
+							<% unless @seed.content_leafs.blank? %>
+		                        <% @bag_roots = [@seed.my_bag_root_category] %>
+		                        <% unless @bag_roots.blank? %>
+		                        <div class="row">
+		                            <div class="span12">
+		                                <div class="pull-right">
+		                                    <%= form_tag({:action=>"stream_list", :id=>nil, :wkey=>@website.wsite_hash_key}, :class=>"form-horizontal")  do %>
+		                                    <div class="controls">
+		                                        <%= tree_select_tag(@bag_roots, 'id', (@seed.blank?)? "": @seed.id) %>
+		                                        <button type="submit" class="btn btn-small">
+		                                            <i class="icon-ok"></i>&nbsp;&nbsp;選択
+		                                        </button>
+		                                    </div>
+		                                    <%end %>
+		                                </div>
+		                            </div>
+		                        </div>
+		                        <%end %>
+							<% end %>
+	                        <% sub_categories = @seed.children %>
+	                        <% unless  sub_categories.blank? %>
+	                        <div class="row">
+	                            <% unless sub_categories.blank? %>
+	                            <% array = sub_categories.in_groups_of(3, false) %>
+	                            <div class="span12">
+	                                <% for i in 0..(array.size-1) %>
+	                                <% @lines = array[i] %>
+	                                <div class="row">
+	                                    <ul class="thumbnails thumbnails-1">
+	                                        <li class="span4">
+	                                            <% if @lines.size>=1 %>
+	                                            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_portfolio_list_category", :locals => {:temp_local => @lines[0]} %>
+	                                            <% end %>
+	                                        </li>
+	                                        <li class="span4">
+	                                            <% if @lines.size>=2 %>
+	                                            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_portfolio_list_category", :locals => {:temp_local => @lines[1]} %>
+	                                            <% end %>
+	                                        </li>
+	                                        <li class="span4">
+	                                            <% if @lines.size>=3 %>
+	                                            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_gallery_list_category", :locals => {:temp_local => @lines[2]} %>
+	                                            <% end %>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                                <% end %>
+	                            </div>
+	                            <% end %>
+	                        </div>
+	                        <hr/><% end %>
+	                        <%
+	                        sons = @seed.sons
+	                        sons << @seed
+	                        c = ContentLeaf.public_leafs_condition
+	                        c.and "content_leafs.content_category_id", 'IN', sons
+	                        @leafs = @seed.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'publish_from desc') %>
+	                        <% unless @leafs.blank? %>
+	                        <div class="row">
+	                            <div class="span12">
+	                                <% array = @leafs.in_groups_of(3, false) %>
+	                                <% for i in 0..(array.size-1) %>
+	                                <% @lines = array[i] %>
+	                                <div class="row">
+	                                    <ul class="thumbnails thumbnails-1">
+	                                        <li class="span4">
+	                                            <% if @lines.size>=1 %>
+	                                            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_portfolio_list", :locals => {:temp_local => @lines[0]} %>
+	                                            <% end %>
+	                                        </li>
+	                                        <li class="span4">
+	                                            <% if @lines.size>=2 %>
+	                                            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_portfolio_list", :locals => {:temp_local => @lines[1]} %>
+	                                            <% end %>
+	                                        </li>
+	                                        <li class="span4">
+	                                            <% if @lines.size>=3 %>
+	                                            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_portfolio_list", :locals => {:temp_local => @lines[2]} %>
+	                                            <% end %>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                                <% end %>
+	                            </div>
+	                        </div>
+	                        <div class="row">
+	                            <div class="span12">
+	                                <div class="pagination text-center">
+	                                    <%= will_paginate(@leafs, :params=> {:action=>'portfolio_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <% end %>
+                        
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--============================== footer =================================-->
+        <footer>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/footer" %>
+        </footer>
+    </body>
+</html>

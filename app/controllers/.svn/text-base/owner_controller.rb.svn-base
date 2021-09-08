@@ -1,0 +1,46 @@
+# -*- encoding : utf-8 -*-
+#
+# FUGA
+# Copyright (c) 2014, 956 Inc.
+#
+# This software is released under the MIT License.
+#
+# http://opensource.org/licenses/mit-license.php
+#
+
+class OwnerController < ApplicationController
+  before_filter :login_required, :check_owner_privilege
+
+  layout  "fuga"
+  
+  def index
+    redirect_to :action=>'switch_shop'
+  end
+
+  def switch_shop
+    current_user.shop = nil
+    current_user.save!
+  end
+
+  def delegating
+    if true || request.post?
+      current_user.shop = current_user.company.shops.find(params[:id])
+      current_user.save
+      redirect_to :controller=>'bs', :action=>'index'
+    end
+  end
+  
+  def shop_higher
+    @item = current_user.company.shops.find(params[:id])
+    @item.move_higher
+    @item.save
+    redirect_to :action=>"index"
+  end
+
+  def shop_lower
+    @item = current_user.company.shops.find(params[:id])
+    @item.move_lower
+    @item.save
+    redirect_to :action=>"index"
+  end
+end

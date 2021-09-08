@@ -1,0 +1,135 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:action=>'company_show_shop') %>">店舗情報</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_staffs') %>">店舗スタッフ</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_users') %>">店舗ユーザー</a></li>
+	<li class="active">	<a href="<%= url_for(:action=>'shop_show_website') %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a></li>
+	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+		<li>				<a href="<%= url_for(:action=>'shop_site_navigation') %>">ナビゲーション</a></li>
+	<% end %>
+</ul>
+
+<h4>
+	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
+		<p class="pull-right">
+			<a class="btn btn-small btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank">
+				<i class="icon-share"></i>
+				店舗サイト表示
+			</a>
+			<a class="btn btn-small btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>">
+				<i class="icon-globe"></i>
+				デザイン編集
+			</a>
+		</p>				
+	<% end %>
+	サイト設定
+</h4>
+
+
+<table class="table table-bordered">
+	<tbody>
+		<% site_status_class = (@shop.wsite_run_mode==Shop::WSITE_BLOCKED)? 'danger': ((@shop.wsite_run_mode==Shop::WSITE_TRIAL)? 'warning': 'success') %>
+		<tr class="<%=site_status_class%>">
+			<td class="span3">サイト・ステータス</td>
+			<td class="span9">
+				<p class="pull-right">
+					<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+						<i class="icon-pencil"></i>&nbsp;
+			  			設定編集
+					</a>
+				</p>
+				<%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;<%= label_site_status(@shop.wsite_run_mode) %>
+				<div class="muted"><small>ステータスの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
+			</td>
+		</tr>
+		<tr>
+			<td>サイト・キーワード</td>
+			<td><%= @shop.wsite_keywords%></td>
+		</tr>
+		<tr>
+			<td>サイトの説明</td>
+			<td><%= @shop.wsite_description_shop%></td>
+		</tr>
+		<tr>
+			<td>問い合わせ電話番号</td>
+			<td><%= @shop.wsite_telephone%></td>
+		</tr>
+		<tr>
+			<td>問い合わせメールアドレス</td>
+			<td><%= @shop.wsite_email%></td>
+		</tr>
+		<tr>
+			<td>ブログコメント機能</td>
+			<td>
+				<%= (@shop.use_disqus)? raw("使用する"): "使用しない"%>
+				<% if @shop.use_disqus && @shop.disqus_code.blank? %>
+					<p class="text-error">
+						<i class="icon-warning-sign"></i>
+						ブログコメント機能をサイトに導入する必要があります。
+						<%=BRAND_NAME%>担当営業までご連絡下さい。	
+					</p>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td>コピーライト表示</td>
+			<td><%= copyright_notice(@shop) %></td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td class="span3">ソーシャル</td>
+			<td class="span9">
+				<span class="pull-right">
+					<a class="btn btn-small btn-info"  data-toggle="modal" href="#modalEditSocial">
+						<i class="icon-pencil"></i>&nbsp;
+			  			ソーシャル設定
+					</a>
+				</span>
+				<%= raw("<a href=#{@shop.social_facebook_uri} target='_blank' title=#{@shop.social_facebook_uri}><i class='icon-facebook-sign icon-large'></i></a>")		unless @shop.social_facebook_uri.blank? %>
+				<%= raw("<a href=#{@shop.social_gplus_uri} target='_blank' title=#{@shop.social_gplus_uri}><i class='icon-google-plus-sign icon-large'></i></a>")			unless @shop.social_gplus_uri.blank? %>
+				<%= raw("<a href=#{@shop.social_twitter_uri} target='_blank' title=#{@shop.social_twitter_uri}><i class='icon-twitter-sign icon-large'></i></a>")			unless @shop.social_twitter_uri.blank? %>
+				<%= raw("<a href=#{@shop.social_instagram_uri} target='_blank' title=#{@shop.social_instagram_uri}><i class='icon-instagram icon-large'></i></a>")			unless @shop.social_instagram_uri.blank? %>
+				<%= raw("<a href=#{@shop.social_pinterest_uri} target='_blank' title=#{@shop.social_pinterest_uri}><i class='icon-pinterest-sign icon-large'></i></a>")		unless @shop.social_pinterest_uri.blank? %>
+				<%= raw("<a href=#{@shop.social_tumblr_uri} target='_blank' title=#{@shop.social_tumblr_uri}><i class='icon-tumblr-sign icon-large'></i></a>")				unless @shop.social_tumblr_uri.blank? %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- modalEdit -->
+<%= form_tag url_for(:action=>"shop_update_website", :id=>@shop), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">サイト属性編集</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_shop_wsite" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<!-- modalEditSocial -->
+<%= form_tag url_for(:action=>"shop_update_website", :id=>@shop), {:class=>"modal hide fade form-horizontal", :id=>"modalEditSocial"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">店舗ソーシャル設定</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_shop_social" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>

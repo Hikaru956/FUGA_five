@@ -1,0 +1,114 @@
+# -*- encoding : utf-8 -*-
+#
+# FUGA
+# Copyright (c) 2014, 956 Inc.
+#
+# This software is released under the MIT License.
+#
+# http://opensource.org/licenses/mit-license.php
+#
+
+class BsRosterController < ApplicationController
+  before_filter :login_required
+  before_filter :session_operation
+
+  layout  "fuga"
+
+  helper  :calendar
+
+  def index
+    @target_date = parse_date(params[:target_date]) unless params[:target_date].blank?
+    if @target_date.blank?
+      now = Time.now
+      @target_date = Time.mktime(now.year, now.month, 1).to_date
+    end
+  end
+
+  def update_rosters
+    if request.post?
+      staff_rosters = params[:rosters]
+      unless staff_rosters.blank?
+        staff_rosters.each_pair do | staff_id, roster_sets | 
+          ###
+          ##  Caution : Need to adapt the target id User Or Staff
+          #
+          staff = @shop.staffs.find_by_id(staff_id)
+          next if staff.blank?
+          roster_sets.each_pair do | date_string, roster_id |
+            probe_date = parse_date(date_string) 
+            next if roster_id.blank?
+  
+            # Destroy all current attendances
+            c = Condition.new
+            ##  Caution : Need to adapt the target id User Or Staff
+            c.and "attendances.staff_id",  staff
+            c.and "attendances.attend_on", "=", probe_date
+            Attendance.destroy_all(c.where)
+  
+            roster_label = (roster_id.blank?)? nil: RosterLabel.find_by_id(roster_id)
+            next if roster_label.blank?
+  
+            new_roster = Attendance.new
+            new_roster.attend_on  = probe_date
+            new_roster.staff      = staff
+            new_roster.shop       = roster_label.shop
+            new_roster.start_hour = roster_label.start_hour
+            new_roster.until_hour = roster_label.until_hour
+            new_roster.save          
+          end
+        end
+      end
+      redirect_to :action=>"index"
+    end
+  end
+
+  def list
+    @items = RosterLabel.find(:all, :order=>'position asc')
+  end
+
+  def create
+    if request.post?
+      item = RosterLabel.new(params[:item])
+      item.save
+      redirect_to :action=>"show", :id=>item
+    end
+  end
+
+  def show
+    @item = RosterLabel.find(params[:id])
+  end
+
+  def update
+    if request.post?
+      @item = RosterLabel.find(params[:id])
+      @item.update_attributes(params[:item])
+      redirect_to :action=>"show", :id=>@item
+    end
+  end
+
+  def delete
+    if request.post?
+      item = RosterLabel.find(params[:id])
+      item.destroy
+      redirect_to :action=>"list"
+    end
+  end
+
+
+  def move_higher
+    item = RosterLabel.find(params[:id])
+    item.move_higher
+    redirect_to :action => "list"
+  end
+
+  def move_lower
+    item = RosterLabel.find(params[:id])
+    item.move_lower
+    redirect_to :action => "list"
+  end
+
+protected
+  def session_operation
+    @shop = current_user.shop
+  end
+end

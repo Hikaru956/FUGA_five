@@ -1,0 +1,8 @@
+<% 
+	options = []
+	options << ['--- ', '']
+	option_rosters = @rosters.map{ | r | [ r.name, r.id.to_s] }
+	options.concat(option_rosters)
+	options << ['OFF', '-1']
+%>
+<%= select_tag("rosters[#{@staff.id}][#{@probe_date.strftime('%Y-%m-%d')}]",options_for_select(options), :class=>"span1", :style=>"width:100%;")%>

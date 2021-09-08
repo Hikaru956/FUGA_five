@@ -1,0 +1,20 @@
+<div class="control-group">
+	<label class="control-label" for="wsite_keywords">ストリーム名</label>
+	<div class="controls">
+		<%= text_field 'item', 'name', :placeholder=>"メニュー、キャンペーン価格表等", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="item[is_public]">公開設定</label>
+	<div class="controls">
+		<label class="radio inline">
+			<input type="radio" id="item[is_public]" name="item[is_public]" value="1" <% if @item.is_public %>checked<% end %>>
+			公開
+		</label>
+		<label class="radio inline">
+			<input type="radio" id="item[is_public]" name="item[is_public]" value="0" <% if !@item.is_public %>checked<% end %>>
+			非公開
+		</label>
+	</div>
+</div>
+

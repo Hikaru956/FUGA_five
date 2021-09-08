@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_attendance
+END
+_attendances.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_attendance/_attendances.rhtml
+END
+_attendances_staff_day.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_attendance/_attendances_staff_day.rhtml
+END
+_roster_summary.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_attendance/_roster_summary.rhtml
+END
+_attendances_staff.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_attendance/_attendances_staff.rhtml
+END
+attendances_staff.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_attendance/attendances_staff.rhtml
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_attendance/index.html.erb
+END
+_edit_business.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_attendance/_edit_business.rhtml
+END
+edit_business.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_attendance/edit_business.rhtml
+END

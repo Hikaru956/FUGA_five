@@ -1,0 +1,60 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<div class="pull-right">
+		<p>
+			<a class="btn btn-success btn-small"  data-toggle="modal" href="#modal_new_customer">
+				<i class="icon-plus"></i>&nbsp;
+				お客様登録
+			</a>
+		</p>
+	</div>
+	<h2>顧客管理</h2>
+</header>
+
+
+<div class="row">
+	<div class="span4">
+		<%= render :partial=>"sidebar"%>
+	</div>
+
+	<div class="span8">
+		<% if @items.blank? %>
+			<div class="alert alert-info">
+			  該当する顧客情報がありません。
+			</div>
+		<% else %>
+			<table class="table table-condensed table-hover table-bordered"">
+				<thead>
+					<tr class="success">
+						<td>顧客ID</td>
+						<td>氏名</td>
+						<td>ふりがな</td>
+						<td>電話番号</td>
+					</tr>
+				</thead>
+				<tbody>
+					<% @items.each do | @item | %>					
+						<tr>
+							<td><%= @item.alt_id %></td>
+							<td>
+								<% if @item.is_happy_birthday? %>
+									<span class="pull-right text-success">
+										<i class="icon-gift"></i>
+									</span>
+								<% end %>
+								<%= link_to raw("<i class='icon-circle-arrow-right'></i>&nbsp;"+@item.name), :action=>'show_property', :id=>@item %>
+							</td>
+							<td><small><%= @item.furigana %></small></td>
+							<td><%= @item.telephone %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<%= will_paginate(@items, 	:params=> { :action=>'list', :page=>@page, :search_alt=>@search_alt, :search_name=>@search_name, :search_furigana=>@search_furigana, :search_telephone=>@search_telephone, :search_shop_id=>@search_shop_id }, 
+										, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+		<% end %>
+	</div>
+</div>
+
+<%= render :partial=>"modal_new_customer" %>

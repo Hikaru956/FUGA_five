@@ -1,0 +1,173 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/956_Inc/956/svn/!svn/ver/2351/fuga_326/app/views/bs_config
+END
+company_show_shop.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/956_Inc/956/svn/!svn/ver/2071/fuga_326/app/views/bs_config/company_show_shop.html.erb
+END
+shop_edit_staff.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/956_Inc/956/svn/!svn/ver/2071/fuga_326/app/views/bs_config/shop_edit_staff.html.erb
+END
+shop_edit_position.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_config/shop_edit_position.html.erb
+END
+_form_shop_wsite.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/956_Inc/956/svn/!svn/ver/2157/fuga_326/app/views/bs_config/_form_shop_wsite.erb
+END
+_form_fixed_page_content.erb
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/956_Inc/956/svn/!svn/ver/2157/fuga_326/app/views/bs_config/_form_fixed_page_content.erb
+END
+company_edit_shop.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/956_Inc/956/svn/!svn/ver/2157/fuga_326/app/views/bs_config/company_edit_shop.html.erb
+END
+shop_show_user.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_config/shop_show_user.html.erb
+END
+shop_list_staffs.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/956_Inc/956/svn/!svn/ver/2249/fuga_326/app/views/bs_config/shop_list_staffs.erb
+END
+_form_fixed_page.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/956_Inc/956/svn/!svn/ver/2060/fuga_326/app/views/bs_config/_form_fixed_page.erb
+END
+_form_account.erb
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/956_Inc/956/svn/!svn/ver/2052/fuga_326/app/views/bs_config/_form_account.erb
+END
+shop_site_navigation.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/956_Inc/956/svn/!svn/ver/2060/fuga_326/app/views/bs_config/shop_site_navigation.html.erb
+END
+_form_staff_social.erb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2249/fuga_326/app/views/bs_config/_form_staff_social.erb
+END
+_item_fixed_page_photo.erb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/956_Inc/956/svn/!svn/ver/2063/fuga_326/app/views/bs_config/_item_fixed_page_photo.erb
+END
+_form_user_password.erb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_config/_form_user_password.erb
+END
+list_page_photo.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/956_Inc/956/svn/!svn/ver/2063/fuga_326/app/views/bs_config/list_page_photo.html.erb
+END
+shop_list_users.erb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/956_Inc/956/svn/!svn/ver/2110/fuga_326/app/views/bs_config/shop_list_users.erb
+END
+_form_shop_social.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2249/fuga_326/app/views/bs_config/_form_shop_social.erb
+END
+_form_staff.erb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/956_Inc/956/svn/!svn/ver/2071/fuga_326/app/views/bs_config/_form_staff.erb
+END
+new_staff_photo.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/956_Inc/956/svn/!svn/ver/2351/fuga_326/app/views/bs_config/new_staff_photo.html.erb
+END
+_item_staff_photo.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2052/fuga_326/app/views/bs_config/_item_staff_photo.erb
+END
+edit_fix_page.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/956_Inc/956/svn/!svn/ver/2065/fuga_326/app/views/bs_config/edit_fix_page.html.erb
+END
+_form_shop.erb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/956_Inc/956/svn/!svn/ver/2052/fuga_326/app/views/bs_config/_form_shop.erb
+END
+shop_show_website.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/956_Inc/956/svn/!svn/ver/2249/fuga_326/app/views/bs_config/shop_show_website.html.erb
+END
+_form_fixed_link.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/956_Inc/956/svn/!svn/ver/2022/fuga_326/app/views/bs_config/_form_fixed_link.erb
+END
+shop_show_staff.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/956_Inc/956/svn/!svn/ver/2249/fuga_326/app/views/bs_config/shop_show_staff.html.erb
+END
+account_show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/956_Inc/956/svn/!svn/ver/2052/fuga_326/app/views/bs_config/account_show.html.erb
+END
+_form_user.erb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/956_Inc/956/svn/!svn/ver/2052/fuga_326/app/views/bs_config/_form_user.erb
+END
+new_page_photo.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/956_Inc/956/svn/!svn/ver/2351/fuga_326/app/views/bs_config/new_page_photo.html.erb
+END

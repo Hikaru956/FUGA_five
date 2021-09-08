@@ -1,0 +1,116 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>レジストリー</h3>
+</header>
+	
+
+<ul class="breadcrumb">
+  <li><%= link_to "レジストリー", 						:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@user.shop.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@user.shop.company %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@user.shop) %></li>
+</ul>
+
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show', 		 	:id=>@user.shop) %>">店舗情報</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@user.shop) %>">店舗スタッフ</a></li>
+	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@user.shop) %>">店舗ユーザー</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@user.shop) %>"><%= icon_site_status(@user.shop.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+</ul>
+
+<h4>
+	<span class="pull-right">
+		<a class="btn btn-small btn-warn" href="<%= url_for(:action=>'shop_list_users', :id=>@user.shop) %>">
+		<i class="icon-arrow-left"></i>&nbsp;
+			一覧
+		</a>
+		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+			<i class="icon-pencil"></i>&nbsp;
+  			編集
+		</a>
+	</span>
+	ユーザー情報
+</h4>
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td>役割</td><td><%= label_user_role(@user.role)%></td>
+		</tr>
+		<tr>
+			<td>表示名</td><td><%= model_name(@user)%></td>
+		</tr>
+		<tr>
+			<td class="span3">ログイン</td>
+			<td class="span9"><%= @user.login %></td>
+		</tr>
+		<tr>
+			<td>メールアドレス</td>
+			<td><%= @user.email %></td>
+		</tr>
+		<tr>
+			<td>パスワード</td>
+			<td>
+				<a class="btn btn-small btn-warning"  data-toggle="modal" href="#modalEditPassword">
+				<i class="icon-refresh"></i>&nbsp;
+					パスワード再発行
+				</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="well">
+	<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
+	<i class="icon-trash"></i>&nbsp;
+		削除確認
+	</a>
+</div>
+				
+
+
+<!-- modalEdit -->
+<%= form_tag url_for(:action=>"shop_user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">ユーザー編集</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_user" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<!-- modalEditPassword -->
+<%= form_tag url_for(:action=>"shop_user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEditPassword"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">パスワード再発行</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_user_password" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<!-- modalDeleteUser -->
+<%= form_tag url_for(:action=>"shop_user_delete", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">ユーザー削除</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			「<%= @user.login %>」を削除します。<br/>
+			よろしいですか？
+		</p>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+	</div>
+<% end %>
