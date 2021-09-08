@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #hikaru
 #gem 'rails', '3.2.6'
 ruby '2.6.5'
-gem 'rails', '4.2.11'
+gem 'rails', '~> 5.2.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -89,7 +89,8 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  #hikaru
+  #gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -111,7 +112,7 @@ gem "rmagick",  :require => 'RMagick'
 gem "acts_as_taggable_on_steroids"
 gem 'mini_racer'
 gem 'holidays'
-gem 'protected_attributes'
+#gem 'protected_attributes'
 
 gem 'devise', '4.7.3'
 gem 'devise-encryptable'
