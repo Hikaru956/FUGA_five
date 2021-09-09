@@ -27,11 +27,11 @@ gem 'mysql2'
 
 gem 'sqlite3', '~> 1.3.6'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0.5'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -76,6 +76,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 #gem "calendar_date_select",         '~> 2.0.0'
 
+#hikaru
 gem "rails-i18n"
 
 #gem 'therubyracer'
@@ -90,7 +91,7 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   #hikaru
-  #gem 'web-console', '~> 2.0'
+  gem 'web-console'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -98,10 +99,14 @@ end
 
 #gem 'rails4_upgrade', github: 'alindeman/rails4_upgrade'
 
+
+
+gem "acts_as_tree"
+gem 'devise', '~> 4.7.3'
+gem 'devise-encryptable'
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 
-gem "acts_as_tree"
 gem "acts_as_list"
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
@@ -114,8 +119,7 @@ gem 'mini_racer'
 gem 'holidays'
 #gem 'protected_attributes'
 
-gem 'devise', '4.7.3'
-gem 'devise-encryptable'
+
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'bcrypt'
