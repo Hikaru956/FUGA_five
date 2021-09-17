@@ -92,7 +92,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   #hikaru
   gem 'web-console'
-
+  gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -113,7 +113,8 @@ gem 'will_paginate-bootstrap'
 gem "calendar_date_select"
 gem "geokit-rails"
 gem 'json'
-gem "rmagick",  :require => 'RMagick'
+#hikatu
+gem "rmagick" #,  :require => 'RMagick'
 gem "acts_as_taggable_on_steroids"
 gem 'mini_racer'
 gem 'holidays'
@@ -125,3 +126,5 @@ gem 'devise-i18n-views'
 gem 'bcrypt'
 gem "file_column"
 gem "condition_builder"
+#5で追加
+gem 'bootsnap'

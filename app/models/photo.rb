@@ -8,7 +8,8 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class Photo < ActiveRecord::Base
+#hikaru#class Photo < ActiveRecord::Base
+class Photo < ApplicationRecord
   acts_as_list :scope=>  [:ref_id, :ref_type]
 
   belongs_to  :shop

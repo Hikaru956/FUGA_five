@@ -8,7 +8,8 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class WebPage < ActiveRecord::Base
+#hikaru#class WebPage < ActiveRecord::Base
+class WebPage < ApplicationRecord
   acts_as_list :scope => :parent
   acts_as_tree :order => :position
 
@@ -42,7 +43,8 @@ class WebPage < ActiveRecord::Base
   TEMPLATE_FRAME      = 'frame'
   TEMPLATE_FIX        = 'fix'
   
-  attr_accessible :page_type, :shop_id, :parent_id, :template_name, :action_name, :name, :content_type, :is_public, :is_open_new, :external_url
+  #hikaru
+  #attr_accessible :page_type, :shop_id, :parent_id, :template_name, :action_name, :name, :content_type, :is_public, :is_open_new, :external_url
   
   
   def self.initialize_rooms_for(target_shop)

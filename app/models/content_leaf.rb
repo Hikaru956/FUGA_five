@@ -8,7 +8,8 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class ContentLeaf < ActiveRecord::Base
+#hikary#class ContentLeaf < ActiveRecord::Base
+class ContentLeaf < ApplicationRecord 
   acts_as_list  :scope => :content_category  # For Leaf Of Gallery And Portfolio
 
   belongs_to    :shop

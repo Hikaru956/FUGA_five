@@ -8,7 +8,8 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class VisualWidget < ActiveRecord::Base
+#hikaru#class VisualWidget < ActiveRecord::Base
+class VisualWidget < ApplicationRecord
   acts_as_list  :scope => :layout_scheme
   
   belongs_to    :layout_scheme

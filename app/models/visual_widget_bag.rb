@@ -8,7 +8,8 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class VisualWidgetBag < ActiveRecord::Base
+#hikatru#class VisualWidgetBag < ActiveRecord::Base
+class VisualWidgetBag < ApplicationRecord
   belongs_to    :shop
   belongs_to    :visual_widget
 

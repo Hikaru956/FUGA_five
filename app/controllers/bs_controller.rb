@@ -11,7 +11,7 @@
 class BsController < ApplicationController
   #hikaru
   before_action :authenticate_user!
-  before_filter :session_operation
+  before_action :session_operation
 
   layout  "fuga"
   

@@ -8,7 +8,8 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class Staff < ActiveRecord::Base
+#hikaru#class Staff < ActiveRecord::Base
+class Staff < ApplicationRecord
   acts_as_list  :scope => :shop
 
   belongs_to    :shop

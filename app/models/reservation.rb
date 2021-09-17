@@ -8,7 +8,8 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class Reservation < ActiveRecord::Base
+#hikaru#class Reservation < ActiveRecord::Base
+class Reservation < ApplicationRecord
   belongs_to  :customer
   belongs_to  :shop
   belongs_to  :staff

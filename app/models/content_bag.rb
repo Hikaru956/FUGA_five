@@ -8,7 +8,9 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class ContentBag < ActiveRecord::Base
+#hikaru
+#class ContentBag < ActiveRecord::Base
+class ContentBag < ApplicationRecord  
   acts_as_list :scope => :parent
   acts_as_tree :order => :position
 
@@ -25,7 +27,8 @@ class ContentBag < ActiveRecord::Base
   TYPE_PORTFOLIO  = 48
   TYPE_ANONYMOUS  = 58
   
-  attr_accessible :content_type, :content_category_id, :web_page_id, :shop_id, :is_public, :name
+  #hikari
+  #attr_accessible :content_type, :content_category_id, :web_page_id, :shop_id, :is_public, :name
   
   
   before_save   :before_save

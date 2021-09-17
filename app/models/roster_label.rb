@@ -8,7 +8,8 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class RosterLabel < ActiveRecord::Base
+#hikaru#class RosterLabel < ActiveRecord::Base
+class RosterLabel < ApplicationRecord
   belongs_to  :shop
   acts_as_list
   

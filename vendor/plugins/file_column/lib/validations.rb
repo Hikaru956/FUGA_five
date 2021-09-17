@@ -91,8 +91,10 @@ module FileColumn
         raise ArgumentError, "Please include a :min option." if !options || !options[:min]
         minimums = options[:min].scan(IMAGE_SIZE_REGEXP).first.collect{|n| n.to_i} rescue []
         raise ArgumentError, "Invalid value for option :min (should be 'XXxYY')" unless minimums.size == 2
-
-        require 'RMagick'
+        
+        #hikaru
+        #require 'RMagick'
+        require 'rmagick'
 
         validates_each(attrs, options) do |record, attr, value|
           unless value.blank?

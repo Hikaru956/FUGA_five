@@ -8,7 +8,9 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class Attendance < ActiveRecord::Base
+#hikaru
+#class Attendance < ActiveRecord::Base
+class Attendance < ApplicationRecord
   belongs_to  :shop
   belongs_to  :staff
 

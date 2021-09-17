@@ -8,7 +8,9 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class ColorScheme < ActiveRecord::Base
+#hikaru
+#class ColorScheme < ActiveRecord::Base
+class ColorScheme < ApplicationRecord
   acts_as_list
 
   has_many  :wsite_color_deploys, :class_name=>'Shop', :foreign_key => 'wsite_color_deploy_id'

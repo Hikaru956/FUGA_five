@@ -191,6 +191,7 @@ class FileColumnTest < Test::Unit::TestCase
     e.save
     
     assert_equal_paths File.join(RAILS_ROOT, "public", "entry", "image", e.id.to_s), e.image_dir
+    assert_equal_paths File.join(RAILS_ROOT, "public", "entry", "image", e.id.to_s), e.image_dir
     assert_equal File.join(e.id.to_s), e.image_relative_dir
   end
 
@@ -647,4 +648,3 @@ class FileColumnMoveTest < Test::Unit::TestCase
   end
 
 end
-

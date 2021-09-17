@@ -8,7 +8,8 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class LayoutScheme < ActiveRecord::Base
+#hikaru#class LayoutScheme < ActiveRecord::Base
+class LayoutScheme < ApplicationRecord
   acts_as_list
   
   has_many  :wsite_layout_deploys, :class_name=>'Shop', :foreign_key => 'wsite_layout_deploy_id'

@@ -40,6 +40,11 @@ Fuga326::Application.routes.draw do
   
   #get '/home'       => 'bs_renderer#home',      :as => :home
   get '/home'      => 'dashboard#index',  :as => :home
+
+
+  get 'bs' ,to: 'bs#index'
+  get 'bs_config/company_show_shop' , to: 'bs_config#company_show_shop'
+
   get 'news_list'       => 'bs_renderer#news_index',    :as => :news_list
   get 'news'            => 'bs_renderer#news_list',     :as => :news
   get 'news_show'       => 'bs_renderer#news_show',     :as => :news_show

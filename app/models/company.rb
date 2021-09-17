@@ -8,7 +8,9 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class Company < ActiveRecord::Base
+#hikaru
+#class Company < ActiveRecord::Base
+class Company < ApplicationRecord  
   #hikaru
   has_many  :users,         :dependent=>:destroy #, :order => "role desc, login asc"  
   has_many  :shops,         :dependent=>:destroy #, :order => "position asc"

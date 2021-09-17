@@ -8,7 +8,9 @@
 # http://opensource.org/licenses/mit-license.php
 #
 
-class ContentCategory < ActiveRecord::Base
+#hikaru
+#class ContentCategory < ActiveRecord::Base
+class ContentCategory < ApplicationRecord  
   acts_as_list :scope => :parent
   acts_as_tree :order => :position
 
@@ -32,7 +34,8 @@ class ContentCategory < ActiveRecord::Base
   TYPE_BAG_ROOT         = 100
   TYPE_CATEGORY         = 1000
   
-  attr_accessible  :category_type, :shop_id, :parent_id, :web_page_id, :title, :description
+  #hikaru
+  #attr_accessible  :category_type, :shop_id, :parent_id, :web_page_id, :title, :description
 
   before_save :before_save
   
