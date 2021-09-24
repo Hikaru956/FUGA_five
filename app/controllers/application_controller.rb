@@ -37,13 +37,11 @@ class ApplicationController < ActionController::Base
   protected
   #hikaru
   def check_super_privilege
-    return redirect_to :controller=>"bs",    :action=>"index" #unless @current_user.has_permission?(User::ROLE_OWNER)
-    unless @current_user.has_role?(User::ROLE_OWNER)
-    return redirect_to :controller=>"owner", :action=>"index" #unless @current_user.has_permission?(User::ROLE_REGISTRAR)
-    unless @current_user.has_role?(User::ROLE_REGISTRAR)
-    unless @current_user.shop.blank?
-      @current_user.shop = nil
-      @current_user.save!
+    return redirect_to :controller=>"bs", :action=>"index" unless current_user.has_permission?(User::ROLE_OWNER)
+    return redirect_to :controller=>"owner", :action=>"index" unless current_user.has_permission?(User::ROLE_REGISTRAR)
+    unless current_user.shop.blank?
+      current_user.shop = nil
+      current_user.save!
     end
   end
 
@@ -61,8 +59,6 @@ class ApplicationController < ActionController::Base
     (limit.blank?)? 
         ContentLeaf.find(:all, :conditions=>c.where, :order=>'position desc, created_at desc'):
         ContentLeaf.find(:all, :conditions=>c.where, :order=>'position desc, created_at desc', :limit=>limit) 
-    end
-  end
 #    posts = ContentLeaf.find(:all, :conditions=>c.where, :order=>'position desc')
 #    posts
   end
