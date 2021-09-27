@@ -16,7 +16,7 @@ class Company < ApplicationRecord
   has_many  :shops,         :dependent=>:destroy #, :order => "position asc"
   has_many  :customers,     :dependent=>:destroy #, :order => "alt_id asc, furigana asc"
   
-  attr_accessible  :alt_id, :name, :telephone_1, :postal, :address_1
+  #attr_accessible  :alt_id, :name, :telephone_1, :postal, :address_1
   
   def room_size_mb
     sum = 0

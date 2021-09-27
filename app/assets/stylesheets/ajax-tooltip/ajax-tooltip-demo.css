@@ -3,11 +3,9 @@
 body,html{
 	margin:0px;
 	padding:0px;
-	text-align:center;
 	background-color: #E2EBED;
 	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
 	line-height: 130%;
-	text-align:center;
 	height:100%;
 	width:100%;
 }

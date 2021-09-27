@@ -18,7 +18,7 @@ class ColorScheme < ApplicationRecord
 
   has_one  :photo,  :as => :ref, :dependent => :destroy
 
-  attr_accessible :is_public, :name, :description, :repository_path
+  #attr_accessible :is_public, :name, :description, :repository_path
 
   before_destroy  :before_destroy
 

@@ -55,7 +55,7 @@ class ContentBag < ApplicationRecord
   ## FIXED PAGE FEATURE
   #
   def self.retrieve_fixed_page_bag(target_shop)
-    bag = target_shop.content_bags.find_by_content_type(ContentBag::TYPE_ANONYMOUS, :limit=>1)
+    bag = target_shop.content_bags.find_by_content_type(ContentBag::TYPE_ANONYMOUS)#hikaru, :limit=>1)
     if bag.blank?
       shop_root = ContentCategory.shop_root(target_shop)
       cat = ContentCategory.create(:category_type=>ContentCategory::TYPE_ANONYMOUS,  :shop_id=>target_shop.id, :parent_id=>shop_root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_ANONYMOUS)

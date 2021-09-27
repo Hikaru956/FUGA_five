@@ -15,11 +15,11 @@ class LayoutScheme < ApplicationRecord
   has_many  :wsite_layout_deploys, :class_name=>'Shop', :foreign_key => 'wsite_layout_deploy_id'
   has_many  :wsite_layout_edits,   :class_name=>'Shop', :foreign_key => 'wsite_layout_deploy_id'
 
-  has_many  :visual_widgets, :dependent => :destroy, :order=>"position asc"
+  has_many  :visual_widgets, :dependent => :destroy #, :order=>"position asc"
 
   has_one   :photo,  :as => :ref, :dependent => :destroy
 
-  attr_accessible :is_public, :name, :description, :repository_path
+  #attr_accessible :is_public, :name, :description, :repository_path
 
   before_destroy  :before_destroy
 

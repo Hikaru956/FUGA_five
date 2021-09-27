@@ -7,4 +7,6 @@ RAILS_ROOT = Rails.root
 
 BRAND_NAME = "swifty"
 
+PER_PAGE = 50
+
 MAKE_SECRET_FUGA_OPTION = true

@@ -26,10 +26,10 @@ class Photo < ApplicationRecord
     :image_required => true }
 
   validates_presence_of     :image
-#  validates_filesize_of     :image, :in => 0..10.megabytes, :too_large_message => "ファイルサイズが大きすぎます(最大10MB)"
-#  validates_file_format_of  :image, :in => ["gif", "png", "jpg", "jpeg", "ico"], :message => "のファイル形式は gif, png, jpg だけです。"
+  validates_filesize_of     :image, :in => 0..10.megabytes, :too_large_message => "ファイルサイズが大きすぎます(最大10MB)"
+  validates_file_format_of  :image, :in => ["gif", "png", "jpg", "jpeg", "ico"], :message => "のファイル形式は gif, png, jpg だけです。"
 
-  attr_accessible :image_temp, :image, :info
+  #attr_accessible :image_temp, :image, :info
   
   before_create :before_create
   after_create  :after_create

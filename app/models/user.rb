@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
   end
 
   #hikaru
-  #def has_role?(required_role); user_role <= required_role; end
+  #def has_permission?(required_role); self.role <= required_role; end
   def has_permission?(req_role)
     req_role <= self.role
   end

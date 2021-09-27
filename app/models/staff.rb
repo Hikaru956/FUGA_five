@@ -24,6 +24,6 @@ class Staff < ApplicationRecord
   STAFF_HELPER    = 10
   STAFF_BLOCKED   = -1
 
-  attr_accessible :name, :job_title, :staff_status, :description, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri
+  #attr_accessible :name, :job_title, :staff_status, :description, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri
 
 end

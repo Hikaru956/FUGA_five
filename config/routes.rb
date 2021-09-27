@@ -43,7 +43,10 @@ Fuga326::Application.routes.draw do
 
 
   get 'bs' ,to: 'bs#index'
-  get 'bs_config/company_show_shop' , to: 'bs_config#company_show_shop'
+  get 'bs_config/company_show_shop', to: 'bs_config#company_show_shop'
+  post 'bs_config/company_update_shop', to: 'bs_config#company_update_shop'
+
+  post 'dashboard/company_create', to: 'dashboard#company_create'
 
   get 'news_list'       => 'bs_renderer#news_index',    :as => :news_list
   get 'news'            => 'bs_renderer#news_list',     :as => :news

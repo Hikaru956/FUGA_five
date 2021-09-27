@@ -16,7 +16,7 @@ class VisualWidget < ApplicationRecord
   
   has_many      :visual_widget_bags,  :dependent=>:destroy
   
-  attr_accessible :layout_scheme_id, :widget_type, :title, :description
+  #attr_accessible :layout_scheme_id, :widget_type, :title, :description
 
   WIDGET_TYPE_STRING    = 10
   WIDGET_TYPE_TEXT      = 20

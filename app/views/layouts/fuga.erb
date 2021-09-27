@@ -65,9 +65,10 @@
 
 
         <div class="container">
+			<!-- hikaru -->
 			<% unless current_user.blank? %>
-				<% if !current_user.shop.blank? %>
-					<% @shop = current_user.shop unless @shop.blank? %>
+				<% @shop = current_user.shop %>
+				<% if !@shop.blank? %>
 					<%= render :partial=>"layouts/user_navigation" %>
 				<% elsif !current_user.company.blank? %>
 					<%= render :partial=>"layouts/owner_navigation" %>

@@ -17,12 +17,12 @@ class ContentLeaf < ApplicationRecord
   belongs_to    :content_category
   belongs_to    :staff
 
-  has_many  :photos,  :as => :ref, :dependent => :destroy, :order=>"position asc"
+  has_many  :photos,  :as => :ref, :dependent => :destroy #hikaru, :order=>"position asc"
 
   before_save   :before_save
   after_create  :after_create  
   
-  attr_accessible  :shop_id, :content_category_id, :content_bag_id, :is_public, :title, :description, :description_2, :description_3, :staff_id, :publish_from, :publish_until, :integer_field
+  #attr_accessible  :shop_id, :content_category_id, :content_bag_id, :is_public, :title, :description, :description_2, :description_3, :staff_id, :publish_from, :publish_until, :integer_field
  
   def before_save
     self.content_category = self.content_bag.content_category if self.content_category.blank?

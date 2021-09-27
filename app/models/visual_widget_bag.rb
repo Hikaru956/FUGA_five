@@ -15,7 +15,7 @@ class VisualWidgetBag < ApplicationRecord
 
   has_many      :photos,  :as => :ref, :dependent => :destroy, :order=>"position asc"
 
-  attr_accessible :data_string
+  #attr_accessible :data_string
 
   def is_valid?
     if      self.visual_widget.widget_type==VisualWidget::WIDGET_TYPE_STRING

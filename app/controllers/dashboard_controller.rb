@@ -7,10 +7,10 @@
 #
 # http://opensource.org/licenses/mit-license.php
 #
-
+require 'file_column'
 class DashboardController < ApplicationController
   #hikaru
-  before_action :check_super_privilege
+  #before_action :check_super_privilege
   #before_filter :check_super_privilege #hikaru :login_required,
   skip_before_action :verify_authenticity_token ,:only=>[:create_color_photo, :create_layout_photo, :shop_create_favicon, :shop_create_apple_touch_icon]
 
@@ -43,15 +43,16 @@ class DashboardController < ApplicationController
   ##  Controllers For Company
   #
   def company_index
-    @items =Company.paginate(:page => params[:page], :order=>"alt_id asc", :per_page=>PER_PAGE)    
+    #hikaru
+    #@items =Company.paginate(:page => params[:page], :order=>"alt_id asc", :per_page=>PER_PAGE)
+    @items = Company.all.order(alt_id: :asc)
+    @items = @items.paginate(page: params[:page], per_page: PER_PAGE)    
   end
 
   def company_create
-    if request.post?
-      company = Company.new(params[:item])
+      company = Company.new(company_params)
       company.save
       redirect_to :action=>"company_show", :id=>company
-    end
   end
 
   def company_show
@@ -78,8 +79,9 @@ class DashboardController < ApplicationController
   ##  Controllers For Comapny's User
   #
   def company_list_user
-    @item = Company.find(params[:id])    
-    @users = @item.users.find(:all, :conditions=>["role=?",User::ROLE_OWNER])
+    @item = Company.find(params[:id])
+    @users = @item.users.where('role=?',User::ROLE_OWNER)
+    #@users = @item.users.find(:all, :conditions=>["role=?",User::ROLE_OWNER])
   end
 
   def company_create_user
@@ -435,7 +437,8 @@ class DashboardController < ApplicationController
   ##  Controllers For ColorSchemes
   #
   def color_list
-    @colors = ColorScheme.find(:all, :order=>"position asc")
+    @colors = ColorScheme.all
+    @colors = @colors.order(position: :asc)
   end
 
   def color_create
@@ -507,7 +510,8 @@ class DashboardController < ApplicationController
   ##  Controllers For LayoutSchemes
   #
   def layout_list
-    @layouts = LayoutScheme.find(:all, :order=>"position asc")
+    @layouts = LayoutScheme.all
+    @layouts = @layouts.order(position: :asc)
   end
 
   def layout_create
@@ -620,4 +624,17 @@ class DashboardController < ApplicationController
     redirect_to :action=>"widget_list", :id=>@item.layout_scheme
   end
 
+#hikaru
+private
+    def company_params
+        params.require(:company).permit(:alt_id, :name, :telephone_1, :postal, :address_1)
+    end
+
+    def layout_scheme_params
+        params.require(:layout_scheme).permit(:id, :is_public, :name, :position, :repository_path)
+    end
+
+    def color_scheme_params
+        params.require(:color_scheme).permit(:id, :is_public, :name, :position, :repository_path)
+    end
 end

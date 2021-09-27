@@ -192,6 +192,8 @@ class Shop < ApplicationRecord
   end
 
   def photo_size
+    #hikaru
+    return 956
     photo_sum_size = 0
     self.photos.each{ |photo|  photo_sum_size+=photo.my_size } unless self.photos.blank?
     photo_sum_size

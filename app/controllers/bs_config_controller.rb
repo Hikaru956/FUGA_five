@@ -31,7 +31,8 @@ class BsConfigController < ApplicationController
   def company_update_shop
     if request.post?
       @item = Shop.find(params[:id])
-      @item.update_attributes(params[:shop])
+      #@item.update_attributes(params[:shop])
+      @item.update(shop_params)
       redirect_to :action=>"company_show_shop"
     end
   end
@@ -400,5 +401,9 @@ class BsConfigController < ApplicationController
 protected
   def session_operation
     @shop = current_user.shop
+  end
+
+  def shop_params
+        params.require(:shop).permit(:alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice)
   end
 end
