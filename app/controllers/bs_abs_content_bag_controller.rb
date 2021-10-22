@@ -9,14 +9,15 @@
 #
 
 class BsAbsContentBagController < ApplicationController
-  before_filter :config_x_xss_protection
+  before_action :config_x_xss_protection
+  before_action :session_operation
 
   ###
   ##  Actions For General
   #
   def create_bag
     if request.post?
-      bag = ContentBag.new(params[:item])
+      bag = ContentBag.new(hikaru_params)
       bag.shop = @shop
       bag.content_type = @content_type
       bag.web_page = @shop.web_pages.find_by_content_type(@content_type)
@@ -110,7 +111,7 @@ class BsAbsContentBagController < ApplicationController
 
   def create_leaf
     if request.post?
-      @item = ContentLeaf.new(params[:item])
+      @item = ContentLeaf.new(hikaru_params)
       @item.save
       redirect_to :action=>"show_leaf", :id=>@item
     end
@@ -186,7 +187,7 @@ class BsAbsContentBagController < ApplicationController
 
   def content_category_create
     if request.post?
-      @item     = ContentCategory.new(params[:item])
+      @item     = ContentCategory.new(hikaru_params)
       @item.save
       redirect_to(:action=>'content_category_tree', :id=>@item.parent)
     end
@@ -390,5 +391,9 @@ class BsAbsContentBagController < ApplicationController
   private
   def config_x_xss_protection
     response.headers['X-XSS-Protection'] = '0'    
+  end
+
+  def session_operation
+    @shop = Shop.find(params[:id])
   end
 end

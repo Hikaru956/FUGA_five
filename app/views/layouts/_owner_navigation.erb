@@ -18,7 +18,8 @@
 						<ul class="dropdown-menu">
 							<li><a href="<%= url_for(:controller=>'bs_config', :action=>'account_show') %>"><i class="icon-wrench"></i><i class="icon-user"></i>&nbsp;マイアカウント</a></li>
 							<li class="divider"></li>
-							<li><a href="/accounts/destroy"><i class="icon-off"></i>&nbsp;ログアウト</a></li>
+							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :delete, :class =>'dropdown-item' %>
+							</li>
 							<% if current_user.role==User::ROLE_SUPER %>
 								<li class="divider"></li>
 								<li><%= link_to raw("<i class='icon-signout'></i>&nbsp;&nbsp;ダッシュボードに戻る"), {:controller=>'dashboard', :action=>'roll_back', :id=>current_user.shop}, :method=>:post %></li>

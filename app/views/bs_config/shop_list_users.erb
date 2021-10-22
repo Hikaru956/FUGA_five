@@ -61,7 +61,8 @@
 <% end %>
 
 <!-- modalNew -->
-<%= form_tag url_for(:action=>"shop_create_user"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+<div class="modal hide fade form-horizontal", id="modalNew">
+<%= form_for @shop, url: bs_config_shop_create_user_path(shop_id: @shop.id), method: :post do |f| -%>
 	<% @user = User.new %>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -76,4 +77,4 @@
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
 	</div>
 <% end %>
-
+</div>

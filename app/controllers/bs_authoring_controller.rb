@@ -10,10 +10,10 @@
 
 class BsAuthoringController < ApplicationController
   before_action :authenticate_user!
-  before_filter :session_operation
-  before_filter :config_x_xss_protection
+  before_action :session_operation
+  before_action :config_x_xss_protection
 
-  skip_before_filter :verify_authenticity_token ,:only=>[:create_widget_bag_photo]
+  skip_before_action :verify_authenticity_token ,:only=>[:create_widget_bag_photo]
 
   def index
     ###

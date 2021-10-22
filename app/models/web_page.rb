@@ -57,38 +57,38 @@ class WebPage < ApplicationRecord
     ###
     ##  Build root categories for a shop and its each content bag. 
     #
-    root = ContentCategory.create(:category_type=>ContentCategory::TYPE_SHOP_ROOT, :shop_id=>target_shop.id, :parent_id=>nil, :title=>"SHOP ROOT")
+    root = ContentCategory.create!(:category_type=>ContentCategory::TYPE_SHOP_ROOT, :shop_id=>target_shop.id, :parent_id=>nil, :title=>"SHOP ROOT")
     ###
     ##  'web_page' field will be fixed last, after creating web_pages. 
     #
-    cat_home      = ContentCategory.create(:category_type=>ContentCategory::TYPE_HOME,       :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_HOME)
-    cat_news      = ContentCategory.create(:category_type=>ContentCategory::TYPE_NEWS,       :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_NEWS)
-    cat_blog      = ContentCategory.create(:category_type=>ContentCategory::TYPE_STREAM,     :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_STREAM)
-    cat_gallery   = ContentCategory.create(:category_type=>ContentCategory::TYPE_GALLERY,    :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_GALLERY)
-    cat_portfolio = ContentCategory.create(:category_type=>ContentCategory::TYPE_PORTFOLIO,  :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_PORTFOLIO)
-    cat_info      = ContentCategory.create(:category_type=>ContentCategory::TYPE_INFO,       :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_INFO)
-    cat_anonymous = ContentCategory.create(:category_type=>ContentCategory::TYPE_ANONYMOUS,  :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_ANONYMOUS)
+    cat_home      = ContentCategory.create!(:category_type=>ContentCategory::TYPE_HOME,       :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_HOME)
+    cat_news      = ContentCategory.create!(:category_type=>ContentCategory::TYPE_NEWS,       :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_NEWS)
+    cat_blog      = ContentCategory.create!(:category_type=>ContentCategory::TYPE_STREAM,     :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_STREAM)
+    cat_gallery   = ContentCategory.create!(:category_type=>ContentCategory::TYPE_GALLERY,    :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_GALLERY)
+    cat_portfolio = ContentCategory.create!(:category_type=>ContentCategory::TYPE_PORTFOLIO,  :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_PORTFOLIO)
+    cat_info      = ContentCategory.create!(:category_type=>ContentCategory::TYPE_INFO,       :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_INFO)
+    cat_anonymous = ContentCategory.create!(:category_type=>ContentCategory::TYPE_ANONYMOUS,  :shop_id=>target_shop.id, :parent_id=>root.id, :web_page_id=>nil, :title=>CONTENT_CATEGORY_TITLE_ANONYMOUS)
   
     ###
     ##  Build a new site pages up.
     #
-    root = WebPage.create(:page_type=>TYPE_ROOT, :shop_id=>target_shop.id, :parent_id=>nil)
+    root = WebPage.create!(:page_type=>TYPE_ROOT, :shop_id=>target_shop.id, :parent_id=>nil)
     
-    page_home   = WebPage.create(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_HOME,      :action_name=>'home',            :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_HOME)
-    page_news   = WebPage.create(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_STREAM,    :action_name=>'news_index',      :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_NEWS,       :content_type=>TYPE_NEWS)
-    page_blog   = WebPage.create(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_STREAM,    :action_name=>'stream_index',    :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_STREAM,     :content_type=>TYPE_STREAM)
-    page_glry   = WebPage.create(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_GALLERY,   :action_name=>'gallery_index',   :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_GALLERY,    :content_type=>TYPE_GALLERY)
-    page_prtf   = WebPage.create(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_GALLERY,   :action_name=>'portfolio_index', :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_PORTFOLIO,  :content_type=>TYPE_PORTFOLIO)
-    page_info   = WebPage.create(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_INFO,      :action_name=>'contact',         :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_INFO)
+    page_home   = WebPage.create!(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_HOME,      :action_name=>'home',            :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_HOME)
+    page_news   = WebPage.create!(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_STREAM,    :action_name=>'news_index',      :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_NEWS,       :content_type=>TYPE_NEWS)
+    page_blog   = WebPage.create!(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_STREAM,    :action_name=>'stream_index',    :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_STREAM,     :content_type=>TYPE_STREAM)
+    page_glry   = WebPage.create!(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_GALLERY,   :action_name=>'gallery_index',   :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_GALLERY,    :content_type=>TYPE_GALLERY)
+    page_prtf   = WebPage.create!(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_GALLERY,   :action_name=>'portfolio_index', :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_PORTFOLIO,  :content_type=>TYPE_PORTFOLIO)
+    page_info   = WebPage.create!(:page_type=>TYPE_PAGE, :template_name=>TEMPLATE_INFO,      :action_name=>'contact',         :shop_id=>target_shop.id, :parent_id=>root.id, :name=>CONTENT_CATEGORY_TITLE_INFO)
 
     ###
     ##  Allocate Content Bag
     #
-    ContentBag.create(:content_type=>ContentBag::TYPE_NEWS,      :web_page_id=>page_news.id,    :shop_id=>target_shop.id, :is_public=>true, :name=>CONTENT_CATEGORY_TITLE_NEWS)
-    ContentBag.create(:content_type=>ContentBag::TYPE_STREAM,    :web_page_id=>page_blog.id,    :shop_id=>target_shop.id, :is_public=>true, :name=>CONTENT_CATEGORY_TITLE_STREAM)
-    ContentBag.create(:content_type=>ContentBag::TYPE_GALLERY,   :web_page_id=>page_glry.id,    :shop_id=>target_shop.id, :is_public=>true, :name=>CONTENT_CATEGORY_TITLE_GALLERY)
-    ContentBag.create(:content_type=>ContentBag::TYPE_PORTFOLIO, :web_page_id=>page_prtf.id,    :shop_id=>target_shop.id, :is_public=>true, :name=>CONTENT_CATEGORY_TITLE_PORTFOLIO)
-    ContentBag.create(:content_type=>ContentBag::TYPE_ANONYMOUS, :web_page_id=>nil,             :shop_id=>target_shop.id, :is_public=>true, :name=>CONTENT_CATEGORY_TITLE_ANONYMOUS)
+    ContentBag.create!(:content_type=>ContentBag::TYPE_NEWS,      :web_page_id=>page_news.id,    :shop_id=>target_shop.id, :is_public=>true, :name=>CONTENT_CATEGORY_TITLE_NEWS)
+    ContentBag.create!(:content_type=>ContentBag::TYPE_STREAM,    :web_page_id=>page_blog.id,    :shop_id=>target_shop.id, :is_public=>true, :name=>CONTENT_CATEGORY_TITLE_STREAM)
+    ContentBag.create!(:content_type=>ContentBag::TYPE_GALLERY,   :web_page_id=>page_glry.id,    :shop_id=>target_shop.id, :is_public=>true, :name=>CONTENT_CATEGORY_TITLE_GALLERY)
+    ContentBag.create!(:content_type=>ContentBag::TYPE_PORTFOLIO, :web_page_id=>page_prtf.id,    :shop_id=>target_shop.id, :is_public=>true, :name=>CONTENT_CATEGORY_TITLE_PORTFOLIO)
+    ContentBag.create!(:content_type=>ContentBag::TYPE_ANONYMOUS, :web_page_id=>page_info.id,             :shop_id=>target_shop.id, :is_public=>true, :name=>CONTENT_CATEGORY_TITLE_ANONYMOUS)
 
     ###
     ##  Bind web_page(s) to category root for navigations

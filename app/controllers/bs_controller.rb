@@ -35,7 +35,7 @@ class BsController < ApplicationController
   
   def create_news
     if request.post?
-      @item = ContentLeaf.new(params[:item])
+      @item = ContentLeaf.new(hikaru_params)
       if @item.save
         redirect_to :action=>"show_news", :hash_leaf=>@item.hash_key, :hash_bag=>(@bag.blank?)? nil: @bag.hash_key
       else

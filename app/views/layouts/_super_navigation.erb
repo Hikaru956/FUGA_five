@@ -28,7 +28,8 @@
 								<li><a href="<%= url_for(:controller=>'dashboard', :action=>'user_list') %>"><i class="icon-gear"></i>&nbsp;管理ユーザー設定</a></li>
 							<% end %>
 							<li class="divider"></li>
-							<li><a href="/accounts/destroy"><i class="icon-off"></i>&nbsp;ログアウト</a></li>
+							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :delete, :class =>'dropdown-item' %>
+							</li>
 						</ul>
 					</li>						
 				</ul>						

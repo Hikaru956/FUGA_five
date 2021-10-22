@@ -77,6 +77,9 @@ module ApplicationHelper
     (model.alt_id.blank?)? "未設定" : model.alt_id
   end
   
+  def logout_icon(title='ログアウト');    sprintf("<i class='icon-off' title=%s></i>", title).html_safe; end
+
+
   def icon_site_status(site_status)
     return raw("<i class='icon-spinner icon-spin'></i>")  if site_status == Shop::WSITE_PUBLISHED    
     return raw("<i class='icon-beaker'></i>")             if site_status == Shop::WSITE_TRIAL

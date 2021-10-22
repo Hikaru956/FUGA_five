@@ -10,7 +10,7 @@
 
 class BsRosterController < ApplicationController
   before_action :authenticate_user!
-  before_filter :session_operation
+  before_action :session_operation
 
   layout  "fuga"
 
@@ -68,7 +68,7 @@ class BsRosterController < ApplicationController
 
   def create
     if request.post?
-      item = RosterLabel.new(params[:item])
+      item = RosterLabel.new(hikaru_params)
       item.save
       redirect_to :action=>"show", :id=>item
     end

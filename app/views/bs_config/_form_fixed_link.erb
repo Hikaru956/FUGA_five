@@ -1,27 +1,27 @@
 <div class="control-group">
-	<label class="control-label" for="item[is_open_new]">アクション</label>
+	<label class="control-label" for="web_page[is_open_new]">アクション</label>
 	<div class="controls">
 		<label class="radio inline">
-			<input type="radio" id="item[is_open_new]" name="item[is_open_new]" value="1" <% if @item.is_open_new %>checked<% end %>>
+			<input type="radio" id="web_page[is_open_new]" name="web_page[is_open_new]" value="1" <% if web_page.is_open_new %>checked<% end %>>
 			新しいウィンドウで開く
 		</label>
 		<label class="radio inline">
-			<input type="radio" id="item[is_open_new]" name="item[is_open_new]" value="0" <% if !@item.is_open_new %>checked<% end %>>
+			<input type="radio" id="web_page[is_open_new]" name="web_page[is_open_new]" value="0" <% if !web_page.is_open_new %>checked<% end %>>
 			表示ウィンドウで開く
 		</label>
 	</div>
 </div>
 
 <div class="control-group">
-	<label class="control-label" for="item[name]">タイトル</label>
+	<label class="control-label" for="web_page[name]">タイトル</label>
 	<div class="controls">
-		<%= text_field 'item', 'name', :placeholder=>"タイトルを入力", :autocomplete => "off" %>
+		<%= text_field 'web_page', 'name', :placeholder=>"タイトルを入力", :autocomplete => "off" %>
 	</div>
 </div>
 <div class="control-group">
-	<label class="control-label" for="item[external_url]">リンクアドレス</label>
+	<label class="control-label" for="web_page[external_url]">リンクアドレス</label>
 	<div class="controls">
-		<%= text_field 'item', 'external_url', :placeholder=>"リンク先アドレスを入力", :autocomplete => "off" %>
+		<%= text_field 'web_page', 'external_url', :placeholder=>"リンク先アドレスを入力", :autocomplete => "off" %>
 		<span class="help-block">外部サイトへのリンクを指定する場合、プロトコル(http://, https:// 等)も含める必要があります。</span>
 	</div>
 </div>

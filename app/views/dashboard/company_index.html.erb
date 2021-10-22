@@ -75,17 +75,19 @@
 <% end %>
 
 <!-- modalNewShop -->
-<%= form_tag url_for(:action=>"company_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+<div class="modal hide fade form-horizontal", id="modalNew">
+<% item = Company.new %>
+<%= form_for item, url: dashboard_company_create_path, method: :post do |f| -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">新規レジストリー登録</h3>
 	</div>
 	<div class="modal-body">
-		<%= render :partial=>"form_company" %>
+		<%= render partial: "form_company", locals: {f: f, item: item } %>
 	</div>
 	<div class="modal-footer">
     	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
 	</div>
 <% end %>
- 
+</div>

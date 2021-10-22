@@ -23,7 +23,8 @@ class ColorScheme < ApplicationRecord
   before_destroy  :before_destroy
 
   def self.default_scheme
-    ColorScheme.find(:first, :conditions=>["is_public=?",true], :order=>"position asc")
+    ColorScheme.where("is_public=?",true).order(position: :asc).first
+    #ColorScheme.find(:first, :conditions=>["is_public=?",true], :order=>"position asc")
   end
   
   def asset_top

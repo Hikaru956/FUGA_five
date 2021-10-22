@@ -18,7 +18,8 @@
 						<ul class="dropdown-menu">
 							<li><a href="<%= url_for(:controller=>'dashboard', :action=>'user_show', :id=>current_user) %>"><i class="icon-user"></i>&nbsp;マイアカウント</a></li>
 							<li class="divider"></li>
-							<li><a href="/accounts/destroy"><i class="icon-off"></i>&nbsp;ログアウト</a></li>
+							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :delete, :class =>'dropdown-item' %>
+							</li>
 						</ul>
 					</li>						
 				</ul>						

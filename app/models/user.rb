@@ -11,8 +11,8 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  belongs_to  :company
-  belongs_to  :shop
+  belongs_to  :company, optional: true
+  belongs_to  :shop, optional: true
 
   #hikaru
   devise :database_authenticatable, :registerable,

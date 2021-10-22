@@ -10,7 +10,7 @@
 
 class BsAttendanceController < ApplicationController
   before_action :authenticate_user!
-  before_filter :session_operation
+  before_action :session_operation
 
   layout  "fuga"
 

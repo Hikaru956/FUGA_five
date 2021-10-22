@@ -26,7 +26,7 @@
 						<li>
 							<% if nav.category_type==ContentCategory::TYPE_NEWS %>		<a href="<%= url_for(:controller=>'bs_content_news', 		:action=>'content_root', :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
 							<% if nav.category_type==ContentCategory::TYPE_STREAM %>	<a href="<%= url_for(:controller=>'bs_content_stream', 		:action=>'content_root', :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
-							<% if nav.category_type==ContentCategory::TYPE_GALLERY %>	<a href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
+							<% if nav.category_type==ContentCategory::TYPE_GALLERY %>	<a href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', id: @shop.id, :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
 							<% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %>	<a href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root', :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
 						</li>
 					<% end %>
@@ -52,7 +52,8 @@
 								<% end %>
 								<li class="divider"></li>
 							<% end %>
-							<li><a href="/accounts/destroy"><i class="icon-off"></i>&nbsp;ログアウト</a></li>
+							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :delete, :class =>'dropdown-item' %>
+							</li>
 							<% if current_user.role>=User::ROLE_SALES %>
 								<li class="divider"></li>
 								<li><%= link_to raw("<i class='icon-signout'></i>&nbsp;&nbsp;ダッシュボードに戻る"), {:controller=>'dashboard', :action=>'roll_back', :id=>current_user.shop}, :method=>:post %></li>

@@ -10,9 +10,9 @@
 
 class BsContentStreamController < BsAbsContentBagController
   before_action :authenticate_user!
-  before_filter :session_operation
+  before_action :session_operation
   
-  skip_before_filter :verify_authenticity_token ,:only=>[:create_photo]
+  skip_before_action :verify_authenticity_token ,:only=>[:create_photo]
 
   layout  "fuga"
 

@@ -26,13 +26,18 @@ Fuga326::Application.routes.draw do
   #resource :account, :only => [:new, :create, :destroy]
 
   #hikaru
-  devise_for :users
-
+  devise_for :users, controllers: {
+        :registrations => 'users/registrations',
+        :sessions => 'users/sessions',
+        :passwords => 'users/passwords'
+      }
+  #
   devise_scope :user do
     get "sign_in", :to => "users/sessions#new"
     get "sign_out", :to => "users/sessions#destroy"
   end
 
+  root :to => 'dashboard#index'
 #  match 'signup'    => 'users#new',         :as => :signup
 #  match 'register'  => 'users#create',      :as => :register
   #get 'login'     => 'accounts#new',      :as => :login
@@ -44,9 +49,46 @@ Fuga326::Application.routes.draw do
 
   get 'bs' ,to: 'bs#index'
   get 'bs_config/company_show_shop', to: 'bs_config#company_show_shop'
-  post 'bs_config/company_update_shop', to: 'bs_config#company_update_shop'
+  patch 'bs_config/company_update_shop', to: 'bs_config#company_update_shop'
+  post 'bs_config/shop_create_staff', to: 'bs_config#shop_create_staff'
+  patch 'bs_config/shop_update_staff', to: 'bs_config#shop_update_staff'
+  delete 'bs_config/shop_delete_staff', to: 'bs_config#shop_delete_staff'
+  post 'bs_config/shop_create_user', to: 'bs_config#shop_create_user'
+  patch 'bs_config/shop_update_user', to: 'bs_config#shop_update_user'
+  delete 'bs_config/shop_delete_user', to: 'bs_config#shop_delete_user'
+  patch 'bs_config/shop_update_website', to: 'bs_config#shop_update_website'
+  post 'bs_config/shop_create_fixed_link', to: 'bs_config#shop_create_fixed_link'
+  post 'bs_config/shop_create_fixed_page', to: 'bs_config#shop_create_fixed_page'
+  patch 'bs_config/navigation_update', to: 'bs_config#navigation_update'
+  delete 'bs_config/shop_delete_fixed_link', to: 'bs_config#shop_delete_fixed_link'
+
 
   post 'dashboard/company_create', to: 'dashboard#company_create'
+  patch 'dashboard/company_update', to: 'dashboard#company_update'
+  delete 'dashboard/company_delete', to: 'dashboard#company_delete'
+  post 'dashboard/company_create_shop', to: 'dashboard#company_create_shop'
+  patch 'dashboard/company_update_shop', to: 'dashboard#company_update_shop'
+  delete 'dashboard/company_delete_shop', to: 'dashboard#company_delete_shop'
+  post 'dashboard/company_create_user', to: 'dashboard#company_create_user'
+  patch 'dashboard/company_update_user', to: 'dashboard#company_update_user'
+  delete 'dashboard/company_delete_user', to: 'dashboard#company_delete_user'
+  post 'dashboard/shop_create_staff', to: 'dashboard#shop_create_staff'
+  patch 'dashboard/shop_update_staff', to: 'dashboard#shop_update_staff'
+  delete 'dashboard/shop_delete_staff', to: 'dashboard#shop_delete_staff'
+  post 'dashboard/shop_create_user', to: 'dashboard#shop_create_user'
+  patch 'dashboard/shop_update_user', to: 'dashboard#shop_update_user'
+  delete 'dashboard/shop_delete_user', to: 'dashboard#shop_delete_user'
+
+  patch 'dashboard/shop_update_website', to: 'dashboard#shop_update_website'
+  delete 'dashboard/shop_reset_favicon', to: 'dashboard#shop_reset_favicon'
+  delete 'dashboard/shop_reset_apple_touch_icon', to: 'dashboard#shop_reset_apple_touch_icon'
+  patch 'dashboard/set_disqus_mode', to: 'dashboard#set_disqus_mode'
+  patch 'dashboard/set_disqus_code', to: 'dashboard#set_disqus_code'
+
+  get 'bs_content_gallery/content_root/:id', to: 'bs_abs_content_bag#content_root'
+  get 'bs_content_portfolio/content_root', to: 'bs_abs_content_bag#content_root'
+  get 'bs_content_news/content_root', to: 'bs_abs_content_bag#content_root'
+  get 'bs_content_stream/content_root', to: 'bs_abs_content_bag#content_root'
 
   get 'news_list'       => 'bs_renderer#news_index',    :as => :news_list
   get 'news'            => 'bs_renderer#news_list',     :as => :news
@@ -110,7 +152,7 @@ Fuga326::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-  root :to => 'dashboard#index'
+  
   
   # See how all your routes lay out with "rake routes"
 

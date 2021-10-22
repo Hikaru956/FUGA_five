@@ -15,8 +15,8 @@ class ContentCategory < ApplicationRecord
   acts_as_tree :order => :position
 
   belongs_to    :shop
-  belongs_to    :content_bag
-  belongs_to    :web_page
+  #belongs_to    :content_bag, optional: true
+  belongs_to    :web_page, optional: true
   has_many      :content_leafs, :dependent=>:nullify #, :order=>'publish_from desc, created_at desc'
   has_one       :content_bag,   :dependent=>:destroy
   
@@ -54,7 +54,8 @@ class ContentCategory < ApplicationRecord
   end
   
   def self.type_root(target_shop, content_type)
-    target_shop.content_categories.find(:first, :conditions=>["shop_id=? AND category_type=?", target_shop.id, content_type])
+    #target_shop.content_categories.find(:first, :conditions=>["shop_id=? AND category_type=?", target_shop.id, content_type])
+    target_shop.content_categories.where('shop_id=? AND category_type=?', target_shop.id, content_type).first
   end
   
   def as_json options = {}
@@ -143,11 +144,13 @@ class ContentCategory < ApplicationRecord
   end
 
   def self.shop_root(target_shop)
-    target_shop.content_categories.find(:first, :conditions=>["parent_id IS NULL AND category_type=?", TYPE_SHOP_ROOT])
+    #target_shop.content_categories.find(:first, :conditions=>["parent_id IS NULL AND category_type=?", TYPE_SHOP_ROOT])
+    target_shop.content_categories.where("parent_id IS NULL AND category_type=?", TYPE_SHOP_ROOT).first
   end
   
   def self.type_root(target_shop, content_type)
-    target_shop.content_categories.find(:first, :conditions=>["category_type=?", content_type])
+    target_shop.content_categories.find_by("category_type=?", content_type)
+
   end
 
   ###

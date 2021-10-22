@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_11_064725) do
+ActiveRecord::Schema.define(version: 2021_10_07_033933) do
 
   create_table "attendances", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "shop_id"
@@ -271,6 +271,8 @@ ActiveRecord::Schema.define(version: 2021_08_11_064725) do
     t.integer "try_count", default: 0
     t.datetime "confirmation_sent_at"
     t.datetime "remember_created_at"
+    t.string "reset_password_token"
+    t.string "reset_password_sent_at"
     t.index ["login"], name: "index_users_on_login", unique: true
   end
 

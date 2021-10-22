@@ -105,31 +105,34 @@
 </table>
 
 <!-- modalEdit -->
-<%= form_tag url_for(:action=>"shop_update_website", :id=>@shop), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">サイト属性編集</h3>
-	</div>
-	<div class="modal-body">
-		<%= render :partial=>"form_shop_wsite" %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-	</div>
-<% end %>
-
+<div class="modal hide fade form-horizontal", id="modalEdit">
+	<%= form_for @shop, url: bs_config_shop_update_website_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">サイト属性編集</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_shop_wsite" %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
 <!-- modalEditSocial -->
-<%= form_tag url_for(:action=>"shop_update_website", :id=>@shop), {:class=>"modal hide fade form-horizontal", :id=>"modalEditSocial"} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">店舗ソーシャル設定</h3>
-	</div>
-	<div class="modal-body">
-		<%= render :partial=>"form_shop_social" %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-	</div>
-<% end %>
+<div class="modal hide fade form-horizontal", id="modalEditSocial">
+	<%= form_for @shop, url: bs_config_shop_update_website_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">店舗ソーシャル設定</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_shop_social" %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>

@@ -91,49 +91,53 @@
 
 
 <!-- modalEdit -->
-<%= form_tag url_for(:action=>"shop_user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">ユーザー編集</h3>
-	</div>
-	<div class="modal-body">
-		<%= render :partial=>"form_user" %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-	</div>
-<% end %>
-
+<div class="modal hide fade form-horizontal", id="modalEdit">
+	<%= form_for @user, url: bs_config_shop_update_user_path(id: @user), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">ユーザー編集</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_user" %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
 <!-- modalEditPassword -->
-<%= form_tag url_for(:action=>"shop_user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEditPassword"} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">パスワード再発行</h3>
-	</div>
-	<div class="modal-body">
-		<%= render :partial=>"form_user_password" %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-	</div>
-<% end %>
-
+<div  class="modal hide fade form-horizontal", id="modalEditPassword">
+	<%= form_for @user, url: bs_config_shop_update_user_path(id: @user), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">パスワード再発行</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_user_password" %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
 <!-- modalDeleteUser -->
-<%= form_tag url_for(:action=>"shop_user_delete", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete"} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">ユーザー削除</h3>
-	</div>
-	<div class="modal-body">
-		<p>
-			「<%= @user.login %>」を削除します。<br/>
-			よろしいですか？
-		</p>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
-	</div>
-<% end %>
+<div  class="modal hide fade form-horizontal", id="modalDelete">
+	<%= form_for @user, url: bs_config_shop_delete_user_path(id: @user), method: :delete do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">ユーザー削除</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+				「<%= @user.login %>」を削除します。<br/>
+				よろしいですか？
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
+</div>

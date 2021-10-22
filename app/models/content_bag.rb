@@ -16,7 +16,7 @@ class ContentBag < ApplicationRecord
 
   belongs_to    :shop
   belongs_to    :web_page     
-  belongs_to    :content_category     
+  belongs_to    :content_category, optional: true
 
   #hikaru
   has_many      :content_leafs, :dependent=>:destroy #, :order=>'publish_from desc, created_at desc'

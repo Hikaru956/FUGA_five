@@ -10,7 +10,7 @@
 
 class BsReservationController < ApplicationController
   before_action :authenticate_user!
-  before_filter :session_operation
+  before_action :session_operation
 
   layout  "fuga"
 
@@ -54,7 +54,7 @@ class BsReservationController < ApplicationController
 
   def create_reservation
     if request.post?
-      @item = Reservation.new(params[:item])
+      @item = Reservation.new(hikaru_params)
 
       @target_date        = (params[:target_date].blank?)? Time.now.to_date: parse_date(params[:target_date])
       base_time           = Time.mktime(@target_date.year, @target_date.month, @target_date.day, 0, 0, 0)
@@ -114,7 +114,7 @@ class BsReservationController < ApplicationController
   def create_reservation_customer
     if request.post? 
       @reservation = @item = Reservation.find(params[:id])
-      @customer = Customer.new(params[:item])
+      @customer = Customer.new(hikaru_params)
       @customer.save
 
       @reservation.customer = @customer

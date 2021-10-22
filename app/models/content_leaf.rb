@@ -14,8 +14,8 @@ class ContentLeaf < ApplicationRecord
 
   belongs_to    :shop
   belongs_to    :content_bag
-  belongs_to    :content_category
-  belongs_to    :staff
+  belongs_to    :content_category, optional: true
+  belongs_to    :staff, optional: true
 
   has_many  :photos,  :as => :ref, :dependent => :destroy #hikaru, :order=>"position asc"
 
@@ -40,7 +40,18 @@ class ContentLeaf < ApplicationRecord
     return bag_root_category.content_bag
   end
   
-  
+  def self.public_leafs
+    today = Time.now.to_date
+    leaves = ContentLeaf.where(is_public: true)
+    leaves = leaves.where('   (content_leafs.publish_from IS NULL AND content_leafs.publish_until IS NULL)
+                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until IS NULL)
+                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until >= ?)', \
+                          today, today, today)
+    leaves
+  end
+
+
+
   def self.public_leafs_condition
     today = Time.now.to_date
     c = Condition.new

@@ -9,8 +9,8 @@
 #
 
 class BsRendererController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :config_x_xss_protection
+  before_action :authenticate_user!
+  before_action :config_x_xss_protection
   
   def index
     default_navi_item = @website.default_navigation_item

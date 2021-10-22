@@ -10,9 +10,9 @@
 
 class BsContentGalleryController < BsAbsContentBagController
   before_action :authenticate_user!
-  before_filter :session_operation
+  before_action :session_operation
   
-  skip_before_filter :verify_authenticity_token ,:only=>[:create_photo, :create_face_photo]
+  skip_before_action :verify_authenticity_token ,:only=>[:create_photo, :create_face_photo]
 
   layout  "fuga"
   
@@ -28,6 +28,7 @@ class BsContentGalleryController < BsAbsContentBagController
 protected
   def session_operation
     @shop         = @current_user.shop
+    xxxxxxx
     @content_type = ContentBag::TYPE_GALLERY
 
     @bag_title = @shop.content_categories.find_by_category_type(@content_type).title

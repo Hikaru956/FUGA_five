@@ -10,7 +10,7 @@
 
 class BsCustomerController < ApplicationController
   before_action :authenticate_user!
-  before_filter :session_operation
+  before_action :session_operation
   
   helper  :calendar
 
@@ -61,7 +61,7 @@ class BsCustomerController < ApplicationController
   
   def create_customer
     if request.post?
-      @item = Customer.new(params[:item])
+      @item = Customer.new(hikaru_params)
       @item.telephone = to_sb(@item.telephone)
       if @item.save
         redirect_to :action=>"show_property", :id=>@item
@@ -147,7 +147,7 @@ class BsCustomerController < ApplicationController
 
   def create_memo
     if request.post?
-      @item = CustomerMemo.new(params[:item])
+      @item = CustomerMemo.new(hikaru_params)
       @item.price = to_sb(params[:item][:price])  unless params[:item][:price].blank?
       
       @item.memo_on = @item.receipt_on
@@ -207,7 +207,7 @@ class BsCustomerController < ApplicationController
 
   def create_receipt
     if request.post?
-      @item = Receipt.new(params[:item])
+      @item = Receipt.new(hikaru_params)
 
       @item.price = to_sb(params[:item][:price])  unless params[:item][:price].blank?
       if @item.save
@@ -257,7 +257,7 @@ class BsCustomerController < ApplicationController
   
   def create_purchase
     if request.post?
-      @item = Purchase.new(params[:item])
+      @item = Purchase.new(hikaru_params)
       @item.receipt     = Receipt.find(params[:id])
       @item.purchase_on = @item.receipt.receipt_on
 

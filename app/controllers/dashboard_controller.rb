@@ -9,12 +9,13 @@
 #
 require 'file_column'
 class DashboardController < ApplicationController
+  before_action :authenticate_user!
   #hikaru
   #before_action :check_super_privilege
-  #before_filter :check_super_privilege #hikaru :login_required,
+  #before_action :check_super_privilege #hikaru :login_required,
   skip_before_action :verify_authenticity_token ,:only=>[:create_color_photo, :create_layout_photo, :shop_create_favicon, :shop_create_apple_touch_icon]
 
-  #skip_before_filter :verify_authenticity_token ,:only=>[:create_color_photo, :create_layout_photo, :shop_create_favicon, :shop_create_apple_touch_icon]
+  #skip_before_action :verify_authenticity_token ,:only=>[:create_color_photo, :create_layout_photo, :shop_create_favicon, :shop_create_apple_touch_icon]
 
   layout  "fuga"
 
@@ -43,10 +44,15 @@ class DashboardController < ApplicationController
   ##  Controllers For Company
   #
   def company_index
+    unless current_user.has_permission?(User::ROLE_OPERATOR)
+      return redirect_to(:action=>"company_show", :id=>current_user.company) if current_user.has_permission?(User::ROLE_OWNER) 
+      return redirect_to(:action=>"company_show_shop", :id=>current_user.shop) if current_user.has_permission?(User::ROLE_MANAGER)
+    end
+    #return redirect_to(:action=>"company_show_shop", :id=>current_user.shop) if current_user.has_permission?(User::ROLE_BLOGGER)
     #hikaru
     #@items =Company.paginate(:page => params[:page], :order=>"alt_id asc", :per_page=>PER_PAGE)
     @items = Company.all.order(alt_id: :asc)
-    @items = @items.paginate(page: params[:page], per_page: PER_PAGE)    
+    @items = @items.paginate(page: params[:page], per_page: PER_PAGE).order(alt_id: :asc)
   end
 
   def company_create
@@ -60,19 +66,15 @@ class DashboardController < ApplicationController
   end
 
   def company_update
-    if request.post?
       @item = Company.find(params[:id])
-      @item.update_attributes(params[:item])
+      @item.update_attributes(company_params)
       redirect_to :action=>"company_show", :id=>@item
-    end
   end
 
   def company_delete
-    if request.post?
       item = Company.find(params[:id])
       item.destroy
       redirect_to :action=>"company_index"
-    end
   end
 
   ###
@@ -85,36 +87,30 @@ class DashboardController < ApplicationController
   end
 
   def company_create_user
-    if request.post?
-      company = Company.find(params[:company_id])
-      user = User.new(params[:user])
+      company = Company.find(params[:id])
+      user = User.new(user_params)
       user.company = company
-      user.save
+      user.save!
       redirect_to :action=>"company_list_user", :id=>company
-    end
   end
 
   def company_show_user
     @user = User.find(params[:id])
   end
 
-  def company_user_update
-    if request.post?
+  def company_update_user
       @item = User.find(params[:id])
-      if @item.update_attributes(params[:user])
+      if @item.update(user_params)
         @item.try_count=0
         @item.save!
       end
       redirect_to :action=>"company_show_user", :id=>@item
-    end
   end
 
-  def company_user_delete
-    if request.post?
+  def company_delete_user
       item = User.find(params[:id])
       item.destroy
       redirect_to :action=>"company_list_user", :id=>item.company
-    end
   end
 
   ###
@@ -125,13 +121,11 @@ class DashboardController < ApplicationController
   end
 
   def company_create_shop
-    if request.post?
       company = Company.find(params[:company_id])
-      shop = Shop.new(params[:shop])
+      shop = Shop.new(shop_params)
       shop.company = company
-      shop.save
-      redirect_to :action=>"company_show_shop", :id=>shop
-    end
+      shop.save!
+      redirect_to :action=>"company_show_shop", :id=>shop.id
   end
 
   def company_show_shop
@@ -140,11 +134,9 @@ class DashboardController < ApplicationController
   end
 
   def company_update_shop
-    if request.post?
       @item = Shop.find(params[:id])
-      @item.update_attributes(params[:shop])
+      @item.update_attributes(shop_params)
       redirect_to :action=>"company_show_shop", :id=>@item
-    end
   end
 
   def company_update_shop_room
@@ -160,11 +152,9 @@ class DashboardController < ApplicationController
   end
 
   def company_delete_shop
-    if request.post?
       item = Shop.find(params[:id])
       item.destroy
       redirect_to :action=>"company_list_shop", :id=>item.company
-    end
   end
 
   def shop_edit_position
@@ -215,33 +205,27 @@ class DashboardController < ApplicationController
   end
 
   def shop_create_staff
-    if request.post?
-      shop = Shop.find(params[:shop_id])
-      staff = Staff.new(params[:staff])
-      staff.shop = shop
-      staff.save
-      redirect_to :action=>"shop_show_staff", :id=>staff
-    end
+    shop = Shop.find(params[:shop_id])
+    staff = Staff.new(staff_params)
+    staff.shop = shop
+    staff.save
+    redirect_to :action=>"shop_show_staff", :id=>staff
   end
 
   def shop_show_staff
     @staff = Staff.find(params[:id])
   end
 
-  def shop_staff_update
-    if request.post?
-      @item = Staff.find(params[:id])
-      @item.update_attributes(params[:staff])
-      redirect_to :action=>"shop_show_staff", :id=>@item
-    end
+  def shop_update_staff
+    @item = Staff.find(params[:id])
+    @item.update_attributes(staff_params)
+    redirect_to :action=>"shop_show_staff", :id=>@item
   end
 
-  def shop_staff_delete
-    if request.post?
-      item = Staff.find(params[:id])
-      item.destroy
-      redirect_to :action=>"shop_list_staffs", :id=>item.shop
-    end
+  def shop_delete_staff
+    item = Staff.find(params[:id])
+    item.destroy
+    redirect_to :action=>"shop_list_staffs", :id=>item.shop
   end
 
   def staff_higher
@@ -274,34 +258,28 @@ class DashboardController < ApplicationController
   end
 
   def shop_create_user
-    if request.post?
-      shop = Shop.find(params[:shop_id])
-      user = User.new(params[:user])
-      user.company  = shop.company
-      user.shop     = shop
-      user.save
-      redirect_to :action=>"shop_list_users", :id=>shop
-    end
+    shop = Shop.find(params[:shop_id])
+    user = User.new(user_params)
+    user.company  = shop.company
+    user.shop     = shop
+    user.save
+    redirect_to :action=>"shop_list_users", :id=>shop
   end
 
   def shop_show_user
     @user = User.find(params[:id])
   end
 
-  def shop_user_update
-    if request.post?
-      @item = User.find(params[:id])
-      @item.update_attributes(params[:user])
-      redirect_to :action=>"shop_show_user", :id=>@item
-    end
+  def shop_update_user
+    @item = User.find(params[:id])
+    @item.update_attributes(user_params)
+    redirect_to :action=>"shop_show_user", :id=>@item
   end
 
-  def shop_user_delete
-    if request.post?
-      item = User.find(params[:id])
-      item.destroy
-      redirect_to :action=>"shop_list_users", :id=>item.shop
-    end
+  def shop_delete_user
+    item = User.find(params[:id])
+    item.destroy
+    redirect_to :action=>"shop_list_users", :id=>item.shop
   end
 
   ###
@@ -312,11 +290,9 @@ class DashboardController < ApplicationController
   end
 
   def shop_update_website
-    if request.post?
       @item = Shop.find(params[:id])
-      @item.update_attributes(params[:shop])
+      @item.update_attributes(shop_params)
       redirect_to :action=>"shop_show_website", :id=>@item
-    end
   end
 
   def shop_new_favicon
@@ -364,11 +340,9 @@ class DashboardController < ApplicationController
   end
   
   def shop_reset_favicon
-    if request.post?
       @shop = Shop.find(params[:id])
       WebPage.reset_favicon(@shop)
       redirect_to :action=>"shop_show_website", :id=>@shop
-    end
   end
   
   def shop_reset_apple_touch_icon
@@ -380,19 +354,15 @@ class DashboardController < ApplicationController
   end
   
   def set_disqus_mode
-    if request.post?
       @shop = Shop.find(params[:id])
-      @shop.update_attributes(params[:shop])
+      @shop.update_attributes(shop_params)
       redirect_to :action=>"shop_show_website", :id=>@shop
-    end
   end
   
   def set_disqus_code
-    if request.post?
       @shop = Shop.find(params[:id])
-      @shop.update_attributes(params[:shop])
+      @shop.update_attributes(shop_params)
       redirect_to :action=>"shop_show_website", :id=>@shop
-    end
   end
 
   ###
@@ -404,7 +374,7 @@ class DashboardController < ApplicationController
 
   def user_create
     if request.post?
-      user = User.new(params[:user])
+      user = User.new(hikaru_params)
       user.save
       redirect_to :action=>"user_list"
     end
@@ -443,7 +413,7 @@ class DashboardController < ApplicationController
 
   def color_create
     if request.post?
-      color = ColorScheme.new(params[:color])
+      color = ColorScheme.new(hikaru_params)
       color.save
       redirect_to :action=>"color_show", :id=>color
     end
@@ -516,7 +486,7 @@ class DashboardController < ApplicationController
 
   def layout_create
     if request.post?
-      layout = LayoutScheme.new(params[:layout])
+      layout = LayoutScheme.new(hikaru_params)
       layout.save
       redirect_to :action=>"layout_show", :id=>layout
     end
@@ -588,7 +558,7 @@ class DashboardController < ApplicationController
   #
   def widget_create
     if request.post?
-      visual_widget = VisualWidget.new(params[:item])
+      visual_widget = VisualWidget.new(hikaru_params)
       visual_widget.save
       redirect_to :action=>"widget_list", :id=>visual_widget.layout_scheme
     end
@@ -626,15 +596,28 @@ class DashboardController < ApplicationController
 
 #hikaru
 private
-    def company_params
-        params.require(:company).permit(:alt_id, :name, :telephone_1, :postal, :address_1)
-    end
+  def company_params
+      params.require(:company).permit(:alt_id, :name, :telephone_1, :postal, :address_1)
+  end
 
-    def layout_scheme_params
-        params.require(:layout_scheme).permit(:id, :is_public, :name, :position, :repository_path)
-    end
+  def layout_scheme_params
+      params.require(:layout_scheme).permit(:id, :is_public, :name, :position, :repository_path)
+  end
 
-    def color_scheme_params
-        params.require(:color_scheme).permit(:id, :is_public, :name, :position, :repository_path)
-    end
+  def color_scheme_params
+      params.require(:color_scheme).permit(:id, :is_public, :name, :position, :repository_path)
+  end
+
+  def shop_params
+      params.require(:shop).permit(:alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice)
+  end
+
+  def user_params
+      params.require(:user).permit(:login, :email, :name, :password, :password_confirmation, :role, :company_id, :shop_id)
+  end
+
+  def staff_params
+      params.require(:staff).permit(:name, :job_title, :staff_status, :description, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri)
+  end
+
 end

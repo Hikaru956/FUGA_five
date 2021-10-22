@@ -9,7 +9,7 @@
 #
 
 class TooltipController < ApplicationController
-  skip_before_filter :verify_authenticity_token ,:only=>[:reservation]
+  skip_before_action :verify_authenticity_token ,:only=>[:reservation]
   
   def reservation
     @item = Reservation.find(params[:id])

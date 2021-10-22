@@ -25,7 +25,8 @@ class LayoutScheme < ApplicationRecord
 
 
   def self.default_scheme
-    LayoutScheme.find(:first, :conditions=>["is_public=?",true], :order=>"position asc")
+    LayoutScheme.where("is_public=?",true).order(position: :asc).first
+    #LayoutScheme.find(:first, :conditions=>["is_public=?",true], :order=>"position asc")
   end
   
   def self.asset_root

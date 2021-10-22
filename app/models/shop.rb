@@ -21,10 +21,10 @@ class Shop < ApplicationRecord
 
   belongs_to    :company
   
-  belongs_to    :wsite_color_deploy,    :class_name=>'ColorScheme',   :foreign_key => 'wsite_color_deploy_id'
-  belongs_to    :wsite_color_edit,      :class_name=>'ColorScheme',   :foreign_key => 'wsite_color_edit_id'
-  belongs_to    :wsite_layout_deploy,   :class_name=>'LayoutScheme',  :foreign_key => 'wsite_layout_deploy_id'
-  belongs_to    :wsite_layout_edit,     :class_name=>'LayoutScheme',  :foreign_key => 'wsite_layout_edit_id'
+  belongs_to    :wsite_color_deploy,    :class_name=>'ColorScheme',   :foreign_key => 'wsite_color_deploy_id', optional: true
+  belongs_to    :wsite_color_edit,      :class_name=>'ColorScheme',   :foreign_key => 'wsite_color_edit_id', optional: true
+  belongs_to    :wsite_layout_deploy,   :class_name=>'LayoutScheme',  :foreign_key => 'wsite_layout_deploy_id', optional: true
+  belongs_to    :wsite_layout_edit,     :class_name=>'LayoutScheme',  :foreign_key => 'wsite_layout_edit_id', optional: true
   #hikaru
   has_many      :staffs,              :dependent=>:destroy #,:order => "position asc"  
   has_many      :users,               :dependent=>:destroy  #, :order => "role desc, login asc"  
@@ -100,8 +100,9 @@ class Shop < ApplicationRecord
   ###
   ##  Content Management
   #
+  #hikaru
   def web_page_root
-    self.web_pages.find(:first, :conditions=>["parent_id IS NULL AND page_type=?", WebPage::TYPE_ROOT])
+    self.web_pages.where("parent_id IS NULL AND page_type=?", WebPage::TYPE_ROOT).first
   end
 
   def category_type_root_for(content_type)
@@ -166,17 +167,20 @@ class Shop < ApplicationRecord
   #
   def default_navigation_item
     root = self.content_categories.find_by_category_type(ContentCategory::TYPE_SHOP_ROOT)
-    root.children.find(:first, :conditions=>["is_public=?", true], :order=>"position asc")
+    #root.children.find(:first, :conditions=>["is_public=?", true], :order=>"position asc")
+    root.children.where(is_public: true).order(position: :asc).first
   end
 
   def public_navigation_items
 #    root = self.content_categories.find_by_category_type(ContentCategory::TYPE_SHOP_ROOT)
     root = WebPage.get_root_node(self)
-    root.children.find(:all, :conditions=>["is_public=?", true], :order=>"position asc")
+    #root.children.find(:all, :conditions=>["is_public=?", true], :order=>"position asc")
+    root.children.where(is_public: true).order(position: :asc)
   end
 
   def public_siblings
-    self.company.shops.find(:all, :conditions=>["id!=? AND wsite_run_mode=?", self.id, WSITE_PUBLISHED])
+    #self.company.shops.find(:all, :conditions=>["id!=? AND wsite_run_mode=?", self.id, WSITE_PUBLISHED])
+    self.company.shops.where("id!=? AND wsite_run_mode=?", self.id, WSITE_PUBLISHED)
   end
 
   def public_staffs
