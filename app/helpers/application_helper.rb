@@ -29,7 +29,7 @@ module ApplicationHelper
 
   def key_photo(model)
     return nil if model.blank?
-    (model.photos.blank?)? nil: model.photos.find(:first)   
+    (model.photos.blank?)? nil: model.photos.first   
   end
 
   def photo_array(photos)

@@ -18,12 +18,12 @@ class BsAttendanceController < ApplicationController
   ##  Attendance
   #
   def index
-    @shop = @current_user.shop
+    @shop = current_user.shop
     @target_date = (params[:year].blank?)?  Time.mktime(Time.now.to_date.year, 1,1,0,0,0).to_date: Time.mktime(params[:year], 1,1,0,0,0).to_date
   end
 
   def attendances_staff
-    @shop = @current_user.shop
+    @shop = current_user.shop
     @staff  = Staff.find(params[:id])
     @target_date = (params[:year].blank?||params[:month].blank?)? Time.now.to_date: Time.mktime(params[:year], params[:month],1,0,0,0).to_date
     

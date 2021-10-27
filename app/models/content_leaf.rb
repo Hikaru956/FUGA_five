@@ -43,13 +43,22 @@ class ContentLeaf < ApplicationRecord
   def self.public_leafs
     today = Time.now.to_date
     leaves = ContentLeaf.where(is_public: true)
-    leaves = leaves.where('   (content_leafs.publish_from IS NULL AND content_leafs.publish_until IS NULL)
-                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until IS NULL)
-                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until >= ?)', \
-                          today, today, today)
+    leaves = filter_latest(leaves)
+    #leaves = leaves.where('   (content_leafs.publish_from IS NULL AND content_leafs.publish_until IS NULL)
+    #                      OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until IS NULL)
+    #                      OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until >= ?)', \
+    #                      today, today, today)
     leaves
   end
 
+  def self.filter_latest(items, today = Time.now.to_date)
+    items = items.where("content_leafs.is_public", true)
+    items = items.where('     (content_leafs.publish_from IS NULL AND content_leafs.publish_until IS NULL) 
+                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until IS NULL) 
+                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until >= ?)', \
+                          today, today, today)
+    items
+  end
 
 
   def self.public_leafs_condition

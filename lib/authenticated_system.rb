@@ -1,7 +1,7 @@
 module AuthenticatedSystem
   protected
     # Returns true or false if the user is logged in.
-    # Preloads @current_user with the user model if they're logged in.
+    # Preloads current_user with the user model if they're logged in.
     def logged_in?
       !!current_user
     end
@@ -9,13 +9,13 @@ module AuthenticatedSystem
     # Accesses the current user from the session.
     # Future calls avoid the database because nil is not equal to false.
     def current_user
-      @current_user ||= (login_from_session || login_from_basic_auth || login_from_cookie) unless @current_user == false
+      current_user ||= (login_from_session || login_from_basic_auth || login_from_cookie) unless current_user == false
     end
 
     # Store the given user id in the session.
     def current_user=(new_user)
       session[:user_id] = new_user ? new_user.id : nil
-      @current_user = new_user || false
+      current_user = new_user || false
     end
 
     # Check if the user is authorized
@@ -135,8 +135,8 @@ module AuthenticatedSystem
     # However, **all session state variables should be unset here**.
     def logout_keeping_session!
       # Kill server-side auth cookie
-      @current_user.forget_me if @current_user.is_a? User
-#      @current_user = false     # not logged in, and don't do it for me
+      current_user.forget_me if current_user.is_a? User
+#      current_user = false     # not logged in, and don't do it for me
       kill_remember_cookie!     # Kill client-side auth cookie
       session[:user_id] = nil   # keeps the session but kill our variable
       # explicitly kill any other session variables you set
@@ -160,18 +160,18 @@ module AuthenticatedSystem
     # and they should be changed at each login
 
     def valid_remember_cookie?
-      return nil unless @current_user
-      (@current_user.remember_token?) && 
-        (cookies[:auth_token] == @current_user.remember_token)
+      return nil unless current_user
+      (current_user.remember_token?) && 
+        (cookies[:auth_token] == current_user.remember_token)
     end
     
     # Refresh the cookie auth token if it exists, create it otherwise
     def handle_remember_cookie!(new_cookie_flag)
-      return unless @current_user
+      return unless current_user
       case
-      when valid_remember_cookie? then @current_user.refresh_token # keeping same expiry date
-      when new_cookie_flag        then @current_user.remember_me 
-      else                             @current_user.forget_me
+      when valid_remember_cookie? then current_user.refresh_token # keeping same expiry date
+      when new_cookie_flag        then current_user.remember_me 
+      else                             current_user.forget_me
       end
       send_remember_cookie!
     end
@@ -182,8 +182,8 @@ module AuthenticatedSystem
     
     def send_remember_cookie!
       cookies[:auth_token] = {
-        :value   => @current_user.remember_token,
-        :expires => @current_user.remember_token_expires_at }
+        :value   => current_user.remember_token,
+        :expires => current_user.remember_token_expires_at }
     end
 
 end

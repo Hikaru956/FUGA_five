@@ -63,7 +63,7 @@
   </div>
   <% 
 	@item 				= ContentLeaf.new
-	@item.shop 			= @current_user.shop
+	@item.shop 			= current_user.shop
 	@item.publish_from	= Time.now.to_date
   %>
   <div class="modal-body">
@@ -84,4 +84,3 @@
 	<%end%>  	
   </div>
 </div>
-

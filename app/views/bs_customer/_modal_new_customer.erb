@@ -6,8 +6,8 @@
   </div>
   <% 
 	@item = Customer.new
-	@item.shop 		= @current_user.shop
-	@item.company	= @current_user.company
+	@item.shop 		= current_user.shop
+	@item.company	= current_user.company
   %>
   <div class="modal-body">
 	<%= form_tag({:action => 'create_customer'}, :class=>"form-horizontal")  do %>
@@ -48,4 +48,3 @@
 	<%end%>  	
   </div>
 </div>
-

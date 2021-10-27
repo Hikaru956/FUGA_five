@@ -184,7 +184,8 @@ class Shop < ApplicationRecord
   end
 
   def public_staffs
-    self.staffs.find(:all, :conditions=>["staff_status!=?", Staff::STAFF_BLOCKED])
+    #self.staffs.find(:all, :conditions=>["staff_status!=?", Staff::STAFF_BLOCKED])
+    self.staffs.where("staff_status!=?", Staff::STAFF_BLOCKED)
   end
 
   def favicon

@@ -4,7 +4,7 @@
 	</header>
 
 	<p class="lead">
-		<% if @current_user.has_permission?(User::ROLE_MANAGER) %>
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 			<span class="pull-right">
 				<% roster_url = url_for(:controller=>"bs_roster", :action=>"index")%>
 				<a href="<%= roster_url %>" class="btn"><i class="icon-tasks"></i>&nbsp;シフト設定</a>

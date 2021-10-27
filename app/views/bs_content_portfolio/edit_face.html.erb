@@ -32,7 +32,9 @@
 </h4>
 
 <div class="row-fluid">
-	<% array = @parent_category.photos.find(:all, :order=>"position asc").in_groups_of(3, false)%>
+	<% 
+		array = @parent_category.photos.all.order(position: :asc).in_groups_of(3, false)
+	%>
 	<% for i in 0..(array.size-1) %>
 		<% @lines = array[i] %>
 	    <ul class="thumbnails">
@@ -88,4 +90,3 @@ $(function() {
 });
 </script>
 <div id="html5_uploader">You browser doesn't support native upload. Try Firefox, Chrome or Safari.</div>
-

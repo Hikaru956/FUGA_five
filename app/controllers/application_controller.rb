@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_owner_privilege
-    return redirect_to :controller=>"bs",     :action=>"index"  unless @current_user.has_permission?(User::ROLE_OWNER)
+    return redirect_to :controller=>"bs",     :action=>"index"  unless current_user.has_permission?(User::ROLE_OWNER)
   end
 
   def rss_feed_items(content_category, limit=nil)

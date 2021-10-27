@@ -112,17 +112,24 @@ class ContentCategory < ApplicationRecord
   def total_leafs
     sons = self.sons
     sons << self
-    c = Condition.new
-    c.and "content_leafs.content_category_id", 'IN', sons
-    ContentLeaf.find(:all, :conditions=>c.where)
+
+    ContentLeaf.where("content_leafs.content_category_id IN (?)", sons)
+    #hikaru
+    #c = Condition.new
+    #c.and "content_leafs.content_category_id", 'IN', sons
+    #ContentLeaf.find(:all, :conditions=>c.where)
   end
 
   def total_photos
-      c = Condition.new
+      #c = Condition.new
       sons = self.sons
       sons << self
-      c.and "content_leafs.content_category_id", sons unless sons.blank?
-      Photo.find(:all, :conditions=>c.where, :joins=>"inner join content_leafs on (content_leafs.id=photos.ref_id AND photos.ref_type='ContentLeaf')")
+      leafs = ContentLeaf.where('content_leafs.content_category_id IN (?)', sons)
+      photos = Photo.where("photos.ref_type='ContentLeaf' AND photos.ref_id IN (?)", leafs.to_a)
+      return photos
+      #hikaru
+      #c.and "content_leafs.content_category_id", sons unless sons.blank?
+      #Photo.find(:all, :conditions=>c.where, :joins=>"inner join content_leafs on (content_leafs.id=photos.ref_id AND photos.ref_type='ContentLeaf')")
   end
 
   def my_bag_root_category
@@ -157,7 +164,8 @@ class ContentCategory < ApplicationRecord
   ##  Renderer Utility
   #
   def public_bags
-    self.children.find(:all, :conditions=>["category_type=? AND is_public=?", TYPE_BAG_ROOT, true])
+    #self.children.find(:all, :conditions=>["category_type=? AND is_public=?", TYPE_BAG_ROOT, true])
+    self.children.where("category_type=? AND is_public=?", TYPE_BAG_ROOT, true)
   end
   
   def public_categories
@@ -166,22 +174,39 @@ class ContentCategory < ApplicationRecord
   
   def public_leafs(recurse=false)
     if recurse
+      items = ContentLeaf.all
+      items = ContentLeaf.filter_latest(items).order(publish_from: :desc)
       sons = self.sons
       sons << self
-      c = ContentLeaf.public_leafs_condition
-      c.and "content_leafs.content_category_id", 'IN', sons
-      return ContentLeaf.find(:all, :conditions=>c.where, :order=>'publish_from desc')
+      items = items.where("content_leafs.content_category_id IN (?)", sons)
+      return items
+      
+      #c = ContentLeaf.public_leafs_condition
+      #c.and "content_leafs.content_category_id", 'IN', sons
+      #return ContentLeaf.find(:all, :conditions=>c.where, :order=>'publish_from desc')
     else
-      return self.content_leafs.find(:all, :conditions=>ContentLeaf.public_leafs_condition.where, :order=>'publish_from desc')
+      items = ContentLeaf.all
+      items = ContentLeaf.filter_latest(items).order(publish_from: :desc)
+      return items
+      #return self.content_leafs.find(:all, :conditions=>ContentLeaf.public_leafs_condition.where, :order=>'publish_from desc')
     end
   end
   
+  #hikaru
+  #def latest_news_article
+  #  sons = self.sons
+  #  sons << self
+  #  c = ContentLeaf.public_leafs_condition
+  #  c.and "content_leafs.content_category_id", 'IN', sons
+  #  return ContentLeaf.find(:first, :conditions=>c.where, :order=>'position desc')
+  #end
+
   def latest_news_article
     sons = self.sons
     sons << self
-    c = ContentLeaf.public_leafs_condition
-    c.and "content_leafs.content_category_id", 'IN', sons
-    return ContentLeaf.find(:first, :conditions=>c.where, :order=>'position desc')
+
+    items = ContentLeaf.public_leafs.where("content_leafs.content_category_id IN (?)", sons)
+    items = items.order(position: :desc).first
   end
   
 end

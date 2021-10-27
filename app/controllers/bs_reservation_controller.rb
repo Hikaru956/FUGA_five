@@ -15,32 +15,32 @@ class BsReservationController < ApplicationController
   layout  "fuga"
 
   def index
-    redirect_to :action=>"reservation", :shop_id=>@current_user.shop, :target_date=>params[:target_date]
+    redirect_to :action=>"reservation", :shop_id=>current_user.shop, :target_date=>params[:target_date]
   end
   
   def reservation
-    @shop = @current_user.shop
+    @shop = current_user.shop
     @target_date = (params[:target_date].blank?)? Time.now.to_date: parse_date(params[:target_date])
   end
 
   def reservation_calendar
-    @shop = @current_user.shop
+    @shop = current_user.shop
     @target_date = (params[:target_date].blank?)? Time.now.to_date: parse_date(params[:target_date])
   end
 
   def birthday
-    @shop = @current_user.shop
+    @shop = current_user.shop
     @target_date = (params[:target_date].blank?)? Time.now.to_date: parse_date(params[:target_date])
   end
   
   def birthday_calendar
-    @shop = @current_user.shop
+    @shop = current_user.shop
     @target_date = (params[:target_date].blank?)? Time.now.to_date: parse_date(params[:target_date])
   end
 
   def new_reservation
     @item       = Reservation.new
-    @item.shop  = @shop = @current_user.shop
+    @item.shop  = @shop = current_user.shop
     @item.staff =  (params[:staff_id].blank?)? nil: @shop.staffs.find_by_id(params[:staff_id])
     
     begin
@@ -66,20 +66,20 @@ class BsReservationController < ApplicationController
   end
 
   def show_reservation
-    @shop = @current_user.shop
+    @shop = current_user.shop
     @item = @shop.reservations.find_by_id(params[:id])
     @target_date = @item.reserved_on.to_date 
   end
 
   def edit_reservation
-    @shop = @current_user.shop
+    @shop = current_user.shop
     @item = @shop.reservations.find_by_id(params[:id])
     @target_date = @item.reserved_on.to_date 
   end
 
   def update_reservation
     if request.post?
-      @shop = @current_user.shop
+      @shop = current_user.shop
       @item = @shop.reservations.find_by_id(params[:id])
       
       @target_date = @item.reserved_on.to_date 

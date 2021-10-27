@@ -79,15 +79,31 @@ class BsAuthoringController < ApplicationController
   ##  Layout Control
   #
   def list_layout_schemes
-    c = Condition.new
-    c.and "is_public", true unless @current_user.has_permission?(User::ROLE_SUPER)
+    @items = LayoutScheme.all
+    unless current_user.has_permission?(User::ROLE_SUPER)
+      @items = @items.where(is_public: true)
+    end
+    render :layout=>"layouts/fuga_assets"
+  end
+
+  def list_layout_schemes_old
+    #c = Condition.new
+    c.and "is_public", true unless current_user.has_permission?(User::ROLE_SUPER)
     @items = LayoutScheme.find(:all, :conditions=>c.where)
     render :layout=>"layouts/fuga_assets"
   end
 
   def list_color_schemes
-    c = Condition.new
-    c.and "is_public", true unless @current_user.has_permission?(User::ROLE_SUPER)
+    @items = ColorScheme.all
+    unless current_user.has_permission?(User::ROLE_SUPER)
+      @items = @items.where(is_public: true)
+    end
+    render :layout=>"layouts/fuga_assets"
+  end
+
+  def list_color_schemes_old
+    #c = Condition.new
+    c.and "is_public", true unless current_user.has_permission?(User::ROLE_SUPER)
     @items = ColorScheme.find(:all, :conditions=>c.where)
     render :layout=>"layouts/fuga_assets"
   end

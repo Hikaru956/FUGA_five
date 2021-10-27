@@ -18,7 +18,7 @@ class BsContentStreamController < BsAbsContentBagController
 
 protected
   def session_operation
-    @shop         = @current_user.shop
+    @shop         = current_user.shop
     @content_type = ContentBag::TYPE_STREAM
 
     @bag_title = @shop.content_categories.find_by_category_type(@content_type).title

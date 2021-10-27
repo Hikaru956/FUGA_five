@@ -67,9 +67,13 @@ class BsAbsContentBagController < ApplicationController
     
     sons = @parent_category.sons
     sons << @parent_category
-    c = Condition.new
-    c.and "content_leafs.content_category_id", 'IN', sons
-    @leafs = @shop.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'publish_from desc, created_at desc')
+    #hikaru
+    #c = Condition.new
+    #c.and "content_leafs.content_category_id", 'IN', sons
+    #@leafs = @shop.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'publish_from desc, created_at desc')
+
+    @leafs = @shop.content_leafs.where("content_leafs.content_category_id IN (?)", sons).order(publish_from: :desc).order(created_at: :desc)
+    @leafs = @leafs.paginate(:page => params[:page], :per_page=>PER_PAGE)
   end
   
   def content_category_edit_description

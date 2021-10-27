@@ -66,9 +66,9 @@
 <%
 	sons = @seed.sons
 	sons << @seed
-	c = ContentLeaf.public_leafs_condition
-	c.and "content_leafs.content_category_id", 'IN', sons
-	@leafs = @seed.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'position asc') 
+	items = ContentLeaf.public_leafs
+	items = items.where("content_leafs.content_category_id IN (?)", sons).order(position: :desc)
+	@leafs = @seed.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE) 
 %>
 
 <% unless @leafs.blank? %>

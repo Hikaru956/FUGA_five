@@ -46,7 +46,7 @@
 <div id="modal_new" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<% 
 		@item 				= ContentBag.new
-		@item.shop 			= @current_user.shop
+		@item.shop 			= current_user.shop
 	%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -61,4 +61,3 @@
 	</div>
 </div>
 <%end%>  	
-

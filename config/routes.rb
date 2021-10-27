@@ -85,10 +85,10 @@ Fuga326::Application.routes.draw do
   patch 'dashboard/set_disqus_mode', to: 'dashboard#set_disqus_mode'
   patch 'dashboard/set_disqus_code', to: 'dashboard#set_disqus_code'
 
-  get 'bs_content_gallery/content_root/:id', to: 'bs_abs_content_bag#content_root'
-  get 'bs_content_portfolio/content_root', to: 'bs_abs_content_bag#content_root'
-  get 'bs_content_news/content_root', to: 'bs_abs_content_bag#content_root'
-  get 'bs_content_stream/content_root', to: 'bs_abs_content_bag#content_root'
+  get 'bs_content_gallery/content_root', to: 'bs_content_gallery#content_root'
+  get 'bs_content_portfolio/content_root', to: 'bs_content_portfolio#content_root'
+  get 'bs_content_news/content_root', to: 'bs_content_news#content_root'
+  get 'bs_content_stream/content_root', to: 'bs_content_stream#content_root'
 
   get 'news_list'       => 'bs_renderer#news_index',    :as => :news_list
   get 'news'            => 'bs_renderer#news_list',     :as => :news
