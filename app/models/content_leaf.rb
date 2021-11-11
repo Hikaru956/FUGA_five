@@ -60,26 +60,26 @@ class ContentLeaf < ApplicationRecord
     items
   end
 
-
-  def self.public_leafs_condition
-    today = Time.now.to_date
-    c = Condition.new
-    c.and "content_leafs.is_public", true
-    c.and do | cx |
-      cx.or do |cxa|
-        cxa.and "content_leafs.publish_from  IS NULL", 'AND', "1=1"
-        cxa.and "content_leafs.publish_until IS NULL", 'AND', "1=1"
-      end
-      cx.or do |cxa|
-        cxa.and "content_leafs.publish_from", '<=', today
-        cxa.and "content_leafs.publish_until IS NULL", 'AND', "1=1"
-      end
-      cx.or do |cxa|
-        cxa.and "content_leafs.publish_from",   '<=', today
-        cxa.and "content_leafs.publish_until",  '>=', today
-      end
-    end
-    c
-  end
+  #hikaru
+  #def self.public_leafs_condition
+  #  today = Time.now.to_date
+  #  c = Condition.new
+  #  c.and "content_leafs.is_public", true
+  #  c.and do | cx |
+  #    cx.or do |cxa|
+  #      cxa.and "content_leafs.publish_from  IS NULL", 'AND', "1=1"
+  #      cxa.and "content_leafs.publish_until IS NULL", 'AND', "1=1"
+  #    end
+  #    cx.or do |cxa|
+  #      cxa.and "content_leafs.publish_from", '<=', today
+  #      cxa.and "content_leafs.publish_until IS NULL", 'AND', "1=1"
+  #    end
+  #    cx.or do |cxa|
+  #      cxa.and "content_leafs.publish_from",   '<=', today
+  #      cxa.and "content_leafs.publish_until",  '>=', today
+  #    end
+  #  end
+  #  c
+  #end
 
 end

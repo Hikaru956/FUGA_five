@@ -5,4 +5,4 @@
 	options.concat(option_rosters)
 	options << ['OFF', '-1']
 %>
-<%= select_tag("rosters[#{@staff.id}][#{@probe_date.strftime('%Y-%m-%d')}]",options_for_select(options), :class=>"span1", :style=>"width:100%;")%>
+<%= select_tag("rosters[#{staff.id}][#{@probe_date.strftime('%Y-%m-%d')}]",options_for_select(options), :class=>"span1", :style=>"width:100%;")%>

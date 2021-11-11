@@ -1,6 +1,5 @@
 <%
-	require 'date'
-	require 'date/holiday'
+	require 'holidays'
 %>
 <%
 	###
@@ -11,7 +10,7 @@
 	from_date = @target_date
 	from_date -= @target_date.wday	if @target_date.day==1
 %>
-<% @rosters = RosterLabel.find(:all, :order=>'position asc') %>
+<% @rosters = RosterLabel.order(position: :asc) %>
 
 <%= stylesheet_link_tag "timeline" %>
 
@@ -23,7 +22,7 @@
 				next_frame = from_date + 7
 			%>
 			<span class="pull-right">
-				<%= link_to("<i class='icon-double-angle-left'></i>", 	{:action=>'index', :target_date=>prev_frame}) %>
+				<%= link_to("<i class='icon-double-angle-left'></i>".html_safe, 	{:action=>'index', :target_date=>prev_frame}) %>
 			</span>
 		</th>
 		<% 7.times do | i | %>
@@ -31,25 +30,23 @@
 			<th class="span2">
 				<% if i==6 %>
 					<span class="pull-right">
-						<%= link_to("<i class='icon-double-angle-right'></i>", 	{:action=>'index', :target_date=>next_frame}) %>
+						<%= link_to("<i class='icon-double-angle-right'></i>".html_safe, 	{:action=>'index', :target_date=>next_frame}) %>
 					</span>
 				<% end %>
 				<%= @probe_date.strftime("%m-%d")%>
 				(<span class="<%=(@probe_date.national_holiday? || @probe_date.wday==0)? 'holiday': 'flat'%>"><%=wday(@probe_date)%></span>)
-				<%= "<i class='icon-flag'></i>" if @probe_date.national_holiday? %>
+				<%= "<i class='icon-flag'></i>".html_safe if @probe_date.national_holiday? %>
 			</th>
 		<% end %>
 	</tr>
-	<% staffs.each do | @staff | %>
+	<% staffs.each do | staff | %>
 		<tr>
-			<td><%= truncate(@staff.name, 20) %></td>
+			<td><%= truncate(staff.name, :length=>20) %></td>
 			<% 7.times do | i | %>
 				<% @probe_date=from_date+i %>
 				<td class="span2">
 					<% 
-						c = Condition.new
-						c.and "attendances.attend_on", @probe_date
-						@attendances = @staff.attendances.find(:all, :conditions=>c.where, :order=>"start_hour asc")
+						@attendances = staff.attendances.where("attendances.attend_on =?", @probe_date).order(start_hour: :asc)
 					%>
 					<small><strong>
 						[
@@ -63,10 +60,9 @@
 						]
 						<%= '…' if @attendances.size>1 %>
 					</strong></small>
-					<%= render :partial=>"roster_selection"%>
+					<%= render :partial=>"roster_selection", locals: {staff: staff}%>
 				</td>
 			<% end %>
 		</tr>
 	<% end %>
 </table>
-

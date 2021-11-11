@@ -16,14 +16,12 @@ class BsAbsContentBagController < ApplicationController
   ##  Actions For General
   #
   def create_bag
-    if request.post?
-      bag = ContentBag.new(hikaru_params)
-      bag.shop = @shop
-      bag.content_type = @content_type
-      bag.web_page = @shop.web_pages.find_by_content_type(@content_type)
-      ContentCategory.register_content_bag(bag)
-      redirect_to :action=>"content_root"
-    end
+    bag = ContentBag.new(content_bag_params)
+    bag.shop = @shop
+    bag.content_type = @content_type
+    bag.web_page = @shop.web_pages.find_by_content_type(@content_type)
+    ContentCategory.register_content_bag(bag)
+    redirect_to :action=>"content_root"
   end
 
   def content_root
@@ -45,20 +43,16 @@ class BsAbsContentBagController < ApplicationController
   end
 
   def update_bag
-    if request.post?
-      bag = ContentBag.find(params[:id])
-      bag.update_attributes(params[:item])
-      redirect_to :action=>"content_root"
-    end
+    bag = ContentBag.find(params[:id])
+    bag.update_attributes(params[:item])
+    redirect_to :action=>"content_root"
   end
   
   def delete_bag
-    if request.post?
-      bag = ContentBag.find(params[:id])
-      # Clean with some relations ships up.
-      bag.content_category.destroy
-      redirect_to :action=>"content_root"
-    end
+    bag = ContentBag.find(params[:id])
+    # Clean with some relations ships up.
+    bag.content_category.destroy
+    redirect_to :action=>"content_root"
   end
   
   def content_category
@@ -397,6 +391,9 @@ class BsAbsContentBagController < ApplicationController
     response.headers['X-XSS-Protection'] = '0'    
   end
 
+  def content_bag_params
+    params.require(:item).permit(:id, :shop_id, :parent_id, :position, :hash_key, :content_type, :contemy_categoru_id, :web_page_id, :name, :description, :is_pablic)
+  end
   def session_operation
     @shop = Shop.find(params[:id])
   end

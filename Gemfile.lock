@@ -87,6 +87,7 @@ GEM
       rails (>= 3.0)
     globalid (0.5.2)
       activesupport (>= 5.0)
+    holiday_japan (1.4.4)
     holidays (8.4.1)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
@@ -241,6 +242,7 @@ DEPENDENCIES
   devise-i18n-views
   file_column
   geokit-rails
+  holiday_japan
   holidays
   jbuilder (~> 2.0)
   jquery-rails

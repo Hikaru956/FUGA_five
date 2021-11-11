@@ -159,7 +159,22 @@ module BsReservationHelper
     index_from  = (reservation.reserved_on.hour)*4+(reservation.reserved_on.min/15)
     index_until = (reservation.reserved_until.hour)*4+(reservation.reserved_until.min/15)
     for ah in index_from..(index_until-1)
+
+      logger.debug reservation.reserved_on.hour
+
+
+      logger.debug roster_td_classes[ah]
+      logger.debug roster_td_classes[ah]==work_class
+      logger.debug ah
+      
+
+
+
+
+
+
       roster_td_classes[ah] = ((roster_td_classes[ah]==work_class)? reservation_class: reservation_warning_class) 
+      logger.debug roster_td_classes[ah]
     end
     #puts "$"*12+" : ["+ index_from.to_s + " .. "+index_until.to_s+"] " + (Time.now.instance_eval { self.to_i * 1000 + (usec/1000) }-counter).to_s
     

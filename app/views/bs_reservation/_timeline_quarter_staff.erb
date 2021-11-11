@@ -1,8 +1,13 @@
 <%
-	c = Condition.new
-	c.and "attendances.shop_id", @shop
-	c.and "attendances.attend_on", @target_date
-	@attendances = @staff.attendances.find(:all, :conditions=>c.where)
+	all = staff.attendances
+	all = all.where(shop_id: @shop)
+	all = all.where(attend_on: @target_date)
+	@attendances = all
+	
+	#c = Condition.new
+	#c.and "attendances.shop_id", @shop
+	#c.and "attendances.attend_on", @target_date
+	#@attendances = staff.attendances.find(:all, :conditions=>c.where)
 	roster_timeline_classes = (@shop.option_attendance_management)? 
 						timeline_classes(@shop, @target_date, @reservations, @attendances, "timeline_work","timeline_absence",	"timeline_reservation","timeline_reservation"):		
 						timeline_classes(@shop, @target_date, @reservations, @attendances, "timeline_work","timeline_work",		"timeline_reservation","timeline_reservation")		
@@ -10,15 +15,15 @@
 <% raw_span_count = (@reservations.blank?)? 3: @reservations.size+2 %>
 <tr>
 	<th rowspan=<%= raw_span_count %> class="head_staff_name">
-		<%= model_name(@staff) %><br/>
+		<%= model_name(staff) %><br/>
 		<% if @shop.option_attendance_management %>
 		<%= link_to("<i class='icon-tasks'></i>",
-			{:controller=>'bs_attendance', :action=>"attendances_staff", :id=>@staff, :shop_id=>@shop, :year=>@target_date.year,  :month=>@target_date.month}, 
+			{:controller=>'bs_attendance', :action=>"attendances_staff", :id=>staff, :shop_id=>@shop, :year=>@target_date.year,  :month=>@target_date.month}, 
 			:class=>"btn btn-mini", :title=>"勤務表") %>
 		<% end %>
 		<span class="pull-right">
-			<%= link_to("<i class='icon-plus'></i>&nbsp;予約",
-				{:action=>"new_reservation", :target_date=>@target_date, :shop_id=>@shop, :staff_id=>@staff}, 
+			<%= link_to("<i class='icon-plus'></i>&nbsp;予約".html_safe,
+				{:action=>"new_reservation", :target_date=>@target_date, :shop_id=>@shop, :staff_id=>staff}, 
 				:class=>"btn btn-success btn-mini") %>
 		</span>
 	</th>
@@ -49,7 +54,7 @@
 		<%
 			reservation_classes = (@shop.option_attendance_management)?
 				 reservation_line_classes(@shop, @target_date, reservation, @attendances, "timeline_work","timeline_absence",	"reservation","reservation_violation"):		
-				 reservation_line_classes(@shop, @target_date, reservation, @attendances, "timeline_work","timeline_work",		"reservation","reservation_violation")		
+				 reservation_line_classes(@shop, @target_date, reservation, @attendances, "timeline_work","timeline_work",		"timeline_reservation","reservation_violation")		
 		%>
 		<tr>
 			<% spanner = reservation_spanner_quarter(@shop, reservation, @finder_range_from) %>
@@ -63,6 +68,10 @@
 				<% my_class = reservation_classes[@shop.business_hour_from*4+spanner[0]] %>
 				<% my_class = 'reservation_alt' if (@shop!=reservation.shop) %>
 				<td colspan=<%= spanner[1] %> class="<%=my_class%>">
+					<%= reservation_classes.to_s%>
+					<%= reservation_classes.size%>
+					<%= @shop.business_hour_from*4+spanner[0] %>
+					<%= my_class %>
 					<% unless reservation.customer.blank? %>
 						<% if reservation.customer.is_happy_birthday?(@target_date) %>
 							<span class="pull-right text-success"><i class="icon-gift"></i></span>
@@ -80,7 +89,7 @@
 						reservation_label = "予約"	if reservation_label.blank?
 					%>
 					<% tooltips_url = "ajax_showTooltip('/tooltip/reservation/#{reservation.id}', this);return false" %>
-					<%= link_to(truncate(reservation_label,(2*spanner[1])),
+					<%= link_to(truncate(reservation_label, length: (2*spanner[1])),
 						{:action=>"show_reservation", :id=>reservation},
 						:onmouseover=>"#{tooltips_url}", :onmouseout=>"ajax_hideTooltip()") %>
 

@@ -1,0 +1,25 @@
+<div class="modal fade" id="AttendancesStaffDayOn_<%= target_date%>" tabindex="-1" role="dialog" aria-labelledby="AttendancesStaffDayOn_<%= target_date%>" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <%= form_for staff, url: bs_attendance_day_on_path(id: staff.id, target_date: target_date), method: :post do |f| %>
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          <h5 class="modal-title" id="exampleModalLabel">スタッフ勤怠管理</h5>
+        </div>
+        <div class="modal-body">
+          <div class='alert alert-info'>
+            <%= target_date %>
+            終日出勤に変更します<br/>
+            よろしいですか?
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <button type="submit" class="btn btn-warning"><i class='icon-circle-blank'></i>&nbsp;更新</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

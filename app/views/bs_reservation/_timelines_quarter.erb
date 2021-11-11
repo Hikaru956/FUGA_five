@@ -16,17 +16,19 @@
 	</tr>
 	
 	<% 
-	    c = Condition.new
-	    c.and("staffs.staff_status", ">=", Staff::STAFF_HELPER)
-		staffs = @shop.staffs.find(:all, :conditions => c.where, :order=>["position asc, alt_id asc"])
+		staffs = @shop.staffs.where("staffs.staff_status >=?", Staff::STAFF_HELPER).order(position: :asc, alt_id: :asc)
+
+	    #c = Condition.new
+	    #c.and("staffs.staff_status", ">=", Staff::STAFF_HELPER)
+		#staffs = @shop.staffs.find(:all, :conditions => c.where, :order=>["position asc, alt_id asc"])
 
 		@finder_range_from  = Time.mktime(@target_date.year, @target_date.month, @target_date.day, @shop.business_hour_from,0,0) 
 		@finder_range_until = Time.mktime(@target_date.year, @target_date.month, @target_date.day, @shop.business_hour_until,59,59) 
 	%>
 
-	<% staffs.each do | @staff | %>
-		<% @reservations = Reservation.in_range(@finder_range_from, @finder_range_until, @shop, @staff) %> 
-		<%= render :partial=>"timeline_quarter_staff" %>
+	<% staffs.each do | staff | %>
+		<% @reservations = Reservation.in_range(@finder_range_from, @finder_range_until, @shop, staff) %> 
+		<%= render :partial=>"timeline_quarter_staff", locals: {staff: staff} %>
 	<% end %>
 	<%= render :partial=>"timeline_quarter_open" %>
 </table>

@@ -53,16 +53,15 @@ class BsReservationController < ApplicationController
   end
 
   def create_reservation
-    if request.post?
-      @item = Reservation.new(hikaru_params)
+    @item = Reservation.new(reservation_params)
 
-      @target_date        = (params[:target_date].blank?)? Time.now.to_date: parse_date(params[:target_date])
-      base_time           = Time.mktime(@target_date.year, @target_date.month, @target_date.day, 0, 0, 0)
-      @item.reserved_on   = base_time + (params[:start_hour].to_i*60*60) + (params[:start_min].to_i*60)
-            
-      @item.save
-      redirect_to :action=>"show_reservation", :id=>@item
-    end
+
+    @target_date        = (params[:item][:target_date].blank?)? Time.now.to_date: parse_date(params[:item][:target_date])
+    base_time           = Time.mktime(@target_date.year, @target_date.month, @target_date.day, 0, 0, 0)
+    @item.reserved_on   = base_time + (params[:item][:start_hour].to_i*60*60) + (params[:item][:start_min].to_i*60)
+          
+    @item.save!
+    redirect_to :action=>"show_reservation", :id=>@item
   end
 
   def show_reservation
@@ -92,13 +91,11 @@ class BsReservationController < ApplicationController
   end
 
   def delete_reservation
-    if request.post?
-      reservation = Reservation.find(params[:id])
-      reservation.destroy
+    reservation = Reservation.find(params[:id])
+    reservation.destroy
 
-      @target_date = reservation.reserved_on.to_date
-      redirect_to :action=>"reservation", :target_date=>@target_date
-    end
+    @target_date = reservation.reserved_on.to_date
+    redirect_to :action=>"reservation", :target_date=>@target_date
   end
 
   def new_reservation_customer
@@ -146,15 +143,21 @@ class BsReservationController < ApplicationController
     @search_string = params[:search_string]
     @reservation = Reservation.find(params[:id])
 
-    c = Condition.new
     unless @search_string.blank?
-      c.and do |cx|
-        cx.or("customers.name",           "LIKE", "%"+@search_string+"%")  
-        cx.or("customers.furigana",       "LIKE", "%"+@search_string+"%")  
-        cx.or("customers.telephone",    "LIKE", "%"+@search_string+"%")  
-      end
+      @items = Customer.where("customers.name LIKE (?) OR customers.furigana LIKE (?) OR customers.telephone LIKE (?)", "%"+@search_string+"%", "%"+@search_string+"%", "%"+@search_string+"%")
     end
-    @items  = Customer.paginate(:conditions=>c.where, :select=>"customers.*", :order=>"furigana asc, name asc", :page => params[:page], :per_page=>PER_PAGE)    
+
+    @items = @items.order(furigane: :asc, name: :asc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+
+    #c = Condition.new
+    #unless @search_string.blank?
+    #  c.and do |cx|
+    #    cx.or("customers.name",           "LIKE", "%"+@search_string+"%")  
+    #    cx.or("customers.furigana",       "LIKE", "%"+@search_string+"%")  
+    #    cx.or("customers.telephone",    "LIKE", "%"+@search_string+"%")  
+    #  end
+    #end
+    #@items  = Customer.paginate(:conditions=>c.where, :select=>"customers.*", :order=>"furigana asc, name asc", :page => params[:page], :per_page=>PER_PAGE)    
 
     render :update do | page |
       page.replace_html "sandbox", :partial=>'list_reservation_customer'      
@@ -178,4 +181,7 @@ protected
     @shop = current_user.shop
   end
 
+  def reservation_params
+    params.require(:item).permit(:id, :customer_id, :shop_id, :staff_id, :reserved_on, :reserved_until, :min_period, :memo_1, :memo_2)
+  end
 end

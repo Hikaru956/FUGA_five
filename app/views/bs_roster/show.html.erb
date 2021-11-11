@@ -58,34 +58,37 @@
 
 
 <!-- modalEdit -->
-<%= form_tag url_for(:action=>"update", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">シフト項目編集</h3>
-	</div>
-	<div class="modal-body">
-		<%= render :partial=>"form" %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-arrow-left"></i>&nbsp;&nbsp;キャンセル</button>
-	</div>
-<% end %>
-
+<div  class="modal hide fade form-horizontal", id="modalEdit">
+	<%= form_for @item, url: bs_roster_update_path(id: @item), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">シフト項目編集</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form"%>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-arrow-left"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
 <!-- modalDelete -->
-<%= form_tag url_for(:action=>"delete", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete"} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">シフト項目削除</h3>
-	</div>
-	<div class="modal-body">
-		<p>
-			「<%= @item.name %>」を削除します。<br/>
-			よろしいですか？
-		</p>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
-	</div>
-<% end %>
+<div  class="modal hide fade form-horizontal", id="modalDelete">
+	<%= form_for @item, url: bs_roster_delete_path(id: @item), method: :delete do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">シフト項目削除</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+				「<%= @item.name %>」を削除します。<br/>
+				よろしいですか？
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
+</div>

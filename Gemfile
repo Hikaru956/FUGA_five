@@ -119,7 +119,7 @@ gem "acts_as_taggable_on_steroids"
 gem 'mini_racer'
 gem 'holidays'
 #gem 'protected_attributes'
-
+gem 'holiday_japan'
 
 gem 'devise-i18n'
 gem 'devise-i18n-views'

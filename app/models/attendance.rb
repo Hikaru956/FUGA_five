@@ -32,35 +32,43 @@ class Attendance < ApplicationRecord
 
   def self.whats_going_on(probe_time, staff, home_shop, bias_min=0)
     bias_time = probe_time + (60*bias_min)
-    
-    crh = Reservation.timeline_condition(probe_time, bias_time, false)
-    crh.and "reservations.staff_id",    "=", staff
-    crh.and "reservations.shop_id",         "=", home_shop
-    home_reservations = Reservation.find( :all,
-                      :select=> 'DISTINCT reservations.*',   
-                      :conditions=>crh.where, :order=>"reserved_on asc")
+    all = Reservation.all
+    crh = Reservation.timeline_condition(all, probe_time, bias_time, false)
+    crh.where "reservations.staff_id",    "=", staff
+    crh.where "reservations.shop_id",         "=", home_shop
 
-    cra = Reservation.timeline_condition(probe_time, bias_time, false)
-    cra.and "reservations.staff_id",    "=", staff
-    cra.and "reservations.shop_id",     "!=", home_shop
-    away_reservations = Reservation.find( :all,
-                      :select=> 'DISTINCT reservations.*',   
-                      :conditions=>cra.where, :order=>"reserved_on asc")
+    home_reservations = crh
+
+    cra = Reservation.timeline_condition(all, probe_time, bias_time, false)
+    cra.where "reservations.staff_id",    "=", staff
+    cra.where "reservations.shop_id",     "!=", home_shop
+    away_reservations = cra
+
+    home_attendances = Attendance.where("   attendances.attend_on =?
+                                        AND attendances.staff_id =?
+                                        AND attendances.shop_id =?
+                                        AND attendances.start_hour <=?
+                                        AND attendances.until_hour >?", \
+                                        probe_time.to_date, staff, home_shop, probe_time.hour, probe_time.hour)
+    #cah = Condition.new
+    #cah.and "attendances.attend_on",  probe_time.to_date
+    #cah.and "attendances.staff_id",    staff
+    #cah.and "attendances.shop_id",    "=", home_shop
+    #cah.and "attendances.start_hour", '<=', probe_time.hour
+    #cah.and "attendances.until_hour", '>',  probe_time.hour
+    #home_attendances = Attendance.find(:all, :conditions=>cah.where)
     
-    cah = Condition.new
-    cah.and "attendances.attend_on",  probe_time.to_date
-    cah.and "attendances.staff_id",    staff
-    cah.and "attendances.shop_id",    "=", home_shop
-    cah.and "attendances.start_hour", '<=', probe_time.hour
-    cah.and "attendances.until_hour", '>',  probe_time.hour
-    home_attendances = Attendance.find(:all, :conditions=>cah.where)
-    
-    caa = Condition.new
-    caa.and "attendances.attend_on",  probe_time.to_date
-    caa.and "attendances.staff_id",    "!=", home_shop
-    caa.and "attendances.start_hour", '<=', probe_time.hour
-    caa.and "attendances.until_hour", '>',  probe_time.hour
-    away_attendances = Attendance.find(:all, :conditions=>caa.where)
+    away_attendances = Attendance.where("   attendances.attend_on =?
+                                        AND attendances.shop_id !=?
+                                        AND attendances.start_hour <=?
+                                        AND attendances.until_hour >?", \
+                                        probe_time.to_date, home_shop, probe_time.hour, probe_time.hour)
+    #caa = Condition.new
+    #caa.and "attendances.attend_on",  probe_time.to_date
+    #caa.and "attendances.staff_id",    "!=", home_shop
+    #caa.and "attendances.start_hour", '<=', probe_time.hour
+    #caa.and "attendances.until_hour", '>',  probe_time.hour
+    #away_attendances = Attendance.find(:all, :conditions=>caa.where)
     
     [home_reservations, away_reservations, home_attendances, away_attendances]
   end

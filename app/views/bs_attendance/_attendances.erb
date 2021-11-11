@@ -1,0 +1,54 @@
+<%
+	staffs = @shop.staffs.where("staffs.staff_status", ">=", Staff::STAFF_HELPER).order(position: :asc, alt_id: :asc)
+%>
+<% unless staffs.blank? %>
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th class="span2"><%= @shop.name.truncate(10) %></th>
+				<% for m in 1..12 %>
+					<th style="text-align:center;"><%=m%>&nbsp;月</th>
+				<% end %>
+			</tr>
+		<thead>
+		<tbody>
+			<% current_year 	= Time.now.to_date.year %>
+			<% current_month	= Time.now.to_date.month %>
+			<% staffs.each do | s | %>
+				<tr>
+					<td>
+						<%= model_name(s) %>
+					</td>
+					<% for m in 1..12 %>
+						<%
+							roster_staff_map = []
+							from_date 	= Time.mktime(@target_date.year, m, 1,0,0,0).to_date
+							until_date 	= (from_date >> 1)
+							roster_staff_map = Attendance.where("	 	attendances.shop_id =?
+																 AND 	attendances.staff_id =?
+																 AND	attendances.attend_on >=?
+																 AND	attendances.attend_on <?", \
+																 @shop.id, s.id, from_date, until_date)
+							roster_staff_map = roster_staff_map.group_by{ |a| a.staff_id }
+							#if false 
+							#	c = Condition.new
+							#	c.and	"attendances.shop_id",			@shop.id
+							#	c.and	"attendances.staff_id", 		s.id
+							#	c.and	"attendances.attend_on",">=", 	from_date
+							#	c.and	"attendances.attend_on","<", 	until_date
+							#	roster_staff_map = Attendance.find(:all, :conditions=>c.where).group_by{ |a| a.staff_id }
+							#end
+						%>
+						<td style="text-align:center;">
+							<% if roster_staff_map.blank? || roster_staff_map[s.id].blank? %>
+								<%= link_to "<i class='icon-check-empty'></i>".html_safe, :action=>"attendances_staff", :id=>s, :year=>@target_date.year, :month=>m%>
+							<% else %>
+								<%= link_to "<i class='icon-pencil'></i>".html_safe, 		:action=>"attendances_staff", :id=>s, :year=>@target_date.year, :month=>m%>
+							<% end %>
+						</td>
+					<% end %>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>

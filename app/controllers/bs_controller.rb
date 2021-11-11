@@ -21,9 +21,13 @@ class BsController < ApplicationController
   
   def list_news
     if @bag.blank?
-      c = Condition.new
-      c.and "content_leafs.content_category_id", 'IN', ContentCategory.type_root(@shop, ContentCategory::TYPE_NEWS).children
-      @items = @shop.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where)
+      #c = Condition.new
+      #c.and "content_leafs.content_category_id", 'IN', ContentCategory.type_root(@shop, ContentCategory::TYPE_NEWS).children
+      #@items = @shop.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where)
+
+
+      @items = @shop.content_leafs.where("content_leafs.content_category_id IN (?)", ContentCategory.type_root(@shop, ContentCategory::TYPE_NEWS).children)
+      @items = @items.paginate(:page => params[:page], :per_page=>PER_PAGE)
     else
       @items = @bag.content_leafs.paginate(:page => params[:page],  :per_page=>PER_PAGE)
     end

@@ -14,19 +14,40 @@
 
 <div class="well">
 	<span class="pull-right">
-		<%= link_to('<i class="icon-trash"></i>&nbsp;予約削除', 
-			{:action=>"delete_reservation", :id=>@item}, 
-			{:method=>"post", :confirm=>"この予約を削除します。よろしいですか？", :class=>"btn btn-small btn-danger"})%>
+		<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
+			<i class="icon-trash"></i>&nbsp;
+				削除確認
+		</a>
 	</span>
 
 	<fieldset class="form-horizontal">
 		<%= render :partial=>"reservation_view" %>
 		<div class="form-actions">
-			<%= link_to('<i class="icon-pencil"></i>&nbsp;編集', 
+			<%= link_to('<i class="icon-pencil"></i>&nbsp;編集'.html_safe, 
 				{:action=>"edit_reservation", :id=>@item}, 
 				{:class=>"btn btn-small btn-warning"})%>
 		  	<% back_url = url_for(:action=>"reservation", :target_date=>(@target_date))%>
 		    <a href="<%= back_url %>" class="btn btn-small"><i class="icon-chevron-left"></i>&nbsp;戻る</a>
 		</div>
 	</fieldset>
+</div>
+
+<!-- modaldelete -->
+<div  class="modal hide fade form-horizontal", id="modalDelete">
+	<%= form_for @item, url: bs_reservation_delete_reservation_path(id: @item), method: :delete do |f| %>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">予約削除</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+			この予約を削除します。<br/>
+			よろしいですか？
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
 </div>

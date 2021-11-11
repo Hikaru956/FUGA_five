@@ -86,9 +86,31 @@ Fuga326::Application.routes.draw do
   patch 'dashboard/set_disqus_code', to: 'dashboard#set_disqus_code'
 
   get 'bs_content_gallery/content_root', to: 'bs_content_gallery#content_root'
+  post 'bs_content_gallerybs_content_gallery/create_bag', to: 'bs_content_gallery#create_bag'
   get 'bs_content_portfolio/content_root', to: 'bs_content_portfolio#content_root'
+  post 'bs_content_portfolio/create_bag', to: 'bs_content_portfolio#create_bag'
   get 'bs_content_news/content_root', to: 'bs_content_news#content_root'
+  post 'bs_content_news/create_bag', to: 'bs_content_news#create_bag'
   get 'bs_content_stream/content_root', to: 'bs_content_stream#content_root'
+  post 'bs_content_stream/create_bag', to: 'bs_content_stream#create_bag'
+  delete 'bs_content_stream/delete_bag', to: 'bs_content_stream#delete_bag'
+
+  patch 'bs_attendance/update_business', to: 'bs_attendance#update_business'
+  post 'bs_attendance/init_roster', to: 'bs_attendance#init_roster'
+  post 'bs_attendance/day_on', to: 'bs_attendance#day_on'
+  post 'bs_attendance/day_off', to: 'bs_attendance#day_off'
+
+  get 'bs_roster/index', to: 'bs_roster#index'
+  patch 'bs_roster/update_rosters', to: 'bs_roster#update_rosters'
+  post 'bs_roster/create', to: 'bs_roster#create'
+  patch 'bs_roster/update', to: 'bs_roster#update'
+  delete 'bs_roster/delete', to: 'bs_roster#delete'
+
+  post 'bs_reservation/create_reservation', to: 'bs_reservation#create_reservation'
+  delete 'bs_reservation/delete_reservation', to: 'bs_reservation#delete_reservation'
+
+  post 'tooltip/reservation/:id', to:'tooltip#reservation'
+
 
   get 'news_list'       => 'bs_renderer#news_index',    :as => :news_list
   get 'news'            => 'bs_renderer#news_list',     :as => :news

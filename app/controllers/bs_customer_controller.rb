@@ -29,19 +29,23 @@ class BsCustomerController < ApplicationController
     @search_telephone = to_sb(@search_telephone)  unless @search_telephone.blank?
     @search_shop_id   = (params[:search_shop_id].blank?)?   nil: params[:search_shop_id]
     
-    c = Condition.new
-    c.and "1=1", "1=1"
+    #c = Condition.new
+    #c.and "1=1", "1=1"
     unless @search_alt.blank? && @search_name.blank? && @search_furigana.blank? && @search_telephone.blank? && @search_shop_id.blank?
-      c.and do |cx| 
-        cx.and("customers.alt_id",        "LIKE", @search_alt+"%")            unless @search_alt.blank?
-        cx.and("customers.name",          "LIKE", "%"+@search_name+"%")       unless @search_name.blank?
-        cx.and("customers.furigana",      "LIKE", "%"+@search_furigana+"%")   unless @search_furigana.blank?
-        cx.and("customers.telephone",     "LIKE", "%"+@search_telephone+"%")  unless @search_telephone.blank?
-        cx.and("customers.shop_id",        @search_shop_id)                   unless @search_shop_id.blank?
-      end
+      #c.and do |cx| 
+      #  cx.and("customers.alt_id",        "LIKE", @search_alt+"%")            unless @search_alt.blank?
+      #  cx.and("customers.name",          "LIKE", "%"+@search_name+"%")       unless @search_name.blank?
+      #  cx.and("customers.furigana",      "LIKE", "%"+@search_furigana+"%")   unless @search_furigana.blank?
+      #  cx.and("customers.telephone",     "LIKE", "%"+@search_telephone+"%")  unless @search_telephone.blank?
+      #  cx.and("customers.shop_id",        @search_shop_id)                   unless @search_shop_id.blank?
+      #end
+      @items = @shop.customers.where("    customers.alt_id LIKE ? AND customers.name LIKE ? AND customers.furigana LIKE ? AND customers.telephone LIKE ? AND customers.shop_id =?", \
+                                      @search_alt+"%", "%"+@search_name+"%", "%"+@search_furigana+"%", "%"+@search_telephone+"%", @search_shop_id)
     end
-    @items  = @shop.customers.paginate(:conditions=>c.where, :select=>"customers.*", :order=>"furigana asc, name asc", :page => params[:page], :per_page=>PER_PAGE)
-    @page = params[:page]
+    @items = Customer.all
+    @items = @items.order(furigana: :asc, name: :asc).paginate(page: params[:page], per_page: PER_PAGE)
+    #@items  = @shop.customers.paginate(:conditions=>c.where, :select=>"customers.*", :order=>"furigana asc, name asc", :page => params[:page], :per_page=>PER_PAGE)
+    #@page = params[:page]
   end
   
   def show_property

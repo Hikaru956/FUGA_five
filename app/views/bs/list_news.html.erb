@@ -41,7 +41,7 @@
 			<span class="label label-info">公開中</span>
 	      </span>		
 			
-	      <h4 class="media-heading"><%= truncate(@item.title, :length=>50) %></h4>
+	      <h4 class="media-heading"><%= @item.title.truncate.(50) %></h4>
 	      <p><%= truncate(@item.description, :length=>100) %></p>
 	    </div>
 	  </li>

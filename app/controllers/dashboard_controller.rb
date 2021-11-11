@@ -369,7 +369,10 @@ class DashboardController < ApplicationController
   ##  Controllers For Admin. Users
   #
   def user_list
-    @users = User.find(:all,:conditions=>["role>? && role<=?", User::ROLE_OWNER, current_user.role], :order=>"role desc, name asc")
+    #@users = User.find(:all,:conditions=>["role>? && role<=?", User::ROLE_OWNER, current_user.role], :order=>"role desc, name asc")
+    @users = User.where("   role >?
+                        AND role <=?", \
+                        User::ROLE_OWNER, current_user.role).order(role: :desc, name: :asc)
   end
 
   def user_create

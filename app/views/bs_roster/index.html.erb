@@ -18,9 +18,9 @@
 			prev_year = this_year << 12
 			next_year = this_year >> 12
 		%>
-		<%= link_to("<i class='icon-double-angle-left'></i>", 	{:action=>'index', :target_date=>prev_year}, :class=>"btn btn-small") %>
+		<%= link_to("<i class='icon-double-angle-left'></i>".html_safe, 	{:action=>'index', :target_date=>prev_year}, :class=>"btn btn-small") %>
 		<%= (@target_date.to_date.year) %>
-		<%= link_to("<i class='icon-double-angle-right'></i>", 	{:action=>'index', :target_date=>next_year}, :class=>"btn btn-small") %>
+		<%= link_to("<i class='icon-double-angle-right'></i>".html_safe, 	{:action=>'index', :target_date=>next_year}, :class=>"btn btn-small") %>
 	</span>
 	<%= @target_date.strftime("%Y-%m") %>
 	&nbsp;
@@ -42,15 +42,17 @@
 	</span>
 </p>
 
-<%= form_tag url_for(:action=>"update_rosters"), {:class=>"form-inline"} do -%>
-	<%= hidden_field_tag 'target_date', @target_date %>
-	<legend>シフト設定</legend>
-	<%= render :partial=>'form_calendar' %>
+<div class="form-inline">
+	<%= form_with(url: bs_roster_update_rosters_path, method: :patch) do |f| %>
+		<%= hidden_field_tag 'target_date', @target_date %>
+		<legend>シフト設定</legend>
+		<%= render :partial=>'form_calendar' %>
 
-	<div class="well">
-    	<button type="submit" class="btn btn-small btn-success"><i class="icon-refresh"></i>&nbsp;&nbsp;更新</button>
-		<%= link_to("<i class='icon-arrow-left'></i>&nbsp;戻る",
-			{:controller=>"bs_attendance",:action=>"index"}, 
-			:class=>"btn btn-small") %>
-  	</div>
-<% end %>
+		<div class="well">
+			<button type="submit" class="btn btn-small btn-success"><i class="icon-refresh"></i>&nbsp;&nbsp;更新</button>
+			<%= link_to("<i class='icon-arrow-left'></i>&nbsp;戻る".html_safe,
+				{:controller=>"bs_attendance",:action=>"index"}, 
+				:class=>"btn btn-small") %>
+		</div>
+	<% end %>
+</div>

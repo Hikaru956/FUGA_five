@@ -13,5 +13,5 @@
 <%=@item.reserved_until.strftime("%H:%M") %><br/>
 
 <% unless @item.memo_1.blank? %>
-	<p class="meta"><%= truncate(@item.memo_1,40) %></p>
+	<p class="meta"><%= truncate(@item.memo_1,length:(40)) %></p>
 <% end %>

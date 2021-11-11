@@ -33,26 +33,26 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% @items.each do | @item | %>					
+					<% @items.each do | item | %>					
 						<tr>
-							<td><%= @item.alt_id %></td>
+							<td><%= item.alt_id %></td>
 							<td>
-								<% if @item.is_happy_birthday? %>
+								<% if item.is_happy_birthday? %>
 									<span class="pull-right text-success">
 										<i class="icon-gift"></i>
 									</span>
 								<% end %>
-								<%= link_to raw("<i class='icon-circle-arrow-right'></i>&nbsp;"+@item.name), :action=>'show_property', :id=>@item %>
+								<%= link_to raw("<i class='icon-circle-arrow-right'></i>&nbsp;"+item.name), :action=>'show_property', :id=>item %>
 							</td>
-							<td><small><%= @item.furigana %></small></td>
-							<td><%= @item.telephone %></td>
+							<td><small><%= item.furigana %></small></td>
+							<td><%= item.telephone %></td>
 						</tr>
 					<% end %>
 				</tbody>
 			</table>
 
 			<%= will_paginate(@items, 	:params=> { :action=>'list', :page=>@page, :search_alt=>@search_alt, :search_name=>@search_name, :search_furigana=>@search_furigana, :search_telephone=>@search_telephone, :search_shop_id=>@search_shop_id }, 
-										, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+										 :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 		<% end %>
 	</div>
 </div>

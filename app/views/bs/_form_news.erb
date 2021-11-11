@@ -7,8 +7,8 @@
 <hr/>
 
 <% 
-	c = Condition.new
-	c.and "content_leafs.content_category_id", 'IN', ContentCategory.type_root(@shop, ContentCategory::TYPE_NEWS).children
+	#c = Condition.new
+	#c.and "content_leafs.content_category_id", 'IN', ContentCategory.type_root(@shop, ContentCategory::TYPE_NEWS).children
 	bag_roots = ContentCategory.type_root(@shop, ContentCategory::TYPE_NEWS).children
 %>
 <% if bag_roots.size==1 %>
@@ -22,4 +22,3 @@
 			</div>
 	</div>
 <% end %>
-

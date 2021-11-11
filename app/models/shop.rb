@@ -82,9 +82,10 @@ class Shop < ApplicationRecord
   end
 
   def valid_staffs
-    c = Condition.new
-    c.and "staffs.staff_status", '!=', Staff::STAFF_BLOCKED
-    self.staffs.find(:all, :conditions=>c.where)
+    self.staffs.where("staffs.staff_status !=?", Staff::STAFF_BLOCKED)
+    #c = Condition.new
+    #c.and "staffs.staff_status", '!=', Staff::STAFF_BLOCKED
+    #self.staffs.find(:all, :conditions=>c.where)
   end
 
   def operation_from(probe_date=nil)

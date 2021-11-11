@@ -6,9 +6,9 @@
 		<th class="head_space">
 			<% rev = (base_time.to_date)<<1 %>
 			<% fwd = (base_time.to_date)>>1 %>
-			<%= link_to("<i class='icon-double-angle-left'></i>", 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>rev.year, :month=>rev.month }) %>
+			<%= link_to("<i class='icon-double-angle-left'></i>".html_safe, 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>rev.year, :month=>rev.month }) %>
 			<%= @target_date.month %>&nbsp;月
-			<%= link_to("<i class='icon-double-angle-right'></i>", 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>fwd.year, :month=>fwd.month }) %>
+			<%= link_to("<i class='icon-double-angle-right'></i>".html_safe, 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>fwd.year, :month=>fwd.month }) %>
 		</th>
 		<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
 			<th colspan="2" class="head_timeline">
@@ -45,3 +45,8 @@
 	</tr>
 </table>
 
+
+<% for d in 0..(last_day-1) %>
+	<%= render :partial=>"dlg_day_on", 	locals: {staff: @staff, target_date: @target_date.to_date+d} %>
+	<%= render :partial=>"dlg_day_off", locals: {staff: @staff, target_date: @target_date.to_date+d} %>
+<% end %>

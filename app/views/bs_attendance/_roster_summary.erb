@@ -3,11 +3,11 @@
 	<h4>
 	<% rev = (base_time.to_date)<<1 %>
 	<% fwd = (base_time.to_date)>>1 %>
-	<%= link_to("<i class='icon-double-angle-left'></i>", 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>rev.year, :month=>rev.month }) %>
+	<%= link_to("<i class='icon-double-angle-left'></i>".html_safe, 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>rev.year, :month=>rev.month }) %>
 	<%= @bc_work_from.strftime("%Y-%m-%d")%>
 	〜
 	<%= (@bc_work_until.to_date).strftime("%Y-%m-%d")%>
-	<%= link_to("<i class='icon-double-angle-right'></i>", 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>fwd.year, :month=>fwd.month }) %>
+	<%= link_to("<i class='icon-double-angle-right'></i>".html_safe, 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>fwd.year, :month=>fwd.month }) %>
 	</h4>
 	<table class="table table-condensed table-bordered">
 	<tr>

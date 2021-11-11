@@ -67,10 +67,11 @@
 
 <% if false %>
 <% 
-    c = Condition.new
-	c.and "staffs.staff_status",'!=', Staff::STAFF_BLOCKED
-	@staffs = @shop.staffs.find(:all, :conditions => c.where)
-		options = @staffs.map{ | s | [ s.name, s.id] }
+    #c = Condition.new
+	#c.and "staffs.staff_status",'!=', Staff::STAFF_BLOCKED
+	#@staffs = @shop.staffs.find(:all, :conditions => c.where)
+	@staffs = @shop.staffs.where("staffs.staff_status !=?", Staff::STAFF_BLOCKED)
+	options = @staffs.map{ | s | [ s.name, s.id] }
 	options.unshift(["-- 指定なし --　", '']) 
 %>
 <div class="control-group">
@@ -110,5 +111,3 @@
 </script>
 
 <% end %>
-
-
