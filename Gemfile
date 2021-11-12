@@ -124,7 +124,9 @@ gem 'holiday_japan'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'bcrypt'
-gem "file_column"
-gem "condition_builder"
+#gem "file_column"
+#gem "condition_builder"
 #5で追加
 gem 'bootsnap'
+
+gem 'paperclip'
