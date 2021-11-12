@@ -7,7 +7,7 @@
 #
 # http://opensource.org/licenses/mit-license.php
 #
-require 'file_column'
+# require 'file_column'
 class DashboardController < ApplicationController
   before_action :authenticate_user!
   #hikaru

@@ -1,0 +1,66 @@
+<style type="text/css">@import url(/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
+
+<!-- Third party script for BrowserPlus runtime (Google Gears included in Gears runtime now) -->
+<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+
+<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+<script type="text/javascript" src="/plupload/js/plupload.full.js"></script>
+<script type="text/javascript" src="/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="/plupload/js/i18n/ja.js"></script>
+
+<script type="text/javascript">
+// Convert divs to queue widgets when the DOM is ready
+$(function() {
+	// Setup html5 version
+	$("#html5_uploader").pluploadQueue({
+		// General settings
+		runtimes : 'html5',
+		url : "/<%=params[:controller]%>/create_staff_photo?id=<%=@item.id%>",
+		max_file_size : '10mb',
+		// chunk_size : '1mb',
+		unique_names : true,
+
+		// Resize images on clientside if we can
+		//resize : {width : 320, height : 240, quality : 90},
+
+		// Specify what files to browse for
+		filters : [
+			{title : "Image files", extensions : "jpg,jpeg,gif,png"}
+		]
+	});
+});
+</script>
+
+
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:action=>'company_show_shop') %>">店舗情報</a></li>
+	<li class="active">	<a href="<%= url_for(:action=>'shop_list_staffs') %>">店舗スタッフ</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_list_users') %>">店舗ユーザー</a></li>
+	<li>				<a href="<%= url_for(:action=>'shop_show_website') %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a></li>
+	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+		<li>				<a href="<%= url_for(:action=>'shop_site_navigation') %>">ナビゲーション</a></li>
+	<% end %>
+</ul>
+
+<h4>
+	<div class="pull-right">
+		<p>
+			<% url_back = url_for(:action=>"shop_show_staff", :id=>@item) %>
+			<a class="btn btn-small" href="<%=url_back%>">
+				<i class="icon-arrow-left"></i>&nbsp;
+				戻る
+			</a>
+		</p>
+	</div>
+	写真追加
+	:
+	<%= model_name(@item) %>
+</h4>
+
+<div id="html5_uploader">You browser doesn't support native upload. Try Firefox, Chrome or Safari.</div>
+

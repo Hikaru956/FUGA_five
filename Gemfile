@@ -130,3 +130,4 @@ gem 'bcrypt'
 gem 'bootsnap'
 
 gem 'paperclip'
+gem "dropzonejs-rails"
