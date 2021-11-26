@@ -250,14 +250,12 @@ class BsAuthoringController < ApplicationController
   end
   
   def create_widget_bag_photo
-    if request.post?
-      @widget_bag = VisualWidgetBag.find_by_id(params[:id])
-      @photo = { :image_temp=>"", :image=>params[:file] }
-      photo = Photo.new(@photo)
-      photo.shop = @website
-      @widget_bag.photos << photo
-      redirect_to :action=>"manage_widget"
-    end
+    @widget_bag = VisualWidgetBag.find_by_id(params[:id])
+    #@photo = { :image_temp=>"", :image=>params[:file] }
+    photo = Photo.new(photo_params)
+    photo.shop = @website
+    @widget_bag.photos << photo
+    redirect_to :action=>"manage_widget"
   end
 
   def widget_bag_photo_higher
@@ -275,11 +273,9 @@ class BsAuthoringController < ApplicationController
   end
 
   def delete_widget_bag_photo
-    if request.post?
-      photo = @shop.photos.find(params[:id])
-      photo.destroy
-      redirect_to :action=>'manage_widget', :hash=>Time.now.to_i
-    end
+    photo = @shop.photos.find(params[:id])
+    photo.destroy
+    redirect_to :action=>'manage_widget', :hash=>Time.now.to_i
   end
   
   private
@@ -293,5 +289,10 @@ class BsAuthoringController < ApplicationController
 
     @author_mode      = true
     redirect_to :action=>'/'  if @website.blank? || @website.wsite_run_mode==Shop::WSITE_BLOCKED
+  end
+
+  def photo_params
+    params.require(:photo).permit(:clip)
+    #params.permit(:file)
   end
 end

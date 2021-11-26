@@ -24,13 +24,12 @@
 			素材追加
 		</a>
 	</p>
-	<%=model_title(@item)%>
 	:
 	画像素材
 </h4>
 
 <div class="row-fluid">
-	<% array = @item.photos.find(:all, :order=>"position asc").in_groups_of(3, false)%>
+	<% array = @shop.photos.order(position: :asc).in_groups_of(3, false)%>
 	<% for i in 0..(array.size-1) %>
 		<% @lines = array[i] %>
 	    <ul class="thumbnails">
@@ -58,4 +57,3 @@
 		</p>
 	<% end %>
 </div>
-

@@ -30,21 +30,31 @@
 	:
 	<%= model_name(@item) %>
 </h4>
-
-<%= form_for(Photo.new, url: root_path, html: {multipart: true, class: "dropzone"}) do |f|  %>
-  <div class="fallback">
-    <%= f.file_field :photo_file_name, multiple: true %>
-  </div>
+<% if false %>
+	<% item = Photo.new %>
+	<%= form_for  item, url: bs_config_create_staff_photo_path(id: @item), method: :post do |f| %>
+	<%= f.file_field :clip %>
+	<%= f.submit %>
+	<% end %>
 <% end %>
 
-<script>
-  $(function() {
-    // disable auto discover
-    Dropzone.autoDiscover = false;
-
-    $(".dropzone").dropzone({
-      maxFilesize: 1,
-      addRemoveLinks: true
-    });
-  });
-</script>
+<% if true %>
+	<% item = Photo.new %>
+	<%= form_tag(bs_config_create_staff_photo_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<div class="fallback">
+		<%= file_field_tag('photo[clip]') %>
+	</div>
+	<% end %>
+	<script>
+		Dropzone.options.dropzone = {
+			paramName: "photo[clip]",
+			maxFilesize: 1,
+			acceptedFiles: "image/*",
+			init: function() {
+				this.on('complete', function (file) {
+					//location.reload();
+				})
+			}
+		}
+	</script>
+<% end %>

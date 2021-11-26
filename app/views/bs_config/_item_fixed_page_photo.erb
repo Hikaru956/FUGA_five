@@ -8,9 +8,9 @@
 		</p>
 	</div>
 	<% end %>
-	<%= image_tag(url_for_file_column(photo, :image, "thumb")) %>
+	<%= image_tag photo.clip.url(:thumb) %>
 	<div class="caption">
-		<p><%=File::basename(photo.image)%></p>
+		<p><%= photo.clip_file_name %></p>
 		<p>
 			<% if false %>
 				<a class="btn btn-success btn-small" data-toggle="modal" href="#modal_edit_photo_<%=photo.id%>">	<i class="icon-info-sign"></i>&nbsp;キャプション</a></a> 

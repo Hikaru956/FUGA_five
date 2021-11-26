@@ -12,7 +12,10 @@
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
 				<img src="http://placehold.it/68x30&amp;text=Logo-S">
 			<% else %>
-				<img src="<%= url_for_file_column(widget_bag.photos[0], :image) %>" title=<%=model_name(@website) %>>
+				<%= image_tag widget_bag.photos[0].clip.url(:thumb), title: model_name(@website) %>
+				<% if false %>
+					<img src="<%= url_for_file_column(widget_bag.photos[0], :image) %>" title=<%=model_name(@website) %>>
+				<% end %>
 			<% end %>			
 		  </a>
         </div>

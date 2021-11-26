@@ -23,6 +23,8 @@ class ContentCategory < ApplicationRecord
   #hikaru
   has_many  :photos,  :as => :ref, :dependent => :destroy #, ->{order('position ASC')}
 
+  accepts_nested_attributes_for :photos
+
   TYPE_SHOP_ROOT        = 0
   TYPE_HOME             = WebPage::TYPE_HOME
   TYPE_INFO             = WebPage::TYPE_INFO

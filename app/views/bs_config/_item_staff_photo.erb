@@ -4,11 +4,11 @@
 			<p class="wewll" style="text-align:center;">
 				<%= (photo.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"photo_staff_higher",	:id=>photo) %>
 				<%= photo.position %>
-				<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"photo_staff_lower",		:id=>photo) %>				
+				<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"photo_staff_lower",		:id=>photo) %>
 			</p>
 		<% end %>
 	</div>
-	<%= image_tag(url_for_file_column(photo, :image, "thumb")) %>
+	<%= image_tag photo.clip.url(:thumb) %>
 	<div class="caption">
 		<p><%=photo.info%></p>
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
@@ -48,7 +48,7 @@
     <p>写真を削除します。よろしいですか？</p>
   </div>
   <div class="modal-footer">
-	<%= form_tag({:action => 'delete_staff_photo', :id=>photo}, :class=>"form-horizontal")  do %>
+	<%= form_for photo, url: bs_config_delete_staff_photo_path(id: photo), method: :delete do |f| -%>
 		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
   	<%end%>  	

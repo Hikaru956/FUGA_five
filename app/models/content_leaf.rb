@@ -17,7 +17,11 @@ class ContentLeaf < ApplicationRecord
   belongs_to    :content_category, optional: true
   belongs_to    :staff, optional: true
 
-  has_many  :photos,  :as => :ref, :dependent => :destroy #hikaru, :order=>"position asc"
+  #has_many  :photos,  :as => :ref, :dependent => :destroy #hikaru, :order=>"position asc"
+
+  has_many      :photos,  as: :ref, :dependent => :destroy
+
+  accepts_nested_attributes_for :photos
 
   before_save   :before_save
   after_create  :after_create  

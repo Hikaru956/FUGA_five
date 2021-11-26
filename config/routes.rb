@@ -62,6 +62,11 @@ Fuga326::Application.routes.draw do
   patch 'bs_config/navigation_update', to: 'bs_config#navigation_update'
   delete 'bs_config/shop_delete_fixed_link', to: 'bs_config#shop_delete_fixed_link'
 
+  post 'bs_config/create_staff_photo', to:'bs_config#create_staff_photo'
+  delete 'bs_config/delete_staff_photo', to:'bs_config#delete_staff_photo'
+
+  post 'bs_authoring/create_widget_bag_photo', to: 'bs_authoring#create_widget_bag_photo'
+  delete 'bs_authoring/delete_widget_bag_photo', to: 'bs_authoring#delete_widget_bag_photo'
 
   post 'dashboard/company_create', to: 'dashboard#company_create'
   patch 'dashboard/company_update', to: 'dashboard#company_update'
@@ -94,6 +99,7 @@ Fuga326::Application.routes.draw do
   get 'bs_content_stream/content_root', to: 'bs_content_stream#content_root'
   post 'bs_content_stream/create_bag', to: 'bs_content_stream#create_bag'
   delete 'bs_content_stream/delete_bag', to: 'bs_content_stream#delete_bag'
+  post 'bs_content_stream/create_leaf', to: 'bs_content_stream#create_leaf'
 
   patch 'bs_attendance/update_business', to: 'bs_attendance#update_business'
   post 'bs_attendance/init_roster', to: 'bs_attendance#init_roster'

@@ -15,6 +15,8 @@ class VisualWidgetBag < ApplicationRecord
 
   has_many      :photos,  :as => :ref, :dependent => :destroy #, :order=>"position asc"
 
+  accepts_nested_attributes_for :photos
+
   #attr_accessible :data_string
 
   def is_valid?

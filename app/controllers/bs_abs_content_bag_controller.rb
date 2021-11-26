@@ -108,12 +108,10 @@ class BsAbsContentBagController < ApplicationController
   end
 
   def create_leaf
-    if request.post?
-      @item = ContentLeaf.new(hikaru_params)
-      @item.save
-      redirect_to :action=>"show_leaf", :id=>@item
-    end
-  end
+    @item = ContentLeaf.new(hikaru_params)
+    @item.save
+    redirect_to :action=>"show_leaf", :id=>@item
+end
   
   def edit_leaf
     @item = @shop.content_leafs.find_by_id(params[:id])

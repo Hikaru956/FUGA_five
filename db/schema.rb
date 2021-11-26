@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_07_033933) do
+ActiveRecord::Schema.define(version: 2021_11_12_024537) do
 
   create_table "attendances", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "shop_id"
@@ -154,6 +154,10 @@ ActiveRecord::Schema.define(version: 2021_10_07_033933) do
     t.integer "my_size", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "clip_file_name"
+    t.string "clip_content_type"
+    t.bigint "clip_file_size"
+    t.datetime "clip_updated_at"
     t.index ["ref_id", "ref_type"], name: "index_photos_on_ref_id_and_ref_type"
     t.index ["shop_id"], name: "index_photos_on_shop_id"
   end

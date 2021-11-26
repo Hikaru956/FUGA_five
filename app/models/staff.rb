@@ -19,8 +19,9 @@ class Staff < ApplicationRecord
   has_many      :reservations,  :dependent=>:destroy #,  :order=>'reserved_on asc'
   has_many      :content_leafs, :dependent=>:destroy #,  :order=>'created_at desc'
 
-  has_many      :photos,  :as => :ref, :dependent => :destroy
-  #, :order=>"position asc"
+  has_many      :photos,  as: :ref, :dependent => :destroy
+
+  accepts_nested_attributes_for :photos #, :order=>"position asc"
 
   STAFF_PROPER    = 100
   STAFF_HELPER    = 10

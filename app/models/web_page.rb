@@ -19,6 +19,8 @@ class WebPage < ApplicationRecord
   #hikaru
   has_many      :photos,            :as => :ref, :dependent => :destroy #, :order=>"position asc"
 
+  accepts_nested_attributes_for :photos
+
   belongs_to    :shop
   
   TYPE_ROOT     = 0

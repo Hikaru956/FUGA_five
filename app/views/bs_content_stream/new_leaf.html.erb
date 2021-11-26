@@ -11,14 +11,14 @@
   <li class="active">新規登録</li>
 </ul>
 
-<%= form_tag url_for(:action=>"create_leaf"), :class=>"form-horizontal well" do -%>
+<%= form_tag url_for(:action=>"create_leaf"), :class=>"form-horizontal well" do-%>
 	<%= hidden_field 		'item', 'shop_id' %>
 	<fieldset>
 		<legend>新規登録</legend>
 		<%= render :partial=>"form_leaf" %>
 		<div class="form-actions">
         	<button type="submit" class="btn btn-small btn-success"><i class="icon-plus"></i>&nbsp;&nbsp;登録</button>
-			<% url_cancel = url_for(:action=>"content_category", :id=>@item.content_category) %>							
+			<% url_cancel = url_for(:action=>"content_category", :id=>@item.content_category) %>
 	  		<a class="btn btn-small" href="<%= url_cancel %>"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
       	</div>
 	</fieldset>

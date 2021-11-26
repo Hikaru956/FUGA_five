@@ -32,6 +32,8 @@ class Shop < ApplicationRecord
 
   has_many      :photos,              :dependent=>:delete_all
 
+  accepts_nested_attributes_for :photos
+
   has_many      :web_pages,           :dependent=>:delete_all
   has_many      :content_bags,        :dependent=>:destroy
   has_many      :content_leafs,       :dependent=>:destroy  #:order=>'publish_from desc, created_at desc'

@@ -24,7 +24,8 @@
 		<meta http-equiv="Pragma" content="no-cache">
 		<meta http-equiv="Cache-Control" content="no-cache">
 		
-        <%= stylesheet_link_tag "main.css" %>
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= stylesheet_link_tag "main.css" if false %>
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 		<!--[if IE 7]>
@@ -40,7 +41,8 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 
 		<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
-		<%= javascript_include_tag "main.js"%>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= javascript_include_tag "main.js" if false %>
 		<%= javascript_include_tag "modernizr-2.6.2-respond-1.1.0.min.js"%>	
     </head>
     <body>

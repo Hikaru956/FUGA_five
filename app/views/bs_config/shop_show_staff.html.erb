@@ -109,17 +109,17 @@
 	    <ul class="thumbnails">
 	        <li class="span4">
 	        	<% if @lines.size>=1 %>
-					<%= render :partial=>"item_staff_photo", :locals => {:photo => @lines[0]} %>
+					<%= render :partial=>"item_staff_photo", locals: {photo: @lines[0], staff: @staff} %>
 				<% end %>
 			</li>		
 	        <li class="span4">
 	        	<% if @lines.size>=2 %>
-					<%= render :partial=>"item_staff_photo", :locals => {:photo => @lines[1]} %>
+					<%= render :partial=>"item_staff_photo", locals: {photo: @lines[1], staff: @staff} %>
 				<% end %>
 			</li>		
 	        <li class="span4">
 	        	<% if @lines.size>=3 %>
-					<%= render :partial=>"item_staff_photo", :locals => {:photo => @lines[2]} %>
+					<%= render :partial=>"item_staff_photo", locals: {photo: @lines[2], staff: @staff} %>
 				<% end %>
 			</li>		
         </ul>

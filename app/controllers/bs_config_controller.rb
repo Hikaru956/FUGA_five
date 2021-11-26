@@ -88,13 +88,13 @@ class BsConfigController < ApplicationController
   end
 
   def shop_delete_staff
-      #item = @shop.staffs.find(params[:id])
-      #item.destroy
-      #redirect_to :action=>"shop_list_staffs", :id=>item.shop
+    #item = @shop.staffs.find(params[:id])
+    #item.destroy
+    #redirect_to :action=>"shop_list_staffs", :id=>item.shop
 
-      item = Staff.find(params[:id])
-      item.destroy
-      redirect_to :action=>"shop_list_staffs", :id=>item.shop
+    item = Staff.find(params[:id])
+    item.destroy
+    redirect_to :action=>"shop_list_staffs", :id=>item.shop
   end
 
   def staff_higher
@@ -122,15 +122,22 @@ class BsConfigController < ApplicationController
     @item = @shop.staffs.find_by_id(params[:id])
   end
 
+  #def create_staff_photo
+  #  @item = @shop.staffs.find_by_id(params[:id])
+  #  @photo = { :image_temp=>"", :image=>params[:file] }
+  #  photo = Photo.new(@photo)
+  #  photo.shop = @shop
+  #  @item.photos << photo
+  #  redirect_to :action=>"shop_show_staff", :id=>@item
+  #end
+
   def create_staff_photo
-    if request.post?
-      @item = @shop.staffs.find_by_id(params[:id])
-      @photo = { :image_temp=>"", :image=>params[:file] }
-      photo = Photo.new(@photo)
-      photo.shop = @shop
-      @item.photos << photo
-      redirect_to :action=>"shop_show_staff", :id=>@item
-    end
+    @item = @shop.staffs.find_by_id(params[:id])
+    photo = Photo.new(photo_params)
+    photo.shop = @shop
+    @item.photos << photo
+    @item.photos.build
+    redirect_to :action=>"shop_show_staff", :id=>@item
   end
 
   def photo_staff_higher
@@ -152,19 +159,15 @@ class BsConfigController < ApplicationController
   end
 
   def update_staff_photo
-    if request.post?
-      photo = @shop.photos.find(params[:id])
-      photo.update_attributes(params[:photo])
-      redirect_to :action=>'shop_show_staff', :id=>photo.ref_id, :hash=>Time.now.to_i
-    end
+    photo = @shop.photos.find(params[:id])
+    photo.update_attributes(params[:photo])
+    redirect_to :action=>'shop_show_staff', :id=>photo.ref_id, :hash=>Time.now.to_i
   end
 
   def delete_staff_photo
-    if request.post?
-      photo = @shop.photos.find(params[:id])
-      photo.destroy
-      redirect_to :action=>'shop_show_staff', :id=>photo.ref_id, :hash=>Time.now.to_i
-    end
+    photo = @shop.photos.find(params[:id])
+    photo.destroy
+    redirect_to :action=>'shop_show_staff', :id=>photo.ref_id, :hash=>Time.now.to_i
   end
 
   ###
@@ -403,5 +406,10 @@ protected
 
   def web_page_params
     params.require(:web_page).permit(:page_type, :shop_id, :parent_id, :template_name, :action_name, :name, :content_type, :is_public, :is_open_new, :external_url)
+  end
+
+  def photo_params
+    params.require(:photo).permit(:clip)
+    #params.permit(:file)
   end
 end
