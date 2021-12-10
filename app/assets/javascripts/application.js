@@ -12,11 +12,9 @@
 //
 //= require jquery2
 //= require jquery-ui
-//= require dragdrop
-//= require effects
-//= require rails-ujs
-//= require_tree .
 //= require dropzone
-//= require trix
 //= require tinymce
 //= require tinymce-jquery
+//= require rails-ujs
+//= require turbolinks
+//= require_tree .

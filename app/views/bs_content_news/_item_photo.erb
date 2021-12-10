@@ -6,9 +6,17 @@
 			<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"photo_lower",		:id=>photo) %>				
 		</p>
 	</div>
-	<%= image_tag(url_for_file_column(photo, :image, "thumb")) %>
+	<%= image_tag photo.clip.url(:thumb) %>
 	<div class="caption">
-		<p><%=File::basename(photo.image)%></p>
+		<p>
+			<%=
+				unless photo.image.blank?
+					photo.image
+				else
+					photo.clip_file_name
+				end
+			 %>
+		</p>
 		<p>
 			<% if false %>
 				<a class="btn btn-success btn-small" data-toggle="modal" href="#modal_edit_photo_<%=photo.id%>">	<i class="icon-info-sign"></i>&nbsp;キャプション</a></a> 
@@ -37,6 +45,23 @@
 <% end %>
 
 <div id="modal_delete_photo_<%=photo.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <%= form_tag({:action => 'delete_photo', :id=>photo}, :class=>"form-horizontal", method: :delete)  do %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">削除確認</h3>
+	</div>
+	<div class="modal-body">
+		<p>写真を削除します。よろしいですか？</p>
+	</div>
+	<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+  <%end%>  
+</div>
+
+<% if false %>
+<div id="modal_delete_photo_<%=photo.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">削除確認</h3>
@@ -51,3 +76,4 @@
   	<%end%>  	
   </div>
 </div>
+<% end %>

@@ -20,11 +20,12 @@
 				<div  class="text-right">
 					<% total_photos = @shop.photos%>
 					<%= total_photos.size%>
-					<% 
-						photo_sum_size = 0
-						total_photos.each{ |photo|  photo_sum_size+=photo.my_size }	unless total_photos.blank?
-					%> 
-					【<%= number_to_human_size(photo_sum_size)  %>】							
+					<%
+						photo_sum_size = Photo.total_file_size(total_photos)
+						#total_photos.each{ |photo|  photo_sum_size+=photo.clip_file_size : photo_sum_size+=photo.my_size}	unless total_photos.blank?
+						#total_photos.each{ |photo|  photo_sum_size+=photo.my_size }	unless total_photos.blank?
+					%>
+					【<%= number_to_human_size(photo_sum_size)  %>
 				</div>
 			</td>
 			<td>

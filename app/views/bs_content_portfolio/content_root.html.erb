@@ -42,7 +42,7 @@
 <% end %>
 
 <!-- Modal -->
-<%= form_tag({:action => 'create_bag'}, :class=>"form-horizontal")  do %>
+<%= form_tag({:action => 'create_bag'}, :class=>"form-horizontal", method: :post)  do %>
 <div id="modal_new" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<% 
 		@item 				= ContentBag.new

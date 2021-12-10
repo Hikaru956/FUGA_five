@@ -32,7 +32,7 @@
 </h4>
 
 <div class="row-fluid">
-	<% array = @parent_category.photos.find(:all, :order=>"position asc").in_groups_of(3, false)%>
+	<% array = @parent_category.photos.order(position: :asc).in_groups_of(3, false)%>
 	<% for i in 0..(array.size-1) %>
 		<% @lines = array[i] %>
 	    <ul class="thumbnails">
@@ -55,6 +55,28 @@
 	<% end %>
 </div>
 <hr/>
+<% if true %>
+	<% item = Photo.new %>
+	<%= form_tag(bs_content_gallery_create_face_photo_path(id: @parent_category.id),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<div class="fallback">
+		<%= file_field_tag('photo[clip]') %>
+	</div>
+	<% end %>
+	<script>
+		Dropzone.options.dropzone = {
+			paramName: "photo[clip]",
+			maxFilesize: 1,
+			acceptedFiles: "image/*",
+			init: function() {
+				this.on('complete', function (file) {
+					//location.reload();
+				})
+			}
+		}
+	</script>
+<% end %>
+
+<% if false %>
 <style type="text/css">@import url(/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
 
 <!-- Third party script for BrowserPlus runtime (Google Gears included in Gears runtime now) -->
@@ -88,4 +110,4 @@ $(function() {
 });
 </script>
 <div id="html5_uploader">You browser doesn't support native upload. Try Firefox, Chrome or Safari.</div>
-
+<% end %>

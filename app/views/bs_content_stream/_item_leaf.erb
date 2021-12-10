@@ -3,7 +3,7 @@
 		<a href="<%= url_for(:action=>'show_leaf', :id=>temp_local, :page=>@page) %>">
 			<% key_photo = key_photo(temp_local) %>
 			<% unless key_photo.blank? %>
-				<%= image_tag(url_for_file_column(key_photo, :image, "thumb")) %>
+				<%= image_tag key_photo.clip.url(:thumb) %>
 			<% else %>
 				<img src="http://placehold.it/320x240&amp;text=No Photo">
 	    	<% end %>
@@ -19,7 +19,7 @@
         	<% unless temp_local.description_3.blank? %>
  	           <%= h temp_local.description_3 %>
         	<% else %>
- 	           <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>50) %>
+ 	           <%= (temp_local.description.blank?)? '': h(truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>50)) %>
            <% end %>
 		</p>
         <p>

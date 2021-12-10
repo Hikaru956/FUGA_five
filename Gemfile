@@ -133,7 +133,5 @@ gem 'paperclip'
 gem "dropzonejs-rails"
 
 gem 'simple_form'
-gem 'summernote-rails', '~> 0.8.10.0'
-
-gem 'trix'
 gem "tinymce-rails"
+gem 'tinymce-rails-langs'

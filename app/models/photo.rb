@@ -40,6 +40,25 @@ class Photo < ApplicationRecord
   before_create :before_create
   after_create  :after_create
   
+  def file_size
+
+    fc_size = self.my_size
+    fc_size = 0 if fc_size.blank?
+    pc_size = self.clip_file_size 
+    pc_size = 0 if pc_size.blank?
+    fc_size+pc_size
+
+  end
+
+  def self.total_file_size(photos)
+    return 0 if photos.blank?
+    sum_size = 0
+    photos.each do |photo|
+      sum_size += photo.file_size
+    end
+    return sum_size
+  end
+
   def before_create
     #hikaru
     #original = Magick::Image.read(self.image).first

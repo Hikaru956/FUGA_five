@@ -24,7 +24,13 @@
         	<%= leaf_state_icons(temp_local) %>
         	<%= truncate(model_title(temp_local), :length=>30) %>
 		</h4>
-		<p><%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>50) %></p>
+		<p>
+			<% unless temp_local.description_3.blank? %>
+ 	           <%= h temp_local.description_3 %>
+        	<% else %>
+ 	           <%= (temp_local.description.blank?)? '': h(truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>50)) %>
+           	<% end %>
+		</p>
         <p>
 		  	<%= temp_local.publish_from.strftime("%Y-%m-%d") %>
 			<% unless temp_local.staff.blank? %>

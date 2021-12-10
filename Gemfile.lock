@@ -220,8 +220,6 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
-    summernote-rails (0.8.10.0)
-      railties (>= 3.1)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
     thor (1.1.0)
@@ -229,8 +227,8 @@ GEM
     tilt (2.0.10)
     tinymce-rails (5.10.2)
       railties (>= 3.1.1)
-    trix (0.10.1)
-      rails
+    tinymce-rails-langs (5.20200505)
+      tinymce-rails (~> 5.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -290,9 +288,8 @@ DEPENDENCIES
   simple_form
   spring
   sqlite3 (~> 1.3.6)
-  summernote-rails (~> 0.8.10.0)
   tinymce-rails
-  trix
+  tinymce-rails-langs
   turbolinks
   uglifier (>= 1.3.0)
   web-console

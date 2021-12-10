@@ -148,7 +148,7 @@
 <% end %>
 
 <% unless @bag_roots.blank? %>
-	<%= form_tag({:action=>"content_category", :id=>nil}, :class=>"form-horizontal")  do %>
+	<%= form_tag({:action=>"content_category", :id=>nil}, :class=>"form-horizontal", method: :patch)  do %>
 		<div id="modal_category_select" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -169,4 +169,3 @@
 		</div>
 	<%end%>  	
 <%end%>  	
-

@@ -67,8 +67,8 @@
 					<td style="text-align:right">
 						<% 
 							total_photos = shop.photos
-							photo_sum_size = 0
-							total_photos.each{ |photo|  photo_sum_size+=photo.my_size }	unless total_photos.blank?
+							photo_sum_size = Photo.total_file_size(total_photos)
+							#total_photos.each{ |photo|  photo_sum_size+=photo.my_size }	unless total_photos.blank?
 							rate = (shop.room_size_mb.blank?||shop.room_size_mb==0)? nil : (photo_sum_size*100)/(shop.room_size_mb*1024*1024) 
 						%>
 						利用率 : <%= (rate.blank?)? "-": rate.to_i %>%

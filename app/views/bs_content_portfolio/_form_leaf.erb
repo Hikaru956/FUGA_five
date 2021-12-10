@@ -6,10 +6,48 @@
 
 <% if true %>
 	<div class="control-group">
-		<%= text_field  'item', 'description_2', 	{:class=>"no-rich input-block-level" , :length => 20, :autocomplete=>false, :placeholder=>"価格情報を入力します。"}  %>
+		<%= text_field  'item', 'description_2', :class => "tinymce input-block-level", :length => 20, :autocomplete=>false, :placeholder=>"価格情報を入力します。" %>
+		<%= tinymce if false%>
+		<script type="text/javascript">
+			tinyMCE.init({
+				selector: 'textfield.tinymce',
+				cache_suffix: "?v=5.10.2",
+				theme_advanced_toolbar_location: "top",
+				theme_advanced_statusbar_location: "bottom",
+				theme_advanced_buttons3_add: ["tablecontrols"],
+				plugins: "table,image",
+				<% unless @item.blank? %>
+					<% unless @item.photos.blank? %>
+					image_list: [ 
+						<%= photo_array(@item.photos).html_safe %>
+						],
+					<% end %>
+				<% end %>
+				toolbar: ["undo redo | formatselect | fontselect | fontsizeselect | bold | italic | underline | alignleft | aligncenter | alignjustify | alignright"],
+				language: 'ja'})
+		</script>
 	</div>
 	<div class="control-group">
-		<%= text_area  'item', 'description', 		{:class=>"no-rich input-block-level" , :rows => 10, :autocomplete=>false, :placeholder=>"項目の説明を入力します。"}  %>
+		<%= text_area  'item', 'description', :class => "tinymce input-block-level", :rows => 10, :autocomplete=>false, :placeholder=>"項目の説明を入力します。" %>
+		<%= tinymce if false%>
+		<script type="text/javascript">
+			tinyMCE.init({
+				selector: 'textarea.tinymce',
+				cache_suffix: "?v=5.10.2",
+				theme_advanced_toolbar_location: "top",
+				theme_advanced_statusbar_location: "bottom",
+				theme_advanced_buttons3_add: ["tablecontrols"],
+				plugins: "table,image",
+				<% unless @item.blank? %>
+					<% unless @item.photos.blank? %>
+					image_list: [ 
+						<%= photo_array(@item.photos).html_safe %>
+						],
+					<% end %>
+				<% end %>
+				toolbar: ["undo redo | formatselect | fontselect | fontsizeselect | bold | italic | underline | alignleft | aligncenter | alignjustify | alignright"],
+				language: 'ja'})
+		</script>
 	</div>
 <% end %>
 

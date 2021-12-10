@@ -44,7 +44,7 @@ class BsAbsContentBagController < ApplicationController
 
   def update_bag
     bag = ContentBag.find(params[:id])
-    bag.update_attributes(params[:item])
+    bag.update_attributes(content_bag_params)
     redirect_to :action=>"content_root"
   end
   
@@ -75,12 +75,9 @@ class BsAbsContentBagController < ApplicationController
   end
 
   def content_category_update_description
-    if request.post?
       @parent_category = @item = @shop.content_categories.find_by_id(params[:id])
-      @item.update_attributes(params[:item])
-          
+      @item.update_attributes(content_category_params)
       redirect_to :action=>'content_category', :id=>@item
-    end    
   end
 
   
@@ -88,7 +85,7 @@ class BsAbsContentBagController < ApplicationController
   ##  Face Operation
   #
   def edit_face
-    @parent_category = @shop.content_categories.find_by_id(params[:id])    
+    @parent_category = @shop.content_categories.find_by_id(params[:id])
   end
 
   ###
@@ -108,7 +105,7 @@ class BsAbsContentBagController < ApplicationController
   end
 
   def create_leaf
-    @item = ContentLeaf.new(hikaru_params)
+    @item = ContentLeaf.new(content_leafs_params)
     @item.save
     redirect_to :action=>"show_leaf", :id=>@item
 end
@@ -118,19 +115,15 @@ end
   end
 
   def update_leaf
-    if request.post?
-      @item =  @shop.content_leafs.find_by_id(params[:id])
-      @item.update_attributes(params[:item])
-      redirect_to :action=>"show_leaf", :id=>@item
-    end
+    @item =  @shop.content_leafs.find_by_id(params[:id])
+    @item.update_attributes(content_leafs_params)
+    redirect_to :action=>"show_leaf", :id=>@item
   end
   
   def delete_leaf
-    if request.post?
-      item = @shop.content_leafs.find_by_id(params[:id])
-      item.destroy
-      redirect_to :action=>"content_category", :id=>item.content_category
-    end
+    item = @shop.content_leafs.find_by_id(params[:id])
+    item.destroy
+    redirect_to :action=>"content_category", :id=>item.content_category
   end
 
   def leaf_higher
@@ -182,11 +175,9 @@ end
   end
 
   def content_category_create
-    if request.post?
-      @item     = ContentCategory.new(hikaru_params)
+      @item     = ContentCategory.new(content_category_params)
       @item.save
       redirect_to(:action=>'content_category_tree', :id=>@item.parent)
-    end
   end
 
   def content_category_edit
@@ -198,11 +189,9 @@ end
   end
 
   def content_category_update
-    if request.post?
       @item = ContentCategory.find(params[:id])
-      @item.update_attributes(params[:item])
+      @item.update_attributes(content_category_params)
       redirect_to(:action=>'content_category_tree', :id=>@item.parent)
-    end
   end
 
   def sort_update
@@ -228,7 +217,6 @@ end
   end
 
   def content_catefory_delete
-    if request.post?
       model = ContentCategory.find(params[:id])
       model.destroy
       render :update do | page |
@@ -236,7 +224,6 @@ end
           page.visual_effect(:fade, "item_#{model.id}", :duration => '1', :delay=>'0')
         end
       end
-    end
   end
 
   ###
@@ -247,21 +234,30 @@ end
   end
 
   def create_photo
-    if request.post?
-      @item = @shop.content_leafs.find_by_id(params[:id]) 
-      @photo = { :image_temp=>"", :image=>params[:file] }
-      photo = Photo.new(@photo)
+    @item = @shop.content_leafs.find_by_id(params[:id]) 
+    photo = Photo.new(photo_params)
+    photo.shop = @shop
+    @item.photos << photo
+    @item.photos.build
+    redirect_to :action=>"show_leaf", :id=>@item
+  end
+
+  #def create_photo
+  #  if request.post?
+  #    @item = @shop.content_leafs.find_by_id(params[:id]) 
+  #    @photo = { :image_temp=>"", :image=>params[:file] }
+  #    photo = Photo.new(@photo)
       
       # puts "*-"*20
       # puts photo
       # puts "*-"*20
       
       
-      photo.shop = @shop
-      @item.photos << photo
-      redirect_to :action=>"show_leaf", :id=>@item
-    end
-  end
+  #    photo.shop = @shop
+  #    @item.photos << photo
+  #    redirect_to :action=>"show_leaf", :id=>@item
+  #  end
+  #end
 
   def photo_higher
     photo = @shop.photos.find(params[:id])
@@ -278,34 +274,38 @@ end
   end
 
   def update_photo
-    if request.post?
-      photo = @shop.photos.find(params[:id])
-      photo.update_attributes(params[:photo])
-      redirect_to :action=>'show_leaf', :id=>photo.ref_id, :hash=>Time.now.to_i
-    end
-  end
+    photo = @shop.photos.find(params[:id])
+    photo.update_attributes(photo_params)
+    redirect_to :action=>'show_leaf', :id=>photo.ref_id, :hash=>Time.now.to_i
+end
   
   def delete_photo
-    if request.post?
-      photo = @shop.photos.find(params[:id])
-      photo.destroy
-      redirect_to :action=>'show_leaf', :id=>photo.ref_id, :hash=>Time.now.to_i
-    end
+    photo = @shop.photos.find(params[:id])
+    photo.destroy
+    redirect_to :action=>'show_leaf', :id=>photo.ref_id, :hash=>Time.now.to_i
   end
 
   ###
   ##   Face Photo Operations
   #
   def create_face_photo
-    if request.post?
-      @item = @shop.content_categories.find_by_id(params[:id]) 
-      @photo = { :image_temp=>"", :image=>params[:file] }
-      photo = Photo.new(@photo)
-      photo.shop = @shop
-      @item.photos << photo
-      redirect_to :action=>"edit_face", :id=>@item
-    end
+    @item = @shop.content_categories.find_by_id(params[:id]) 
+    photo = Photo.new(photo_params)
+    photo.shop = @shop
+    @item.photos << photo
+    @item.photos.build
+    redirect_to :action=>"edit_face", :id=>@item
   end
+
+
+  #def create_face_photo
+  #    @item = @shop.content_categories.find_by_id(params[:id]) 
+  #    @photo = { :image_temp=>"", :image=>params[:file] }
+  #    photo = Photo.new(@photo)
+  #    photo.shop = @shop
+  #    @item.photos << photo
+  #    redirect_to :action=>"edit_face", :id=>@item
+  #end
 
   def photo_face_higher
     photo = @shop.photos.find(params[:id])
@@ -322,19 +322,15 @@ end
   end
 
   def update_face_photo
-    if request.post?
       photo = @shop.photos.find(params[:id])
-      photo.update_attributes(params[:photo])
+      photo.update_attributes(photo_params)
       redirect_to :action=>'edit_face', :id=>photo.ref_id, :hash=>Time.now.to_i
-    end
   end
   
   def delete_face_photo
-    if request.post?
       photo = @shop.photos.find(params[:id])
       photo.destroy
       redirect_to :action=>'edit_face', :id=>photo.ref_id, :hash=>Time.now.to_i
-    end
   end
   
   def json_cat
@@ -390,8 +386,22 @@ end
   end
 
   def content_bag_params
-    params.require(:item).permit(:id, :shop_id, :parent_id, :position, :hash_key, :content_type, :contemy_categoru_id, :web_page_id, :name, :description, :is_pablic)
+    params.require(:item).permit(:id, :shop_id, :parent_id, :position, :hash_key, :content_type, :contemy_categoru_id, :web_page_id, :name, :description, :is_public)
   end
+
+  def content_leafs_params
+    params.require(:item).permit(:id, :shop_id, :content_bag_id, :content_category_id, :staff_id, :position, :title, :description, :description_2, :description_3, :is_public)
+  end
+
+  def content_category_params
+    params.require(:item).permit(:id, :shop_id, :parent_id, :position, :category_type, :web_page_id, :title, :description, :description_2, :description_3, :is_public)
+  end
+
+  def photo_params
+    params.require(:photo).permit(:clip, :info)
+    #params.permit(:file)
+  end
+
   def session_operation
     @shop = Shop.find(params[:id])
   end

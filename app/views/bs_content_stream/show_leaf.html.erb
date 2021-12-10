@@ -1,3 +1,4 @@
+
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
 	<h3><%= model_title(@item) %></h3>
@@ -10,7 +11,6 @@
   <% end %>
   <li class="active"><%= model_title(@item) %></li>
 </ul>
-
 <h4>
 	<div class="pull-right">
 		<p>
@@ -24,7 +24,7 @@
 				<i class="icon-pencil"></i>&nbsp;
 				編集
 			</a>
-			<a class="btn btn-danger btn-small"  data-toggle="modal" href="#modal_delete">
+			<a class="btn btn-danger btn-small" data-toggle="modal" href="#modal_delete">
 				<i class="icon-trash"></i>&nbsp;
 				削除確認
 			</a>
@@ -72,7 +72,7 @@
 	  <small>記事で使用する画像は予め追加してください。先頭の写真が一覧表示の際の代表写真になります。</small>
 	</p>	
 	
-	<% array = @item.photos.find(:all, :order=>"position asc").in_groups_of(3, false)%>
+	<% array = @item.photos.order(position: :asc).in_groups_of(3, false)%>
 	<% for i in 0..(array.size-1) %>
 		<% @lines = array[i] %>
 	    <ul class="thumbnails">
@@ -103,18 +103,43 @@
 
 
 <div id="modal_delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">削除確認</h3>
-  </div>
-  <div class="modal-body">
-    <p>記事を削除します。よろしいですか？</p>
-  </div>
-  <div class="modal-footer">
-	<%= form_tag({:action => 'delete_leaf', :id=>@item}, :class=>"form-horizontal")  do %>
-		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-  	<%end%>  	
-  </div>
+  <%= form_tag({:action => 'delete_leaf', :id=>@item}, :class=>"form-horizontal", method: :delete)  do %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">削除確認</h3>
+	</div>
+	<div class="modal-body">
+		<p>記事を削除します。よろしいですか？</p>
+	</div>
+	<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+  <%end%>  
 </div>
 
+<% if false %>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
