@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="copyright"                content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/style" %>
+</head>
+<body id="body">
+<!-- CALOUSEL -->
+    <div id="carousel" class="page_staff">
+        STAFF LIST
+    </div>
+<!-- MAIN -->
+<main id="main">
+    <h1><%= model_title(@seed) %></h1>
+    <p class="smaller">画像をクリックで詳細を表示します。</p>
+    <ul class="p3m2">
+<%
+    @staffs.each do | staff | @staff = staff
+        key_photo = key_photo(@staff)
+        unless key_photo.blank?
+            image_url = url_for_file_column(key_photo, :image, 'panel')
+        else
+            image_url = '//placehold.jp/256x384.png?text=STAFF'
+        end
+        if request.host == 'sr2.swifty.jp'
+            staff_url = url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key)
+        else
+            staff_url = url_for(:action=>'staff', :id=>@staff)
+        end
+%>
+        <li>
+            <div><a href="<%= staff_url %>"><img src="<%= image_url %>" alt="<%= model_name(@staff) %>"></a></div>
+            <h2><a href="<%= staff_url %>"><%= model_name(@staff) %><span><%= h @staff.job_title %></span></a></h2>
+        </li>
+<%  end %>
+    </ul>
+</main>
+<!-- FOOTER -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/footer" %>
+<!-- HEADER -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/header" %>
+<!-- SCRIPT -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/script" %>
+</body>
+</html>

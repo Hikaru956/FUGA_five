@@ -1,0 +1,48 @@
+<%
+    widget_bag = VisualWidget.search_widget_bag_for(@website, "12e9275b7e7a46441c171681026beec0")
+    if widget_bag.data_string.blank?
+        cmax = 0
+    else
+        cmax = widget_bag.data_string.to_i
+    end
+    if cmax == 1
+
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_GALLERY)
+        navigation = type_root.web_page
+        gallery_bags =  type_root.public_bags
+        unless gallery_bags.blank?
+%>
+        <aside>
+            <div class="container">
+                <h1><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id %></h1>
+                <div id="streem_table">
+                    <ul class="wrapper">
+<%
+            gallery_bags.each do | leaf |
+                if request.host == 'sr2.swifty.jp'
+                    page_url  = url_for(:action=>'gallery_list', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'gallery_list', :id=>leaf)
+                end
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.jp/ffffff/cccccc/480x360.jpg?text=No Photo'
+                end
+%>
+                        <li class="col-1p4">
+                            <div class="imgbox"><div style="background-image:url('<%= image_url %>')">
+                                <a href="<%= page_url %>"><img src="<%= image_url %>" alt=""></a>
+                            </div></div>
+                            <h1><a href="<%= page_url %>"><%= model_name(leaf) %></a></h1>
+                        </li>
+<%          end %>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+<%      end %>
+<%
+    end
+%>

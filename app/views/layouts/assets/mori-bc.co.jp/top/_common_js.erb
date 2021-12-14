@@ -1,0 +1,7 @@
+<div id="gotop"><i class="fa fa-angle-up"></i></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/assets/vendor/jquery-2.1.4.min.js"><\/script>')</script>
+<script src="/javascripts/assets/mori-bc.co.jp/top/top.js"></script>
+<% unless @website.analytics_code.blank? %>
+<%= raw @website.analytics_code %>
+<% end %>

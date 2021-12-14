@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+		<title><%= model_title(@seed) %> - <%= @website.name %></title>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster/head_logic" %>
+    </head>
+    <body>
+        <div class="spinner">
+        </div>
+        <!--============================== header =================================-->
+        <header>
+	        <%= render :partial=>"#{LayoutScheme.asset_root}/monster/header" %>
+        </header>
+        <div class="bg-content">
+
+            <!--============================== content =================================-->
+            <div id="content" class="content-extra">
+
+                <div class="ic">
+                </div>
+                <div class="row-1">
+                    <div class="container">
+						
+					  <br/>                    	
+			          <ol class="breadcrumb">
+			            <li><a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>">TOP</a></li>
+			            <li class="active"><%= model_title(@seed) %></li>
+			          </ol>
+						
+						<% @public_bag =  @seed.public_bags %>
+						<% unless @public_bag.blank? %>
+							<% array = @public_bag.in_groups_of(4, false) %>
+							<% for i in 0..(array.size-1) %>
+								<% @lines = array[i] %>
+								
+								<div class="row">
+						            <ul class="thumbnails thumbnails-1">
+						
+								    <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_news_bag", :locals => {:temp_local => ((@lines.size<1)? nil: @lines[0])} %>
+								    <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_news_bag", :locals => {:temp_local => ((@lines.size<2)? nil: @lines[1])} %>
+								    <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_news_bag", :locals => {:temp_local => ((@lines.size<3)? nil: @lines[2])} %>
+								    <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_news_bag", :locals => {:temp_local => ((@lines.size<4)? nil: @lines[3])} %>
+									
+									</ul>
+								</div>
+							<% end %>
+						<% else %>
+							<p class="muted">情報が登録されていません。</p>
+						<% end %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--============================== footer =================================-->
+        <footer>
+	        <%= render :partial=>"#{LayoutScheme.asset_root}/monster/footer" %>
+        </footer>
+    </body>
+</html>

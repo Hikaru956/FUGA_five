@@ -1,0 +1,10 @@
+<% widget_bag = VisualWidget.search_widget_bag_for(@website, "fc6b5ace88d0ee3bb11a921bbf22768b") %>
+<% if !widget_bag.blank? && widget_bag.is_valid? %>
+<aside id="carousel">
+    <ul id="carousel_ul">
+<% widget_bag.photos.each do | photo | %>
+        <li><img src="<%= url_for_file_column(photo, :image) %>"></li>
+<% end %>
+    </ul>
+</aside>
+<% end %>

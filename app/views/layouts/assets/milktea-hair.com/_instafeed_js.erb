@@ -1,0 +1,23 @@
+<%  instaid = VisualWidget.search_widget_bag_for(@website, "e14c1e6a72d08afd0b865fe4fe058e11") %>
+<%  instatk = VisualWidget.search_widget_bag_for(@website, "d6362c10b3f435d975c5aec851b3a9fc") %>
+<%  if !instaid.blank? && !instatk.blank? && !instaid.data_string.blank? && !instatk.data_string.blank? %>
+<script>
+$.ajax({
+    type: 'GET',
+    url: 'https://graph.facebook.com/v8.0/<%= instaid.data_string %>?fields=name%2Cmedia.limit(9)%7Bcaption%2Cmedia_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url%7D&access_token=<%= instatk.data_string %>',
+    dataType: 'json',
+    success: function(json) {
+        var ig = json.media.data;
+        var ht = '';
+        for (var i = 0; i < ig.length; i++) {
+            if (ig[i].media_type == 'VIDEO'){
+                ht += '<li class="col-1p3f"><div class="col-in2"><div class="imgbox"><div style="background-image:url(' + ig[i].thumbnail_url + ')"><a href="' + ig[i].permalink + '" target="_blank"><img src="' + ig[i].thumbnail_url + '" alt="' + ig[i].caption + '"></a></div></div></div></li>';
+            } else {
+                ht += '<li class="col-1p3f"><div class="col-in2"><div class="imgbox"><div style="background-image:url(' + ig[i].media_url + ')"><a href="' + ig[i].permalink + '" target="_blank"><img src="' + ig[i].media_url + '" alt="' + ig[i].caption + '"></a></div></div></div></li>';
+            }
+        }
+        $("#instafeed").append(ht);
+    }
+});
+</script>
+<%  end %>

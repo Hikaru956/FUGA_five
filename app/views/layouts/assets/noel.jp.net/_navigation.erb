@@ -1,0 +1,91 @@
+<% if request.host == 'sr2.swifty.jp' %>
+      <li><a href="/home?wkey=d77afab45ead32de9907c4efb813ca7a">TOP</a></li>
+      <li>
+        <span>noël HAIR</span>
+        <div>
+          <ul>
+            <li><a href="/fix?id=12749&wkey=d77afab45ead32de9907c4efb813ca7a">SALON</a></li>
+            <li><a href="/menu_table?id=3125&wkey=d77afab45ead32de9907c4efb813ca7a">MENU</a></li>
+            <li><a href="/articles?id=3129&wkey=d77afab45ead32de9907c4efb813ca7a">BLOG</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <span>noël CARE</span>
+        <div>
+          <ul>
+            <li><a href="/fix?id=12750&wkey=d77afab45ead32de9907c4efb813ca7a">SALON</a></li>
+            <li><a href="/menu_table?id=3133&wkey=d77afab45ead32de9907c4efb813ca7a">MENU</a></li>
+            <li><a href="/articles?id=3130&wkey=d77afab45ead32de9907c4efb813ca7a">BLOG</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <span>Crecer <span> - Kid's fashion</span></span>
+        <div>
+          <ul>
+            <li><a href="http://www.atelier-crecer.jp/" target="_blank">SHOP</a></li>
+            <li><a href="/articles?id=3131&wkey=d77afab45ead32de9907c4efb813ca7a">BLOG</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <span>CHALLENGE SHOP</span>
+        <div>
+          <ul>
+            <li><a href="/fix?id=12751&wkey=d77afab45ead32de9907c4efb813ca7a">SHOP</a></li>
+            <li><a href="/menu_table?id=3134&wkey=d77afab45ead32de9907c4efb813ca7a">MENU</a></li>
+            <li><a href="/articles?id=3132&wkey=d77afab45ead32de9907c4efb813ca7a">BLOG</a></li>
+          </ul>
+        </div>
+      </li>
+<% else %>
+      <li><a href="/home">TOP</a></li>
+      <li>
+        <span>noël HAIR</span>
+        <div>
+          <ul>
+            <li><a href="/fix?id=12749">SALON</a></li>
+            <li><a href="/menu_table?id=3125">MENU</a></li>
+            <li><a href="/articles?id=3129">BLOG</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <span>noël CARE</span>
+        <div>
+          <ul>
+            <li><a href="/fix?id=12750">SALON</a></li>
+            <li><a href="/menu_table?id=3133">MENU</a></li>
+            <li><a href="/articles?id=3130">BLOG</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <span>Crecer <span> - Kid's fashion</span></span>
+        <div>
+          <ul>
+            <li><a href="http://www.atelier-crecer.jp/" target="_blank">SHOP</a></li>
+            <li><a href="/articles?id=3131">BLOG</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <span>CHALLENGE SHOP</span>
+        <div>
+          <ul>
+            <li><a href="/fix?id=12751">SHOP</a></li>
+            <li><a href="/menu_table?id=3134">MENU</a></li>
+            <li><a href="/articles?id=3132">BLOG</a></li>
+          </ul>
+        </div>
+      </li>
+<% end %>
+<% if @author_mode %>
+    <% unless @website.wsite_layout_deploy.is_public.blank? %>
+      <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>
+      <li><a href="<%= url_for(:action=>'list_color_schemes') %>">カラー</a></li>
+    <% end %>
+      <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+      <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+<% end %>

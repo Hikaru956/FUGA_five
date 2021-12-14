@@ -1,0 +1,38 @@
+    <ul class="sns">
+<% unless @website.wsite_telephone.blank? %>
+        <li>
+            <a href="tel:<%= @website.wsite_telephone %>" target="_blank">
+                <i class="fas fa-phone-alt"></i>
+            </a>
+        </li>
+<% end %>
+<% unless @website.social_facebook_uri.blank? %>
+        <li>
+            <a href="<%= @website.social_facebook_uri %>" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </li>
+<% end %>
+<% unless @website.social_instagram_uri.blank? %>
+        <li>
+            <a href="<%= @website.social_instagram_uri %>" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </li>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+        <li>
+            <a href="<%= @website.social_line_uri %>" target="_blank">
+                <i class="fab fa-line"></i>
+            </a>
+        </li>
+<% end %>
+<%  contact = VisualWidget.search_widget_bag_for(@website, "40ac48d2bf792e9e7e5dd5a21902c1f1") %>
+<%  if request.host == 'sr2.swifty.jp' %>
+<!--
+        <li><a href="#"><i class="far fa-envelope"></i></a></li>
+-->
+<%  elsif !contact.blank? && contact.is_valid? %>
+        <li><a href="<%= raw contact.data_string %>"><i class="far fa-envelope"></i></a></li>
+<%  end %>
+    </ul>

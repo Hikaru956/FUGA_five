@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<%
+    if request.host == 'sr2.swifty.jp'
+        fix_url = url_for(:action=>'fix', :id=>@seed, :wkey=>@website.wsite_hash_key)
+    else
+        fix_url = url_for(:action=>'fix', :id=>@seed)
+    end
+%>
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="//<%= request.host + fix_url %>">
+<meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/css" %>
+</head>
+<body>
+<!-- グローバルナビ -->
+<header id="header" class="wrapper">
+  <nav id="gNav" class="tablet">
+    <ul class="gNav">
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/navigation" %>
+    </ul>
+  </nav>
+  <div id="mNavOpener">
+    <span>MENU</span>
+  </div>
+<% if    @seed.id == 12749 %>
+  <h1><span>HAIR DESIGN</span></h1>
+<% elsif @seed.id == 12750 %>
+  <h1><span>NAIL / MASSAGE</span></h1>
+<% elsif @seed.id == 12751 %>
+  <h1><span>CHALLENGE SHOP</span></h1>
+<% else %>
+  <h1><span><%= model_title(@seed) %></span></h1>
+<% end %>
+</header>
+<% if    @seed.id == 12749 %>
+<%=  render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/corousel-hair" %>
+<%   unless @seed.description.blank? %>
+<%=    raw @seed.description %>
+<%   end %>
+<%=  render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/bloglist-hair" %>
+<% elsif @seed.id == 12750 %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/corousel-care" %>
+<%   unless @seed.description.blank? %>
+<%=    raw @seed.description %>
+<%   end %>
+<%=  render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/bloglist-care" %>
+<% elsif @seed.id == 12751 %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/corousel-challenge" %>
+<%   unless @seed.description.blank? %>
+<%=    raw @seed.description %>
+<%   end %>
+<%=  render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/bloglist-challenge" %>
+<% else %>
+<%   unless @seed.description.blank? %>
+<article id="concept" class="wrapper">
+<%=    raw @seed.description %>
+</article>
+<%   end %>
+<% end %>
+<!-- フッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/footer" %>
+<!-- モバイルナビ -->
+<div id="mNav" class="mobile">
+  <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/navigation" %>
+  </ul>
+</div><!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/common_js" %>
+</body>
+</html>

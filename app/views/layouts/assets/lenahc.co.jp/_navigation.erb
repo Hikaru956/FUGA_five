@@ -1,0 +1,11 @@
+<nav id="nav" class="">
+    <div class="container">
+<%  @fix16847 = @website.content_leafs.find_by_id(16847); %>
+<%  if !@fix16847.blank? %>
+<%      unless @fix16847.description.blank? %>
+<%=         raw @fix16847.description %>
+<%      end %>
+<%  end %>
+        <div id="nav-closer">&nbsp;</div>
+    </div>
+</nav>

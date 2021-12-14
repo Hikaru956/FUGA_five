@@ -40,7 +40,7 @@
 
 
 <!-- Modals -->
-<%= form_tag({:action => 'update_bag', :id=>@item}, :class=>"form-horizontal")  do %>
+<%= form_tag({:action => 'update_bag', :id=>@item}, :class=>"form-horizontal", method: :patch)  do %>
 <div id="modal_edit_<%=@item.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -65,7 +65,7 @@
     <p>ストリームを削除します。ストリーム内のすべてのコンテンツも削除されます。よろしいですか？</p>
   </div>
   <div class="modal-footer">
-	<%= form_tag({:action => 'delete_bag', :id=>@item}, :class=>"form-horizontal")  do %>
+	<%= form_tag({:action => 'delete_bag', :id=>@item}, :class=>"form-horizontal", method: :delete)  do %>
 		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
   	<%end%>  	

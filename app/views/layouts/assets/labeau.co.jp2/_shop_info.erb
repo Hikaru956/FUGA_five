@@ -1,0 +1,147 @@
+<%
+    shop1_logo = VisualWidget.search_widget_bag_for(@website, "580e73e06fb9de010ded07ad2c1b16be")
+    shop1_phot = VisualWidget.search_widget_bag_for(@website, "0aff51d65eb317fe43766c032be59aa8")
+    shop2_logo = VisualWidget.search_widget_bag_for(@website, "3d5f7378b6d52f924082da8b3183d5c1")
+    shop2_phot = VisualWidget.search_widget_bag_for(@website, "f6053733ef0b04f74885976f9f3ef329")
+    shop3_logo = VisualWidget.search_widget_bag_for(@website, "4ee5332447095380f8dd0dbd3bbbc716")
+    shop3_phot = VisualWidget.search_widget_bag_for(@website, "f9148b466941a31cdbb08d51bab3c3f5")
+    if shop1_logo.blank? || shop1_logo.photos[0].blank?
+        logo1_url = '//placehold.jp/ffffff/cccccc/150x80.jpg?text=NoPhoto'
+    else
+        logo1_url = url_for_file_column(shop1_logo.photos[0], :image, "thumb")
+    end
+    if shop1_phot.blank? || shop1_phot.photos[0].blank?
+        photo1_url = '//placehold.jp/ffffff/cccccc/150x150.jpg?text=NoPhoto'
+    else
+        photo1_url = url_for_file_column(shop1_phot.photos[0], :image, "thumb")
+    end
+    if shop2_logo.blank? || shop2_logo.photos[0].blank?
+        logo2_url = '//placehold.jp/ffffff/cccccc/150x80.jpg?text=NoPhoto'
+    else
+        logo2_url = url_for_file_column(shop2_logo.photos[0], :image, "thumb")
+    end
+    if shop2_phot.blank? || shop2_phot.photos[0].blank?
+        photo2_url = '//placehold.jp/ffffff/cccccc/150x150.jpg?text=NoPhoto'
+    else
+        photo2_url = url_for_file_column(shop2_phot.photos[0], :image, "thumb")
+    end
+    if shop3_logo.blank? || shop3_logo.photos[0].blank?
+        logo3_url = '//placehold.jp/ffffff/cccccc/150x80.jpg?text=NoPhoto'
+    else
+        logo3_url = url_for_file_column(shop3_logo.photos[0], :image, "thumb")
+    end
+    if shop3_phot.blank? || shop3_phot.photos[0].blank?
+        photo3_url = '//placehold.jp/ffffff/cccccc/150x150.jpg?text=NoPhoto'
+    else
+        photo3_url = url_for_file_column(shop3_phot.photos[0], :image, "thumb")
+    end
+%>
+        <article>
+            <div class="container">
+                <h1>SALON</h1>
+                <div class="container2">
+                    <div class="wrapper">
+                        <div class="col-1p2">
+                            <div class="col-in">
+                                <div class="wrapper">
+                                    <div class="col-1p3f">
+                                        <div class="col-in">
+                                            <div class="imgbox"><div style="background-image:url('<%= photo1_url %>')">
+                                                <img src="<%= photo1_url %>" alt="">
+                                            </div></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2p3f">
+                                        <div class="col-in">
+                                            <div class="shop_logo">
+                                                <img src="<%= logo1_url %>" alt="">
+                                            </div>
+                                            <div class="shop_info">
+                                                <a href="https://beauty.hotpepper.jp/slnH000230521/coupon/" target="_blank"><img src="/photo/image/0000/1222/hpb_bunner.png" alt="予約"></a><br>
+                                                新潟市中央区新島町通1-1977-2<br>
+                                                ロイヤル礎1階<br>
+                                                Phone. 025-211-4595<br>
+                                                OPEN / 10:00 - 20:00<br>
+                                                【金曜】10:00 - 20:30<br>
+                                                【日・祝】9:00 - 18:30<br>
+                                                CLOSE / 毎週月曜日、第3火曜日<br>
+                                                駐車場（Milk tea 専用駐車場は8、10です！）
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1p2">
+                            <div class="col-in">
+                                <div class="wrapper">
+                                    <div class="col-1p3f">
+                                        <div class="col-in">
+                                            <div class="imgbox"><div style="background-image:url('<%= photo2_url %>')">
+                                                <img src="<%= photo2_url %>" alt="">
+                                            </div></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2p3f">
+                                        <div class="col-in">
+                                            <div class="shop_logo">
+                                                <img src="<%= logo2_url %>" alt="">
+                                            </div>
+                                            <div class="shop_info">
+                                                <a href="https://beauty.hotpepper.jp/slnH000230521/coupon/" target="_blank"><img src="/photo/image/0000/1222/hpb_bunner.png" alt="予約"></a><br>
+                                                新潟市中央区新島町通1-1977-2<br>
+                                                ロイヤル礎2階<br>
+                                                Phone. 025-201-6088<br>
+                                                OPEN / 10:00 - 20:00<br>
+                                                【金曜】10:00 - 20:30<br>
+                                                【日・祝】9:00 - 18:30<br>
+                                                CLOSE / 毎週月曜日、第3火曜日<br>
+                                                駐車場（Milk tea 専用駐車場は8、10です！）
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="gmap1">
+                    </div>
+                    <div class="wrapper">
+                        <div class="col-1p2">
+                            <div class="col-in">
+                                <div class="wrapper">
+                                    <div class="col-1p3f">
+                                        <div class="col-in">
+                                            <div class="imgbox"><div style="background-image:url('<%= photo3_url %>')">
+                                                <img src="<%= photo3_url %>" alt="">
+                                            </div></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2p3f">
+                                        <div class="col-in">
+                                            <div class="shop_logo">
+                                                <img src="<%= logo3_url %>" alt="">
+                                            </div>
+                                            <div class="shop_info">
+                                                <a href="https://beauty.hotpepper.jp/slnH000348459/coupon/" target="_blank"><img src="/photo/image/0000/1222/hpb_bunner.png" alt="予約"></a><br>
+                                                新潟市西区大学南2-2-7日報ビル<br>
+                                                Phone. 025-263-1633<br>
+                                                OPEN / 9:30 - 19:00<br>
+                                                【日・祝】9:00 - 18:30<br>
+                                                CLOSE / 毎週月曜日、第3火曜日<br>
+                                                駐車場完備
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1p2">
+                            <div class="col-in">
+                                <div id="gmap2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>

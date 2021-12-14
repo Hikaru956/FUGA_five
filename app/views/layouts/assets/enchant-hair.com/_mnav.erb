@@ -1,0 +1,61 @@
+<%  reserve = VisualWidget.search_widget_bag_for(@website, "5d8f71b16f892ef6e5cfa900650ba5d8") %>
+<div id="mNav">
+    <ul class="nonStyle">
+<%  if request.host == 'sr2.swifty.jp' %>
+        <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><span>HOME</span>ホーム</a></li>
+<!--
+        <li><a href="/news_list?id=160&wkey=<%= @website.wsite_hash_key %>"><span>INFO</span>お知らせ</a></li>
+-->
+        <li><a href="/fix?id=5505&wkey=<%= @website.wsite_hash_key %>"><span>SALON</span>サロン</a></li>
+        <li><a href="/fix?id=5506&wkey=<%= @website.wsite_hash_key %>"><span>BEAUTY</span>ビューティー</a></li>
+<!--
+        <li><a href="/collcetions?id=162&wkey=<%= @website.wsite_hash_key %>"><span>STYLE</span>スタイル</a></li>
+-->
+        <li><a href="/contact_us?wkey=<%= @website.wsite_hash_key %>"><span>STAFF</span>スタッフ</a></li>
+        <li><a href="/menu_list?id=163&wkey=<%= @website.wsite_hash_key %>"><span>PRICE</span>料金表</a></li>
+        <li><a href="/fix?id=5612&wkey=<%= @website.wsite_hash_key %>"><span>ANNIVERSARY</span>記念日</a></li>
+<!--
+        <li><a href="/streams?id=161&wkey=<%= @website.wsite_hash_key %>"><span>BLOG</span>ブログ</a></li>
+-->
+<%      unless @website.wsite_telephone.blank? %>
+        <li><a href="tel:<%= @website.wsite_telephone %>"><span>TEL</span>お電話</a></li>
+<%      end %>
+<%      if !reserve.blank? && reserve.is_valid? %>
+<!--
+        <li><a href="<%= raw reserve.data_string %>" target="_blank"><span>RESERVE</span>WEB予約</a></li>
+-->
+<%      end %>
+        <li><a href="/fix?id=4017&wkey=<%= @website.wsite_hash_key %>"><span>RECRUIT</span>求人</a></li>
+<%      if @author_mode %>
+        <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>
+        <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+        <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+<%      end %>
+<%  else %>
+        <li><a href="/home"><span>HOME</span>ホーム</a></li>
+<!--
+        <li><a href="/news_list?id=160"><span>INFO</span>お知らせ</a></li>
+-->
+        <li><a href="/fix?id=5505"><span>SALON</span>サロン</a></li>
+        <li><a href="/fix?id=5506"><span>BEAUTY</span>ビューティー</a></li>
+<!--
+        <li><a href="/collcetions?id=162"><span>STYLE</span>スタイル</a></li>
+-->
+        <li><a href="/contact_us"><span>STAFF</span>スタッフ</a></li>
+        <li><a href="/menu_list?id=163"><span>PRICE</span>料金表</a></li>
+        <li><a href="/fix?id=5612"><span>ANNIVERSARY</span>記念日</a></li>
+<!--
+        <li><a href="/streams?id=161"><span>BLOG</span>ブログ</a></li>
+-->
+<%      unless @website.wsite_telephone.blank? %>
+        <li><a href="tel:<%= @website.wsite_telephone %>"><span>TEL</span>お電話</a></li>
+<%      end %>
+<%      if !reserve.blank? && reserve.is_valid? %>
+<!--
+        <li><a href="<%= raw reserve.data_string %>" target="_blank"><span>RESERVE</span>WEB予約</a></li>
+-->
+<%      end %>
+        <li><a href="/fix?id=4017"><span>RECRUIT</span>求人</a></li>
+<%  end %>
+    </ul>
+</div>

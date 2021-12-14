@@ -1,0 +1,81 @@
+<%
+        @max = 12
+        type_news = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+        bag_categories = type_news.children.find(:all, :conditions=>["is_public=?", true])
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        c = ContentLeaf.public_leafs_condition
+        c.and "content_category_id", public_categories
+        latest_news = @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+        latest_news.each do | news |
+            news['type']  = 'news'
+            news['label'] = news.content_category.category_label
+        end
+
+        type_blog = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
+        bag_categories = type_blog.children.find(:all, :conditions=>["is_public=?", true])
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        c = ContentLeaf.public_leafs_condition
+        c.and "content_category_id", public_categories
+        latest_blog = @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+        latest_blog.each do | blog |
+            blog['type']  = 'blog'
+            blog['label'] = blog.content_category.category_label
+        end
+
+        latest_leafs = latest_news + latest_blog
+        latest_leafs.sort_by! {| leaf | leaf.publish_from }.reverse!
+        latest_leafs = latest_leafs.slice(0, @max)
+%>
+<%      unless latest_leafs.blank? %>
+        <aside>
+            <div class="container">
+                <h1>New Posts</h1>
+                <ul class="wrapper">
+<%
+            latest_leafs.each do | leaf |
+                if request.host == 'sr2.swifty.jp' && leaf.type == 'news'
+                    page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                elsif request.host == 'sr2.swifty.jp' && leaf.type == 'blog'
+                    page_url  = url_for(:action=>'stream_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                elsif request.host != 'sr2.swifty.jp' && leaf.type == 'news'
+                    page_url  = url_for(:action=>'news_show', :id=>leaf)
+                else
+                    page_url  = url_for(:action=>'stream_show', :id=>leaf)
+                end
+                publish   = leaf.publish_from.strftime("%Y-%m-%d")
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'thumb')
+                else
+                    image_url = '//placehold.jp/ffffff/cccccc/359x202.jpg?text='+publish
+                end
+%>
+                    <li class="col-1p3">
+                        <div class="col-in">
+                            <div class="imgbox169"><div style="background-image:url('<%= image_url %>')">
+                                <a href="<%= page_url %>"><img src="<%= image_url %>" alt=""></a>
+                            </div></div>
+                            <div class="new_label">
+                                <%= leaf.label %>
+                            </div>
+                            <h2 class="new_title">
+                                <a href="<%= page_url %>"><%= model_title(leaf) %></a>
+                            </h2>
+                            <div class="new_post">
+                                Posted by <%= publish %>
+                            </div>
+                        </div>
+                    </li>
+<%          end %>
+                </ul>
+            </div>
+        </aside>
+<%      end %>

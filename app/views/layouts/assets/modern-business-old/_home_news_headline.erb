@@ -1,0 +1,45 @@
+<%
+	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+	news_navigation = type_root.web_page 
+	first_bag = type_root.children.where("is_public=?", true).first
+	
+	public_categories  = []
+	public_categories.concat(first_bag.sons)
+	public_categories << first_bag
+
+	latest_leaf = ContentLeaf.public_leafs.where("content_category_id", public_categories).order(position: :desc).first
+%>
+
+<% unless latest_leaf.blank? %>
+    <div class="section-colored">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <h2><%= model_title(latest_leaf) %></h2>
+	        <p>
+	        	<i class="icon-time"></i>&nbsp;<%= publish_label(latest_leaf) %>
+				<% if !latest_leaf.staff.blank? && latest_leaf.staff.staff_status!=Staff::STAFF_BLOCKED %>
+				    by <a href="<%=url_for(:action=>'staff', :id=>latest_leaf.staff) %>"><%= h model_name(latest_leaf.staff) %></a>
+				<% end %>
+	        </p>
+	        <p>
+	        	<%= h truncate(strip_tags(latest_leaf.description).gsub('&nbsp;', ' '), :length=>200) %>
+	        </p>
+		    <p>
+		        <a href="<%= url_for(:action=>'news_show', :id=>latest_leaf, :wkey=>@website.wsite_hash_key) %>" class="btn btn-primary">Read</a>
+		    </p>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+			<% key_photo = key_photo(latest_leaf) %>
+			<% unless key_photo.blank? %>
+				<div class="thumbnail thumbnail-1"><%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %></div>
+			<% else %>
+				<img class="img-responsive" src="http://placehold.it/700x450/ffffff/cccccc&amp;text=<%=latest_leaf.publish_from.strftime('%Y-%m-%d')%>">
+	    	<% end %>
+          </div>
+        </div><!-- /.row -->
+
+      </div><!-- /.container -->
+    </div><!-- /.section-colored -->
+<% end %>

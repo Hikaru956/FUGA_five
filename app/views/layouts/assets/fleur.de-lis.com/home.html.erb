@@ -1,0 +1,152 @@
+<!doctype html>
+<%  home = "a386021cedc3584c6999c6f1c2115f48" %>
+<%  lis  = "27ac677851db26419e0d821b37dc9e22" %>
+<%  ens  = "6d747da5bf38d7171f268545b0652d1c" %>
+<%  lm   = "cd32ac74ed5ca6837f8c86d4ed67a149" %>
+<%  codo = "f90c2c82832eb4a51b59eb07559b7a05" %>
+<%  hptitle = VisualWidget.search_widget_bag_for(@website, "973a82a0296dfcd6acfd039f88ecf2a1") %>
+<%  fbappid = VisualWidget.search_widget_bag_for(@website, "953cce676964cb38b96279606962f082") %>
+<%  og_img  = VisualWidget.search_widget_bag_for(@website, "13238b6667a727b04edd7c9ca097c56f") %>
+<%
+    shopalt = "/" + @website.alt_id
+    shopalt.slice!(".fleur.de-lis.com")
+    if shopalt == "/www"
+        shopalt = ""
+    end
+%>
+<html lang="ja">
+<head prefix="og: http:http://ogp.me/ns#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<%  if hptitle.blank? || !hptitle.is_valid? %>
+<title><%= @website.name %></title>
+<%  else %>
+<title><%= hptitle.data_string %></title>
+<%  end %>
+<%  unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<%  end %>
+<%  unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<%  end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="copyright"                content="<%= model_name(@website.company) %>">
+<%  if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<%  end %>
+<%  unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<%  end %>
+<%  if @website.wsite_hash_key == home %>
+<meta property="og:type"              content="website">
+<%  else %>
+<meta property="og:type"              content="article">
+<%  end %>
+<%  if request.host == 'sr2.swifty.jp' %>
+<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<%  else %>
+<meta property="og:url"               content="https://<%= request.host + shopalt %>/home">
+<%  end %>
+<%  if hptitle.blank? || !hptitle.is_valid? %>
+<meta property="og:title"             content="<%= @website.name %>">
+<%  else %>
+<meta property="og:title"             content="<%= hptitle.data_string %>">
+<%  end %>
+<%  if !og_img.blank? && og_img.is_valid? %>
+<meta property="og:image"             content="https://<%= request.host %><%= url_for_file_column(og_img.photos[0], :image) %>">
+<%  end %>
+<%  unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<%  end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<%  unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<%  end %>
+<%  if request.host != 'sr2.swifty.jp' %>
+<link href="https://<%= request.host %><%= shopalt %>/news_feed.rss" rel="alternate" title="News | fleur de lis" type="application/rss+xml" />
+<link href="https://<%= request.host %><%= shopalt %>/stream_feed.rss" rel="alternate" title="BLOG | fleur de lis" type="application/rss+xml" />
+<%  end %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/fleur.de-lis.com/css" %>
+</head>
+<%  if @website.wsite_hash_key == home %>
+<body id="home">
+<%  elsif @website.wsite_hash_key == lis %>
+<body id="lis">
+<%  else %>
+<body id="shop">
+<%  end %>
+<%  if @website.wsite_hash_key == home %>
+<main id="main">
+	<ul>
+		<li>
+<%  if request.host == 'sr2.swifty.jp' %>
+			<a href="https://sr2.swifty.jp/home?wkey=27ac677851db26419e0d821b37dc9e22">
+<%  else %>
+			<a href="https://fleur.de-lis.com/lis/home">
+<%  end %>
+				<i class="icon-lis"></i>
+			</a>
+		</li>
+		<li>
+<%  if request.host == 'sr2.swifty.jp' %>
+			<a href="https://sr2.swifty.jp/home?wkey=6d747da5bf38d7171f268545b0652d1c">
+<%  else %>
+			<a href="https://fleur.de-lis.com/ens/home">
+<%  end %>
+				<i class="icon-ens"></i>
+			</a>
+		</li>
+		<li>
+<%  if request.host == 'sr2.swifty.jp' %>
+			<a href="https://sr2.swifty.jp/home?wkey=cd32ac74ed5ca6837f8c86d4ed67a149">
+<%  else %>
+			<a href="https://fleur.de-lis.com/lm/home">
+<%  end %>
+				<i class="icon-lm"></i>
+			</a>
+		</li>
+		<li>
+<%  if request.host == 'sr2.swifty.jp' %>
+			<a href="https://sr2.swifty.jp/home?wkey=f90c2c82832eb4a51b59eb07559b7a05">
+<%  else %>
+			<a href="https://fleur.de-lis.com/codo/home">
+<%  end %>
+				<i class="icon-codo"></i>
+			</a>
+		</li>
+	</ul>
+</main>
+<%  else %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/fleur.de-lis.com/shop_home_contents" %>
+<%  end %>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fleur.de-lis.com/footer" %>
+<!-- サイトヘッダー -->
+<%  if @website.wsite_hash_key == home %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/fleur.de-lis.com/home_header" %>
+<%  else %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/fleur.de-lis.com/header" %>
+<%  end %>
+<!-- main nav -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fleur.de-lis.com/navigation" %>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fleur.de-lis.com/common_js" %>
+<!-- page specific javascript -->
+</body>
+</html>

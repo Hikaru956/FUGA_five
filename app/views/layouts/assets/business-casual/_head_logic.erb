@@ -47,10 +47,7 @@
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
 				  background: url(/images/assets/business-casual/bg2.jpg) no-repeat center center fixed; 
 			<% else %>
-				  <% if false %>
-				  	background: url(<%= url_for_file_column(widget_bag.photos[0], :image) %>) no-repeat center center fixed;
-				  <% end %>
-				  background: url(<%= image_tag widget_bag.photos[0].clip.url(:thumb), title: model_name(@website) %>) no-repeat center center fixed;
+				  background: url(<%= url_for_file_column(widget_bag.photos[0], :image) %>) no-repeat center center fixed; 
 			<% end %>			
 
 		  -webkit-background-size: cover;

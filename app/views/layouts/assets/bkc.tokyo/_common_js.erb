@@ -1,0 +1,8 @@
+<div id="gotop" class="center"><i class="fa fa-angle-up"></i></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="/javascripts/assets/vendor/jquery.mobile.v1.4.5.touch.min.js"></script>
+<script src="/javascripts/assets/bkc.tokyo/main.js"></script>
+<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
+<% unless @website.analytics_code.blank? %>
+<%= raw @website.analytics_code %>
+<% end %>

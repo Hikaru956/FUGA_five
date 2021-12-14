@@ -1,0 +1,54 @@
+<%
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
+        navigation = type_root.web_page
+        bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        c = ContentLeaf.public_leafs_condition
+        c.and "content_category_id", public_categories
+        latest_leafs =  @website.content_leafs.find(:all, :limit=>30, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<%      unless latest_leafs.blank? %>
+<aside id="bloglist" class="wrapper">
+  <h2><span class="">BLOG</span></h2>
+  <p><a href="/articles?id=3130" class="moreButton">SEE MORE</a></p>
+  <ul class="container">
+<%
+            count = 0
+            latest_leafs.each do | leaf |
+              if count >= 4
+                break
+              else
+                if leaf.content_category_id == 3130
+                  count += 1
+                  title = model_title(leaf)
+                  if request.host == 'staffroom.swifty.jp'
+                      page_url  = url_for(:action=>'stream_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                  else
+                      page_url  = url_for(:action=>'stream_show', :id=>leaf)
+                  end
+                  publish   = leaf.publish_from.strftime("%Y-%m-%d")
+                  key_photo = key_photo(leaf)
+                  unless key_photo.blank?
+                      image_url = url_for_file_column(key_photo, :image, 'panel')
+                  else
+                      image_url = '//placehold.jp/f8f8f8/999999/230x130.png?text=PHOTO'
+                  end
+%>
+    <li class="col-m2t4">
+      <div class="hdBox">
+        <a href="<%= page_url %>"><img src="<%= image_url %>" alt="<%= title %>"></a>
+      </div>
+      <p class="date"><%= publish %></p>
+      <h3><a href="<%= page_url %>"><%= title %></a></h3>
+    </li>
+<%              end %>
+<%            end %>
+<%          end %>
+  </ul>
+</aside>
+<%      end %>

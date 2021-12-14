@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<%
+    contact_category = ContentCategory.type_root(@website, ContentCategory::TYPE_INFO)
+    if request.host == 'sr2.swifty.jp'
+        staff_url = url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key)
+    else
+        staff_url = url_for(:action=>'staff', :id=>@seed)
+    end
+%>
+<title><%= model_name(contact_category.web_page)+' '+model_name(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<%  if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<%  end %>
+<%  unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<%  end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<%  unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<%  end %>
+<%  unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<%  end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant-hair.com/style" %>
+</head>
+<body id="body">
+<div id="container" class="clearfix">
+    <main id="staffShow">
+<!-- パンくずリスト -->
+        <aside id="breadcrumbs">
+            <ol>
+<%  if request.host == 'sr2.swifty.jp' %>
+                <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fas fa-home"></i></a></li>
+                <li><a href="<%= url_for(:action=>'contact', :id=>contact_category, :wkey=>@website.wsite_hash_key) %>"><%= model_name(contact_category.web_page) %></a></li>
+<%  else %>
+                <li><a href="/home"><i class="fas fa-home"></i></a></li>
+                <li><a href="<%= url_for(:action=>'contact', :id=>contact_category) %>"><%= model_name(contact_category.web_page) %></a></li>
+<%  end %>
+                <li><%= model_name(@seed) %></li>
+            </ol>
+        </aside>
+<!-- 記事 -->
+        <article id="article">
+            <h1><div>スタッフ紹介</div><%= model_name(contact_category.web_page) %></h1>
+            <p>アンシャンテのスタッフ紹介です。</p>
+            <div class="wrapper">
+                <div class="col-1p2">
+                    <div id="gallery">
+<%  @photos = @seed.photos %>
+<%  unless @photos.blank? %>
+                        <ul>
+<%      @photos.each do | photo |  %>
+                            <li>
+                                <%= image_tag(url_for_file_column(photo, :image, 'panel')) %>
+<%          unless photo.info.blank? %>
+                                <div class="caption"><%=h photo.info%></div>
+<%          end %>
+                            </li>
+<%      end %>
+                        </ul>
+                        <div id="gallery_prev"><i class="fa fa-chevron-circle-left"></i></div>
+                        <div id="gallery_next"><i class="fa fa-chevron-circle-right"></i></div>
+<%  else %>
+                        <ul>
+                            <li><img src="//placehold.jp/319x478.jpg?text=No Photo"></li>
+                        </ul>
+<%  end %>
+                    </div>
+                </div>
+                <div class="col-1p2">
+                    <h2 class="staff"><%= model_name(@seed) %> <span><%= h @seed.job_title %></span></h2>
+<%  unless @seed.description.blank? %>
+                    <div class="contents">
+                        <%= raw @seed.description %>
+                    </div>
+<%  end %>
+                    <footer>
+                        <ul class="sns_links">
+<%  unless @seed.social_facebook_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_facebook_uri%>" target='_blank'><i class="fab fa-facebook-square"></i></a>
+                            </li>
+<%  end %>
+<%  unless @seed.social_instagram_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_instagram_uri %>" target='_blank'><i class="fab fa-instagram"></i></a>
+                            </li>
+<%  end %>
+<%  unless @seed.social_line_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_line_uri %>" target='_blank'><i class="fab fa-line"></i></a>
+                            </li>
+<%  end %>
+<%  unless @seed.social_twitter_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_twitter_uri %>" target='_blank'><i class="fab fa-twitter-square"></i></a>
+                            </li>
+<%  end %>
+<%  unless @seed.social_gplus_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_gplus_uri %>" target='_blank'><i class="fab fa-google-plus-square"></i></a>
+                            </li>
+<%  end %>
+<%  unless @seed.social_pinterest_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_pinterest_uri %>" target='_blank'><i class="fab fa-pinterest-square"></i></a>
+                            </li>
+<%  end %>
+<%  unless @seed.social_tumblr_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_tumblr_uri %>" target='_blank'><i class="fab fa-tumblr-square"></i></a>
+                            </li>
+<%  end %>
+
+<%  if @seed.id == 267 %>
+<!-- 佐藤 徹 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/bzhome-mng/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 284 %>
+<!-- 會田 涼子 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/bhoozwoo-rece" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 268 %>
+<!-- 磯部 君衣 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/kenny19840221/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 269 %>
+<!-- 丸山 寛 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/00618800/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 274 %>
+<!-- 佐藤 将太 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/akada-1220-krw/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 271 %>
+<!-- 吉原 恵美子 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/ebicpan/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 272 %>
+<!-- 石川 尋香 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/bzh0808/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 275 %>
+<!-- 山田 絵理 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/e19881117/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 273 %>
+<!-- 両田 美幸 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/o22oo8o1/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 285 %>
+<!-- 吉田 美穂 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/ect-yoshida/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 277 %>
+<!-- 金子 美奈 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/mina3377777/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/kr/slnH000428475/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 278 %>
+<!-- 山田 美穂 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/12-juunii/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 279 %>
+<!-- 横田 芳枝 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/bzhome-assiblog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 280 %>
+<!-- 佐藤 操子 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/866161/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 281 %>
+<!-- 関川 ひろみ -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/hi2213/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/kr/slnH000428475/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 283 %>
+<!-- 佐原 里緒菜 -->
+<!--
+                            <li>
+                                <a href="https://ameblo.jp/enchant-nail-riona/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/kr/slnH000428475/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 282 %>
+<!-- 池田 陽子 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/enchant-sunny/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/kr/slnH000428475/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 286 %>
+<!-- 佐藤 アツヨシ -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/atsuyoshi0531/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+<%  if @seed.id == 287 %>
+<!-- 山本 丈 -->
+<!--
+                            <li>
+                                <a href="http://ameblo.jp/jyo2yamamoto/" target='_blank'>
+                                    <img src="../../photo/image/0000/8718/ameba.png" alt="アメブロ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+-->
+                            <li>
+                                <a href="https://beauty.hotpepper.jp/slnH000046274/blog/" target='_blank'>
+                                    <img src="../../photo/image/0000/8719/hpb_icon.png" alt="HPB ブログ" style="vertical-align: bottom;">
+                                </a>
+                            </li>
+<%  end %>
+                        </ul>
+                    </footer>
+                </div>
+            </div>
+        </article>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant-hair.com/footer" %>
+    </main>
+<%  if @seed.id == 269 || @seed.id == 285 || @seed.id == 286 || @seed.id == 287 %>
+    <aside id="summary" style="background-image:url('/images/assets/enchant-hair.com/side/side_blow.jpg')">
+<%  elsif @seed.id == 274 %>
+    <aside id="summary" style="background-image:url('/images/assets/enchant-hair.com/side/side_color.jpg')">
+<%  elsif @seed.id == 273 || @seed.id == 275 %>
+    <aside id="summary" style="background-image:url('/images/assets/enchant-hair.com/side/side_eye.jpg')">
+<%  elsif @seed.id == 277 || @seed.id == 280 %>
+    <aside id="summary" style="background-image:url('/images/assets/enchant-hair.com/side/side_wellness.jpg')">
+<%  elsif @seed.id == 278 || @seed.id == 279 %>
+    <aside id="summary" style="background-image:url('/images/assets/enchant-hair.com/side/side_spa.jpg')">
+<%  elsif @seed.id == 281 || @seed.id == 282 || @seed.id == 283 %>
+    <aside id="summary" style="background-image:url('/images/assets/enchant-hair.com/side/side_nail1.jpg')">
+<%  else %>
+    <aside id="summary" style="background-image:url('/images/assets/enchant-hair.com/side/side_stylist.jpg')">
+<%  end %>
+        <div>
+            <h1><div>スタッフ紹介</div><%= model_name(contact_category.web_page) %></h1>
+            <p>アンシャンテのスタッフ紹介です。</p>
+        </div>
+    </aside>
+</div>
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant-hair.com/header" %>
+<!-- ページトップボタン -->
+<div id="goTop">
+    <i class="fas fa-chevron-circle-up"></i>
+</div>
+<!-- タッチデバイス用ナビゲーション -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant-hair.com/mnav" %>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant-hair.com/common_js" %>
+<!-- page specific javascript -->
+<script src="/javascripts/assets/enchant-hair.com/gallery.js"></script>
+</body>
+</html>

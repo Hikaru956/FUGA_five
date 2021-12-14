@@ -1,0 +1,10 @@
+<%  @fix15027 = @website.content_leafs.find_by_id(15027); %>
+<%  if !@fix15027.blank? %>
+<%      unless @fix15027.description.blank? %>
+<aside id="salonlist">
+    <div class="container">
+<%=         raw @fix15027.description %>
+    </div>
+</aside>
+<%      end %>
+<% end %>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="copyright"                content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/style" %>
+</head>
+<body id="contact">
+<div id="top">
+</div>
+<!-- パンくずリスト -->
+<aside id="breadcrumb">
+    <div class="container">
+        <ol>
+<% if request.host == 'sr2.swifty.jp' %>
+            <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">HOME</a></li>
+<% else %>
+            <li><a href="/home">HOME</a></li>
+<% end %>
+            <li><%= model_title(@seed) %></li>
+        </ol>
+    </div>
+</aside>
+<article id="article">
+    <div class="container">
+        <h1><%= model_title(@seed) %></h1>
+        <ul class="infolist">
+<%
+    @staffs.each do | staff | @staff = staff
+        key_photo = key_photo(@staff)
+        unless key_photo.blank?
+            image_url = url_for_file_column(key_photo, :image, 'panel')
+        else
+            image_url = '//placehold.jp/352x264.png?text=No Photo'
+        end
+        if request.host == 'sr2.swifty.jp'
+            staff_url = url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key)
+        else
+            staff_url = url_for(:action=>'staff', :id=>@staff)
+        end
+%>
+            <li>
+                <div class="imgbox">
+                    <div>
+                        <a href="<%= staff_url %>">
+                            <img src="<%= image_url %>" alt="<%= model_name(@staff) %>">
+                        </a>
+                    </div>
+                </div>
+                <h2><%= model_name(@staff) %></h2>
+            </li>
+<%  end %>
+        </ul>
+    </div>
+</article>
+<!-- salon list -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/salon_list" %>
+<!-- footer -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/footer" %>
+<!-- header -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/header" %>
+<!-- nav -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/navigation" %>
+<!-- reserve -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/reserve" %>
+<!-- script -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/common_js" %>
+</body>
+</html>

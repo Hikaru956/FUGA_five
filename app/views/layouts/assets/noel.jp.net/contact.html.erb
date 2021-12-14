@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/css" %>
+</head>
+<body>
+<!-- グローバルナビ -->
+<header id="header" class="wrapper">
+  <nav id="gNav" class="tablet">
+    <ul class="gNav">
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/navigation" %>
+    </ul>
+  </nav>
+  <div id="mNavOpener">
+    <span>MENU</span>
+  </div>
+  <h1><span>ALL STAFF</span></h1>
+</header>
+<article id="safflist" class="wrapper">
+  <ul class="container">
+<%
+    @staffs.each do | staff | @staff = staff
+        key_photo = key_photo(@staff)
+        unless key_photo.blank?
+            image_url = url_for_file_column(key_photo, :image, 'panel')
+        else
+            image_url = '//placehold.jp/f8f8f8/999999/306x165.png?text=PHOTO'
+        end
+        if request.host == 'sr2.swifty.jp'
+            staff_url = url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key)
+        else
+            staff_url = url_for(:action=>'staff', :id=>@staff)
+        end
+%>
+    <li class="col-m1t3">
+      <div class="staff-photo">
+        <div class="hdBox">
+          <a href="<%= staff_url %>"><img src="<%= image_url %>" alt="<%= model_name(@staff) %>"></a>
+        </div>
+        <div class="staff-position"><%= h @staff.job_title %></div>
+      </div>
+      <div class="staff-name">
+        <h3><a href="<%= staff_url %>"><%= model_name(@staff) %></a></h3>
+      </div>
+    </li>
+<%  end %>
+  </ul>
+</article>
+<!-- フッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/footer" %>
+<!-- モバイルナビ -->
+<div id="mNav" class="mobile">
+  <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/navigation" %>
+  </ul>
+</div><!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/common_js" %>
+</body>
+</html>

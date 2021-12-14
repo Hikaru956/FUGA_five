@@ -1,0 +1,12 @@
+        <aside>
+            <div class="container">
+                <h1>
+<% unless @website.social_instagram_uri.blank? %>
+                    <a href="<%= @website.social_instagram_uri %>" target="_blank">INSTAGRAM</a>
+<% else %>
+                    INSTAGRAM
+<% end %>
+                </h1>
+                <ul id="instafeed" class="wrapper contents_list"></ul>
+            </div>
+        </aside>

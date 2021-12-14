@@ -1,0 +1,68 @@
+<%
+    widget_bag = VisualWidget.search_widget_bag_for(@website, "19b3ff993ce2372560d66d40e59c9761")
+    if widget_bag.blank?
+        cmax = 1
+    else
+        cmax = widget_bag.data_string.to_i
+    end
+    if cmax < 0 || cmax > 32
+        cmax = 1
+    end
+    if cmax != 0
+
+        @max = cmax
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_GALLERY)
+        navigation = type_root.web_page
+        bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        c = ContentLeaf.public_leafs_condition
+        c.and "content_category_id", public_categories
+        latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<%      unless latest_leafs.blank? %>
+<aside id="home_styleList">
+    <div class="container">
+        <h1>
+<%          if request.host == 'sr2.swifty.jp' %>
+            <a href="/collcetions?id=162&wkey=<%= @website.wsite_hash_key %>">
+<%          else %>
+            <a href="/collcetions?id=162">
+<%          end %>
+                <div>スタイルギャラリー</div>STYLE GALLERY
+            </a>
+        </h1>
+        <ul class="nonStyle wrapper">
+<%
+            latest_leafs.each do | leaf |
+                if request.host == 'sr2.swifty.jp'
+                    page_url  = url_for(:action=>'gallery_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'gallery_show', :id=>leaf)
+                end
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.jp/ffffff/cccccc/327x327.jpg?text=No Photo'
+                end
+%>
+            <li class="col-234">
+                <div class="imgbox">
+                    <div style="background-image:url('<%= image_url %>')">
+                        <a href="<%= page_url %>">
+                            <span class="more">More <i class="fas fa-arrow-alt-circle-right"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+<%          end %>
+        </ul>
+    </div>
+</aside>
+<%      end %>
+<%  end %>

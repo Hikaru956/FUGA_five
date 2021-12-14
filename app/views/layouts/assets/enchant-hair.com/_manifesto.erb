@@ -1,0 +1,11 @@
+<%  @fix01 = @website.content_leafs.find_by_id(5437); %>
+<%  if !@fix01.blank? %>
+<article id="home_manifesto">
+    <div class="container">
+        <h1><a href="../../fix?id=5505"><div>お約束</div>MANIFESTO</a></h1>
+<%      unless @fix01.description.blank? %>
+        <%= raw @fix01.description %>
+<%      end %>
+    </div>
+</article>
+<% end %>

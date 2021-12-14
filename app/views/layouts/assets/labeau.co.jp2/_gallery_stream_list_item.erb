@@ -1,0 +1,19 @@
+<%
+if request.host == 'sr2.swifty.jp'
+    art_url = url_for(:action=>'gallery_list', :id=>temp_local, :wkey=>@website.wsite_hash_key)
+else
+    art_url = url_for(:action=>'gallery_list', :id=>temp_local)
+end
+key_photo = temp_local.photos.find(:first)
+unless key_photo.blank?
+    img_url = url_for_file_column(key_photo, :image, 'thumb')
+else
+    img_url = "//placehold.jp/ffffff/cccccc/280x280.jpg?text=NoPhoto"
+end
+%>
+                                    <div class="imgbox"><div style="background-image:url('<%= img_url %>')">
+                                        <a href="<%= art_url %>"><img src="<%= img_url %>" alt=""></a>
+                                    </div></div>
+                                    <a href="<%= art_url %>">
+                                        <h2><%= truncate(model_name(temp_local)) %></h2>
+                                    </a>

@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http:http://ogp.me/ns# fb: http:http://ogp.me/ns/fb# website: http:http://ogp.me/ns/website#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title>MORI BEAYTY CORPORATION 求人サイト | 福島県いわき市の美容室</title>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta property="og:type"              content="website">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta property="og:url"               content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+<meta property="og:url"               content="http://<%= request.host %>/home">
+<% end %>
+<meta property="og:title"             content="MORI BEAYTY CORPORATION 求人サイト">
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"         content="MORI BEAYTY CORPORATION 求人サイト">
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="/stylesheets/assets/mori-bc.co.jp/recruit.css?v=2">
+</head>
+<body>
+<header id="header">
+    <div class="container">
+        <h1 id="summary">
+            <span>リクルート 求人｜美容院、美容室、ヘアサロンならMORIモリビューティコーポレーション</span>
+        </h1>
+        <div id="header_image">
+            <div style="background-image:url(/images/assets/mori-bc.co.jp/recruit/header_bak.jpg);">
+                <div id="header_logo">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/mori_bc_logo.png" alt="モリ・ビューティーコーポレーション">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<aside id="share">
+    <div class="container">
+        <div id="share_image">
+            <img src="/images/assets/mori-bc.co.jp/recruit/recruit_logo.png" alt="リクルート">
+        </div>
+        <ul class="share">
+<!--
+            <li>
+                <img src="/images/assets/mori-bc.co.jp/recruit/line-share-a.png" alt="LINEで送る" class="line_share">
+            </li>
+            <li>
+                <img src="/images/assets/mori-bc.co.jp/recruit/line-share-a.png" alt="LINEで送る" class="line_share">
+            </li>
+-->
+            <li>
+                <div class="line-it-button" data-lang="ja" data-type="share-a" data-url="https://recruit.mori-bc.co.jp/home" style="display: none;"></div>
+                <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+            </li>
+            <li class="fblike">
+                <div class="fb-share-button" data-href="https://recruit.mori-bc.co.jp/home" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Frecruit.mori-bc.co.jp%2Fhome&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">シェア</a></div>
+            </li>
+        </ul>
+    </div>
+</aside>
+<nav id="nav">
+    <div class="container">
+        <ul>
+            <li>
+                <a href="#interview">
+                    <div class="nav_img">
+                        <img src="/images/assets/mori-bc.co.jp/recruit/nav_interview.jpg" alt="スタッフの写真">
+                    </div>
+                    <div class="nav_sub">
+                        <img src="/images/assets/mori-bc.co.jp/recruit/nav_interview.png" alt="インタビュー">
+                    </div>
+                    <h2>スタッフインタビュー</h2>
+                    <p>MORIスタッフに仕事・お客様・サロンへのリアルな思いをインタビュー！</p>
+                </a>
+            </li>
+            <li>
+                <a href="#aday">
+                    <div class="nav_img">
+                        <img src="/images/assets/mori-bc.co.jp/recruit/nav_aday.jpg" alt="スタッフの写真">
+                    </div>
+                    <div class="nav_sub">
+                        <img src="/images/assets/mori-bc.co.jp/recruit/nav_aday.png" alt="ある一日">
+                    </div>
+                    <h2>スタッフのある1日</h2>
+                    <p>MORIスタッフの1日のサロンワークに密着！こんな風に毎日のサロンワークを楽しんでます。</p>
+                </a>
+            </li>
+            <li>
+                <a href="#curriculum">
+                    <div class="nav_img">
+                        <img src="/images/assets/mori-bc.co.jp/recruit/nav_curriculum.jpg" alt="練習風景">
+                    </div>
+                    <div class="nav_sub">
+                        <img src="/images/assets/mori-bc.co.jp/recruit/nav_curriculum.png" alt="カリキュラム">
+                    </div>
+                    <h2>教育システムのご紹介</h2>
+                    <p>教育設備が整っています。即戦力となれる技術力、コミュニケーション能力を素早く取得できます。</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<aside id="interview">
+    <div class="container">
+        <h2 class="art_sub">
+            <img src="/images/assets/mori-bc.co.jp/recruit/interview_logo.png" alt="スタッフインタビュー">
+            <div>スタッフインタビュー</div>
+        </h2>
+        <div id="interview_img">
+            <img src="/images/assets/mori-bc.co.jp/recruit/interview_sum.png" alt="MORIスタッフに仕事・お客様・サロンへのリアルな思いをインタビュー">
+        </div>
+        <div class="art_but">
+            <a href="/fix?id=4220">インタビューを読む</a>
+        </div>
+    </div>
+</aside>
+<aside id="aday">
+    <div class="container">
+        <h2 class="art_sub">
+            <img src="/images/assets/mori-bc.co.jp/recruit/aday_logo.png" alt="スタッフのある１日">
+            <div>スタッフのある１日</div>
+        </h2>
+        <div>
+            <img src="/images/assets/mori-bc.co.jp/recruit/aday.jpg" alt="スタッフ写真">
+        </div>
+        <div id="aday_work">
+            <div>
+                <img src="/images/assets/mori-bc.co.jp/recruit/green_onwork.png" alt="アヴェダ・サロン＆スパ・グリーンでの仕事">
+            </div>
+            <p>
+                渡邊 萌加<br>
+                アヴェダ・サロン＆スパ グリーン（勤続3年目）<br>
+                国際ビューティーファッション専門学校
+            </p>
+        </div>
+        <hr>
+        <ul>
+            <li>
+                <div class="aday_sub">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday_logo.png" alt="ある１日">01
+                </div>
+                <div class="aday_art">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday01.jpg" alt="身だしなみ">
+                    <h3>身だしなみ</h3>
+                    <p>美容師は常に人に見られている仕事なので、常に清潔感・ヘアスタイルには気を使います。制服ではないですが、今日はキャンペーン中なのでAVEDAのTシャツをチョイス！</p>
+                </div>
+            </li>
+            <li>
+                <div class="aday_sub">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday_logo.png" alt="ある１日">02
+                </div>
+                <div class="aday_art">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday02.jpg" alt="出勤">
+                    <h3>出勤</h3>
+                    <p>今日もお客様に快適に過ごしてもらえるようにお店を徹底清掃！気持ちも1日がスタートする時間です。</p>
+                </div>
+            </li>
+            <li>
+                <div class="aday_sub">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday_logo.png" alt="ある１日">03
+                </div>
+                <div class="aday_art">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday03.jpg" alt="朝礼">
+                    <h3>朝礼</h3>
+                    <p>みんなで集まり、連絡事項の伝達＆本日来店されるお客様を全員で把握して、最高の状態でお店をOPENします！</p>
+                </div>
+            </li>
+            <li>
+                <div class="aday_sub">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday_logo.png" alt="ある１日">04
+                </div>
+                <div class="aday_art">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday04.jpg" alt="サロンワーク1">
+                    <h3>サロンワーク1</h3>
+                    <p>1つ1つの仕事を丁寧に、そしてリラックスしていただけるよう心がけます。</p>
+                </div>
+            </li>
+            <li>
+                <div class="aday_sub">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday_logo.png" alt="ある１日">05
+                </div>
+                <div class="aday_art">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday05.jpg" alt="休憩・昼食">
+                    <h3>休憩・昼食</h3>
+                    <p>お昼休憩。いつもお母さんの手作りお弁当を持参。お母さんいつもありがとう！リフレッシュして午後の仕事へ備えます。</p>
+                </div>
+            </li>
+            <li>
+                <div class="aday_sub">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday_logo.png" alt="ある１日">06
+                </div>
+                <div class="aday_art">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday06.jpg" alt="サロンワーク2">
+                    <h3>サロンワーク2</h3>
+                    <p>笑顔を心がけています。常連のお客様のお子様と最近仲良くなって、帰るときにいつまでも手を振る姿にこちらが癒されちゃいます！</p>
+                </div>
+            </li>
+            <li>
+                <div class="aday_sub">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday_logo.png" alt="ある１日">07
+                </div>
+                <div class="aday_art">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday07.jpg" alt="クローズ">
+                    <h3>クローズ</h3>
+                    <p>今日販売した商品の在庫チェック〜終礼で今日のサロンワークが終わります。今日は私が気に入っててオススメの商品をたくさんのお客様にお求めいただけました。気に入ってくれるかな？</p>
+                </div>
+            </li>
+            <li>
+                <div class="aday_sub">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday_logo.png" alt="ある１日">08
+                </div>
+                <div class="aday_art">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/aday08.jpg" alt="帰宅">
+                    <h3>帰宅</h3>
+                    <p>今日のすべての業務が終了。気持ちをリセットして他スタッフに挨拶してまた明日！今日はこれから友人と食事会！楽しみ！</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</aside>
+<aside id="curriculum">
+    <div class="container">
+        <h2 class="art_sub">
+            <img src="/images/assets/mori-bc.co.jp/recruit/curriculum_logo.png" alt="カリキュラム">
+            <div>教育システムのご紹介</div>
+        </h2>
+        <div>
+            <img src="/images/assets/mori-bc.co.jp/recruit/curriculum.jpg" alt="教育システムのご紹介">
+        </div>
+        <h3 class="art_sub">各分野のスペシャリストがしっかりフォローしてくれる、充実した教育システム。</h3>
+        <p>
+            トレーニングセンターで2年でスタイリストデビューが叶うよう、しっかりお手伝いいたします！<br>
+            充実した教育システムにより、美容専門学校を卒業された方はもちろん、<br>
+            高校卒業後、専門学校に通いながらでも、卓越したスタイリング技術を学ぶことが出来ます。<br>
+            技術動画が見れるように一人一人にタブレットを支給し、トレーニングで使用するウイッグも会社支給で技術習得をサポートします。<br>
+            カット・カラー・パーマ・スパなどの各ジャンルに、教育担当のスペシャリストが在籍。<br>
+            また、各店の店長はもちろん、先輩方もしっかりフォローしてくれるので、安心して技術を学ぶことが出来ます。<br>
+            また、「ケラスターゼ」「AVEDA」「ミルボン」といった、世界のトップサロンが<br>
+            セレクトしているヘアエステブランドも取り扱っているので、その最新技術を学ぶチャンスも豊富です。<br>
+            さらなるデザインのステップアップのために希望の方には海外経験することもできます。<br>
+            〈MORI BEAUTY CORPORATION〉は、皆様の夢を叶えるお手伝いをさせて頂きます。
+        </p>
+        <ul>
+            <li>
+                <img src="/images/assets/mori-bc.co.jp/recruit/curriculum01.jpg" alt="シャンプースペース">
+                <h4>シャンプースペース</h4>
+                <p>トレーニングだけに用いられるシャンプースペースサロンと同じモデルを使用して練習ができます。</p>
+            </li>
+            <li>
+                <img src="/images/assets/mori-bc.co.jp/recruit/curriculum02.jpg" alt="研修室">
+                <h4>研修室</h4>
+                <p>セット面を見たてカウンセリング・接遇のトレーニング、カット練習などを行います。</p>
+            </li>
+            <li>
+                <img src="/images/assets/mori-bc.co.jp/recruit/curriculum03.jpg" alt="通いやすいロケーション">
+                <h4>通いやすいロケーション</h4>
+                <p>研修施設は「Feel」併設ゆったり駐車場、通いやすい立地でトレーニングに前向きに取り組めます。</p>
+            </li>
+        </ul>
+        <h3 class="art_sub">ヘアスタイリストデビューカリキュラム</h3>
+        <p>
+            プロとしての信頼溢れる技術力はもちろん、常にお客様の目線を意識することのできる<br>
+            「お客様に愛され、支持されるスタイリスト」を目指します。<br>
+             技術だけでなく人間力や対応力を総合したコンサルテーション能力を培うことができます。<br>
+            現場に直結した内容、能動的に学ぶことのできる環境をしっかりと用意しています。
+        </p>
+        <table>
+            <tr>
+                <th>１年目</th>
+                <td>
+                    シャンプー・マッサージ・ドライング・毛髪知識講習1・接遇<br>
+                    グレイカラー＆オシャレ染め・ストレート（塗布・アイロン）<br>
+                    毛髪知識講習2・ブロー（ロング・ショート）・パーマ（ワインディング）
+                </td>
+            </tr>
+            <tr>
+                <th>２年目</th>
+                <td>
+                    パーマ・カラー・カット・顔分析・似合わせ<br>
+                    カットイメージスタイル・カラースタイル
+                </td>
+            </tr>
+            <tr>
+                <th>３年目</th>
+                <td>
+                    パーマスタイル・メンズスタイル・スタイリストデビュー
+                </td>
+            </tr>
+        </table>
+    </div>
+</aside>
+<aside id="salon">
+    <div class="container">
+        <h2 class="art_sub">
+            <img src="/images/assets/mori-bc.co.jp/recruit/salon_logo.png" alt="サロン">
+            <div>モリ・ビューティコーポレーションのご紹介</div>
+        </h2>
+        <p>〈MORI BEAUTY CORPORATION〉は、いわき市内に美容室5店舗、撮影スタジオ１店舗を構えている、いわき市の美容室です。</p>
+        <div id="mori">
+            <a href="https://www.mori-bc.co.jp/" target="_blank">
+                <div id="logo">
+                    <img src="/images/assets/mori-bc.co.jp/recruit/mori_logo.png" alt="MORI BEAUTY CORPORATION サロンサイトへ">
+                </div>
+                <div id="gosalon">サロンサイトへ</div>
+            </a>
+        </div>
+    </div>
+</aside>
+<aside id="flow">
+    <div class="container">
+        <h2 class="art_sub">
+            <img src="/images/assets/mori-bc.co.jp/recruit/flow_logo.png" alt="採用までの流れ">
+            <div>採用までの流れ</div>
+        </h2>
+        <h3 class="art_sub">「 01.会社説明会 」</h3>
+        <p>新卒募集にあたり、会社説明会を実施致します。<br>会社概要や教育システムについて詳しくご紹介致しますので、是非ご参加下さい。<br>説明会参加ご希望の方は、学校単位で受付しておりますので、学校様の就職課を通してお申し込み下さい。</P>
+        <h3 class="art_sub">「 02.サロン見学・サロン来店 」</h3>
+        <p>事前に各サロンに電話予約をお願いします。<br><span>（※サロン見学は平日限定で実施しております）</span></P>
+        <h3 class="art_sub">「 03.採用応募 」</h3>
+        <p>採用試験ご希望の方は、同様に学校単位での受付になりますので、学校様の就職課を通してお申し込み下さい。<br><span>※履歴書と成績証明書を面接当日にお持ちください。(※事前に送付していただく物はありません)<br>※尚、求人票がない学校様がございましたら、下記までお問合せ下さい。</span></P>
+        <div class="art_but">
+            <a href="https://www.mori-bc.co.jp/form/index.php">お問い合わせフォーム</a>
+        </div>
+    </div>
+</aside>
+<article id="recruit">
+    <div class="container">
+        <h2 class="art_sub">
+            <img src="/images/assets/mori-bc.co.jp/recruit/recruit_logo.png" alt="募集要項">
+            <div>募集要項</div>
+        </h2>
+        <hr>
+        <h3>募集対象</h3>
+        <p>
+            ・新卒アシスタント 募集中<br>
+            ・中途アシスタント 募集中<br>
+            ・中途スタイリスト 募集中<br>
+            ・アイリスト 募集中<br>
+        </p>
+        <h3>給与</h3>
+        <p>各役職にて設定がございます。お問い合わせください。</p>
+        <h3>休日</h3>
+        <p>
+            完全週休２日制（毎週火曜日＋１日）<br>
+            年間休日105日、有給休暇制度あり<br>
+            7日間と5日間の連続休暇あり<br>
+        </p>
+        <h3>待遇・福利厚生</h3>
+        <p>社会保険完備・健康保険・厚生年金・雇用保険・労災保険・交通費支給<br>各種レクリエーション<br>忘年会・新年会</P>
+        <h3>勤務時間</h3>
+        <p>9:00 - 19:00（お昼休憩60分）</P>
+    </div>
+</article>
+<footer id="footer">
+    <div class="container">
+        <div id="footer_logo">
+            <img src="/images/assets/mori-bc.co.jp/recruit/mori_logog.png" alt="MORI BEAUTY CORPORATION サロンサイトへ">
+        </div>
+        <div id="gomori">
+            <a href="https://www.mori-bc.co.jp/" target="_blank">
+                サロンサイトへ
+            </a>
+        </div>
+        <p>
+            リクルート 求人｜美容院、美容室、ヘアサロンならモリビューティーコーポレーション　|　Copyright © 2018-2019 by MORI BEAUTY CORPORATION. All rights reserved.
+        </p>
+    </div>
+</footer>
+<div id="pagetop"><a href="#header">PAGE<br>TOP</a></div>
+<% unless @website.analytics_code.blank? %>
+<%= raw @website.analytics_code %>
+<% end %>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.0';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<script src="/javascripts/assets/mori-bc.co.jp/recruit/smooth-scroll.min.js"></script>
+<script>
+var scroll = new SmoothScroll('a[href*="#"]');
+</script>
+</body>
+</html>

@@ -304,7 +304,6 @@ class DashboardController < ApplicationController
   end
 
   def shop_create_favicon
-    if request.post?
       @shop = Shop.find(params[:id])
       ###
       ##  Clear Current Favicon
@@ -318,11 +317,9 @@ class DashboardController < ApplicationController
       photo.save!
 
       redirect_to :action=>"shop_show_website", :id=>@shop
-    end
   end
   
   def shop_create_apple_touch_icon
-    if request.post?
       @shop = Shop.find(params[:id])
       ###
       ##  Clear Current Apple Touch Icon
@@ -336,7 +333,6 @@ class DashboardController < ApplicationController
       photo.save!
 
       redirect_to :action=>"shop_show_website", :id=>@shop
-    end
   end
   
   def shop_reset_favicon
@@ -346,11 +342,9 @@ class DashboardController < ApplicationController
   end
   
   def shop_reset_apple_touch_icon
-    if request.post?
       @shop = Shop.find(params[:id])
       WebPage.reset_apple_touch_icon(@shop)
       redirect_to :action=>"shop_show_website", :id=>@shop
-    end
   end
   
   def set_disqus_mode
@@ -376,11 +370,9 @@ class DashboardController < ApplicationController
   end
 
   def user_create
-    if request.post?
       user = User.new(hikaru_params)
       user.save
       redirect_to :action=>"user_list"
-    end
   end
 
   def user_show
@@ -388,22 +380,18 @@ class DashboardController < ApplicationController
   end
 
   def user_update
-    if request.post?
       @item = User.find(params[:id])
       if @item.update_attributes(params[:user])
         @item.try_count=0
         @item.save!
       end
       redirect_to :action=>"user_show", :id=>@item
-    end
   end
 
   def user_delete
-    if request.post?
       item = User.find(params[:id])
       item.destroy
       redirect_to :action=>"user_list"
-    end
   end
 
   ###
@@ -415,11 +403,9 @@ class DashboardController < ApplicationController
   end
 
   def color_create
-    if request.post?
       color = ColorScheme.new(hikaru_params)
       color.save
       redirect_to :action=>"color_show", :id=>color
-    end
   end
 
   def color_show
@@ -427,19 +413,15 @@ class DashboardController < ApplicationController
   end
 
   def color_update
-    if request.post?
       @item = ColorScheme.find(params[:id])
       @item.update_attributes(params[:color])
       redirect_to :action=>"color_show", :id=>@item
-    end
   end
 
   def color_delete
-    if request.post?
       item = ColorScheme.find(params[:id])
       item.destroy
       redirect_to :action=>"color_list"
-    end
   end
 
   def color_higher
@@ -461,22 +443,18 @@ class DashboardController < ApplicationController
   end
 
   def create_color_photo
-    if request.post?
       @item = ColorScheme.find(params[:id])
       @photo = { :image_temp=>"", :image=>params[:file] }
       photo = Photo.new(@photo)
       photo.shop = nil
       @item.photo = photo
       redirect_to :action=>"color_show", :id=>@item
-    end
   end
 
   def delete_color_photo
-    if request.post?
       photo = Photo.find(params[:id])
       photo.destroy
       redirect_to :action=>'color_show', :id=>photo.ref_id, :hash=>Time.now.to_i
-    end
   end
 
   ###
@@ -488,11 +466,9 @@ class DashboardController < ApplicationController
   end
 
   def layout_create
-    if request.post?
       layout = LayoutScheme.new(hikaru_params)
       layout.save
       redirect_to :action=>"layout_show", :id=>layout
-    end
   end
 
   def layout_show
@@ -500,19 +476,15 @@ class DashboardController < ApplicationController
   end
 
   def layout_update
-    if request.post?
       @item = LayoutScheme.find(params[:id])
       @item.update_attributes(params[:layout])
       redirect_to :action=>"layout_show", :id=>@item
-    end
   end
 
   def layout_delete
-    if request.post?
       item = LayoutScheme.find(params[:id])
       item.destroy
       redirect_to :action=>"layout_list"
-    end
   end
 
   def layout_higher
@@ -534,22 +506,18 @@ class DashboardController < ApplicationController
   end
 
   def create_layout_photo
-    if request.post?
       @item = LayoutScheme.find(params[:id])
       @photo = { :image_temp=>"", :image=>params[:file] }
       photo = Photo.new(@photo)
       photo.shop = nil
       @item.photo = photo
       redirect_to :action=>"layout_show", :id=>@item
-    end
   end
 
   def delete_layout_photo
-    if request.post?
       photo = Photo.find(params[:id])
       photo.destroy
       redirect_to :action=>'layout_show', :id=>photo.ref_id, :hash=>Time.now.to_i
-    end
   end
 
   def widget_list
@@ -560,27 +528,21 @@ class DashboardController < ApplicationController
   ##  Visual Widget
   #
   def widget_create
-    if request.post?
       visual_widget = VisualWidget.new(hikaru_params)
       visual_widget.save
       redirect_to :action=>"widget_list", :id=>visual_widget.layout_scheme
-    end
   end
 
   def widget_update
-    if request.post?
       @item = VisualWidget.find(params[:id])
       @item.update_attributes(params[:item])
       redirect_to :action=>"widget_list", :id=>@item.layout_scheme
-    end
   end
 
   def widget_delete
-    if request.post?
       @item = VisualWidget.find(params[:id])
       @item.destroy
       redirect_to :action=>"widget_list", :id=>@item.layout_scheme
-    end
   end
 
   def widget_higher

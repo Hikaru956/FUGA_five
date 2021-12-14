@@ -1,0 +1,31 @@
+<%  @staffs = @website.public_staffs %>
+<%  unless @staffs.blank? %>
+<ul class="wrapper">
+<%
+        @staffs.each do | staff | @staff = staff
+            if request.host == 'sr2.swifty.jp'
+                page_url  = url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key)
+            else
+                page_url  = url_for(:action=>'staff', :id=>@staff)
+            end
+            key_photo = key_photo(@staff)
+            unless key_photo.blank?
+                image_url = url_for_file_column(key_photo, :image, 'panel')
+            else
+                image_url = '//placehold.jp/ffffff/cccccc/327x327.jpg?text=No Photo'
+            end
+%>
+    <li class="col-1p6">
+        <div class="col-in">
+            <a href="<%= page_url %>">
+                <div class="imgbox">
+                    <div style="background-image:url('<%= image_url %>')">
+                        <img src="<%= image_url %>" alt="<%= model_name(@staff) %>">
+                    </div>
+                </div>
+            </a>
+        </div>
+    </li>
+<%      end %>
+</ul>
+<%  end %>

@@ -1,0 +1,18 @@
+<%
+if request.host == 'sr2.swifty.jp'
+    href = '/fix?id=792&wkey=39e8502a1682c954819fb23dcb515433'
+else
+    href = '/fix?id=792'
+end
+%>
+
+        <footer id="footer">
+            <p id="add">
+                住所： 福島県いわき市植田町中央1-14-5 2F<br>
+                電話： 0246-63-7386　FAX： 0246-62-3644
+            </p>
+            <p id="ppolicy">
+                <a href="<%= href %>">プライバシーポリシー</a>
+            </p>
+            <p id="copy"><%= copyright_notice(@website) %></p>
+        </footer>

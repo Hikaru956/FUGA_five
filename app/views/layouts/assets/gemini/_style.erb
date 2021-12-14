@@ -1,0 +1,33 @@
+<style>
+a {
+<% style_sheet_uri = (@author_mode) ? @website.wsite_color_edit.repository_path : @website.wsite_color_deploy.repository_path %>
+<% case style_sheet_uri %>
+<% when 'lavish-bootstrap-0' %>
+    color: #304FFE;
+<% when 'lavish-bootstrap-1' %>
+    color: #d50000;
+<% when 'lavish-bootstrap-2' %>
+    color: #ff1493;
+<% when 'lavish-bootstrap-3' %>
+    color: #FFEB3B;
+<% when 'lavish-bootstrap-4' %>
+    color: #1B5E20;
+<% when 'lavish-bootstrap-5' %>
+    color: #00C853;
+<% when 'lavish-bootstrap-6' %>
+    color: #FF6F00;
+<% when 'lavish-bootstrap-7' %>
+    color: #FFFFFF;
+<% when 'lavish-bootstrap-8' %>
+    color: #484848;
+<% else %>
+    color: #ff1493;
+<% end %>
+}
+<% if request.host == 'www.porter-bonheur.jp' %>
+html {
+    background-image: url(../photo/image/0001/9855/bg.jpg);
+    background-size:  contain;
+}
+<% end %>
+</style>

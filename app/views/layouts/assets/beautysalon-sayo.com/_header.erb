@@ -1,0 +1,46 @@
+<% logo = VisualWidget.search_widget_bag_for(@website, "10f2a4541ceca0916b6456823d5dc5ca") %>
+<% sumr = VisualWidget.search_widget_bag_for(@website, "50a88099de54680abcd5fe4fb9380280") %>
+        <header id="header">
+            <div class="container">
+                <div id="bland">
+<% if logo.blank? || !logo.is_valid? %>
+    <% if request.host == 'sr2.swifty.jp' %>
+                    <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="//placehold.jp/E0E0E0/FFFFFF/140x140.png?text=logo" alt="logo"></a>
+    <% else %>
+                    <a href="/home"><img src="//placehold.jp/140x140.jpg" alt="logo"></a>
+    <% end %>
+<% else %>
+    <% if request.host == 'sr2.swifty.jp' %>
+                    <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="<%= url_for_file_column(logo.photos[0], :image) %>" alt="logo"></a>
+    <% else %>
+                    <a href="/home"><img src="<%= url_for_file_column(logo.photos[0], :image) %>" alt="logo"></a>
+    <% end %>
+<% end %>
+                </div>
+                <div id="headerSide">
+                    <div id="headerInfo">
+                        <div id="siteSummary">
+<%  if sumr.blank? || !sumr.is_valid? %>
+                            <h1>髪だけでなく頭皮もイキイキ美しく、若返る - サヨ美容室</h1>
+<%  else %>
+                            <h1><%= sumr.data_string %></h1>
+<%  end %>
+                        </div>
+                        <div id="headerButton">
+<% unless @website.wsite_telephone.blank? %>
+                            <a href="tel:<%= @website.wsite_telephone %>"><i class="fa fa-phone-square"></i></a>
+<% end %>
+<!--
+                            <a href="/contact/index.php"><i class="fa fa-envelope"></i></a>
+-->
+                            <div id="mNavButton">MENU</div>
+                        </div>
+                    </div>
+                    <nav id="nav">
+                        <ul id="gnav" class="clearfix">
+<%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-sayo.com/navigation" %>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>

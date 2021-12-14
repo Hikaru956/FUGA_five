@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<%
+    if request.host == 'sr2.swifty.jp'
+        fix_url = url_for(:action=>'fix', :id=>@seed, :wkey=>@website.wsite_hash_key)
+    else
+        fix_url = url_for(:action=>'fix', :id=>@seed)
+    end
+%>
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="//<%= request.host + fix_url %>">
+<meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<!-- Twitter card も入れる？ -->
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp2/css" %>
+</head>
+<body>
+<!-- 主ウインドウ -->
+<main id="body" class="scroolWrapper">
+    <div class="scrooler">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp2/header" %>
+<!-- グローバルナビゲーション -->
+        <nav id="gnav">
+            <div class="container">
+                <ul id="gnav_main">
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp2/navigation" %>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+<!-- パンくずリスト -->
+            <aside id="breadcrumbs">
+                <ol>
+<% if request.host == 'sr2.swifty.jp' %>
+                    <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+<% else %>
+                    <li><a href="/home"><i class="fa fa-home"></i></a></li>
+<% end %>
+                    <li><%= model_title(@seed) %></li>
+                </ol>
+            </aside>
+            <article id="article">
+                <header>
+                    <h1><%= model_title(@seed) %></h1>
+                </header>
+                <div class="container">
+                    <div id="contents">
+                        <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+                    </div>
+                </div>
+            </article>
+<%  if @seed.id == 2622 %>
+<!-- SnapWidget -->
+            <div class="container">
+                <script src="https://snapwidget.com/js/snapwidget.js"></script>
+                <h1>Instagram</h1>
+                <iframe src="https://snapwidget.com/embed/506052" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+            </div>
+            <aside id="gmap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3235.6946178585613!2d139.67009671646187!3d35.80742967520043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018eb4241490001%3A0x60e072e5642632a9!2zU0FCT-OCq-ODleOCpw!5e0!3m2!1sja!2sjp!4v1538443185475" width="1264" height="420" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </aside>
+<%  elsif @seed.id == 970 %>
+            <aside id="gmap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1617.8473090302737!2d139.67119105805895!3d35.807429670242634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018eb424149310d%3A0x35c9163d3a2b568d!2z44CSMzM1LTAwMjUg5Z-8546J55yM5oi455Sw5biC5Y2X55S677yY4oiS77yS77yZIOODmuODhuOCo-ODg-ODiOODnOOCog!5e0!3m2!1sja!2sjp!4v1538443089439" width="1264" height="320" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </aside>
+<%  elsif @seed.id == 969 %>
+            <aside id="gmap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1617.8021462832307!2d139.6783173580474!3d35.809646670250515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018eb45a3c4d719%3A0x97e0bd18f04443ce!2z44OQ44O844OJ!5e0!3m2!1sja!2sjp!4v1538442925718" width="1264" height="320" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </aside>
+<%  elsif @seed.id == 968 %>
+            <aside id="gmap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3238.9644394797465!2d139.7314122164655!3d35.72709307523098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188da0394a213f%3A0x87ede82fe33a4f47!2z576O5a655a6k44KJ44O744G844O8IOWkp-WhmuW6lw!5e0!3m2!1sja!2sjp!4v1538442834480" width="1264" height="320" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </aside>
+<%  elsif @seed.id == 967 %>
+            <aside id="gmap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1618.276299583519!2d139.7069596584452!3d35.78636496406097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018933c26d2c6dd%3A0xbcb82cfc94fd69d!2z576O5a655a6k44KJ44O744G844O8IOi1pOe-veW6lw!5e0!3m2!1sja!2sjp!4v1538442735317" width="1264" height="320" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </aside>
+<%  else %>
+            <aside id="gmap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1619.2202388757703!2d139.74356499464693!3d35.739976876611074!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x47ccdb5fcdaf3375!2z576O5a655a6k44KJ44O744G844O8IOmnkui-vOW6lw!5e0!3m2!1sja!2sjp!4v1538442662279" width="1264" height="320" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </aside>
+<%  end %>
+            <aside>
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp2/sns_btn" %>
+            </aside>
+        </div>
+<%  if @seed.id == 967 %>
+<!-- SnapWidget -->
+        <div class="container">
+            <script src="https://snapwidget.com/js/snapwidget.js"></script>
+            <h1>Instagram</h1>
+            <iframe src="https://snapwidget.com/embed/517698" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+        </div>
+<%  end %>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp2/footer" %>
+    </div>
+</main>
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav">
+    <ul class="scrooler">
+        <li>- MENU</li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp2/navigation" %>
+    </ul>
+</aside>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp2/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp2/social_js" %>
+<!-- google maps javascript -->
+<!--
+<%  if (@seed.id >= 966 && @seed.id <= 970) || @seed.id == 2622 %>
+<%      gmkey = VisualWidget.search_widget_bag_for(@website, "ade188eee2ff15e839baf05aad5c8fe7") %>
+<%      if gmkey.blank? || !gmkey.is_valid? %>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyCvYTVvqH3xpk1ORLQ-Y-d2WWfr1381Hg4"></script>
+<%      else %>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<%= gmkey.data_string %>"></script>
+<%      end %>
+<%
+        if @seed.id == 967
+            lat = 35.78622931286021
+            lng = 139.70818055295945
+        elsif @seed.id == 968
+            lat = 35.727118073712276
+            lng = 139.73360521221161
+        elsif @seed.id == 969
+            lat = 35.80969152037298
+            lng = 139.6794359894991
+        elsif @seed.id == 970
+            lat = 35.80742277808029
+            lng = 139.6723127129078
+        elsif @seed.id == 2622
+            lat = 35.80742277808029
+            lng = 139.6723127129078
+        else
+            lat = 35.74053975134028
+            lng = 139.7443179550171
+        end
+%>
+<script>
+google.maps.event.addDomListener(window, 'load', function() {
+    var latlng = new google.maps.LatLng(<%= lat %>, <%= lng %>);
+    var op = {
+        zoom: 17,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var gmap = new google.maps.Map(document.getElementById('gmap'), op);
+    var mark = new google.maps.Marker({
+        position: latlng,
+        title: 'Salon',
+        map: gmap
+    });
+});
+</script>
+<%  end %>
+-->
+</body>
+</html>

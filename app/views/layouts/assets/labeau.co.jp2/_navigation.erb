@@ -1,0 +1,103 @@
+        <li>
+<% if request.host == 'sr2.swifty.jp' %>
+            <a href="/fix?id=965&wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="/fix?id=965">
+<% end %>
+                Concept
+            </a>
+        </li>
+        <li>
+<% if request.host == 'sr2.swifty.jp' %>
+            <a href="/news?id=432&wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="/news?id=432">
+<% end %>
+                News
+            </a>
+        </li>
+        <li>
+<% if request.host == 'sr2.swifty.jp' %>
+            <a href="/fix?id=2807&wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="/fix?id=2807">
+<% end %>
+                Menu
+            </a>
+        </li>
+        <li>
+<% if request.host == 'sr2.swifty.jp' %>
+            <a href="/news?id=437&wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="/news?id=437">
+<% end %>
+                Pick Up Item
+            </a>
+        </li>
+        <li>
+<% if request.host == 'sr2.swifty.jp' %>
+            <a href="/collcetions?id=428&wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="/collcetions?id=428">
+<% end %>
+                Gallery
+            </a>
+        </li>
+        <li>
+<% if request.host == 'sr2.swifty.jp' %>
+            <a href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="/contact_us">
+<% end %>
+                Staff
+            </a>
+        </li>
+        <li>
+<% if request.host == 'sr2.swifty.jp' %>
+            <a href="/streams?id=427&wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="/streams?id=427">
+<% end %>
+                BLOG
+            </a>
+        </li>
+        <li>
+<% if request.host == 'sr2.swifty.jp' %>
+            <a href="/fix?id=1513&wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="/fix?id=1513">
+<% end %>
+                Royalty Rewards
+            </a>
+        </li>
+        <li>
+<% if request.host == 'sr2.swifty.jp' %>
+            <a href="/fix?id=1321&wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="/fix?id=1321">
+<% end %>
+                External
+            </a>
+        </li>
+        <li>
+            <a href="http://www.labeau-recruit.com/home" target="_blank">
+                Recruit
+            </a>
+        </li>
+        <li>
+<% if request.host == 'sr2.swifty.jp' %>
+            <a href="/fix?id=2102&wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="/fix?id=2102">
+<% end %>
+                14days program
+            </a>
+        </li>
+<% if @author_mode %>
+    <% unless @website.wsite_layout_deploy.is_public.blank? %>
+        <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>
+        <li><a href="<%= url_for(:action=>'list_color_schemes') %>">カラー</a></li>
+    <% end %>
+        <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+        <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+<% end %>

@@ -1,0 +1,7 @@
+<footer id="footer">
+    <div id="contactus">お問い合わせ</div>
+<%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/sns_links" %>
+    <p><%= copyright_notice(@website) %></p>
+    <p class="address">〒<%= @website.postal %>&nbsp;<%= @website.address_1 %></p>
+    <p>TEL&nbsp;<%= @website.wsite_telephone %></p>
+</footer>

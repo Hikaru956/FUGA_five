@@ -1,0 +1,58 @@
+<%  instafd = VisualWidget.search_widget_bag_for(@website, "6ac0ac1f23a3d4b308d6b802feb29255") %>
+<%  instaid = VisualWidget.search_widget_bag_for(@website, "d6b0f4f063c1f5dfba47d61c3d0ac717") %>
+<%  instatk = VisualWidget.search_widget_bag_for(@website, "87ddfea72e10692001c2b57da18b2cb8") %>
+<%  newinstaid = VisualWidget.search_widget_bag_for(@website, "9738ee91fbac31538c48c1bf81c929d5") %>
+<%  newinstatk = VisualWidget.search_widget_bag_for(@website, "2afca419fff53f95ab4ed51008e1565b") %>
+<%  instaun = VisualWidget.search_widget_bag_for(@website, "c285e11d26c0f1ddd9f61267afa3cad0") %>
+<%  if !instaun.blank? && !instaun.data_string.blank? %>
+<aside>
+    <div class="container">
+        <div class="content_box">
+            <h1>
+<%    if @website.social_instagram_uri.blank? %>
+                INSTAGRAM
+<%    else %>
+                <a href="<%= @website.social_instagram_uri %>" target="_blank">INSTAGRAM</a>
+<%    end %>
+            </h1>
+            <div id="streem_table">
+                <ul id="instafeed" class="wrapper"></ul>
+            </div>
+        </div>
+    </div>
+</aside>
+<%  elsif !newinstaid.blank? && !newinstatk.blank? && !newinstaid.data_string.blank? && !newinstatk.data_string.blank? %>
+<aside>
+    <div class="container">
+        <div class="content_box">
+            <h1>
+<%    if @website.social_instagram_uri.blank? %>
+                INSTAGRAM
+<%    else %>
+                <a href="<%= @website.social_instagram_uri %>" target="_blank">INSTAGRAM</a>
+<%    end %>
+            </h1>
+            <div id="streem_table">
+                <ul id="instafeed" class="wrapper"></ul>
+            </div>
+        </div>
+    </div>
+</aside>
+<%  elsif !instafd.blank? && !instaid.blank?  && !instatk.blank? && instafd.data_string == "Zc359WUn" && !instaid.data_string.blank?  && !instatk.data_string.blank? %>
+<aside>
+    <div class="container">
+        <div class="content_box">
+            <h1>
+<%    if @website.social_instagram_uri.blank? %>
+                INSTAGRAM
+<%    else %>
+                <a href="<%= @website.social_instagram_uri %>" target="_blank">INSTAGRAM</a>
+<%    end %>
+            </h1>
+            <div id="streem_table">
+                <ul id="instafeed" class="wrapper"></ul>
+            </div>
+        </div>
+    </div>
+</aside>
+<%  end %>

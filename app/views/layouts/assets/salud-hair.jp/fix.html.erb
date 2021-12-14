@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<%
+    if request.host == 'sr2.swifty.jp'
+        fix_url = url_for(:action=>'fix', :id=>@seed, :wkey=>@website.wsite_hash_key)
+    else
+        fix_url = url_for(:action=>'fix', :id=>@seed)
+    end
+%>
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="//<%= request.host + fix_url %>">
+<meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/salud-hair.jp/style" %>
+</head>
+<body>
+<!-- 主ウインドウ -->
+<main id="body" class="scroolWrapper">
+    <div class="scrooler">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/salud-hair.jp/header" %>
+<!-- ページヘッダー -->
+        <div id="page-header">
+            <div class="container">
+                <h1 class="ribbon"><%= model_title(@seed) %></h1>
+            </div>
+        </div>
+        <article id="contents">
+            <div class="container">
+                <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+            </div>
+        </article>
+<%= render :partial=>"#{LayoutScheme.asset_root}/salud-hair.jp/footer" %>
+    </div>
+</main>
+<%= render :partial=>"#{LayoutScheme.asset_root}/salud-hair.jp/smart" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/salud-hair.jp/common_js" %>
+</body>
+</html>

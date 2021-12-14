@@ -1,0 +1,18 @@
+<!-- sns -->
+        <aside id="sns">
+<% unless @website.social_facebook_uri.blank? %>
+            <a class="face" href="<%= @website.social_facebook_uri %>" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i>FACEBOOK</a>
+<% end %>
+<% unless @website.social_instagram_uri.blank? %>
+            <a class="inst" href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i>INSTAGRAM</a>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+            <a class="line" href="<%= @website.social_line_uri %>" target="_blank"><i class="icon-line" aria-hidden="true"></i>LINE</a>
+<% end %>
+        </aside>
+<!-- footer -->
+        <footer id="page-footer">
+            <div class="container">
+                <%= copyright_notice(@website) %>
+            </div>
+        </footer>

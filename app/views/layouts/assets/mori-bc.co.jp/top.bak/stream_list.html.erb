@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% unless @seed.my_type_root_category.has_only_a_public_bag? %>
+<title><%= model_title(@seed.my_type_root_category) %> <%= model_name(@seed) %> - <%= @website.name %></title>
+<% else %>
+<title><%= model_name(@seed) %> - <%= @website.name %></title>
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/top/css" %>
+</head>
+<body>
+<div id="body" class="scroolwrap">
+    <div class="scrooler">
+        <div id="contents" class="container">
+            <main id="main" role="main">
+                    <h1><%= model_name(@seed) %></h1>
+                    <section id="contents_list">
+                        <ul>
+<%
+    sons = @seed.sons
+    sons << @seed
+    c = ContentLeaf.public_leafs_condition
+    c.and "content_leafs.content_category_id", 'IN', sons
+    @leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'publish_from desc')
+    @leafs.each do | leaf | @leaf = leaf
+            publish   = leaf.publish_from.strftime("%Y-%m-%d")
+            key_photo = key_photo(leaf)
+            unless key_photo.blank?
+                image_url = url_for_file_column(key_photo, :image, 'panel')
+            else
+                image_url = '//placehold.jp/ffffff/cccccc/256x256.jpg?text='+publish
+            end
+            if request.host == 'sr2.swifty.jp'
+                content_url = url_for(:action=>'stream_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
+            else
+                content_url = url_for(:action=>'stream_show', :id=>@leaf, :page=>@page)
+            end
+%>
+                            <li class="wrapper">
+                                <div class="col-1p4f">
+                                    <div class="col-in text-center">
+                                        <a href="<%= content_url %>"><img src="<%= image_url %>" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-3p4f">
+                                    <div class="col-in">
+                                        <h2><a href="<%= content_url %>"><%= h model_title(@leaf) %></a></h2>
+                                        <p class="publish"><i class="fa fa-calendar"></i> <%= publish_label(@leaf) %></p>
+                                        <div><%= h truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>96) %></div>
+                                    </div>
+                                </div>
+                            </li>
+<%  end %>
+                        </ul>
+                    </section>
+                    <aside class="pagination text-center">
+<% if request.host == 'sr2.swifty.jp' %>
+                            <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% else %>
+                            <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% end %>
+                    </aside>
+            </main>
+            <aside id="sidebar">
+<!-- サイドエリア -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/top/sidebar" %>
+            </aside>
+        </div>
+        <footer id="footer">
+            <div id="footer_nav">
+                <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/top/navigation" %>
+                </ul>
+            </div>
+            <div id="footer_sns_links">
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/top/sns_links" %>
+            </div>
+            <div id="author">
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/top/footer" %>
+            </div>
+        </footer>
+    </div>
+</div>
+<!-- サイトヘッダー -->
+<header id="header">
+    <div class="container">
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/top/header" %>
+    </div>
+</header>
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav" class="scroolwrap">
+    <div class="scrooler">
+<% logomark = VisualWidget.search_widget_bag_for(@website, "e5ae2655654d0c9d0f467e59dc10a772") %>
+<% if !logomark.blank? && logomark.is_valid? %>
+        <div id="tnav_logo">
+            <img src="//<%= request.host %><%= url_for_file_column(logomark.photos[0], :image) %>" alt="MORI BEAUTY CORPORATION.">
+        </div>
+<% end %>
+        <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/top/navigation" %>
+        </ul>
+    </div>
+</aside>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/top/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<!-- google maps javascript -->
+</body>
+</html>

@@ -25,14 +25,14 @@ ahtml, abody {
   padding:20px 30px;
 }
 </style>
-<%= image_tag("backgrounds/SPECTRE_IMG/#{Time.now.to_i%5}.jpg", :id=>"full-screen-background-image") %>
+<%= image_tag("backgrounds/#{Time.now.to_i%5}.jpg", :id=>"full-screen-background-image") %>
 <!-- === Masthead === -->
 <header class="jumbotron subhead" id="overview">
     <h2></h2>
     <p class="lead"></p>
 </header>
 <h2>ログイン</h2>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, class: 'well', url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

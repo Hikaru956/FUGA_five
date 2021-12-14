@@ -1,13 +1,15 @@
 <%
 	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
 	news_navigation = type_root.web_page 
-	first_bag = type_root.children.where(is_public: true).first
+	first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
 	
 	public_categories  = []
 	public_categories.concat(first_bag.sons)
 	public_categories << first_bag
 
-	latest_leaf = ContentLeaf.public_leafs.order(position: :desc).first
+	c = ContentLeaf.public_leafs_condition
+	c.and "content_category_id", public_categories
+	latest_leaf =  ContentLeaf.find(:first, :conditions=>c.where, :order=>'position desc')
 %>
 
 <% unless latest_leaf.blank? %>
@@ -28,7 +30,7 @@
 								<% unless key_photo.blank? %>
 									<div class="thumbnail thumbnail-1 img-left"><%= image_tag(url_for_file_column(key_photo, :image, 'thumb'), :class=>"img-responsive img-border img-left") %></div>
 								<% else %>
-									<img class="thumbnail thumbnail-1 img-left" src="http://placehold.it/240x180/ffffff/cccccc&amp;text=<%=latest_leaf.publish_from.strftime('%Y-%m-%d')%>">
+									<img class="thumbnail thumbnail-1 img-left" src="//placehold.jp/ffffff/cccccc/240x180.jpg?text=<%=latest_leaf.publish_from.strftime('%Y-%m-%d')%>">
 								<% end %>
 							</div>
 							<div class="col-lg-9 col-md-9 col-sm-9">

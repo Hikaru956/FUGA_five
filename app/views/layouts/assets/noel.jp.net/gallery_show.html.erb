@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="//<%= request.host + url_for(:action=>'gallery_show', :id=>@seed) %>">
+<meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% key_photo = key_photo(@seed) %>
+<% unless key_photo.blank? %>
+<meta property="og:image"             content="http://<%= request.host + url_for_file_column(key_photo, :image) %>">
+<% end %>
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/css" %>
+</head>
+<body>
+<!-- グローバルナビ -->
+<header id="header" class="wrapper">
+  <nav id="gNav" class="tablet">
+    <ul class="gNav">
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/navigation" %>
+    </ul>
+  </nav>
+  <div id="mNavOpener">
+    <span>MENU</span>
+  </div>
+</header>
+<article id="article" class="wrapper3">
+    <header>
+        <h1><%= model_title(@seed) %></h1>
+    </header>
+    <div id="container">
+      <div class="col-m1t2">
+          <div id="gallery">
+<% @photos = @seed.photos %>
+<% unless @photos.blank? %>
+              <ul>
+<% @photos.each do | photo | %>
+                  <li>
+                      <img src="<%= url_for_file_column(photo, :image, 'panel') %>" alt="">
+<% unless photo.info.blank? %>
+                      <div class="caption"><%=h photo.info%></div>
+<% end %>
+                  </li>
+<% end %>
+              </ul>
+              <div id="gallery_prev"><i class="fas fa-chevron-circle-left"></i></div>
+              <div id="gallery_next"><i class="fas fa-chevron-circle-right"></i></div>
+<% end %>
+          </div>
+      </div>
+      <div class="col-m1t2">
+          <header>
+              <h2><%= model_title(@seed) %></h2>
+<% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+              <p class="publish">
+                  <i class="fas fa-user"></i> <a href="<%= url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>&nbsp;
+              </p>
+<% end %>
+          </header>
+<% unless @seed.description.blank? %>
+          <div id="contents">
+              <%= raw @seed.description %>
+          </div>
+<% end %>
+      </div>
+    </div>
+</article>
+<!-- フッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/footer" %>
+<!-- モバイルナビ -->
+<div id="mNav" class="mobile">
+  <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/navigation" %>
+  </ul>
+</div><!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/common_js" %>
+<!-- page specific javascript -->
+<script src="/javascripts/assets/business-casual2/gallery.js"></script>
+</body>
+</html>

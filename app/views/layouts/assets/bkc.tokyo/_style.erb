@@ -1,0 +1,28 @@
+<style>
+#main {
+    background-color: #fec;
+<% bg_clr = VisualWidget.search_widget_bag_for(@website, "2613f2073b8c58a40d2f1aa601ac0168") %>
+<% if !bg_clr.blank? %>
+    background-color: <%= bg_clr.data_string %>;
+<% end %>
+<% bg_img = VisualWidget.search_widget_bag_for(@website, "5e187c77ada2fccb894986bbed79656e") %>
+<% if !bg_img.blank? && bg_img.is_valid? %>
+    background: url("<%= url_for_file_column(bg_img.photos[0], :image) %>") no-repeat center top;
+    -webkit-background-size: cover;
+       -moz-background-size: cover;
+            background-size: cover;
+<% end %>
+}
+#header {
+    background-color: #012201;
+<% hd_clr = VisualWidget.search_widget_bag_for(@website, "ace6f46957740e45b0f079528dba19fb") %>
+<% if !hd_clr.blank? %>
+    background-color: <%= hd_clr.data_string %>;
+<% end %>
+<% hd_img = VisualWidget.search_widget_bag_for(@website, "f33eacc08d707902352e9040bfc26c03") %>
+<% if !hd_img.blank? && hd_img.is_valid? %>
+    background: url("<%= url_for_file_column(hd_img.photos[0], :image) %>") no-repeat center top;
+    background-size: 100% 100%;
+<% end %>
+}
+</style>

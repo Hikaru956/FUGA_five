@@ -1,0 +1,27 @@
+<% if request.host == 'sr2.swifty.jp' %>
+        <li><a href="/home">HOME</a></li>
+        <li><a href="/news?id=2796?wkey=<%= @website.wsite_hash_key %>">NEWS</a></li>
+        <li><a href="/streams?wkey=<%= @website.wsite_hash_key %>">BLOG</a></li>
+        <li><a href="/fix?id=10650?wkey=<%= @website.wsite_hash_key %>">特 徴</a></li>
+        <li><a href="/fix?id=10651?wkey=<%= @website.wsite_hash_key %>">コース</a></li>
+        <li><a href="/fix?id=11683?wkey=<%= @website.wsite_hash_key %>">ネイリスト優待生コース</a></li>
+        <li><a href="/contact_us?wkey=<%= @website.wsite_hash_key %>">講 師</a></li>
+        <li><a href="/fix?id=10726?wkey=<%= @website.wsite_hash_key %>">生徒さんの声</a></li>
+<% else %>
+        <li><a href="/home">HOME</a></li>
+        <li><a href="/news?id=2796">NEWS</a></li>
+        <li><a href="/streams">BLOG</a></li>
+        <li><a href="/fix?id=10650">特 徴</a></li>
+        <li><a href="/fix?id=10651">コース</a></li>
+        <li><a href="/fix?id=11683">ネイリスト優待生コース</a></li>
+        <li><a href="/contact_us">講 師</a></li>
+        <li><a href="/fix?id=10726">生徒さんの声</a></li>
+<% end %>
+<% if @author_mode %>
+    <% unless @website.wsite_layout_deploy.is_public.blank? %>
+        <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>
+        <li><a href="<%= url_for(:action=>'list_color_schemes') %>">カラー</a></li>
+    <% end %>
+        <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+        <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+<% end %>

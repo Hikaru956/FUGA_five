@@ -1,0 +1,67 @@
+<%  instafd = VisualWidget.search_widget_bag_for(@website, "789d4f755ea62aad701ff1854cf07b56") %>
+<%  instaid = VisualWidget.search_widget_bag_for(@website, "9dd46c3ab73ef9ecc2c83172e64fc120") %>
+<%  instatk = VisualWidget.search_widget_bag_for(@website, "2b230e69017376ac00f5554673923a4e") %>
+<%  newinstaid = VisualWidget.search_widget_bag_for(@website, "c812eaeacd66f98a1c9d36ae047307f0") %>
+<%  newinstatk = VisualWidget.search_widget_bag_for(@website, "cdf3ea1fb6732aa93b1b508f8835b048") %>
+<%  instaun = VisualWidget.search_widget_bag_for(@website, "f7d30c095d914ea820b8c253775e3f52") %>
+<%  if !instaun.blank? && !instaun.data_string.blank? %>
+<script>
+$.getJSON("/php/insta_feed9.php",
+    {id: "<%= instaun.data_string %>"},
+    function(json){
+        if ('business_discovery' in json){
+            var ig = json.business_discovery.media.data;
+            var j  = 0;
+            var ht = '';
+            for (var i = 0; i < ig.length; i++) {
+                if (ig[i].media_type != 'VIDEO'){
+                    ht += '<li class="col-1p3"><div class="imgbox"><div style="background-image:url(' + ig[i].media_url + ')"><a href="' + ig[i].permalink + '" target="_blank"><img src="' + ig[i].media_url + '" alt="' + ig[i].caption + '"></a></div></div></li>';
+                    j++;
+                }
+                if (j >= 9){
+                    break;
+                }
+            }
+        }else{
+            var ht = '<li>Error: Instagramのアカウントをプロアカウントに変更してください。</li>';
+        }
+        $("#instafeed").append(ht);
+    }
+);
+</script>
+<%  elsif !newinstaid.blank? && !newinstatk.blank? && !newinstaid.data_string.blank? && !newinstatk.data_string.blank? %>
+<script>
+$.ajax({
+    type: 'GET',
+    url: 'https://graph.facebook.com/v8.0/<%= newinstaid.data_string %>?fields=name%2Cmedia.limit(6)%7Bcaption%2Cmedia_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url%7D&access_token=<%= newinstatk.data_string %>',
+    dataType: 'json',
+    success: function(json) {
+        var ig = json.media.data;
+        var ht = '';
+        for (var i = 0; i < ig.length; i++) {
+            if (ig[i].media_type == 'VIDEO'){
+                ht += '<li class="col-1p3"><div class="imgbox"><div style="background-image:url(' + ig[i].thumbnail_url + ')"><a href="' + ig[i].permalink + '" target="_blank"><img src="' + ig[i].thumbnail_url + '" alt="' + ig[i].caption + '"></a></div></div></li>';
+            } else {
+                ht += '<li class="col-1p3"><div class="imgbox"><div style="background-image:url(' + ig[i].media_url + ')"><a href="' + ig[i].permalink + '" target="_blank"><img src="' + ig[i].media_url + '" alt="' + ig[i].caption + '"></a></div></div></li>';
+            }
+        }
+        $("#instafeed").append(ht);
+    }
+});
+</script>
+<%  elsif !instafd.blank? && !instaid.blank?  && !instatk.blank? && instafd.data_string == "Zc359WUn" && !instaid.data_string.blank?  && !instatk.data_string.blank? %>
+<script src="/javascripts/assets/vendor/instafeed.js"></script>
+<script>
+$(window).on('load', function() {
+    var userFeed = new Instafeed({
+        get: 'user',
+        userId: '<%= instaid.data_string %>',
+        accessToken: '<%= instatk.data_string %>',
+        limit: 6,
+        template: '<li class="col-1p3"><div class="imgbox"><div style="background-image:url({{image}})"><a href="{{link}}" target="_blank"><img src="{{image}}" alt="{{caption}}"></a></div></div></li>',
+        resolution: "low_resolution", // 320px; standard_resolution 640px;
+    });
+    userFeed.run();
+});
+</script>
+<%  end %>

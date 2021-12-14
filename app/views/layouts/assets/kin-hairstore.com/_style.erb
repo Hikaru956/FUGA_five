@@ -1,0 +1,65 @@
+<style>
+#header {
+<% bg_clr = VisualWidget.search_widget_bag_for(@website, "0d26d83e5c963246b29c1338d87fb92c") %>
+<% if bg_clr.data_string.blank? %>
+    background-color: #424242;
+<% else %>
+    background-color: <%= bg_clr.data_string %>;
+<% end %>
+}
+#brand a {
+<% clr = VisualWidget.search_widget_bag_for(@website, "60f91abe8719f3dfc46e7dc64349a405") %>
+<% if clr.data_string.blank? %>
+    color: #fff;
+<% else %>
+    color: <%= clr.data_string %>;
+<% end %>
+}
+a {
+<% style_sheet_uri = (@author_mode) ? @website.wsite_color_edit.repository_path : @website.wsite_color_deploy.repository_path %>
+<% case style_sheet_uri %>
+<% when 'lavish-bootstrap-0' %>
+    color: #304FFE;
+<% when 'lavish-bootstrap-1' %>
+    color: #d50000;
+<% when 'lavish-bootstrap-2' %>
+    color: #ff1493;
+<% when 'lavish-bootstrap-3' %>
+    color: #FFEB3B;
+<% when 'lavish-bootstrap-4' %>
+    color: #1B5E20;
+<% when 'lavish-bootstrap-5' %>
+    color: #00C853;
+<% when 'lavish-bootstrap-6' %>
+    color: #FF6F00;
+<% when 'lavish-bootstrap-7' %>
+    color: #FFFFFF;
+<% when 'lavish-bootstrap-8' %>
+    color: #484848;
+<% else %>
+    color: #ff1493;
+<% end %>
+}
+<% pnl = VisualWidget.search_widget_bag_for(@website, "dd22d375d8d4514d39de7b1f45f5791e") %>
+<% if pnl.photos.blank? %>
+#logopanelback > div {
+    background-image: url('/images/assets/share/w1440h/int001.jpg');
+}
+<% else %>
+    <% pnl.photos.each_with_index do | photo, idx | %>
+#logopanelback > div:nth-child(<%= idx+1 %>) {
+    background-image: url('<%= url_for_file_column(photo, :image) %>');
+}
+    <% end %>
+<% end %>
+<% typ = VisualWidget.search_widget_bag_for(@website, "5626a5caea6d4f4971d41f5151e86003") %>
+<% if typ.photos.blank? %>
+#typoback {
+    background-image: url('/images/assets/share/w1440h/int002.jpg');
+}
+<% else %>
+#typoback {
+    background-image: url('<%= url_for_file_column(typ.photos[0], :image) %>');
+}
+<% end %>
+</style>

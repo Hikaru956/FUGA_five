@@ -1,5 +1,6 @@
 <div class="thumbnail">
-	<%= image_tag(url_for_file_column(temp_local, :image, 'thumb')) %>
+	<%= image_tag temp_local.clip.url(:thumb) %>
+	<%= image_tag(url_for_file_column(temp_local, :image, 'thumb')) if false%>
 	<% unless temp_local.info.blank? %>
 		<div class="caption">
 			<p><%=h temp_local.info%></p>

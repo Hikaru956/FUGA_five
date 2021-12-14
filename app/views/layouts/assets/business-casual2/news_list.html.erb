@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% unless @seed.my_type_root_category.has_only_a_public_bag? %>
+<title><%= model_title(@seed.my_type_root_category) %> <%= model_name(@seed) %> - <%= @website.name %></title>
+<% else %>
+<title><%= model_name(@seed) %> - <%= @website.name %></title>
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<script src="https://use.fontawesome.com/9e789611aa.js"></script>
+<link rel="stylesheet" href="/stylesheets/assets/business-casual2/style.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/style" %>
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body id="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body id="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<body>
+<!--<![endif]-->
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav">
+    <ul class="scrooler">
+        <li>- MENU</li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/navigation" %>
+    </ul>
+</aside>
+<!-- 主ウインドウ -->
+<div id="body">
+    <div class="scrooler">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/header" %>
+<!-- グローバルナビゲーション -->
+        <nav id="gnav">
+            <div class="container">
+                <ul id="gnav_main">
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/navigation" %>
+                </ul>
+            </div>
+        </nav>
+        <div>
+            <div class="container">
+                <div class="content_box">
+<!-- パンくずリスト -->
+                    <aside id="breadcrumbs">
+                        <ol>
+<% if request.host == 'sr2.swifty.jp' %>
+                            <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+<% else %>
+                            <li><a href="/home"><i class="fa fa-home"></i></a></li>
+<% end %>
+<% unless @seed.my_type_root_category.has_only_a_public_bag? %>
+<% if request.host == 'sr2.swifty.jp' %>
+                            <li><a href="<%= url_for(:action=>'news_index', :id=>@seed.my_type_root_category, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
+<% else %>
+                            <li><a href="<%= url_for(:action=>'news_index', :id=>@seed.my_type_root_category) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
+<% end %>
+<% end %>
+<% @seed.category_path.each do | category | %>
+<% if request.host == 'sr2.swifty.jp' %>
+                            <li><a href="<%= url_for(:action=>'news_list', :id=>category, :wkey=>@website.wsite_hash_key) %>"><%= category.category_label %></a></li>
+<% else %>
+                            <li><a href="<%= url_for(:action=>'news_list', :id=>category) %>"><%= category.category_label %></a></li>
+<% end %>
+<% end %>
+                            <li><%= model_name(@seed) %></li>
+                        </ol>
+                    </aside>
+                    <h1><%= model_name(@seed) %></h1>
+                    <section id="contents_list">
+                        <ul>
+<%
+    sons = @seed.sons
+    sons << @seed
+    c = ContentLeaf.public_leafs_condition
+    c.and "content_leafs.content_category_id", 'IN', sons
+    @leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'position desc')
+    @leafs.each do | leaf | @leaf = leaf
+            key_photo = key_photo(leaf)
+            unless key_photo.blank?
+                image_url = url_for_file_column(key_photo, :image, 'panel')
+            else
+                image_url = '//placehold.jp/327x327.jpg?text=No Photo'
+            end
+            if request.host == 'sr2.swifty.jp'
+                content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
+            else
+                content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page)
+            end
+%>
+                            <li class="wrapper">
+                                <div class="col-1p3">
+                                    <div class="imgbox"><div style="background-image:url('<%= image_url %>');">
+                                        <a href="<%= content_url %>"><img src="<%= image_url %>" alt=""></a>
+                                    </div></div>
+                                </div>
+                                <div class="col-2p3">
+                                    <h1><a href="<%= content_url %>"><%= h model_title(@leaf) %></a></h1>
+                                    <p class="publish"><i class="fa fa-calendar"></i> <%= publish_label(@leaf) %></p>
+                                    <div><%= raw truncate(strip_tags(@leaf.description), :length=>150) %></div>
+                                </div>
+                            </li>
+<%  end %>
+                        </ul>
+                    </section>
+                    <aside class="pagination text-center">
+<% if request.host == 'sr2.swifty.jp' %>
+                            <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% else %>
+                            <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% end %>
+                    </aside>
+                </div>
+            </div>
+        </div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/footer" %>
+    </div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<!-- google maps javascript -->
+</body>
+</html>

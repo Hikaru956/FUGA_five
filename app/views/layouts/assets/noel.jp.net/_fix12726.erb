@@ -1,0 +1,8 @@
+<%  @fix12726 = @website.content_leafs.find_by_id(12726); %>
+<%  if !@fix12726.blank? %>
+<%    unless @fix12726.description.blank? %>
+<aside id="access">
+<%=     raw @fix12726.description %>
+</aside>
+<%    end %>
+<%  end %>

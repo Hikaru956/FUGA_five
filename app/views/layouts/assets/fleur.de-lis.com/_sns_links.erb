@@ -1,0 +1,98 @@
+<%  shop_url = VisualWidget.search_widget_bag_for(@website, "8196379993d62d6a8d7fc163b1be2231") %>
+<%  lis_reserve  = VisualWidget.search_widget_bag_for(@website, "ed2c77df73391fca4eba611024a1bebb") %>
+<%  ens_reserve  = VisualWidget.search_widget_bag_for(@website, "2b3a0b066d2afc9b033a5b834bd1c8a5") %>
+<%  lm_reserve   = VisualWidget.search_widget_bag_for(@website, "6f97f4aa2ec82081cb1ccb567bfa287a") %>
+<%  codo_reserve = VisualWidget.search_widget_bag_for(@website, "a0801ffa53b4042395bab083bd3acf74") %>
+<%  home = "a386021cedc3584c6999c6f1c2115f48" %>
+<%  lis  = "27ac677851db26419e0d821b37dc9e22" %>
+<%  ens  = "6d747da5bf38d7171f268545b0652d1c" %>
+<%  lm   = "cd32ac74ed5ca6837f8c86d4ed67a149" %>
+<%  codo = "f90c2c82832eb4a51b59eb07559b7a05" %>
+<%  if @website.wsite_hash_key == lis %>
+<%      unless lis_reserve.blank? && !lis_reserve.is_valid? %>
+			<li>
+				<a href="<%= lis_reserve.data_string %>" target="_blank" class="reserve24">
+					24H WEB <span>予約</span>
+				</a>
+			</li>
+<%      end %>
+<%  elsif @website.wsite_hash_key == ens %>
+<%      unless ens_reserve.blank? && !ens_reserve.is_valid? %>
+			<li>
+				<a href="<%= ens_reserve.data_string %>" target="_blank" class="reserve24">
+					24H WEB <span>予約</span>
+				</a>
+			</li>
+<%      end %>
+<%  elsif @website.wsite_hash_key == lm %>
+<%      unless lm_reserve.blank? || !lm_reserve.is_valid? %>
+			<li>
+				<a href="<%= lm_reserve.data_string %>" target="_blank" class="reserve24">
+					24H WEB <span>予約</span>
+				</a>
+			</li>
+<%      end %>
+<%  elsif @website.wsite_hash_key == codo %>
+<%      unless codo_reserve.blank? || !codo_reserve.is_valid? %>
+			<li>
+				<a href="<%= codo_reserve.data_string %>" target="_blank" class="reserve24">
+					24H WEB <span>予約</span>
+				</a>
+			</li>
+<%      end %>
+<%  else %>
+			<li>
+				<a class="reserve-opener reserve24">
+					24H WEB <span>予約</span>
+				</a>
+			</li>
+<%  end %>
+<%  unless shop_url.blank? || !shop_url.is_valid? || shop_url.data_string.blank? %>
+			<li>
+				<a href="<%= shop_url.data_string %>" target="_blank" class="shop-opener">
+					<i class="icon-cart"></i>
+				</a>
+			</li>
+<% end %>
+<% unless @website.wsite_telephone.blank? %>
+			<li>
+				<a href="tel:<%= @website.wsite_telephone %>">
+					<i class="icon-phone"></i>
+				</a>
+			</li>
+<% end %>
+<% unless @website.wsite_email.blank? %>
+			<li>
+				<a href="mailto:<%= @website.wsite_email %>">
+					<i class="icon-mail"></i>
+				</a>
+			</li>
+<% end %>
+<% unless @website.social_instagram_uri.blank? %>
+			<li>
+				<a href="<%= @website.social_instagram_uri %>" target="_blank">
+					<i class="icon-instagram"></i>
+				</a>
+			</li>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+			<li>
+				<a href="<%= @website.social_line_uri %>" target="_blank">
+					<i class="icon-line"></i>
+				</a>
+			</li>
+<% end %>
+<% unless @website.social_facebook_uri.blank? %>
+			<li>
+				<a href="<%= @website.social_facebook_uri %>" target="_blank">
+					<i class="icon-facebook"></i>
+				</a>
+			</li>
+<% end %>
+<% unless @website.social_twitter_uri.blank? %>
+			<li>
+				<a href="<%= @website.social_twitter_uri %>" target="_blank">
+					<i class="icon-twitter"></i>
+				</a>
+			</li>
+<% end %>

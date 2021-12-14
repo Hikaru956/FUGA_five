@@ -1,0 +1,16 @@
+<%  gmap = VisualWidget.search_widget_bag_for(@website, "d8b8c4c9add6411fa2d58d5133f33a12") %>
+<aside id="home_shop">
+    <div class="container">
+        <h1><div>お店のご紹介</div>SHOP INFORMATION</h1>
+        <p>
+<%  unless @website.wsite_description_business.blank? %>
+            <%=raw @website.wsite_description_business%>
+<%  end %>
+        </p>
+<%  if !gmap.blank? && gmap.is_valid? %>
+        <div id="gMap">
+            <%= raw gmap.data_string %>
+        </div>
+<%  end %>
+    </div>
+</aside>

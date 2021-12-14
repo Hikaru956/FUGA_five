@@ -1,0 +1,23 @@
+<%  gmapcode = VisualWidget.search_widget_bag_for(@website, "30d2e6f7a052f5f51b13f21181ca8e2c") %>
+        <article>
+            <div class="container">
+                <div class="wrapper">
+                    <div class="col-1p2">
+<%  if !gmapcode.blank? && gmapcode.is_valid? %>
+                        <div id="gmap">
+                            <%= raw gmapcode.data_string %>
+                        </div>
+<%  end %>
+                    </div>
+                    <div class="col-1p2 contents">
+                        <h1><%= model_name(@website) %></h1>
+<% unless @website.wsite_description_business.blank? %>
+                        <div class="contents">
+                            <%=raw @website.wsite_description_business%>
+                        </div>
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/caelum-web.jp/sns_btn" %>
+                    </div>
+                </div>
+            </div>
+        </article>

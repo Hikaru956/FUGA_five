@@ -16,6 +16,8 @@ Rails.application.config.assets.precompile += %w( timeline.css )
 Rails.application.config.assets.precompile += %w( timeline_quarter.css )
 #js
 Rails.application.config.assets.precompile += %w( main.js )
+Rails.application.config.assets.precompile += %w( jquery.js )
+Rails.application.config.assets.precompile += %w( bootstrap.js )
 Rails.application.config.assets.precompile += %w( application.js )
 Rails.application.config.assets.precompile += %w( modernizr-2.6.2-respond-1.1.0.min.js )
 Rails.application.config.assets.precompile += %w( ajax-tooltip/ajax-dynamic-content.js )

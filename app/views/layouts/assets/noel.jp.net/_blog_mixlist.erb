@@ -1,0 +1,60 @@
+<%
+        @max = 4
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
+        navigation = type_root.web_page
+        bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        c = ContentLeaf.public_leafs_condition
+        c.and "content_category_id", public_categories
+        latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<%      unless latest_leafs.blank? %>
+<aside id="home-bloglist" class="wrapper">
+  <h1><span class="">BLOG</span></h1>
+  <ul class="container">
+<%
+            latest_leafs.each do | leaf |
+                title = model_title(leaf)
+                if request.host == 'staffroom.swifty.jp'
+                    page_url  = url_for(:action=>'stream_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'stream_show', :id=>leaf)
+                end
+                publish   = leaf.publish_from.strftime("%Y-%m-%d")
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.jp/f8f8f8/999999/230x130.png?text=PHOTO'
+                end
+                if    leaf.content_category_id == 3129
+                  category = 'noël HAIR'
+                elsif leaf.content_category_id == 3130
+                  category = 'noël CARE'
+                elsif leaf.content_category_id == 3131
+                  category = 'Crecer'
+                elsif leaf.content_category_id == 3132
+                  category = 'CHALLENGE SHOP'
+                else
+                  category = 'noël'
+                end
+%>
+    <li class="col-m2t4">
+      <div class="category">
+        <span class=""><%= category %></span>
+      </div>
+      <div class="hdBox">
+        <a href="<%= page_url %>"><img src="<%= image_url %>" alt="<%= title %>"></a>
+      </div>
+      <p class="date"><%= publish %></p>
+      <h2><a href="<%= page_url %>"><%= title %></a></h2>
+    </li>
+<%          end %>
+  </ul>
+</aside>
+<%      end %>

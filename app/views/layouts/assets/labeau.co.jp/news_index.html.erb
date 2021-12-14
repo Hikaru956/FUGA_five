@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="copyright"                content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<script src="https://use.fontawesome.com/9e789611aa.js"></script>
+<link rel="stylesheet" href="/stylesheets/assets/labeau.co.jp/style.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp/style" %>
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body class="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body class="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<body>
+<!--<![endif]-->
+<!-- サイトヘッダー -->
+<header id="header">
+    <div class="container">
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp/header" %>
+    </div>
+</header>
+<nav id="nav">
+    <ul>
+<!-- ナビゲーション -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp/navigation" %>
+    </ul>
+</nav>
+<div id="main">
+    <div class="scroller">
+        <aside id="breadcrumbs">
+            <div class="container">
+                <ol>
+<% if request.host == 'sr2.swifty.jp' %>
+                            <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+<% else %>
+                            <li><a href="/home"><i class="fa fa-home"></i></a></li>
+<% end %>
+                            <li><%= model_title(@seed) %></li>
+                </ol>
+            </div>
+        </aside>
+        <!--<![endif]-->
+        <!-- このサイトはIE9未満では正しく表示されません。 -->
+        <!--[if lt IE 9]>
+        <p id="browserupgrade">あなたは<strong>古いブラウザ</strong>をご利用のようです。安心してインターネットをお楽しみいただくために<a href="http:http://browsehappy.com/">最新のブラウザにアップグレード</a>してください。このサイトは古いブラウザでは正しく表示されません。</p>
+        <![endif]-->
+        <main>
+            <article id="article" class="container">
+                <h1><%= model_title(@seed) %></h1>
+                <ul class="wrapper contents_list">
+<%
+    @public_bag =  @seed.public_bags
+    unless @public_bag.blank?
+        @public_bag.each do | bag |
+            latests = bag.public_leafs
+            unless latests.blank?
+# 2016/09/20 Tachikawa Start
+                position = 0
+                target   = nil
+                latests.each do | leaf |
+                    if position < leaf.position
+                        target = leaf
+                        position = leaf.position
+                    end
+                end
+                key_photo = key_photo(target)
+# 2016/09/20 Tachikawa End
+#                key_photo = key_photo(latests[0])
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.jp/327x327.jpg?text=No Photo'
+                end
+                if request.host == 'sr2.swifty.jp'
+                    content_url = url_for(:action=>'news_list', :id=>bag, :wkey=>@website.wsite_hash_key)
+                else
+                    content_url = url_for(:action=>'news_list', :id=>bag)
+                end
+%>
+                    <li class="col-1p3">
+                        <div class="imgbox"><div style="background-image:url('<%= image_url %>');">
+                            <a href="<%= content_url %>"><img src="<%= image_url %>"></a>
+                        </div></div>
+                        <h1>
+                            <a href="<%= content_url %>"><%= truncate(model_name(bag)) %></a>
+                        </h1>
+                    </li>
+<%          end %>
+<%      end %>
+<%  end %>
+                </ul>
+            </article>
+        </main>
+<!-- SNS Links -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp/sns_links" %>
+<!-- フットナビ -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp/foot_nav" %>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp/footer" %>
+    </div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp/common_js" %>
+<!-- page specific javascript -->
+<script src="/javascripts/assets/labeau.co.jp/common.js"></script>
+<!-- social net javascript -->
+<!-- google maps javascript -->
+</body>
+</html>

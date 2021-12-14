@@ -1,0 +1,31 @@
+  <footer id="footer">
+    <ul class="sns_links">
+<% unless @website.wsite_telephone.blank? %>
+      <li><a href="tel:<%= @website.wsite_telephone %>"><i class="fas fa-phone-square"></i></a></li>
+<% end %>
+<% unless @website.wsite_email.blank? %>
+      <li><a href="mailto:<%= @website.wsite_email %>"><i class="fas fa-envelope"></i></a></li>
+<% end %>
+<% unless @website.social_facebook_uri.blank? %>
+      <li><a href="<%= @website.social_facebook_uri %>" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+<% end %>
+<% unless @website.social_twitter_uri.blank? %>
+      <li><a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="fab fa-twitter-square"></i></a></li>
+<% end %>
+<% unless @website.social_instagram_uri.blank? %>
+      <li><a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fab fa-instagram"></i></a></li>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+      <li><a href="<%= @website.social_line_uri %>" target="_blank"><i class="fab fa-line"></i></a></li>
+<% end %>
+<% unless @website.social_pinterest_uri.blank? %>
+      <li><a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="fab fa-pinterest-square"></i></a></li>
+<% end %>
+<% unless @website.social_tumblr_uri.blank? %>
+      <li><a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fab fa-tumblr-square"></i></a></li>
+<% end %>
+    </ul>
+    <p id="copy">
+      <%= copyright_notice(@website) %>
+    </p>
+  </footer>

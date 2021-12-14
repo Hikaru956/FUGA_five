@@ -89,7 +89,8 @@
     	<div class="thumbnail">
 		<% key_photo = key_photo(@staff) %>
 		<% unless key_photo.blank? %>
-			<%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
+			<%= image_tag key_photo.clip.url(:panel) %>
+			<%= image_tag(url_for_file_column(key_photo, :image, 'panel')) if false%>
 		<% else %>
 			<img src="http://placehold.it/750x450&amp;text=No Face Photo">
 		<% end %>

@@ -1,0 +1,18 @@
+<%
+	type_root    = ContentCategory.type_root(@website, ContentCategory::TYPE_GALLERY)
+	navigation   = type_root.web_page
+	gallery_bags = type_root.public_bags
+%>
+
+<%  unless gallery_bags.blank? %>
+                <aside id="style">
+                    <h3 class="en"><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id %> <span>最新のヘアスタイル集です</span></h3>
+                    <ul id="style_list" class="wrapper">
+<%      gallery_bags.each do | leaf |  %>
+                        <li class="col-1p3">
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/top/stream_list_gallery_item", :locals => {:temp_local => leaf}  %>
+                        </li>
+<%      end %>
+                    </ul>
+                </aside>
+<%  end %>

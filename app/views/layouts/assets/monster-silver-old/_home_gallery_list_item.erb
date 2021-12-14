@@ -1,0 +1,15 @@
+<div class="thumbnail thumbnail-1">
+	<h3></h3>
+	<% key_photo = temp_local.photos.first %>
+	<% unless key_photo.blank? %>
+		<%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
+	<% else %>
+		<img src="http://placehold.it/320x240&amp;text=No Face Photo">
+	<% end %>
+    <section>
+        <strong><%= truncate(model_name(temp_local), :length=>50) %></strong>
+		<% unless temp_local.description.blank? %><p><%= h temp_local.description %></p><% end %>
+        <p><%= h temp_local.description %></p>
+	    <p><a href="<%= url_for(:action=>'gallery_list', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>" class="btn btn-1">Read More</a></p>
+    </section>
+</div>

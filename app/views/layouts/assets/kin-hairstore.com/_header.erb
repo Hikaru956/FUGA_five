@@ -1,0 +1,7 @@
+<% brand = VisualWidget.search_widget_bag_for(@website, "9fe3bd743c170ed4a3cd354b22050525") %>
+<% if brand.data_string.blank? %>
+        <div id="brand"><a href="/home"><%= @website.name %></a></div>
+<% else %>
+        <div id="brand"><a href="/home"><%= brand.data_string %></a></div>
+<% end %>
+        <a id="nav_btn"><i class="fa fa-bars"></i><span>MENU</span></a>

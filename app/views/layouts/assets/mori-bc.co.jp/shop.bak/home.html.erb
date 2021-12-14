@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http:http://ogp.me/ns# fb: http:http://ogp.me/ns/fb# website: http:http://ogp.me/ns/website#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% hptitle = VisualWidget.search_widget_bag_for(@website, "22c2ab8ffcc1e41531f0c94ead5ddd28") %>
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<title><%= @website.name %></title>
+<% else %>
+<title><%= hptitle.data_string %></title>
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "b11f9ea223e31f26d5d98ed2e8437da1") %>
+<% if !fbappid.blank? && fbappid.is_valid? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="website">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta property="og:url"               content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+<meta property="og:url"               content="http://<%= request.host %>/home">
+<% end %>
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<meta property="og:title"             content="<%= @website.name %>">
+<% else %>
+<meta property="og:title"             content="<%= hptitle.data_string %>">
+<% end %>
+<% og_img = VisualWidget.search_widget_bag_for(@website, "3ee97b0471bc98ed53842a74affb7cad") %>
+<% if !og_img.blank? && og_img.is_valid? %>
+<meta property="og:image"             content="http://<%= request.host %><%= url_for_file_column(og_img.photos[0], :image) %>">
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/css" %>
+</head>
+<body id="home">
+<div id="body" class="scroolwrap">
+    <div class="scrooler">
+        <div id="main" class="container" role="main">
+<!-- カルーセル -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/corousel" %>
+<!-- サロンコンセプト・店舗情報 -->
+<% map_img = VisualWidget.search_widget_bag_for(@website, "406d8614749ea43d122a737ded428acf") %>
+<%  if request.host == 'salon.mori-bc.co.jp' || @website.wsite_hash_key == '9a6b3d0a73b16215b331252b73e5aff0' %>
+            <article id="home_article">
+<!--
+                <h1 class="en">CONCEPT <span>サロンコンセプト</span></h1>
+-->
+                 <p>
+                    吹き抜けの開放感溢れる空間で、リラックスしながらスタッフとの楽しい時間を過ごしていただけるサロンです。<br>
+                    お客様の髪の悩みやお手入れのお悩みなど丁寧にお話をお聞きしながら、一緒にヘアスタイルを作っていきたいと考えています。<br>
+                    チャイルドスペースもございますので、お子様連れでもお気軽にどうぞ。
+                </p>
+            </article>
+            <aside id="home_shop" class="wrapper">
+                <div class="col-1p2">
+                    <div class="col-in">
+<%      if request.host == 'sr2.swifty.jp' %>
+                        <h1 class="en"><a href="/fix?id=8&wkey=9a6b3d0a73b16215b331252b73e5aff0">SHOP</a> <span>店舗情報</span></h1>
+<%      else %>
+                        <h1 class="en"><a href="/fix?id=8">SHOP</a> <span>店舗情報</span></h1>
+<%      end %>
+                        <ul>
+                            <li>住所： 福島県いわき市平谷川瀬字仲山町21</li>
+                            <li>電話： 0120-244180 / 0246-25-4180</li>
+                            <li>営業時間： 9:00 - 19:00 (日・月・水・祝)</li>
+                            <li>営業時間： 9:00 - 20:00 (木・金・土)</li>
+                            <li class="smaller">パーマ・カラーは2時間前、カットは1時間前までの受付となります。</li>
+                            <li>定休日： 毎週火曜日</li>
+                            <li>駐車場： 無料20台完備</li>
+                            <li>カード： 各種カードお取り扱いしています。</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1p2">
+                    <div class="col-in">
+                        <a target="_blank" href="https://www.google.com/maps/place/%E3%83%A2%E3%83%AA%E3%83%BB%E3%83%93%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BB%E3%82%B3%E3%83%BC%E3%83%9D%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B5%E3%83%AD%E3%83%B3%E3%83%BB%E3%83%89%E3%83%BB%E3%83%A2%E3%83%AA%E5%B9%B3%E8%B0%B7%E5%B7%9D%E7%80%AC%E5%BA%97/@37.047717,140.893584,17z/data=!3m1!4b1!4m5!3m4!1s0x6021110292bda327:0x1a31ec3f78823603!8m2!3d37.047717!4d140.895778?hl=ja">
+<%      if !map_img.blank? && map_img.is_valid? %>
+                            <img src="<%= url_for_file_column(map_img.photos[0], :image) %>" alt="地図">
+<%      else %>
+                            <img src="//placehold.jp/512x217.jpg" alt="地図">
+<%      end %>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+            <aside id="home_staff">
+<%      if request.host == 'sr2.swifty.jp' %>
+                <h1 class="en"><a href="/contact_us?wkey=9a6b3d0a73b16215b331252b73e5aff0">STAFF</a> <span>スタッフ紹介</span></h1>
+<%      else %>
+                <h1 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h1>
+<%      end %>
+<!--
+                <p class="text-center">
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a class="link_button" href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
+<%      else %>
+                    <a class="link_button" href="/contact_us %>">
+<%      end %>
+                        スタッフ紹介へ <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+-->
+<%  if false %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/staff_lists" %>
+<%  end %>
+            </aside>
+            <aside>
+<%      if request.host == 'sr2.swifty.jp' %>
+                <h1 class="en"><a href="/menu_list?id=19&wkey=9a6b3d0a73b16215b331252b73e5aff0">PRICE</a> <SPAN>施術料金</SPAN></h1>
+<%      else %>
+                <h1 class="en"><a href="/menu_list?id=19">PRICE</a> <SPAN>施術料金</span></h1>
+<%      end %>
+            </aside>
+            <aside>
+                <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
+                <p class="text-center">
+                    <img src="/photo/image/0000/0756/kerastase_logo.png" alt="KERASTASE">
+                    <img src="/photo/image/0000/0753/adjuvant_logo.png" alt="ADJUVANT">
+                </p>
+            </aside>
+<%  elsif request.host == 'irom.mori-bc.co.jp'  || @website.wsite_hash_key == '1619cf7b4ebde9cd3a6b83d1d57a7e59' %>
+            <article id="home_article">
+<!--
+                <h1 class="en">CONCEPT <span>サロンコンセプト</span></h1>
+-->
+                 <p>
+                    親しみやすい雰囲気とリラックスできる空間で、楽しく癒される時間をお過ごしいただけます。<br>
+                    当店はトレンドを取り入れたデザインカラーや、お一人おひとりの魅力を引き出すパーマを得意としています。<br>
+                    しっかりとしたカウンセリングでお客様の"なりたい"イメージを共有し、ぴったりのスタイルをご提案させて頂きます。
+                </p>
+            </article>
+            <aside id="home_shop" class="wrapper">
+                <div class="col-1p2">
+                    <div class="col-in">
+<%      if request.host == 'sr2.swifty.jp' %>
+                        <h1 class="en"><a href="/fix?id=208&wkey=1619cf7b4ebde9cd3a6b83d1d57a7e59">SHOP</a> <span>店舗情報</span></h1>
+<%      else %>
+                        <h1 class="en"><a href="/fix?id=208">SHOP</a> <span>店舗情報</span></h1>
+<%      end %>
+                        <ul>
+                            <li>住所： 福島県いわき市鹿島町米田字日渡5（エブリア1F）</li>
+                            <li>電話： 0120-634180 / 0246-29-4180</li>
+                            <li>営業時間： 9:00 - 19:00 (日・月・火・水・祝)</li>
+                            <li>営業時間： 9:00 - 20:00 (木・金・土)</li>
+                            <li class="smaller">パーマ・カラーは2時間前、カットは1時間前までの受付となります。</li>
+                            <li>定休日： エブリア定休日</li>
+                            <li>駐車場： エブリア駐車場</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1p2">
+                    <div class="col-in">
+                        <a target="_blank" href="https://www.google.com/maps/place/%E3%83%A2%E3%83%AA%E3%83%BB%E3%83%93%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BB%E3%82%B3%E3%83%BC%E3%83%9D%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%A2%E3%83%AA%E3%83%BB%E3%82%A2%E3%82%A4%E3%83%AD%E3%83%A0%E3%82%A8%E3%83%96%E3%83%AA%E3%82%A2%E5%BA%97/@36.9938977,140.9029291,17z/data=!4m8!1m2!2m1!1z44Ki44Kk44Ot44OgIOemj-WztuecjOOBhOOCj-OBjeW4gum5v-WztueUuuexs-eUsOaXpea4oe-8lQ!3m4!1s0x602113be8b8a9ec7:0x22e3a104d992c63b!8m2!3d36.994064!4d140.90514?hl=ja">
+<%      if !map_img.blank? && map_img.is_valid? %>
+                            <img src="<%= url_for_file_column(map_img.photos[0], :image) %>" alt="地図">
+<%      else %>
+                            <img src="//placehold.jp/512x217.jpg" alt="地図">
+<%      end %>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+            <aside id="home_staff">
+<%      if request.host == 'sr2.swifty.jp' %>
+                <h1 class="en"><a href="/contact_us?wkey=1619cf7b4ebde9cd3a6b83d1d57a7e59">STAFF</a> <span>スタッフ紹介</span></h1>
+<%      else %>
+                <h1 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h1>
+<%      end %>
+<!--
+                <p class="text-center">
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a class="link_button" href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
+<%      else %>
+                    <a class="link_button" href="/contact_us %>">
+<%      end %>
+                        スタッフ紹介へ <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+-->
+<%  if false %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/staff_lists" %>
+<%  end %>
+            </aside>
+            <aside>
+<%      if request.host == 'sr2.swifty.jp' %>
+                <h1 class="en"><a href="/menu_list?id=32&wkey=1619cf7b4ebde9cd3a6b83d1d57a7e59">PRICE</a> <SPAN>施術料金</SPAN></h1>
+<%      else %>
+                <h1 class="en"><a href="/menu_list?id=32">PRICE</a> <SPAN>施術料金</span></h1>
+<%      end %>
+<!--
+                <p class="text-center">
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a class="link_button" href="/menu_list?id=32&wkey=<%= @website.wsite_hash_key %>">
+<%      else %>
+                    <a class="link_button" href="/menu_list?id=32 %>">
+<%      end %>
+                        施術料金表へ <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+-->
+            </aside>
+            <aside>
+                <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
+                <p class="text-center">
+                    <img src="/photo/image/0000/0754/aujua_logo.png" alt="Aujua">
+                    <img src="/photo/image/0000/0755/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/0000/0753/adjuvant_logo.png" alt="ADJUVANT">
+                </p>
+            </aside>
+<%  elsif request.host == 'wings.mori-bc.co.jp' || @website.wsite_hash_key == 'b03e55355ea5ac4a8e7f0916a24a2505' %>
+            <article id="home_article">
+<!--
+                <h1 class="en">CONCEPT <span>サロンコンセプト</span></h1>
+-->
+                 <p>
+                    「Friendly（親しみやすさ）」と「Personal（あなたらしさ）」がコンセプトの「AVEDA ファミリーサロン」。そして「資生堂のシンボリックサロン」です。<br>
+                    気兼ねなくくつろいでいただける、癒しのひとときをご提供いたします。<br>
+                    スタイリングでは、お客様に元気になってもらえるようなデザインをご提案。<br>
+                    チャイルドスペースもございますので、お子様と一緒にお気軽にご来店下さい。
+                </p>
+            </article>
+            <aside id="home_shop" class="wrapper">
+                <div class="col-1p2">
+                    <div class="col-in">
+<%      if request.host == 'sr2.swifty.jp' %>
+                        <h1 class="en"><a href="/fix?id=209&wkey=b03e55355ea5ac4a8e7f0916a24a2505">SHOP</a> <span>店舗情報</span></h1>
+<%      else %>
+                        <h1 class="en"><a href="/fix?id=209">SHOP</a> <span>店舗情報</span></h1>
+<%      end %>
+                        <ul>
+                            <li>住所： 福島県いわき市植田町中央1-14-5</li>
+                            <li>電話： 0120-064180 / 0246-62-4180</li>
+                            <li>営業時間： 9:00 - 19:00 (日・月・水・祝)</li>
+                            <li>営業時間： 9:00 - 20:00 (木・金・土)</li>
+                            <li class="smaller">パーマ・カラーは2時間前、カットは1時間前までの受付となります。</li>
+                            <li>定休日： 火曜日</li>
+                            <li>駐車場： 12台</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1p2">
+                    <div class="col-in">
+                        <a target="_blank" href="https://www.google.com/maps/place/%E3%83%A2%E3%83%AA%E3%83%BB%E3%83%93%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BB%E3%82%B3%E3%83%BC%E3%83%9D%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%A2%E3%83%AA%E3%83%BB%E3%82%A6%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B9%E6%A4%8D%E7%94%B0%E5%BA%97/@36.9197788,140.7970755,16z/data=!4m8!1m2!2m1!1z44Oi44OqIOemj-WztuecjOOBhOOCj-OBjeW4guakjeeUsOeUuuS4reWkru-8keS4geebru-8ke-8lOKIku-8lQ!3m4!1s0x60210ce76c3bb087:0xb4887f20d576522f!8m2!3d36.919798!4d140.797094?hl=ja">
+<%      if !map_img.blank? && map_img.is_valid? %>
+                            <img src="<%= url_for_file_column(map_img.photos[0], :image) %>" alt="地図">
+<%      else %>
+                            <img src="//placehold.jp/512x217.jpg" alt="地図">
+<%      end %>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+            <aside id="home_staff">
+<%      if request.host == 'sr2.swifty.jp' %>
+                <h1 class="en"><a href="/contact_us?wkey=b03e55355ea5ac4a8e7f0916a24a2505">STAFF</a> <span>スタッフ紹介</span></h1>
+<%      else %>
+                <h1 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h1>
+<%      end %>
+<!--
+                <p class="text-center">
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a class="link_button" href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
+<%      else %>
+                    <a class="link_button" href="/contact_us %>">
+<%      end %>
+                        スタッフ紹介へ <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+-->
+<%  if false %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/staff_lists" %>
+<%  end %>
+            </aside>
+            <aside>
+<%      if request.host == 'sr2.swifty.jp' %>
+                <h1 class="en"><a href="/menu_list?id=45&wkey=b03e55355ea5ac4a8e7f0916a24a2505">PRICE</a> <SPAN>施術料金</SPAN></h1>
+<%      else %>
+                <h1 class="en"><a href="/menu_list?id=45">PRICE</a> <SPAN>施術料金</span></h1>
+<%      end %>
+<!--
+                <p class="text-center">
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a class="link_button" href="/menu_list?id=45&wkey=<%= @website.wsite_hash_key %>">
+<%      else %>
+                    <a class="link_button" href="/menu_list?id=45 %>">
+<%      end %>
+                        施術料金表へ <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+-->
+            </aside>
+            <aside>
+                <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
+                <p class="text-center">
+                    <img src="/photo/image/0000/0757/shiseido_logo.png" alt="SHISEIDO">
+                    <img src="/photo/image/0000/0753/adjuvant_logo.png" alt="ADJUVANT">
+                    <img src="/photo/image/0000/0755/aveda_logo.png" alt="AVEDA">
+                </p>
+            </aside>
+<%  elsif request.host == 'green.mori-bc.co.jp' || @website.wsite_hash_key == '4f160f902541b6f384630d66ceff5cbb' %>
+            <article id="home_article">
+<!--
+                <h1 class="en">CONCEPT <span>サロンコンセプト</span></h1>
+-->
+                 <p>
+                    まるでリゾートに訪れたようなアジアンテイストの店内に、アロマの香り。<br>
+                    当店では毎日のお手入れ方法もお聞きした上で、簡単にスタイリングできる方法もアドバイスさせていただきます。<br>
+                    さらに、疲れを癒やすヘッドスパも。<br>
+                    また、豊富なAVEDA製品をご用意しています。お買い物だけでもお気軽にご来店下さい。
+                </p>
+            </article>
+            <aside id="home_shop" class="wrapper">
+                <div class="col-1p2">
+                    <div class="col-in">
+<%      if request.host == 'sr2.swifty.jp' %>
+                        <h1 class="en"><a href="/fix?id=210&wkey=4f160f902541b6f384630d66ceff5cbb">SHOP</a> <span>店舗情報</span></h1>
+<%      else %>
+                        <h1 class="en"><a href="/fix?id=210">SHOP</a> <span>店舗情報</span></h1>
+<%      end %>
+                        <ul>
+                            <li>住所： 福島県いわき市鹿島町久保2丁目3-12</li>
+                            <li>電話： 0800-800-5554 / 0246-58-2800</li>
+                            <li>営業時間： 9:00 - 19:00 (日・月・水・祝)</li>
+                            <li>営業時間： 9:00 - 20:00 (木・金・土)</li>
+                            <li class="smaller">パーマ・カラーは2時間前、カットは1時間前までの受付となります。</li>
+                            <li>定休日： 火曜日</li>
+                            <li>駐車場： 15台</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1p2">
+                    <div class="col-in">
+                        <a target="_blank" href="https://www.google.com/maps/place/%E3%82%A2%E3%83%B4%E3%82%A7%E3%83%80%E3%83%BB%E3%82%B5%E3%83%AD%E3%83%B3%EF%BC%86%E3%82%B9%E3%83%91%E3%83%BB%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3/@36.98921,140.9000655,17z/data=!4m8!1m2!2m1!1z44Kw44Oq44O844OzIOemj-WztuecjOOBhOOCj-OBjeW4gum5v-WztueUuuS5heS_ne-8kuS4geebru-8k-KIku-8ke-8kg!3m4!1s0x602113bc94675623:0x5133c2480dfafae3!8m2!3d36.989456!4d140.9040011?hl=ja">
+<%      if !map_img.blank? && map_img.is_valid? %>
+                            <img src="<%= url_for_file_column(map_img.photos[0], :image) %>" alt="地図">
+<%      else %>
+                            <img src="//placehold.jp/512x217.jpg" alt="地図">
+<%      end %>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+            <aside id="home_staff">
+<%      if request.host == 'sr2.swifty.jp' %>
+                <h1 class="en"><a href="/contact_us?wkey=4f160f902541b6f384630d66ceff5cbb">STAFF</a> <span>スタッフ紹介</span></h1>
+<%      else %>
+                <h1 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h1>
+<%      end %>
+<!--
+                <p class="text-center">
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a class="link_button" href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
+<%      else %>
+                    <a class="link_button" href="/contact_us %>">
+<%      end %>
+                        スタッフ紹介へ <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+-->
+<%  if false %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/staff_lists" %>
+<%  end %>
+            </aside>
+            <aside>
+<%      if request.host == 'sr2.swifty.jp' %>
+                <h1 class="en"><a href="/menu_list?id=58&wkey=4f160f902541b6f384630d66ceff5cbb">PRICE</a> <SPAN>施術料金</SPAN></h1>
+<%      else %>
+                <h1 class="en"><a href="/menu_list?id=58">PRICE</a> <SPAN>施術料金</span></h1>
+<%      end %>
+<!--
+                <p class="text-center">
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a class="link_button" href="/menu_list?id=58&wkey=<%= @website.wsite_hash_key %>">
+<%      else %>
+                    <a class="link_button" href="/menu_list?id=58 %>">
+<%      end %>
+                        施術料金表へ <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+-->
+            </aside>
+            <aside>
+                <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
+                <p class="text-center">
+                    <img src="/photo/image/0000/0755/aveda_logo.png" alt="AVEDA">
+                </p>
+            </aside>
+
+
+
+
+
+
+<%  elsif request.host == 'leaf.mori-bc.co.jp' || @website.wsite_hash_key == '8077ed2b1aa6712717293e46f93cf59f' %>
+            <article id="home_article">
+<!--
+                <h1 class="en">CONCEPT <span>サロンコンセプト</span></h1>
+-->
+                 <p>
+                    "素材の美しさを大切にヘルシー、ナチュラルで上質なスタイルを提案"をコンセプトに、お客様一人一人に合わせたカウンセリングでお客様の美しさを最大限に引き出すお手伝いをさせて頂きたいと考えております。<br>皆様のご来店を心よりお待ちししております。
+                </p>
+            </article>
+            <aside id="home_shop" class="wrapper">
+                <div class="col-1p2">
+                    <div class="col-in">
+<%      if request.host == 'sr2.swifty.jp' %>
+                        <h1 class="en"><a href="/fix?id=2391&wkey=8077ed2b1aa6712717293e46f93cf59f">SHOP</a> <span>店舗情報</span></h1>
+<%      else %>
+                        <h1 class="en"><a href="/fix?id=2391">SHOP</a> <span>店舗情報</span></h1>
+<%      end %>
+                        <ul>
+                            <li>住所： 福島県いわき市泉町下川字薬師前115番地1</li>
+                            <li>電話： 0120-39-4180 / 0246-85-5525</li>
+                            <li>営業時間： 9:00 - 19:00 (日・月・水・祝)</li>
+                            <li>営業時間： 9:00 - 20:00 (木・金・土)</li>
+                            <li class="smaller">パーマ・カラーは2時間前、カットは1時間前までの受付となります。</li>
+                            <li>定休日： 火曜日</li>
+                            <li>駐車場： 無料駐車場完備</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1p2">
+                    <div class="col-in">
+<!--
+                        <a target="_blank" href="https://www.google.com/maps/place/%E3%82%A2%E3%83%B4%E3%82%A7%E3%83%80%E3%83%BB%E3%82%B5%E3%83%AD%E3%83%B3%EF%BC%86%E3%82%B9%E3%83%91%E3%83%BB%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3/@36.98921,140.9000655,17z/data=!4m8!1m2!2m1!1z44Kw44Oq44O844OzIOemj-WztuecjOOBhOOCj-OBjeW4gum5v-WztueUuuS5heS_ne-8kuS4geebru-8k-KIku-8ke-8kg!3m4!1s0x602113bc94675623:0x5133c2480dfafae3!8m2!3d36.989456!4d140.9040011?hl=ja">
+-->
+<%      if !map_img.blank? && map_img.is_valid? %>
+                            <img src="<%= url_for_file_column(map_img.photos[0], :image) %>" alt="地図">
+<%      else %>
+                            <img src="//placehold.jp/512x217.jpg" alt="地図">
+<%      end %>
+<!--
+                        </a>
+-->
+                    </div>
+                </div>
+            </aside>
+            <aside id="home_staff">
+<%      if request.host == 'sr2.swifty.jp' %>
+                <h1 class="en"><a href="/contact_us?wkey=8077ed2b1aa6712717293e46f93cf59f">STAFF</a> <span>スタッフ紹介</span></h1>
+<%      else %>
+                <h1 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h1>
+<%      end %>
+<!--
+                <p class="text-center">
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a class="link_button" href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
+<%      else %>
+                    <a class="link_button" href="/contact_us %>">
+<%      end %>
+                        スタッフ紹介へ <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+-->
+<%  if false %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/staff_lists" %>
+<%  end %>
+            </aside>
+            <aside>
+<%      if request.host == 'sr2.swifty.jp' %>
+                <h1 class="en"><a href="/menu_list?id=885&wkey=8077ed2b1aa6712717293e46f93cf59f">PRICE</a> <SPAN>施術料金</SPAN></h1>
+<%      else %>
+                <h1 class="en"><a href="/menu_list?id=885">PRICE</a> <SPAN>施術料金</span></h1>
+<%      end %>
+<!--
+                <p class="text-center">
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a class="link_button" href="/menu_list?id=885&wkey=<%= @website.wsite_hash_key %>">
+<%      else %>
+                    <a class="link_button" href="/menu_list?id=885 %>">
+<%      end %>
+                        施術料金表へ <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+-->
+            </aside>
+            <aside>
+                <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
+                <p class="text-center">
+                    <img src="/photo/image/0000/0756/kerastase_logo.png" alt="KERASTASE">
+                    <img src="/photo/image/0000/0755/aveda_logo.png" alt="AVEDA">
+                </p>
+            </aside>
+
+
+
+
+
+
+
+
+
+<%  end %>
+<!-- 最新のBLOG -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/blog_list" %>
+        </div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/footer" %>
+    </div>
+</div>
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/header" %>
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav" class="scroolwrap">
+    <div class="scrooler">
+<% logomark = VisualWidget.search_widget_bag_for(@website, "62aa95cab0dd63e669fa466996f2b97b") %>
+<% if !logomark.blank? && logomark.is_valid? %>
+        <div id="tnav_logo">
+            <img src="//<%= request.host %><%= url_for_file_column(logomark.photos[0], :image) %>" alt="logomark">
+        </div>
+<% end %>
+        <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/navigation" %>
+            <li>
+<%      if request.host == 'sr2.swifty.jp' %>
+                <a href="/home?wkey=08ebd0bbcad881d718362fef54ee81e8">MORI<span> BEAUTY CORPORATION</span></a>
+<%      else %>
+                <a href="http://www.mori-bc.co.jp/">MORI<span> BEAUTY CORPORATION</span></a>
+<%      end %>
+            </li>
+        </ul>
+    </div>
+</aside>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/common_js" %>
+<!-- page specific javascript -->
+<script src="/javascripts/assets/mori-bc.co.jp/shop/carousel.js"></script>
+<!-- social net javascript -->
+<!-- google maps javascript -->
+</body>
+</html>

@@ -1,0 +1,9 @@
+<% pnl = VisualWidget.search_widget_bag_for(@website, "dd22d375d8d4514d39de7b1f45f5791e") %>
+<% if pnl.photos.blank? %>
+    <div></div>
+<% else %>
+<%      cnt = pnl.photos.length %>
+<%      cnt.times do %>
+    <div></div>
+<%      end %>
+<% end %>

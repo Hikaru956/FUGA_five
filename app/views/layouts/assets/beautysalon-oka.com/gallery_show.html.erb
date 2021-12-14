@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http:http://ogp.me/ns# fb: http:http://ogp.me/ns/fb# article: http:http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="copyright"                content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "ef3e72543026f675d52d731b5f8f5fac") %>
+<% unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="http://<%= request.host + url_for(:action=>'gallery_show', :id=>@seed) %>">
+<meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/style" %>
+</head>
+<body id="body">
+<!-- CALOUSEL -->
+    <div id="carousel" class="page_gallery">
+        GALLERY
+    </div>
+<!-- MAIN -->
+<main id="main">
+    <h1><%= model_title(@seed) %></h1>
+    <ul class="p2m1">
+<%  @photo = @seed.photos %>
+<%  unless @photo.blank? %>
+        <li>
+            <%= image_tag(url_for_file_column(@photo[0], :image)) %>
+<%      unless @photo[0].info.blank? %>
+            <div class="caption"><%=h @photo[0].info %></div>
+<%      end %>
+        </li>
+<%  else %>
+        <li><img src="//placehold.jp/430x645.png?text=GALLERY"></li>
+<%  end %>
+        <li>
+            <div class="contents">
+<%  unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+                <div class="publish">
+                    <i class="fas fa-user"></i> <a href="<%= url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>
+                </div>
+<%  end %>
+<%  unless @seed.description.blank? %>
+                <%= raw @seed.description %>
+<%  end %>
+            </div>
+        </li>
+    </ul>
+</main>
+<!-- FOOTER -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/footer" %>
+<!-- HEADER -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/header" %>
+<!-- SCRIPT -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/script" %>
+</body>
+</html>

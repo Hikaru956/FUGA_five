@@ -16,10 +16,10 @@
 		  position: relative;
 	      	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "2cef44b0dd9692c245f132685b20f313") %>
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
-				  background: url(/images/assets/stylish-portfolio/bg.jpg) no-repeat center center fixed; 
+				  background: url(/images/assets/stylish-portfolio/bg.jpg) no-repeat center center fixed;
 			<% else %>
-				  background: url(<%= url_for_file_column(widget_bag.photos[0], :image) %>) no-repeat center center fixed; 
-			<% end %>			
+				  background: url(<%= url_for_file_column(widget_bag.photos[0], :image) %>) no-repeat center center fixed;
+			<% end %>
 		  -webkit-background-size: cover;
 		  -moz-background-size: cover;
 		  -o-background-size: cover;
@@ -34,10 +34,10 @@
 		  width: 100%;
 	      	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "e3cb98852eec58ecbee79a6640f6f0ba") %>
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
-				  background: url(/images/assets/stylish-portfolio/section-two.jpg) no-repeat center center fixed; 
+				  background: url(/images/assets/stylish-portfolio/section-two.jpg) no-repeat center center fixed;
 			<% else %>
-				  background: url(<%= url_for_file_column(widget_bag.photos[0], :image) %>) no-repeat center center fixed; 
-			<% end %>			
+				  background: url(<%= url_for_file_column(widget_bag.photos[0], :image) %>) no-repeat center center fixed;
+			<% end %>
 		  -webkit-background-size: cover;
 		  -moz-background-size: cover;
 		  -o-background-size: cover;
@@ -51,7 +51,7 @@
   <body>
 
 	<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/navigation_home" %>
-	  
+
     <!-- Full Page Image Header Area -->
     <div id="top" class="header">
       <div class="vert-text">
@@ -59,10 +59,10 @@
 
 	      	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "527a3266c376ced4044eb1e72151c717") %>
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
-	        	<img src="http://placehold.it/200x200&amp;text=Logo-S">
+	        	<img src="//placehold.jp/200x200.jpg?text=Logo-S">
 			<% else %>
 				<img src="<%= url_for_file_column(widget_bag.photos[0], :image) %>" title=<%=model_name(@website) %>>
-			<% end %>			
+			<% end %>
 			<br/>
 			<i class="icon-double-angle-down"></i>
 		</h1>
@@ -77,7 +77,7 @@
       </div>
     </div>
     <!-- /Intro -->
-  
+
     <!-- Services -->
     <div id="services" class="services">
       <div class="container">
@@ -95,7 +95,7 @@
 	        	A Dramatic Text Area
 			<% else %>
 				<%= widget_bag.data_string %>
-			<% end %>			
+			<% end %>
 		</h1>
       </div>
     </div>
@@ -120,7 +120,7 @@
     <!-- /Call to Action -->
 
 	<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/footer" %>
-	
+
   <!-- Bootstrap core JavaScript -->
   <!-- Placed at the end of the document so the pages load faster -->
 	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
@@ -145,7 +145,7 @@
   <script>
     $(function() {
         $('a[href*=#]:not([href=#])').click(function() {
-          if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+          if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\http://,'')
               || location.hostname == this.hostname) {
 
             var target = $(this.hash);

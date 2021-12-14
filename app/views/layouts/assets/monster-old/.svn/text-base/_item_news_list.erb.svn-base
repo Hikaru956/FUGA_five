@@ -1,0 +1,29 @@
+<% link_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key) %>
+<div class="row">
+    <div class="span6">
+        <div class="thumbnail">
+            <% key_photo = key_photo(@leaf) %>
+            <% unless key_photo.blank? %>
+            <div align="center"><%= image_tag(url_for_file_column(key_photo, :image, 'panel'), :class=>"img-responsive") %></div>
+            <% else %>
+            <a href="#"><img class="img-responsive" src="http://placehold.it/700x300&amp;text=<%=@leaf.publish_from.strftime('%Y-%m-%d')%>"></a><% end %>
+        </div>
+    </div>
+    <div class="span6">
+        <h4><a href="<%= link_url %>"><%= h model_title(@leaf) %></a></h4>
+        <h4><% unless @leaf.staff.blank?  || @leaf.staff.staff_status==Staff::STAFF_BLOCKED %>
+            <p class="lead">
+                by <%= h model_name(@leaf.staff) %>
+            </p>
+            <% end %>
+        </h4>
+        <p>
+            <i class="icon-time"></i>&nbsp;<%= publish_label(@leaf) %>
+        </p>
+        <p>
+            <%= h  truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>100) %>
+        </p>
+        <a class="btn btn-primary" href="<%= link_url %>">Read More <i class="icon-angle-right"></i></a>
+    </div>
+</div>
+<hr>

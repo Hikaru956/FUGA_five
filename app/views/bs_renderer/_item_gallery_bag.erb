@@ -1,7 +1,8 @@
 <div class="thumbnail thumbnail-1">
 	<% key_photo = temp_local.photos.first %>
 	<% unless key_photo.blank? %>
-		<%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
+		<%= image_tag key_photo.clip.url(:panel) %>
+		<%= image_tag(url_for_file_column(key_photo, :image, 'panel')) if false %>
 	<% else %>
 		<img src="http://placehold.it/320x240&amp;text=No Face Photo">
 	<% end %>

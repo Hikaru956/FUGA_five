@@ -1,0 +1,56 @@
+<%  home = "a386021cedc3584c6999c6f1c2115f48" %>
+<%  lis  = "27ac677851db26419e0d821b37dc9e22" %>
+<%  ens  = "6d747da5bf38d7171f268545b0652d1c" %>
+<%  lm   = "cd32ac74ed5ca6837f8c86d4ed67a149" %>
+<%  codo = "f90c2c82832eb4a51b59eb07559b7a05" %>
+<%  if @website.wsite_hash_key == lis %>
+			<div id="brand">
+<%      if request.host == 'sr2.swifty.jp' %>
+				 <a href="https://sr2.swifty.jp/home?wkey=<%= lis %>">
+<%      else %>
+				 <a href="https://fleur.de-lis.com/lis/home">
+<%      end %>
+					<i class="icon-lis"></i>
+				</a>
+			</div>
+<%  elsif @website.wsite_hash_key == ens %>
+			<div id="brand">
+<%      if request.host == 'sr2.swifty.jp' %>
+				 <a href="https://sr2.swifty.jp/home?wkey=<%= ens %>">
+<%      else %>
+				 <a href="https://fleur.de-lis.com/ens/home">
+<%      end %>
+					<i class="icon-ens"></i>
+				</a>
+			</div>
+<%  elsif @website.wsite_hash_key == lm %>
+			<div id="brand">
+<%      if request.host == 'sr2.swifty.jp' %>
+				 <a href="https://sr2.swifty.jp/home?wkey=<%= lm %>">
+<%      else %>
+				 <a href="https://fleur.de-lis.com/lm/home">
+<%      end %>
+					<i class="icon-lm"></i>
+				</a>
+			</div>
+<%  elsif @website.wsite_hash_key == codo %>
+			<div id="brand">
+<%      if request.host == 'sr2.swifty.jp' %>
+				 <a href="https://sr2.swifty.jp/home?wkey=<%= codo %>">
+<%      else %>
+				 <a href="https://fleur.de-lis.com/codo/home">
+<%      end %>
+					<i class="icon-codo"></i>
+				</a>
+			</div>
+<%  else %>
+			<div id="brand">
+<%      if request.host == 'sr2.swifty.jp' %>
+				 <a href="https://sr2.swifty.jp/home?wkey=<%= home %>">
+<%      else %>
+				 <a href="https://fleur.de-lis.com/home">
+<%      end %>
+					<i class="icon-lis"></i>
+				</a>
+			</div>
+<%  end %>

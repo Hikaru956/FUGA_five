@@ -1,0 +1,41 @@
+<style>
+#body {
+    background-color: #fec;
+<% bg_clr = VisualWidget.search_widget_bag_for(@website, "289d969709b3f09345dd1e1161f67d56") %>
+<% if !bg_clr.blank? %>
+    background-color: <%= bg_clr.data_string %>;
+<% end %>
+<% bg_img = VisualWidget.search_widget_bag_for(@website, "c9869f2e27dd708137b976e40e666e8c") %>
+<% if !bg_img.blank? && bg_img.is_valid? %>
+    background: url("<%= url_for_file_column(bg_img.photos[0], :image) %>") no-repeat center top;
+    -webkit-background-size: cover;
+       -moz-background-size: cover;
+            background-size: cover;
+<% end %>
+}
+a {
+<% style_sheet_uri = (@author_mode) ? @website.wsite_color_edit.repository_path : @website.wsite_color_deploy.repository_path %>
+<% case style_sheet_uri %>
+<% when 'lavish-bootstrap-0' %>
+    color: #304FFE;
+<% when 'lavish-bootstrap-1' %>
+    color: #d50000;
+<% when 'lavish-bootstrap-2' %>
+    color: #ff1493;
+<% when 'lavish-bootstrap-3' %>
+    color: #FFEB3B;
+<% when 'lavish-bootstrap-4' %>
+    color: #1B5E20;
+<% when 'lavish-bootstrap-5' %>
+    color: #00C853;
+<% when 'lavish-bootstrap-6' %>
+    color: #FF6F00;
+<% when 'lavish-bootstrap-7' %>
+    color: #FFFFFF;
+<% when 'lavish-bootstrap-8' %>
+    color: #484848;
+<% else %>
+    color: #ff1493;
+<% end %>
+}
+</style>

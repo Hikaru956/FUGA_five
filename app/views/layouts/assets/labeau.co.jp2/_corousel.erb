@@ -1,0 +1,27 @@
+<% widget_bag = VisualWidget.search_widget_bag_for(@website, "549c08d52652292c1ee3a380c742bbbc") %>
+<% links      = Array.new %>
+<% links[0]   = VisualWidget.search_widget_bag_for(@website, "cfbc467ab5daae35512725f48397b226") %>
+<% links[1]   = VisualWidget.search_widget_bag_for(@website, "43dc09cbbe4edb4391442566cf630047") %>
+<% links[2]   = VisualWidget.search_widget_bag_for(@website, "c01ac03195e9bf59ef4581cb8970c88c") %>
+<% links[3]   = VisualWidget.search_widget_bag_for(@website, "3dced34f25b56db26b7d1884a679c690") %>
+<% links[4]   = VisualWidget.search_widget_bag_for(@website, "cf3ba304bab37a46856b13295526b18a") %>
+<% links[5]   = VisualWidget.search_widget_bag_for(@website, "eb9fcf2779c41d3498b51a82161ca05a") %>
+<% if !widget_bag.blank? && widget_bag.is_valid? %>
+        <aside>
+            <div class="container">
+                <div id="carousel">
+                    <ul id="carousel_ul">
+<% widget_bag.photos.each_with_index do | photo, i | %>
+<%      if links[i].blank? || !links[i].is_valid? %>
+                        <li><img src="<%= url_for_file_column(photo, :image) %>"></li>
+<%      else %>
+                        <li><a href="<%= links[i].data_string %>"><img src="<%= url_for_file_column(photo, :image) %>"></a></li>
+<%      end %>
+<% end %>
+                    </ul>
+                    <div id="carousel_prev"><i class="fa fa-chevron-circle-left"></i></div>
+                    <div id="carousel_next"><i class="fa fa-chevron-circle-right"></i></div>
+                </div>
+            </div>
+        </aside>
+<% end %>

@@ -1,0 +1,53 @@
+<%
+    cmax = 3
+    if cmax != 0
+
+        @max = cmax
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+        navigation = type_root.web_page
+        bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        c = ContentLeaf.public_leafs_condition
+        c.and "content_category_id", public_categories
+        latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'position desc')
+        unless latest_leafs.blank?
+%>
+<aside id="info">
+    <div class="container">
+        <h1><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id %></h1>
+        <ul class="infolist">
+<%
+            latest_leafs.each do | leaf |
+                if request.host == 'sr2.swifty.jp'
+                    page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'news_show', :id=>leaf)
+                end
+                publish   = leaf.publish_from.strftime("%Y-%m-%d")
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.jp/352x264.png?text='+publish
+                end
+%>
+            <li>
+                <div class="imgbox">
+                    <div>
+                        <a href="<%= page_url %>">
+                            <img src="<%= image_url %>" alt="<%= model_title(leaf) %>">
+                        </a>
+                    </div>
+                </div>
+                <h2><%= model_title(leaf) %></h2>
+            </li>
+<%          end %>
+		</ul>
+	</div>
+</aside>
+<%      end %>
+<%  end %>

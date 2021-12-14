@@ -11,7 +11,11 @@
         <header>
             <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/header" %>
         </header>
+<% if request.host == 'www.bond-of-mondo.com' %>
+        <div>
+<% else %>
         <div class="bg-content">
+<% end %>
             <!--============================== content =================================-->
             <div id="content" class="content-extra">
                 <div class="ic">
@@ -51,7 +55,7 @@
 								</h1>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="span12">
                                 <p>
@@ -63,7 +67,7 @@
                                 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
                             </div>
                         </div>
-                        
+
                         <% if false %>
                         <div class="row">
                             <div class="span12">
@@ -87,7 +91,7 @@
                             </div>
                         </div>
                         <% end %>
- 
+
                         <div class="row">
                             <div class="span12">
                                 <hr><%= render :partial=>'layouts/social_buttons' %>

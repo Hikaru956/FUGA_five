@@ -1,10 +1,10 @@
 <div class="thumbnail thumbnail-1">
 	<h3></h3>
-	<% key_photo = temp_local.photos.first %>
+	<% key_photo = temp_local.photos.find(:first) %>
 	<% unless key_photo.blank? %>
 		<%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
 	<% else %>
-		<img src="http://placehold.it/320x240&amp;text=No Face Photo">
+		<img src="//placehold.jp/320x240.jpg?text=No Face Photo">
 	<% end %>
     <section>
         <strong><%= truncate(model_name(temp_local), :length=>50) %></strong>

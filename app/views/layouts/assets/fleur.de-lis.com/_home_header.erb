@@ -1,0 +1,50 @@
+<% lis_reserve  = VisualWidget.search_widget_bag_for(@website, "ed2c77df73391fca4eba611024a1bebb") %>
+<% ens_reserve  = VisualWidget.search_widget_bag_for(@website, "2b3a0b066d2afc9b033a5b834bd1c8a5") %>
+<% lm_reserve   = VisualWidget.search_widget_bag_for(@website, "6f97f4aa2ec82081cb1ccb567bfa287a") %>
+<% codo_reserve = VisualWidget.search_widget_bag_for(@website, "a0801ffa53b4042395bab083bd3acf74") %>
+<header id="header" class="show">
+	<div class="container">
+		<ul id="head-link">
+<%= render :partial=>"#{LayoutScheme.asset_root}/fleur.de-lis.com/sns_links" %>
+		</ul>
+		<div id="nav-opener">
+			<i class="icon-burger"></i>
+	    </div>
+    </div>
+</header>
+<div id="reserve" class="">
+	<div class="container">
+		<i class="icon-times"></i>
+	</div>
+	<p>24H WEB 予約</p>
+	<ul>
+<%  unless lis_reserve.blank? && !lis_reserve.is_valid? %>
+		<li>
+			<a href="<%= lis_reserve.data_string %>" target="_blank">
+				<i class="icon-lis"></i>
+			</a>
+		</li>
+<%  end %>
+<%  unless ens_reserve.blank? && !ens_reserve.is_valid? %>
+		<li>
+			<a href="<%= ens_reserve.data_string %>" target="_blank">
+				<i class="icon-ens"></i>
+			</a>
+		</li>
+<%  end %>
+<%  unless lm_reserve.blank? && !lm_reserve.is_valid? %>
+		<li>
+			<a href="<%= lm_reserve.data_string %>" target="_blank">
+				<i class="icon-lm"></i>
+			</a>
+		</li>
+<%  end %>
+<%  unless codo_reserve.blank? && !codo_reserve.is_valid? %>
+		<li>
+			<a href="<%= codo_reserve.data_string %>" target="_blank">
+				<i class="icon-codo"></i>
+			</a>
+		</li>
+<%  end %>
+	</ul>
+</div>

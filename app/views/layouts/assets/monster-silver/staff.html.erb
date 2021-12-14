@@ -11,7 +11,11 @@
         <header>
             <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/header" %>
         </header>
+<% if request.host == 'www.bond-of-mondo.com' %>
+        <div>
+<% else %>
         <div class="bg-content">
+<% end %>
             <!--============================== content =================================-->
             <div id="content" class="content-extra">
                 <div class="ic">
@@ -30,7 +34,7 @@
 							            <li>
 							                <a href="<%= url_for(:action=>'contact', :id=>contact_category, :wkey=>@website.wsite_hash_key) %>"><%= model_name(contact_category.web_page) %></a>
 							            </li>
-									<% end %>				
+									<% end %>
                                     <li class="active">
                                         <%= model_name(@seed) %>
                                     </li>
@@ -55,7 +59,7 @@
                                             <%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
                                         </div>
                                         <% else %>
-                                        <img src="http://placehold.it/320x240&amp;text=No Face Photo"><% end %>
+                                        <img src="//placehold.jp/320x240.jpg?text=No Face Photo"><% end %>
                                     </div>
                                 </div>
                                 <div class="span5">
@@ -98,7 +102,7 @@
                         <% @photos = @seed.photos %>
                         <% unless @photos.blank? %>
                         <hr/>
-						
+
                         <div class="row">
                             <div class="span12">
                                 <% array = @photos.in_groups_of(3, false) %>

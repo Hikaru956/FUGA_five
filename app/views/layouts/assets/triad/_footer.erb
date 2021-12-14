@@ -1,0 +1,405 @@
+<%
+    logo1 = VisualWidget.search_widget_bag_for(@website, "2959f3bb79e0260e1c310ba1956fd9e6")
+    stv1  = VisualWidget.search_widget_bag_for(@website, "a1cd4b40bdceadd5279bb74b2017c984")
+    logo2 = VisualWidget.search_widget_bag_for(@website, "b7e1e16c145391506a24f8cc06268eb1")
+    logo3 = VisualWidget.search_widget_bag_for(@website, "5b186fcdf19ad6da7cb1dbb22eac1ed4")
+    unless logo2.photos[0].blank?
+        add2  = VisualWidget.search_widget_bag_for(@website, "a207e0ba0e137239dbd4d89c23a7e26f")
+        tel2  = VisualWidget.search_widget_bag_for(@website, "7614fc4c2161722759ff51a822a5a934")
+        mail2 = VisualWidget.search_widget_bag_for(@website, "d3aa3a99abcb9cbb8ed7bae0b120f370")
+        glat2 = VisualWidget.search_widget_bag_for(@website, "df78da07b7d00ee25bdc6260e05b823b")
+        glng2 = VisualWidget.search_widget_bag_for(@website, "b044b72a7cb3cbe748e3e33cf01e5d93")
+        stv2  = VisualWidget.search_widget_bag_for(@website, "85f9b581fd1f2383b3e75410cb68f4d4")
+        fb2   = VisualWidget.search_widget_bag_for(@website, "69e11fba171c778b738f96409b946b5a")
+        gp2   = VisualWidget.search_widget_bag_for(@website, "30121c345403c1d68e5996afa6a4b088")
+        tw2   = VisualWidget.search_widget_bag_for(@website, "acea53d055ad978e5ae714269777f10f")
+        ig2   = VisualWidget.search_widget_bag_for(@website, "2b3ad1cd0bdd86337218d84e28504b24")
+        ln2   = VisualWidget.search_widget_bag_for(@website, "58f54f8f76671b41dc1f72c761ff0dd9")
+        pl2   = VisualWidget.search_widget_bag_for(@website, "78fe5b421a6121dd150849d2256c211d")
+        tb2   = VisualWidget.search_widget_bag_for(@website, "48a441a4210058c8c08e506031f3311d")
+    end
+    unless logo3.photos[0].blank?
+        add3  = VisualWidget.search_widget_bag_for(@website, "952ce6985e1357b0e534868c49846a23")
+        tel3  = VisualWidget.search_widget_bag_for(@website, "23d60df88b804028241d0510fd555fe8")
+        mail3 = VisualWidget.search_widget_bag_for(@website, "1747ae3b96f92cbbb35870e6301ade0f")
+        glat3 = VisualWidget.search_widget_bag_for(@website, "13379235ed160e875131a47f3de09423")
+        glng3 = VisualWidget.search_widget_bag_for(@website, "097d3b16e6dca6db133a51df0fefae9c")
+        stv3  = VisualWidget.search_widget_bag_for(@website, "0a5bbe0e9ced0fd1cfcd9154c29a0ccd")
+        fb3   = VisualWidget.search_widget_bag_for(@website, "9a72a83bd9791bd94dc64d55a7b2289e")
+        gp3   = VisualWidget.search_widget_bag_for(@website, "602494c9389e31762078982e7a583a62")
+        tw3   = VisualWidget.search_widget_bag_for(@website, "f5fde8e215ac76d88afe2ed0520386b8")
+        ig3   = VisualWidget.search_widget_bag_for(@website, "ed00b00b2c3860b3f488e04ea9afddfb")
+        ln3   = VisualWidget.search_widget_bag_for(@website, "a86c36a2369e83646ee5a69b087c113a")
+        pl3   = VisualWidget.search_widget_bag_for(@website, "908cd6d8da8c141cbd8a79fa6744a95b")
+        tb3   = VisualWidget.search_widget_bag_for(@website, "38e0afb8656a1bca73acc4acd2d31e33")
+    end
+%>
+<% if logo2.photos[0].blank? && logo3.photos[0].blank? %>
+<footer id="footer">
+    <div class="container">
+        <div class="footer_logo">
+        <% if logo1.photos[0].blank? %>
+            <img src="//placehold.jp/260x120.jpg" alt="logo mark">
+        <% else %>
+            <img src="<%= url_for_file_column(logo1.photos[0], :image) %>" alt="logo mark">
+        <% end %>
+        </div>
+        <div class="sns_links">
+            <% unless @website.wsite_telephone.blank? %>
+            <a href="tel:<%= @website.wsite_telephone %>"><i class="fa fa-phone-square"></i></a>
+            <% end %>
+            <% unless @website.wsite_email.blank? %>
+            <a href="mailto:<%= @website.wsite_email %>"><i class="fa fa-envelope"></i></a>
+            <% end %>
+            <% unless @website.social_facebook_uri.blank? %>
+            <a href="<%= @website.social_facebook_uri %>" target="_blank"><i class="fa fa-facebook-official"></i></a>
+            <% end %>
+            <% unless @website.social_twitter_uri.blank? %>
+            <a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="fa fa-twitter-square"></i></a>
+            <% end %>
+            <% unless @website.social_gplus_uri.blank? %>
+            <a href="<%= @website.social_gplus_uri %>" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+            <% end %>
+            <% unless @website.social_instagram_uri.blank? %>
+            <a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fa fa-instagram"></i></a>
+            <% end %>
+            <% unless @website.social_line_uri.blank? %>
+            <a href="<%= @website.social_line_uri %>" target="_blank"><img src="/images/assets/line_icon.png" alt="LINE" /></a>
+            <% end %>
+            <% unless @website.social_pinterest_uri.blank? %>
+            <a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="fa fa-pinterest-square"></i></a>
+            <% end %>
+            <% unless @website.social_tumblr_uri.blank? %>
+            <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fa fa-tumblr-square"></i></a>
+            <% end %>
+        </div>
+        <% unless @website.address_1.blank? %>
+        <div>
+            <%= @website.address_1 %>
+        </div>
+        <% end %>
+        <% unless @website.wsite_telephone.blank? %>
+        <div class="footer_tel">
+            <i class="fa fa-phone"></i> <a href="tel:<%= @website.wsite_telephone %>"><%= @website.wsite_telephone %></a>
+        </div>
+        <% end %>
+        <% unless stv1.blank? %>
+        <div class="footer_view">
+            <%= raw stv1.data_string %>
+        </div>
+        <% end %>
+        <% unless @website.lat.blank? || @website.lng.blank? %>
+        <div id="gmap1" class="gmap"></div>
+        <div class="text-right">
+            <a href="https://www.google.co.jp/maps/@<%= @website.lat %>,<%= @website.lng %>,16z?hl=ja" target="_blank">大きな地図で見る</a>
+        </div>
+        <% end %>
+        <div id="copyright">
+            <small><%= copyright_notice(@website) %></small>
+        </div>
+    </div>
+</footer>
+<% elsif logo3.photos[0].blank? %>
+<footer id="footer">
+    <div class="container">
+        <div class="wrapper">
+            <div class="col-1p2">
+                <div class="footer_logo">
+                <% if logo1.photos[0].blank? %>
+                    <img src="//placehold.jp/260x120.jpg" alt="logo mark">
+                <% else %>
+                    <img src="<%= url_for_file_column(logo1.photos[0], :image) %>" alt="logo mark">
+                <% end %>
+                </div>
+                <div class="sns_links">
+                    <% unless @website.wsite_telephone.blank? %>
+                    <a href="tel:<%= @website.wsite_telephone %>"><i class="fa fa-phone-square"></i></a>
+                    <% end %>
+                    <% unless @website.wsite_email.blank? %>
+                    <a href="mailto:<%= @website.wsite_email %>"><i class="fa fa-envelope"></i></a>
+                    <% end %>
+                    <% unless @website.social_facebook_uri.blank? %>
+                    <a href="<%= @website.social_facebook_uri %>" target="_blank"><i class="fa fa-facebook-official"></i></a>
+                    <% end %>
+                    <% unless @website.social_twitter_uri.blank? %>
+                    <a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                    <% end %>
+                    <% unless @website.social_gplus_uri.blank? %>
+                    <a href="<%= @website.social_gplus_uri %>" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+                    <% end %>
+                    <% unless @website.social_instagram_uri.blank? %>
+                    <a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fa fa-instagram"></i></a>
+                    <% end %>
+                    <% unless @website.social_line_uri.blank? %>
+                    <a href="<%= @website.social_line_uri %>" target="_blank"><img src="/images/assets/line_icon.png" alt="LINE" /></a>
+                    <% end %>
+                    <% unless @website.social_pinterest_uri.blank? %>
+                    <a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="fa fa-pinterest-square"></i></a>
+                    <% end %>
+                    <% unless @website.social_tumblr_uri.blank? %>
+                    <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fa fa-tumblr-square"></i></a>
+                    <% end %>
+                </div>
+                <% unless @website.address_1.blank? %>
+                <div>
+                    <%= @website.address_1 %>
+                </div>
+                <% end %>
+                <% unless @website.wsite_telephone.blank? %>
+                <div class="footer_tel">
+                    <i class="fa fa-phone"></i> <a href="tel:<%= @website.wsite_telephone %>" class="footer_tel"><%= @website.wsite_telephone %></a>
+                </div>
+                <% end %>
+                <% unless stv1.blank? %>
+                <div class="footer_view">
+                    <%= raw stv1.data_string %>
+                </div>
+                <% end %>
+                <% unless @website.lat.blank? || @website.lng.blank? %>
+                <div id="gmap1" class="gmap"></div>
+                <div class="text-right" style="margin-bottom: 3rem;">
+                    <a href="https://www.google.co.jp/maps/@<%= @website.lat %>,<%= @website.lng %>,16z?hl=ja" target="_blank">大きな地図で見る</a>
+                </div>
+                <% end %>
+            </div>
+            <div class="col-1p2">
+                <div class="footer_logo">
+                    <img src="<%= url_for_file_column(logo2.photos[0], :image) %>" alt="logo mark">
+                </div>
+                <div class="sns_links">
+                    <% unless tel2.data_string.blank? %>
+                    <a href="tel:<%= tel2.data_string %>"><i class="fa fa-phone-square"></i></a>
+                    <% end %>
+                    <% unless mail2.data_string.blank? %>
+                    <a href="mailto:<%= mail2.data_string %>"><i class="fa fa-envelope"></i></a>
+                    <% end %>
+                    <% unless fb2.data_string.blank? %>
+                    <a href="<%= fb2.data_string %>" target="_blank"><i class="fa fa-facebook-official"></i></a>
+                    <% end %>
+                    <% unless tw2.data_string.blank? %>
+                    <a href="<%= tw2.data_string %>" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                    <% end %>
+                    <% unless gp2.data_string.blank? %>
+                    <a href="<%= gp2.data_string %>" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+                    <% end %>
+                    <% unless ig2.data_string.blank? %>
+                    <a href="<%= ig2.data_string %>" target="_blank"><i class="fa fa-instagram"></i></a>
+                    <% end %>
+                    <% unless ln2.data_string.blank? %>
+                    <a href="<%= ln2.data_string %>" target="_blank"><img src="/images/assets/line_icon.png" alt="LINE" /></a>
+                    <% end %>
+                    <% unless pl2.data_string.blank? %>
+                    <a href="<%= pl2.data_string %>" target="_blank"><i class="fa fa-pinterest-square"></i></a>
+                    <% end %>
+                    <% unless tb2.data_string.blank? %>
+                    <a href="<%= tb2.data_string %>" target="_blank"><i class="fa fa-tumblr-square"></i></a>
+                    <% end %>
+                </div>
+                <% unless add2.data_string.blank? %>
+                <div>
+                    <%= add2.data_string %>
+                </div>
+                <% end %>
+                <% unless tel2.data_string.blank? %>
+                <div class="footer_tel">
+                    <i class="fa fa-phone"></i> <a href="tel:<%= tel2.data_string %>" class="footer_tel"><%= tel2.data_string %></a>
+                </div>
+                <% end %>
+                <% unless stv2.data_string.blank? %>
+                <div class="footer_view">
+                    <%= raw stv2.data_string %>
+                </div>
+                <% end %>
+                <% unless glat2.data_string.blank? || glng2.data_string.blank? %>
+                <div id="gmap2" class="gmap"></div>
+                <div class="text-right">
+                    <a href="https://www.google.co.jp/maps/@<%= glat2.data_string %>,<%= glng2.data_string %>,16z?hl=ja" target="_blank">大きな地図で見る</a>
+                </div>
+                <% end %>
+            </div>
+        </div>
+        <div id="copyright">
+            <small><%= copyright_notice(@website) %></small>
+        </div>
+    </div>
+</footer>
+<% else %>
+<footer id="footer">
+    <div class="container">
+        <div class="wrapper">
+            <div class="col-1p3">
+                <div class="footer_logo">
+                <% if logo1.photos[0].blank? %>
+                    <img src="//placehold.jp/260x120.jpg" alt="logo mark">
+                <% else %>
+                    <img src="<%= url_for_file_column(logo1.photos[0], :image) %>" alt="logo mark">
+                <% end %>
+                </div>
+                <div class="sns_links">
+                    <% unless @website.wsite_telephone.blank? %>
+                    <a href="tel:<%= @website.wsite_telephone %>"><i class="fa fa-phone-square"></i></a>
+                    <% end %>
+                    <% unless @website.wsite_email.blank? %>
+                    <a href="mailto:<%= @website.wsite_email %>"><i class="fa fa-envelope"></i></a>
+                    <% end %>
+                    <% unless @website.social_facebook_uri.blank? %>
+                    <a href="<%= @website.social_facebook_uri %>" target="_blank"><i class="fa fa-facebook-official"></i></a>
+                    <% end %>
+                    <% unless @website.social_twitter_uri.blank? %>
+                    <a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                    <% end %>
+                    <% unless @website.social_gplus_uri.blank? %>
+                    <a href="<%= @website.social_gplus_uri %>" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+                    <% end %>
+                    <% unless @website.social_instagram_uri.blank? %>
+                    <a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fa fa-instagram"></i></a>
+                    <% end %>
+                    <% unless @website.social_line_uri.blank? %>
+                    <a href="<%= @website.social_line_uri %>" target="_blank"><img src="/images/assets/line_icon.png" alt="LINE" /></a>
+                    <% end %>
+                    <% unless @website.social_pinterest_uri.blank? %>
+                    <a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="fa fa-pinterest-square"></i></a>
+                    <% end %>
+                    <% unless @website.social_tumblr_uri.blank? %>
+                    <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fa fa-tumblr-square"></i></a>
+                    <% end %>
+                </div>
+                <% unless @website.address_1.blank? %>
+                <div>
+                    <%= @website.address_1 %>
+                </div>
+                <% end %>
+                <% unless @website.wsite_telephone.blank? %>
+                <div class="footer_tel">
+                    <i class="fa fa-phone"></i> <a href="tel:<%= @website.wsite_telephone %>" class="footer_tel"><%= @website.wsite_telephone %></a>
+                </div>
+                <% end %>
+                <% unless stv1.blank? %>
+                <div class="footer_view">
+                    <%= raw stv1.data_string %>
+                </div>
+                <% end %>
+                <% unless @website.lat.blank? || @website.lng.blank? %>
+                <div id="gmap1" class="gmap"></div>
+                <div class="text-right" style="margin-bottom: 3rem;">
+                    <a href="https://www.google.co.jp/maps/@<%= @website.lat %>,<%= @website.lng %>,16z?hl=ja" target="_blank">大きな地図で見る</a>
+                </div>
+                <% end %>
+            </div>
+            <div class="col-1p3">
+                <div class="footer_logo">
+                    <img src="<%= url_for_file_column(logo2.photos[0], :image) %>" alt="logo mark">
+                </div>
+                <div class="sns_links">
+                    <% unless tel2.data_string.blank? %>
+                    <a href="tel:<%= tel2.data_string %>"><i class="fa fa-phone-square"></i></a>
+                    <% end %>
+                    <% unless mail2.data_string.blank? %>
+                    <a href="mailto:<%= mail2.data_string %>"><i class="fa fa-envelope"></i></a>
+                    <% end %>
+                    <% unless fb2.data_string.blank? %>
+                    <a href="<%= fb2.data_string %>" target="_blank"><i class="fa fa-facebook-official"></i></a>
+                    <% end %>
+                    <% unless tw2.data_string.blank? %>
+                    <a href="<%= tw2.data_string %>" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                    <% end %>
+                    <% unless gp2.data_string.blank? %>
+                    <a href="<%= gp2.data_string %>" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+                    <% end %>
+                    <% unless ig2.data_string.blank? %>
+                    <a href="<%= ig2.data_string %>" target="_blank"><i class="fa fa-instagram"></i></a>
+                    <% end %>
+                    <% unless ln2.data_string.blank? %>
+                    <a href="<%= ln2.data_string %>" target="_blank"><img src="/images/assets/line_icon.png" alt="LINE" /></a>
+                    <% end %>
+                    <% unless pl2.data_string.blank? %>
+                    <a href="<%= pl2.data_string %>" target="_blank"><i class="fa fa-pinterest-square"></i></a>
+                    <% end %>
+                    <% unless tb2.data_string.blank? %>
+                    <a href="<%= tb2.data_string %>" target="_blank"><i class="fa fa-tumblr-square"></i></a>
+                    <% end %>
+                </div>
+                <% unless add2.data_string.blank? %>
+                <div>
+                    <%= add2.data_string %>
+                </div>
+                <% end %>
+                <% unless tel2.data_string.blank? %>
+                <div class="footer_tel">
+                    <i class="fa fa-phone"></i> <a href="tel:<%= tel2.data_string %>" class="footer_tel"><%= tel2.data_string %></a>
+                </div>
+                <% end %>
+                <% unless stv2.data_string.blank? %>
+                <div class="footer_view">
+                    <%= raw stv2.data_string %>
+                </div>
+                <% end %>
+                <% unless glat2.data_string.blank? || glng2.data_string.blank? %>
+                <div id="gmap2" class="gmap"></div>
+                <div class="text-right">
+                    <a href="https://www.google.co.jp/maps/@<%= glat2.data_string %>,<%= glng2.data_string %>,16z?hl=ja" target="_blank">大きな地図で見る</a>
+                </div>
+                <% end %>
+            </div>
+            <div class="col-1p3">
+                <div class="footer_logo">
+                    <img src="<%= url_for_file_column(logo3.photos[0], :image) %>" alt="logo mark">
+                </div>
+                <div class="sns_links">
+                    <% unless tel3.data_string.blank? %>
+                    <a href="tel:<%= tel3.data_string %>"><i class="fa fa-phone-square"></i></a>
+                    <% end %>
+                    <% unless mail3.data_string.blank? %>
+                    <a href="mailto:<%= mail3.data_string %>"><i class="fa fa-envelope"></i></a>
+                    <% end %>
+                    <% unless fb3.data_string.blank? %>
+                    <a href="<%= fb3.data_string %>" target="_blank"><i class="fa fa-facebook-official"></i></a>
+                    <% end %>
+                    <% unless tw3.data_string.blank? %>
+                    <a href="<%= tw3.data_string %>" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                    <% end %>
+                    <% unless gp3.data_string.blank? %>
+                    <a href="<%= gp3.data_string %>" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+                    <% end %>
+                    <% unless ig3.data_string.blank? %>
+                    <a href="<%= ig3.data_string %>" target="_blank"><i class="fa fa-instagram"></i></a>
+                    <% end %>
+                    <% unless ln3.data_string.blank? %>
+                    <a href="<%= ln3.data_string %>" target="_blank"><img src="/images/assets/line_icon.png" alt="LINE" /></a>
+                    <% end %>
+                    <% unless pl3.data_string.blank? %>
+                    <a href="<%= pl3.data_string %>" target="_blank"><i class="fa fa-pinterest-square"></i></a>
+                    <% end %>
+                    <% unless tb3.data_string.blank? %>
+                    <a href="<%= tb3.data_string %>" target="_blank"><i class="fa fa-tumblr-square"></i></a>
+                    <% end %>
+                </div>
+                <% unless add3.data_string.blank? %>
+                <div>
+                    <%= add3.data_string %>
+                </div>
+                <% end %>
+                <% unless tel3.data_string.blank? %>
+                <div class="footer_tel">
+                    <i class="fa fa-phone"></i> <a href="tel:<%= tel3.data_string %>" class="footer_tel"><%= tel3.data_string %></a>
+                </div>
+                <% end %>
+                <% unless stv3.data_string.blank? %>
+                <div class="footer_view">
+                    <%= raw stv3.data_string %>
+                </div>
+                <% end %>
+                <% unless glat3.data_string.blank? || glng3.data_string.blank? %>
+                <div id="gmap3" class="gmap"></div>
+                <div class="text-right">
+                    <a href="https://www.google.co.jp/maps/@<%= glat3.data_string %>,<%= glng3.data_string %>,16z?hl=ja" target="_blank">大きな地図で見る</a>
+                </div>
+                <% end %>
+            </div>
+        </div>
+        <div id="copyright">
+            <small><%= copyright_notice(@website) %></small>
+        </div>
+    </div>
+</footer>
+<% end %>

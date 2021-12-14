@@ -1,0 +1,29 @@
+<% reserve = VisualWidget.search_widget_bag_for(@website, "012b0122b6b2a978ae895fe1216e81f8") %>
+<% unless @website.wsite_telephone.blank? %>
+        <a href="tel:<%= @website.wsite_telephone %>"><i class="fas fa-phone-square"></i></a>
+<% end %>
+<% unless @website.wsite_email.blank? %>
+        <a href="mailto:<%= @website.wsite_email %>"><i class="fas fa-envelope"></i></a>
+<% end %>
+<% unless @website.social_facebook_uri.blank? %>
+        <a href="<%= @website.social_facebook_uri %>" target="_blank"><i class="fab fa-facebook"></i></a>
+<% end %>
+<% unless @website.social_twitter_uri.blank? %>
+        <a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="fab fa-twitter"></i></a>
+<% end %>
+<% unless @website.social_instagram_uri.blank? %>
+        <a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fab fa-instagram"></i></a>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+        <a href="<%= @website.social_line_uri %>" target="_blank"><i class="fab fa-line"></i></a>
+<% end %>
+<% unless @website.social_pinterest_uri.blank? %>
+        <a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="fab fa-pinterest"></i></a>
+<% end %>
+<% unless @website.social_tumblr_uri.blank? %>
+        <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fab fa-tumblr"></i></a>
+<% end %>
+        <a href="https://www.aveda.jp/locator/get_the_facts.tmpl?vanity=1&SalonID=58694&utm_medium=referral&utm_source=aveda-salon&utm_campaign=acom_site-traffic&utm_content=caelum_fs&utm_keyword=online" target="_blank"><img src="/assets/caelum-web.jp/img/cart.png" alt=""></a>
+<% unless reserve.blank? || !reserve.is_valid? %>
+        <a href="<%= reserve.data_string %>" target="_blank"><img src="/assets/caelum-web.jp/img/hpb-g.png" alt=""></a>
+<% end %>

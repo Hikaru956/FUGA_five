@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<script src="https://use.fontawesome.com/9e789611aa.js"></script>
+<link rel="stylesheet" href="/stylesheets/assets/triad/style.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad/style" %>
+</head>
+<!--[if !IE]><!-->
+<body>
+<!--<![endif]-->
+<!--[if IE]>
+<body id="ie">
+<div id="browserupgrade">あなたは<strong>古い</strong>アプリケーションをご利用のようです。<a href="http:http://browsehappy.com/">最新のブラウザ</a>に更新して快適なインターネットをお楽しみ下さい。</div>
+<![endif]-->
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad/header" %>
+<!-- グローバルナビゲーション -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad/navigation" %>
+        <div>
+            <div class="container">
+<!-- パンくずリスト -->
+                    <aside id="breadcrumbs">
+                        <ol>
+<% if request.host == 'sr2.swifty.jp' %>
+                            <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+<% else %>
+                            <li><a href="/home"><i class="fa fa-home"></i></a></li>
+<% end %>
+                            <li><%= model_title(@seed) %></li>
+                        </ol>
+                    </aside>
+                    <h1><%= model_title(@seed) %></h1>
+                    <section id="streem_table">
+                        <ul class="wrapper">
+<%
+    @public_bag =  @seed.public_bags
+    unless @public_bag.blank?
+        @public_bag.each do | bag |
+            unless bag.blank?
+                key_photo = bag.photos.find(:first)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.jp/327x327.jpg?text=No Photo'
+                end
+                if request.host == 'sr2.swifty.jp'
+                    content_url = url_for(:action=>'portfolio_list', :id=>bag, :wkey=>@website.wsite_hash_key)
+                else
+                    content_url = url_for(:action=>'portfolio_list', :id=>bag)
+                end
+%>
+                            <li class="col-1p3">
+                                <div class="imgbox"><div style="background-image:url('<%= image_url %>');">
+                                    <a href="<%= content_url %>"><img src="<%= image_url %>"></a>
+                                </div></div>
+                                <h1>
+                                    <a href="<%= content_url %>"><%= truncate(model_name(bag)) %></a>
+                                </h1>
+                            </li>
+<%          end %>
+<%      end %>
+<%  end %>
+                        </ul>
+                    </section>
+            </div>
+        </div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad/footer" %>
+    </div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad/gmaps_js" %>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<% widget_bag = VisualWidget.search_widget_bag_for(@website, "cffec5a742aae4d0d48cd9ea8f475e4e") %>
+<% if widget_bag.blank? || !widget_bag.is_valid? %>
+    <div id="myCarousel" class="carousel slide">
+      <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="item active">
+            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+            <div class="carousel-caption">
+              <h1></h1>
+            </div>
+          </div>
+          <div class="item">
+            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+            <div class="carousel-caption">
+              <h1></h1>
+            </div>
+          </div>
+          <div class="item">
+            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+            <div class="carousel-caption">
+              <h1></h1>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+          <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+          <span class="icon-next"></span>
+        </a>
+    </div>
+<% else %>
+    <div id="myCarousel" class="carousel slide">
+      <!-- Indicators -->
+        <ol class="carousel-indicators">
+        	<% widget_bag.photos.each do | photo | %>
+	          <li data-target="#myCarousel" data-slide-to="<%= photo.position-1%>" <%if photo.position==1%>class="active"<% end %>></li>
+		  	<% end %>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+        	<% widget_bag.photos.each do | photo | %>
+		          <div class="item <%if photo.position==1%>active<%end%>">
+		            <div class="fill" style='background-image:url("<%=url_for_file_column(photo, :image)%>");'></div>
+		            <div class="carousel-caption">
+		              <h1></h1>
+		            </div>
+		          </div>
+			<% end %>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+          <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+          <span class="icon-next"></span>
+        </a>
+    </div>
+<% end %>			
+

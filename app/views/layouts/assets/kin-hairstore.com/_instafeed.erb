@@ -1,0 +1,32 @@
+<%  instafd = VisualWidget.search_widget_bag_for(@website, "9d6d012e21ab52ccfae63300001c56b0") %>
+<%  instaid = VisualWidget.search_widget_bag_for(@website, "1c62e46ea2320d6a956ae2ee2d7e07da") %>
+<%  instatk = VisualWidget.search_widget_bag_for(@website, "7aea4825150d34fb13f4358a968b2d6e") %>
+<%  newinstaid = VisualWidget.search_widget_bag_for(@website, "7293c3ef8e797036cc29f57c31c619e5") %>
+<%  newinstatk = VisualWidget.search_widget_bag_for(@website, "71c387bc5c86a0cfc5cfaa2d00b73b97") %>
+<%  if !newinstaid.blank? && !newinstatk.blank? && !newinstaid.data_string.blank? && !newinstatk.data_string.blank? %>
+<aside>
+    <div class="container">
+        <h1>
+<%    if @website.social_instagram_uri.blank? %>
+            INSTAGRAM
+<%    else %>
+            <a href="<%= @website.social_instagram_uri %>" target="_blank">INSTAGRAM</a>
+<%    end %>
+        </h1>
+        <ul id="instafeed" class="wrapper contents_list"></ul>
+    </div>
+</aside>
+<%  elsif !instafd.blank? && !instaid.blank?  && !instatk.blank? && instafd.data_string == "Zc359WUn" && !instaid.data_string.blank?  && !instatk.data_string.blank? %>
+<aside>
+    <div class="container">
+        <h1>
+<%    if @website.social_instagram_uri.blank? %>
+            INSTAGRAM
+<%    else %>
+            <a href="<%= @website.social_instagram_uri %>" target="_blank">INSTAGRAM</a>
+<%    end %>
+        </h1>
+        <ul id="instafeed" class="wrapper contents_list"></ul>
+    </div>
+</aside>
+<%  end %>

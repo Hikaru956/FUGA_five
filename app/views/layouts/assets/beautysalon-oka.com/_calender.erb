@@ -1,0 +1,6 @@
+<%  calender = VisualWidget.search_widget_bag_for(@website, "d65d17f1dbb5cf4d9130251df3a0372e") %>
+<%  if !calender.blank? && calender.is_valid? %>
+    <aside id="carender">
+        <%= raw calender.data_string %>
+    </aside>
+<%  end %>

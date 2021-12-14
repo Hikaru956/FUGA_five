@@ -11,7 +11,11 @@
         <header>
             <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/header" %>
         </header>
+<% if request.host == 'www.bond-of-mondo.com' %>
+        <div>
+<% else %>
         <div class="bg-content">
+<% end %>
             <!--============================== content =================================-->
             <div id="content" class="content-extra">
                 <div class="ic">
@@ -110,7 +114,7 @@
                                     <% unless key_photo.blank? %>
                                     <%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
                                     <% else %>
-                                    <img src="http://placehold.it/750x450&amp;text=No Face Photo"><% end %>
+                                    <img src="//placehold.jp/750x450.jpg?text=No Face Photo"><% end %>
                                     <h3><%= model_name(@staff) %>
                                         <small>
                                             <%= h @staff.job_title %>
@@ -174,13 +178,13 @@
                                 		        mapTypeId: google.maps.MapTypeId.ROADMAP
                                 		    }
                                 		    var map = new google.maps.Map(document.getElementById('map'), options);
-                                			
-                                			var shop_marker; 
+
+                                			var shop_marker;
                                 		    shop_marker = new google.maps.Marker({
                                 		        position:latlng,
                                 		        map: map
                                 		    });
-                                		
+
                         </script>
                         <% end %>
                     </div>

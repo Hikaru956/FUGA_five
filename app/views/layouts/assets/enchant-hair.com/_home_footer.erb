@@ -1,0 +1,73 @@
+<footer>
+    <div class="container">
+        <div id="snsLinks">
+            <h1>Social Networking Service</h1>
+            <p>
+<% unless @website.social_facebook_uri.blank? %>
+                <a href="<%= @website.social_facebook_uri %>" target="_blank"><i class="fab fa-facebook-square"></i></a>
+<% end %>
+<% unless @website.social_instagram_uri.blank? %>
+                <a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fab fa-instagram"></i></a>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+                <a href="<%= @website.social_line_uri %>" target="_blank"><i class="fab fa-line"></i></a>
+<% end %>
+<% unless @website.social_twitter_uri.blank? %>
+                <a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="fab fa-twitter-square"></i></a>
+<% end %>
+<% unless @website.social_gplus_uri.blank? %>
+                <a href="<%= @website.social_gplus_uri %>" target="_blank"><i class="fab fa-google-plus-square"></i></a>
+<% end %>
+<% unless @website.social_pinterest_uri.blank? %>
+                <a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="fab fa-pinterest-square"></i></a>
+<% end %>
+<% unless @website.social_tumblr_uri.blank? %>
+                <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fab fa-tumblr-square"></i></a>
+<% end %>
+            </p>
+        </div>
+        <div id="fNav">
+            <h1>Site Navigation</h1>
+                <ul class="nonStyle">
+<% if request.host == 'sr2.swifty.jp' %>
+                    <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">HOME</a></li>
+<!--
+                    <li><a href="/news_list?id=160&wkey=<%= @website.wsite_hash_key %>">INFO</a></li>
+-->
+                    <li><a href="/fix?id=5505&wkey=<%= @website.wsite_hash_key %>">SALON</a></li>
+                    <li><a href="/fix?id=5506&wkey=<%= @website.wsite_hash_key %>">BEAUTY</a></li>
+<!--
+                    <li><a href="/collcetions?id=162&wkey=<%= @website.wsite_hash_key %>">STYLE</a></li>
+-->
+                    <li><a href="/contact_us?wkey=<%= @website.wsite_hash_key %>">STAFF</a></li>
+                    <li><a href="/menu_list?id=163&wkey=<%= @website.wsite_hash_key %>">PRICE</a></li>
+                    <li><a href="/fix?id=5612&wkey=<%= @website.wsite_hash_key %>">ANNIVERSARY</a></li>
+<!--
+                    <li><a href="/streams?id=161&wkey=<%= @website.wsite_hash_key %>">BLOG</a></li>
+-->
+                    <li><a href="/fix?id=4017&wkey=<%= @website.wsite_hash_key %>">RECRUIT</a></li>
+<% else %>
+                    <li><a href="/home">HOME</a></li>
+<!--
+                    <li><a href="/news_list?id=160">INFO</a></li>
+-->
+                    <li><a href="/fix?id=5505">SALON</a></li>
+                    <li><a href="/fix?id=5506">BEAUTY</a></li>
+<!--
+                    <li><a href="/collcetions?id=162">STYLE</a></li>
+-->
+                    <li><a href="/contact_us">STAFF</a></li>
+                    <li><a href="/menu_list?id=163">PRICE</a></li>
+                    <li><a href="/fix?id=5612">ANNIVERSARY</a></li>
+<!--
+                    <li><a href="/streams?id=161">BLOG</a></li>
+-->
+                    <li><a href="/fix?id=4017">RECRUIT</a></li>
+<%  end %>
+                </ul>
+        </div>
+        <div id="copyright">
+            <%= copyright_notice(@website) %>
+        </div>
+    </div>
+</footer>

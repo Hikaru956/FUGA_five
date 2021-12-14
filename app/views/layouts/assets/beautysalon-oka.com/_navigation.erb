@@ -1,0 +1,35 @@
+<%  contact = VisualWidget.search_widget_bag_for(@website, "40ac48d2bf792e9e7e5dd5a21902c1f1") %>
+                <li><a href="/news_list?id=3297">お知らせ</a></li>
+                <li><a href="/fix?id=14386">店舗案内</a></li>
+                <li>こだわり
+                    <ul>
+                        <li><a href="/fix?id=14516">ヘアカラー</a></li>
+                        <li><a href="/fix?id=14517">パーマ</a></li>
+                        <li><a href="/fix?id=14518">ヘアトリートメント</a></li>
+<!--
+                        <li><a href="/fix?id=14519">カット</a></li>
+-->
+                        <li><a href="/fix?id=14520">スキンケア</a></li>
+                        <li><a href="/fix?id=16009">スキャルプエステ</a></li>
+                        <li><a href="/fix?id=14521">婚礼・七五三・成人式</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contact_us">スタッフ</a></li>
+                <li><a href="/menu_list?id=3300">料金表</a></li>
+<!--
+                <li><a href="/collcetions?id=3299">ギャラリー</a></li>
+                <li><a href="/streams?id=3298">BLOG</a></li>
+-->
+<%  if request.host == 'sr2.swifty.jp' %>
+                <li><a href="#">お問い合わせ</a></li>
+<%  elsif !contact.blank? && contact.is_valid? %>
+                <li><a href="<%= raw contact.data_string %>">お問い合わせ</a></li>
+<%  end %>
+<%  if @author_mode %>
+<%      unless @website.wsite_layout_deploy.is_public.blank? %>
+                <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>
+                <li><a href="<%= url_for(:action=>'list_color_schemes') %>">カラー</a></li>
+<%      end %>
+                <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+                <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+<%  end %>

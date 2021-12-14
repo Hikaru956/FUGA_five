@@ -11,7 +11,11 @@
         <header>
             <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/header" %>
         </header>
+<% if request.host == 'www.bond-of-mondo.com' %>
+        <div>
+<% else %>
         <div class="bg-content">
+<% end %>
             <!--============================== content =================================-->
             <div id="content" class="content-extra">
                 <div class="ic">
@@ -46,7 +50,7 @@
                                 </h1>
                             </div>
                         </div>
-                        
+
                         <% if false %>
 							<% unless @seed.content_leafs.blank? %>
 		                        <% @bag_roots = [@seed.my_bag_root_category] %>

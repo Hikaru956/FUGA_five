@@ -30,6 +30,26 @@ $(function() {
 	});
 });
 </script>
+<% if true %>
+	<% item = Photo.new %>
+	<%= form_tag(dashboard_shop_create_apple_touch_icon_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<div class="fallback">
+		<%= file_field_tag('photo[clip]') %>
+	</div>
+	<% end %>
+	<script>
+		Dropzone.options.dropzone = {
+			paramName: "photo[clip]",
+			maxFilesize: 1,
+			acceptedFiles: "image/*",
+			init: function() {
+				this.on('complete', function (file) {
+					//location.reload();
+				})
+			}
+		}
+	</script>
+<% end %>
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
@@ -67,4 +87,3 @@ $(function() {
 	画像のサイズは「114x114ピクセル」以上の正方形。
 	画像の種類は「PNG形式」。	
 </div>
-

@@ -10,6 +10,7 @@
 
 class BsRendererController < ApplicationController
   before_action :authenticate_user!
+  before_action :session_operation
   before_action :config_x_xss_protection
   
   def index

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% unless @seed.my_type_root_category.has_only_a_public_bag? %>
+<title><%= model_title(@seed.my_type_root_category) %> <%= model_name(@seed) %> - <%= @website.name %></title>
+<% else %>
+<title><%= model_name(@seed) %> - <%= @website.name %></title>
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/wedding/css" %>
+</head>
+<body>
+<div id="body" class="scroolwrap">
+    <div class="scrooler">
+        <div id="main" class="container" role="main">
+                    <article>
+                        <h1>モリ・ウェディングのエステティック</h1>
+                        <p>
+                            ブライダルエステなどのエステプログラムを<a href="http://green.mori-bc.co.jp/">AVEDA Salon&amp;Spa GREEN 2F</a>にて施術いたします。<br>
+                            アロマの香り漂う空間で癒やしの時間を過ごし、ぜひその効果をご体験ください。
+                        </p>
+                        <p>ご予約はお電話で：080 5732 3790 または 0246 63 2300</p>
+                    </article>
+                    <aside id="home_shop" class="wrapper">
+                        <div class="col-1p2">
+                            <div class="col-in">
+                                <ul>
+                                    <li><a href="http://green.mori-bc.co.jp/"><strong>AVEDA Salon&amp;Spa GREEN</strong></a></li>
+                                    <li>住所： 福島県いわき市鹿島町久保2丁目3-12 2F</li>
+                                    <li>電話： 0246-63-2300（エステ直通ダイヤル）</li>
+                                    <li>営業時間： 9:00 - 19:00 (日・月・水・祝)</li>
+                                    <li>営業時間： 9:00 - 20:00 (木・金・土)</li>
+                                    <li>定休日： 毎週火曜日</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-1p2">
+                            <div class="col-in">
+                                <a target="_blank" href="https://www.google.com/maps/place/%E3%82%A2%E3%83%B4%E3%82%A7%E3%83%80%E3%83%BB%E3%82%B5%E3%83%AD%E3%83%B3%EF%BC%86%E3%82%B9%E3%83%91%E3%83%BB%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3/@36.98921,140.9000655,17z/data=!4m8!1m2!2m1!1z44Kw44Oq44O844OzIOemj-WztuecjOOBhOOCj-OBjeW4gum5v-WztueUuuS5heS_ne-8kuS4geebru-8k-KIku-8ke-8kg!3m4!1s0x602113bc94675623:0x5133c2480dfafae3!8m2!3d36.989456!4d140.9040011?hl=ja">
+<%  map_img2 = VisualWidget.search_widget_bag_for(@website, "5dca20a6755f88632dbdba79acbbd7a4") %>
+<%  if !map_img2.blank? && map_img2.is_valid? %>
+                                    <img src="<%= url_for_file_column(map_img2.photos[0], :image) %>" alt="地図" style="max-width:359px;">
+<%  else %>
+                                    <img src="//placehold.jp/512x217.jpg" alt="地図">
+<%  end %>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                    <aside>
+                        <p><img style="display: block; margin-left: auto; margin-right: auto;" src="../../photo/image/0000/0833/_MG_3111.jpg" alt="esthe" /></p>
+                    </aside>
+                    <!-- <h1><%= model_name(@seed) %></h1> -->
+                    <aside id="menu">
+                        <P class="text-right" style="font-size:1.1rem;"><a href="/fix?id=818">ブライダルにオススメのエステメニュー <i class="fa fa-arrow-right" aria-hidden="true"></i></a></P>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/wedding/portfolio_leafs", :locals=>{:seed=>@seed} %>
+                    </aside>
+        </div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/wedding/footer" %>
+    </div>
+</div>
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/wedding/header" %>
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav" class="scroolwrap">
+    <div class="scrooler">
+<% logomark = VisualWidget.search_widget_bag_for(@website, "4352e985f864dc10049914ced4427386") %>
+<% if !logomark.blank? && logomark.is_valid? %>
+        <div id="tnav_logo">
+            <img src="//<%= request.host %><%= url_for_file_column(logomark.photos[0], :image) %>" alt="logomark">
+        </div>
+<% end %>
+        <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/wedding/navigation" %>
+            <li>
+<%      if request.host == 'sr2.swifty.jp' %>
+                <a href="/home?wkey=08ebd0bbcad881d718362fef54ee81e8">MORI<span> BEAUTY CORPORATION</span></a>
+<%      else %>
+                <a href="http://www.mori-bc.co.jp/">MORI<span> BEAUTY CORPORATION</span></a>
+<%      end %>
+            </li>
+        </ul>
+    </div>
+</aside>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/wedding/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<!-- google maps javascript -->
+</body>
+</html>

@@ -1,0 +1,83 @@
+<%
+    widget_bag = VisualWidget.search_widget_bag_for(@website, "2d70081724b97d5a31c361a9c77ebd7e")
+    if widget_bag.blank?
+        cmax = 18
+    else
+        cmax = widget_bag.data_string.to_i
+    end
+    if cmax < 0 || cmax > 32
+        cmax = 18
+    end
+    if cmax != 0
+
+        @max = cmax
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_GALLERY)
+        navigation = type_root.web_page
+        bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        c = ContentLeaf.public_leafs_condition
+        c.and "content_category_id", public_categories
+        latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<%      unless latest_leafs.blank? %>
+                <aside id="style">
+<%          if request.host == 'sr2.swifty.jp' %>
+                    <h1 class="en"><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id, :wkey=>@website.wsite_hash_key %> <span>最新のヘアスタイル集です</span></h1>
+<%          else %>
+                    <h1 class="en"><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id %> <span>最新のヘアスタイル集です</span></h1>
+<%          end %>
+                    <ul id="style_category">
+<%          if request.host == 'sr2.swifty.jp' %>
+                        <li><a href="/galleries?id=92&wkey=08ebd0bbcad881d718362fef54ee81e8">SHORT</a></li>
+                        <li><a href="/galleries?id=11&wkey=08ebd0bbcad881d718362fef54ee81e8">MEDIUM</a></li>
+                        <li><a href="/galleries?id=93&wkey=08ebd0bbcad881d718362fef54ee81e8">LONG</a></li>
+                        <li><a href="/galleries?id=385&wkey=08ebd0bbcad881d718362fef54ee81e8">ARRANGE</a></li>
+<!--
+                        <li><a href="/galleries?id=362&wkey=08ebd0bbcad881d718362fef54ee81e8">Men</a></li>
+-->
+<%          else %>
+                        <li><a href="/galleries?id=92">SHORT</a></li>
+                        <li><a href="/galleries?id=11">MEDIUM</a></li>
+                        <li><a href="/galleries?id=93">LONG</a></li>
+                        <li><a href="/galleries?id=385">ARRANGE</a></li>
+<!--
+                        <li><a href="/galleries?id=362">MEN</a></li>
+-->
+<%          end %>
+                    </ul>
+                    <ul id="style_list" class="wrapper">
+<%
+            latest_leafs.each do | leaf |
+                if request.host == 'sr2.swifty.jp'
+                    page_url  = url_for(:action=>'gallery_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'gallery_show', :id=>leaf)
+                end
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.jp/ffffff/cccccc/327x327.jpg?text=No Photo'
+                end
+%>
+                        <li class="col-1p6">
+                            <div class="col-in">
+                                <a href="<%= page_url %>">
+                                    <div class="imgbox">
+                                        <div style="background-image:url('<%= image_url %>')">
+                                            <img src="<%= image_url %>" alt="<%= model_title(leaf) %>">
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+<%          end %>
+                    </ul>
+                </aside>
+<%      end %>
+<%  end %>

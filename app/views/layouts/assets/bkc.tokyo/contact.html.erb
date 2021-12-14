@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<script src="https://use.fontawesome.com/9e789611aa.js"></script>
+<link rel="stylesheet" href="/stylesheets/assets/vendor/sanitize-5.0.0.css">
+<link rel="stylesheet" href="/stylesheets/assets/bkc.tokyo/style.css?v=1">
+<%= render :partial=>"#{LayoutScheme.asset_root}/bkc.tokyo/style" %>
+</head>
+<body>
+<!-- 主ウインドウ -->
+<main id="main" class="scroollwrap">
+    <div class="scrooller">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bkc.tokyo/header" %>
+        <article id="article">
+            <div class="container">
+                <h1>各ジャンルのエキスパートコンサルタントがチームで対応します。</h1>
+                <h2>美容室業界の常識に囚われない指導</h2>
+                <p>
+私たちは美容師全体の賃金レベルを上げる事を使命・理念として長年、日本全国のサロンの経営指導を
+行ってきました。しかし、個別のコンサルタントがカバーできる範囲には限度があります。BKCでは各ジャン
+ルで豊富な経験を持つコンサルタントがチームとして御社をサポートする事で経営・財務・人事の統べての
+問題に対応できるよう、新たに社団法人として発足しました。これによりさらに多面的・統合的なコンサルタ
+ントを継続的に提供することが可能となりました。<br>
+美容室経営はますます過当競争になっています。あなたのサロンが生き残るためには、美容室経営の本質
+である技術力をみ据える事は当然ですが、プラスαの付加価値を創成し、地域に根ざしたオンリーワン店舗
+となることが重要です。<br>
+そのためにBKCではチーム体制であらゆる問題を分析・改善し、プラスαの付加価値を創りだして健全な経
+営を継続できるお手伝いを強力に行います。<br>
+顔写真をクリックして、各コンサルタントのプロフィールをご覧ください。
+                </p>
+                <ul class="wrapper">
+<%
+    @staffs.each do | staff | @staff = staff
+        key_photo = key_photo(@staff)
+        unless key_photo.blank?
+            image_url = url_for_file_column(key_photo, :image, 'panel')
+        else
+            image_url = '//placehold.jp/327x327.jpg?text=No Photo'
+        end
+        if request.host == 'sr2.swifty.jp'
+            staff_url = url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key)
+        else
+            staff_url = url_for(:action=>'staff', :id=>@staff)
+        end
+%>
+                    <li class="col-1p3">
+                        <div>
+                            <div class="imgbox"><div style="background-image:url('<%= image_url %>');">
+                                <a href="<%= staff_url %>"><img src="<%= image_url %>"></a>
+                            </div></div>
+                            <h1 class="none-margin-top">
+                                <a href="<%= staff_url %>">
+                                    <%= model_name(@staff) %>
+<!--
+                                    <span><%= h @staff.job_title %></span>
+-->
+                                </a>
+                            </h1>
+                        </div>
+                    </li>
+<%  end %>
+                </ul>
+            </div>
+        </article>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bkc.tokyo/footer" %>
+    </div>
+</main>
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav" class="scroollwrap">
+    <ul class="scrooller">
+        <li>
+            <i class="fa fa-times" aria-hidden="true"></i> 閉じる
+        </li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/bkc.tokyo/navigation" %>
+    </ul>
+</aside>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bkc.tokyo/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<!-- google maps javascript -->
+</body>
+</html>

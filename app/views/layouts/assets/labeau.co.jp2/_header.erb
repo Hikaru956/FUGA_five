@@ -1,0 +1,43 @@
+<% logomark1 = VisualWidget.search_widget_bag_for(@website, "cf2366606895e69b9983acdbe31a1416") %>
+<% logomark2 = VisualWidget.search_widget_bag_for(@website, "abcd28cbe65d3014db1f1e2ad4c6be62") %>
+        <header id="header">
+            <div class="container">
+                <div id="heading">
+                    <div id="tnav_dummy">
+                    </div>
+                    <div id="brand">
+<% if logomark1.blank? || !logomark1.is_valid? %>
+<%      if request.host == 'sr2.swifty.jp' %>
+                        <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="//placehold.jp/240x120.jpg" alt="logo mark"></a>
+<%      else %>
+                        <a href="/home"><img src="//placehold.jp/240x120.jpg" alt="logo mark"></a>
+<%      end %>
+<% else %>
+<%      if request.host == 'sr2.swifty.jp' %>
+                        <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="<%= url_for_file_column(logomark1.photos[0], :image) %>" alt="logo mark"></a>
+<%      else %>
+                        <a href="/home"><img src="<%= url_for_file_column(logomark1.photos[0], :image) %>" alt="logo mark"></a>
+<%      end %>
+<% end %>
+                    </div>
+                    <div id="tnav_open">
+                        <a id="tnav_open_btn"><i class="fa fa-bars"></i><span>MENU</span></a>
+                    </div>
+                </div>
+                <div id="hsalon">
+<% if logomark2.blank? || !logomark2.is_valid? %>
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="//placehold.jp/240x120.jpg" alt="Salon logo mark"></a>
+<%      else %>
+                    <a href="/home"><img src="//placehold.jp/240x120.jpg" alt="Salon logo mark"></a>
+<%      end %>
+<% else %>
+<%      if request.host == 'sr2.swifty.jp' %>
+                    <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="<%= url_for_file_column(logomark2.photos[0], :image) %>" alt="Salon logo mark"></a>
+<%      else %>
+                    <a href="/home"><img src="<%= url_for_file_column(logomark2.photos[0], :image) %>" alt="Salon logo mark"></a>
+<%      end %>
+<% end %>
+                </div>
+            </div>
+        </header>

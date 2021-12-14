@@ -11,7 +11,11 @@
         <header>
             <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/header" %>
         </header>
+<% if request.host == 'www.bond-of-mondo.com' %>
+        <div>
+<% else %>
         <div class="bg-content">
+<% end %>
             <!--============================== content =================================-->
             <div id="content" class="content-extra">
                 <div class="ic">
@@ -58,7 +62,7 @@
                                     <% unless key_photo.blank? %>
                                     <%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
                                     <% else %>
-                                    <img src="http://placehold.it/320x240&amp;text=No Photo"><% end %>
+                                    <img src="//placehold.jp/320x240.jpg?text=No Photo"><% end %>
                                 </div>
                             </div>
                             <div class="span6">

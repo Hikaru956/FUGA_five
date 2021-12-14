@@ -1,0 +1,83 @@
+<%
+    widget_bag = VisualWidget.search_widget_bag_for(@website, "cad9d49250a1dfa556da0522a01696c8")
+    if widget_bag.blank? || !widget_bag.is_valid?
+        cmax = 1
+    else
+        cmax = widget_bag.data_string.to_i
+    end
+    if cmax < 0 || cmax > 32
+        cmax = 1
+    end
+    if cmax != 0
+
+        @max = cmax
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+        navigation = type_root.web_page
+        bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        c = ContentLeaf.public_leafs_condition
+        c.and "content_category_id", public_categories
+        latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<%      unless latest_leafs.blank? %>
+<aside id="home_infoList">
+    <div class="container">
+        <h1>
+<%          if request.host == 'sr2.swifty.jp' %>
+            <a href="/news_list?id=160&wkey=<%= @website.wsite_hash_key %>">
+<%          else %>
+            <a href="/news_list?id=160">
+<%          end %>
+                <div>お知らせ</div>INFORMATION
+            </a>
+        </h1>
+        <ul class="nonStyle">
+<%
+            latest_leafs.each do | leaf |
+                if request.host == 'sr2.swifty.jp'
+                    page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'news_show', :id=>leaf)
+                end
+                publish   = leaf.publish_from.strftime("%Y-%m-%d")
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.jp/ffffff/cccccc/392x392.jpg?text='+publish
+                end
+%>
+            <li class="wrapper">
+                <div class="col-1p3">
+                    <div class="imgbox">
+                        <div style="background-image:url('<%= image_url %>')">
+                            <a href="<%= page_url %>">
+                                <span class="more">More <i class="fas fa-arrow-alt-circle-right"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2p3">
+                    <h2><a href="<%= page_url %>"><%= model_title(leaf) %></a></h1>
+                    <p class="publish"><i class="far fa-calendar-alt"></i> <time><%= publish %></time></p>
+                    <p>
+                        <%= raw truncate(strip_tags(leaf.description), :length=>200) %>
+                    </p>
+                    <div class="text-center">
+                        <a href="<%= page_url %>">
+                            <span class="more">More <i class="fas fa-arrow-alt-circle-right"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+<%          end %>
+        </ul>
+    </div>
+</aside>
+<%      end %>
+<%  end %>

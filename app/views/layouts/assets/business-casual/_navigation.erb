@@ -10,12 +10,9 @@
           <a class="navbar-brand" href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>">
           	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "08ea7eacf890e119bd4ace9acd7ca8a7") %>
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
-				<img src="http://placehold.it/68x30&amp;text=Logo-S">
+				<img src="//placehold.jp/68x30.jpg?text=Logo-S">
 			<% else %>
-				<%= image_tag widget_bag.photos[0].clip.url(:thumb), title: model_name(@website) %>
-				<% if false %>
-					<img src="<%= url_for_file_column(widget_bag.photos[0], :image) %>" title=<%=model_name(@website) %>>
-				<% end %>
+				<img src="<%= url_for_file_column(widget_bag.photos[0], :image) %>" title=<%=model_name(@website) %>>
 			<% end %>			
 		  </a>
         </div>

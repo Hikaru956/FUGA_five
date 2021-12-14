@@ -1,0 +1,15 @@
+<%  @fix16899 = @website.content_leafs.find_by_id(16899); %>
+<%  if !@fix16899.blank? && !@fix16899.description.blank? %>
+<aside id="home-news">
+    <div class="container">
+        <h1>News</h1>
+        <ul class="home-newslist">
+            <li>
+                <a href="/fix?id=16899">
+                    <%= model_title(@fix16899) %>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+<%  end %>

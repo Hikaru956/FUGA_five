@@ -1,0 +1,12 @@
+<%  carousel = VisualWidget.search_widget_bag_for(@website, "a8762216a720d76ee46a83c023f84df0") %>
+			<div id="carousel">
+				<div>
+					<ul>
+<%  if !carousel.photos.blank? %>
+<%      carousel.photos.each do | photo | %>
+                        <li><img src="<%= url_for_file_column(photo, :image) %>" alt=""></li>
+<%      end %>
+<%  end %>
+					</ul>
+				</div>
+			</div>

@@ -1,0 +1,14 @@
+<% slider = VisualWidget.search_widget_bag_for(@website, "1ecfea6bcef8109f8056e5aa38bf0c4d") %>
+<% if !slider.blank? && slider.is_valid? %>
+<aside id="carousel">
+  <div id="carousel-list">
+    <ul id="carousel-ul">
+    <% slider.photos.each do | photo | %>
+      <li><img src="<%= url_for_file_column(photo, :image) %>" alt=""></li>
+    <% end %>
+    </ul>
+  </div>
+  <ul id="carousel-nav">
+  </ul>
+</aside>
+<% end %>

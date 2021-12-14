@@ -1,0 +1,8 @@
+<%  @fix17038 = @website.content_leafs.find_by_id(17038); %>
+<%  if !@fix17038.blank? && !@fix17038.description.blank?%>
+<article id="saff_link">
+    <div class="container">
+<%= raw @fix17038.description %>
+    </div>
+</article>
+<%  end %>

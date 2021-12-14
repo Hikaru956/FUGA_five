@@ -1,0 +1,78 @@
+写真 ロゴ画像
+
+サイト左上に表示されるロゴ画像です。幅240ピクセル以下。
+
+
+文字列 サイトの説明文
+
+サイト上部に表示される説明文です。
+
+
+複数の写真    TOP スライダー画像
+
+TOPページに表示されるスライダー画像です。幅1144x高644ピクセルの画像。
+
+
+文字列  Newsの表示件数
+
+最新のNewsを表示する件数を入力してください。0以上32以下の整数。
+
+
+文字列  Home(TOP)page TITLE
+
+ホーム(TOP)ページのタイトルです。
+
+
+写真   OGP: 画像
+
+SNSに表示したい画像をW1200xH630pxでアップロードしてください。この指定はHOME(TOP)ページのみ有効です。
+
+
+文字列  Facebook appID
+
+Facebook appID
+
+
+
+
+
+
+レジストリーID    DEMO albino
+レジストリー名称    DEMO aibino
+電話番号    03-6436-5432
+郵便番号    105-0014
+住所  港区芝3丁目3-12 松下ビル2F
+
+@DEMO
+名称   サイト表示    店舗管理画面  利用状況表示 港区芝の美容室 salon de TACHIKAWA
+営業時間    11:00 AM 〜 10:00 PM
+郵便番号    105-0014
+住所  東京都港区芝3丁目3-12 松下ビル2F
+
+サイト・キーワード   キーワード
+サイトの説明  swifty2 DEMO サイト albino です。
+問い合わせ電話番号   03-6436-5432
+問い合わせメールアドレス    info@swifty.jp
+
+
+         H1      a
+Lavish-0 #5a5967 #617992 グレー＆グレー
+Lavish-1 #97708a #ab6361 朱
+Lavish-2 #9e4a4b #f40d8e ピンク
+Lavish-3 #2f575d #658b6f 緑
+Lavish-4 #85794d #26ada1 緑２
+Lavish-5 #ae5e53 #797493
+Lavish-6 #8e6c6e #98758b
+Lavish-7 #5c595a #878179
+Lavish-8 #5f5e66 #b95d40
+
+<%= fuga_colors_stylesheets_link(@website, @author_mode)%>
+  def fuga_colors_stylesheets_link(wsite, is_author_mode)
+    style_sheet_uri = COLOR_ASSETS+'/'
+    style_sheet_uri += (is_author_mode)?  wsite.wsite_color_edit.repository_path: wsite.wsite_color_deploy.repository_path
+
+    stylesheet_link_tag style_sheet_uri
+  end
+
+/stylesheets/colors/lavish-bootstrap-2.css
+/lavish-bootstrap-0.css

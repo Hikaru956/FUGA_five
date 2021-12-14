@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: https://ogp.me/ns#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<%
+    contact_category = ContentCategory.type_root(@website, ContentCategory::TYPE_INFO)
+    if request.host == 'sr2.swifty.jp'
+        staff_url = url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key)
+    else
+        staff_url = url_for(:action=>'staff', :id=>@seed)
+    end
+%>
+<title><%= model_name(contact_category.web_page)+' '+model_name(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="copyright"                content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="https://<%= request.host + staff_url %>">
+<meta property="og:title"             content="<%= model_name(contact_category.web_page) + model_name(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% else %>
+<meta property="article:publisher"    content="<%= model_name(@website.company) %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/style" %>
+</head>
+<body id="staff">
+<div id="top">
+</div>
+<aside id="breadcrumb">
+    <div class="container">
+        <ol>
+<% if request.host == 'sr2.swifty.jp' %>
+            <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">HOME</a></li>
+            <li><a href="<%= url_for(:action=>'contact', :id=>contact_category, :wkey=>@website.wsite_hash_key) %>"><%= model_name(contact_category.web_page) %></a></li>
+<% else %>
+            <li><a href="/home">HOME</a></li>
+            <li><a href="<%= url_for(:action=>'contact', :id=>contact_category) %>"><%= model_name(contact_category.web_page) %></a></li>
+<% end %>
+            <li><%= model_name(@seed) %></li>
+        </ol>
+    </div>
+</aside>
+<article>
+    <div class="container">
+        <div class="wrapper">
+            <div class="m1p2">
+                <div id="gallery">
+<%  @photos = @seed.photos %>
+<%  unless @photos.blank? %>
+                    <ul>
+<%      @photos.each do | photo |  %>
+                        <li>
+                            <%= image_tag(url_for_file_column(photo, :image)) %>
+<%          unless photo.info.blank? %>
+                            <div class="caption"><%=h photo.info%></div>
+<%          end %>
+                        </li>
+<%      end %>
+                    </ul>
+                    <div id="gallery_prev"><div></div></div>
+                    <div id="gallery_next"><div></div></div>
+<%  else %>
+                    <ul>
+                        <li><img src="//placehold.jp/500x670.png?text=No Photo"></li>
+                    </ul>
+<%  end %>
+                </div>
+            </div>
+            <div class="m1p2">
+                <h1 class="staff"><%= model_name(@seed) %> <span><%= h @seed.job_title %></span></h1>
+<% unless @seed.description.blank? %>
+                <div class="content">
+                    <%= raw @seed.description %>
+                </div>
+<% end %>
+                <footer>
+                    <ul class="snslinks">
+<% unless @seed.social_instagram_uri.blank? %>
+                        <li>
+                            <a href="<%= @seed.social_instagram_uri %>" target='_blank'><i class="fab fa-instagram"></i></a>
+                        </li>
+<% end %>
+<% unless @seed.social_line_uri.blank? %>
+                        <li>
+                            <a href="<%= @seed.social_line_uri %>" target='_blank'><i class="fab fa-line"></i></a>
+                        </li>
+<% end %>
+<% unless @seed.social_facebook_uri.blank? %>
+                        <li>
+                            <a href="<%= @seed.social_facebook_uri%>" target='_blank'><i class="fab fa-facebook"></i></a>
+                        </li>
+<% end %>
+<% unless @seed.social_twitter_uri.blank? %>
+                        <li>
+                            <a href="<%= @seed.social_twitter_uri %>" target='_blank'><i class="fab fa-twitter"></i></a>
+                        </li>
+<% end %>
+<% unless @seed.social_gplus_uri.blank? %>
+                        <li>
+                            <a href="<%= @seed.social_gplus_uri %>" target='_blank'><i class="fab fa-google-plus"></i></a>
+                        </li>
+<% end %>
+<% unless @seed.social_pinterest_uri.blank? %>
+                        <li>
+                            <a href="<%= @seed.social_pinterest_uri %>" target='_blank'><i class="fab fa-pinterest"></i></a>
+                        </li>
+<% end %>
+<% unless @seed.social_tumblr_uri.blank? %>
+                        <li>
+                            <a href="<%= @seed.social_tumblr_uri %>" target='_blank'><i class="fab fa-tumblr"></i></a>
+                        </li>
+<% end %>
+                    </ul>
+                </footer>
+            </div>
+        </div>
+    </div>
+</article>
+<!-- salon list -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/salon_list" %>
+<!-- footer -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/footer" %>
+<!-- header -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/header" %>
+<!-- nav -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/navigation" %>
+<!-- reserve -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/reserve" %>
+<!-- script -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/common_js" %>
+<!-- page specific javascript -->
+<script src="/assets/lenahc.co.jp/js/gallery.js?v=0"></script>
+</body>
+</html>
