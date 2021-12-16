@@ -1,0 +1,416 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:400");
+@import url("https://fonts.googleapis.com/css?family=Pathway+Gothic+One");
+#mori_beauty {
+	color: #212121;
+    font-size: 15px;
+    font-family: "Helvetica Neue", "Calibri", "Open Sans", Helvetica, Arial, "ヒラギノ角ゴシック", "Hiragino Kaku Gothic", "游ゴシック", "游ゴシック体", YuGothic, "Yu Gothic", "メイリオ", Meiryo, sans-serif;
+}
+#mori_beauty * {
+	box-sizing: border-box;
+}
+#mori_beauty h1, h2, h3, h4, h5, h6 {
+    font-family: "Pathway Gothic One", "ヒラギノ角ゴシック", "Hiragino Kaku Gothic", "游ゴシック", "游ゴシック体", YuGothic, "Yu Gothic", "メイリオ", Meiryo, sans-serif;
+    line-height: 1.25;
+    font-weight: normal;
+    margin: 0;
+    text-shadow: 0 0 1px rgba(0,0,0,.2);
+}
+#mori_beauty h1 {
+    font-size: 1.6rem;
+}
+#mori_beauty h2 {
+    font-size: 1.125rem;
+}
+#mori_beauty h3 {
+    font-size: 1rem;
+}
+#mori_beauty h4 {
+    font-size: 0.95rem;
+}
+#mori_beauty h5 {
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+#mori_beauty h6 {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+#mori_beauty h1.en {
+    font-size: 2rem;
+    line-height: 1;
+}
+#mori_beauty h2.en {
+    font-size: 1.45rem;
+    line-height: 1;
+}
+#mori_beauty h3.en {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+#mori_beauty h4.en {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+#mori_beauty h5.en {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+#mori_beauty h6.en {
+    font-size: 1rem;
+    line-height: 1;
+}
+#mori_beauty h1.en span,
+#mori_beauty h1.en i,
+#mori_beauty h1.en s {
+    font-size: 1rem;
+	font-style: normal;
+    text-decoration: none;
+}
+#mori_beauty h2.en span,
+#mori_beauty h2.en i,
+#mori_beauty h2.en s {
+    font-size: 0.75rem;
+	font-style: normal;
+    text-decoration: none;
+}
+#mori_beauty h3.en span,
+#mori_beauty h3.en i,
+#mori_beauty h3.en s {
+    font-size: 9.625rem;
+	font-style: normal;
+    text-decoration: none;
+}
+#mori_beauty p {
+    margin: 0 0 1em;
+}
+#mori_beauty img {
+    vertical-align: middle;
+}
+/*
+ *      utils
+ */
+#mori_beauty .text-left {
+    text-align: left;
+}
+#mori_beauty .text-right {
+    text-align: right;
+}
+#mori_beauty .text-center {
+    text-align: center;
+}
+#mori_beauty .pull-left {
+    float: left !important;
+}
+#mori_beauty .pull-right {
+    float: right !important;
+}
+#mori_beauty img.pull-left {
+    margin-right: 1em;
+}
+#mori_beauty img.pull-right {
+    margin-left: 1em;
+}
+/*
+ *
+ *      grid
+ *
+ */
+#mori_beauty .wrapper {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    padding: 0;
+    list-style: none;
+    display:  -webkit-box;
+    display:  -ms-flexbox; /* IE10 */
+    display: -webkit-flex;
+    display:         flex; /* IE11+ */
+    -webkit-box-lines: multiple;
+     -ms-flexbox-wrap: wrap; /* IE10 */
+    -webkit-flex-wrap: wrap;
+            flex-wrap: wrap; /* IE11+ */
+}
+#mori_beauty .col-in {
+    padding: 0 .5rem;
+}
+#mori_beauty .col-1p6 {
+    -webkit-box-flex: 1;
+        -ms-flex: 0 1 33.3333333%; /* IE10 */
+    -webkit-flex: 0 1 33.3333333%;
+            flex: 0 1 33.3333333%;
+    width: 33.3333333%;
+    margin-bottom: 1rem;
+}
+#mori_beauty .col-1p2 {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+#mori_beauty .col-1p3 {
+    -webkit-box-flex: 1;
+        -ms-flex: 0 1 33.3333333%; /* IE10 */
+    -webkit-flex: 0 1 33.3333333%;
+            flex: 0 1 33.3333333%;
+    width: 33.3333333%;
+    margin-bottom: 1rem;
+}
+#mori_beauty .col-2p3 {
+    -webkit-box-flex: 1;
+        -ms-flex: 0 1 66.6666666%; /* IE10 */
+    -webkit-flex: 0 1 66.6666666%;
+            flex: 0 1 66.6666666%;
+    width: 66.6666666%;
+    margin-bottom: 1rem;
+}
+#mori_beauty .col-1p3m1 {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+#mori_beauty .col-2p3m1 {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+#mori_beauty .col-1p4 {
+    -webkit-box-flex: 1;
+        -ms-flex: 0 1 50%; /* IE10 */
+    -webkit-flex: 0 1 50%;
+            flex: 0 1 50%;
+    width: 50%;
+    margin-bottom: 1rem;
+}
+#mori_beauty .col-1p4r {
+    -webkit-box-flex: 1;
+        -ms-flex: 0 1 50%; /* IE10 */
+    -webkit-flex: 0 1 50%;
+            flex: 0 1 50%;
+    width: 50%;
+    margin-bottom: 1rem;
+}
+#mori_beauty .col-1p4f {
+    -webkit-box-flex: 1;
+        -ms-flex: 0 1 25%; /* IE10 */
+    -webkit-flex: 0 1 25%;
+            flex: 0 1 25%;
+    width: 25%;
+    margin-bottom: 1rem;
+}
+#mori_beauty .col-3p4f {
+    -webkit-box-flex: 1;
+        -ms-flex: 0 1 75%; /* IE10 */
+    -webkit-flex: 0 1 75%;
+            flex: 0 1 75%;
+    width: 75%;
+    margin-bottom: 1rem;
+}
+@media screen and (min-width: 600px) {
+    #mori_beauty .col-1p6 {
+        -webkit-box-flex: 1;
+            -ms-flex: 0 1 25%; /* IE10 */
+        -webkit-flex: 0 1 25%;
+                flex: 0 1 25%;
+        width: 25%;
+    }
+    #mori_beauty .col-1p4 {
+        -webkit-box-flex: 1;
+            -ms-flex: 0 1 33.3333333%; /* IE10 */
+        -webkit-flex: 0 1 33.3333333%;
+                flex: 0 1 33.3333333%;
+        width: 33.3333333%;
+    }
+    #mori_beauty .col-1p4r {
+        -webkit-box-flex: 1;
+            -ms-flex: 0 1 25%; /* IE10 */
+        -webkit-flex: 0 1 25%;
+                flex: 0 1 25%;
+        width: 25%;
+    }
+    #mori_beauty .col-1p2 {
+        -webkit-box-flex: 1;
+            -ms-flex: 0 1 50%; /* IE10 */
+        -webkit-flex: 0 1 50%;
+                flex: 0 1 50%;
+        width: 50%;
+    }
+    #mori_beauty .col-1p3m1 {
+        -webkit-box-flex: 1;
+            -ms-flex: 0 1 33.3333333%; /* IE10 */
+        -webkit-flex: 0 1 33.3333333%;
+                flex: 0 1 33.3333333%;
+        width: 33.3333333%;
+    }
+    #mori_beauty .col-2p3m1 {
+        -webkit-box-flex: 1;
+            -ms-flex: 0 1 66.6666666%; /* IE10 */
+        -webkit-flex: 0 1 66.6666666%;
+                flex: 0 1 66.6666666%;
+        width: 66.6666666%;
+    }
+}
+@media screen and (min-width: 980px) {
+    #mori_beauty .col-1p6 {
+        -webkit-box-flex: 1;
+            -ms-flex: 0 1 16.6666666%; /* IE10 */
+        -webkit-flex: 0 1 16.6666666%;
+                flex: 0 1 16.6666666%;
+        width: 16.6666666%;
+    }
+    #mori_beauty .col-1p4 {
+        -webkit-box-flex: 1;
+            -ms-flex: 0 1 25%; /* IE10 */
+        -webkit-flex: 0 1 25%;
+                flex: 0 1 25%;
+        width: 25%;
+    }
+    #mori_beauty .col-1p3 {
+        -webkit-box-flex: 1;
+            -ms-flex: 0 1 33.3333333%; /* IE10 */
+        -webkit-flex: 0 1 33.3333333%;
+                flex: 0 1 33.3333333%;
+        width: 33.3333333%;
+    }
+}
+/*
+ *
+ *      汎用
+ *
+ */
+#mori_beauty .imgbox {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100%; // 正方形
+    box-sizing: content-box; /* IE8+ */
+}
+#mori_beauty .imgbox3p4 {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 75%; // 4:3
+    box-sizing: content-box; /* IE8+ */
+}
+#mori_beauty .imgbox9p16 {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%; // 16:9
+    box-sizing: content-box; /* IE8+ */
+}
+#mori_beauty .imgbox1p2 {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 50%; // 2:1
+    box-sizing: content-box; /* IE8+ */
+}
+#mori_beauty .imgbox1p3 {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 33.3333333%; // 3:1
+    box-sizing: content-box; /* IE8+ */
+}
+#mori_beauty .imgbox > div,
+#mori_beauty .imgbox3p4 > div,
+#mori_beauty .imgbox9p16 > div,
+#mori_beauty .imgbox1p2 > div,
+#mori_beauty .imgbox1p3 > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    background-color: #fff;
+    background-position: center top;
+    background-size: cover; /* IE9+ */
+}
+#mori_beauty .imgbox:hover > div {
+    opacity: .75;
+}
+#mori_beauty .imgbox > div img {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+#mori_beauty .nostyle {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#mori_beauty .smaller {
+    font-size: smaller;
+}
+#mori_beauty .publish {
+    text-align: right;
+    font-size: smaller;
+}
+#mori_beauty p.button_link {
+    margin-bottom: 0;
+    text-align: center;
+}
+#mori_beauty a.link_button {
+    display: inline-block;
+    padding: .4em .6em;
+    border: 1px solid rgba(0,0,0,.3);
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+}
+#mori_beauty a.link_button:hover {
+    text-decoration: none;
+}
+@media screen and (min-width: 600px) {
+    #mori_beauty a.link_button {
+        padding: .8em 1em;
+    }
+}
+/*
+ *
+ *      eyelash
+ *
+ */
+#mori_beauty h2.eye {
+    font-size: 1.6rem;
+}
+#mori_beauty h2.eye span,
+#mori_beauty h2.eye i,
+#mori_beauty h2.eye s {
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+#mori_beauty .eyearea {
+    margin: 1rem 0;
+}
+#mori_beauty .eyemaru {
+    float: left;
+    border: 1px dotted #666;
+    border-radius: 50%;
+    font-size: 13px;
+    padding-top: 27px;
+    width: 83px;
+    height: 83px;
+    text-align: center;
+    line-height: 1.2;
+}
+#mori_beauty .eyeright {
+    margin-left: 98px;
+    line-height: 2;
+}
+#mori_beauty .eyesum {
+    font-size: 13px;
+    line-height: 1.2;
+    border:1px solid #999;
+}
+/*
+ *
+ *      recommend
+ *
+ */
+#mori_beauty #recommend h1 {
+    margin-bottom: 2rem;
+}
+#mori_beauty #recommend h3 {
+    margin: 0.5rem 0;
+}
+#mori_beauty .catch {
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
+}

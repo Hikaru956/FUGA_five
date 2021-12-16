@@ -1,0 +1,169 @@
+var wh = $(document).height();
+var hh = $('#header').height();
+$('#logopanel').height(wh-hh);
+
+$(function()
+{
+    var sh = $('#sns_links').innerHeight();
+    var fh = $('#footer').innerHeight();
+    $('#typopanel').height(wh-sh-fh-hh);
+
+    new function() {
+        var main  = $('#main');
+        var nav   = $('#nav');
+        var top   = $('#gotop');
+        var typ   = $('#typoback');
+        /* スマホナビ表示 */
+        $('#nav_btn').click(function()
+        {
+            if (nav.hasClass('navshow'))
+            {
+                nav.removeClass('navshow');
+            }
+            else
+            {
+                nav.addClass('navshow');
+            }
+            return false;
+        });
+        main.click(function()
+        {
+            if (nav.hasClass('navshow'))
+            {
+                nav.removeClass('navshow');
+                return false;
+            }
+        });
+        main.scroll(function()
+        {
+            if (main.scrollTop() > 1.5*wh)
+            {
+                top.fadeIn(800);
+                typ.css('opacity', 1);
+            }
+            else
+            {
+                top.fadeOut(800);
+                typ.css('opacity', 0);
+            }
+        });
+        /* ページTOPへスクロール */
+        top.click(function(){
+            main.animate({scrollTop:0}, 400);
+            return false;
+        });
+    }
+    /* TEXTPANEL */
+    new function() {
+
+        /* 設定 */
+        var interval = 8000;
+        var panel    = $('#textpanel .textsection');
+        var length   = panel.length;
+        var current  = 0;
+
+        panel.eq(0).addClass('show');
+
+        var next = function()
+        {
+            if (current < length-1)
+            {
+                panel.eq(current+1).addClass('show');
+                panel.eq(current).removeClass('show');
+                current++;
+            }
+        }
+        if (length > 1)
+        {
+            setInterval(next, interval);
+        }
+    }
+    /* カルーセル */
+    new function() {
+
+        /* 設定 */
+        var interval = 8000;
+        var panel    = $('#logopanelback > div');
+        var length   = panel.length;
+        var current  = 0;
+
+        panel.eq(0).css('opacity', 1);
+
+        var next = function()
+        {
+            if (current < length-1)
+            {
+                panel.eq(current+1).css('opacity', 1);
+                panel.eq(current).css('opacity', 0);
+                current++;
+            }
+            else
+            {
+                panel.eq(0).css('opacity', 1);
+                panel.eq(current).css('opacity', 0);
+                current = 0;
+            }
+        }
+        if (length > 1)
+        {
+            setInterval(next, interval);
+        }
+    }
+    /* フットナビゲーション */
+    new function() {
+        /* 初期設定 */
+        var ll = 0;  /* LI.length */
+        var lw = []; /* 各LI.width */
+        var mw = 0;  /* UL.width */
+        var or = '<li id="fnav_tmp"><span>MORE <i class="fa fa-chevron-circle-down"></i></span></li>'
+        var ow = 0;
+
+        $('#fnav_main > li').each(function(){
+            ll = lw.push($(this).outerWidth());
+        });
+        lw.forEach(function(v){
+            mw += v;
+        });
+        $('#fnav_main > li:last-child').after(or);
+        ow = $('#fnav_tmp').outerWidth() + 40;
+        $('#fnav_tmp').remove();
+
+        /* ドロップダウン削除 */
+        var rem = function(){
+            var dp = $('#fnav_drop');
+            dp.after($('#fnav_drop li'));
+            dp.remove();
+        }
+
+        /* ドロップダウン追加 */
+        var app = function(){
+            var nw = $('#fnav > div.container').width();
+            var ww = 0;
+            var i  = 0;
+            if (nw < mw){
+                for (i=0; i<ll; i++){
+                    ww += lw[i];
+                    if (ww + ow >= nw){
+                        break;
+                    }
+                }
+                $('#fnav_main > li:gt('+(i-1)+')').wrapAll('<li id="fnav_drop"><ul></ul></li>');
+                $('#fnav_drop').prepend('<span>MORE <i class="fa fa-chevron-circle-down"></i></span>');
+            }
+        }
+
+        rem();
+        app();
+
+        var event_timer = false;
+        $(window).resize(function(){
+            if (event_timer !== false){
+                clearTimeout(event_timer);
+            }
+            event_timer = setTimeout(function(){
+                rem();
+                app();
+            }, 200);
+        });
+    }
+});
