@@ -71,7 +71,7 @@
 			<% end %>
 		</tbody>
 	</table>
-	<%= will_paginate(@items, :params=> {:action=>'company_index', :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+	<%= will_paginate(@items, :params=> {:action=>'company_index', :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% end %>
 
 <!-- modalNewShop -->
