@@ -37,7 +37,7 @@
 <% end %>
 <% og_img = VisualWidget.search_widget_bag_for(@website, "aa7e2132489597c4ea7149a5f26b900d") %>
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="http://<%= request.host %><%= url_for_file_column(og_img.photos[0], :image) %>">
+<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url(:image) %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">
@@ -54,11 +54,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/feel/css" %>
 </head>
@@ -107,7 +107,7 @@
                     <div class="col-in">
                         <a target="_blank" href="https://www.google.co.jp/maps/place/%E3%80%92970-8044+%E7%A6%8F%E5%B3%B6%E7%9C%8C%E3%81%84%E3%82%8F%E3%81%8D%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8F%B0%E9%A3%AF%E9%87%8E%EF%BC%94%E4%B8%81%E7%9B%AE%EF%BC%98%E2%88%92%EF%BC%91+%E3%82%AA%E3%83%BC%E3%82%AC%E3%83%8B%E3%83%83%E3%82%AF%E3%83%95%E3%82%A9%E3%83%88%E3%82%B5%E3%83%AD%E3%83%B3%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB/@37.0168544,140.9142596,16z/data=!4m5!3m4!1s0x602113fb7f6a7fd3:0x48a37423f4fa5232!8m2!3d37.0173442!4d140.9210706?hl=ja&authuser=0">
 <%      if !map_img.blank? && map_img.is_valid? %>
-                            <img src="<%= url_for_file_column(map_img.photos[0], :image) %>" alt="フィール・オーガニック・フォトサロンの地図">
+                            <img src="<%= map_img.photos[0].clip.url(:image) %>" alt="フィール・オーガニック・フォトサロンの地図">
 <%      else %>
                             <img src="//placehold.jp/512x217.jpg" alt="地図">
 <%      end %>
@@ -128,7 +128,7 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "50d0aa9efc7a5e9747eb74c3e6c76acb") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= url_for_file_column(logomark.photos[0], :image) %>" alt="logomark">
+            <img src="//<%= request.host %><%= logomark.photos[0].clip.url(:image) %>" alt="logomark">
         </div>
 <% end %>
         <ul>

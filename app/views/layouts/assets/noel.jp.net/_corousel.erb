@@ -5,12 +5,12 @@
   <div id="carousel-list">
     <ul id="carousel-ul">
     <% slider.photos.each do | photo | %>
-      <li><img src="<%= url_for_file_column(photo, :image) %>" alt=""></li>
+      <li><img src="<%= photo.clip.url(:image) %>" alt=""></li>
     <% end %>
     </ul>
     <% if !logo.blank? && logo.is_valid? %>
     <div id="logo">
-      <img src="<%= url_for_file_column(logo.photos[0], :image) %>" alt="ロゴ">
+      <img src="<%= logo.photos[0].clip.url(:image) %>" alt="ロゴ">
     </div>
     <% end %>
   </div>

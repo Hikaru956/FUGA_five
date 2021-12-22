@@ -24,7 +24,7 @@
 <meta property="og:site_name"         content="<%= @website.name %>">
 <% key_photo = key_photo(@seed) %>
 <% unless key_photo.blank? %>
-<meta property="og:image"             content="https://<%= request.host + url_for_file_column(key_photo, :image) %>">
+<meta property="og:image"             content="https://<%= request.host + key_photo.clip.url(:image) %>">
 <% end %>
 <% unless @website.social_facebook_uri.blank? %>
 <meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
@@ -41,11 +41,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/style" %>
 </head>

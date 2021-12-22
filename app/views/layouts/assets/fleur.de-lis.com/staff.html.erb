@@ -55,11 +55,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/fleur.de-lis.com/css" %>
 </head>
@@ -91,7 +91,7 @@
                 <li class="col-m1p2">
 <% key_photo = key_photo(@seed) %>
 <% unless key_photo.blank? %>
-                    <%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
+                    <%= image_tag key_photo.clip.url(:panel) %>
 <% else %>
                     <img src="//placehold.jp/544x725.png?text=No Face Photo">
 <% end %>
@@ -143,7 +143,7 @@
             <ul class="wrapper">
 <%      @photos.each do | photo |  %>
                 <li class="col-m2p3">
-                    <%= image_tag(url_for_file_column(photo, :image, 'panel')) %>
+                    <%= image_tag photo.clip.url(:panel) %>
                 </li>
 <%      end %>
             </ul>

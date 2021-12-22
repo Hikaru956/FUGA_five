@@ -5,7 +5,7 @@
                 <div id="carousel">
                     <ul id="carousel_ul">
 <% widget_bag.photos.each do | photo | %>
-                        <li><img src="<%= url_for_file_column(photo, :image) %>"></li>
+                        <li><img src="<%= photo.clip.url(:image) %>"></li>
 <% end %>
                     </ul>
                     <div id="carousel_prev"><i class="fa fa-chevron-circle-left"></i></div>

@@ -47,7 +47,7 @@ https://sr2.swifty.jp/streams?id=161&wkey=439c5977a6ea6e40dd38b2f518797b9d      
                 publish   = leaf.publish_from.strftime("%Y-%m-%d")
                 key_photo = key_photo(leaf)
                 unless key_photo.blank?
-                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                    image_url = key_photo.clip.url(:panel)
                 else
                     image_url = '//placehold.jp/ffffff/cccccc/392x392.jpg?text='+publish
                 end

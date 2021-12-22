@@ -6,7 +6,7 @@
 			<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"photo_lower",		:id=>photo) %>				
 		</p>
 	</div>
-	<%= image_tag(url_for_file_column(photo, :image, "thumb")) %>
+	<%= image_tag photo.clip.url(:thumb) %>
 	<div class="caption">
 		<p><%=File::basename(photo.image)%></p>
 		<p><%=photo.info%></p>

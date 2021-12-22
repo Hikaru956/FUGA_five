@@ -41,7 +41,7 @@
         <% if logo1.photos[0].blank? %>
             <img src="//placehold.jp/260x120.jpg" alt="logo mark">
         <% else %>
-            <img src="<%= url_for_file_column(logo1.photos[0], :image) %>" alt="logo mark">
+            <img src="<%= logo1.photos[0].clip.url(:image) %>" alt="logo mark">
         <% end %>
         </div>
         <div class="sns_links">
@@ -108,7 +108,7 @@
                 <% if logo1.photos[0].blank? %>
                     <img src="//placehold.jp/260x120.jpg" alt="logo mark">
                 <% else %>
-                    <img src="<%= url_for_file_column(logo1.photos[0], :image) %>" alt="logo mark">
+                    <img src="<%= logo1.photos[0].clip.url(:image) %>" alt="logo mark">
                 <% end %>
                 </div>
                 <div class="sns_links">
@@ -164,7 +164,7 @@
             </div>
             <div class="col-1p2">
                 <div class="footer_logo">
-                    <img src="<%= url_for_file_column(logo2.photos[0], :image) %>" alt="logo mark">
+                    <img src="<%= logo2.photos[0].clip.url(:image) %>" alt="logo mark">
                 </div>
                 <div class="sns_links">
                     <% unless tel2.data_string.blank? %>
@@ -232,7 +232,7 @@
                 <% if logo1.photos[0].blank? %>
                     <img src="//placehold.jp/260x120.jpg" alt="logo mark">
                 <% else %>
-                    <img src="<%= url_for_file_column(logo1.photos[0], :image) %>" alt="logo mark">
+                    <img src="<%= logo1.photos[0].clip.url(:image) %>" alt="logo mark">
                 <% end %>
                 </div>
                 <div class="sns_links">
@@ -288,7 +288,7 @@
             </div>
             <div class="col-1p3">
                 <div class="footer_logo">
-                    <img src="<%= url_for_file_column(logo2.photos[0], :image) %>" alt="logo mark">
+                    <img src="<%= logo2.photos[0].clip.url(:image) %>" alt="logo mark">
                 </div>
                 <div class="sns_links">
                     <% unless tel2.data_string.blank? %>
@@ -343,7 +343,7 @@
             </div>
             <div class="col-1p3">
                 <div class="footer_logo">
-                    <img src="<%= url_for_file_column(logo3.photos[0], :image) %>" alt="logo mark">
+                    <img src="<%= logo3.photos[0].clip.url(:image) %>" alt="logo mark">
                 </div>
                 <div class="sns_links">
                     <% unless tel3.data_string.blank? %>

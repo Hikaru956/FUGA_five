@@ -1,5 +1,5 @@
 <div class="thumbnail">
-	<%= image_tag(url_for_file_column(photo, :image, "thumb")) %>
+	<%= image_tag photo.clip.url(:thumb) %>
 	<div class="caption">
 		<p><%=photo.info%></p>
 		<p class="text-center"><a class="btn btn-danger btn-mini"  data-toggle="modal" href="#modal_delete_photo_<%=photo.id%>">	<i class="icon-trash"></i>&nbsp;削除確認</a></p>

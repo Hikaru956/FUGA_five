@@ -4,7 +4,7 @@
 	<% key_photo = key_photo(latests[0]) %>
 	<% unless key_photo.blank? %>
 		<%= image_tag key_photo.clip.url(:panel) %>
-		<%= image_tag(url_for_file_column(key_photo, :image, 'panel')) if false%>
+		<%= image_tag key_photo.clip.url(:panel)) if false%>
 	<% else %>
 		<img src="http://placehold.it/800x500&amp;text=<%=latests[0].publish_from.strftime('%Y-%m-%d')%>">
 	<% end %>

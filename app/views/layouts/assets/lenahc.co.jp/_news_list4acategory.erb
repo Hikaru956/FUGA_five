@@ -24,7 +24,7 @@
             publish   = leaf.publish_from.strftime("%Y-%m-%d")
             key_photo = key_photo(leaf)
             unless key_photo.blank?
-                image_url = url_for_file_column(key_photo, :image, 'panel')
+                image_url = key_photo.clip.url(:panel)
             else
                 image_url = '//placehold.jp/352x264.png?text='+publish
             end

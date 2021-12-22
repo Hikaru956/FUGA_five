@@ -13,9 +13,9 @@
                     <ul id="carousel_ul">
 <% widget_bag.photos.each_with_index do | photo, i | %>
 <%      if links[i].blank? || !links[i].is_valid? %>
-                        <li><img src="<%= url_for_file_column(photo, :image) %>"></li>
+                        <li><img src="<%= photo.clip.url(:image) %>"></li>
 <%      else %>
-                        <li><a href="<%= links[i].data_string %>"><img src="<%= url_for_file_column(photo, :image) %>"></a></li>
+                        <li><a href="<%= links[i].data_string %>"><img src="<%= photo.clip.url(:image) %>"></a></li>
 <%      end %>
 <% end %>
                     </ul>

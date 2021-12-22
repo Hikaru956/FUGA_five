@@ -52,7 +52,7 @@
                                         <% key_photo = key_photo(@seed) %>
                                         <% unless key_photo.blank? %>
                                         <div class="thumbnail thumbnail-1">
-                                            <%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
+                                            <%= image_tag key_photo.clip.url(:panel) %>
                                         </div>
                                         <% else %>
                                         <img src="http://placehold.it/320x240&amp;text=No Face Photo"><% end %>

@@ -46,7 +46,7 @@
 		<div  style="text-align:center;">
 		<% key_photo = key_photo(@seed) %>
 		<% unless key_photo.blank? %>
-			<div class="thumbnail thumbnail-1"><%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %></div>
+			<div class="thumbnail thumbnail-1"><%= image_tag key_photo.clip.url(:panel) %></div>
     	<% end %>
 		</div>
     </div>
@@ -78,4 +78,3 @@
 		<div class="row-fluid"><%= render :partial=>'layouts/social_buttons'%></div>
 	</div>
 </div>
-

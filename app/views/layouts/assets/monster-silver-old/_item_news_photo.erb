@@ -1,5 +1,5 @@
 <div class="thumbnail thumbnail-1">
-	<div align="center"><%= image_tag(url_for_file_column(photo, :image, 'panel')) %></div>
+	<div align="center"><%= image_tag photo.clip.url(:panel) %></div>
 	<% unless photo.info.blank? %>
 		<div class="caption">
 			<p><%=photo.info%></p>

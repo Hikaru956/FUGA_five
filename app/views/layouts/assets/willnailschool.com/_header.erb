@@ -7,7 +7,7 @@
     <a href="/home">
 <% end %>
 <% if !logo.blank? && logo.is_valid? %>
-      <img src="<%= url_for_file_column(logo.photos[0], :image) %>" alt="WILL Nail School ロゴ">
+      <img src="<%= logo.photos[0].clip.url(:image) %>" alt="WILL Nail School ロゴ">
 <% else %>
       <img src="//placehold.jp/246x50.png" alt="WILL Nail School ロゴ">
 <% end %>

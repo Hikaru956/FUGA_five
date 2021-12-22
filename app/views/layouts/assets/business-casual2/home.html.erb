@@ -42,7 +42,7 @@
 <meta property="og:title"             content="<%= hptitle.data_string %>">
 <% end %>
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="http://<%= request.host %><%= url_for_file_column(og_img.photos[0], :image) %>">
+<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url(:image) %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">

@@ -22,11 +22,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/css" %>
 </head>
@@ -43,7 +43,7 @@
         @public_bag.each do | leaf |
             key_photo = key_photo(leaf)
             unless key_photo.blank?
-                image_url = url_for_file_column(key_photo, :image, 'panel')
+                image_url = key_photo.clip.url(:panel)
             else
                 image_url = '//placehold.jp/327x327.jpg?text=No Photo'
             end
@@ -78,7 +78,7 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "62aa95cab0dd63e669fa466996f2b97b") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= url_for_file_column(logomark.photos[0], :image) %>" alt="logomark">
+            <img src="//<%= request.host %><%= logomark.photos[0].clip.url(:image) %>" alt="logomark">
         </div>
 <% end %>
         <ul>

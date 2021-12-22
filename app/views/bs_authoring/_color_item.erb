@@ -1,7 +1,7 @@
 <div class="thumbnail">
 	<% key_photo = temp_local.photo %>
 	<% unless key_photo.blank? %>
-		<%= image_tag(url_for_file_column(key_photo, :image, "thumb")) %>
+		<%= image_tag key_photo.clip.url(:thumb) %>
 	<% else %>
 		<img src="http://placehold.it/320x240&amp;text=No Photo">
 	<% end %>

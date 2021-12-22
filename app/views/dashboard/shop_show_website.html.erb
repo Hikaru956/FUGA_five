@@ -257,7 +257,7 @@
 				  			クリア
 						</a>
 					</span>
-					<%= image_tag(url_for_file_column(@icon, :image)) %>
+					<%= image_tag @icon.clip.url (:image) %>
 				<% end %>
 			</td>
 		</tr>
@@ -284,7 +284,7 @@
 				  			クリア
 						</a>
 					</span>
-					<%= image_tag(url_for_file_column(@icon, :image)) %>
+					<%= image_tag @iconclip.url(:image) %>
 				<% end %>
 			</td>
 		</tr>

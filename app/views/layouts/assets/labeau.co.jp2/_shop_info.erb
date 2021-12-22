@@ -8,32 +8,32 @@
     if shop1_logo.blank? || shop1_logo.photos[0].blank?
         logo1_url = '//placehold.jp/ffffff/cccccc/150x80.jpg?text=NoPhoto'
     else
-        logo1_url = url_for_file_column(shop1_logo.photos[0], :image, "thumb")
+        logo1_url = shop1_logo.photos[0].clip.url(:thumb)
     end
     if shop1_phot.blank? || shop1_phot.photos[0].blank?
         photo1_url = '//placehold.jp/ffffff/cccccc/150x150.jpg?text=NoPhoto'
     else
-        photo1_url = url_for_file_column(shop1_phot.photos[0], :image, "thumb")
+        photo1_url = shop1_logo.photos[0].clip.url(:thumb)
     end
     if shop2_logo.blank? || shop2_logo.photos[0].blank?
         logo2_url = '//placehold.jp/ffffff/cccccc/150x80.jpg?text=NoPhoto'
     else
-        logo2_url = url_for_file_column(shop2_logo.photos[0], :image, "thumb")
+        logo2_url = shop2_logo.photos[0].clip.url(:thumb)
     end
     if shop2_phot.blank? || shop2_phot.photos[0].blank?
         photo2_url = '//placehold.jp/ffffff/cccccc/150x150.jpg?text=NoPhoto'
     else
-        photo2_url = url_for_file_column(shop2_phot.photos[0], :image, "thumb")
+        photo2_url = shop2_logo.photos[0].clip.url(:thumb)
     end
     if shop3_logo.blank? || shop3_logo.photos[0].blank?
         logo3_url = '//placehold.jp/ffffff/cccccc/150x80.jpg?text=NoPhoto'
     else
-        logo3_url = url_for_file_column(shop3_logo.photos[0], :image, "thumb")
+        logo3_url = shop3_logo.photos[0].clip.url(:thumb)
     end
     if shop3_phot.blank? || shop3_phot.photos[0].blank?
         photo3_url = '//placehold.jp/ffffff/cccccc/150x150.jpg?text=NoPhoto'
     else
-        photo3_url = url_for_file_column(shop3_phot.photos[0], :image, "thumb")
+        photo3_url = shop3_logo.photos[0].clip.url(:thumb)
     end
 %>
         <article>

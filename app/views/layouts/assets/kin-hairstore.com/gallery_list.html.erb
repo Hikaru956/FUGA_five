@@ -27,11 +27,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
 <% end %>
 <script src="https://use.fontawesome.com/9e789611aa.js"></script>
 <link rel="stylesheet" href="/stylesheets/assets/kin-hairstore.com/style.css">
@@ -105,7 +105,7 @@
     @leafs.each do | leaf |
         key_photo = key_photo(leaf)
         unless key_photo.blank?
-            image_url = url_for_file_column(key_photo, :image, 'panel')
+            image_url = key_photo.clip.url(:panel)
         else
             image_url = '//placehold.jp/327x327.jpg?text=No Photo'
         end

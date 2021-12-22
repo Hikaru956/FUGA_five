@@ -54,7 +54,7 @@
 			          <div class="item <%if photo.position==1%>active<%end%>">
                   <%= image_tag photo.clip.url(:thumb), :class=>"img-responsive img-full" %>
                   <% if false %>
-			          	  <%= image_tag(url_for_file_column(photo, :image), :class=>"img-responsive img-full")%>
+			          	  <%= image_tag photo.clip.url(:image), :class=>"img-responsive img-full")%>
                   <% end %>
 			          </div>
 				<% end %>
