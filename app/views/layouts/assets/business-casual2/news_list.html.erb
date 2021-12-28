@@ -103,7 +103,7 @@
     sons << @seed
     @leafs = ContentLeaf.where("content_leafs.content_category_id IN (?)", sons)
     @leafs = @leafs.order(position: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
-    #c = ContentLeaf.public_leafs_condition
+    #c = ContentLeaf.public_leafs
     #c.and "content_leafs.content_category_id", 'IN', sons
     #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'position desc')
     @leafs.each do | leaf | @leaf = leaf

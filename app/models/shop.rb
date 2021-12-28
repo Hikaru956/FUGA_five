@@ -213,6 +213,27 @@ class Shop < ApplicationRecord
     true
   end
 
+  def public_leafs
+    today = Time.now.to_date
+    leaves = self.content_leafs.eager_load(:content_category).where('content_categories.is_public=TRUE AND content_leafs.is_public=TRUE')
+    leaves = Shop.filter_latest(leaves)
+    #leaves = leaves.where('   (content_leafs.publish_from IS NULL AND content_leafs.publish_until IS NULL)
+    #                      OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until IS NULL)
+    #                      OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until >= ?)', \
+    #                      today, today, today)
+    leaves
+  end
+
+  def self.filter_latest(items, today = Time.now.to_date)
+    items = items.where("content_leafs.is_public", true)
+    items = items.where('     (content_leafs.publish_from IS NULL AND content_leafs.publish_until IS NULL) 
+                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until IS NULL) 
+                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until >= ?)', \
+                          today, today, today)
+    items
+  end
+
+
   protected 
   def gen_new_wsite_key
     string = Time.now.to_s+":"

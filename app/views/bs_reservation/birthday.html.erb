@@ -30,10 +30,12 @@
 
 <%
 	birthday_key_string = @target_date.strftime("-%m-%d")
-	c = Condition.new
-	c.and("birthday", "LIKE", "%"+birthday_key_string )
-	c.and "shop_id", @shop.id	unless @shop.blank?
-	@items = Customer.find(:all, :conditions => c.where) 
+	@items = (@shop.blank?)? 	Customer.where("birthday", "LIKE", "%"+birthday_key_string): \
+								@shop.customers.where("birthday", "LIKE", "%"+birthday_key_string)
+	#c = Condition.new
+	#c.and("birthday", "LIKE", "%"+birthday_key_string )
+	#c.and "shop_id", @shop.id	unless @shop.blank?
+	#@items = Customer.find(:all, :conditions => c.where) 
 %>
 <% if @items.blank? %>
 	<p>誕生日の方はいらっしゃいません。</p>

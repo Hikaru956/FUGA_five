@@ -53,12 +53,18 @@ class ApplicationController < ActionController::Base
     return [] if content_category.blank?
     sons = content_category.sons
     sons << content_category
-    c = ContentLeaf.public_leafs_condition
-    c.and "content_leafs.content_category_id", 'IN', sons
+    public_leafs = ContentLeaf.public_leafs
+    public_leafs = public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(position: :desc).order(created_at: :desc)
+    public_leafs = public_leafs.limit(limit) unless limit.blank?
+    return public_leafs
     
-    (limit.blank?)? 
-        ContentLeaf.find(:all, :conditions=>c.where, :order=>'position desc, created_at desc'):
-        ContentLeaf.find(:all, :conditions=>c.where, :order=>'position desc, created_at desc', :limit=>limit) 
+    
+    #c = ContentLeaf.public_leafs
+    #c.and "content_leafs.content_category_id", 'IN', sons
+    
+    #(limit.blank?)? 
+    #    ContentLeaf.find(:all, :conditions=>c.where, :order=>'position desc, created_at desc'):
+    #    ContentLeaf.find(:all, :conditions=>c.where, :order=>'position desc, created_at desc', :limit=>limit) 
 #    posts = ContentLeaf.find(:all, :conditions=>c.where, :order=>'position desc')
 #    posts
   end

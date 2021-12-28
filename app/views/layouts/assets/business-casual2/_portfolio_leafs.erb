@@ -3,7 +3,7 @@
     sons << seed
     @leafs = ContentLeaf.public_leafs
     @leafs = @leafs.order(position: :asc)
-    #c = ContentLeaf.public_leafs_condition
+    #c = ContentLeaf.public_leafs
     #@leafs = seed.content_leafs.find(:all, :conditions=>c.where, :order=>'position asc')
     unless @leafs.blank?
 %>

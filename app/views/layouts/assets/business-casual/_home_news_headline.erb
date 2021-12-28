@@ -1,15 +1,17 @@
 <%
 	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
 	news_navigation = type_root.web_page 
-	first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
-	
-	public_categories  = []
-	public_categories.concat(first_bag.sons)
-	public_categories << first_bag
+	latest_leaf = @website.public_leafs.order(position: :desc).first
 
-	c = ContentLeaf.public_leafs_condition
-	c.and "content_category_id", public_categories
-	latest_leaf =  ContentLeaf.find(:first, :conditions=>c.where, :order=>'position desc')
+
+	#first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
+	#public_categories  = []
+	#public_categories.concat(first_bag.sons)
+	#public_categories << first_bag
+	#latest_leaf = ContentLeaf.where("content_category_id IN (?)", public_categories).order(position: :desc).first
+	#c = ContentLeaf.public_leafs
+	#c.and "content_category_id", public_categories
+	#latest_leaf =  ContentLeaf.find(:first, :conditions=>c.where, :order=>'position desc')
 %>
 
 <% unless latest_leaf.blank? %>
@@ -28,7 +30,7 @@
 							<div class="col-lg-3 col-md-3 col-sm-3">
 								<% key_photo = key_photo(latest_leaf) %>
 								<% unless key_photo.blank? %>
-									<div class="thumbnail thumbnail-1 img-left"><%= image_tag key_photo.clip.url(:thumb), :class=>"img-responsive img-border img-left") %></div>
+									<div class="thumbnail thumbnail-1 img-left"><%= image_tag key_photo.clip.url(:thumb), :class=>"img-responsive img-border img-left" %></div>
 								<% else %>
 									<img class="thumbnail thumbnail-1 img-left" src="//placehold.jp/ffffff/cccccc/240x180.jpg?text=<%=latest_leaf.publish_from.strftime('%Y-%m-%d')%>">
 								<% end %>

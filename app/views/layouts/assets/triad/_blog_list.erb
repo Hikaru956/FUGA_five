@@ -13,16 +13,19 @@
         @max = cmax
         type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
         navigation = type_root.web_page
-        bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+        bag_categories = type_root.children.where("is_public=?", true) #type_root.children.find(:all, :conditions=>["is_public=?", true])
 
         public_categories  = []
         bag_categories.each do | cat |
             public_categories.concat(cat.sons)
             public_categories << cat
         end
-        c = ContentLeaf.public_leafs_condition
-        c.and "content_category_id", public_categories
-        latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+        latest_leafs = @website.public_leafs
+        latest_leafs = latest_leafs.where("content_category_id IN (?)", public_categories).order(publish_from: :desc).limit(@max)
+
+        #c = ContentLeaf.public_leafs
+        #c.and "content_category_id", public_categories
+        #latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
 %>
 <%      unless latest_leafs.blank? %>
         <aside>

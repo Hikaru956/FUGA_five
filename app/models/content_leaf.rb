@@ -46,7 +46,7 @@ class ContentLeaf < ApplicationRecord
   
   def self.public_leafs
     today = Time.now.to_date
-    leaves = ContentLeaf.where(is_public: true)
+    leaves = ContentLeaf.eager_load(:content_category).where('content_categories.is_public=TRUE AND content_leafs.is_public=TRUE')
     leaves = filter_latest(leaves)
     #leaves = leaves.where('   (content_leafs.publish_from IS NULL AND content_leafs.publish_until IS NULL)
     #                      OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until IS NULL)
@@ -65,7 +65,7 @@ class ContentLeaf < ApplicationRecord
   end
 
   #hikaru
-  #def self.public_leafs_condition
+  #def self.public_leafs
   #  today = Time.now.to_date
   #  c = Condition.new
   #  c.and "content_leafs.is_public", true
