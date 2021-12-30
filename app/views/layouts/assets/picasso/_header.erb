@@ -1,0 +1,69 @@
+        <!-- このサイトはIE9未満では正しく表示されません。 -->
+        <!--[if lt IE 9]>
+        <p id="browserupgrade">あなたは<strong>古いブラウザ</strong>をご利用のようです。安心してインターネットをお楽しみいただくために<a href="http://browsehappy.com/">最新のブラウザにアップグレード</a>してください。このサイトは古いブラウザでは正しく表示されません。</p>
+        <![endif]-->
+        <header id="header">
+            <div class="container">
+                <div id="header_img">
+<% logomark = VisualWidget.search_widget_bag_for(@website, "b538e4122cc7cd99ea820738d3993e02") %>
+<% if logomark.blank? || !logomark.is_valid? %>
+    <% if request.host == 'staffroom.swifty.jp' %>
+                    <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="//placehold.it/240x120" alt="logo mark"></a>
+    <% else %>
+                    <a href="/home" id="brand"><img src="//placehold.it/240x120" alt="logo mark"></a>
+    <% end %>
+<% else %>
+    <% if request.host == 'staffroom.swifty.jp' %>
+                    <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="<%= url_for_file_column(logomark.photos[0], :image) %>" alt="logo mark"></a>
+    <% else %>
+                    <a href="/home" id="brand"><img src="<%= url_for_file_column(logomark.photos[0], :image) %>" alt="logo mark"></a>
+    <% end %>
+<% end %>
+                    <a id="tnav_open_btn"><i class="fa fa-bars"></i><span>MENU</span></a>
+                </div>
+                <div id="header_add">
+                    <div id="sns_links">
+<% unless @website.wsite_telephone.blank? %>
+                        <a href="tel:<%= @website.wsite_telephone %>"><i class="fa fa-phone-square"></i></a>
+<% end %>
+<% unless @website.wsite_email.blank? %>
+                        <a href="mailto:<%= @website.wsite_email %>"><i class="fa fa-envelope"></i></a>
+<% end %>
+<% unless @website.social_facebook_uri.blank? %>
+                        <a href="<%= @website.social_facebook_uri %>" target="_blank"><i class="fa fa-facebook-official"></i></a>
+<% end %>
+<% unless @website.social_twitter_uri.blank? %>
+                        <a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="fa fa-twitter-square"></i></a>
+<% end %>
+<% unless @website.social_gplus_uri.blank? %>
+                        <a href="<%= @website.social_gplus_uri %>" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+<% end %>
+<% unless @website.social_instagram_uri.blank? %>
+                        <a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fa fa-instagram"></i></a>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+                        <a href="<%= @website.social_line_uri %>" target="_blank"><img src="/images/assets/line_icon.png" alt="LINE" /></a>
+<% end %>
+<% unless @website.social_pinterest_uri.blank? %>
+                        <a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="fa fa-pinterest-square"></i></a>
+<% end %>
+<% unless @website.social_tumblr_uri.blank? %>
+                        <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fa fa-tumblr-square"></i></a>
+<% end %>
+                    </div>
+<% unless @website.wsite_telephone.blank? %>
+                    <div id="phone">
+                        <address>TEL.<a href="tel:<%= @website.wsite_telephone %>"><%= @website.wsite_telephone %></a></address>
+                    </div>
+<% end %>
+                    <div id="address">
+<% unless @website.address_1.blank? %>
+                        <%= @website.address_1 %>
+<% end %>
+<% unless @website.address_2.blank? %>
+                        <%= @website.address_2 %>
+<% end %>
+                    </div>
+                </div>
+            </div>
+        </header>

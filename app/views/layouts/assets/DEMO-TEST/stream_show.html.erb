@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title><%= model_title(@seed) %>- <%= @website.name %></title>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/DEMO-TEST/head_logic" %>
+    </head>
+    <body>
+        <div class="spinner">
+        </div>
+        <!--============================== header =================================-->
+        <header>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/DEMO-TEST/header" %>
+        </header>
+        <div class="bg-content">
+            <!--============================== content =================================-->
+            <div id="content" class="content-extra">
+                <div class="ic">
+                </div>
+                <div class="row-1">
+                    <div class="container">
+                        <br/>
+                        <div class="row">
+                            <div class="span12">
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>"><i class="icon-home"></i></a>
+                                    </li>
+									<% unless @seed.content_category.has_only_a_public_bag? %>
+	                                    <li>
+	                                        <a href="<%= url_for(:action=>'stream_index', :id=>@seed.content_category,	:wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a>
+	                                    </li>
+									<% end %>
+                                    <% @seed.content_category.category_path(true).each do |category | %>
+                                    <li>
+                                        <%= link_to category.category_label, :action=>"stream_list", :id=>category,	:wkey=>@website.wsite_hash_key %>
+                                    </li>
+                                    <% end %>
+                                    <li class="active">
+                                        <%= model_title(@seed) %>
+                                    </li>
+                                </ol>
+                                <h1 class="page-header">
+									<div class="pull-right">
+										<% url_back = url_for(:action=>"stream_list", :id=>@seed.content_category, :page=>@page) %>
+										<a class="btn btn-small btn-primary" href="<%=url_back%>">
+											<i class="icon-arrow-left"></i>&nbsp;
+											戻る
+										</a>
+									</div>
+                                	<%= h model_title(@seed) %>
+								</h1>
+                            </div>
+                        </div>
+
+						<% unless @seed.description_3.blank? %>
+                        <div class="row">
+                            <div class="span12">
+								<blockquote>
+									<%=  raw h(@seed.description_3) %>
+								</blockquote>
+
+                                <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+                            </div>
+                        </div>
+						<% end %>
+
+                        <div class="row">
+                            <div class="span12">
+								<div class="pull-cright">
+                                    <i class="icon-time"></i>&nbsp;<%= publish_label(@seed) %>
+									<% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+										    by <a href="<%=url_for(:action=>'staff', :id=>@seed.staff,	:wkey=>@website.wsite_hash_key) %>"><%= h model_name(@seed.staff) %></a>
+									<% end %>
+								</div>
+                            </div>
+                        </div>
+
+						<% if false %>
+                        <div class="row">
+                            <div class="span12">
+                                <% photos =  @seed.photos %>
+                                <% unless photos.blank? %>
+                                <% array = photos.in_groups_of(2, false) %>
+                                <hr><% for i in 0..(array.size-1) %>
+                                <% @lines = array[i] %>
+                                <div class="row">
+                                    <ul class="thumbnails thumbnails-1">
+                                        <li class="span6">
+                                            <%= render :partial=>"#{LayoutScheme.asset_root}/DEMO-TEST/item_stream_photo", :locals => {:photo => ((@lines.size<1)? nil: @lines[0])} %>
+                                        </li>
+                                        <li class="span6">
+                                            <%= render :partial=>"#{LayoutScheme.asset_root}/DEMO-TEST/item_stream_photo", :locals => {:photo => ((@lines.size<2)? nil: @lines[1])} %>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <% end %>
+                                <% end %>
+                            </div>
+                        </div>
+                        <% end %>
+
+                        <div class="row">
+                            <div class="span12">
+                                <hr><%= render :partial=>'layouts/social_buttons' %>
+                            </div>
+                        </div>
+
+						<% if @website.disqus? %>
+							<div class="row">
+	                            <div class="span12">
+									<%= raw @website.disqus_code %>
+								</div>
+							</div>
+						<% end %>
+
+                    </div>
+                </div>
+            </div>
+        </div><!--============================== footer =================================-->
+        <footer>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/DEMO-TEST/footer" %>
+        </footer>
+    </body>
+</html>

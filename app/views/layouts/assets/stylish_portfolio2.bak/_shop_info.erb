@@ -1,0 +1,21 @@
+        <article>
+            <div class="container">
+                <div class="wrapper">
+                    <div class="col-1p2">
+                        <div id="gmap"></div>
+                        <div class="text-right">
+                            <a href="https://www.google.co.jp/maps/@<%= @website.lat %>,<%= @website.lng %>,16z?hl=ja" target="_blank">大きな地図で見る</a>
+                        </div>
+                    </div>
+                    <div class="col-1p2 contents">
+                        <h1><%= model_name(@website) %></h1>
+<% unless @website.wsite_description_business.blank? %>
+                        <div class="contents">
+                            <%=raw @website.wsite_description_business%>
+                        </div>
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/sns_btn" %>
+                    </div>
+                </div>
+            </div>
+        </article>

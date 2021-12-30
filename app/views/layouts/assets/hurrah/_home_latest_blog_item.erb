@@ -1,0 +1,53 @@
+<div>
+    <!-- 記事へのリンク -->
+    <a href="<%= url_for(:action=>'stream_show', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
+        <!-- 最初の写真 -->
+<% key_photo = key_photo(temp_local) %>
+<% unless key_photo.blank? %>
+    <% if false %>
+        <!-- オリジナル -->
+        <div class=""><%= image_tag(url_for_file_column(key_photo, :image), :class=>"") %></div>
+        <!-- 長辺を2412pxに拡大 -->
+        <div class=""><%= image_tag(url_for_file_column(key_photo, :image, 'large'), :class=>"") %></div>
+        <!-- 640*480pxのボックスに収める -->
+        <div class=""><%= image_tag(url_for_file_column(key_photo, :image, 'panel'), :class=>"") %></div>
+        <!-- 320*240pxのボックスに収める -->
+        <div class=""><%= image_tag(url_for_file_column(key_photo, :image, 'thumb'), :class=>"") %></div>
+    <% end %>
+        <div class="latest_imgbox"><div><%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %></div></div>
+<% else %>
+        <div class="latest_imgbox"><div><img src="//placehold.it/480x360/ffffff/cccccc&amp;text=<%=temp_local.publish_from.strftime('%Y-%m-%d')%>"></div></div>
+<% end %>
+    </a>
+    <!-- 記事タイトル -->
+    <a href="<%= url_for(:action=>'stream_show', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
+        <h2 class="latest_h2"><%= model_title(temp_local) %></h2>
+    </a>
+    <div class="latest_item_heder">
+        <!-- 投稿日 -->
+        <i class="icon-calendar"></i> <%= temp_local.publish_from.strftime("%Y-%m-%d") %>
+        <!-- 投稿スタッフ -->
+<% unless temp_local.staff.blank? || temp_local.staff.staff_status==Staff::STAFF_BLOCKED %>
+        <i class="icon-user"></i> <a href="<%=url_for(:action=>'staff', :id=>temp_local.staff) %>"><%= h model_name(temp_local.staff) %></a>
+<% end %>
+    </div>
+    <!-- 記事ヘッドライン -->
+<% unless temp_local.description_3.blank? %>
+    <p class="latest_text">
+        <%= h truncate(strip_tags(temp_local.description_3).gsub('&nbsp;', ' '), :length=>100) %>
+    </p>
+<% end %>
+<% if false %>
+    <!-- 記事本文 -->
+    <% unless temp_local.description.blank? %>
+    <p>
+        <!-- 記事本文クリアテキスト -->
+        <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>200) %>
+    </p>
+    <div>
+        <!-- 記事本文生HTMLタグ付き -->
+        <%= raw temp_local.description %>
+    </div>
+    <% end %>
+<% end %>
+</div>

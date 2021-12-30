@@ -1,0 +1,28 @@
+<% link_url = url_for(:action=>'gallery_show', :id=>temp_local, :page=>@page, :wkey=>@website.wsite_hash_key) %>
+<div class="thumbnail">
+	<div  style="text-align:center;">
+		<a href="<%= link_url %>">
+			<% key_photo = key_photo(temp_local) %>
+			<% unless key_photo.blank? %>
+				<%= image_tag(url_for_file_column(key_photo, :image, "thumb")) %>
+			<% else %>
+				<img src="//placehold.it/320x240&amp;text=No Photo">
+	    	<% end %>
+		</a>
+	</div>
+    <div class="caption">
+        <h4>
+			<a href="<%= link_url %>">
+        	<%= truncate(model_title(temp_local), :length=>50) %>
+			</a>
+		</h4>
+		<p><%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>30) %></p>
+        <p>
+			<% unless temp_local.staff.blank? || temp_local.staff.staff_status==Staff::STAFF_BLOCKED %>
+				by
+				<strong><%= model_name(temp_local.staff)  %></strong>
+			<% end %>
+		</p>
+        <a class="btn btn-primary" href="<%= link_url %>">Read More <i class="icon-angle-right"></i></a>
+    </div>
+</div>

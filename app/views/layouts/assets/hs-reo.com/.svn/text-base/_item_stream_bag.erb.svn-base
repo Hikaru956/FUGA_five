@@ -1,0 +1,27 @@
+<li class="span4">
+	<% unless temp_local.blank? %>
+
+	    <div class="thumbnail thumbnail-1">
+	        <h3><%= truncate(model_name(temp_local), :length=>50) %></h3>
+	        <div class="">
+	        	<% latests = temp_local.public_leafs %>
+			  	<% unless latests.blank? %>
+					<% key_photo = key_photo(latests[0]) %>
+					<% unless key_photo.blank? %>
+						<%= image_tag(url_for_file_column(key_photo, :image, 'panel'), :style=>"visibility: visible; opacity: 1;", :alt=>model_name(temp_local)) %>
+					<% else %>
+						<img src="http://placehold.it/800x500&amp;text=<%=latests[0].publish_from.strftime('%Y-%m-%d')%>">
+					<% end %>
+				<% else %>
+						<img src="http://placehold.it/800x500&amp;text=No Article">
+				<% end %>
+			</div>
+	        <section>
+				<% unless temp_local.description.blank? %><p><%= h temp_local.description %></p><% end %>
+				<a href="<%= url_for(:action=>'stream_list', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>" class="btn btn-1">Read More</a>
+	        </section>
+	    </div>
+
+	<% end %>
+
+</li>

@@ -1,0 +1,8 @@
+<div id="gotop"><i class="fa fa-angle-up"></i></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/assets/vendor/jquery.mobile.v1.4.5.touch.min.js"></script>
+<script src="/javascripts/assets/bs-sae.com/main.js"></script>
+<script src="/javascripts/assets/bs-sae.com/navigation.js"></script>
+<% unless @website.analytics_code.blank? %>
+<%= raw @website.analytics_code %>
+<% end %>

@@ -1,0 +1,181 @@
+<% logo1 = VisualWidget.search_widget_bag_for(@website, "000ee9da17eacb9c1743ccb60ee0e291") %>
+<% shop1 = VisualWidget.search_widget_bag_for(@website, "81b96fa0c1ca241636239be8ade1ef1b") %>
+<% addr1 = VisualWidget.search_widget_bag_for(@website, "923927a030c95da72a0f9fcfcc8bfd5a") %>
+<% teln1 = VisualWidget.search_widget_bag_for(@website, "eceac26898f5d9f4be960799edac873b") %>
+<% slid1 = VisualWidget.search_widget_bag_for(@website, "e886d8a35183472acf37e57fed87776b") %>
+<% face1 = VisualWidget.search_widget_bag_for(@website, "2eac30ac92662162dc0c4ea1f1260462") %>
+<% inst1 = VisualWidget.search_widget_bag_for(@website, "5dca20a6755f88632dbdba79acbbd7a4") %>
+<% line1 = VisualWidget.search_widget_bag_for(@website, "8a6f2d73b3fef902476d8bd2b5d4ff5a") %>
+<% logo2 = VisualWidget.search_widget_bag_for(@website, "c2e33975c4181e83c9b814c4e930b06b") %>
+<% shop2 = VisualWidget.search_widget_bag_for(@website, "8245ec431305c687c4b8e5e834a92d30") %>
+<% addr2 = VisualWidget.search_widget_bag_for(@website, "0860b45931657b10e6dd4a75c155b8a5") %>
+<% teln2 = VisualWidget.search_widget_bag_for(@website, "182c839f2b93d67c84f0b20d9893c73e") %>
+<% slid2 = VisualWidget.search_widget_bag_for(@website, "fa81aa26bd9f2b901b372cc5aab1222c") %>
+<% face2 = VisualWidget.search_widget_bag_for(@website, "e0fb97bea4de6fc47626f345f2cf7d17") %>
+<% inst2 = VisualWidget.search_widget_bag_for(@website, "c6c14fb7d1244183aa3658c4f1030b4d") %>
+<% line2 = VisualWidget.search_widget_bag_for(@website, "b7ff970ec7370553968102a778aa2d69") %>
+<% gmapcode1 = VisualWidget.search_widget_bag_for(@website, "528f6ee226e0df0821e5761301f95fd1") %>
+<% gmapcode2 = VisualWidget.search_widget_bag_for(@website, "ddc0f4f31131d7e688de47fbdf20b6df") %>
+<article id="home_shop">
+    <div class="container">
+        <h1 class="page_head"><span>SALON</span></h1>
+<!-- 店舗情報 -->
+        <div class="wrapper">
+<!-- 店舗１ -->
+            <div class="col-1p2">
+<!-- 店舗１ ロゴ・予約・SNS -->
+                <div class="clearfix">
+                    <div class="home_shop_logo_area">
+<% if logo1.photos[0].blank? %>
+                        <img src="//placehold.it/240x240" alt="shop image">
+<% else %>
+                        <img src="<%= url_for_file_column(logo1.photos[0], :image) %>" alt="shop image">
+<% end %>
+                    </div>
+                    <div class="home_shop_sns_area">
+                        <div class="home_shop_sns_area1">
+<% unless teln1.blank? || !teln1.is_valid? %>
+                            <a href="tel:<%= teln1.data_string %>">
+                                <img src="/images/assets/area-web.jp.3/tel.png" alt="AREA燕店電話">
+                            </a>
+<% end %>
+<% unless line1.blank? || !line1.is_valid? %>
+                            <a href="<%= line1.data_string %>" target="_blank">
+                                <img src="/images/assets/area-web.jp.3/line.png" alt="AREA燕店LINE@">
+                            </a>
+<% end %>
+                        </div>
+                        <div class="home_shop_sns_area2">
+<% unless face1.blank? || !face1.is_valid? %>
+                            <a href="<%= face1.data_string %>" target="_blank">
+                                <i class="fa fa-facebook-official"></i>
+                            </a>
+<% end %>
+<% unless inst1.blank? || !inst1.is_valid? %>
+                            <a href="<%= inst1.data_string %>" target="_blank">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+<% end %>
+                        </div>
+                    </div>
+                </div>
+<!-- 店舗１ 店舗名・住所・電話 -->
+                <div class="clearfix">
+<% unless shop1.blank? || !shop1.is_valid? %>
+                    <div class="home_shop_name"><%= shop1.data_string %></div>
+<% end %>
+                    <div>
+<% unless addr1.blank? || !addr1.is_valid? %>
+                        <%= addr1.data_string %><br>
+<% end %>
+<% unless teln1.blank? || !teln1.is_valid? %>
+                        Tel.<%= teln1.data_string %>
+<% end %>
+                    </div>
+                </div>
+<!-- 店舗１ スライダー -->
+<% if !slid1.photos.blank? %>
+                <div id="carousel_outer1">
+                    <div id="carousel1">
+                        <ul id="carousel_ul1">
+    <% slid1.photos.each do | photo | %>
+                            <li><img src="<%= url_for_file_column(photo, :image, 'panel') %>"></li>
+    <% end %>
+                        </ul>
+                        <div id="carousel_prev1"><i class="fa fa-chevron-circle-left"></i></div>
+                        <div id="carousel_next1"><i class="fa fa-chevron-circle-right"></i></div>
+                    </div>
+                </div>
+<% end %>
+<!-- 店舗１ カレンダー -->
+                <div style="margin-bottom: 1rem;"><iframe style="border-width: 0;" src="https://calendar.google.com/calendar/embed?title=%E7%87%95%E5%BA%97&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=750&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=veauvbbf6e8s4induo11gtf6cg%40group.calendar.google.com&amp;color=%238D6F47&amp;src=4h4o45dp16hg4vos2ujm99sqt8%40group.calendar.google.com&amp;color=%235229A3&amp;src=ssejnu3q3gcc3duhmbolndqsq4%40group.calendar.google.com&amp;color=%23711616&amp;src=ja.japanese%23holiday%40group.v.calendar.google.com&amp;color=%230F4B38&amp;src=9an35sttvdq3nfrnldv491j6as%40group.calendar.google.com&amp;color=%238D6F47&amp;ctz=Asia%2FTokyo" width="500" height="480" frameborder="0" scrolling="no"></iframe></div>
+<!-- 店舗１ 地図 -->
+<%  if !gmapcode1.blank? && gmapcode1.is_valid? %>
+                <div id="gmap1" class="gmap">
+                    <%= raw gmapcode1.data_string %>
+                </div>
+<%  else %>
+                <div id="gmap1" class="gmap"></div>
+<%  end %>
+            </div>
+
+<!-- 店舗２ -->
+            <div class="col-1p2">
+<!-- 店舗２ ロゴ・予約・SNS -->
+                <div class="clearfix">
+                    <div class="home_shop_logo_area">
+<% if logo2.photos[0].blank? %>
+                        <img src="//placehold.it/240x240" alt="shop image">
+<% else %>
+                        <img src="<%= url_for_file_column(logo2.photos[0], :image) %>" alt="shop image">
+<% end %>
+                    </div>
+                    <div class="home_shop_sns_area">
+                        <div class="home_shop_sns_area1">
+<% unless teln2.blank? || !teln2.is_valid? %>
+                            <a href="tel:<%= teln2.data_string %>">
+                                <img src="/images/assets/area-web.jp.3/tel.png" alt="AREA三条店電話">
+                            </a>
+<% end %>
+<% unless line2.blank? || !line2.is_valid? %>
+                            <a href="<%= line2.data_string %>" target="_blank">
+                                <img src="/images/assets/area-web.jp.3/line.png" alt="AREA三条店LINE@">
+                            </a>
+<% end %>
+                        </div>
+                        <div class="home_shop_sns_area2">
+<% unless face2.blank? || !face2.is_valid? %>
+                            <a href="<%= face2.data_string %>" target="_blank">
+                                <i class="fa fa-facebook-official"></i>
+                            </a>
+<% end %>
+<% unless inst2.blank? || !inst2.is_valid? %>
+                            <a href="<%= inst2.data_string %>" target="_blank">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+<% end %>
+                        </div>
+                    </div>
+                </div>
+<!-- 店舗２ 店舗名・住所・電話 -->
+                <div>
+<% unless shop2.blank? || !shop2.is_valid? %>
+                    <div class="home_shop_name"><%= shop2.data_string %></div>
+<% end %>
+                    <div>
+<% unless addr2.blank? || !addr2.is_valid? %>
+                        <%= addr2.data_string %><br>
+<% end %>
+<% unless teln2.blank? || !teln2.is_valid? %>
+                        Tel.<%= teln2.data_string %>
+<% end %>
+                    </div>
+                </div>
+<!-- 店舗２ スライダー -->
+<% if !slid2.photos.blank? %>
+                <div id="carousel_outer2">
+                    <div id="carousel2">
+                        <ul id="carousel_ul2">
+    <% slid2.photos.each do | photo | %>
+                            <li><img src="<%= url_for_file_column(photo, :image, 'panel') %>"></li>
+    <% end %>
+                        </ul>
+                        <div id="carousel_prev2"><i class="fa fa-chevron-circle-left"></i></div>
+                        <div id="carousel_next2"><i class="fa fa-chevron-circle-right"></i></div>
+                    </div>
+                </div>
+<% end %>
+<!-- 店舗２ カレンダー -->
+                <div style="margin-bottom: 1rem;"><iframe style="border-width: 0;" src="https://calendar.google.com/calendar/embed?title=%E4%B8%89%E6%9D%A1%E5%BA%97&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=750&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=area.assistant%40gmail.com&amp;color=%238C500B&amp;src=veauvbbf6e8s4induo11gtf6cg%40group.calendar.google.com&amp;color=%238D6F47&amp;src=3pb2d7uoi7c5hu6k3uubkria6c%40group.calendar.google.com&amp;color=%238D6F47&amp;src=ssejnu3q3gcc3duhmbolndqsq4%40group.calendar.google.com&amp;color=%23711616&amp;src=ja.japanese%23holiday%40group.v.calendar.google.com&amp;color=%230F4B38&amp;ctz=Asia%2FTokyo" width="500" height="480" frameborder="0" scrolling="no"></iframe></div>
+<!-- 店舗２ 地図 -->
+<%  if !gmapcode2.blank? && gmapcode2.is_valid? %>
+                <div id="gmap2" class="gmap">
+                    <%= raw gmapcode2.data_string %>
+                </div>
+<%  else %>
+                <div id="gmap2" class="gmap"></div>
+<%  end %>
+            </div>
+        </div>
+    </div>
+</article>

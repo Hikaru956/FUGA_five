@@ -1,0 +1,56 @@
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+<!--          <a class="navbar-brand" href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>"> -->
+          <a class="navbar-brand" href="http://www.broletto.jp/home">
+          	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "8dd1ea1759746637d62e0a3e3289ab5f") %>
+			<% if widget_bag.blank? || !widget_bag.is_valid? %>
+	    		<img src="//placehold.it/68x30&amp;text=Logo-S">
+			<% else %>
+				<img src="<%= url_for_file_column(widget_bag.photos[0], :image) %>" title=<%=model_name(@website) %>>
+			<% end %>
+		  </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-right">
+	      	<% time_hash = Time.now.to_i %>
+	      	<% @website.public_navigation_items.each do | nav_item | %>
+	            <li>
+	            	<% if nav_item.page_type==WebPage::TYPE_LINK %>
+						<a href="<%= nav_item.external_url %>" <% if nav_item.is_open_new %>target='_blank'<% end %>><%= model_name(nav_item) %></a>
+
+	            	<% elsif nav_item.page_type==WebPage::TYPE_FIX %>
+	            		<% fixed_leaf = ContentLeaf.find_by_hash_key(nav_item.content_key) %>
+	            		<% unless fixed_leaf.blank? %>
+			            	<%= link_to model_title(fixed_leaf), :action=>nav_item.action_name, :id=>fixed_leaf, :wkey=>@website.wsite_hash_key %>
+						<% end %>
+
+					<% else %>
+						<% if nav_item.content_type.blank? %>
+			            	<%= link_to model_name(nav_item), :action=>nav_item.action_name, :wkey=>@website.wsite_hash_key %>
+						<% else %>
+			            	<%= link_to model_name(nav_item), :action=>nav_item.action_name, :id=>nav_item.content_category.id, :wkey=>@website.wsite_hash_key %>
+						<% end %>
+					<% end %>
+				</li>
+			<% end %>
+			<% if @author_mode %>
+	            <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-gear"></i> 設定 <b class="caret"></b></a>
+	              <ul class="dropdown-menu">
+					<%= render :partial=>"bs_renderer/site_controls" %>
+	              </ul>
+	            </li>
+			<% end %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>

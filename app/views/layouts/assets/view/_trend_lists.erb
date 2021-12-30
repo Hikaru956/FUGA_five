@@ -1,0 +1,102 @@
+    <aside>
+        <img src="/assets/imgs/head_trend.jpg" alt="Trend">
+    </aside>
+    <article id="article">
+        <header>
+            <h1>Trend</h1>
+            <div>ヘア、メイク、ファッションなどの最新トレンド情報</div>
+        </header>
+        <div class="header">
+            <h2>category</h2>
+        </div>
+        <ul class="categorylist">
+            <li>
+<%  if request.host == 'staffroom.swifty.jp' %>
+                <a href="https://<%= request.host %>/news?id=4226&wkey=<%= @website.wsite_hash_key %>">
+<%  else %>
+                <a href="https://<%= request.host %>/news?id=4226">
+<%  end %>
+                    hair
+                </a>
+            </li>
+            <li>
+                <img src="/assets/imgs/category_slash3.png" alt="">
+            </li>
+            <li>
+<%  if request.host == 'staffroom.swifty.jp' %>
+                <a href="https://<%= request.host %>/news?id=4230&wkey=<%= @website.wsite_hash_key %>">
+<%  else %>
+                <a href="https://<%= request.host %>/news?id=4230">
+<%  end %>
+                    make
+                </a>
+            </li>
+            <li>
+                <img src="/assets/imgs/category_slash3.png" alt="">
+            </li>
+            <li>
+<%  if request.host == 'staffroom.swifty.jp' %>
+                <a href="https://<%= request.host %>/news?id=4231&wkey=<%= @website.wsite_hash_key %>">
+<%  else %>
+                <a href="https://<%= request.host %>/news?id=4231">
+<%  end %>
+                    fashion
+                </a>
+            </li>
+        </ul>
+<%
+    @max = 50
+    type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+    navigation = type_root.web_page
+    bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+    public_categories  = []
+    bag_categories.each do | cat |
+        public_categories.concat(cat.sons)
+        public_categories << cat
+    end
+    c = ContentLeaf.public_leafs_condition
+    c.and "content_category_id", public_categories
+    latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<%  unless latest_leafs.blank? %>
+        <ul class="articlelist">
+<%
+        latest_leafs.each do | leaf |
+            if leaf.content_category_id == 4226 || leaf.content_category_id == 4230 || leaf.content_category_id == 4231
+                if request.host == 'staffroom.swifty.jp'
+                    page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'news_show', :id=>leaf)
+                end
+                publish   = leaf.publish_from.strftime("%Y-%m-%d")
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.jp/24/eeeeee/424242/320x180.png?text=Click'
+                end
+%>
+            <li>
+<%              if leaf.content_category_id == 4226 %>
+                <div class="category">hair</div>
+<%              elsif leaf.content_category_id == 4230 %>
+                <div class="category">make</div>
+<%              elsif leaf.content_category_id == 4231 %>
+                <div class="category">fashion</div>
+<%              else %>
+                <div class="category">other</div>
+<%              end %>
+                <a href="<%= page_url %>">
+                    <div class="imgbox"><div>
+                        <img src="<%= image_url %>" alt="<%= model_title(leaf) %>">
+                    </div></div>
+                    <div class="date"><%= publish %></div>
+                    <h3><%= model_title(leaf) %></h3>
+                </a>
+            </li>
+<%          end %>
+<%      end %>
+        </ul>
+<%  end %>
+    </article>

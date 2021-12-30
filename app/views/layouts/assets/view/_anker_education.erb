@@ -1,0 +1,5 @@
+<% if request.host == 'staffroom.swifty.jp' %>
+                <a href="https://<%= request.host %>/news?id=4233&wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+                <a href="https://<%= request.host %>/news?id=4233">
+<% end %>

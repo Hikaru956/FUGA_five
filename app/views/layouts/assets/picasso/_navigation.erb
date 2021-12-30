@@ -1,0 +1,86 @@
+<% time_hash = Time.now.to_i %>
+<% @website.public_navigation_items.each do | nav_item | %>
+        <li>
+    <% if nav_item.page_type==WebPage::TYPE_LINK %>
+            <a href="<%= nav_item.external_url %>" <% if nav_item.is_open_new %>target='_blank'<% end %>><%= model_name(nav_item) %></a>
+    <% elsif nav_item.page_type==WebPage::TYPE_FIX %>
+        <% fixed_leaf = ContentLeaf.find_by_hash_key(nav_item.content_key) %>
+        <% unless fixed_leaf.blank? %>
+            <% if request.host == 'staffroom.swifty.jp' %>
+                <% if model_title(fixed_leaf) == 'SALON' %>
+                    SALON
+                    <ul>
+                        <li>
+                            <%= link_to '各店舗ご紹介', :action=>nav_item.action_name, :id=>fixed_leaf, :wkey=>@website.wsite_hash_key %>
+                        </li>
+                        <li>
+                            <a href="/home?wkey=0edb54018cd1a6609375629269429a54">picasso forti</a>
+                        </li>
+                        <li>
+                            <a href="/home?wkey=a361a2806f5f4fb0b0b99d10e3e61d6b">PICASSO こあら店</a>
+                        </li>
+                        <li>
+                            <a href="/home?wkey=fb5c0a7bb49688c46a55743e734c684a">PICASSO ほなみ店</a>
+                        </li>
+                        <li>
+                            <a href="/home?wkey=f24ee6653e0a4c0be961295ac5e52da2">PICASSO 三川店</a>
+                        </li>
+                        <li>
+                            <a href="/home?wkey=2a0e4569abdd2b85cbf75f21477db9da">ever Green</a>
+                        </li>
+                    </ul>
+                <% else %>
+                    <%= link_to model_title(fixed_leaf), :action=>nav_item.action_name, :id=>fixed_leaf, :wkey=>@website.wsite_hash_key %>
+                <% end %>
+            <% else %>
+                <% if model_title(fixed_leaf) == 'SALON' %>
+                    SALON
+                    <ul>
+                        <li>
+                            <%= link_to '各店舗ご紹介', :action=>nav_item.action_name, :id=>fixed_leaf %>
+                        </li>
+                        <li>
+                            <a href="/forti/">picasso forti</a>
+                        </li>
+                        <li>
+                            <a href="/coara/">PICASSO こあら店</a>
+                        </li>
+                        <li>
+                            <a href="/honami/">PICASSO ほなみ店</a>
+                        </li>
+                        <li>
+                            <a href="/mikawa/">PICASSO 三川店</a>
+                        </li>
+                        <li>
+                            <a href="http://www.ever-green.link/">ever Green</a>
+                        </li>
+                    </ul>
+                <% else %>
+                    <%= link_to model_title(fixed_leaf), :action=>nav_item.action_name, :id=>fixed_leaf %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <% if nav_item.content_type.blank? %>
+            <% if request.host == 'staffroom.swifty.jp' %>
+            <%= link_to model_name(nav_item), :action=>nav_item.action_name, :wkey=>@website.wsite_hash_key %>
+            <% else %>
+            <%= link_to model_name(nav_item), :action=>nav_item.action_name %>
+            <% end %>
+        <% else %>
+            <% if request.host == 'staffroom.swifty.jp' %>
+            <%= link_to model_name(nav_item), :action=>nav_item.action_name, :id=>nav_item.content_category.id, :wkey=>@website.wsite_hash_key %>
+            <% else %>
+            <%= link_to model_name(nav_item), :action=>nav_item.action_name, :id=>nav_item.content_category.id %>
+            <% end %>
+        <% end %>
+    <% end %>
+        </li>
+<% end %>
+<% if @author_mode %>
+    <% unless @website.wsite_layout_deploy.is_public.blank? %>
+        <li><a href="<%= url_for(:action=>'list_layout_schemes')%>">デザイン</a></li>
+    <% end %>
+        <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+        <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+<% end %>

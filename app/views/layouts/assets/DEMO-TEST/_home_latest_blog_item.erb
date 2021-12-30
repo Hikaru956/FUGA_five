@@ -1,0 +1,48 @@
+<div>
+	<!-- 投稿日 -->
+    <%= temp_local.publish_from.strftime("%Y-%m-%d") %>
+
+    <!-- 投稿スタッフ -->
+    <% unless temp_local.staff.blank? || temp_local.staff.staff_status==Staff::STAFF_BLOCKED %>
+        <span class="pull-right">
+            by <a href="<%=url_for(:action=>'staff', :id=>temp_local.staff) %>"><%= h model_name(temp_local.staff) %></a>
+        </span>
+    <% end %>
+
+    <!-- 記事へのリンク -->
+	<a href="<%= url_for(:action=>'stream_show', :id=>temp_local,	:wkey=>@website.wsite_hash_key) %>">
+
+<% if false %>
+        <% unless temp_local.staff.blank? || temp_local.staff.staff_status==Staff::STAFF_BLOCKED %>
+			<span class="pull-right">by <%= h model_name(temp_local.staff) %></span>
+        <% end %>
+<% end %>
+
+        <!-- 最初の写真 -->
+        <% key_photo = key_photo(temp_local) %>
+        <% unless key_photo.blank? %>
+            <div class="thumbnail thumbnail-1 img-left"><%= image_tag(url_for_file_column(key_photo, :image, 'thumb'), :class=>"img-responsive img-border img-left") %></div>
+        <% else %>
+            <img class="thumbnail thumbnail-1 img-left" src="//placehold.it/240x180/ffffff/cccccc&amp;text=<%=temp_local.publish_from.strftime('%Y-%m-%d')%>">
+        <% end %>
+
+        <!-- 記事タイトル -->
+		<%= model_title(temp_local) %>
+	</a>
+    <% unless temp_local.description_3.blank? %>
+    <p>
+        <!-- 記事ヘッドライン -->
+        <%= h truncate(strip_tags(temp_local.description_3).gsub('&nbsp;', ' '), :length=>200) %>
+    </p>
+    <% end %>
+    <% unless temp_local.description.blank? %>
+    <p>
+        <!-- 記事本文 -->
+        <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>200) %>
+    </p>
+    <div>
+        <!-- 記事本文 -->
+        <%= raw temp_local.description %>
+    </div>
+    <% end %>
+</div>

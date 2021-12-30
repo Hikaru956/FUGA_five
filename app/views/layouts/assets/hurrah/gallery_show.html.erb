@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title><%= model_title(@seed) %> - HURRAH / HURRAH AND THINGS</title>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/head_logic" %>
+</head>
+<body>
+<div id="smart_tablet_nav">
+    <ul id="smart_tablet_nav_inner">
+        <li>Menu<span>メニュー</span></li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/navigation" %>
+    </ul>
+</div>
+<div id="body">
+    <div id="body_inner">
+        <!-- このサイトはIE9未満では正しく表示されません。 -->
+        <!--[if lt IE 9]>
+        <p id="browserupgrade">あなたは<strong>古いブラウザ</strong>をご利用のようです。安心してインターネットをお楽しみいただくために<a href="http://windows.microsoft.com/ja-jp/internet-explorer/download-ie">最新のブラウザにアップグレード</a>してください。このサイトは古いブラウザでは正しく表示されません。</p>
+        <![endif]-->
+        <header id="header">
+            <div class="container">
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/header" %>
+            </div>
+        </header>
+        <nav id="nav">
+            <div class="container">
+                <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/navigation" %>
+                </ul>
+            </div>
+        </nav>
+        <main id="gallery">
+            <article class="container">
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="latest_h1"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+<% @photos = @seed.photos %>
+<% unless @photos.blank? %>
+                        <div id="carousel-example-generic" class="carousel slide">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators hidden-xs">
+    <% @photos.each do | photo | %>
+                              <li data-target="#carousel-example-generic" data-slide-to="<%= photo.position-1%>" <%if photo.position==1%>class="active"<% end %>></li>
+    <% end %>
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+    <% @photos.each do | photo | %>
+                                <div class="item <% if photo.position==1 %>active<% end %>">
+        <%= image_tag(url_for_file_column(photo, :image), :class=>"img-responsive img-full") %>
+                                </div>
+    <% end %>
+                            </div>
+
+                            <!-- Controls -->
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="icon-prev"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="icon-next"></span>
+                            </a>
+                        </div>
+<% end %>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <h2 class="headline_h2">
+                                <%= model_title(@seed) %>
+                        </h2>
+<% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+                        <div class="latest_item_heder">
+                            <i class="icon-user"></i>
+                            <a href="<%=url_for(:action=>'staff', :id=>@seed.staff) %>">
+                                <%= h model_name(@seed.staff) %>
+                            </a>
+                        </div>
+<% end %>
+<% unless @seed.description.blank? %>
+                        <p class="headline_text">
+                            <%= raw @seed.description %>
+                        </p>
+<% end %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <hr/><%= render :partial=>'layouts/social_buttons' %>
+                    </div>
+                </div>
+
+
+            </article>
+        </main>
+        <footer id="footer">
+            <div class="container">
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/footer" %>
+            </div>
+        </footer>
+    </div>
+</div>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/footer_logic" %>
+</body>
+</html>

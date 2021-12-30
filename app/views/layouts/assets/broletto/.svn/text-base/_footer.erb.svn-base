@@ -1,0 +1,39 @@
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <ul class="list-inline">
+        	<%
+        		news_cat = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+        		if news_cat.is_public
+					url_feed = url_for(:controller=>'bs_renderer', :action=>"news_feed.rss", :only_path => false) 
+					url_feed = url_feed+"?id="+ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS).id.to_s	
+			%>
+				<%= raw("<a href=#{url_feed} <i class='icon-rss-sign  icon-2x'></i></a>") %>
+    		<% end %>
+
+			<%= raw("<a href=#{@website.social_facebook_uri} target='_blank' 	title=#{@website.social_facebook_uri}>	<i class='icon-facebook-sign  icon-2x'></i></a>")		unless @website.social_facebook_uri.blank? %>
+			<%= raw("<a href=#{@website.social_gplus_uri} target='_blank' 		title=#{@website.social_gplus_uri}>		<i class='icon-google-plus-sign  icon-2x'></i></a>")		unless @website.social_gplus_uri.blank? %>
+			<%= raw("<a href=#{@website.social_twitter_uri} target='_blank' 	title=#{@website.social_twitter_uri}>	<i class='icon-twitter-sign  icon-2x'></i></a>")			unless @website.social_twitter_uri.blank? %>
+			<%= raw("<a href=#{@website.social_pinterest_uri} target='_blank' 	title=#{@website.social_pinterest_uri}>	<i class='icon-pinterest-sign  icon-2x'></i></a>")		unless @website.social_pinterest_uri.blank? %>
+			<%= raw("<a href=#{@website.social_tumblr_uri} target='_blank' 		title=#{@website.social_tumblr_uri}>	<i class='icon-tumblr-sign  icon-2x'></i></a>")			unless @website.social_tumblr_uri.blank? %>
+        </ul>
+        <hr>
+        <p>
+			<strong><%= copyright_notice(@website) %></strong>
+        </p>
+
+		<% siblings = @website.public_siblings %>
+		<% unless siblings.blank? %>
+			<p>
+				<% siblings.each do | sibling | %>
+					<%= link_to( raw("<i class='icon-home'></i>&nbsp;"+model_name(sibling)), {:action=>'index', :wkey=>sibling.wsite_hash_key}, :class=>'btn btn-small btn-info') %>
+				<% end %>
+			</p>
+		<% end %>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- /Footer -->

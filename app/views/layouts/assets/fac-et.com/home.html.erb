@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% hptitle = VisualWidget.search_widget_bag_for(@website, "4eade3e962fa65ea8097060281445fb1") %>
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<title><%= @website.name %></title>
+<% else %>
+<title><%= hptitle.data_string %></title>
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "bf9b98142fba7d078c81a0c2a036d272") %>
+<% unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="website">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta property="og:url"               content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+<meta property="og:url"               content="http://<%= request.host %>/home">
+<% end %>
+<meta property="og:title"             content="<%= @website.name %>">
+<% og_img = VisualWidget.search_widget_bag_for(@website, "a24dc324c3d86d59eb9e1bbde342bcc3") %>
+<% if !og_img.blank? && og_img.is_valid? %>
+<meta property="og:image"             content="<%= url_for_file_column(og_img.photos[0], :image) %>">
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<meta property="article:publisher"    content="<%= model_name(@website.company) %>">
+<!-- Twitter card も入れる？ -->
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/stylesheets/assets/fac-et.com/style.css">
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body id="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body id="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<body>
+<!--<![endif]-->
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav">
+    <ul id="scrooler">
+        <li>- MENU</li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/navigation" %>
+    </ul>
+</aside>
+<!-- 主ウインドウ -->
+<div id="body">
+    <div class="scrooler">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/header" %>
+<!-- グローバルナビゲーション -->
+        <nav id="gnav">
+            <div class="container">
+                <div>
+                    <i id="gnav_prev" class="fa fa-chevron-circle-left"></i>
+                    <div id="gnav_wrapper">
+                        <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/navigation" %>
+                        </ul>
+                    </div>
+                    <i id="gnav_next" class="fa fa-chevron-circle-right"></i>
+                </div>
+            </div>
+        </nav>
+<!-- パンくずリスト -->
+<!-- カルーセル -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/corousel" %>
+<!-- 主エリア -->
+        <main id="home" class="container">
+<!-- 最新のNews -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/news_list" %>
+<!-- 最新のBLOG -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/blog_list" %>
+<!-- 最新のGallery -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/gallery_list" %>
+<!-- Staff list -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/staff_list" %>
+        </main>
+        <div class="container" id="sub">
+<!-- サブエリア -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/sub" %>
+        </div>
+        <div class="container">
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/footer" %>
+        </div>
+    </div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/common_js" %>
+<!-- page specific javascript -->
+<script src="/javascripts/assets/fac-et.com/carousel.js"></script>
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/social_js" %>
+<!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/gmaps_js" %>
+</body>
+</html>

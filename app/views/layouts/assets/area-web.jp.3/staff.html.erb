@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<%
+    contact_category = ContentCategory.type_root(@website, ContentCategory::TYPE_INFO)
+    if request.host == 'staffroom.swifty.jp'
+        staff_url = url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key)
+    else
+        staff_url = url_for(:action=>'staff', :id=>@seed)
+    end
+%>
+<title><%= model_name(contact_category.web_page)+' '+model_name(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "7a6ae8af6725867dc0b356f4db5a8b66") %>
+<% unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="http://<%= request.host + staff_url %>">
+<meta property="og:title"             content="<%= model_name(contact_category.web_page) + model_name(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<!-- Twitter card も入れる？ -->
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/area-web.jp.3/css" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/area-web.jp.3/style" %>
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body id="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body id="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<body>
+<!--<![endif]-->
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/area-web.jp.3/header" %>
+<!-- グローバルナビゲーション -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/area-web.jp.3/navigation" %>
+<div>
+    <div class="container">
+        <div class="content_box">
+<!-- パンくずリスト -->
+            <aside id="breadcrumbs">
+                <ol>
+<% if request.host == 'staffroom.swifty.jp' %>
+                    <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+                    <li><a href="<%= url_for(:action=>'contact', :id=>contact_category, :wkey=>@website.wsite_hash_key) %>"><%= model_name(contact_category.web_page) %></a></li>
+<% else %>
+                    <li><a href="/home"><i class="fa fa-home"></i></a></li>
+                    <li><a href="<%= url_for(:action=>'contact', :id=>contact_category) %>"><%= model_name(contact_category.web_page) %></a></li>
+<% end %>
+                    <li><%= model_name(@seed) %></li>
+                </ol>
+            </aside>
+            <!-- <h1><%= model_name(contact_category.web_page) %></h1> -->
+            <article id="article" class="wrapper">
+                <div class="col-1p2">
+                    <div id="gallery">
+<%  @photos = @seed.photos %>
+<%  unless @photos.blank? %>
+                        <ul>
+<%      @photos.each do | photo |  %>
+                            <li>
+                                <%= image_tag(url_for_file_column(photo, :image)) %>
+<%          unless photo.info.blank? %>
+                                <div class="caption"><%=h photo.info%></div>
+<%          end %>
+                            </li>
+<%      end %>
+                        </ul>
+                        <div id="gallery_prev"><i class="fa fa-chevron-circle-left"></i></div>
+                        <div id="gallery_next"><i class="fa fa-chevron-circle-right"></i></div>
+<%  else %>
+                        <ul>
+                            <li><img src="//placehold.it/319x478&amp;text=No Photo"></li>
+                        </ul>
+<%  end %>
+                    </div>
+                </div>
+                <div class="col-1p2">
+                    <header>
+                        <h1><%= model_name(@seed) %> <span><%= h @seed.job_title %></span></h1>
+                    </header>
+<% unless @seed.description.blank? %>
+                    <div id="contents">
+                        <%= raw @seed.description %>
+                    </div>
+<% end %>
+                    <footer>
+                        <ul class="sns_links">
+<% unless @seed.social_facebook_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_facebook_uri%>" target='_blank'><i class="fa fa-facebook-official"></i></a>
+                            </li>
+<% end %>
+<% unless @seed.social_twitter_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_twitter_uri %>" target='_blank'><i class="fa fa-twitter-square"></i></a>
+                            </li>
+<% end %>
+<% unless @seed.social_gplus_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_gplus_uri %>" target='_blank'><i class="fa fa-google-plus-square"></i></a>
+                            </li>
+<% end %>
+<% unless @seed.social_instagram_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_instagram_uri %>" target='_blank'><i class="fa fa-instagram"></i></a>
+                            </li>
+<% end %>
+<% unless @seed.social_line_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_line_uri %>" target='_blank'><img src="/images/assets/line_icon.png" alt="LINE" /></a>
+                            </li>
+<% end %>
+<% unless @seed.social_pinterest_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_pinterest_uri %>" target='_blank'><i class="fa fa-pinterest-square"></i></a>
+                            </li>
+<% end %>
+<% unless @seed.social_tumblr_uri.blank? %>
+                            <li>
+                                <a href="<%= @seed.social_tumblr_uri %>" target='_blank'><i class="fa fa-tumblr-square"></i></a>
+                            </li>
+<% end %>
+                        </ul>
+                    </footer>
+                </div>
+            </article>
+<%= render :partial=>"#{LayoutScheme.asset_root}/area-web.jp.3/sns_btn" %>
+<!-- パンくずリスト -->
+            <aside class="instawidget">
+<!-- 田邉 麗 -->
+<% if @seed.social_instagram_uri == 'https://www.instagram.com/rei.ens66lis33ate55lap99/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/169894" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 板垣宏 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/fleurdelisatelier/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/179344" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 太田佐和 o_s_a_w_a -->
+<!-- 折笠 純人 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/ori_kiyo/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/169895" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 清野洸 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/hi_hikari/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/179346" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 坂口大介 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/0116roomroom/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/179348" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 渡辺梓 azupaaan -->
+<!-- 狩谷 啓史 KaaaRiii -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/kaaariii3/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/179349" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 中澤 光希 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/koki0723/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/175745" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 山崎 翔子 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/shoko0725/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/179351" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 青田 沙羅 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/saraaaaa127/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/169896" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 小泉 光 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/hikaru_ruru_/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/179353" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 篠原 美優 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/gumipg/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/179355" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 松井 紗恵子 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/bobpa2ko/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/180496" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 諸橋 美由希 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/mm_1207/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/179352" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<!-- 栗原 夏以 -->
+<% elsif @seed.social_instagram_uri == 'https://www.instagram.com/kaipeco/' %>
+<script src="https://snapwidget.com/js/snapwidget.js"></script>
+<iframe src="https://snapwidget.com/embed/code/169897" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+<% end %>
+            </aside>
+        </div>
+    </div>
+</div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/area-web.jp.3/footer" %>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/area-web.jp.3/common_js" %>
+<!-- page specific javascript -->
+<script src="/javascripts/assets/area-web.jp.3/gallery.js"></script>
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/area-web.jp.3/social_js" %>
+<!-- google maps javascript -->
+</body>
+</html>

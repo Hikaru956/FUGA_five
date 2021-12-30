@@ -1,0 +1,116 @@
+<!doctype html>
+<% hptitle = VisualWidget.search_widget_bag_for(@website, "00ccb0798004e9c70a7125e612d01e1a") %>
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "cad9d49250a1dfa556da0522a01696c8") %>
+<% og_img  = VisualWidget.search_widget_bag_for(@website, "bc8272f9cdb3ee621616261596550fec") %>
+<html lang="ja">
+<head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<title><%= @website.name %></title>
+<% else %>
+<title><%= hptitle.data_string %></title>
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% if !fbappid.blank? && fbappid.is_valid? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="website">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+<meta property="og:url"               content="https://<%= request.host %>/home">
+<% end %>
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<meta property="og:title"             content="<%= @website.name %>">
+<% else %>
+<meta property="og:title"             content="<%= hptitle.data_string %>">
+<% end %>
+<% if !og_img.blank? && og_img.is_valid? %>
+<meta property="og:image"             content="https://<%= request.host %><%= url_for_file_column(og_img.photos[0], :image) %>">
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/style" %>
+</head>
+<body id="body">
+<main id="main">
+<!-- MOVIE -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/mov" %>
+<!-- CONCEPT -->
+<%  @fix_concept = @website.content_leafs.find_by_id(31255); %>
+<%  if !@fix_concept.blank? %>
+    <article id="concept">
+        <header>
+            <h1><%= model_title(@fix_concept) %></h1>
+        </header>
+        <% unless @fix_concept.description.blank? %><%= raw @fix_concept.description %><% end %>
+    </article>
+<%  end %>
+<!-- CONTENTS LIST -->
+    <aside id="contents">
+        <header>
+            <h2>contents</h2>
+        </header>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/contents_list" %>
+    </aside>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/whats_new" %>
+</main>
+<!-- FOOTER -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/footer" %>
+<!-- HEADER -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/header" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/script" %>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const vdo = document.getElementById('video');
+    const vol = document.getElementById('vol');
+    vol.addEventListener('click', function () {
+        if (vol.classList.contains('icon-volume-high')){
+            vol.classList.remove('icon-volume-high');
+            vol.classList.add('icon-volume-mute');
+            vdo.muted  = true;
+            vdo.volume = 0;
+        }else{
+            vol.classList.remove('icon-volume-mute');
+            vol.classList.add('icon-volume-high');
+            vdo.muted  = false;
+            vdo.volume = 1;
+        }
+    });
+});
+</script>
+</body>
+</html>

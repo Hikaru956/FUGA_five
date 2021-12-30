@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport" content="initial-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="application-name" content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator" content="fuga">
+<meta name="author" content="ENCHANT holistic beauty">
+<meta property="og:type"   content="article">
+<meta property="og:url"    content="http://<%= request.host %>/news_show?id=<%= @seed.id %>&wkey=<%= @website.wsite_hash_key %>">
+<meta property="og:title"  content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"   content="<%= @website.name %> - 長岡市美容室アンシャンテ">
+<meta property="article:publisher" content="ENCHANT holistic beauty">
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon"/>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon"/>
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<%= stylesheet_link_tag "/stylesheets/assets/enchant/swifty.css" %>
+<!-- <%= @seed.id %> -->
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body id="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body id="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<body>
+<!--<![endif]-->
+<aside id="smart_nav">
+    <ul id="smart_nav_inner">
+        <li>Enchant magazine - MENU</li>
+        <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">Home</a></li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant/navigation" %>
+        <li><a href="tel:0258-77-7217">お電話</a></li>
+    </ul>
+</aside>
+<div id="body">
+    <div id="body_inner">
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant/header" %>
+        <nav id="nav">
+            <h1>サイトナビゲーション</h1>
+            <ul class="container">
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant/navigation" %>
+            </ul>
+        </nav>
+        <aside id="breadcrumbs">
+            <ol class="container">
+                <li><a itemprop="url" href="/home?wkey=<%= @website.wsite_hash_key %>"><span itemprop="title"><i class="fa fa-home"></i> <%= model_name(@website) %></span></a></li>
+            <% @seed.content_category.category_path(true).each do |category | %>
+                <li><%= link_to category.category_label, :action=>"news_list", :id=>category, :wkey=>@website.wsite_hash_key %></li>
+            <% end %>
+                <li><span itemprop="title"><%= model_title(@seed) %></span></li>
+            </ol>
+        </aside>
+        <div id="news_show">
+            <div id="wrapper" class="container">
+                <main id="main">
+                    <article id="article">
+                        <header>
+                            <h1><%= h model_title(@seed) %></h1>
+                            <p><i class="fa fa-calendar"></i> <%= publish_label(@seed) %></p>
+                        </header>
+                        <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+                        <aside class="sns_buttons">
+                            <%= render :partial=>'layouts/social_buttons' %>
+                        </aside>
+                    </article>
+                </main>
+                <div id="sidebar">
+                    <aside>
+<% unless @website.wsite_description_business.blank? %><%=raw @website.wsite_description_business%><% end %>
+                    </aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+            <div class="container">
+                <small><%= copyright_notice(@website) %></small>
+            </div>
+        </footer>
+    </div>
+</div>
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant/footer"%>
+</body>
+</html>

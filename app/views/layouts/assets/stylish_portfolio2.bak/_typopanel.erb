@@ -1,0 +1,6 @@
+<% typo = VisualWidget.search_widget_bag_for(@website, "0d973bbcd265d500e15bd9674225dabf") %>
+<% if typo.data_string.blank? %>
+                <p><%= @website.name %></p>
+<% else %>
+                <p><%= typo.data_string %></p>
+<% end %>

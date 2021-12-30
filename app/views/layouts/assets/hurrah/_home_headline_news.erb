@@ -1,0 +1,44 @@
+<%
+	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+	navigation = type_root.web_page
+	first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
+
+	public_categories  = []
+	public_categories.concat(first_bag.sons)
+	public_categories << first_bag
+
+	c = ContentLeaf.public_leafs_condition
+	c.and "content_category_id", public_categories
+	latest_leaf =  ContentLeaf.find(:first, :conditions=>c.where, :order=>'position desc')
+%>
+<% unless latest_leaf.blank? %>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="latest_h1"><%= model_name(navigation) %></h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-4 col-md-4 col-sm-4">
+			<a href="<%= url_for(:action=>'news_show', :id=>latest_leaf, :wkey=>@website.wsite_hash_key) %>">
+	<% key_photo = key_photo(latest_leaf) %>
+	<% unless key_photo.blank? %>
+				<div class="latest_imgbox"><div><%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %></div></div>
+	<% else %>
+				<div class="latest_imgbox"><div><img src="//placehold.it/480x360/ffffff/cccccc&amp;text=<%=latest_leaf.publish_from.strftime('%Y-%m-%d')%>"></div></div>
+	<% end %>
+		</div>
+		<div class="col-lg-8 col-md-8 col-sm-8">
+		    <h2 class="headline_h2">
+				<a href="<%= url_for(:action=>'news_show', :id=>latest_leaf, :wkey=>@website.wsite_hash_key) %>">
+				    <%= model_title(latest_leaf) %>
+	        	</a>
+	        </h2>
+            <div class="latest_item_heder">
+                <i class="icon-calendar"></i>&nbsp;<%= publish_label(latest_leaf) %>
+            </div>
+		    <p class="headline_text">
+		    	<%= h truncate(strip_tags(latest_leaf.description).gsub('&nbsp;', ' '), :length=>200) %>
+		    </p>
+		</div>
+	</div>
+<% end %>

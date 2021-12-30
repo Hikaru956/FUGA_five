@@ -1,0 +1,14 @@
+                            <a href="<%= url_for(:action=>'news_show', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
+<% key_photo = key_photo(temp_local) %>
+<% unless key_photo.blank? %>
+                                <img src="<%= url_for_file_column(key_photo, :image) %>">
+<% else %>
+                                <img src="//placehold.it/1264x570/ffffff/cccccc&amp;text=<%=temp_local.publish_from.strftime('%Y-%m-%d')%>">
+<% end %>
+                            </a>
+                            <div class="bx_caption">
+                                <a href="<%= url_for(:action=>'news_show', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
+                                    <h1><%= model_title(temp_local) %></h1>
+                                    <p><i class="fa fa-calendar"></i> <%= temp_local.publish_from.strftime("%Y-%m-%d") %></p>
+                                </a>
+                            </div>

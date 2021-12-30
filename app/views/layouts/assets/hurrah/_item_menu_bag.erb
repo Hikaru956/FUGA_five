@@ -1,0 +1,18 @@
+<% unless temp_local.blank? %>
+<li class="latest_li col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <!-- 記事リストへのリンク -->
+    <a href="<%= url_for(:action=>'portfolio_list', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
+        <!-- 最初の記事の写真 -->
+	<% key_photo = temp_local.photos.find(:first) %>
+	<% unless key_photo.blank? %>
+        <div class="latest_imgbox"><div><%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %></div></div>
+	<% else %>
+        <div class="latest_imgbox"><div><img src="//placehold.it/480x360/ffffff/cccccc&amp;text=<%= truncate(model_name(temp_local)) %>"></div></div>
+	<% end %>
+    </a>
+    <!-- 記事タイトル -->
+    <a href="<%= url_for(:action=>'portfolio_list', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
+        <h2 class="latest_h2"><%= truncate(model_name(temp_local)) %></h2>
+    </a>
+</li>
+<% end %>

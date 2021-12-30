@@ -1,0 +1,28 @@
+<%
+    sons = seed.sons
+    sons << seed
+    c = ContentLeaf.public_leafs_condition
+    @leafs = seed.content_leafs.find(:all, :conditions=>c.where, :order=>'position asc')
+    unless @leafs.blank?
+%>
+                        <section>
+                            <h1 class="page_head"><%= model_name(seed) %></h1>
+<%      unless seed.description.blank? %>
+                            <p><%= raw seed.description %></p>
+<%      end %>
+                            <ul>
+<%      @leafs.each do | leaf | %>
+                                <li>
+                                    <div class="menu_name"><%= model_title(leaf) %></div>
+                                    <div class="price"><%= raw leaf.description_2 %></div>
+<%          unless leaf.description.blank? %>
+                                    <div class="menu_note"><%= raw leaf.description %></div>
+<%          end %>
+                                </li>
+<%      end %>
+                            </ul>
+                        </section>
+<%  end %>
+<%  seed.children.each do |sub| %>
+<%=     render :partial=>"#{LayoutScheme.asset_root}/albino/portfolio_leafs", :locals=>{:seed=>sub} %>
+<%  end %>

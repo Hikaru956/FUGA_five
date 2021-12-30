@@ -1,0 +1,49 @@
+            <li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/anker_information" %>
+                    Information
+                </a>
+            </li>
+            <li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/anker_products" %>
+                    The products
+                </a>
+            </li>
+            <li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/anker_trend" %>
+                    Trend
+                </a>
+            </li>
+            <li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/anker_laboratoryn" %>
+                    Laboratory.N
+                </a>
+            </li>
+            <li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/anker_education" %>
+                    Education
+                </a>
+            </li>
+            <li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/anker_management" %>
+                    Management
+                </a>
+            </li>
+            <li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/anker_lifestyle" %>
+                    Life style
+                </a>
+            </li>
+            <li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/anker_photocontest" %>
+                    Photo contest
+                </a>
+            </li>
+            <li>
+                <a href="../contact/index.php">
+                    Contact
+                </a>
+            </li>
+<% if @author_mode %>
+            <li><a href="<%= url_for(:controller=>'bs_authoring', :action=>'manage_widget')%>">表示設定</a></li>
+            <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+<% end %>

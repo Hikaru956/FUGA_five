@@ -1,0 +1,90 @@
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "b2f1df279a8c8940dd3c3ba363e97922") %>
+<% gn_logo = VisualWidget.search_widget_bag_for(@website, "fbda5b5183552f376897ad63552b51ac") %>
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<%
+    if request.host == 'staffroom.swifty.jp'
+        fix_url = url_for(:action=>'fix', :id=>@seed, :wkey=>@website.wsite_hash_key)
+    else
+        fix_url = url_for(:action=>'fix', :id=>@seed)
+    end
+%>
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="http://<%= request.host + fix_url %>">
+<meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<!-- Twitter card も入れる？ -->
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="/stylesheets/assets/bond-of-mondo.com/style.css">
+</head>
+<body>
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/header" %>
+<div class="container pageContents">
+    <article id="article">
+        <header>
+            <h1 class="pageHeader"><%= model_title(@seed) %></h1>
+        </header>
+        <div id="contents">
+            <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+        </div>
+    </article>
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/sns_btn" %>
+</div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/footer" %>
+<!-- グローバルナビゲーション -->
+<div id="gNavWrap">
+</div>
+<nav id="gNav">
+<% if !gn_logo.blank? && gn_logo.is_valid? %>
+<!--
+    <img src ="<%= url_for_file_column(gn_logo.photos[0], :image, 'thumb') %>" alt="ロゴマーク">
+-->
+<% end %>
+    <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/navigation" %>
+    </ul>
+</nav>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/social_js" %>
+<!-- google maps javascript -->
+</body>
+</html>

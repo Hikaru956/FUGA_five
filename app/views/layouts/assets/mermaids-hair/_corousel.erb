@@ -1,0 +1,18 @@
+<% widget_bag = VisualWidget.search_widget_bag_for(@website, "0c93f92894bdd98ed135f747e1cc17f8") %>
+<% if !widget_bag.photos.blank? %>
+        <aside>
+            <div class="container">
+                <div id="carousel">
+                    <div>
+                        <ul id="carousel_ul">
+    <% widget_bag.photos.each do | photo | %>
+                            <li><img src="<%= url_for_file_column(photo, :image) %>"></li>
+    <% end %>
+                        </ul>
+                        <div id="carousel_prev"><i class="fa fa-chevron-circle-left"></i></div>
+                        <div id="carousel_next"><i class="fa fa-chevron-circle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+<% end %>

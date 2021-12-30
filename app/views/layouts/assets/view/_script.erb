@@ -1,0 +1,6 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="/assets/js/script.js?v=0"></script>
+<script async src="//www.instagram.com/embed.js"></script>
+<% unless @website.analytics_code.blank? %>
+<%= raw @website.analytics_code %>
+<% end %>

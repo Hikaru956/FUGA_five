@@ -1,0 +1,20 @@
+    <!-- 記事リストへのリンク -->
+    <a href="<%= url_for(:action=>'stream_list', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
+<% latests = temp_local.public_leafs %>
+<% unless latests.blank? %>
+        <!-- 最初の記事の写真 -->
+	<% key_photo = key_photo(latests[0]) %>
+	<% unless key_photo.blank? %>
+        <div class="latest_imgbox"><div><%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %></div></div>
+	<% else %>
+        <div class="latest_imgbox"><div><img src="//placehold.it/480x360/ffffff/cccccc&amp;text=<%=latests[0].publish_from.strftime('%Y-%m-%d')%>"></div></div>
+	<% end %>
+    </a>
+    <!-- 記事タイトル -->
+    <a href="<%= url_for(:action=>'news_list', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
+        <h2 class="latest_h2"><%= truncate(model_name(temp_local)) %></h2>
+    </a>
+<% end %>
+<% if false %>
+BLOG でカテゴリーを設定していると、ルートカテゴリーの写真しか表示されない。
+<% end %>

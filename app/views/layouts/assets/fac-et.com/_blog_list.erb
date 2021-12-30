@@ -1,0 +1,73 @@
+<%
+    widget_bag = VisualWidget.search_widget_bag_for(@website, "df0186cca230d8df79244850f5da260e")
+    if widget_bag.blank?
+        cmax = 1
+    else
+        cmax = widget_bag.data_string.to_i
+    end
+    if cmax < 0 || cmax > 32
+        cmax = 1
+    end
+    if cmax != 0
+
+        @max = cmax
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
+        navigation = type_root.web_page
+        bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        c = ContentLeaf.public_leafs_condition
+        c.and "content_category_id", public_categories
+        latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<%      unless latest_leafs.blank? %>
+                    <h1><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id %></h1>
+                    <section id="contents_list">
+                        <ul>
+<%
+            latest_leafs.each do | leaf |
+                if request.host == 'staffroom.swifty.jp'
+                    page_url  = url_for(:action=>'stream_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'stream_show', :id=>leaf)
+                end
+                publish   = leaf.publish_from.strftime("%Y-%m-%d")
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.it/256x256/ffffff/cccccc&amp;text='+publish
+                end
+%>
+                            <li class="wrapper">
+                                <div class="col-1p3">
+                                    <div class="imgbox"><div style="background-image:url('<%= image_url %>')">
+                                        <a href="<%= page_url %>"><img src="<%= image_url %>" alt=""></a>
+                                    </div></div>
+                                </div>
+                                <div class="col-2p3">
+                                    <h1><a href="<%= page_url %>"><%= model_title(leaf) %></a></h1>
+                                    <p class="publish">
+<% unless leaf.staff.blank? || leaf.staff.staff_status==Staff::STAFF_BLOCKED %>
+    <% if request.host == 'staffroom.swifty.jp' %>
+                                        <i class="fa fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>leaf.staff, :wkey=>@website.wsite_hash_key) %>"><%= h model_name(leaf.staff) %></a>
+    <% else %>
+                                        <i class="fa fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>leaf.staff) %>"><%= h model_name(leaf.staff) %></a>
+    <% end %>
+<% end %>
+                                        <i class="fa fa-calendar"></i> <%= publish %>
+                                    </p>
+                                    <div><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>200) %></div>
+                                </div>
+                            </li>
+<%          end %>
+                        </ul>
+                    </section>
+<%      end %>
+<%
+    end
+%>

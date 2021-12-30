@@ -1,0 +1,26 @@
+<% link_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key) %>
+<% key_photo = key_photo(@leaf) %>
+                            <li class="clearfix">
+                                <div class="col-1p3">
+<% unless key_photo.blank? %>
+                                    <div class="imgbox"><div style="background-image: url('<%= url_for_file_column(key_photo, :image, 'panel') %>')">
+                                        <a href="<%= link_url %>">
+                                            <img src="<%= url_for_file_column(key_photo, :image, 'panel') %>">
+                                        </a>
+                                    </div></div>
+<% else %>
+                                    <div class="imgbox"><div style="background-image: url('//placehold.it/480x360/ffffff/cccccc&amp;text=<%=@leaf.publish_from.strftime('%Y-%m-%d')%>')">
+                                        <a href="<%= link_url %>">
+                                            <img src="//placehold.it/480x360/ffffff/cccccc&amp;text=<%=@leaf.publish_from.strftime('%Y-%m-%d')%>">
+                                        </a>
+                                    </div></div>
+<% end %>
+                                </div>
+                                <div class="col-2p3">
+                                    <h2><a href="<%= link_url %>"><%= h model_title(@leaf) %></a></h2>
+                                    <div class="cat">
+                                        <i class="fa fa-calendar"></i> <%= publish_label(@leaf) %>
+                                    </div>
+                                    <p><%= h  truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>200) %></p>
+                                </div>
+                            </li>

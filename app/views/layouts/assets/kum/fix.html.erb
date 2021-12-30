@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<%
+    if request.host == 'staffroom.swifty.jp'
+        fix_url = url_for(:action=>'fix', :id=>@seed, :wkey=>@website.wsite_hash_key)
+    else
+        fix_url = url_for(:action=>'fix', :id=>@seed)
+    end
+%>
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="//<%= request.host + fix_url %>">
+<meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/css" %>
+</head>
+<%  if @seed.id == 32295 %>
+<body id="contents">
+<%  elsif @seed.id == 32296 %>
+<body id="cmanagement">
+<%  elsif @seed.id == 32297 %>
+<body id="copenconsultation">
+<%  elsif @seed.id == 32298 %>
+<body id="csalespromotion">
+<%  elsif @seed.id == 32299 %>
+<body id="cmerchandising">
+<%  elsif @seed.id == 32300 %>
+<body id="ceducation">
+<%  elsif @seed.id == 32301 %>
+<body id="cdegitalmedia">
+<%  else %>
+<body id="about">
+<%  end %>
+<main id="main">
+<% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+</main>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/inquiry" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/footer" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/header" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/js" %>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title><%=model_title(@seed) %> - <%= @website.name %></title>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/konishi-group.com/head_logic" %>
+  </head>
+
+  <body>
+	<%= render :partial=>"#{LayoutScheme.asset_root}/konishi-group.com/must_head" %>
+
+	<%= render :partial=>"#{LayoutScheme.asset_root}/konishi-group.com/navigation" %>
+
+    <div class="container">
+      <div class="row">
+        <div class="box">
+			<%= yield %>
+	    </div>
+      </div>
+    </div>
+
+	<%= render :partial=>"#{LayoutScheme.asset_root}/konishi-group.com/footer" %>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Make sure to add jQuery - download the most recent version at http://jquery.com/ -->
+	<%= javascript_include_tag "jquery.js"%>
+    <%= javascript_include_tag "bootstrap.js"%>
+    <script>
+	  // Activates the Carousel
+	  $('.carousel').carousel({
+		interval: 5000
+	  })
+	</script>
+  </body>
+</html>

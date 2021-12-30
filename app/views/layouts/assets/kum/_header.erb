@@ -1,0 +1,95 @@
+<% tachikawa = VisualWidget.search_widget_bag_for(@website, "83f42bd2f430b665cbdd93cb425f02c1") %>
+<% view      = VisualWidget.search_widget_bag_for(@website, "85eea87a2223df201e15ec8d3539cd33") %>
+<% youtube   = VisualWidget.search_widget_bag_for(@website, "a9dd585fa2f806dcdb46d97edd7e2ec4") %>
+<% insta     = VisualWidget.search_widget_bag_for(@website, "996ba7b4d69340e0e6d0bb67b7ca5b20") %>
+<header id="header" class="show">
+	<div id="header-links">
+<% if !insta.blank? && insta.is_valid? %>
+		<a href="<%= insta.data_string %>" target="_blank">
+			<span class="icon icon-instagram">&nbsp;</span>
+		</a>
+<% end %>
+<% if !youtube.blank? && youtube.is_valid? %>
+		<a href="<%= youtube.data_string %>" target="_blank">
+			<span class="icon icon-youtube">&nbsp;</span>
+		</a>
+<% end %>
+<% if !tachikawa.blank? && tachikawa.is_valid? %>
+		<a href="<%= tachikawa.data_string %>" target="_blank" class="head-bic">
+			<img src="/assets/kum/img/logob.png" alt="タチカワロゴ" />
+<!--
+			<span class="icon icon-head-bic">
+				<span class="path1"></span>
+				<span class="path2"></span>
+				<span class="path3"></span>
+				<span class="path4"></span>
+			</span>
+-->
+		</a>
+<% end %>
+<% if !view.blank? && view.is_valid? %>
+		<a href="<%= view.data_string %>" target="_blank" class="head-view">
+			<span class="icon icon-head-view">&nbsp;</span>
+		</a>
+<% end %>
+		<a href="https://www.jbl-tachikawa.co.jp/contact/" target="_blank" class="head-contact">
+			CONTACT
+		</a>
+	</div>
+	<div id="overlay" class=""></div>
+	<nav id="nav">
+		<ul>
+<% if request.host == 'staffroom.swifty.jp' %>
+			<li class="home"><a href="//staffroom.swifty.jp/home?wkey=<%= @website.wsite_hash_key %>">HOME</a></li>
+			<li class="about"><a href="//staffroom.swifty.jp/fix?id=32294&wkey=<%= @website.wsite_hash_key %>">ABOUT</a></li>
+			<li class="contents">
+				<a href="//staffroom.swifty.jp/fix?id=32295&wkey=<%= @website.wsite_hash_key %>">CONTENTS</a>
+				<ul>
+					<li class="cmanagement"><a href="//staffroom.swifty.jp/fix?id=32296&wkey=<%= @website.wsite_hash_key %>">MANAGEMENT<span>マネージメント</span></a></li>
+					<li class="copenconsultation"><a href="//staffroom.swifty.jp/fix?id=32297&wkey=<%= @website.wsite_hash_key %>">OPEN CONSULTATION<span>オープンコンサルテーション</span></a></li>
+					<li class="csalespromotion"><a href="//staffroom.swifty.jp/fix?id=32298&wkey=<%= @website.wsite_hash_key %>">SALES PROMOTION<span>セールスプロモーション</span></a></li>
+					<li class="cmerchandising"><a href="//staffroom.swifty.jp/fix?id=32299&wkey=<%= @website.wsite_hash_key %>">MERCHANDISING<span>マーチャンダイジング</span></a></li>
+					<li class="ceducation"><a href="//staffroom.swifty.jp/fix?id=32300&wkey=<%= @website.wsite_hash_key %>">EDUCATION<span>教育サポート</span></a></li>
+					<li class="cdegitalmedia"><a href="//staffroom.swifty.jp/fix?id=32301&wkey=<%= @website.wsite_hash_key %>">DEGITAL MEDIA<span>デジタルメディア</span></a></li>
+				</ul>
+			</li>
+<!--
+			<li class="news"><a href="//staffroom.swifty.jp/news_list?id=4315&wkey=<%= @website.wsite_hash_key %>">NEWS</a></li>
+-->
+			<li class="works"><a href="//staffroom.swifty.jp/streams?id=4316&wkey=<%= @website.wsite_hash_key %>">WORKS</a></li>
+			<li class="contact"><a href="https://www.jbl-tachikawa.co.jp/contact/" target="_blank">CONTACT</a></li>
+<% else %>
+			<li class="home"><a href="//<%= request.host %>/home">HOME</a></li>
+			<li class="about"><a href="//<%= request.host %>/fix?id=32294">ABOUT</a></li>
+			<li class="contents">
+				<a href="//<%= request.host %>/fix?id=32295">CONTENTS</a>
+				<ul>
+					<li class="cmanagement"><a href="//<%= request.host %>/fix?id=32296">MANAGEMENT<span>マネージメント</span></a></li>
+					<li class="copenconsultation"><a href="//<%= request.host %>/fix?id=32297">OPEN CONSULTATION<span>オープンコンサルテーション</span></a></li>
+					<li class="csalespromotion"><a href="//<%= request.host %>/fix?id=32298">SALES PROMOTION<span>セールスプロモーション</span></a></li>
+					<li class="cmerchandising"><a href="//<%= request.host %>/fix?id=32299">MERCHANDISING<span>マーチャンダイジング</span></a></li>
+					<li class="ceducation"><a href="//<%= request.host %>/fix?id=32300">EDUCATION<span>教育サポート</span></a></li>
+					<li class="cdegitalmedia"><a href="//<%= request.host %>/fix?id=32301">DEGITAL MEDIA<span>デジタルメディア</span></a></li>
+				</ul>
+			</li>
+<!--
+			<li class="news"><a href="//<%= request.host %>/news_list?id=4315">NEWS</a></li>
+-->
+			<li class="works"><a href="//<%= request.host %>/streams?id=4316">WORKS</a></li>
+			<li class="contact"><a href="https://www.jbl-tachikawa.co.jp/contact/" target="_blank">CONTACT</a></li>
+<% end %>
+<% if @author_mode %>
+	        <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>
+	        <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+	        <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+<% end %>
+		</ul>
+	</nav>
+	<div id="nav-opener">
+		<div>
+	        <div></div>
+	        <div></div>
+		</div>
+        <div>MENU</div>
+    </div>
+</header>

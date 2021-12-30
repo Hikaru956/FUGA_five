@@ -1,0 +1,42 @@
+<% if false %>
+<ul class="list-photo">
+    <li>
+        <a href="/images/assets/monster/image-blank.png" class="magnifier"><%= image_tag "assets/monster/page1-img8.jpg" %></a>
+    </li>
+    <li class="last">
+        <a href="/images/assets/monster/image-blank.png" class="magnifier"><%= image_tag "assets/monster/page1-img9.jpg" %></a>
+    </li>
+    <li>
+        <a href="/images/assets/monster/image-blank.png" class="magnifier"><%= image_tag "assets/monster/page1-img10.jpg" %></a>
+    </li>
+    <li>
+        <a href="/images/assets/monster/image-blank.png" class="magnifier"><%= image_tag "assets/monster/page1-img11.jpg" %></a>
+    </li>
+</ul>
+<% end %>
+
+<%
+	@max = 10
+	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
+	navigation = type_root.web_page
+	bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+	public_categories  = []
+	bag_categories.each do | cat |
+		public_categories.concat(cat.sons)
+		public_categories << cat
+	end
+	c = ContentLeaf.public_leafs_condition
+	c.and "content_category_id", public_categories
+	latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<% unless latest_leafs.blank? %>
+	<h3><%= model_name(navigation) %></h3>
+	<ul>
+		<% latest_leafs.each do | leaf |  %>
+		    <li>
+				<%= render :partial=>"#{LayoutScheme.asset_root}/hs-reo.com/home_latest_blog_item", :locals => {:temp_local => leaf}  %>
+	        </li>
+		<% end %>
+	</ul>
+<% end %>

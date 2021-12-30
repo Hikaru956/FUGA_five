@@ -1,0 +1,177 @@
+<% hptitle = VisualWidget.search_widget_bag_for(@website, "5fb8fe0c0a5575c83e156ad28cd4dc24") %>
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "b2f1df279a8c8940dd3c3ba363e97922") %>
+<% og_img  = VisualWidget.search_widget_bag_for(@website, "5f70d84346b4c03a02a2800b02bcded5") %>
+<% mv_logo = VisualWidget.search_widget_bag_for(@website, "97c4eb1c6485af7ac876bd9158201da3") %>
+<% mv_bak  = VisualWidget.search_widget_bag_for(@website, "31ca1a7f2275d5c2ac39aa8bac498c37") %>
+<% sv_bak  = VisualWidget.search_widget_bag_for(@website, "22c2ab8ffcc1e41531f0c94ead5ddd28") %>
+<% gn_logo = VisualWidget.search_widget_bag_for(@website, "fbda5b5183552f376897ad63552b51ac") %>
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<title><%= @website.name %></title>
+<% else %>
+<title><%= hptitle.data_string %></title>
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="website">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta property="og:url"               content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+<meta property="og:url"               content="http://<%= request.host %>/home">
+<% end %>
+<meta property="og:title"             content="<%= @website.name %>">
+<% if !og_img.blank? && og_img.is_valid? %>
+<meta property="og:image"             content="http://<%= request.host %><%= url_for_file_column(og_img.photos[0], :image) %>">
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="/stylesheets/assets/bond-of-mondo.com/style.css?v=1">
+</head>
+<body>
+<!-- メインラッパー -->
+<!--<div id="mWrap">-->
+<!-- メインヴィジュアル -->
+<% if mv_bak.blank? || !mv_bak.is_valid? %>
+<aside id="mVisual">
+<% else %>
+<aside id="mVisual" style="background-image:url('<%= url_for_file_column(mv_bak.photos[0], :image) %>')">
+<% end %>
+<% unless mv_logo.blank? && !mv_logo.is_valid? %>
+    <div>
+        <img src ="<%= url_for_file_column(mv_logo.photos[0], :image, 'panel') %>" alt="ロゴマーク">
+    </div>
+<% end %>
+</aside>
+<% if false %>
+<!-- 最新のNews -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/news_list" %>
+<% end %>
+<!-- コンテンツメニュー -->
+<% @fix = @website.content_leafs.find_by_id('11722'); %>
+<% if !@fix.blank? %>
+<aside id="cMenu">
+    <div class="container">
+        <h1><%= model_title(@fix) %></h1>
+    <% unless @fix.description.blank? %>
+        <div>
+            <%= raw @fix.description %>
+        </div>
+    <% end %>
+    </div>
+</aside>
+<% end %>
+<!-- セカンドヴィジュアル -->
+<% if !sv_bak.blank? && sv_bak.is_valid? %>
+<aside id="sVisual" style="background-image:url('<%= url_for_file_column(sv_bak.photos[0], :image) %>')">
+    <div class="container">
+        <h1>ACE inc.Philosophy</h1>
+        <p>
+            いつもいつまでも理想以上の自分でありつづけるために、かわりゆくライフスタイルの中<br>
+            真のお客様目線で必要とされ続ける場所<br>
+            ACE inc. MONDO<br>
+            あなたの世界が輝くために<br>
+            All Photo by Sayaka Maruyama (nishiyan)<br>
+        </p>
+    </div>
+</aside>
+<% end %>
+<!-- 店舗説明文と地図 -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/shop_info" %>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/footer" %>
+<!-- END of メインラッパー -->
+<!--</div>-->
+<!-- ヘッダー -->
+<div id="gNavOpener">
+    <i class="fa fa-bars"></i><span>MENU</span>
+</div>
+<!-- グローバルナビゲーション -->
+<div id="gNavWrap">
+</div>
+<nav id="gNav">
+<% if !gn_logo.blank? && gn_logo.is_valid? %>
+<!--
+    <img src ="<%= url_for_file_column(gn_logo.photos[0], :image, 'thumb') %>" alt="ロゴマーク">
+-->
+<% end %>
+    <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/navigation" %>
+    </ul>
+</nav>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/common_js" %>
+<!-- page specific javascript -->
+<script>
+$(function()
+{
+/*
+    new function()
+    {
+        $('body').scroll(function()
+        {
+            var mo = $('#mVisual').offset();
+            var mt = 157 - mo.top * -1;
+            if (mt <= 157 && mt >= 66)
+            {
+                $('#hHeader').height(mt);
+            }
+            else if (mt > 157)
+            {
+                $('#hHeader').height(157);
+            }
+            else
+            {
+                $('#hHeader').height(66);
+            }
+        });
+    }
+*/
+});
+</script>
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/social_js" %>
+<!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/gmaps_js" %>
+</body>
+</html>

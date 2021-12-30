@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% unless @seed.my_type_root_category.has_only_a_public_bag? %>
+<title><%= model_title(@seed.my_type_root_category) %> <%= model_name(@seed) %> - <%= @website.name %></title>
+<% else %>
+<title><%= model_name(@seed) %> - <%= @website.name %></title>
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/stylesheets/assets/fac-et.com/style.css">
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body id="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body id="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<body>
+<!--<![endif]-->
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav">
+    <ul id="scrooler">
+        <li>- MENU</li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/navigation" %>
+    </ul>
+</aside>
+<!-- 主ウインドウ -->
+<div id="body">
+    <div class="scrooler">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/header" %>
+<!-- グローバルナビゲーション -->
+        <nav id="gnav">
+            <div class="container">
+                <div>
+                    <i id="gnav_prev" class="fa fa-chevron-circle-left"></i>
+                    <div id="gnav_wrapper">
+                        <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/navigation" %>
+                        </ul>
+                    </div>
+                    <i id="gnav_next" class="fa fa-chevron-circle-right"></i>
+                </div>
+            </div>
+        </nav>
+<!-- パンくずリスト -->
+        <aside id="breadcrumbs">
+            <div class="container">
+                <ol>
+<% if request.host == 'staffroom.swifty.jp' %>
+                    <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+<% else %>
+                    <li><a href="/home"><i class="fa fa-home"></i></a></li>
+<% end %>
+<% unless @seed.my_type_root_category.has_only_a_public_bag? %>
+    <% if request.host == 'staffroom.swifty.jp' %>
+                    <li><a href="<%= url_for(:action=>'gallery_index', :id=>@seed.my_type_root_category, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
+    <% else %>
+                    <li><a href="<%= url_for(:action=>'gallery_index', :id=>@seed.my_type_root_category) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
+    <% end %>
+<% end %>
+<% @seed.category_path.each do | category | %>
+    <% if request.host == 'staffroom.swifty.jp' %>
+                    <li><a href="<%= url_for(:action=>'gallery_list', :id=>category, :wkey=>@website.wsite_hash_key) %>"><%= category.category_label %></a></li>
+    <% else %>
+                    <li><a href="<%= url_for(:action=>'gallery_list', :id=>category) %>"><%= category.category_label %></a></li>
+    <% end %>
+<% end %>
+                    <li><%= model_name(@seed) %></li>
+                </ol>
+            </div>
+        </aside>
+<!-- メインコンテナ -->
+        <main id="gallery" class="container">
+            <h1><%= model_name(@seed) %></h1>
+            <section id="streem_table">
+                <ul class="wrapper">
+<%
+    sons = @seed.sons
+    sons << @seed
+    c = ContentLeaf.public_leafs_condition
+    c.and "content_leafs.content_category_id", 'IN', sons
+    @leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'position')
+    @leafs.each do | leaf |
+            key_photo = key_photo(leaf)
+            unless key_photo.blank?
+                image_url = url_for_file_column(key_photo, :image, 'panel')
+            else
+                image_url = '//placehold.it/327x327&amp;text=No Photo'
+            end
+            if request.host == 'staffroom.swifty.jp'
+                gallery_url = url_for(:action=>'gallery_show', :id=>leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
+            else
+                gallery_url = url_for(:action=>'gallery_show', :id=>leaf, :page=>@page)
+            end
+%>
+                    <li class="col-1p3">
+                        <div class="imgbox"><div style="background-image:url('<%= image_url %>');">
+                            <a href="<%= gallery_url %>"><img src="<%= image_url %>"></a>
+                        </div></div>
+                        <h1>
+                            <a href="<%= gallery_url %>"><%= model_title(leaf) %></a>
+                        </h1>
+                    </li>
+<%  end %>
+                </ul>
+            </section>
+            <aside class="pagination text-center">
+<% if request.host == 'staffroom.swifty.jp' %>
+                    <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% else %>
+                    <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% end %>
+            </aside>
+        </main>
+        <div class="container" id="sub">
+<!-- サブエリア -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/sub" %>
+        </div>
+        <div class="container">
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/footer" %>
+        </div>
+    </div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/social_js" %>
+<!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/fac-et.com/gmaps_js" %>
+</body>
+</html>

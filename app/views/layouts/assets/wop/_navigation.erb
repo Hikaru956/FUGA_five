@@ -1,0 +1,15 @@
+            <li><a href="/news?id=2862">SALON</a></li>
+            <li><a href="/news?id=2867">CLUB</a></li>
+            <!--<li><a href="/news?id=2868">WORDS</a></li>-->
+            <li><a href="/news?id=2869">BUZZ</a></li>
+            <li><a href="/news?id=2870">BIHATSU</a></li>
+            <li><a href="/fix?id=9930">PHOTO</a></li>
+            <li><a href="/home">HOME</a></li>
+<% if @author_mode %>
+    <% unless @website.wsite_layout_deploy.is_public.blank? %>
+            <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>
+            <li><a href="<%= url_for(:action=>'list_color_schemes') %>">カラー</a></li>
+    <% end %>
+            <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+            <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+<% end %>

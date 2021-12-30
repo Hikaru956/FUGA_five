@@ -1,0 +1,36 @@
+<footer id="footer">
+    <div class="container">
+        <div id="sns_links" class="clearfix">
+<% unless @website.wsite_telephone.blank? %>
+            <a href="tel:<%= @website.wsite_telephone %>"><i class="fa fa-phone-square"></i></a>
+<% end %>
+<% unless @website.wsite_email.blank? %>
+            <a href="mailto:<%= @website.wsite_email %>"><i class="fa fa-envelope"></i></a>
+<% end %>
+<% unless @website.social_facebook_uri.blank? %>
+            <a href="<%= @website.social_facebook_uri %>" target="_blank"><i class="fa fa-facebook-official"></i></a>
+<% end %>
+<% unless @website.social_twitter_uri.blank? %>
+            <a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="fa fa-twitter-square"></i></a>
+<% end %>
+<% unless @website.social_gplus_uri.blank? %>
+            <a href="<%= @website.social_gplus_uri %>" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+<% end %>
+<% unless @website.social_instagram_uri.blank? %>
+            <a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fa fa-instagram"></i></a>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+            <a href="<%= @website.social_line_uri %>" target="_blank"><img src="/images/assets/line_icon.png" alt="LINE" /></a>
+<% end %>
+<% unless @website.social_pinterest_uri.blank? %>
+            <a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="fa fa-pinterest-square"></i></a>
+<% end %>
+<% unless @website.social_tumblr_uri.blank? %>
+            <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fa fa-tumblr-square"></i></a>
+<% end %>
+        </div>
+        <div id="copyright">
+            <small><%= copyright_notice(@website) %></small>
+        </div>
+    </div>
+</footer>

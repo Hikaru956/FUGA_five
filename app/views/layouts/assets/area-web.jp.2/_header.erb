@@ -1,0 +1,109 @@
+        <!-- このサイトはIE9未満では正しく表示されません。 -->
+        <!--[if lt IE 9]>
+        <p id="browserupgrade">あなたは<strong>古いブラウザ</strong>をご利用のようです。安心してインターネットをお楽しみいただくために<a href="http://http://browsehappy.com/">最新のブラウザにアップグレード</a>してください。このサイトは古いブラウザでは正しく表示されません。</p>
+        <![endif]-->
+        <header id="header">
+<% if request.host == 'tsubame.area-web.jp' %>
+            <div class="container" id="tsubame_header">
+                <div id="header_img">
+                    <div>
+                        <a href="http://tsubame.area-web.jp/">
+                            <img src="/images/assets/area-web.jp/tsubame.png" alt="燕店">
+                        </a>
+                        <br>
+                        燕店
+                        <a href="tel:0256-61-5865">
+                            0256-61-5865
+                        </a>
+                    </div>
+                    <a id="tnav_open_btn"><i class="fa fa-bars"></i><span>MENU</span></a>
+                </div>
+                <div id="sub_nav">
+                    <div>
+                        <a href="http://www.area-web.jp/">
+                            <img src="/images/assets/area-web.jp/main_logo.png" alt="グループトップへ">
+                            <br>GROUP TOP
+                        </a>
+                    </div>
+                    <div>
+                        <a href="http://sanjo.area-web.jp/">
+                            <img src="/images/assets/area-web.jp/sanjo.png" alt="三条店へ">
+                        </a>
+                        <br>
+                        三条店
+                        <a href="tel:0256-35-3653">
+                            0256-35-3653
+                        </a>
+                    </div>
+                </div>
+            </div>
+<% elsif request.host == 'sanjo.area-web.jp' %>
+            <div class="container" id="sanjo_header">
+                <div id="header_img">
+                    <div>
+                        <a href="http://sanjo.area-web.jp/">
+                            <img src="/images/assets/area-web.jp/sanjo.png" alt="三条店">
+                        </a>
+                        <br>
+                        三条店
+                        <a href="tel:0256-35-3653">
+                            0256-35-3653
+                        </a>
+                    </div>
+                    <a id="tnav_open_btn"><i class="fa fa-bars"></i><span>MENU</span></a>
+                </div>
+                <div id="sub_nav">
+                    <div>
+                        <a href="http://www.area-web.jp/">
+                            <img src="/images/assets/area-web.jp/main_logo.png" alt="グループトップへ">
+                            <br>GROUP TOP
+                        </a>
+                    </div>
+                    <div>
+                        <a href="http://tsubame.area-web.jp/">
+                            <img src="/images/assets/area-web.jp/tsubame.png" alt="燕店へ">
+                        </a>
+                        <br>
+                        燕店
+                        <a href="tel:0256-61-5865">
+                            0256-61-5865
+                        </a>
+                    </div>
+                </div>
+            </div>
+<% else %>
+            <div class="container" id="group_header">
+                <div id="header_img">
+                    <div>
+                        <a href="http://www.area-web.jp/">
+                            <img src="/images/assets/area-web.jp/main_logo.png" alt="グループトップ">
+                            <br>Group TOP
+                        </a>
+                    </div>
+                    <a id="tnav_open_btn"><i class="fa fa-bars"></i><span>MENU</span></a>
+                </div>
+                <div id="sub_nav">
+                    <div>
+                        <a href="http://tsubame.area-web.jp/">
+                            <img src="/images/assets/area-web.jp/tsubame.png" alt="燕店へ">
+                        </a>
+                        <br>
+                        燕店
+                        <a href="tel:0256-61-5865">
+                            0256-61-5865
+                        </a>
+                    </div>
+                    <div>
+                        <a href="http://sanjo.area-web.jp/">
+                            <img src="/images/assets/area-web.jp/sanjo.png" alt="三条店へ">
+                        </a>
+                        <br>
+                        三条店
+                        <a href="tel:0256-35-3653">
+                            0256-35-3653
+                        </a>
+                    </div>
+                </div>
+            </div>
+<% end %>
+        </header>

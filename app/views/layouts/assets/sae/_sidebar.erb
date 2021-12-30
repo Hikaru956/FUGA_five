@@ -1,0 +1,53 @@
+                <div id="sidebar">
+<!-- シェアボタン -->
+                    <aside>
+<% widget_bag = VisualWidget.search_widget_bag_for(@website, "daf5d71eb588fd17c2c6bce107965197") %>
+<% if widget_bag.data_string.blank? %>
+                        <h1>Share</h1>
+<% else %>
+                        <h1><%= widget_bag.data_string %></h1>
+<% end %>
+                        <ul class="share">
+                            <li class="fblike"><div class="fb-like" data-width="80" data-layout="box_count" data-action="like" data-share="true"></div></li>
+                            <li>
+                                <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
+                                <script type="text/javascript">
+                                    new media_line_me.LineButton({"pc":true,"lang":"ja","type":"e"});
+                                </script>
+                            </li>
+                            <li><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="vertical">ツイート</a></li>
+                        </ul>
+                    </aside>
+<% unless @website.wsite_description_business.blank? %>
+<!-- 店舗基本情報 -->
+                    <aside>
+<% widget_bag = VisualWidget.search_widget_bag_for(@website, "f7b793377a90fe110dee298fc8bc31a8") %>
+<% if widget_bag.data_string.blank? %>
+                        <h1>Salon</h1>
+<% else %>
+                        <h1><%= widget_bag.data_string %></h1>
+<% end %>
+                        <%=raw @website.wsite_description_business%>
+                    </aside>
+<% end %>
+<% if @website.gps? %>
+<% end %>
+<%
+widget_bag = VisualWidget.search_widget_bag_for(@website, "fd08ce84b4300bd769aa0722bb9b9a16")
+if widget_bag.blank?
+    fblb = 0
+else
+    fblb = widget_bag.data_string.to_i
+end
+if fblb == 1
+    unless @website.social_facebook_uri.blank?
+%>
+<!-- Facebook LikeBox -->
+                    <aside>
+                        <div class="fb-page" data-href="<%= @website.social_facebook_uri %>" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"></div>
+                    </aside>
+<%
+    end
+end
+%>
+                </div>

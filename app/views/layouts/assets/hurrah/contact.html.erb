@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title><%= model_title(@seed) %> - HURRAH / HURRAH AND THINGS</title>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/head_logic" %>
+</head>
+<body>
+<div id="smart_tablet_nav">
+    <ul id="smart_tablet_nav_inner">
+        <li>Menu<span>メニュー</span></li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/navigation" %>
+    </ul>
+</div>
+<div id="body">
+    <div id="body_inner">
+        <!-- このサイトはIE9未満では正しく表示されません。 -->
+        <!--[if lt IE 9]>
+        <p id="browserupgrade">あなたは<strong>古いブラウザ</strong>をご利用のようです。安心してインターネットをお楽しみいただくために<a href="http://windows.microsoft.com/ja-jp/internet-explorer/download-ie">最新のブラウザにアップグレード</a>してください。このサイトは古いブラウザでは正しく表示されません。</p>
+        <![endif]-->
+        <header id="header">
+            <div class="container">
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/header" %>
+            </div>
+        </header>
+        <nav id="nav">
+            <div class="container">
+                <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/navigation" %>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <div class="container">
+
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h1 class="latest_h1">STAFF</h1>
+                            </div>
+                        </div>
+
+<% @staffs = @website.public_staffs %>
+<% unless @staffs.blank? %>
+                        <div class="row">
+                            <ul class="box latest_ul clearfix">
+    <% @staffs.each do | staff | @staff = staff%>
+                                <li class="latest_li col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <!-- 記事へのリンク -->
+                                    <a href="<%= url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key) %>">
+                                    <!-- 最初の写真 -->
+        <% key_photo = key_photo(@staff) %>
+        <% unless key_photo.blank? %>
+                                        <div class="staff_imgbox"><div><%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %></div></div>
+            <% else %>
+                                        <div class="staff_imgbox"><div><img src="//placehold.it/480x360/ffffff/cccccc&amp;text=No Photo"></div></div>
+        <% end %>
+                                    </a>
+                                    <!-- 記事タイトル -->
+                                    <a href="<%= url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key) %>">
+                                        <h2 class="latest_h2"><%= model_name(@staff) %> <small><%= h @staff.job_title %></small></h2>
+                                    </a>
+                                </li>
+    <% end %>
+                        </div>
+<% end %>
+
+
+            </div>
+        </main>
+        <footer id="footer">
+            <div class="container">
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/footer" %>
+            </div>
+        </footer>
+    </div>
+</div>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/footer_logic" %>
+</body>
+</html>

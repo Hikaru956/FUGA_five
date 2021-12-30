@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% hptitle = VisualWidget.search_widget_bag_for(@website, "f0024d9d059d22271dac232381da1f1a") %>
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<title><%= @website.name %></title>
+<% else %>
+<title><%= hptitle.data_string %></title>
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "771773aec444b42e2e7dafa0fcb96841") %>
+<% unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="website">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta property="og:url"               content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+<meta property="og:url"               content="http://<%= request.host %>/home">
+<% end %>
+<meta property="og:title"             content="<%= @website.name %>">
+<% og_img = VisualWidget.search_widget_bag_for(@website, "2cfc391f41d454f9be4fc9fa56db4caa") %>
+<% if !og_img.blank? && og_img.is_valid? %>
+<meta property="og:image"             content="http://<%= request.host %><%= url_for_file_column(og_img.photos[0], :image) %>">
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<!-- Twitter card も入れる？ -->
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/stylesheets/assets/business-casual2/style.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/style" %>
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body id="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body id="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<body>
+<!--<![endif]-->
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav">
+    <ul class="scrooler">
+        <li>- MENU</li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/navigation" %>
+    </ul>
+</aside>
+<!-- 主ウインドウ -->
+<div id="body">
+    <div class="scrooler">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/header" %>
+<!-- グローバルナビゲーション -->
+        <nav id="gnav">
+            <div class="container">
+                <ul id="gnav_main">
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/navigation" %>
+                </ul>
+            </div>
+        </nav>
+<!-- パンくずリスト -->
+<!-- カルーセル -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/corousel" %>
+<!-- 最新のNews -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/news_list" %>
+<!-- 最新のBLOG -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/blog_list" %>
+<!-- 最新のStyle -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/gallery_list" %>
+<!-- Google street view -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/street_view" %>
+<!-- 店舗説明文と地図 -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/shop_info" %>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/footer" %>
+    </div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/common_js" %>
+<!-- page specific javascript -->
+<script src="/javascripts/assets/business-casual2/carousel.js"></script>
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/social_js" %>
+<!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/gmaps_js" %>
+</body>
+</html>

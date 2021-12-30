@@ -1,0 +1,109 @@
+<% widget_bag0 = VisualWidget.search_widget_bag_for(@website, "6d44e908ed4058af15d2a90b50adf955") %>
+<% widget_bag1 = VisualWidget.search_widget_bag_for(@website, "df0575e4e563fde52ccc1996659195eb") %>
+		        <div id="smart_header">
+		            <div id="smart_nav_opener">
+		                <button class="nav_opener_btn"><div><i class="icon-reorder"></i></div><span>MENU</span></button>
+		            </div>
+		            <div id="smart_title">
+		                <div class="smart_title_block">
+							<a href="tel:025-250-7434">
+<% if widget_bag0.blank? || !widget_bag0.is_valid? %>
+								<img src="//placehold.it/260x100&amp;text=HURRAH">
+<% else %>
+								<img src="<%= url_for_file_column(widget_bag0.photos[0], :image) %>">
+<% end %>
+							</a>
+		                    <span>
+		                        <a href="tel:025-250-7434"><i class="icon-phone"></i> 025-250-7434</a>
+		                    </span>
+		                    <span>
+			                    <a href="https://www.facebook.com/pages/Hurrah-%E3%83%95%E3%83%A9%E3%83%BC/338106649658663" target="_blank"><i class="icon-facebook-sign"></i></a>
+			                    <a href="https://instagram.com/hurrah0719/" target="_blank"><i class="icon-instagram"></i></a>
+		                    </span>
+		                </div>
+		                <div class="smart_title_block">
+							<a href="tel:025-224-1534">
+<% if widget_bag1.blank? || !widget_bag1.is_valid? %>
+								<img src="//placehold.it/180x100&amp;text=THINGS">
+<% else %>
+								<img src="<%= url_for_file_column(widget_bag1.photos[0], :image) %>">
+<% end %>
+							</a>
+ 		                    <span>
+		                        <a href="tel:025-224-1534"><i class="icon-phone"></i> 025-224-1534</a>
+		                    </span>
+ 		                    <span>
+			                    <a href="https://www.facebook.com/pages/Hurrah-and-Things-フラーアンドシングス/1382245328673374" target="_blank"><i class="icon-facebook-sign"></i></a>
+			                    <a href="https://instagram.com/hurrah_and_things/" target="_blank"><i class="icon-instagram"></i></a>
+		                    </span>
+		                </div>
+		            </div>
+		        </div>
+
+		        <div id="tablet_header">
+		            <div id="tablet_nav_opener">
+		                <button class="nav_opener_btn"><div><i class="icon-reorder"></i></div><span>MENU</span></button>
+		            </div>
+		            <div id="tablet_title">
+		                <div class="tablet_title_shop">
+			                <a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>">
+<% if widget_bag0.blank? || !widget_bag0.is_valid? %>
+								<img src="//placehold.it/260x100&amp;text=HURRAH">
+<% else %>
+								<img src="<%= url_for_file_column(widget_bag0.photos[0], :image) %>">
+<% end %>
+							</a>
+		                    <a href="https://www.facebook.com/pages/Hurrah-%E3%83%95%E3%83%A9%E3%83%BC/338106649658663" target="_blank"><i class="icon-facebook-sign"></i></a>
+		                    <a href="https://instagram.com/hurrah0719/" target="_blank"><i class="icon-instagram"></i></a>
+		                    <div class="tablet_title_shop_tel">
+		                        <a href="tel:025-250-7434"><i class="icon-phone"></i> 025-250-7434</a>
+		                    </div>
+		                </div>
+		                <div class="tablet_title_shop">
+			                <a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>">
+<% if widget_bag1.blank? || !widget_bag1.is_valid? %>
+								<img src="//placehold.it/180x100&amp;text=THINGS">
+<% else %>
+								<img src="<%= url_for_file_column(widget_bag1.photos[0], :image) %>">
+<% end %>
+							</a>
+		                    <a href="https://www.facebook.com/pages/Hurrah-and-Things-フラーアンドシングス/1382245328673374" target="_blank"><i class="icon-facebook-sign"></i></a>
+		                    <a href="https://instagram.com/hurrah_and_things/" target="_blank"><i class="icon-instagram"></i></a>
+		                    <div class="tablet_title_shop_tel">
+		                        <a href="tel:025-224-1534"><i class="icon-phone"></i> 025-224-1534</a>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		        <div id="pc_header">
+		            <div id="pc_head_container">
+		                <div class="pc_title_shop">
+			                <a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>">
+<% if widget_bag0.blank? || !widget_bag0.is_valid? %>
+								<img src="//placehold.it/260x100&amp;text=HURRAH">
+<% else %>
+								<img src="<%= url_for_file_column(widget_bag0.photos[0], :image) %>">
+<% end %>
+							</a>
+		                    <a href="https://www.facebook.com/pages/Hurrah-%E3%83%95%E3%83%A9%E3%83%BC/338106649658663" target="_blank"><i class="icon-facebook-sign"></i></a>
+		                    <a href="https://instagram.com/hurrah0719/" target="_blank"><i class="icon-instagram"></i></a>
+		                    <div class="pc_title_shop_add">
+		                        新潟市中央区万代1-2-3 コーポ野村万代1F <i class="icon-phone"></i> 025-250-7434
+		                    </div>
+		                </div>
+		                <div class="pc_title_shop">
+			                <a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>">
+<% if widget_bag1.blank? || !widget_bag1.is_valid? %>
+								<img src="//placehold.it/180x100&amp;text=THINGS">
+<% else %>
+								<img src="<%= url_for_file_column(widget_bag1.photos[0], :image) %>">
+<% end %>
+							</a>
+		                    <a href="https://www.facebook.com/pages/Hurrah-and-Things-フラーアンドシングス/1382245328673374" target="_blank"><i class="icon-facebook-sign"></i></a>
+		                    <a href="https://instagram.com/hurrah_and_things/" target="_blank"><i class="icon-instagram"></i></a>
+		                    <div class="pc_title_shop_add">
+		                        新潟市中央区西堀通5-833-8 <i class="icon-phone"></i> 025-224-1534
+		                    </div>
+		                </div>
+		            </div>
+	            </div>

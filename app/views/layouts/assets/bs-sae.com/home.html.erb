@@ -1,0 +1,133 @@
+<% hptitle = VisualWidget.search_widget_bag_for(@website, "f2f445581dfc6261fa5c7dae683b98f4") %>
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "eb17531f7c32df4653322e734bb91393") %>
+<% og_img  = VisualWidget.search_widget_bag_for(@website, "a8d3aad390931974f9e4c17581904313") %>
+<% fixid01 = VisualWidget.search_widget_bag_for(@website, "bc52f57c2304a6e27bb004b15fbf508c") %>
+<% fixid02 = VisualWidget.search_widget_bag_for(@website, "adb48789c010bbccd79a42346431a988") %>
+<% fixid03 = VisualWidget.search_widget_bag_for(@website, "cc74b6c7b9d27b8c03c68bc9018fe37d") %>
+<% fixid04 = VisualWidget.search_widget_bag_for(@website, "f077db1c979c64158c04138bf7c64c65") %>
+<% if !fixid01.blank? && fixid01.is_valid? %>
+<%   @fix01 = @website.content_leafs.find_by_id(fixid01.data_string); %>
+<% end %>
+<% if !fixid02.blank? && fixid02.is_valid? %>
+<%   @fix02 = @website.content_leafs.find_by_id(fixid02.data_string); %>
+<% end %>
+<% if !fixid03.blank? && fixid03.is_valid? %>
+<%   @fix03 = @website.content_leafs.find_by_id(fixid03.data_string); %>
+<% end %>
+<% if !fixid04.blank? && fixid04.is_valid? %>
+<%   @fix04 = @website.content_leafs.find_by_id(fixid04.data_string); %>
+<% end %>
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<title><%= @website.name %></title>
+<% else %>
+<title><%= hptitle.data_string %></title>
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="website">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta property="og:url"               content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+<meta property="og:url"               content="http://<%= request.host %>/home">
+<% end %>
+<meta property="og:title"             content="<%= @website.name %>">
+<% if !og_img.blank? && og_img.is_valid? %>
+<meta property="og:image"             content="http://<%= request.host %><%= url_for_file_column(og_img.photos[0], :image) %>">
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/stylesheets/assets/bs-sae.com/style.css">
+</head>
+<body>
+<!-- 主ウインドウ -->
+<main id="container">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bs-sae.com/header" %>
+<!-- グローバルナビゲーション -->
+<nav id="gnav" class="clearfix">
+    <ul id="gnav_main">
+<%= render :partial=>"#{LayoutScheme.asset_root}/bs-sae.com/navigation" %>
+    </ul>
+</nav>
+<% if !@fix01.blank? %>
+<article>
+    <h1 class="page_h"><%= model_title(@fix01) %></h1>
+    <% unless @fix01.description.blank? %><%= raw @fix01.description %><% end %>
+</article>
+<% end %>
+<% if !@fix02.blank? %>
+<section>
+    <h1 class="page_h"><%= model_title(@fix02) %></h1>
+    <% unless @fix02.description.blank? %><%= raw @fix02.description %><% end %>
+</section>
+<% end %>
+<% if !@fix03.blank? %>
+<section>
+    <h1 class="page_h"><%= model_title(@fix03) %></h1>
+    <% unless @fix03.description.blank? %><%= raw @fix03.description %><% end %>
+</section>
+<% end %>
+<% if !@fix04.blank? %>
+<section>
+    <h1 class="page_h"><%= model_title(@fix04) %></h1>
+    <% unless @fix04.description.blank? %><%= raw @fix04.description %><% end %>
+</section>
+<% end %>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bs-sae.com/footer" %>
+</main><!-- End of container -->
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav">
+    <ul>
+        <li>- MENU</li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/bs-sae.com/navigation" %>
+    </ul>
+</aside>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bs-sae.com/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bs-sae.com/gmaps_js" %>
+</body>
+</html>

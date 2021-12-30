@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/css" %>
+</head>
+<body id="works">
+<main id="main">
+<h1>
+	<div class="container">
+		<span class="icon icon-chevron-right"></span>
+		<span class="icon icon-zedo-works"></span>
+	</div>
+</h1>
+<article id="worksstream">
+	<div class="container">
+		<div class="text-center">
+			<span class="icon icon-auto-caseforsupport"></span>
+			<h2>サポート事例</h2>
+		</div>
+		<div class="container2">
+			<ul id="newsmenu" class="wrapper">
+				<li class="m2p3">
+					<a href="/articles?id=4322">
+						MANAGEMENT
+					</a>
+				</li>
+				<li class="m2p3">
+					<a href="/articles?id=4331">
+						OPEN CONSULTATION
+					</a>
+				</li>
+				<li class="m2p3">
+					<a href="/articles?id=4332">
+						SALES PROMOTION
+					</a>
+				</li>
+				<li class="m2p3">
+					<a href="/articles?id=4333">
+						MERCHANDISING
+					</a>
+				</li>
+				<li class="m2p3">
+					<a href="/articles?id=4334">
+						EDUCATION
+					</a>
+				</li>
+				<li class="m2p3">
+					<a href="/articles?id=4335">
+						DIGITAL MEDIA
+					</a>
+				</li>
+			</ul>
+		</div>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/blog_index" %>
+	</div>
+</article>
+</main>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/inquiry" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/footer" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/header" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/kum/js" %>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title><%=model_title(@seed) %> - <%= @website.name %></title>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/head_logic" %>
+
+	<% 
+		url_feed = url_for(:controller=>'bs_renderer', :action=>"stream_feed.rss", :only_path => false) 
+		url_feed = url_feed+"?id="+ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM).id.to_s	
+	%>
+	<link rel="alternate"  type="application/rss+xml"  title="TEST" href="<%= url_feed %>" >
+
+    <!-- Add custom CSS here -->
+    <style>
+		body {margin-top: 60px;}
+		footer {margin-top: 60px;}
+		#myTab {margin-bottom:30px;}
+	</style>
+
+  </head>
+
+  <body>
+	<br/>
+	<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/navigation" %>
+    
+    <div class="container">
+		<%= yield %>
+    </div>
+
+    <div class="container">
+	  <%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/footer" %>
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+	<script type="text/javascript" src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

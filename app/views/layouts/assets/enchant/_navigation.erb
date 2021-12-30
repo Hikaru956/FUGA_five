@@ -1,0 +1,40 @@
+        <li><a href="articles?id=356&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">MOVIE</a></li>
+        <li>
+            サロンケア
+            <ul>
+                <li><a href="/news?id=355&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">カット</a></li>
+                <li><a href="/news?id=846&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">カラー</a></li>
+                <li><a href="/news?id=847&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">ヘアケア・ヘッドスパ</a></li>
+            </ul>
+        </li>
+        <li>
+            ホームケア
+            <ul>
+                <li><a href="/news?id=848&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">ヘア・スキャルプケア</a></li>
+                <li><a href="/news?id=849&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">スタイリング</a></li>
+                <li><a href="/news?id=850&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">アレンジ</a></li>
+            </ul>
+        </li>
+        <li><a href="/news?id=851&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">ホリスティックビューティー</a></li>
+        <li><a href="/news?id=852&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">ネイル</a></li>
+        <li><a href="/news?id=864&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">アイラッシュ</a></li>
+        <li><a href="/news?id=863&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">サロン新聞</a></li>
+        <li><a href="http://www.enchant-hair.com/shop/" target="_blank">店舗案内</a></li>
+        <li><a href="http://www.enchant-hair.com/tel/" target="_blank">ご予約</a></li>
+<% if @author_mode %>
+        <li>
+            <i class="fa fa-cog"></i> 設定
+            <ul>
+<!--
+                <li><a href="<%= url_for(:action=>'list_color_schemes')%>">カラー</a></li>
+-->
+                <% unless @website.wsite_layout_deploy.is_public.blank? %>
+                    <li><a href="<%= url_for(:action=>'list_layout_schemes')%>">デザイン</a></li>
+                <% end %>
+                <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+                <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+            </ul>
+        </li>
+<% end %>
+
+

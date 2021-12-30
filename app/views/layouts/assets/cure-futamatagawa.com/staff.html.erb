@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title><%= model_name(@seed) %>- <%= @website.name %></title>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/cure-futamatagawa.com/head_logic" %>
+    </head>
+    <body>
+        <div class="spinner">
+        </div>
+        <!--============================== header =================================-->
+        <header>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/cure-futamatagawa.com/header" %>
+        </header>
+        <div class="bg-content">
+            <!--============================== content =================================-->
+            <div id="content" class="content-extra">
+                <div class="ic">
+                </div>
+                <div class="row-1">
+                    <div class="container">
+                        <br/>
+                        <div class="row">
+                            <div class="span12">
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>"><i class="icon-home"></i></a>
+                                    </li>
+									<% contact_category = ContentCategory.type_root(@website, ContentCategory::TYPE_INFO)%>
+									<% unless contact_category.blank? %>
+							            <li>
+							                <a href="<%= url_for(:action=>'contact', :id=>contact_category, :wkey=>@website.wsite_hash_key) %>"><%= model_name(contact_category.web_page) %></a>
+							            </li>
+									<% end %>				
+                                    <li class="active">
+                                        <%= model_name(@seed) %>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="box">
+                                <div class="span12">
+                                    <hr><h2 class="intro-text text-center"><strong><%= model_name(@seed) %></strong>
+                                        <small>
+                                            <%= h @seed.job_title %>
+                                        </small>
+                                    </h2>
+                                    <hr>
+                                </div>
+                                <div class="span7">
+                                    <div style="text-align:center;">
+                                        <% key_photo = key_photo(@seed) %>
+                                        <% unless key_photo.blank? %>
+                                        <div class="thumbnail thumbnail-1">
+                                            <%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
+                                        </div>
+                                        <% else %>
+                                        <img src="//placehold.it/320x240&amp;text=No Face Photo"><% end %>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+                                    <ul class="list-inline list-social text-right">
+							        	<% unless @seed.social_facebook_uri.blank? %>
+								            <li class="tooltip-social facebook-link">
+								                <a href="<%= @seed.social_facebook_uri%>" data-toggle="tooltip" data-placement="top" title="Facebook" target='_blank'><i class="icon-facebook-sign icon-2x"></i></a>
+								            </li>
+										<% end %>
+							        	<% unless @seed.social_twitter_uri.blank? %>
+								            <li class="tooltip-social twitter-link">
+								                <a href="<%= @seed.social_twitter_uri %>" data-toggle="tooltip" data-placement="top" title="Twitter" target='_blank'><i class="icon-twitter-sign icon-2x"></i></a>
+								            </li>
+										<% end %>
+							        	<% unless @seed.social_gplus_uri.blank? %>
+								            <li class="tooltip-social google-plus-link">
+								                <a href="<%= @seed.social_gplus_uri %>" data-toggle="tooltip" data-placement="top" title="Google+" target='_blank'><i class="icon-google-plus-sign icon-2x"></i></a>
+								            </li>
+										<% end %>
+							        	<% unless @seed.social_pinterest_uri.blank? %>
+								            <li class="tooltip-social pinterest-link">
+								                <a href="<%= @seed.social_pinterest_uri %>" data-toggle="tooltip" data-placement="top" title="Pinterest" target='_blank'><i class="icon-pinterest-sign icon-2x"></i></a>
+								            </li>
+										<% end %>
+							        	<% unless @seed.social_tumblr_uri.blank? %>
+								            <li class="tooltip-social tumblr-link">
+								                <a href="<%= @seed.social_tumblr_uri %>" data-toggle="tooltip" data-placement="top" title="Tumblr" target='_blank'><i class="icon-tumblr-sign icon-2x"></i></a>
+								            </li>
+										<% end %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+<!--
+                        <% @photos = @seed.photos %>
+                        <% unless @photos.blank? %>
+                        <hr/>
+						
+                        <div class="row">
+                            <div class="span12">
+                                <% array = @photos.in_groups_of(3, false) %>
+                                <div class="span12">
+                                    <% for i in 0..(array.size-1) %>
+                                    <% @lines = array[i] %>
+                                    <div class="row">
+                                        <ul class="thumbnails thumbnails-1">
+                                            <li class="span4">
+                                                <% if @lines.size>=1 %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_gallery_photo", :locals => {:temp_local => @lines[0]} %>
+                                                <% end %>
+                                            </li>
+                                            <li class="span4">
+                                                <% if @lines.size>=2 %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_gallery_photo", :locals => {:temp_local => @lines[1]} %>
+                                                <% end %>
+                                            </li>
+                                            <li class="span4">
+                                                <% if @lines.size>=3 %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_gallery_photo", :locals => {:temp_local => @lines[2]} %>
+                                                <% end %>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% end %>
+-->
+                    </div>
+                </div>
+
+				<% unless MAKE_SECRET_FUGA_OPTION %>
+					<% if @website.option_attendance_management %><%= render :partial=>'#{LayoutScheme.asset_root}/cure-futamatagawa.com/staff_attendances' %><% end%>
+				<% end %>
+
+            </div>
+        </div>
+        <!--============================== footer =================================-->
+        <footer>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/footer" %>
+        </footer>
+    </body>
+</html>

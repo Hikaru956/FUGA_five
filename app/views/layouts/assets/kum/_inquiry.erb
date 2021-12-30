@@ -1,0 +1,4 @@
+<%   @inquiry = @website.content_leafs.find_by_id(32312); %>
+<%   if !@inquiry.blank? %>
+<%       unless @inquiry.description.blank? %><%= raw @inquiry.description %><% end %>
+<%   end %>

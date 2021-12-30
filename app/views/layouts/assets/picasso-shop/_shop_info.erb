@@ -1,0 +1,33 @@
+<%  gmapcode = VisualWidget.search_widget_bag_for(@website, "1804fd2c4c4796fb20339468183a82cf") %>
+        <aside>
+            <div class="container">
+                <div class="content_box">
+                    <div class="wrapper">
+                        <div class="col-1p2">
+<%  if !gmapcode.blank? && gmapcode.is_valid? %>
+                            <div id="gmap">
+                                <%= raw gmapcode.data_string %>
+                            </div>
+<%  else %>
+                            <div id="gmap"></div>
+                            <div class="text-right">
+                                <a href="https://www.google.co.jp/maps/@<%= @website.lat %>,<%= @website.lng %>,16z?hl=ja" target="_blank">大きな地図で見る</a>
+                            </div>
+<%  end %>
+<% unless @website.google_calendar_emb_frame_code.blank? %>
+                            <div id="gcal">
+<%= raw @website.google_calendar_emb_frame_code %>
+                            </div>
+<% end %>
+                        </div>
+                        <div class="col-1p2 contents">
+                            <h1><%= model_name(@website) %></h1>
+<% unless @website.wsite_description_business.blank? %>
+                            <%=raw @website.wsite_description_business%>
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/sns_btn" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>

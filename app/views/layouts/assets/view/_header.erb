@@ -1,0 +1,40 @@
+<header id="header" class="">
+    <div id="brand">
+<% if request.host == 'staffroom.swifty.jp' %>
+        <a href="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+        <a href="https://<%= request.host %>/home">
+<% end %>
+<!--
+            <img src="/assets/imgs/view_logo.png" alt="view: logo">
+-->
+            <i class="icon-view"></i>
+        </a>
+    </div>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/sns_list" %>
+    <div id="overlay"></div>
+    <nav id="nav">
+        <div id="navbrand">
+<% if request.host == 'staffroom.swifty.jp' %>
+            <a href="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+            <a href="https://<%= request.host %>/home">
+<% end %>
+<!--
+                <img src="/assets/imgs/view_logo.png" alt="view: logo">
+-->
+                <i class="icon-view"></i>
+            </a>
+        </div>
+        <ul class="navlist">
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/nav" %>
+        </ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/sns_list" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/view/site_search" %>
+    </nav>
+    <div id="navopener">
+        <div></div>
+        <div></div>
+        <div>menu</div>
+    </div>
+</header>

@@ -1,0 +1,19 @@
+        <!-- このサイトはIE9未満では正しく表示されません。 -->
+        <!--[if lt IE 9]>
+        <p id="browserupgrade">あなたは<strong>古いブラウザ</strong>をご利用のようです。安心してインターネットをお楽しみいただくために<a href="http://windows.microsoft.com/ja-jp/internet-explorer/download-ie">最新のブラウザにアップグレード</a>してください。このサイトは古いブラウザでは正しく表示されません。</p>
+        <![endif]-->
+        <header id="header">
+            <div class="container">
+                <div id="header_main" >
+                    <h1><a href="/home?wkey=<%= @website.wsite_hash_key %>"><%= @website.name %></a></h1>
+                </div>
+                <div id="header_side">
+                    <%= raw("<a href=#{@website.social_facebook_uri} target='_blank' ><i class='fa fa-facebook-official'></i></a>") unless @website.social_facebook_uri.blank? %>
+                    <div class="fb-like" data-href="http://www.yoshilabo.jp/home" data-width="80" data-layout="box_count" data-share="false"></div>
+                    <div class="fb-share-button" data-href="http://www.yoshilabo.jp/home" data-layout="box_count" data-mobile-iframe="true" style="vertical-align:top;"></div>
+                    <div class="g-plusone" data-size="tall"></div>
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="vertical">ツイート</a>
+                    <button id="smart_nav_opener_btn"><i class="fa fa-bars"></i><div>MENU</div></button>
+                </div>
+            </div>
+        </header>

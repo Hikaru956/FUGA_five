@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% unless @seed.my_type_root_category.has_only_a_public_bag? %>
+<title><%= model_title(@seed.my_type_root_category) %> <%= model_name(@seed) %> - <%= @website.name %></title>
+<% else %>
+<title><%= model_name(@seed) %> - <%= @website.name %></title>
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="/stylesheets/assets/wop/style.css">
+</head>
+<body id="body">
+<div id="overall">
+<header id="header">
+    <h1>
+        <a href="/home">
+            <img src="/photo/image/0002/4329/site_title.png" alt="次世代を担う美容師さんを応援するウェッブマガジン、W.O.P!">
+        </a>
+    </h1>
+    <nav id="gnav">
+        <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/wop/navigation" %>
+        </ul>
+    </nav>
+    <div id="nav_opener">
+        <img src="/photo/image/0002/4325/menu.png" alt="MENU">
+    </div>
+</header>
+<div class="container">
+<!-- ページタイトル画像 -->
+    <div id="page_image">
+    <% if @seed.id == 2862 %>
+        <img src="/photo/image/0002/4311/salon.png" alt="SALON">
+    <% elsif @seed.id == 2867 %>
+        <img src="/photo/image/0002/4305/club.png" alt="CLUB">
+    <% elsif @seed.id == 2868 %>
+        <img src="/photo/image/0002/4313/words.png" alt="WORD">
+    <% elsif @seed.id == 2869 %>
+        <img src="/photo/image/0002/4304/buzz.png" alt="BUZZ">
+    <% elsif @seed.id == 2870 %>
+        <img src="/photo/image/0002/4303/bihatsu.png" alt="BIHATSU">
+    <% end %>
+    </div>
+</div>
+<div class="container">
+    <section>
+        <ul id="contents_list">
+<%
+    sons = @seed.sons
+    sons << @seed
+    c = ContentLeaf.public_leafs_condition
+    c.and "content_leafs.content_category_id", 'IN', sons
+    @leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'position desc')
+    @leafs.each do | leaf | @leaf = leaf
+            key_photo = key_photo(leaf)
+            unless key_photo.blank?
+                image_url = url_for_file_column(key_photo, :image, 'panel')
+            else
+                image_url = '//placehold.it/272x153/FFF9C4/FDD835/&amp;text='+publish_label(@leaf)
+            end
+            if request.host == 'staffroom.swifty.jp'
+                page_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
+            else
+                page_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page)
+            end
+%>
+            <li class="list_wrapper">
+                <div class="list_article">
+                    <div class="list_date"><a href="<%= page_url %>"><%= publish_label(@leaf) %></a></div>
+                    <h3 class="list_header"><a href="<%= page_url %>"><%= h model_title(leaf) %></a></h3>
+                    <p><a href="<%= page_url %>"><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>80) %></a></p>
+                </div>
+                <div class="list_image">
+                    <div class="imgbox"><div style="background-image:url('<%= image_url %>')">
+                        <a href="<%= page_url %>"><img src="<%= image_url %>" alt="<%= model_title(leaf) %>"></a>
+                    </div></div>
+                </div>
+            </li>
+<%  end %>
+        </ul>
+    </section>
+    <aside class="pagination text-center">
+<% if request.host == 'staffroom.swifty.jp' %>
+        <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% else %>
+        <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+<% end %>
+    </aside>
+</div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/wop/footer" %>
+</div>
+<div id="mnav_back"></div>
+<ul id="mnav">
+<%= render :partial=>"#{LayoutScheme.asset_root}/wop/navigation" %>
+</ul>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/wop/common_js" %>
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/wop/social_js" %>
+</body>
+</html>

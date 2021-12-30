@@ -1,0 +1,63 @@
+<%
+    widget_bag = VisualWidget.search_widget_bag_for(@website, "b10c94c7bdc6b821a89ec5290ca48768")
+    if widget_bag.blank? || !widget_bag.is_valid?
+        cmax = 12
+    else
+        cmax = widget_bag.data_string.to_i
+    end
+    if cmax < 0 || cmax > 32
+        cmax = 12
+    end
+    if cmax != 0
+
+        @max = cmax
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+        navigation = type_root.web_page
+        bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        c = ContentLeaf.public_leafs_condition
+        c.and "content_category_id", public_categories
+        latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<%      unless latest_leafs.blank? %>
+    <aside>
+        <ul id="whatsnew_list">
+<%
+            latest_leafs.each do | leaf |
+                if request.host == 'staffroom.swifty.jp'
+                    page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'news_show', :id=>leaf)
+                end
+                publish   = leaf.publish_from.strftime("%Y-%m-%d")
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                else
+                    image_url = '//placehold.it/272x153/FFF9C4/FDD835/&amp;text='+publish
+                end
+%>
+            <li class="list_wrapper">
+                <div class="list_article">
+                    <div class="list_date"><a href="<%= page_url %>"><%= publish %></a></div>
+                    <h3 class="list_header"><a href="<%= page_url %>"><%= model_title(leaf) %></a></h3>
+                    <p><a href="<%= page_url %>"><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>80) %></a></p>
+                </div>
+                <div class="list_image">
+                    <div class="imgbox"><div style="background-image:url('<%= image_url %>')">
+                        <a href="<%= page_url %>"><img src="<%= image_url %>" alt="<%= model_title(leaf) %>"></a>
+                    </div></div>
+                </div>
+            </li>
+<%          end %>
+        </ul>
+    </aside>
+<%      end %>
+<%
+    end
+%>

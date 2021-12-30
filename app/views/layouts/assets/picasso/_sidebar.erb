@@ -1,0 +1,51 @@
+                <div id="sidebar">
+<!-- シェアボタン -->
+                    <aside>
+<% widget_bag = VisualWidget.search_widget_bag_for(@website, "85c81fb416bec89eb600ae5e79233c8d") %>
+<% if widget_bag.data_string.blank? %>
+                        <h1>Share</h1>
+<% else %>
+                        <h1><%= widget_bag.data_string %></h1>
+<% end %>
+                        <ul class="share">
+                            <li class="fblike"><div class="fb-like" data-width="80" data-layout="box_count" data-action="like" data-share="true"></div></li>
+                            <li><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="vertical">ツイート</a></li>
+                            <li>
+                                <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
+                                <script type="text/javascript">
+                                    new media_line_me.LineButton({"pc":true,"lang":"ja","type":"e"});
+                                </script>
+                            </li>
+                        </ul>
+                    </aside>
+<% unless @website.wsite_description_business.blank? %>
+<!-- 店舗基本情報 -->
+                    <aside>
+<% widget_bag = VisualWidget.search_widget_bag_for(@website, "9860584b1cf62b2c8a1c19ed15697b9f") %>
+<% if widget_bag.data_string.blank? %>
+                        <h1>Salon</h1>
+<% else %>
+                        <h1><%= widget_bag.data_string %></h1>
+<% end %>
+                        <%=raw @website.wsite_description_business%>
+                    </aside>
+<% end %>
+<%
+widget_bag = VisualWidget.search_widget_bag_for(@website, "e9c9ff9e6c7fd9cff7830beb58de13df")
+if widget_bag.blank?
+    fblb = 0
+else
+    fblb = widget_bag.data_string.to_i
+end
+if fblb == 1
+    unless @website.social_facebook_uri.blank?
+%>
+<!-- Facebook LikeBox -->
+                    <aside>
+                        <div class="fb-page" data-href="<%= @website.social_facebook_uri %>" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"></div>
+                    </aside>
+<%
+    end
+end
+%>
+                </div>

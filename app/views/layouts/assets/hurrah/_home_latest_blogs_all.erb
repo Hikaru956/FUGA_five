@@ -1,0 +1,45 @@
+<%
+	# 最大コンテンツ数
+	@max = 6
+	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_GALLERY)
+	# navigation = type_root.web_page
+	# type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+	# type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_GALLERY)
+	# type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
+	# find:first 先頭行 :last 最終行 :all 全て
+	bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+	public_categories  = []
+	bag_categories.each do | cat |
+		# concat(arr) arrを末尾に結合 <<, push は要素を追加
+		public_categories.concat(cat.sons)
+		public_categories << cat
+	end
+	c = ContentLeaf.public_leafs_condition
+	c.and "content_category_id", public_categories
+	latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+	# latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+	# latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'position desc')
+	# latest_leafs =  ContentLeaf.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+	# latest_leafs =  ContentLeaf.find(:all, :limit=>@max, :conditions=>c.where, :order=>'position desc')
+%>
+<% unless latest_leafs.blank? %>
+	<div class="row">
+		<div class="box">
+			<div class="col-lg-12">
+<% if false %>
+				<h1><%= model_name(navigation) %></h1>
+<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<ul class="box">
+<% latest_leafs.each do | leaf |  %>
+		    <li class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/home_latest_blog_item", :locals => {:temp_local => leaf}  %>
+	        </li>
+<% end %>
+		</ul>
+	</div>
+<% end %>

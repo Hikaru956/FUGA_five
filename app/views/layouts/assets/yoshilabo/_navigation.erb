@@ -1,0 +1,24 @@
+<%
+    type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+    news_bags =  type_root.public_bags
+    unless news_bags.blank?
+        news_bags.each do | leaf |
+%>
+        <li><a href="<%= url_for(:action=>'news_list', :id=>leaf, :wkey=>@website.wsite_hash_key) %>"><%= leaf.name %></a></li>
+<%      end %>
+<%  end %>
+<% if @author_mode %>
+        <li>
+            <i class="fa fa-cog"></i> 設定
+            <ul>
+<!--
+                <li><a href="<%= url_for(:action=>'list_color_schemes')%>">カラー</a></li>
+-->
+                <% unless @website.wsite_layout_deploy.is_public.blank? %>
+                    <li><a href="<%= url_for(:action=>'list_layout_schemes')%>">デザイン</a></li>
+                <% end %>
+                <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+                <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+            </ul>
+        </li>
+<% end %>

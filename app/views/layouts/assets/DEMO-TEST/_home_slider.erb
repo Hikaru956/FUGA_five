@@ -1,0 +1,29 @@
+<div class="flexslider">
+    <ul class="slides">
+		<% widget_bag = VisualWidget.search_widget_bag_for(@website, "6790f931af7a37df9755b30ed33853e4") %>
+		<% if widget_bag.blank? || !widget_bag.is_valid? %>
+	        <li>
+	            <%= image_tag "/images/assets/monster/slide-1.jpg" %>
+	        </li>
+	        <li>
+	            <%= image_tag "/images/assets/monster/slide-2.jpg" %>
+	        </li>
+	        <li>
+	            <%= image_tag "/images/assets/monster/slide-3.jpg" %>
+	        </li>
+	        <li>
+	            <%= image_tag "/images/assets/monster/slide-4.jpg" %>
+	        </li>
+	        <li>
+	            <%= image_tag "/images/assets/monster/slide-5.jpg" %>
+	        </li>
+		<% else %>
+        	<% widget_bag.photos.each do | photo | %>
+		        <li>
+		            <%= image_tag(url_for_file_column(photo, :image)) %>
+		        </li>
+			<% end %>
+		<% end %>
+    </ul>
+</div>
+

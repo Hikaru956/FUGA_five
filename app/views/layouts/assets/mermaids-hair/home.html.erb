@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% hptitle = VisualWidget.search_widget_bag_for(@website, "7bcf0869cc132326631ab3039c828747") %>
+<% if hptitle.data_string.blank? %>
+<title><%= @website.name %></title>
+<% else %>
+<title><%= hptitle.data_string %></title>
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "a7fce9393312f371e908a4b09c05885a") %>
+<% unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="website">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta property="og:url"               content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+<meta property="og:url"               content="http://<%= request.host %>/home">
+<% end %>
+<meta property="og:title"             content="<%= @website.name %>">
+<% og_img = VisualWidget.search_widget_bag_for(@website, "4047cdb9d3f8d4fc20fa659683ace60e") %>
+<% if !og_img.photos[0].blank? %>
+<meta property="og:image"             content="http://<%= request.host %><%= url_for_file_column(og_img.photos[0], :image) %>">
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<!-- Twitter card も入れる？ -->
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+<link rel="stylesheet" href="/stylesheets/assets/mermaids-hair/style.css?v=3">
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/style" %>
+</head>
+<!--[if !IE]><!-->
+<body>
+<!--<![endif]-->
+<!--[if IE]>
+<body id="ie">
+<div id="browserupgrade">あなたは<strong>古い</strong>アプリケーションをご利用のようです。<a href="http://browsehappy.com/">最新のブラウザ</a>に更新して快適なインターネットをお楽しみ下さい。</div>
+<![endif]-->
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/header" %>
+<!-- グローバルナビゲーション -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/navigation" %>
+<!-- パンくずリスト -->
+<!-- カルーセル -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/corousel" %>
+<!-- コンセプト -->
+<aside>
+    <div id="concept" class="container">
+        <p>
+            <strong>皆様に安全にお過ごし頂ける様、コロナ対策強化中！</strong><br>
+            ・スタッフ・お客様共にマスク着用。<br>
+            ・フェイスシールドもご用意しております。<br>
+            ・ご来店時に、消毒、検温にご協力下さい。<br>
+            ・オゾン発生器による空気除菌。<br>
+            ・ゆったりとした作業スペース＋パーテーション。<br>
+            ・常時換気。<br><br>
+        </p>
+        <p>
+            モダン and クラシックをテーマに、<br>店内をアンティーク調にデザインしています。<br>
+            『古き良き』を大切にしつつ、<br>ヘアデザインやお客様へのサービスは<br>常に最新のものをご提案いたします。<br>
+            ゆったりと優しく包み込んでくれる贅沢空間で<br>心から綺麗に秘密にしたくなるほどの<br>上質なサロンタイムをお過ごし下さい。
+        </p>
+    </div>
+</aside>
+<!-- ネット予約 -->
+<aside>
+    <div id="reserve" class="container">
+        <a href="https://beauty.hotpepper.jp/slnH000208952/coupon/" target="_blank">
+            <img alt="インターネット予約はこちら" src="/photo/image/0003/7649/reserv.png">
+        </a>
+    </div>
+</aside>
+<!-- 最新のBLOG -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/blog_list2" %>
+<!-- 最新のNews -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/news_list" %>
+<!-- Gallery streem list -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/gallery_streem" %>
+<!-- STAFF list -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/staff_list" %>
+<% if false %>
+<!-- カレンダー -->
+<%   unless @website.google_calendar_emb_frame_code.blank? %>
+<aside id="gcal">
+    <div class="container">
+<%= raw @website.google_calendar_emb_frame_code %>
+	</div>
+</aside>
+<%   end %>
+<% end %>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/footer" %>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/common_js" %>
+<!-- page specific javascript -->
+<script src="/javascripts/assets/mermaids-hair/carousel.js"></script>
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/social_js" %>
+<!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/mermaids-hair/gmaps_js" %>
+</body>
+</html>

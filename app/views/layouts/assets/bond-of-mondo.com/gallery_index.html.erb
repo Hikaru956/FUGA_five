@@ -1,0 +1,92 @@
+<% gn_logo = VisualWidget.search_widget_bag_for(@website, "fbda5b5183552f376897ad63552b51ac") %>
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="/stylesheets/assets/bond-of-mondo.com/style.css">
+</head>
+<body>
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/header" %>
+<div class="container pageContents">
+    <h1><%= model_title(@seed) %></h1>
+    <section id="streem_table">
+        <ul class="wrapper">
+<%
+@public_bag =  @seed.public_bags
+unless @public_bag.blank?
+@public_bag.each do | leaf |
+key_photo = key_photo(leaf)
+unless key_photo.blank?
+image_url = url_for_file_column(key_photo, :image, 'panel')
+else
+image_url = '//placehold.it/327x327&amp;text=No Photo'
+end
+if request.host == 'staffroom.swifty.jp'
+gallery_url = url_for(:action=>'gallery_list', :id=>leaf, :wkey=>@website.wsite_hash_key)
+else
+gallery_url = url_for(:action=>'gallery_list', :id=>leaf)
+end
+%>
+            <li class="col-1p3s">
+                <div class="imgbox"><div style="background-image:url('<%= image_url %>');">
+                    <a href="<%= gallery_url %>"><img src="<%= image_url %>"></a>
+                </div></div>
+                <h1>
+                    <a href="<%= gallery_url %>"><%= model_name(leaf) %></a>
+                </h1>
+            </li>
+<%      end %>
+<%  end %>
+        </ul>
+    </section>
+</div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/footer" %>
+<!-- グローバルナビゲーション -->
+<div id="gNavWrap">
+</div>
+<nav id="gNav">
+<% if !gn_logo.blank? && gn_logo.is_valid? %>
+<!--
+    <img src ="<%= url_for_file_column(gn_logo.photos[0], :image, 'thumb') %>" alt="ロゴマーク">
+-->
+<% end %>
+    <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/navigation" %>
+    </ul>
+</nav>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<!-- google maps javascript -->
+</body>
+</html>

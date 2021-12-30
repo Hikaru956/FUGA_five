@@ -1,0 +1,55 @@
+<% gmkey = VisualWidget.search_widget_bag_for(@website, "6224546ba597c2bacafab9e3d36fb77f") %>
+<% gmap1 = VisualWidget.search_widget_bag_for(@website, "09e4fdc985078831cc5c0f06ce63a727") %>
+<% gmap2 = VisualWidget.search_widget_bag_for(@website, "ad3821f715893ae65c500ee0674121ed") %>
+<% gmap3 = VisualWidget.search_widget_bag_for(@website, "51c0b0b62aa56242203f4bb875bdc096") %>
+<% if gmkey.blank? || !gmkey.is_valid? %>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<% else %>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&key=<%= gmkey.data_string %>"></script>
+<% end %>
+<script>
+google.maps.event.addDomListener(window, 'load', function() {
+<% if !gmap1.blank? && gmap1.is_valid? %>
+    var latlng1 = new google.maps.LatLng(<%= gmap1.data_string %>);
+    var op1 = {
+        zoom: 17,
+        center: latlng1,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var gmap1 = new google.maps.Map(document.getElementById('gmap1'), op1);
+    var mark1 = new google.maps.Marker({
+        position: latlng1,
+        title: 'Salon1',
+        map: gmap1
+    });
+<% end %>
+<% if !gmap2.blank? && gmap2.is_valid? %>
+    var latlng2 = new google.maps.LatLng(<%= gmap2.data_string %>);
+    var op2 = {
+        zoom: 17,
+        center: latlng2,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var gmap2 = new google.maps.Map(document.getElementById('gmap2'), op2);
+    var mark2 = new google.maps.Marker({
+        position: latlng2,
+        title: 'Salon2',
+        map: gmap2
+    });
+<% end %>
+<% if !gmap3.blank? && gmap3.is_valid? %>
+    var latlng3 = new google.maps.LatLng(<%= gmap3.data_string %>);
+    var op3 = {
+        zoom: 17,
+        center: latlng3,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var gmap3 = new google.maps.Map(document.getElementById('gmap3'), op3);
+    var mark3 = new google.maps.Marker({
+        position: latlng3,
+        title: 'Salon3',
+        map: gmap3
+    });
+<% end %>
+});
+</script>

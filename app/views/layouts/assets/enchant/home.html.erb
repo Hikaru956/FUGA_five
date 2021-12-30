@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title><%= @website.name %> - 長岡市美容室アンシャンテ</title>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description" content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta name="viewport" content="initial-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="application-name" content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator" content="fuga">
+<meta name="author" content="model_name">
+<meta property="og:type"   content="website">
+<meta property="og:url"    content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<meta property="og:title"  content="<%= @website.name %>">
+<% og_img = VisualWidget.search_widget_bag_for(@website, "06d412930701932523945cec79a4dcd8") %>
+<% if !og_img.blank? && og_img.is_valid? %>
+<meta property="og:image"  content="<%= url_for_file_column(og_img.photos[0], :image) %>">
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description" content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"   content="<%= @website.name %> - 長岡市美容室アンシャンテ">
+<meta property="article:publisher" content="ENCHANT holistic beauty">
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon"/>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon"/>
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<%= stylesheet_link_tag "/javascripts/assets/vendor/jquery.bxslider/jquery.bxslider.css" %>
+<%= stylesheet_link_tag "/stylesheets/assets/enchant/swifty.css" %>
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body id="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body id="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<body>
+<!--<![endif]-->
+<aside id="smart_nav">
+    <ul id="smart_nav_inner">
+        <li>Enchant magazine - MENU</li>
+        <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">Home</a></li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant/navigation" %>
+        <li><a href="tel:<%=@website.wsite_telephone %>">お電話</a></li>
+    </ul>
+</aside>
+<div id="body">
+    <div id="body_inner">
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant/header" %>
+        <nav id="nav">
+            <h1>サイトナビゲーション</h1>
+            <ul class="container">
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant/navigation" %>
+            </ul>
+        </nav>
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant/slider"%>
+        <main id="home">
+            <header class="container">
+                <h1>WHAT'S NEW <span>アンシャンテ発 最新情報</span></h1>
+            </header>
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant/latest_news"%>
+        </div>
+        <footer id="footer">
+            <div class="container">
+                <small><%= copyright_notice(@website) %></small>
+            </div>
+        </footer>
+    </div>
+</div>
+<%= render :partial=>"#{LayoutScheme.asset_root}/enchant/footer"%>
+</body>
+</html>

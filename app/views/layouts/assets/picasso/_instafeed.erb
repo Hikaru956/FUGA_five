@@ -1,0 +1,14 @@
+<%  newinstaid = VisualWidget.search_widget_bag_for(@website, "d6b0f4f063c1f5dfba47d61c3d0ac717") %>
+<%  newinstatk = VisualWidget.search_widget_bag_for(@website, "87ddfea72e10692001c2b57da18b2cb8") %>
+<%  if !newinstaid.blank? && !newinstatk.blank? && !newinstaid.data_string.blank? && !newinstatk.data_string.blank? %>
+            <h1>
+<%    if @website.social_instagram_uri.blank? %>
+                INSTAGRAM
+<%    else %>
+                <a href="<%= @website.social_instagram_uri %>" target="_blank">INSTAGRAM</a>
+<%    end %>
+            </h1>
+            <section id="streem_table">
+                <ul id="instafeed" class="flex-container"></ul>
+            </section>
+<%  end %>

@@ -1,0 +1,34 @@
+<% youtube = VisualWidget.search_widget_bag_for(@website, "e82674690dcd1f64c60a193a8b454345") %>
+    <ul class="sns">
+        <li><a href="https://www.instagram.com/view_photocon/" target="_blank">
+            <img src="../assets/imgs/view22.png" alt="view photo contest">
+        </a></li>
+<% unless @website.social_instagram_uri.blank? %>
+        <li><a href="<%= @website.social_instagram_uri %>" target="_blank">
+            <i class="icon-instagram"></i>
+        </a></li>
+<% end %>
+<% unless @website.social_facebook_uri.blank? %>
+        <li><a href="<%= @website.social_facebook_uri %>" target="_blank">
+            <i class="icon-facebook-f"></i>
+        </a></li>
+<% end %>
+<% unless @website.social_twitter_uri.blank? %>
+        <li><a href="<%= @website.social_twitter_uri %>" target="_blank">
+            <i class="icon-twitter"></i>
+        </a></li>
+<% end %>
+<% unless youtube.data_string.blank? %>
+        <li><a href="<%= youtube.data_string %>" target="_blank">
+            <i class="icon-youtube"></i>
+        </a></li>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+        <li><a href="<%= @website.social_line_uri %>" target="_blank">
+            <i class="icon-line"></i>
+        </a></li>
+<% end %>
+        <li><a href="../contact/index.php">
+            <i class="icon-envelope"></i>
+        </a></li>
+    </ul>

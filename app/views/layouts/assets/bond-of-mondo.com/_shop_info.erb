@@ -1,0 +1,26 @@
+<%  gmapcode = VisualWidget.search_widget_bag_for(@website, "b461d3804244abc3fddc4b5d4a400ce4") %>
+<main id="shopInfo">
+    <div class="container">
+        <div class="wrapper">
+            <div class="col-1p2">
+<%  if !gmapcode.blank? && gmapcode.is_valid? %>
+                <div id="gmap">
+                    <%= raw gmapcode.data_string %>
+                </div>
+<%  else %>
+                <div id="gmap"></div>
+                <div class="text-right">
+                    <a href="https://www.google.co.jp/maps/@<%= @website.lat %>,<%= @website.lng %>,16z?hl=ja" target="_blank">大きな地図で見る</a>
+                </div>
+<%  end %>
+            </div>
+            <article class="col-1p2">
+                <h1><%= model_name(@website) %></h1>
+<% unless @website.wsite_description_business.blank? %>
+                <%=raw @website.wsite_description_business%>
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/sns_btn" %>
+            </article>
+        </div>
+    </div>
+</main>

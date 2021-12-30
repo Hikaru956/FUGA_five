@@ -1,0 +1,64 @@
+<%
+    @max = 5
+    type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+    navigation = type_root.web_page
+    bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+    public_categories  = []
+    bag_categories.each do | cat |
+        public_categories.concat(cat.sons)
+        public_categories << cat
+    end
+    c = ContentLeaf.public_leafs_condition
+    c.and "content_category_id", public_categories
+    latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<% unless latest_leafs.blank? %>
+                        <section id="carousel">
+                            <div id="carousel_inner">
+                                <ul id="carousel_ul">
+<%
+    latest_leafs.each do | leaf |
+        key_photo = key_photo(leaf)
+        unless key_photo.blank?
+            img_src = url_for_file_column(key_photo, :image)
+        else
+            img_src = "//placehold.it/768x465/ffffff/cccccc&amp;text="+leaf.publish_from.strftime('%Y-%m-%d')
+        end
+%>
+                                    <li>
+                                        <div class="carousel_back" style="background-image:url('<%= img_src %>');">
+                                            <a href="<%= url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key) %>">
+                                                <img src="<%= img_src %>">
+                                            </a>
+                                        </div>
+                                        <div class="carousel_caption">
+                                            <a href="<%= url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key) %>">
+                                                <h1><%= model_title(leaf) %></h1>
+<!--
+                                                <p><%= model_name(leaf.content_category) %> <i class="fa fa-calendar"></i> <%= leaf.publish_from.strftime("%Y-%m-%d") %></p>
+-->
+                                            </a>
+                                        </div>
+                                        <div class="img_category cat_id<%= leaf.content_category_id %>">
+                                            <p><%= model_name(leaf.content_category) %></p>
+                                        </div>
+                                    </li>
+    <% end %>
+                                </ul>
+                                <div id="carousel_prev"><i class="fa fa-chevron-circle-left"></i></div>
+                                <div id="carousel_next"><i class="fa fa-chevron-circle-right"></i></div>
+                            </div>
+                        </section>
+<% end %>
+<% if false %>
+leaf.content_category_id
+1354: スタイル
+1439: イベント
+1440: カルチャー
+1062: キレイ
+1063: ネイル
+ 626: アイ
+1355: 地域
+1441: 悩み
+<% end %>

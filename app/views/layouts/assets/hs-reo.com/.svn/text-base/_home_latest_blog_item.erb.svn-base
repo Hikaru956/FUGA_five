@@ -1,0 +1,13 @@
+<% if false %>
+	<a href="/images/assets/monster/image-blank.png" class="magnifier"><%= image_tag "assets/monster/page1-img6.jpg" %></a>
+<% end %>
+
+<div>
+	<%= temp_local.publish_from.strftime("%Y-%m-%d") %>
+	<a href="<%= url_for(:action=>'stream_show', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
+        <% unless temp_local.staff.blank? || temp_local.staff.staff_status==Staff::STAFF_BLOCKED %>
+			<span class="pull-right">by <%= h model_name(temp_local.staff) %></span>
+        <% end %>
+		<%= model_title(temp_local) %>
+	</a>
+</div>

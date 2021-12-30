@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport" content="initial-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="application-name" content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator" content="fuga">
+<meta name="author" content="<%= model_name(@website.company) %>">
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon"/>
+<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon"/>
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<% end %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/stylesheets/assets/yoshilabo/swifty.css">
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body id="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body id="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<body>
+<!--<![endif]-->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<aside id="smart_nav">
+    <ul id="smart_nav_inner">
+        <li><%= @website.name %> - MENU</li>
+        <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">Home</a></li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/yoshilabo/navigation" %>
+<% if request.host == 'yoshilabo.jp' || request.host == 'www.yoshilabo.jp' %>
+        <li><a href="http://www.chgroup.jp/" target="_blank">Yoshiつねgroup SITE</a></li>
+<% end %>
+    </ul>
+</aside>
+<div id="body">
+    <div id="body_inner">
+<%= render :partial=>"#{LayoutScheme.asset_root}/yoshilabo/header" %>
+        <div id="news">
+            <div class="container">
+                <div id="wrapper" class="wrapper">
+                    <main id="main">
+                        <section>
+                            <header class="container">
+                                <h1><%= model_title(@seed) %></h1>
+                            </header>
+<% @public_bag =  @seed.public_bags %>
+<% unless @public_bag.blank? %>
+                            <ul id="streem_list">
+    <% @public_bag.each do | bag |  %>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/yoshilabo/item_news_bag", :locals => {:temp_local => bag}  %>
+    <% end %>
+                            </ul>
+<% end %>
+                        </section>
+                    </main>
+                    <div id="sidebar">
+                        <nav id="nav">
+                            <ul>
+                                <li><%= @website.name %> - MENU</li>
+                                <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">Home</a></li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/yoshilabo/navigation" %>
+<% if request.host == 'yoshilabo.jp' || request.host == 'www.yoshilabo.jp' %>
+                                <li><a href="http://www.chgroup.jp/" target="_blank">Yoshiつねgroup SITE</a></li>
+<% end %>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+            <div class="container">
+                <small><%= copyright_notice(@website) %></small>
+            </div>
+        </footer>
+    </div>
+</div>
+<%= render :partial=>"#{LayoutScheme.asset_root}/yoshilabo/footer"%>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ja'}</script>
+</body>
+</html>

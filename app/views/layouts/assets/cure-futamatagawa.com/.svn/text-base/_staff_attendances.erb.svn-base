@@ -1,0 +1,58 @@
+	<hr/>
+	<h4>出勤ステータス</h4>
+	<div class="row">
+        <div class="col-lg-12">
+	        <div class="col-sm-2 col-lg-2 col-md-2"></div>
+	        <div class="col-sm-8 col-lg-8 col-md-8">
+				<table class="table table-hover table-bordered" >
+					<thead>
+						<tr>
+							<th class="col-sm-4">
+								<span class="pull-right">
+									<a href="<%= url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key, :target_date=>(@target_date-1)) %>"><i class="icon-chevron-sign-left"></i></a>
+									<a href="<%= url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key) %>">今週</a>
+									<a href="<%= url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key, :target_date=>(@target_date+7)) %>"><i class="icon-chevron-sign-right"></i></a>
+								</span>
+								日付
+							</th>
+							<th class="col-sm-8">
+								<span class="pull-right">
+						        	<% unless @website.wsite_telephone.blank? %>
+										<a href="tel:<%=@website.wsite_telephone %>">
+											<i class="icon-phone-sign"></i>
+											<%=@website.wsite_telephone %>
+										</a>
+						            <% end %>
+								</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% today = Time.now.to_date %>
+						<% 7.times do |d| %>
+							<% my_date = (@target_date+(d-1)) %>
+							<% attendances = @seed.attendances.find_all_by_attend_on(my_date) %>
+							<tr>
+								<td>
+									<% if my_date==today %>
+										<strong><%= my_date.strftime("%Y-%m-%d")%> (<%=wday(my_date)%>)</strong>
+									<% else %>
+										<%= my_date.strftime("%Y-%m-%d")%> (<%=wday(my_date)%>)
+									<% end %>
+									<%= raw("<i class='icon-flag'></i>") if my_date.national_holiday? %>
+								</td>
+								<td>
+									<% unless attendances.blank? %>
+										<i class="icon-spinner icon-spin icon-large"></i>
+										<%= attendances.map{|a| (a.start_hour.to_s)+":00〜"+(a.until_hour.to_s)+":00"}.join(',') %>
+									<% end %>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>		
+	        	
+	        </div>
+	        <div class="col-sm-2 col-lg-2 col-md-2"></div>
+		</div>	        	
+	</div>	        	

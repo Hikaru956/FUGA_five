@@ -1,0 +1,40 @@
+<%
+	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_GALLERY)
+	navigation = type_root.web_page
+	gallery_bags =  type_root.public_bags
+%>
+
+<% unless gallery_bags.blank? %>
+        <aside>
+            <div class="container">
+                <div class="content_box">
+                    <h1><%= model_name(navigation) %></h1>
+                    <div id="streem_table">
+                        <ul class="wrapper">
+<%
+	gallery_bags.each do | leaf |
+        if request.host == 'staffroom.swifty.jp'
+            page_url  = url_for(:action=>'gallery_list', :id=>leaf, :wkey=>@website.wsite_hash_key)
+        else
+            page_url  = url_for(:action=>'gallery_list', :id=>leaf)
+        end
+        key_photo = leaf.photos.find(:first)
+        unless key_photo.blank?
+            image_url = url_for_file_column(key_photo, :image, 'panel')
+        else
+            image_url = '//placehold.it/327x327/ffffff/cccccc&amp;text=No Photo'
+        end
+%>
+                            <li class="col-1p3">
+                                <div class="imgbox"><div style="background-image:url('<%= image_url %>')">
+                                    <a href="<%= page_url %>"><img src="<%= image_url %>" alt=""></a>
+                                </div></div>
+                                <h1><a href="<%= page_url %>"><%= truncate(model_name(leaf)) %></a></h1>
+                            </li>
+<% end %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+<% end %>

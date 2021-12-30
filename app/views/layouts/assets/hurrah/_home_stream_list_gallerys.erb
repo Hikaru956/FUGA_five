@@ -1,0 +1,22 @@
+<%
+	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_GALLERY)
+	navigation = type_root.web_page
+	gallery_bags =  type_root.public_bags
+%>
+
+<% unless gallery_bags.blank? %>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="latest_h1"><%= model_name(navigation) %></h1>
+		</div>
+	</div>
+	<div class="row">
+		<ul class="box latest_ul clearfix">
+<% gallery_bags.each do | leaf |  %>
+		    <li class="latest_li col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/home_stream_list_gallery_item", :locals => {:temp_local => leaf}  %>
+	        </li>
+<% end %>
+		</ul>
+	</div>
+<% end %>

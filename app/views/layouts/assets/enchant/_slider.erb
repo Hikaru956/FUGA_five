@@ -1,0 +1,30 @@
+<%
+    @max = 5
+    type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+    navigation = type_root.web_page
+    bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+
+    public_categories  = []
+    bag_categories.each do | cat |
+        public_categories.concat(cat.sons)
+        public_categories << cat
+    end
+    c = ContentLeaf.public_leafs_condition
+    c.and "content_category_id", public_categories
+    latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+%>
+<% unless latest_leafs.blank? %>
+        <aside id="carousel">
+            <div class="container">
+                <div id="carousel_inner"><div>
+                    <ul class="bxslider">
+    <% latest_leafs.each do | leaf |  %>
+                        <li>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/enchant/slider_item", :locals => {:temp_local => leaf}  %>
+                        </li>
+    <% end %>
+                    </ul>
+                </div></div>
+            </div>
+        </aside>
+<% end %>

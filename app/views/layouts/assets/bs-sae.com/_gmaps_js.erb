@@ -1,0 +1,66 @@
+<%  gmkey = VisualWidget.search_widget_bag_for(@website, "e5ae2655654d0c9d0f467e59dc10a772") %>
+<%  gmll1 = VisualWidget.search_widget_bag_for(@website, "fa727216cbf629b0e7ef1642e61fb08d") %>
+<%  gmll2 = VisualWidget.search_widget_bag_for(@website, "7e4983251d4fd03c1227fc7f43441f5c") %>
+<%  gmll3 = VisualWidget.search_widget_bag_for(@website, "68c2665847aed9dc5de8dd3a429ece94") %>
+<%  gmapcode1 = VisualWidget.search_widget_bag_for(@website, "af3d0e78199777ef54ebd84be5903379") %>
+<%  gmapcode2 = VisualWidget.search_widget_bag_for(@website, "9e0054367ef8ec1792d09307a1c2edc5") %>
+<%  gmapcode3 = VisualWidget.search_widget_bag_for(@website, "2f4d584a991c23e38f292aa2ba5aefbf") %>
+<%  if gmapcode1.blank? || !gmapcode1.is_valid? || gmapcode2.blank? || !gmapcode2.is_valid? || gmapcode3.blank? || !gmapcode3.is_valid? %>
+<%     if gmkey.blank? || !gmkey.is_valid? %>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<%     else %>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&key=<%= gmkey.data_string %>"></script>
+<%     end %>
+<script>
+google.maps.event.addDomListener(window, 'load', function() {
+<%      if gmapcode1.blank? || !gmapcode1.is_valid? %>
+<%          if !gmll1.blank? && gmll1.is_valid? %>
+    var latlng1 = new google.maps.LatLng(<%= gmll1.data_string %>);
+    var op1 = {
+        zoom: 17,
+        center: latlng1,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var gmap1 = new google.maps.Map(document.getElementById('gmap1'), op1);
+    var mark1 = new google.maps.Marker({
+        position: latlng1,
+        title: 'Sae',
+        map: gmap1
+    });
+<%          end %>
+<%      end %>
+<%      if gmapcode2.blank? || !gmapcode2.is_valid? %>
+<%          if !gmll2.blank? && gmll2.is_valid? %>
+    var latlng2 = new google.maps.LatLng(<%= gmll2.data_string %>);
+    var op2 = {
+        zoom: 17,
+        center: latlng2,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var gmap2 = new google.maps.Map(document.getElementById('gmap2'), op2);
+    var mark2 = new google.maps.Marker({
+        position: latlng2,
+        title: 'Sae',
+        map: gmap2
+    });
+<%          end %>
+<%      end %>
+<%      if gmapcode3.blank? || !gmapcode3.is_valid? %>
+<%          if !gmll3.blank? && gmll3.is_valid? %>
+    var latlng3 = new google.maps.LatLng(<%= gmll3.data_string %>);
+    var op3 = {
+        zoom: 17,
+        center: latlng3,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var gmap3 = new google.maps.Map(document.getElementById('gmap3'), op3);
+    var mark3 = new google.maps.Marker({
+        position: latlng3,
+        title: 'Sae',
+        map: gmap3
+    });
+<%          end %>
+<%      end %>
+});
+</script>
+<%  end %>

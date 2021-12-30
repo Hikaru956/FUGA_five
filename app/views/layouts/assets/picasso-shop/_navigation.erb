@@ -1,0 +1,60 @@
+<% shopalt = "/"+@website.alt_id %>
+<% shopalt.slice!(".hs-picasso.jp") %>
+<% @website.public_navigation_items.each do | nav_item | %>
+        <li>
+    <% if nav_item.page_type==WebPage::TYPE_LINK %>
+            <a href="<%= nav_item.external_url %>" <% if nav_item.is_open_new %>target='_blank'<% end %>><%= model_name(nav_item) %></a>
+    <% elsif nav_item.page_type==WebPage::TYPE_FIX %>
+        <% fixed_leaf = ContentLeaf.find_by_hash_key(nav_item.content_key) %>
+        <% unless fixed_leaf.blank? %>
+            <% if request.host == 'staffroom.swifty.jp' %>
+            <%= link_to model_title(fixed_leaf), :action=>nav_item.action_name, :id=>fixed_leaf, :wkey=>@website.wsite_hash_key %>
+            <% else %>
+            <a href="<%= shopalt %>/fix?id=<%= fixed_leaf.id %>"><%= model_title(fixed_leaf) %></a>
+            <% end %>
+        <% end %>
+    <% else %>
+        <% if nav_item.content_type.blank? %>
+            <% if request.host == 'staffroom.swifty.jp' %>
+            <%= link_to model_name(nav_item), :action=>nav_item.action_name, :wkey=>@website.wsite_hash_key %>
+            <% else %>
+            <%
+                if nav_item.action_name == 'contact'
+                    act = '/contact_us'
+                else
+                    act = '/home'
+                end
+            %>
+            <a href="<%= shopalt+act %>"><%= model_name(nav_item) %></a>
+            <% end %>
+        <% else %>
+            <% if request.host == 'staffroom.swifty.jp' %>
+            <%= link_to model_name(nav_item), :action=>nav_item.action_name, :id=>nav_item.content_category.id, :wkey=>@website.wsite_hash_key %>
+            <% else %>
+            <%
+                if nav_item.action_name == 'news_index'
+                    act = '/news_list'
+                elsif nav_item.action_name == 'stream_index'
+                    act = '/streams'
+                elsif nav_item.action_name == 'gallery_index'
+                    act = '/collcetions'
+                elsif nav_item.action_name == 'portfolio_index'
+                    act = '/menu_list'
+                else
+                    act = '/home'
+                end
+            %>
+            <a href="<%= shopalt+act %>?id=<%= nav_item.content_category.id %>"><%= model_name(nav_item) %></a>
+            <% end %>
+        <% end %>
+    <% end %>
+        </li>
+<% end %>
+<% if @author_mode %>
+    <% unless @website.wsite_layout_deploy.is_public.blank? %>
+        <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>
+        <li><a href="<%= url_for(:action=>'list_color_schemes') %>">カラー</a></li>
+    <% end %>
+        <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
+        <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+<% end %>

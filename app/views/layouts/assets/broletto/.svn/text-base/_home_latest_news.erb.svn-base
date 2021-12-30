@@ -1,0 +1,47 @@
+<%
+	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+	news_navigation = type_root.web_page 
+	first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
+	
+	public_categories  = []
+	public_categories.concat(first_bag.sons)
+	public_categories << first_bag
+
+	c = ContentLeaf.public_leafs_condition
+	c.and "content_category_id", public_categories
+	latest_leafs =  ContentLeaf.find(:all, :limit=>4, :conditions=>c.where, :order=>'position desc')
+%>
+
+<% unless latest_leafs.blank? %> 
+ 	
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4 text-center">
+            <h2><%= model_name(news_navigation) %></h2>
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+			<% if latest_leafs.size>0 %>
+				<div class="col-md-2 col-md-offset-2 text-center">
+					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[0]} %>
+				</div>
+			 <% end %>
+			 <% if latest_leafs.size>1 %>
+				<div class="col-md-2 text-center">
+					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[1]} %>
+				</div>
+			 <% end %>
+			 <% if latest_leafs.size>2 %>
+				<div class="col-md-2 text-center">
+					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[2]} %>
+				</div>
+			 <% end %>
+			 <% if latest_leafs.size>3 %>
+				<div class="col-md-2 text-center">
+					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[3]} %>
+				</div>
+			 <% end %>
+		  
+        </div>
+
+<% end %>
