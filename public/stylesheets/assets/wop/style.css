@@ -1,0 +1,382 @@
+@import url("sanitize.4.1.0.css");
+/*
+ *      oldIE
+ */
+article, section, nav, aside, header, footer {
+    display: block;
+}
+/*
+ *      init
+ */
+* {
+    /* 要素をタップしたときの枠 */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* iOSでリンクを長押ししたときのポップアップメニュー */
+    -webkit-touch-callout: none;
+}
+button:active, button:focus {
+    outline: 0;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+a img {
+    opacity: 1;
+    -webkit-transition: opacity .3s;
+            transition: opacity .3s; /* IE10+ */
+}
+a:hover img {
+    opacity: .7;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+iframe {
+    max-width: 100%;
+}
+/*
+ *      utils
+ */
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: " ";
+}
+.clearfix:after {
+    clear: both;
+}
+/*
+ *
+ *      grid
+ *
+ */
+.container {
+    margin: 0 auto;
+    padding: 30px 12px 40px;
+    max-width: 800px;
+}
+.container:before,
+.container:after {
+    display: table;
+    content: " ";
+}
+.container:after {
+    clear: both;
+}
+.wrapper {
+    margin-left: -12px;
+    margin-right: -12px;
+}
+/*
+ *
+ *      汎用
+ *
+ */
+.imgbox {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%; // 16:9
+    box-sizing: content-box; /* IE8+ */
+}
+.imgbox > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    background-color: #fff;
+    background-position: center 30%;
+    background-size: cover; /* IE9+ */
+}
+.imgbox:hover > div {
+    opacity: .75;
+}
+.imgbox > div img {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+.scrooler {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+}
+/*
+ *
+ *      root
+ *
+ */
+html {
+    color: #383838;
+    background-color: #ffffff;
+    font-family: "Helvetica Neue", "Calibri", "Open Sans", Helvetica, Arial, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+    line-height: 1.8;
+    width: 100%;
+    height: 100%;
+    min-width: 320px;
+}
+#body {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+#overall {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+}
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+}
+/*
+ *
+ *      header
+ *
+ */
+#header {
+    padding: 16px;
+    overflow: hidden;
+}
+#header h1 {
+    width: 42px;
+    height: 42px;
+    float: left;
+    margin: 0;
+}
+#gnav {
+    display: none;
+    float: right;
+}
+#gnav > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#gnav li{
+    display: inline-block;
+}
+#gnav li > a {
+    display: inline-block;
+    line-height: 44px;
+    font-size: 14px;
+    padding: 0 16px;
+}
+#nav_opener {
+    float: right;
+    opacity: .65;
+}
+@media only screen and (min-width: 641px) and (min-height: 641px) {
+    #gnav {
+        display: block;
+    }
+    #nav_opener {
+        display: none;
+    }
+}
+/*
+ *
+ *      smart nav
+ *
+ */
+#mnav_back {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 998;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0;
+    transition: opacity .3s;
+}
+#mnav_back.visible {
+    display: block;
+}
+#mnav_back.show {
+    opacity: .3;
+}
+#mnav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    width: 200px;
+    height: 100%;
+    padding: 14px;
+    margin: 0;
+    list-style: none;
+    -webkit-transform: translateX(-200px);
+            transform: translateX(-200px);
+    -webkit-transition: .3s;
+            transition: .3s;
+    background-color: rgba(255,255,255,.9);
+    pointer-events: none;
+}
+#mnav.show {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    pointer-events: auto;
+}
+#mnav li {
+    line-height: 3;
+    border-bottom: 1px dotted #bbb;
+    font-size: 14px;
+    padding: 0 8px;
+}
+@media only screen and (min-width: 641px) and (min-height: 641px) {
+    #mnav {
+        display: none;
+    }
+}
+/*
+ *
+ *      top
+ *
+ */
+#top {
+    width: 60px;
+    height: 20px;
+    margin: 0 auto 30px;
+    position: relative;
+    cursor: pointer;
+}
+#top::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 20px solid #ffeb3b;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+}
+#top::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    border-bottom: 20px solid #ffffff;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+}
+/*
+ *
+ *      footer
+ *
+ */
+#footer {
+    text-align: center;
+    margin: 30px auto 16px;
+}
+#copyright {
+    display: inline-block;
+    color: #bbb;
+}
+/*
+ *
+ *      home
+ *
+ */
+/*
+ *
+ *      site_image
+ *
+ */
+/*
+ *
+ *      site_image
+ *
+ */
+/*
+ *
+ *      hr
+ *
+ */
+.hr {
+    margin: 20px auto;
+}
+/*
+ *
+ *      summary
+ *
+ */
+#summary {
+    margin: 20px auto;
+}
+/*
+ *
+ *      contents_list
+ *
+ */
+#contents_list_header,
+#whatsnew_header {
+    margin: 20px auto;
+}
+#contents_list,
+#whatsnew_list {
+    list-style: none;
+    margin: 20px 0 20px;
+    padding: 0;
+}
+#contents_list > li {
+    margin: 14px 0 14px;
+}
+li.list_wrapper {
+    margin: 28px 0 14px;
+    border-bottom: 1px solid #ffeb3b;
+    overflow: hidden;
+}
+.list_date {
+    display: inline-block;
+    color: #ffffff;
+    background-color: #ffeb3b;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+h3.list_header {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+@media only screen and (min-width: 641px) and (min-height: 641px) {
+    #whatsnew_list {
+        margin: 20px 0 50px;
+    }
+    li.list_wrapper {
+        border-bottom: 1px none #ffeb3b;
+    }
+    .list_article {
+        width: 65%;
+        float: left;
+    }
+    .list_image {
+        width: 35%;
+        float: right;
+    }
+}
+/*
+ *
+ *      like_box
+ *
+ */
+#likebox {
+    text-align: center;
+}
