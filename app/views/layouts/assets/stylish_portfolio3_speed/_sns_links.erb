@@ -1,0 +1,33 @@
+    <ul class="snslinks">
+<% unless @website.wsite_telephone.blank? %>
+        <li><a href="tel:<%= @website.wsite_telephone %>"><i class="pico-phone"></i></a></li>
+<% end %>
+<% unless @website.wsite_email.blank? %>
+        <li><a href="mailto:<%= @website.wsite_email %>"><i class="pico-mail"></i></a></li>
+<% end %>
+<% unless @website.social_instagram_uri.blank? %>
+        <li><a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="pico-instagram"></i></a></li>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+        <li><a href="<%= @website.social_line_uri %>" target="_blank"><i class="pico-line"></i></a></li>
+<% end %>
+<% yoytube = VisualWidget.search_widget_bag_for(@website, "3ea1f3fd7724ce84757ea391121b0638") %>
+<% if !yoytube.blank? && yoytube.is_valid? %>
+        <li><a href="<%= raw yoytube.data_string %>" target="_blank"><i class="pico-youtube"></i></a></li>
+<% end %>
+<% unless @website.social_facebook_uri.blank? %>
+        <li><a href="<%= @website.social_facebook_uri %>" target="_blank"><i class="pico-facebook"></i></a></li>
+<% end %>
+<% unless @website.social_twitter_uri.blank? %>
+        <li><a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="pico-twitter"></i></a></li>
+<% end %>
+<% unless @website.social_pinterest_uri.blank? %>
+        <li><a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="pico-pinterest-p"></i></a></li>
+<% end %>
+<% unless @website.social_tumblr_uri.blank? %>
+        <li><a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="pico-tumblr"></i></a></li>
+<% end %>
+<% unless @website.social_gplus_uri.blank? %>
+        <li><a href="<%= @website.social_gplus_uri %>" target="_blank"><i class="pico-google-plus"></i></a></li>
+<% end %>
+    </ul>

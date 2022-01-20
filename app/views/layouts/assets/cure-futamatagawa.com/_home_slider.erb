@@ -20,10 +20,9 @@
 		<% else %>
         	<% widget_bag.photos.each do | photo | %>
 		        <li>
-		            <%= image_tag(url_for_file_column(photo, :image)) %>
+		            <%= image_tag photo.clip.url(:image) %>
 		        </li>
 			<% end %>
 		<% end %>
     </ul>
 </div>
-

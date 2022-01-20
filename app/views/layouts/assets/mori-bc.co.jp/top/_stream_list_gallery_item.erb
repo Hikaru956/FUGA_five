@@ -1,4 +1,4 @@
-<%  key_photo = temp_local.photos.find(:first) %>
+<%  key_photo = temp_local.photos.first %>
 <%  page_url  = url_for(:action=>'gallery_list', :id=>temp_local) %>
 <%  image_url = key_photo.clip.url(:panel) %>
                             <div class="col-in">

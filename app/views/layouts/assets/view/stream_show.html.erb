@@ -24,7 +24,7 @@
 <meta property="og:site_name"         content="<%= @website.name %>">
 <% key_photo = key_photo(@seed) %>
 <% unless key_photo.blank? %>
-<meta property="og:image"             content="http://<%= request.host + url_for_file_column(key_photo, :image) %>">
+<meta property="og:image"             content="http://<%= request.host + key_photo.clip.url(:image) %>">
 <% end %>
 <% unless @website.social_facebook_uri.blank? %>
 <meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
@@ -39,15 +39,15 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
 <% end %>
 <script src="https://use.fontawesome.com/9e789611aa.js"></script>
-<link rel="stylesheet" href="/stylesheets/assets/business-casual2/style.css">
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/style" %>
+<link rel="stylesheet" href="/stylesheets/assets/business-casual2-speed/style.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/style" %>
 </head>
 <!-- このサイトはIE9未満では正しく表示されません。 -->
 <!--[if lt IE 9]>
@@ -63,19 +63,19 @@
 <aside id="tnav">
     <ul class="scrooler">
         <li>- MENU</li>
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/navigation" %>
     </ul>
 </aside>
 <!-- 主ウインドウ -->
 <div id="body">
     <div class="scrooler">
 <!-- サイトヘッダー -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/header" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/header" %>
 <!-- グローバルナビゲーション -->
         <nav id="gnav">
             <div class="container">
                 <ul id="gnav_main">
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/navigation" %>
                 </ul>
             </div>
         </nav>
@@ -127,7 +127,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
                         </div>
                     </article>
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/sns_btn" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/sns_btn" %>
 <% if @website.disqus? %>
                     <aside id="comments">
 <%= raw @website.disqus_code %>
@@ -137,14 +137,14 @@
             </div>
         </div>
 <!-- サイトフッター -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/footer" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/footer" %>
     </div>
 </div>
 <!-- common javascript -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/common_js" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/common_js" %>
 <!-- page specific javascript -->
 <!-- social net javascript -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/social_js" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/social_js" %>
 <!-- google maps javascript -->
 </body>
 </html>

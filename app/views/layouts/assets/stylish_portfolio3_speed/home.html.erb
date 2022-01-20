@@ -1,0 +1,130 @@
+<!doctype html>
+<% hptitle = VisualWidget.search_widget_bag_for(@website, "3e79fb8e735298346314d4149a6bccae") %>
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "43a9386c4304f22507c8e6222dd3fc4c") %>
+<% og_img  = VisualWidget.search_widget_bag_for(@website, "3e45b186a5191607bfcbdc778c09f398") %>
+<html lang="ja">
+<head prefix="og: https://ogp.me/ns#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<title><%= @website.name %></title>
+<% else %>
+<title><%= hptitle.data_string %></title>
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="copyright"                content="<%= model_name(@website.company) %>">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="website">
+<% if request.host == 'staffroom.swifty.jp' %>
+<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+<meta property="og:url"               content="https://<%= request.host %>/home">
+<% end %>
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<meta property="og:title"             content="<%= @website.name %>">
+<% else %>
+<meta property="og:title"             content="<%= hptitle.data_string %>">
+<% end %>
+<% if !og_img.blank? && og_img.is_valid? %>
+<meta property="og:image"             content="https://<%= request.host %><%= og_img.photos[0].clip.url(:image) %>">
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% else %>
+<meta property="article:publisher"    content="<%= model_name(@website.company) %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/style" %>
+</head>
+<body id="home">
+<!-- header area dummy height. -->
+<div id="top">
+</div>
+<!-- CAROUSEL -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/carousel" %>
+<%  if request.host == 'www.feel-bs.jp' %>
+<!-- feel nav -->
+<aside id="feelnav">
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/navigation" %>
+</aside>
+<%  end %>
+<main>
+<!-- NEWS -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/news_list" %>
+<!-- BLOG -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/blog_list" %>
+<!-- GALLERY -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/gallery_list" %>
+<!-- INSTAGRAM feed -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/instafeed" %>
+<!-- SHOP INFORMATION -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/shop_info" %>
+</main>
+<!-- iFrame -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/street_view" %>
+<!-- Maps -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/map" %>
+<!-- Footer sns links -->
+<aside id="footsns">
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/sns_links" %>
+</aside>
+<!-- Footer nav -->
+<aside id="footnav">
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/navigation" %>
+</aside>
+<!-- Footer -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/footer" %>
+<!-- Header -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/header" %>
+<div id="gotop"><a href="#top"></a></div>
+<!-- Navigation -->
+<div id="gnav" class="">
+    <div class="container">
+	    <h1>- site navigation -</h1>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/navigation" %>
+	    <div id="navcloser"></div>
+		<div id="scguide">SCROLL</div>
+    </div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/common_js" %>
+<!-- page specific javascript -->
+<!-- Instafeed js -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/instafeed_js" %>
+</body>
+</html>

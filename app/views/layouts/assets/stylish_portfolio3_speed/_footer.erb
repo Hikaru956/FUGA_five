@@ -1,0 +1,22 @@
+<footer>
+	<div class="container">
+		<p class="subnav">
+<% name1 = VisualWidget.search_widget_bag_for(@website, "e2831f72e7223f1fd473515d9f5f5bfd") %>
+<% url1  = VisualWidget.search_widget_bag_for(@website, "2f03a65493dc57dae1b57f09fb78c8c1") %>
+<% if !name1.blank? && name1.is_valid? && !url1.blank? && url1.is_valid? %>
+			<a href="<%= raw url1.data_string %>"><%= name1.data_string %></a>
+<% end %>
+<% name2 = VisualWidget.search_widget_bag_for(@website, "3ea4ad73ce81082751022fa07b6efbfc") %>
+<% url2  = VisualWidget.search_widget_bag_for(@website, "769755c2f0f879e36573c6242c0f9176") %>
+<% if !name2.blank? && name2.is_valid? && !url2.blank? && url2.is_valid? %>
+			<a href="<%= raw url2.data_string %>"><%= name2.data_string %></a>
+<% end %>
+<% name3 = VisualWidget.search_widget_bag_for(@website, "59dbe890f6b2e6be1be4c7ef65c217b7") %>
+<% url3  = VisualWidget.search_widget_bag_for(@website, "d3d868098fdba450802d0dffcf8894bd") %>
+<% if !name3.blank? && name3.is_valid? && !url3.blank? && url3.is_valid? %>
+			<a href="<%= raw url3.data_string %>"><%= name3.data_string %></a>
+<% end %>
+		</p>
+		<p class="copy"><%= copyright_notice(@website) %></p>
+	</div>
+</footer>

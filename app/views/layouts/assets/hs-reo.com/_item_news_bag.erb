@@ -8,7 +8,7 @@
 			  	<% unless latests.blank? %>
 					<% key_photo = key_photo(latests[0]) %>
 					<% unless key_photo.blank? %>
-						<%= image_tag(url_for_file_column(key_photo, :image, 'panel'), :style=>"visibility: visible; opacity: 1;", :alt=>model_name(temp_local)) %>
+						<%= image_tag key_photo.clip.url(:panel), :style=>"visibility: visible; opacity: 1;", :alt=>model_name(temp_local) %>
 					<% else %>
 						<img src="//placehold.it/800x500&amp;text=<%=latests[0].publish_from.strftime('%Y-%m-%d')%>">
 					<% end %>

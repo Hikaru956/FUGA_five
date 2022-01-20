@@ -1,15 +1,15 @@
 <%
 	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
 	news_navigation = type_root.web_page
-	first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
+	latest_leafs = @website.public_leafs.where("content_category_id",public_categories).order(position: :desc).first
 
-	public_categories  = []
-	public_categories.concat(first_bag.sons)
-	public_categories << first_bag
-
-	c = ContentLeaf.public_leafs_condition
-	c.and "content_category_id", public_categories
-	latest_leaf =  ContentLeaf.find(:first, :conditions=>c.where, :order=>'position desc')
+	#first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
+	#public_categories  = []
+	#public_categories.concat(first_bag.sons)
+	#public_categories << first_bag
+	#c = ContentLeaf.public_leafs_condition
+	#c.and "content_category_id", public_categories
+	#latest_leaf =  ContentLeaf.find(:first, :conditions=>c.where, :order=>'position desc')
 %>
 
 <% unless latest_leaf.blank? %>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% fbappid = VisualWidget.search_widget_bag_for(@website, "771773aec444b42e2e7dafa0fcb96841") %>
+<% unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="http://<%= request.host + url_for(:action=>'stream_show', :id=>@seed) %>">
+<meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% end %>
+<!-- Twitter card も入れる？ -->
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<% end %>
+<script src="https://use.fontawesome.com/9e789611aa.js"></script>
+<link rel="stylesheet" href="/stylesheets/assets/gemini_speed/style.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/gemini_speed/style" %>
+</head>
+<!--[if !IE]><!-->
+<body>
+<!--<![endif]-->
+<!--[if IE]>
+<body id="ie">
+<div id="browserupgrade">あなたは<strong>古い</strong>アプリケーションをご利用のようです。<a href="http://browsehappy.com/">最新のブラウザ</a>に更新して快適なインターネットをお楽しみ下さい。</div>
+<![endif]-->
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/gemini_speed/header" %>
+<!-- グローバルナビゲーション -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/gemini_speed/navigation" %>
+        <div>
+            <div class="container">
+<!-- パンくずリスト -->
+                    <aside id="breadcrumbs">
+                        <ol>
+<% if request.host == 'sr2.swifty.jp' %>
+                            <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+<% else %>
+                            <li><a href="/home"><i class="fa fa-home"></i></a></li>
+<% end %>
+<% unless @seed.content_category.has_only_a_public_bag? %>
+<%      if request.host == 'sr2.swifty.jp' %>
+                            <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.content_category.my_bag_root_category.parent, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
+<%      else %>
+                            <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.content_category.my_bag_root_category.parent) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
+<%      end %>
+<% end %>
+<% @seed.content_category.category_path(true).each do | category | %>
+<%      if request.host == 'sr2.swifty.jp' %>
+                            <li><%= link_to category.category_label, :action=>"stream_list", :id=>category, :wkey=>@website.wsite_hash_key %></li>
+<%      else %>
+                            <li><%= link_to category.category_label, :action=>"stream_list", :id=>category %></li>
+<%      end %>
+<% end %>
+                            <li class="active">
+                                <%= model_title(@seed) %>
+                            </li>
+                        </ol>
+                    </aside>
+                    <!-- <h1><%= model_title(@seed.content_category.my_bag_root_category.parent) %></h1> -->
+                    <article id="article">
+                        <header>
+                            <h1><%= model_title(@seed) %></h1>
+                            <p class="publish">
+<% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+<%      if request.host == 'sr2.swifty.jp' %>
+                                <i class="fa fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff, :wkey=>@website.wsite_hash_key) %>"><%= h model_name(@seed.staff) %></a>
+<%      else %>
+                                <i class="fa fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>
+<%      end %>
+<% end %>
+                                <i class="fa fa-calendar"></i> <%= publish_label(@seed) %></p>
+                        </header>
+                        <div id="contents">
+<% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+                        </div>
+                    </article>
+<%= render :partial=>"#{LayoutScheme.asset_root}/gemini_speed/sns_btn" %>
+<% if @website.disqus? %>
+                    <aside id="comments">
+<%= raw @website.disqus_code %>
+                    </aside>
+<% end %>
+            </div>
+        </div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/gemini_speed/footer" %>
+    </div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/gemini_speed/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/gemini_speed/social_js" %>
+<!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/gemini_speed/gmaps_js" %>
+</body>
+</html>

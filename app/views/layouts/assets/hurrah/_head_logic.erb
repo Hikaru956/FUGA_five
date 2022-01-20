@@ -22,11 +22,11 @@
 		@webclip = @website.apple_touch_icon
 	%>
 	<% unless @favicon.blank? %>
-		<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon"/>
-		<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon"/>
+		<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon"/>
+		<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon"/>
 	<% end %>
 	<% unless @webclip.blank? %>
-		<link rel="apple-touch-icon-precomposed" href="<%= url_for_file_column(@webclip, :image) %>">
+		<link rel="apple-touch-icon-precomposed" href="<%= @webclip.clip.url(:image) %>">
 	<% end %>
 
     <!-- Bootstrap core CSS -->
@@ -48,7 +48,7 @@
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
 				  background-image: none;
 			<% else %>
-				  background: url(<%= url_for_file_column(widget_bag.photos[0], :image) %>) no-repeat center top fixed;
+				  background: url(<%= widget_bag.photos[0].clip.url(:image) %>) no-repeat center top fixed;
                   -webkit-background-size: cover;
                      -moz-background-size: cover;
                        -o-background-size: cover;

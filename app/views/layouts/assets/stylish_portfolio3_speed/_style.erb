@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="/stylesheets/assets/stylish_portfolio3_speed/style.css?v=2">
+<style>
+<% hlogo_h = VisualWidget.search_widget_bag_for(@website, "ef3097ee6bc20bfdfae2c69ab8d4fad1") %>
+<% if !hlogo_h.data_string.blank? %>
+/* logo height: px */
+	#header .logo img {
+	    height: <%= hlogo_h.data_string %>px;
+	}
+	#top {
+	    height: calc(<%= hlogo_h.data_string %>px + 32px);
+	}
+	#header {
+	    height: calc(<%= hlogo_h.data_string %>px + 32px);
+	    top:   calc(-1 * (<%= hlogo_h.data_string %>px + 35px));
+	}
+	#home #carousel,
+	#home #carousel2 {
+	    height: calc(100vh - (<%= hlogo_h.data_string %>px + 32px));
+	}
+<% end %>
+<% link_c = VisualWidget.search_widget_bag_for(@website, "6e0d246cc4673e8d149efc3def54cca8") %>
+<% if !link_c.data_string.blank? %>
+/* link color: */
+	.contents a,
+	.contents a:link {
+	    color: <%= link_c.data_string %>;
+	}
+	#gotop {
+	    background-color: <%= link_c.data_string %>;
+	}
+<% end %>
+<% htxt_c = VisualWidget.search_widget_bag_for(@website, "7fcf5f3f53b1cbb1b580e912add79780") %>
+<% if !htxt_c.data_string.blank? %>
+    #header p {
+        color: <%= htxt_c.data_string %>;
+    }
+    #navopener::before {
+        border-top: 2px solid <%= htxt_c.data_string %>;
+        border-bottom: 2px solid <%= htxt_c.data_string %>;
+    }
+    #navopener::after {
+        border-bottom: 2px solid <%= htxt_c.data_string %>;
+    }
+<% end %>
+<% hbak_c = VisualWidget.search_widget_bag_for(@website, "c9f1af91443b7c239107e85ad92e20a9") %>
+<% if !hbak_c.data_string.blank? %>
+    #header {
+        background-color: <%= hbak_c.data_string %>;
+    }
+<% end %>
+<% logo_b = VisualWidget.search_widget_bag_for(@website, "bc88d2932be3f13c3380fa1481dd3168") %>
+<% if !logo_b.photos.blank? %>
+    #home #carousel::before {
+        background-image: url('<%= logo_b.photos[0].clip.url(:image) %>');
+    }
+<% end %>
+</style>

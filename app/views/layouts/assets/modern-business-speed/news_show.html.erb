@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title><%= model_title(@seed) %> - <%= @website.name %></title>
+    <%= render :partial=>'layouts/assets/modern-business-speed/head_logic' %>
+  </head>
+
+  <body>
+	<%= render :partial=>"layouts/assets/modern-business-speed/navigation" %>
+    
+    <div class="container">
+    	<br/>
+		<%= yield %>
+    </div><!-- /.container -->
+
+    <div class="container">
+		<%= render :partial=>"layouts/assets/modern-business-speed/footer" %>
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<%= javascript_include_tag "jquery.js"%>
+	<%= javascript_include_tag "bootstrap.js"%>
+	<%= javascript_include_tag "assets/modern-business-speed/modern-business.js"%>
+  </body>
+</html>

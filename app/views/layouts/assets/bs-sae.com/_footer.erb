@@ -14,7 +14,7 @@
         <div class="col-1p3">
 <% if !shop1img.blank? && shop1img.is_valid? %>
             <div class="shop_info_img">
-                <img src="//<%= request.host %><%= url_for_file_column(shop1img.photos[0], :image) %>" alt="姥ケ山店">
+                <img src="//<%= request.host %><%= shop1img.photos[0].clip.url(:image) %>" alt="姥ケ山店">
             </div>
 <% end %>
             <h2>姥ケ山店</h2>
@@ -41,7 +41,7 @@
         <div class="col-1p3">
 <% if !shop2img.blank? && shop2img.is_valid? %>
             <div class="shop_info_img">
-                <img src="//<%= request.host %><%= url_for_file_column(shop2img.photos[0], :image) %>" alt="寺尾店">
+                <img src="//<%= request.host %><%= shop2img.photos[0].clip.url(:image) %>" alt="寺尾店">
             </div>
 <% end %>
             <h2>寺尾店</h2>
@@ -68,7 +68,7 @@
         <div class="col-1p3">
 <% if !shop3img.blank? && shop3img.is_valid? %>
             <div class="shop_info_img">
-                <img src="//<%= request.host %><%= url_for_file_column(shop3img.photos[0], :image) %>" alt="紫竹山店">
+                <img src="//<%= request.host %><%= shop3img.photos[0].clip.url(:image) %>" alt="紫竹山店">
             </div>
 <% end %>
             <h2>紫竹山店</h2>

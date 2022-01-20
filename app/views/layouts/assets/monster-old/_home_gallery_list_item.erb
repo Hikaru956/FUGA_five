@@ -1,6 +1,6 @@
 <div class="thumbnail thumbnail-1">
 	<h3></h3>
-	<% key_photo = temp_local.photos.find(:first) %>
+	<% key_photo = temp_local.photos.first %>
 	<% unless key_photo.blank? %>
 		<%= image_tag key_photo.clip.url(:panel) %>
 	<% else %>

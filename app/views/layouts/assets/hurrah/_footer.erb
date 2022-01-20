@@ -11,7 +11,7 @@
 <% if widget_bag0.blank? || !widget_bag0.is_valid? %>
                 <img src="//placehold.it/260x100&amp;text=HURRAH" class="foot_shop_logo">
 <% else %>
-                <img src="<%= url_for_file_column(widget_bag0.photos[0], :image) %>" class="foot_shop_logo">
+                <img src="<%= widget_bag0.photos[0].clip.url(:image) %>" class="foot_shop_logo">
 <% end %>
             </div>
             <div class="foot_shop_text">
@@ -36,7 +36,7 @@
                     <div class="carousel-inner">
                         <% widget_bag2.photos.each do | photo | %>
                         <div class="item <%if photo.position==1%>active<%end%>">
-                            <%= image_tag(url_for_file_column(photo, :image), :class=>"img-responsive img-full")%>
+                            <%= image_tag photo.clip.url(:image), :class=>"img-responsive img-full")%>
                         </div>
                         <% end %>
                     </div>
@@ -67,7 +67,7 @@
 <% if widget_bag1.blank? || !widget_bag1.is_valid? %>
                 <img src="//placehold.it/260x100&amp;text=THINGS" class="foot_shop_logo">
 <% else %>
-                <img src="<%= url_for_file_column(widget_bag1.photos[0], :image) %>" class="foot_shop_logo">
+                <img src="<%= widget_bag1.photos[0].clip.url(:image) %>" class="foot_shop_logo">
 <% end %>
             </div>
             <div class="foot_shop_text">
@@ -92,7 +92,7 @@
                     <div class="carousel-inner">
                         <% widget_bag3.photos.each do | photo | %>
                         <div class="item <%if photo.position==1%>active<%end%>">
-                            <%= image_tag(url_for_file_column(photo, :image), :class=>"img-responsive img-full")%>
+                            <%= image_tag photo.clip.url(:image), :class=>"img-responsive img-full")%>
                         </div>
                         <% end %>
                     </div>

@@ -23,7 +23,7 @@
         <!-- 最初の写真 -->
         <% key_photo = key_photo(temp_local) %>
         <% unless key_photo.blank? %>
-            <div class="thumbnail thumbnail-1 img-left"><%= image_tag(url_for_file_column(key_photo, :image, 'thumb'), :class=>"img-responsive img-border img-left") %></div>
+            <div class="thumbnail thumbnail-1 img-left"><%= image_tag key_photo.clip.url(:thumb), :class=>"img-responsive img-border img-left" %></div>
         <% else %>
             <img class="thumbnail thumbnail-1 img-left" src="//placehold.it/240x180/ffffff/cccccc&amp;text=No Photo">
         <% end %>

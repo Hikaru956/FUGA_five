@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<% end %>
+<script src="https://use.fontawesome.com/9e789611aa.js"></script>
+<link rel="stylesheet" href="/stylesheets/assets/business-casual2-speed/style.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/style" %>
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body id="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body id="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<body>
+<!--<![endif]-->
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav">
+    <ul class="scrooler">
+        <li>- MENU</li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/navigation" %>
+    </ul>
+</aside>
+<!-- 主ウインドウ -->
+<div id="body">
+    <div class="scrooler">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/header" %>
+<!-- グローバルナビゲーション -->
+        <nav id="gnav">
+            <div class="container">
+                <ul id="gnav_main">
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/navigation" %>
+                </ul>
+            </div>
+        </nav>
+        <div>
+            <div class="container">
+                <div class="content_box">
+<!-- パンくずリスト -->
+                    <aside id="breadcrumbs">
+                        <ol>
+<% if request.host == 'sr2.swifty.jp' %>
+                            <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+<% else %>
+                            <li><a href="/home"><i class="fa fa-home"></i></a></li>
+<% end %>
+                            <li><%= model_title(@seed) %></li>
+                        </ol>
+                    </aside>
+                    <h1><%= model_title(@seed) %></h1>
+<% unless @website.google_calendar_emb_frame_code.blank? %>
+                    <aside id="gcal">
+<%= raw @website.google_calendar_emb_frame_code %>
+                    </aside>
+<% end %>
+                    <section id="streem_table">
+                        <ul class="wrapper">
+<%
+    @staffs.each do | staff | @staff = staff
+        key_photo = key_photo(@staff)
+        unless key_photo.blank?
+            image_url = key_photo.clip.url(:panel)
+        else
+            image_url = '//placehold.it/327x327&amp;text=No Photo'
+        end
+        if request.host == 'sr2.swifty.jp'
+            staff_url = url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key)
+        else
+            staff_url = url_for(:action=>'staff', :id=>@staff)
+        end
+%>
+                            <li class="col-1p3">
+                                <div class="imgbox"><div style="background-image:url('<%= image_url %>');">
+                                    <a href="<%= staff_url %>"><img src="<%= image_url %>"></a>
+                                </div></div>
+                                <h1>
+                                    <a href="<%= staff_url %>">
+                                        <%= model_name(@staff) %>
+                                        <span><%= h @staff.job_title %></span>
+                                    </a>
+                                </h1>
+                            </li>
+<%  end %>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/footer" %>
+    </div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<!-- google maps javascript -->
+</body>
+</html>

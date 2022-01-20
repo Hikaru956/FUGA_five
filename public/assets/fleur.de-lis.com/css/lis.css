@@ -1,0 +1,106 @@
+@font-face {
+  font-family: 'lis_fonts';
+  src:
+    url('fonts/lis_fonts.ttf?vymzz1') format('truetype'),
+    url('fonts/lis_fonts.woff?vymzz1') format('woff'),
+    url('fonts/lis_fonts.svg?vymzz1#lis_fonts') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'lis_fonts' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-codo:before {
+  content: "\e907";
+  color: #595757;
+}
+.icon-ens:before {
+  content: "\e908";
+  color: #595757;
+}
+.icon-lis:before {
+  content: "\e909";
+  color: #595757;
+}
+.icon-lm:before {
+  content: "\e90a";
+  color: #595757;
+}
+.icon-cart:before {
+  content: "\e906";
+  color: #9e9e9f;
+}
+.icon-burger:before {
+  content: "\e900";
+}
+.icon-times:before {
+  content: "\e905";
+}
+.icon-logo-atelier:before {
+  content: "\e901";
+}
+.icon-logo-ens:before {
+  content: "\e902";
+}
+.icon-logo-lis:before {
+  content: "\e903";
+}
+.icon-logo-lm:before {
+  content: "\e904";
+}
+.icon-user:before {
+  content: "\f007";
+}
+.icon-home:before {
+  content: "\f015";
+}
+.icon-edit:before {
+  content: "\f044";
+}
+.icon-chevron-right:before {
+  content: "\f054";
+}
+.icon-calendar:before {
+  content: "\f073";
+}
+.icon-phone:before {
+  content: "\f095";
+}
+.icon-chevron-circle-left:before {
+  content: "\f137";
+}
+.icon-chevron-circle-right:before {
+  content: "\f138";
+}
+.icon-twitter:before {
+  content: "\f099";
+}
+.icon-facebook:before {
+  content: "\f09a";
+}
+.icon-youtube1:before {
+  content: "\f167";
+}
+.icon-instagram1:before {
+  content: "\f16d";
+}
+.icon-line:before {
+  content: "\f3c0";
+}
+.icon-mail:before {
+  content: "\f0e0";
+}

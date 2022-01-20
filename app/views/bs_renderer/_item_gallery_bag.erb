@@ -2,7 +2,6 @@
 	<% key_photo = temp_local.photos.first %>
 	<% unless key_photo.blank? %>
 		<%= image_tag key_photo.clip.url(:panel) %>
-		<%= image_tag(key_photo.clip.url(:panel) if false %>
 	<% else %>
 		<img src="http://placehold.it/320x240&amp;text=No Face Photo">
 	<% end %>

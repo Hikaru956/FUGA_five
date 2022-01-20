@@ -9,28 +9,28 @@
 <% if logo0.photos[0].blank? %>
                 <img src="//placehold.it/240x60" alt="logo mark">
 <% else %>
-                <img src="<%= url_for_file_column(logo0.photos[0], :image) %>" alt="logo mark">
+                <img src="<%= logo0.photos[0].clip.url(:image) %>" alt="logo mark">
 <% end %>
             </div>
             <div class="col-1p4 text-center">
 <% if logo1.photos[0].blank? %>
                 <img src="//placehold.it/240x60" alt="logo mark">
 <% else %>
-                <img src="<%= url_for_file_column(logo1.photos[0], :image) %>" alt="logo mark">
+                <img src="<%= logo1.photos[0].clip.url(:image) %>" alt="logo mark">
 <% end %>
             </div>
             <div class="col-1p4 text-center">
 <% if logo2.photos[0].blank? %>
                 <img src="//placehold.it/240x60" alt="logo mark">
 <% else %>
-                <img src="<%= url_for_file_column(logo2.photos[0], :image) %>" alt="logo mark">
+                <img src="<%= logo2.photos[0].clip.url(:image) %>" alt="logo mark">
 <% end %>
             </div>
             <div class="col-1p4 text-center">
 <% if logo3.photos[0].blank? %>
                 <img src="//placehold.it/240x60" alt="logo mark">
 <% else %>
-                <img src="<%= url_for_file_column(logo3.photos[0], :image) %>" alt="logo mark">
+                <img src="<%= logo3.photos[0].clip.url(:image) %>" alt="logo mark">
 <% end %>
             </div>
         </div>

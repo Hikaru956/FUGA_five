@@ -9,8 +9,8 @@
                         <ul id="carousel_ul">
     <% widget_bag.photos.each do | photo | %>
                             <li>
-                                <div class="carousel_back" style="background-image:url('<%= url_for_file_column(photo, :image) %>');">
-                                    <img src="<%= url_for_file_column(photo, :image) %>">
+                                <div class="carousel_back" style="background-image:url('<%= photo.clip.url(:image) %>');">
+                                    <img src="<%= photo.clip.url(:image) %>">
                                 </div>
                             </li>
     <% end %>

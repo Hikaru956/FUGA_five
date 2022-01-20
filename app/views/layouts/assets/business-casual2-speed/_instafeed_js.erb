@@ -1,0 +1,41 @@
+<%  instafd = VisualWidget.search_widget_bag_for(@website, "232b241488889421f22656719d0505c4") %>
+<%  instaid = VisualWidget.search_widget_bag_for(@website, "7288becd20b65daf5e1f01ec82d0983f") %>
+<%  instatk = VisualWidget.search_widget_bag_for(@website, "289d969709b3f09345dd1e1161f67d56") %>
+<%  newinstaid = VisualWidget.search_widget_bag_for(@website, "50d0aa9efc7a5e9747eb74c3e6c76acb") %>
+<%  newinstatk = VisualWidget.search_widget_bag_for(@website, "04cb171f043f572d8f9d4be18c1b17b9") %>
+<%  if !newinstaid.blank? && !newinstatk.blank? && !newinstaid.data_string.blank? && !newinstatk.data_string.blank? %>
+<script>
+$.ajax({
+    type: 'GET',
+    url: 'https://graph.facebook.com/v8.0/<%= newinstaid.data_string %>?fields=name%2Cmedia.limit(6)%7Bcaption%2Cmedia_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url%7D&access_token=<%= newinstatk.data_string %>',
+    dataType: 'json',
+    success: function(json) {
+        var ig = json.media.data;
+        var ht = '';
+        for (var i = 0; i < ig.length; i++) {
+            if (ig[i].media_type == 'VIDEO'){
+                ht += '<li class="col-1p3"><div class="imgbox"><div style="background-image:url(' + ig[i].thumbnail_url + ')"><a href="' + ig[i].permalink + '" target="_blank"><img src="' + ig[i].thumbnail_url + '" alt="' + ig[i].caption + '"></a></div></div></li>';
+            } else {
+                ht += '<li class="col-1p3"><div class="imgbox"><div style="background-image:url(' + ig[i].media_url + ')"><a href="' + ig[i].permalink + '" target="_blank"><img src="' + ig[i].media_url + '" alt="' + ig[i].caption + '"></a></div></div></li>';
+            }
+        }
+        $("#instafeed").append(ht);
+    }
+});
+</script>
+<%  elsif !instafd.blank? && !instaid.blank?  && !instatk.blank? && instafd.data_string == "Zc359WUn" && !instaid.data_string.blank?  && !instatk.data_string.blank? %>
+<script src="/javascripts/assets/vendor/instafeed.js"></script>
+<script>
+$(window).on('load', function() {
+    var userFeed = new Instafeed({
+		get: 'user',
+		userId: '<%= instaid.data_string %>',
+		accessToken: '<%= instatk.data_string %>',
+		limit: 6,
+		template: '<li class="col-1p3"><div class="imgbox"><div style="background-image:url({{image}})"><a href="{{link}}" target="_blank"><img src="{{image}}" alt="{{caption}}"></a></div></div></li>',
+		resolution: "low_resolution", // 320px; standard_resolution 640px;
+	});
+	userFeed.run();
+});
+</script>
+<%  end %>

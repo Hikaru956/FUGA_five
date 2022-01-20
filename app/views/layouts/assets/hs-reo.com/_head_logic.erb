@@ -20,11 +20,11 @@
 		@webclip = @website.apple_touch_icon
 	%>
 	<% unless @favicon.blank? %>
-		<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon"/>
-		<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon"/>
+		<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon"/>
+		<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon"/>
 	<% end %>
 	<% unless @webclip.blank? %>
-		<link rel="apple-touch-icon-precomposed" href="<%= url_for_file_column(@webclip, :image) %>">
+		<link rel="apple-touch-icon-precomposed" href="<%= @webclip.clip.url(:image) %>">
 	<% end %>
 
     <!-- Bootstrap core CSS -->
@@ -42,7 +42,7 @@
             <% if widget_bag.blank? || !widget_bag.is_valid? %>
                   background: url(/images/assets/monster/bg-content.jpg) 50% 50%;
             <% else %>
-                  background: url(<%= url_for_file_column(widget_bag.photos[0], :image) %>) 50% 50%;
+                  background: url(<%= widget_bag.photos[0].clip.url(:image) %>) 50% 50%;
             <% end %>
         }
         .row-1 {
@@ -137,4 +137,3 @@
 	<% end %>
 
 	<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => model_name(@website) %>
-

@@ -46,7 +46,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-4">
 <% key_photo = key_photo(@seed) %>
 <% unless key_photo.blank? %>
-                        <%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %>
+                        <%= image_tag key_photo.clip.url(:panel) %>
 <% else %>
                         <img src="//placehold.it/480x360&amp;text=No Face Photo">
 <% end %>
@@ -101,7 +101,7 @@
                 <div class="row">
 <%      @photos.each do | photo |  %>
                     <div class="col-lg-4 col-md-4 col-sm-4">
-                        <%= image_tag(url_for_file_column(photo, :image, 'panel')) %>
+                        <%= image_tag photo.clip.url(:panel) %>
 <%          unless photo.info.blank? %>
 						<p><%=h photo.info%></p>
 <%          end %>

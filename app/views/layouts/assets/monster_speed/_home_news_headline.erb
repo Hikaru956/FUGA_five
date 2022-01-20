@@ -1,0 +1,25 @@
+<%
+	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+	news_navigation = type_root.web_page 
+	latest_leafs = @website.public_leafs.where("content_category_id IN (?)", public_categories).order(position: :desc).first
+
+	#first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
+	#public_categories  = []
+	#public_categories.concat(first_bag.sons)
+	#public_categories << first_bag
+	#c = ContentLeaf.public_leafs_condition
+	#c.and "content_category_id", public_categories
+	#latest_leaf =  ContentLeaf.find(:first, :conditions=>c.where, :order=>'position desc')
+%>
+
+<% unless latest_leaf.blank? %>
+	<div class="block-slogan">
+	    <h2><%= latest_leaf.publish_from.strftime("%Y-%m-%d") %></h2>
+	    <div>
+	        <p>
+	        	<%= h truncate(strip_tags(latest_leaf.description).gsub('&nbsp;', ' '), :length=>200) %>
+	            <a href="<%= url_for(:action=>'news_show', :id=>latest_leaf, :wkey=>@website.wsite_hash_key) %>" class="link-1">Read</a>
+	        </p>
+	    </div>
+	</div>
+<% end %>

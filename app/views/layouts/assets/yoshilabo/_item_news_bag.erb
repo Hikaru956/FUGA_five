@@ -4,8 +4,8 @@
     <% link_url = url_for(:action=>'news_list', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>
     <% key_photo = key_photo(latests[0]) %>
     <% unless key_photo.blank? %>
-                                    <div class="imgbox"><div style="background-image: url('<%= url_for_file_column(key_photo, :image, 'panel') %>')">
-                                        <a href="<%= link_url %>"><img src="<%= url_for_file_column(key_photo, :image, 'panel') %>"></a>
+                                    <div class="imgbox"><div style="background-image: url('<%= key_photo.clip.url(:panel) %>')">
+                                        <a href="<%= link_url %>"><img src="<%= key_photo.clip.url(:panel) %>"></a>
     <% else %>
                                     <div class="imgbox"><div style="background-image: url('//placehold.it/400x400/ffffff/cccccc&amp;text=<%=temp_local.publish_from.strftime('%Y-%m-%d')%>')">
                                         <a href="<%= link_url %>"><img src="//placehold.it/400x400/ffffff/cccccc&amp;text=<%=temp_local.publish_from.strftime('%Y-%m-%d')%>"></a>

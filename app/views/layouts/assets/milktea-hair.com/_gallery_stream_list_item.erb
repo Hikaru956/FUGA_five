@@ -4,7 +4,7 @@ if request.host == 'sr2.swifty.jp'
 else
     art_url = url_for(:action=>'gallery_list', :id=>temp_local)
 end
-key_photo = temp_local.photos.find(:first)
+key_photo = temp_local.photos.first
 unless key_photo.blank?
     img_url = key_photo.clip.url(:thumb)
 else

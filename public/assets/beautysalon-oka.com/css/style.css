@@ -1,0 +1,816 @@
+@charset "UTF-8";
+@import url("../../css/reset.min.css");
+@import url("../../css/all.min.css");
+#body {
+    font-family: 'Times New Roman', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic", "Yu Gothic", "Meiryo", sans-serif;
+}
+article, aside {
+    margin-bottom: 4rem;
+}
+@media screen and (min-width:600px){
+    article, aside {
+        margin-bottom: 4rem;
+    }
+}
+.contents {
+    margin-bottom: 2rem;
+}
+h1, h2, h3 {
+    font-family: 'Times New Roman', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin: 2em 0 1em;
+}
+h1 {
+    font-size: 24px;
+}
+h1:after {
+    content: "";
+    display: block;
+    height: 4px;
+    background: linear-gradient(to right, #e65a5a, #ffffff);
+}
+h2 {
+    font-size: 22px;
+}
+h3 {
+    font-size: 20px;
+}
+h1 span, h2 span {
+    display: block;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic", "Yu Gothic", "Meiryo", sans-serif;
+    font-weight: normal;
+}
+h1 span {
+    font-size: 18px;
+}
+h2 span {
+    font-size: 16px;
+}
+h3 span {
+    font-size: 14px;
+}
+.contents h1 span,
+.contents h2 span {
+    display: inline;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+img {
+    height: auto;
+}
+img:not([alt]) {
+    filter: none;
+}
+.contents img {
+    display: inline-block;
+}
+iframe {
+    max-width: 100%;
+}
+p {
+    margin-bottom: 1em;
+}
+p.image {
+    text-align: center;
+    margin: 0 -8px;
+}
+p.image img {
+    margin: 0 auto;
+}
+ul.p2m1 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem -0.5rem;
+}
+ul.p2m1 > li {
+    flex: 0 1 100%;
+    padding: 0 1em;
+    margin: 1em 0;
+    overflow: hidden;
+}
+ul.p3m2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem -0.5rem;
+}
+ul.p3m2 > li {
+    flex: 0 1 50%;
+    padding: 0 1em;
+    margin: 1em 0;
+    overflow: hidden;
+}
+ul.p3m2 .date {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 2px;
+}
+ul.p3m2 h2 {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1;
+    margin: 6px 0 0;
+}
+ul.p3m2 .date + h2 {
+    margin-top: 0;
+}
+@media screen and (min-width:600px){
+    ul.p2m1 > li {
+        flex-basis: 50%;
+    }
+    ul.p3m2 > li {
+        flex-basis: 33.3333333%;
+    }
+}
+.imgbox {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%;
+}
+.imgbox > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.imgbox img {
+    object-fit: cover;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.publish {
+    text-align: right;
+}
+.smaller {
+    font-size: smaller;
+}
+/*
+*   sns
+*/
+ul.sns {
+    text-align: center;
+}
+ul.sns li {
+    display: inline-block;
+    height: 36px;
+    margin: 0 10px;
+}
+ul.sns a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+    font-size: 34px;
+}
+/*
+*   footer
+*/
+#footer {
+    margin: 48px 8px 8px;
+    border-top: 1px solid rgba(0,0,0,0.2);
+}
+#contactus {
+    font-family: 'Times New Roman', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 20px;
+    margin: 32px auto 12px;
+}
+#footer ul.sns{
+    margin: 12px 0 24px;
+}
+#footer p {
+    text-align: center;
+    font-size: 14px;
+    margin: 0;
+    color: #787878;
+}
+#footer p.address {
+    font-size: 12px;
+}
+/*
+*   header
+*/
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background-color: rgba(255,255,255,0.9);
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    transition: 0.6s;
+}
+#header.close {
+    top: -65px;
+}
+/*
+*   brand
+*/
+#brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+#brand img {
+    width: 190px;
+}
+/*
+*   header sns
+*/
+#header > ul.sns {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 8px;
+}
+#header > ul.sns li {
+    margin: 0 4px;
+}
+@media screen and (min-width:600px){
+    #header > ul.sns {
+        display: block;
+    }
+}
+/*
+*   nav
+*/
+#overlay {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.3);
+}
+#header.navshow #overlay {
+    visibility: visible;
+}
+#nav {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    padding-top: 4px;
+    background-color: #ffffff;
+    transition: 0.5s;
+}
+#header.navshow #nav {
+    left: 0;
+}
+#navbrand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    margin-left: 48px;
+}
+#navbrand img {
+    width: 190px;
+    opacity: 0;
+    transition: 1s;
+}
+#header.navshow #navbrand img {
+    opacity: 1;
+}
+#navscroller {
+    height: calc(100vh - 64px);
+    overflow-y: scroll;
+}
+ul.navlist {
+    padding: 16px 42px;
+}
+ul.navlist li {
+    font-family: 'Times New Roman', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    font-size: 20px;
+    margin: 12px 0;
+}
+ul.navlist li a {
+    color: inherit;
+    text-decoration: none;
+}
+ul.navlist ul {
+    list-style-type: none;
+    padding-left: 1.7em;
+}
+ul.navlist ul li {
+    position: relative;
+    font-size: 18px;
+}
+ul.navlist ul li::before {
+    position: absolute;
+    top: 7px;
+    left: -16px;
+    content: "\f054";
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 12px;
+}
+#nav ul.sns {
+    margin: 16px 0;
+}
+.site_search {
+    width: 280px;
+    margin: 24px auto 80px;
+}
+/*
+*   nav opener
+*/
+#navopener {
+    position: absolute;
+    top: 18px;
+    left: 12px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+#navopener > div:nth-child(1) {
+    height: 11px;
+    border-top: 2px solid rgba(230,90,90,1);
+    border-bottom: 2px solid rgba(230,90,90,1);
+    transition: 0.8s;
+}
+#navopener > div:nth-child(2) {
+    height: 10px;
+    border-bottom: 2px solid rgba(230,90,90,1);
+    transition: 0.8s;
+}
+#navopener > div:nth-child(3) {
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #E60043;
+}
+#header.navshow #navopener {
+    position: fixed;
+}
+#header.navshow #navopener > div:nth-child(1) {
+    border-bottom: 2px solid rgba(230,90,90,0);
+    transform: matrix(1,0.6,0,1,0,8);
+}
+#header.navshow #navopener > div:nth-child(2) {
+    transform: matrix(1,-0.6,0,1,0,-12);
+}
+/*
+*   carousel
+*/
+#carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 2rem;
+    background-color: #e8e8e8;
+    font-family: 'Times New Roman', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    max-width: 1008px;
+    min-height: 100px;
+    margin: 80px auto 1rem;
+}
+div[class^="page_"] {
+    height: 100px;
+    background-color: #FFEE58;
+    background-image: linear-gradient(30deg, #FFCA28, #FFEE58);
+}
+/*
+*   main
+*/
+#main {
+    max-width: 860px;
+    padding: 0 8px 0;
+    margin: 0 auto;
+    overflow: hidden;
+}
+/*
+*   top-recommend
+*/
+#top-recommend ul {
+    margin-top: -1rem;
+}
+#top-recommend li > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+    border-radius: 6px;
+    background-color: #8cc4db;
+}
+/*
+.haircolor {
+    background-color: #EF5350;
+    background-image: linear-gradient(30deg, #EF5350, #EC407A);
+}
+.parm {
+    background-color: #AB47BC;
+    background-image: linear-gradient(30deg, #AB47BC, #7E57C2);
+}
+.treatment {
+    background-color: #5C6BC0;
+    background-image: linear-gradient(30deg, #5C6BC0, #42A5F5);
+}
+.cut {
+    background-color: #29B6F6;
+    background-image: linear-gradient(30deg, #29B6F6, #26C6DA);
+}
+.skincare {
+    background-color: #26A69A;
+    background-image: linear-gradient(30deg, #26A69A, #66BB6A);
+}
+.bridal {
+    background-color: #9CCC65;
+    background-image: linear-gradient(30deg, #9CCC65, #D4E157);
+*/
+}
+/*
+*   carousel
+*/
+div.page_fix {
+    background-color: #FFEE58;
+    background-image: linear-gradient(30deg, #FFA726, #FF7043);
+}
+div.page_staff {
+    background-color: #FFEE58;
+    background-image: linear-gradient(30deg, #EF5350, #EC407A);
+}
+div.page_gallery {
+    background-color: #FFEE58;
+    background-image: linear-gradient(30deg, #5C6BC0, #42A5F5);
+}
+div.page_news {
+    background-color: #FFEE58;
+    background-image: linear-gradient(30deg, #29B6F6, #26C6DA);
+}
+div.page_blog {
+    background-color: #FFEE58;
+    background-image: linear-gradient(30deg, #9CCC65, #D4E157);
+}
+div.page_menu {
+    background-color: #FFEE58;
+    background-image: linear-gradient(30deg, #AB47BC, #7E57C2);
+}
+/*
+ *
+ *      pagination
+ *
+ */
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.pagination > li {
+  display: inline;
+}
+.pagination > a,        /* 956 */
+.pagination > span,     /* 956 */
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  line-height: 1.428571429;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  margin-left: -1px;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  margin-left: 0;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.pagination > a:hover,          /* 956 */
+.pagination > span:hover,       /* 956 */
+.pagination > a:focus,          /* 956 */
+.pagination > span:focus,       /* 956 */
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  background-color: #d0c7ba;
+}
+.pagination > .current > a,             /* 956 */
+.pagination > .current > span,          /* 956 */
+.pagination > .current > a:hover,       /* 956 */
+.pagination > .current > span:hover,    /* 956 */
+.pagination > .current > a:focus,       /* 956 */
+.pagination > .current > span:focus     /* 956 */
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 2;
+  color: #ffffff;
+  background-color: #878179;
+  border-color: #878179;
+  cursor: default;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #bbbdb6;
+  background-color: #ffffff;
+  border-color: #dddddd;
+  cursor: not-allowed;
+}
+.pagination-lg > li > a,
+.pagination-lg > li > span {
+  padding: 10px 16px;
+  font-size: 18px;
+}
+.pagination-lg > li:first-child > a,
+.pagination-lg > li:first-child > span {
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+}
+.pagination-lg > li:last-child > a,
+.pagination-lg > li:last-child > span {
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.pagination-sm > li > a,
+.pagination-sm > li > span {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.pagination-sm > li:first-child > a,
+.pagination-sm > li:first-child > span {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.pagination-sm > li:last-child > a,
+.pagination-sm > li:last-child > span {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.pager {
+  padding-left: 0;
+  margin: 20px 0;
+  list-style: none;
+  text-align: center;
+}
+.pager:before,
+.pager:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.pager:after {
+  clear: both;
+}
+.pager:before,
+.pager:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.pager:after {
+  clear: both;
+}
+.pager li {
+  display: inline;
+}
+.pager li > a,
+.pager li > span {
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 15px;
+}
+.pager li > a:hover,
+.pager li > a:focus {
+  text-decoration: none;
+  background-color: #d0c7ba;
+}
+.pager .next > a,
+.pager .next > span {
+  float: right;
+}
+.pager .previous > a,
+.pager .previous > span {
+  float: left;
+}
+.pager .disabled > a,
+.pager .disabled > a:hover,
+.pager .disabled > a:focus,
+.pager .disabled > span {
+  color: #bbbdb6;
+  background-color: #ffffff;
+  cursor: not-allowed;
+}
+/*
+ *
+ *      price list
+ *
+ */
+#menu h1 {
+    font-size: 1.5em;
+    margin-bottom: 1rem;
+}
+#menu h1 + p {
+    font-size: .875em;
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+#menu ul {
+    padding: 0;
+    margin: 1em 1em 2em 1em;
+    list-style-type: none;
+}
+#menu li {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: .8em;
+    margin-bottom: 1em;
+    border-bottom: 1px dotted #999;
+}
+.menu_name {
+    float: left;
+}
+.price {
+    width: 100%;
+    text-align: right;
+}
+.menu_note {
+    clear: both;
+    font-size: .875em;
+    margin-left: 2rem;
+}
+/*
+ *
+ *      mailForm
+ *
+ */
+.mailform label {
+    display: inline-block;
+    font-weight: bold;
+    padding: 0 0.2em;
+    margin-top: .6em;
+}
+i.r {
+    font-style: normal;
+    font-size: smaller;
+    color: red;
+}
+.mailform .notes {
+    display: block;
+    font-size: 1rem;
+    color: red;
+    padding: 0 0.5em;
+    border: 0px none #fff;
+}
+.mailform .warning {
+    background-color: #FCE4EC;
+}
+.mailform input[type="text"] {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1.125em;
+    padding: 0.2em 0.4em;
+    border: 2px solid #9e9e9e;
+    border-radius: 4px;
+}
+.mailform input[type="date"] {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1.125em;
+    padding: 0.2em 0.4em;
+    border: 2px solid #9e9e9e;
+    border-radius: 4px;
+}
+.mailform input[type="email"] {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1.125em;
+    padding: 0.2em 0.4em;
+    border: 2px solid #9e9e9e;
+    border-radius: 4px;
+}
+.mailform input[type="tel"] {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1.125em;
+    padding: 0.2em 0.4em;
+    border: 2px solid #9e9e9e;
+    border-radius: 4px;
+}
+.mailform input[type="number"] {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1.125em;
+    padding: 0.2em 0.4em;
+    border: 2px solid #9e9e9e;
+    border-radius: 4px;
+}
+.mailform select {
+    font-size: 1.125em;
+    font-weight: normal;
+    padding: 0.2em 2em 0.2em 0.4em;
+    border: 2px solid #9e9e9e;
+    border-radius: 4px;
+    display: block;
+    margin-left: -0.2rem;
+}
+.mailform select::-ms-expand {
+    display: none;
+}
+.mailform label.selectlabel {
+    position: relative;
+}
+.mailform label.selectlabel::before {
+    font: normal normal normal 1em/1 FontAwesome;
+    content: "\f107";
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: antialiased;
+    position: absolute;
+    bottom: 0.6em;
+    right: 0.8em;
+    color: #666;
+    pointer-events: none;
+}
+.mailform textarea {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1.125em;
+    padding: 0.2em 0.4em;
+    border: 2px solid #9e9e9e;
+    border-radius: 4px;
+}
+.mailform .mailform_text {
+    margin: 2em 0;
+    border: 0px none #fff;
+}
+.mailform div {
+    font-size: 1.125em;
+    padding: 0.2em 0.4em;
+    border-bottom: 1px dotted #9e9e9e;
+    margin-bottom: 1em;
+}
+.mailform button {
+    display: inline-block;
+    font-size: 1.125em;
+    padding: 0.2em 1em;
+    border: 2px solid #9e9e9e;
+    border-radius: 4px;
+}
+.mailform button[value="check"] {
+    background-color: #BBDEFB;
+}
+.mailform button[value="review"] {
+    background-color: #FCE4EC;
+}
+.mailform button[value="send"] {
+    background-color: #A5D6A7;
+}
+.mailform .mailform_button {
+    text-align: center;
+    border: 0px none #fff;
+}

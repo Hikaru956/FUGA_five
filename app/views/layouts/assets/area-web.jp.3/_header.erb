@@ -10,9 +10,9 @@
     <% end %>
 <% else %>
     <% if request.host == 'staffroom.swifty.jp' %>
-            <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="<%= url_for_file_column(logomark.photos[0], :image) %>" alt="logo mark"></a>
+            <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="logo mark"></a>
     <% else %>
-            <a href="/home" id="brand"><img src="<%= url_for_file_column(logomark.photos[0], :image) %>" alt="logo mark"></a>
+            <a href="/home" id="brand"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="logo mark"></a>
     <% end %>
 <% end %>
         </div>

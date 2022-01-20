@@ -15,7 +15,7 @@
         end
         key_photo = key_photo(@staff)
         unless key_photo.blank?
-            img_url = url_for_file_column(key_photo, :image, 'panel')
+            img_url = key_photo.clip.url(:panel)
         else
             img_url = '//placehold.it/480x360/ffffff/cccccc&amp;text=No Photo'
         end

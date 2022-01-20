@@ -1,0 +1,25 @@
+<% brand = VisualWidget.search_widget_bag_for(@website, "ccc33a729610b15d0c0cf625a77ced35") %>
+<% catch = VisualWidget.search_widget_bag_for(@website, "19fb99b4ee2606c13038fa91f3e124d7") %>
+<header id="header" class="show">
+	<div class="container">
+		<div class="wrapper">
+			<div class="header">
+				<div class="logo">
+<% if !brand.blank? && brand.is_valid? %>
+					<a href="/home">
+		                <img src="//<%= request.host %><%= brand.photos[0].clip.url(:image) %>" alt="logo">
+					</a>
+<% end %>
+				</div>
+<% if !catch.blank? && catch.is_valid? && !catch.data_string.blank? %>
+				<p>
+					<%= catch.data_string %>
+				</p>
+<% end %>
+			</div>
+			<div class="navopener">
+				<div id="navopener"></div>
+			</div>
+		</div>
+	</div>
+</header>

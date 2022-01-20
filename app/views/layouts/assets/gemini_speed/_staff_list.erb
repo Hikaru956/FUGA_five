@@ -1,0 +1,49 @@
+<%
+    widget_bag = VisualWidget.search_widget_bag_for(@website, "5b6167c107ad8ccc6d3659f1e7d9c445")
+    if widget_bag.data_string.blank?
+        cmax = 0
+    else
+        cmax = widget_bag.data_string.to_i
+    end
+    @staffs = @website.public_staffs
+    if cmax == 1
+        unless @staffs.blank?
+%>
+        <aside>
+            <div class="container">
+<%          if request.host == 'sr2.swifty.jp' %>
+                <h1><a href="/contact_us?wkey=<%= @website.wsite_hash_key %>">STAFF</a></h1>
+<%          else %>
+                <h1><a href="/contact_us">STAFF</a></h1>
+<%          end %>
+                <div id="streem_table">
+                    <ul class="wrapper">
+<%
+            @staffs.each do | staff | @staff = staff
+                key_photo = key_photo(@staff)
+                unless key_photo.blank?
+                    image_url = key_photo.clip.url(:panel)
+                else
+                    image_url = "//placehold.it/480x360/ffffff/cccccc&amp;text=No Photo"
+                end
+                if request.host == 'sr2.swifty.jp'
+                    page_url = url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url = url_for(:action=>'staff', :id=>@staff)
+                end
+%>
+                        <li class="col-1p3">
+                            <div class="imgbox"><div style="background-image:url('<%= image_url %>')">
+                                <a href="<%= page_url %>"><img src="<%= image_url %>" alt=""></a>
+                            </div></div>
+                            <h1><a href="<%= page_url %>"><%= model_name(@staff) %> <small><%= h @staff.job_title %></small></a></h1>
+                        </li>
+<%          end %>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+<%      end %>
+<%
+    end
+%>

@@ -1,0 +1,42 @@
+<li class="span4">
+	<% unless temp_local.blank? %>
+
+	    <div class="thumbnail thumbnail-1">
+	        <h3><%= truncate(model_name(temp_local), :length=>50) %></h3>
+	        <div class="">
+	        	<% latests = temp_local.public_leafs %>
+				<div align="center">
+			  	<% unless latests.blank? %>
+<%
+# 2016/09/20 Tachikawa Start
+	                position = 0
+	                target   = nil
+	                latests.each do | leaf |
+	                    if position < leaf.position
+	                        target   = leaf
+	                    	position = leaf.position
+	                    end
+	                end
+	                key_photo = key_photo(target)
+# 2016/09/20 Tachikawa End
+#                    key_photo = key_photo(latests[0])
+%>
+					<% unless key_photo.blank? %>
+						<%= image_tag key_photo.clip.url(:panel), :style=>"visibility: visible; opacity: 1;", :alt=>model_name(temp_local) %>
+					<% else %>
+						<img src="//placehold.it/800x500&amp;text=<%=latests[0].publish_from.strftime('%Y-%m-%d')%>">
+					<% end %>
+				<% else %>
+						<img src="//placehold.it/800x500&amp;text=No Article">
+				<% end %>
+				</div>
+			</div>
+	        <section>
+				<% unless temp_local.description.blank? %><p><%= h temp_local.description %></p><% end %>
+				<a href="<%= url_for(:action=>'news_list', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>" class="btn btn-1">Read More</a>
+	        </section>
+	    </div>
+
+	<% end %>
+
+</li>

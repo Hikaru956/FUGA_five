@@ -83,7 +83,7 @@
     unless @public_bag.blank?
         @public_bag.each do | bag |
             unless bag.blank?
-                key_photo = bag.photos.find(:first)
+                key_photo = bag.photos.first
                 unless key_photo.blank?
                     image_url = key_photo.clip.url(:panel)
                 else

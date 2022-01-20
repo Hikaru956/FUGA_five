@@ -1,0 +1,10 @@
+<div id="gotop"><i class="fa fa-angle-up"></i></div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/assets/vendor/jquery-2.1.4.min.js"><\/script>')</script>
+<script src="/javascripts/assets/vendor/jquery.mobile.v1.4.5.touch.min.js"></script>
+<script src="/javascripts/assets/albino_speed/albino.js"></script>
+<script src="/javascripts/assets/albino_speed/navigation.js"></script>
+<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
+<% unless @website.analytics_code.blank? %>
+<%= raw @website.analytics_code %>
+<% end %>

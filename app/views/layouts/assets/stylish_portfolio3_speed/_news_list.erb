@@ -1,0 +1,81 @@
+<%
+    news_count = VisualWidget.search_widget_bag_for(@website, "cdf3ea1fb6732aa93b1b508f8835b048")
+    if news_count.blank? || !news_count.is_valid?
+        cmax = 0
+    else
+        cmax = news_count.data_string.to_i
+    end
+    if cmax < 0 || cmax > 3
+        cmax = 0
+    end
+    if cmax != 0
+
+        @max = cmax
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+        navigation = type_root.web_page
+        bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        latest_leafs = @website.public_leafs.where("content_category_id IN (?)", public_categories).order(position: :desc).limit(@max)
+        #c = ContentLeaf.public_leafs_condition
+        #c.and "content_category_id", public_categories
+        #latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'position desc')
+        unless latest_leafs.blank?
+%>
+	<aside id="news-list">
+		<div class="container">
+            <h1><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id %></h1>
+			<ul class="content-list">
+<%
+            latest_leafs.each do | leaf |
+                if request.host == 'staffroom.swifty.jp'
+                    page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'news_show', :id=>leaf)
+                end
+                publish   = leaf.publish_from.strftime("%Y-%m-%d")
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = key_photo.clip.url(:panel)
+                else
+                    image_url = '//placehold.jp/640x480.png?text='+publish
+                end
+%>
+				<li class="wrapper">
+					<div class="m1p3">
+						<div class="imgbox43">
+							<div>
+								<a href="<%= page_url %>">
+									<img src="<%= image_url %>" alt="<%= model_title(leaf) %>">
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="m1p23">
+						<h2>
+							<a href="<%= page_url %>">
+								<%= model_title(leaf) %>
+							</a>
+						</h2>
+						<p class="property">
+							<span>
+								<i class="pico-calendar-alt"></i> <%= publish %>
+							</span>
+						</p>
+						<p><%= raw truncate(strip_tags(leaf.description), :length=>84) %></p>
+						<p class="viewmore">
+							<a href="<%= page_url %>">
+								<img src="/images/assets/share/read_more.png">
+							</a>
+						</p>
+					</div>
+				</li>
+<%          end %>
+			</ul>
+		</div>
+	</aside>
+<%      end %>
+<%  end %>

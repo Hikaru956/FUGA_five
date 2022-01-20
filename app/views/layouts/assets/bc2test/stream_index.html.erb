@@ -23,15 +23,15 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
 <% end %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/stylesheets/assets/business-casual2/style.css">
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/style" %>
+<link rel="stylesheet" href="/stylesheets/assets/business-casual2-speed/style.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/style" %>
 </head>
 <!-- このサイトはIE9未満では正しく表示されません。 -->
 <!--[if lt IE 9]>
@@ -47,19 +47,19 @@
 <aside id="tnav">
     <ul class="scrooler">
         <li>- MENU</li>
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/navigation" %>
     </ul>
 </aside>
 <!-- 主ウインドウ -->
 <div id="body">
     <div class="scrooler">
 <!-- サイトヘッダー -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/header" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/header" %>
 <!-- グローバルナビゲーション -->
         <nav id="gnav">
             <div class="container">
                 <ul id="gnav_main">
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/navigation" %>
                 </ul>
             </div>
         </nav>
@@ -87,7 +87,7 @@
             unless latests.blank?
                 key_photo = key_photo(latests[0])
                 unless key_photo.blank?
-                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                    image_url = key_photo.clip.url(:panel)
                 else
                     image_url = '//placehold.it/327x327&amp;text=No Photo'
                 end
@@ -114,11 +114,11 @@
             </div>
         </div>
 <!-- サイトフッター -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/footer" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/footer" %>
     </div>
 </div>
 <!-- common javascript -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2/common_js" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/common_js" %>
 <!-- page specific javascript -->
 <!-- social net javascript -->
 <!-- google maps javascript -->

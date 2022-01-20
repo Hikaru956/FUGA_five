@@ -4,7 +4,7 @@
         <!-- 最初の写真 -->
 <% key_photo = key_photo(temp_local) %>
 <% unless key_photo.blank? %>
-        <div class="latest_imgbox"><div><%= image_tag(url_for_file_column(key_photo, :image, 'panel')) %></div></div>
+        <div class="latest_imgbox"><div><%= image_tag key_photo.clip.url(:panel) %></div></div>
 <% else %>
         <div class="latest_imgbox"><div><img src="//placehold.it/480x360/ffffff/cccccc&amp;text=<%=temp_local.publish_from.strftime('%Y-%m-%d')%>"></div></div>
 <% end %>

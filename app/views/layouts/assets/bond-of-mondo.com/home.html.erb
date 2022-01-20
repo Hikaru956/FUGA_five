@@ -42,7 +42,7 @@
 <% end %>
 <meta property="og:title"             content="<%= @website.name %>">
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="http://<%= request.host %><%= url_for_file_column(og_img.photos[0], :image) %>">
+<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url(:image) %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">
@@ -60,11 +60,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
 <% end %>
 <link rel="stylesheet" href="/stylesheets/assets/bond-of-mondo.com/style.css?v=1">
 </head>
@@ -75,11 +75,11 @@
 <% if mv_bak.blank? || !mv_bak.is_valid? %>
 <aside id="mVisual">
 <% else %>
-<aside id="mVisual" style="background-image:url('<%= url_for_file_column(mv_bak.photos[0], :image) %>')">
+<aside id="mVisual" style="background-image:url('<%= mv_bak.photos[0].clip.url(:image) %>')">
 <% end %>
 <% unless mv_logo.blank? && !mv_logo.is_valid? %>
     <div>
-        <img src ="<%= url_for_file_column(mv_logo.photos[0], :image, 'panel') %>" alt="ロゴマーク">
+        <img src ="<%= mv_logo.photos[0].clip.url(:panel) %>" alt="ロゴマーク">
     </div>
 <% end %>
 </aside>
@@ -103,7 +103,7 @@
 <% end %>
 <!-- セカンドヴィジュアル -->
 <% if !sv_bak.blank? && sv_bak.is_valid? %>
-<aside id="sVisual" style="background-image:url('<%= url_for_file_column(sv_bak.photos[0], :image) %>')">
+<aside id="sVisual" style="background-image:url('<%= sv_bak.photos[0].clip.url(:image) %>')">
     <div class="container">
         <h1>ACE inc.Philosophy</h1>
         <p>
@@ -132,7 +132,7 @@
 <nav id="gNav">
 <% if !gn_logo.blank? && gn_logo.is_valid? %>
 <!--
-    <img src ="<%= url_for_file_column(gn_logo.photos[0], :image, 'thumb') %>" alt="ロゴマーク">
+    <img src ="<%= gn_logo.photos[0].clip.url(:thumb) %>" alt="ロゴマーク">
 -->
 <% end %>
     <ul>

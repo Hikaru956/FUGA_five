@@ -4,7 +4,7 @@
         <div class="thumbnail">
             <% key_photo = key_photo(@leaf) %>
             <% unless key_photo.blank? %>
-            <div align="center"><%= image_tag key_photo.clip.url(:panel), :class=>"img-responsive") %></div>
+            <div align="center"><%= image_tag key_photo.clip.url(:panel), :class=>"img-responsive" %></div>
             <% else %>
             <a href="#"><img class="img-responsive" src="//placehold.jp/700x300.jpg?text=<%=@leaf.publish_from.strftime('%Y-%m-%d')%>"></a><% end %>
         </div>

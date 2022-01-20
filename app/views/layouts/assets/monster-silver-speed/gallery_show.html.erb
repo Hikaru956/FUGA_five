@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title><%= model_title(@seed) %>- <%= @website.name %></title>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/head_logic" %>
+    </head>
+    <body>
+        <div class="spinner">
+        </div>
+        <!--============================== header =================================-->
+        <header>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/header" %>
+        </header>
+<% if request.host == 'www.bond-of-mondo.com' %>
+        <div>
+<% else %>
+        <div class="bg-content">
+<% end %>
+            <!--============================== content =================================-->
+            <div id="content" class="content-extra">
+                <div class="ic">
+                </div>
+                <div class="row-1">
+                    <div class="container">
+                        <br/>
+                        <div class="row">
+                            <div class="span12">
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>"><i class="icon-home"></i></a>
+                                    </li>
+									<% unless @seed.content_category.has_only_a_public_bag? %>
+	                                    <li>
+	                                        <a href="<%= url_for(:action=>'portfolio_index', :id=>@seed.content_category,	:wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a>
+	                                    </li>
+									<% end %>
+                                    <% @seed.content_category.category_path(true).each do |category | %>
+                                    <li>
+                                        <%= link_to category.category_label, :action=>"portfolio_list", :id=>category,	:wkey=>@website.wsite_hash_key %>
+                                    </li>
+                                    <% end %>
+                                    <li class="active">
+                                        <%= model_title(@seed) %>
+                                    </li>
+                                </ol>
+                                <h1 class="page-header">
+									<div class="pull-right">
+										<% url_back = url_for(:action=>"gallery_list", :id=>@seed.content_category, :page=>@page,	:wkey=>@website.wsite_hash_key) %>
+										<a class="btn btn-small btn-primary" href="<%=url_back%>">
+											<i class="icon-arrow-left"></i>&nbsp;
+											戻る
+										</a>
+									</div>
+                                	<%= h model_title(@seed) %>
+								</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="span6">
+                                <div style="text-align:center;">
+                                    <% key_photo = key_photo(@seed) %>
+                                    <% unless key_photo.blank? %>
+                                    <%= image_tag key_photo.clip.url(:panel) %>
+                                    <% else %>
+                                    <img src="//placehold.it/320x240&amp;text=No Photo"><% end %>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+                                <p>
+                                    <% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+                                    by <a href="<%=url_for(:action=>'staff', :id=>@seed.staff,	:wkey=>@website.wsite_hash_key) %>"><%= h model_name(@seed.staff) %></a>
+                                    <% end %>
+                                </p>
+                            </div>
+                        </div>
+                        <% @photos = @seed.photos %>
+                        <% unless @photos.blank? %>
+                        <hr/>
+                        <div class="row">
+                            <div class="span12">
+                                <% array = @photos.in_groups_of(2, false) %>
+                                <div class="span12">
+                                    <% for i in 0..(array.size-1) %>
+                                    <% @lines = array[i] %>
+                                    <div class="row">
+                                        <ul class="thumbnails thumbnails-1">
+                                            <li class="span6">
+                                                <% if @lines.size>=1 %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_gallery_photo", :locals => {:temp_local => @lines[0]} %>
+                                                <% end %>
+                                            </li>
+                                            <li class="span6">
+                                                <% if @lines.size>=2 %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_gallery_photo", :locals => {:temp_local => @lines[1]} %>
+                                                <% end %>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                        <% end %>
+                        <div class="row">
+                            <div class="span12">
+                                <hr/><%= render :partial=>'layouts/social_buttons' %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--============================== footer =================================-->
+        <footer>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/footer" %>
+        </footer>
+    </body>
+</html>

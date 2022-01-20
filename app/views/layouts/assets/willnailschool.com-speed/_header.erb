@@ -1,0 +1,30 @@
+<% logo    = VisualWidget.search_widget_bag_for(@website, "6ac0ac1f23a3d4b308d6b802feb29255") %>
+<header id="header">
+  <h1>
+<% if request.host == 'staffroom.swifty.jp' %>
+    <a href="/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+    <a href="/home">
+<% end %>
+<% if !logo.blank? && logo.is_valid? %>
+      <img src="<%= logo.photos[0].clip.url(:image) %>" alt="WILL Nail School ロゴ">
+<% else %>
+      <img src="//placehold.jp/246x50.png" alt="WILL Nail School ロゴ">
+<% end %>
+    </a>
+  </h1>
+  <nav id="nav">
+    <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com/head_navigation" %>
+    </ul>
+  </nav>
+  <div id="contactus">
+    <a href="https://form.willnailschool.com/index.html" class="button" target="_blank">お問い合わせ</a>
+  </div>
+  <div id="mNavButtonArea">
+    <div id="mNavButton">
+      <div><i class="fas fa-bars"></i></div>
+      <div>MENU</div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,12 @@
+<div class="service-item">
+    <i class="service-icon icon-pencil"></i>
+    <h4>
+    <a href="<%= url_for(:action=>'news_show', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>" class="link-1">
+    <%= temp_local.publish_from.strftime("%Y-%m-%d") %></h4>
+</a>
+<p>
+    <h5><%= model_title(temp_local) %></h5>
+    <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>100) %>
+    <a href="<%= url_for(:action=>'news_show', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>" class="link-1">Read</a>
+</p>
+</div>

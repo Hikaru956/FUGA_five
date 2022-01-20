@@ -10,7 +10,7 @@
 <% if widget_bag0.blank? || !widget_bag0.is_valid? %>
 								<img src="//placehold.it/260x100&amp;text=HURRAH">
 <% else %>
-								<img src="<%= url_for_file_column(widget_bag0.photos[0], :image) %>">
+								<img src="<%= widget_bag0.photos[0].clip.url(:image) %>">
 <% end %>
 							</a>
 		                    <span>
@@ -26,7 +26,7 @@
 <% if widget_bag1.blank? || !widget_bag1.is_valid? %>
 								<img src="//placehold.it/180x100&amp;text=THINGS">
 <% else %>
-								<img src="<%= url_for_file_column(widget_bag1.photos[0], :image) %>">
+								<img src="<%= widget_bag1.photos[0].clip.url(:image) %>">
 <% end %>
 							</a>
  		                    <span>
@@ -50,7 +50,7 @@
 <% if widget_bag0.blank? || !widget_bag0.is_valid? %>
 								<img src="//placehold.it/260x100&amp;text=HURRAH">
 <% else %>
-								<img src="<%= url_for_file_column(widget_bag0.photos[0], :image) %>">
+								<img src="<%= widget_bag0.photos[0].clip.url(:image) %>">
 <% end %>
 							</a>
 		                    <a href="https://www.facebook.com/pages/Hurrah-%E3%83%95%E3%83%A9%E3%83%BC/338106649658663" target="_blank"><i class="icon-facebook-sign"></i></a>
@@ -64,7 +64,7 @@
 <% if widget_bag1.blank? || !widget_bag1.is_valid? %>
 								<img src="//placehold.it/180x100&amp;text=THINGS">
 <% else %>
-								<img src="<%= url_for_file_column(widget_bag1.photos[0], :image) %>">
+								<img src="<%= widget_bag1.photos[0].clip.url(:image) %>">
 <% end %>
 							</a>
 		                    <a href="https://www.facebook.com/pages/Hurrah-and-Things-フラーアンドシングス/1382245328673374" target="_blank"><i class="icon-facebook-sign"></i></a>
@@ -82,7 +82,7 @@
 <% if widget_bag0.blank? || !widget_bag0.is_valid? %>
 								<img src="//placehold.it/260x100&amp;text=HURRAH">
 <% else %>
-								<img src="<%= url_for_file_column(widget_bag0.photos[0], :image) %>">
+								<img src="<%= widget_bag0.photos[0].clip.url(:image) %>">
 <% end %>
 							</a>
 		                    <a href="https://www.facebook.com/pages/Hurrah-%E3%83%95%E3%83%A9%E3%83%BC/338106649658663" target="_blank"><i class="icon-facebook-sign"></i></a>
@@ -96,7 +96,7 @@
 <% if widget_bag1.blank? || !widget_bag1.is_valid? %>
 								<img src="//placehold.it/180x100&amp;text=THINGS">
 <% else %>
-								<img src="<%= url_for_file_column(widget_bag1.photos[0], :image) %>">
+								<img src="<%= widget_bag1.photos[0].clip.url(:image) %>">
 <% end %>
 							</a>
 		                    <a href="https://www.facebook.com/pages/Hurrah-and-Things-フラーアンドシングス/1382245328673374" target="_blank"><i class="icon-facebook-sign"></i></a>

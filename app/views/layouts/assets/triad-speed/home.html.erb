@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% hptitle = VisualWidget.search_widget_bag_for(@website, "48ac09c0ea4b9760dd63a4b5bbbc205b") %>
+<% if hptitle.blank? || !hptitle.is_valid? %>
+<title><%= @website.name %></title>
+<% else %>
+<title><%= hptitle.data_string %></title>
+<% end %>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% else %>
+<%      fbappid = VisualWidget.search_widget_bag_for(@website, "b78bf115d10b56b46ed4191eba5beb82") %>
+<%      unless fbappid.data_string.blank? %>
+<meta property="fb:app_id"            content="<%= fbappid.data_string %>">
+<%      end %>
+<meta property="og:type"              content="website">
+<meta property="og:url"               content="http://<%= request.host %>/home">
+<%      if hptitle.blank? || !hptitle.is_valid? %>
+<meta property="og:title"             content="<%= @website.name %>">
+<%      else %>
+<meta property="og:title"             content="<%= hptitle.data_string %>">
+<%      end %>
+<%      og_img = VisualWidget.search_widget_bag_for(@website, "e41930c7057e382416cd4e664abf11a3") %>
+<%      if !og_img.blank? && og_img.is_valid? %>
+<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url(:image) %>">
+<%      end %>
+<%      unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<%      end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<%      unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<%      end %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<% end %>
+<script src="https://use.fontawesome.com/9e789611aa.js"></script>
+<link rel="stylesheet" href="/stylesheets/assets/triad-speed/style.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/style" %>
+</head>
+<!--[if !IE]><!-->
+<body>
+<!--<![endif]-->
+<!--[if IE]>
+<body id="ie">
+<div id="browserupgrade">あなたは<strong>古い</strong>アプリケーションをご利用のようです。<a href="http://browsehappy.com/">最新のブラウザ</a>に更新して快適なインターネットをお楽しみ下さい。</div>
+<![endif]-->
+<div id="body">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/header" %>
+<!-- グローバルナビゲーション -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/navigation" %>
+<!-- パンくずリスト -->
+<!-- カルーセル -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/corousel" %>
+<!-- 最新のNews -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/news_list" %>
+<!-- Gallery streem list -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/gallery_streem" %>
+<!-- 最新のBLOG -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/blog_list" %>
+<!-- STAFF list -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/staff_list" %>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/footer" %>
+    </div>
+</div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/common_js" %>
+<!-- page specific javascript -->
+<script src="/javascripts/assets/triad-speed/carousel.js"></script>
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/social_js" %>
+<!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/triad-speed/gmaps_js" %>
+</body>
+</html>

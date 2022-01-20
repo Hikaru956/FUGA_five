@@ -1,0 +1,6 @@
+<% map = VisualWidget.search_widget_bag_for(@website, "2afca419fff53f95ab4ed51008e1565b") %>
+<% if !map.blank? && map.is_valid? %>
+<aside class="map">
+    <%= raw map.data_string %>
+</aside>
+<% end %>

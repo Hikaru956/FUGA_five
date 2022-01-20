@@ -9,7 +9,7 @@
 			  	<% unless latests.blank? %>
 					<% key_photo = key_photo(latests[0]) %>
 					<% unless key_photo.blank? %>
-						<%= image_tag key_photo.clip.url(:panel), :style=>"visibility: visible; opacity: 1;", :alt=>model_name(temp_local)) %>
+						<%= image_tag key_photo.clip.url(:panel), :style=>"visibility: visible; opacity: 1;", :alt=>model_name(temp_local) %>
 					<% else %>
 						<img src="//placehold.jp/800x500.jpg?text=<%=latests[0].publish_from.strftime('%Y-%m-%d')%>">
 					<% end %>

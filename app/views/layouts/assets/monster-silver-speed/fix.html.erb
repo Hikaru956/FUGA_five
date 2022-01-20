@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title><%= model_title(@seed) %> - <%= @website.name %></title>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/head_logic" %>
+    </head>
+    <body>
+        <div class="spinner">
+        </div>
+        <!--============================== header =================================-->
+        <header>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/header" %>
+        </header>
+<% if request.host == 'www.bond-of-mondo.com' %>
+        <div>
+<% else %>
+        <div class="bg-content">
+<% end %>
+            <!--============================== content =================================-->
+            <div id="content" class="content-extra">
+                <div class="row-1">
+                    <div class="container">
+                    	</br/>
+                        <div class="row">
+                            <div class="span12">
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>"><i class="icon-home"></i></a>
+                                    </li>
+                                    <li class="active">
+                                        <%= model_title(@seed) %>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="span12">
+								<% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+								<%= render :partial=>'layouts/social_buttons'%>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+        <!--============================== footer =================================-->
+        <footer>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/footer" %>
+        </footer>
+    </body>
+</html>

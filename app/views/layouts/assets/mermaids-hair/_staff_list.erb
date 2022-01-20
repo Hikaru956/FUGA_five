@@ -22,7 +22,7 @@
             @staffs.each do | staff | @staff = staff
                 key_photo = key_photo(@staff)
                 unless key_photo.blank?
-                    image_url = url_for_file_column(key_photo, :image, 'panel')
+                    image_url = key_photo.clip.url(:panel)
                 else
                     image_url = "//placehold.it/480x360/ffffff/cccccc&amp;text=No Photo"
                 end

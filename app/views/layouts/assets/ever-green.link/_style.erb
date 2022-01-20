@@ -7,7 +7,7 @@
 <% end %>
 <% bg_img = VisualWidget.search_widget_bag_for(@website, "58194e0455a186de9faf7af8ffb76ae6") %>
 <% if !bg_img.blank? && bg_img.is_valid? %>
-    background: url("<%= url_for_file_column(bg_img.photos[0], :image) %>") no-repeat center top;
+    background: url("<%= bg_img.photos[0].clip.url(:image) %>") no-repeat center top;
     -webkit-background-size: cover;
        -moz-background-size: cover;
             background-size: cover;
