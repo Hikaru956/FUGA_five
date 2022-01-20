@@ -1,0 +1,126 @@
+@font-face {
+  font-family: 'pico';
+  src:
+    url('fonts/pico.ttf?kvd5g4') format('truetype'),
+    url('fonts/pico.woff?kvd5g4') format('woff'),
+    url('fonts/pico.svg?kvd5g4#pico') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'pico' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pico-user:before {
+  content: "\f007";
+}
+.pico-home:before {
+  content: "\f015";
+}
+.pico-edit:before {
+  content: "\f044";
+}
+.pico-phone:before {
+  content: "\f095";
+}
+.pico-twitter:before {
+  content: "\f099";
+}
+.pico-facebook:before {
+  content: "\f09a";
+}
+.pico-youtube:before {
+  content: "\f167";
+}
+.pico-instagram:before {
+  content: "\f16d";
+}
+.pico-line:before {
+  content: "\f3c0";
+}
+.pico-mail:before {
+  content: "\f0e0";
+}
+.pico-setting:before {
+  content: "\e92f";
+  color: #595757;
+}
+.pico-pump-soap:before {
+  content: "\e06b";
+}
+.pico-cut:before {
+  content: "\f0c4";
+}
+.pico-sitemap:before {
+  content: "\f0e8";
+}
+.pico-hashtag:before {
+  content: "\f292";
+}
+.pico-user-circle:before {
+  content: "\f2bd";
+}
+.pico-pencil-alt:before {
+  content: "\f303";
+}
+.pico-user-edit:before {
+  content: "\f4ff";
+}
+.pico-pinterest:before {
+  content: "\f0d2";
+}
+.pico-pinterest-p:before {
+  content: "\f231";
+}
+.pico-edit1:before {
+  content: "\f045";
+}
+.pico-calendar-alt:before {
+  content: "\f074";
+}
+.pico-quill:before {
+  content: "\e907";
+}
+.pico-images:before {
+  content: "\e912";
+}
+.pico-camera:before {
+  content: "\e913";
+}
+.pico-price-tag:before {
+  content: "\e935";
+}
+.pico-location:before {
+  content: "\e947";
+}
+.pico-clock:before {
+  content: "\e94e";
+}
+.pico-bookmark:before {
+  content: "\e9d2";
+}
+.pico-google-plus:before {
+  content: "\ea8b";
+}
+.pico-google-plus3:before {
+  content: "\ea8d";
+}
+.pico-facebook-f:before {
+  content: "\ea90";
+}
+.pico-tumblr:before {
+  content: "\eab9";
+}

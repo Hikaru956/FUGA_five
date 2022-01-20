@@ -1,0 +1,147 @@
+/*
+*
+*      grid
+*
+*/
+.col-m1t2p3 {
+  -webkit-flex: 0 1 33.3333333%;
+          flex: 0 1 33.3333333%;
+}
+.col-m1t2p4,
+.col-m1t3p4,
+.col-m2t3p4,
+.col-m3t3p4 {
+  -webkit-flex: 0 1 25%;
+          flex: 0 1 25%;
+}
+.col-m2t4p6,
+.col-m3t4p6 {
+  -webkit-flex: 0 1 16.6666666%;
+          flex: 0 1 16.6666666%;
+}
+.col-m3t4p8,
+.col-m3t6p8 {
+  -webkit-flex: 0 1 12.5%;
+          flex: 0 1 12.5%;
+}
+/*
+*
+*      header
+*
+*/
+#header {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#header h1 {
+  -webkit-flex: 0 1 auto;
+          flex: 0 1 auto;
+}
+#nav > ul > li:not(.drop) a,
+#nav > ul > li:not(.drop3) a {
+  font-size: 1rem;
+  padding: 0 14px;
+  line-height: 42px;
+}
+#nav li.drop,
+#nav li.drop3 {
+  font-size: 1rem;
+  line-height: 42px;
+  padding: 0 14px;
+}
+#nav li.drop ul,
+#nav li.drop3 ul {
+  top: 41px;
+}
+#nav li.drop:hover ul {
+  height: 84px;
+}
+#nav li.drop3:hover ul {
+  height: 126px;
+}
+#nav li.drop li a,
+#nav li.drop3 li a {
+  font-size: 1rem;
+  line-height: 42px;
+  padding: 0 14px;
+}
+#contactus {
+  align-self: center;
+}
+#contactus a {
+  font-size: 1rem;
+}
+@media screen and (min-width:1108px) {
+  #nav a {
+    padding: 0 22px;
+  }
+}
+/*
+*
+*      pagegraphic
+*
+*/
+#pagegraphic {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*
+*
+*      max-width
+*
+*/
+#breadcrumbs,
+#experience,
+#article,
+#footInfo {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*
+*
+*      footInfo
+*
+*/
+@media screen and (min-width:1108px) {
+  #footInformation {
+    display: -webkit-flex;
+    display:         flex;
+  }
+  #gmap {
+    order: 1;
+    -webkit-flex: 1 1 calc(50% - 156px);
+            flex: 1 1 calc(50% - 156px);
+    background-color: rgba(234,99,144,0.05);
+    padding: 8px;
+  }
+  #gmap iframe {
+    height: 100%;
+  }
+  #footAbout {
+    order: 2;
+    -webkit-flex: 1 1 calc(50% - 156px);
+            flex: 1 1 calc(50% - 156px);
+    margin: 0 16px 0 0;
+    background-color: rgba(234,99,144,0.05);
+    padding: 8px;
+  }
+  #footAbout h2 {
+    margin-top: 0;
+  }
+  #footSub {
+    order: 3;
+    -webkit-flex: 0 0 280px;
+            flex: 0 0 280px;
+  }
+]
+/*
+*
+*      school-link
+*
+*/
+#school-link div {
+  font-size: 1.2rem;
+}
