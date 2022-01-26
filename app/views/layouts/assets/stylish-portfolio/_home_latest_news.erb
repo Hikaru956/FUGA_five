@@ -1,7 +1,7 @@
 <%
 	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
 	news_navigation = type_root.web_page
-	latest_leaf = @website.public_leafs.order(position: :desc).limit(4)
+	latest_leafs = @website.public_leafs.order(position: :desc).limit(4)
 
 	#first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
 	#public_categories  = []

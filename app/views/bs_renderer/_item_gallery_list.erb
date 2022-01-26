@@ -5,7 +5,6 @@
 			<% key_photo = key_photo(temp_local) %>
 			<% unless key_photo.blank? %>
 				<%= image_tag key_photo.clip.url(:thumb) %>
-				<%= image_tag(url_for_file_column(key_photo, :image, "thumb")) if false%>
 			<% else %>
 				<img src="http://placehold.it/320x240&amp;text=No Photo">
 	    	<% end %>

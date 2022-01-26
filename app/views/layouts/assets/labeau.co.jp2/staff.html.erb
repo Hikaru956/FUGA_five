@@ -140,20 +140,20 @@
                     </div>
                 </article>
 <%  @photos = @seed.photos %>
-<%  @photos.shift %>
+<%  @photos.to_a.shift unless @photos.blank? #hikaru%>
 <%  unless @photos.blank? %>
                 <aside class="wrapper">
-<%      @photos.each do | photo |  %>
-                    <div class="col-1p3">
-                        <div class="col-in">
-                            <%= image_tag photo.clip.url(:panel) %>
-<%          unless photo.info.blank? %>
-                            <p><%=h photo.info%></p>
-<%          end %>
-                        </div>
-                    </div>
-<%      end %>
-                </aside>
+<% @photos.each do | photo |  %>
+    <div class="col-1p3">
+        <div class="col-in">
+            <%= image_tag photo.clip.url(:panel) %>
+<% unless photo.info.blank? %>
+    <p><%=h photo.info%></p>
+<% end %>
+        </div>
+    </div>
+<% end %>
+    </aside>
 <%  end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/labeau.co.jp2/sns_btn" %>
             </div>

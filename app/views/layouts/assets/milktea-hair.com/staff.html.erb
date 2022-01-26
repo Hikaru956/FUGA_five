@@ -144,7 +144,7 @@
                     </div>
                 </article>
 <%  @photos = @seed.photos %>
-<%  @photos.shift %>
+<%  @photos.to_a.shift unless @photos.blank? %>
 <%  unless @photos.blank? %>
                 <aside class="wrapper2">
 <%      @photos.each do | photo |  %>

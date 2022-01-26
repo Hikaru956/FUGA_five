@@ -171,7 +171,8 @@ class ContentCategory < ApplicationRecord
   end
   
   def public_categories
-    self.children.find(:all, :conditions=>["is_public=?", true])
+    #self.children.where('is_public=?', true)
+    self.children.where('is_public=?', true)
   end
   
   def public_leafs(recurse=false)

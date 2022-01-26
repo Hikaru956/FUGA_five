@@ -13,7 +13,7 @@
         @max = cmax
         type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
         navigation = type_root.web_page
-        bag_categories = type_root.children.where("is_public=?", true) #type_root.children.where("is_public=?", true) #type_root.children.find(:all, :conditions=>["is_public=?", true])
+        bag_categories = type_root.children.where("is_public=?", true) #type_root.children.where("is_public=?", true) #type_root.children.where('is_public=?', true)
 
         public_categories  = []
         bag_categories.each do | cat |

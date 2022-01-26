@@ -6,7 +6,7 @@
 	# ブログ.ウェブページ
 	navigation = type_root.web_page
 	# ブログ中の全て＆有効
-	bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+	bag_categories = type_root.children.where('is_public=?', true)
 
 	public_categories  = []
 	bag_categories.each do | cat |

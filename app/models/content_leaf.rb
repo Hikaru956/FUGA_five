@@ -27,7 +27,11 @@ class ContentLeaf < ApplicationRecord
   after_create  :after_create  
   
   #attr_accessible  :shop_id, :content_category_id, :content_bag_id, :is_public, :title, :description, :description_2, :description_3, :staff_id, :publish_from, :publish_until, :integer_field
- 
+
+  #labeau.co.jp2対応
+  attribute :type, :string, default: nil
+  attribute :label, :string, default: nil
+
   def before_save
     self.content_category = self.content_bag.content_category if self.content_category.blank?
     self.publish_from     = Time.now.to_date  if self.publish_from.blank?

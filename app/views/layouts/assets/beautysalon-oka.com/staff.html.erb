@@ -63,7 +63,7 @@
 <%  @photos = @seed.photos %>
 <%  unless @photos.blank? %>
         <li>
-            <%= image_tag @photos[0].clip.url(:image)) %>
+            <%= image_tag @photos[0].clip.url(:image) %>
 <%      unless @photos[0].info.blank? %>
             <div class="caption"><%=h @photos[0].info %></div>
 <%      end %>

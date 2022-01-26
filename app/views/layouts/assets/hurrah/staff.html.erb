@@ -96,7 +96,7 @@
                     </div>
                 </div>
 <%  @photos = @seed.photos %>
-<%  @photos.shift %>
+<%  @photos.to_a.shift unless @photos.blank? %>
 <%  unless @photos.blank? %>
                 <div class="row">
 <%      @photos.each do | photo |  %>

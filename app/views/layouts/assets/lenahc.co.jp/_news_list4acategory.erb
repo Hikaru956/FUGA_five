@@ -1,7 +1,7 @@
 <%
     type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
     navigation = type_root.web_page
-    bag_categories = type_root.children.where("is_public=?", true) #type_root.children.find(:all, :conditions=>["is_public=?", true])
+    bag_categories = type_root.children.where("is_public=?", true) #type_root.children.where('is_public=?', true)
     today = Date.today.strftime("%Y-%m-%d")
     latest_leafs = []
     bag_categories.each do | cat |

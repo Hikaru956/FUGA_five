@@ -1,7 +1,8 @@
 <%
         @max = 12
         type_news = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
-        bag_categories = type_news.children.find(:all, :conditions=>["is_public=?", true])
+        bag_categories = type_news.children.where('is_public=?', true)
+        #bag_categories = type_news.children.where('is_public=?', true)
         public_categories  = []
         bag_categories.each do | cat |
             public_categories.concat(cat.sons)
@@ -17,7 +18,7 @@
         end
 
         type_blog = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
-        bag_categories = type_blog.children.find(:all, :conditions=>["is_public=?", true])
+        bag_categories = type_blog.children.where('is_public=?', true)
         public_categories  = []
         bag_categories.each do | cat |
             public_categories.concat(cat.sons)

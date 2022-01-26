@@ -46,7 +46,7 @@
 		<div  style="text-align:center;">
 		<% key_photo = key_photo(@seed) %>
 		<% unless key_photo.blank? %>
-			<div class="thumbnail thumbnail-1"><%= image_tag key_photo.clip.url(:panel) %><%= image_tag key_photo.clip.url(:panel)) if false %></div>
+			<div class="thumbnail thumbnail-1"><%= image_tag key_photo.clip.url(:panel) %></div>
     	<% end %>
 		</div>
     </div>

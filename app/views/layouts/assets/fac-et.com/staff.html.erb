@@ -107,7 +107,7 @@
 <%  photos = @seed.photos %>
 <%  unless photos.blank? %>
                         <div style="background-image:url(<%= photos[0].clip.url(:image) %>);">
-<%      photos.shift %>
+<%      photos.to_a.shift unless photos.blank? %>
 <%  else %>
                         <div>
 <%  end %>

@@ -7,7 +7,7 @@
 	# type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_GALLERY)
 	# type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
 	# find:first 先頭行 :last 最終行 :all 全て
-	bag_categories = type_root.children.find(:all, :conditions=>["is_public=?", true])
+	bag_categories = type_root.children.where('is_public=?', true)
 
 	public_categories  = []
 	bag_categories.each do | cat |
