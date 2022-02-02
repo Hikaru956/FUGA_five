@@ -12,7 +12,7 @@
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
 				<img src="//placehold.jp/68x30.jpg?text=Logo-S">
 			<% else %>
-				<img src="<%= widget_bag.photos[0].clip.url(:image) %>" title=<%=model_name(@website) %>>
+				<img src="<%= widget_bag.photos[0].clip.url() %>" title=<%=model_name(@website) %>>
 			<% end %>			
 		  </a>
         </div>

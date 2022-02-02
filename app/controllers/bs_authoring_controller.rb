@@ -190,42 +190,34 @@ class BsAuthoringController < ApplicationController
   end
 
   def update_layout_edit
-    if request.post?
       @website.layout_edit = params[:layout_edit]
       @website.save
       redirect_to :action=>'index'
-    end
   end
 
   def update_colors_edit
-    if request.post?
       @website.colors_edit = params[:colors_edit]
       @website.save
       redirect_to :action=>'index'
-    end
   end
 
   def apply_layout
-    if request.post?
       unless @website.layout_edit.blank?
         @website.layout_deploy  = @website.layout_edit
         @website.layout_edit    = nil
         @website.save
         redirect_to :action=>'index'
       end
-    end
   end
 
 
   def apply_colors
-    if request.post?
       unless @website.colors_edit.blank?
         @website.colors_deploy  = @website.colors_edit
         @website.colors_edit    = nil
         @website.save
         redirect_to :action=>'index'
       end
-    end
   end
 
   ###
@@ -237,11 +229,9 @@ class BsAuthoringController < ApplicationController
   end
 
   def update_widget_bag
-    if request.post?
       @widget_bag = VisualWidgetBag.find_by_id(params[:id])
       @widget_bag.update_attributes(params[:widget_bag])
       redirect_to :action=>'manage_widget'
-    end
   end
 
   def new_widget_bag_photo

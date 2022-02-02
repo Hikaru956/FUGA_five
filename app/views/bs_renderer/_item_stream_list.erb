@@ -5,7 +5,6 @@
             <% key_photo = key_photo(@leaf) %>
             <% unless key_photo.blank? %>
 		        <%= image_tag key_photo.clip.url(:panel), :class=>"img-responsive" %>
-	            <%= image_tag key_photo.clip.url(:panel), :class=>"img-responsive" if false%>
             <% else %>
     	        <a href="#"><img class="img-responsive" src="http://placehold.it/700x300&amp;text=<%=@leaf.publish_from.strftime('%Y-%m-%d')%>"></a>
 			<% end %>
@@ -26,7 +25,7 @@
         	<% unless @leaf.description_3.blank? %>
  	           <%= h @leaf.description_3 %>
         	<% else %>
- 	           <%= h truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>50) %>
+ 	           <%= h truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>50) unless @leaf.description.blank? %>
            <% end %>
         </p>
         <a class="btn btn-primary" href="<%= link_url %>">Read More <i class="icon-angle-right"></i></a>

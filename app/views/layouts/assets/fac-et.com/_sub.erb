@@ -19,7 +19,7 @@
 <% if logomark.blank? || !logomark.is_valid? %>
                             <img src="//placehold.it/240x120" alt="logo mark">
 <% else %>
-                            <img src="<%= logomark.photos[0].clip.url(:image) %>" alt="logo mark">
+                            <img src="<%= logomark.photos[0].clip.url() %>" alt="logo mark">
 <% end %>
                         </div>
                         <div id="site_description">

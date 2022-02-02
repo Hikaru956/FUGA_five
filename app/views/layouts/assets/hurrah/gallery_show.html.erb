@@ -55,7 +55,7 @@
                             <div class="carousel-inner">
     <% @photos.each do | photo | %>
                                 <div class="item <% if photo.position==1 %>active<% end %>">
-        <%= image_tag photo.clip.url(:image), :class=>"img-responsive img-full") %>
+        <%= image_tag photo.clip.url(), :class=>"img-responsive img-full") %>
                                 </div>
     <% end %>
                             </div>

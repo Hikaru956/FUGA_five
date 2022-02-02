@@ -10,9 +10,9 @@
     <% end %>
 <% else %>
     <% if request.host == 'staffroom.swifty.jp' %>
-            <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="logo mark"></a>
+            <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>
     <% else %>
-            <a href="/home" id="brand"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="logo mark"></a>
+            <a href="/home" id="brand"><img src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>
     <% end %>
 <% end %>
         </div>
@@ -21,10 +21,10 @@
         </div>
         <div id="call">
             <div id="tubame-call">
-                <a href="tel:0256-61-5865"><img src="/photo/image/0007/6820/tubame_call.png"></a>
+                <a href="tel:0256-61-5865"><img src="/photo/image/clip/76820/tubame_call.png"></a>
             </div>
             <div id="sanjo_call">
-                <a href="tel:0256-35-3653"><img src="/photo/image/0007/6819/sanjo_call.png"></a>
+                <a href="tel:0256-35-3653"><img src="/photo/image/clip/76819/sanjo_call.png"></a>
             </div>
         </div>
     </div>

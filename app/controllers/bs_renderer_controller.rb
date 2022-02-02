@@ -208,7 +208,6 @@ class BsRendererController < ApplicationController
   def session_operation
     session[:wkey]  = params[:wkey] unless params[:wkey].blank?
     @website        = (session[:wkey].blank?)? nil: Shop.find_by_wsite_hash_key(session[:wkey])
-
     @author_mode = false
     if @website.blank? || @website.wsite_run_mode==Shop::WSITE_BLOCKED
       render :file=>"public/404.html", :layout=>false, :status => 404

@@ -6,7 +6,7 @@
 <% unless key_photo.blank? %>
     <% if false %>
         <!-- オリジナル -->
-        <div class=""><%= image_tag key_photo.clip.url(:image), :class=>"" %></div>
+        <div class=""><%= image_tag key_photo.clip.url(), :class=>"" %></div>
         <!-- 長辺を2412pxに拡大 -->
         <div class=""><%= image_tag key_photo.clip.url(:large), :class=>"") %></div>
         <!-- 640*480pxのボックスに収める -->

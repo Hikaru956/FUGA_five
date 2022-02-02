@@ -13,16 +13,17 @@
 class Photo < ApplicationRecord
   acts_as_list :scope=>  [:ref_id, :ref_type]
 
-  belongs_to  :shop
-  belongs_to  :ref, polymorphic: true
+  belongs_to  :shop, optional: true
+  belongs_to  :ref, polymorphic: true, optional: true
   validates :clip, :attachment_presence => true
 
 
   has_attached_file :clip,
                     styles: { large: "4096x4096>", thumb: "320x240>", panel: "640x480" },
-                    url: "/photo/image/0000/:id/:style/:filename",
-                    path: "#{Rails.root}/public/photo/image/0000/:id/:style/:filename"
+                    url: "/photo/image/clip/:id/:style/:filename",
+                    path: "#{Rails.root}/public/photo/image/clip/:id/:style/:filename"
   validates_attachment_content_type :clip, content_type: /\Aimage\/.*\z/
+
   #hikaru
   #file_column :image, :magick => { # :size => "800>",
   #  :versions => {

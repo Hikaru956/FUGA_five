@@ -26,7 +26,7 @@ class BsContentPortfolioController < BsAbsContentBagController
     #@leafs = @shop.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>"content_leafs.position asc")
     #@leafs = @shop.content_leafs.find(:all, :conditions=>c.where, :order=>"content_leafs.position asc")
 
-    @leafs = @shop.content_leafs.where("content_leafs.content_category_id", @parent_category.id).order('content_leafs.position ASC')
+    @leafs = @shop.content_leafs.where("content_leafs.content_category_id =?", @parent_category.id).order('content_leafs.position ASC')
     @leafs = @leafs.paginate(:page => params[:page], :per_page=>PER_PAGE)
   end
 

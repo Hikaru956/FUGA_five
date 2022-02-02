@@ -48,7 +48,7 @@ a {
 <% else %>
     <% pnl.photos.each_with_index do | photo, idx | %>
 #logopanelback > div:nth-child(<%= idx+1 %>) {
-    background-image: url('<%= photo.clip.url(:image) %>');
+    background-image: url('<%= photo.clip.url() %>');
 }
     <% end %>
 <% end %>
@@ -59,7 +59,7 @@ a {
 }
 <% else %>
 #typoback {
-    background-image: url('<%= typ.photos[0].clip.url(:image) %>');
+    background-image: url('<%= typ.photos[0].clip.url() %>');
 }
 <% end %>
 </style>

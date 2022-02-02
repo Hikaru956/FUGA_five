@@ -4,7 +4,7 @@
   <div id="carousel-list">
     <ul id="carousel-ul">
     <% slider.photos.each do | photo | %>
-      <li><img src="<%= photo.clip.url(:image) %>" alt=""></li>
+      <li><img src="<%= photo.clip.url() %>" alt=""></li>
     <% end %>
     </ul>
   </div>

@@ -26,11 +26,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/wedding/css" %>
 </head>
@@ -64,7 +64,7 @@
                                 <a target="_blank" href="https://www.google.com/maps/place/%E3%82%A2%E3%83%B4%E3%82%A7%E3%83%80%E3%83%BB%E3%82%B5%E3%83%AD%E3%83%B3%EF%BC%86%E3%82%B9%E3%83%91%E3%83%BB%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3/@36.98921,140.9000655,17z/data=!4m8!1m2!2m1!1z44Kw44Oq44O844OzIOemj-WztuecjOOBhOOCj-OBjeW4gum5v-WztueUuuS5heS_ne-8kuS4geebru-8k-KIku-8ke-8kg!3m4!1s0x602113bc94675623:0x5133c2480dfafae3!8m2!3d36.989456!4d140.9040011?hl=ja">
 <%  map_img2 = VisualWidget.search_widget_bag_for(@website, "5dca20a6755f88632dbdba79acbbd7a4") %>
 <%  if !map_img2.blank? && map_img2.is_valid? %>
-                                    <img src="<%= map_img2.photos[0].clip.url(:image) %>" alt="地図" style="max-width:359px;">
+                                    <img src="<%= map_img2.photos[0].clip.url() %>" alt="地図" style="max-width:359px;">
 <%  else %>
                                     <img src="//placehold.jp/512x217.jpg" alt="地図">
 <%  end %>
@@ -73,7 +73,7 @@
                         </div>
                     </aside>
                     <aside>
-                        <p><img style="display: block; margin-left: auto; margin-right: auto;" src="../../photo/image/0000/0833/_MG_3111.jpg" alt="esthe" /></p>
+                        <p><img style="display: block; margin-left: auto; margin-right: auto;" src="../../photo/image/clip/833/_MG_3111.jpg" alt="esthe" /></p>
                     </aside>
                     <!-- <h1><%= model_name(@seed) %></h1> -->
                     <aside id="menu">
@@ -93,7 +93,7 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "4352e985f864dc10049914ced4427386") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= logomark.photos[0].clip.url(:image) %>" alt="logomark">
+            <img src="//<%= request.host %><%= logomark.photos[0].clip.url() %>" alt="logomark">
         </div>
 <% end %>
         <ul>

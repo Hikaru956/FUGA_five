@@ -56,11 +56,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <script src="https://kit.fontawesome.com/7e454da5c1.js" crossorigin="anonymous"></script>
 <%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com/style" %>
@@ -75,7 +75,7 @@
       <a href="https://form.willnailschool.com/index.html" target="_blank"><img src="/images/assets/willnailschool.com/trial_course.jpg" alt="体験コース"></a>
     </aside>
     <aside id="covid">
-      <img src="../photo/image/0008/6837/2021_covid.png" alt="対策徹底中">
+      <img src="../photo/image/clip/86837/2021_covid.png" alt="対策徹底中">
     </aside>
 <%  @fix01 = @website.content_leafs.find_by_id(30162); %>
 <%  if !@fix01.blank? %>

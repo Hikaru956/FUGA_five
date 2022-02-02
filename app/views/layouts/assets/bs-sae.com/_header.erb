@@ -8,6 +8,6 @@
 <% end %>
     </div>
 <% if !logomark.blank? && logomark.is_valid? %>
-    <img id="header_image" src="<%= logomark.photos[0].clip.url(:image) %>" alt="logo mark">
+    <img id="header_image" src="<%= logomark.photos[0].clip.url() %>" alt="logo mark">
 <% end %>
 </header>

@@ -35,11 +35,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/style" %>
 </head>
@@ -55,7 +55,7 @@
 <%  @photo = @seed.photos %>
 <%  unless @photo.blank? %>
         <li>
-            <%= image_tag @photo[0].clip.url(:image) %>
+            <%= image_tag @photo[0].clip.url() %>
 <%      unless @photo[0].info.blank? %>
             <div class="caption"><%=h @photo[0].info %></div>
 <%      end %>

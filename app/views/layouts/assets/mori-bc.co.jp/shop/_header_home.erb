@@ -11,21 +11,21 @@
 <%      end %>
 <%  else %>
 <%      if request.host == 'sr2.swifty.jp' %>
-                <h1><a href="/home?wkey=<%= @website.wsite_hash_key %>"><img id="logomark" src="<%= logomark.photos[0].clip.url(:image) %>" alt="店舗のロゴ"></a></h1>
+                <h1><a href="/home?wkey=<%= @website.wsite_hash_key %>"><img id="logomark" src="<%= logomark.photos[0].clip.url() %>" alt="店舗のロゴ"></a></h1>
 <%      elsif request.host == 'salon.mori-bc.co.jp' %>
-                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="サロン・ド・モリのロゴ"></a></h1>
+                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url() %>" alt="サロン・ド・モリのロゴ"></a></h1>
 <%      elsif request.host == 'irom.mori-bc.co.jp' %>
-                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="モリ・アイロムのロゴ"></a></h1>
+                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url() %>" alt="モリ・アイロムのロゴ"></a></h1>
 <%      elsif request.host == 'wings.mori-bc.co.jp' %>
-                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="モリ・ウイングスのロゴ"></a></h1>
+                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url() %>" alt="モリ・ウイングスのロゴ"></a></h1>
 <%      elsif request.host == 'green.mori-bc.co.jp' %>
-                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="アヴェダ・サロン＆スパ・グリーンのロゴ"></a></h1>
+                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url() %>" alt="アヴェダ・サロン＆スパ・グリーンのロゴ"></a></h1>
 <%      elsif request.host == 'leaf.mori-bc.co.jp' %>
-                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="リーフのロゴ"></a></h1>
+                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url() %>" alt="リーフのロゴ"></a></h1>
 <%      elsif request.host == 'feel.mori-bc.co.jp' %>
-                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="フィール・オーガニック・フォトサロンのロゴ"></a></h1>
+                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url() %>" alt="フィール・オーガニック・フォトサロンのロゴ"></a></h1>
 <%      else %>
-                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="店舗のロゴ"></a></h1>
+                <h1><a href="/home"><img src="<%= logomark.photos[0].clip.url() %>" alt="店舗のロゴ"></a></h1>
 <%      end %>
 <%  end %>
             </div>

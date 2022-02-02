@@ -39,11 +39,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <script src="https://use.fontawesome.com/9e789611aa.js"></script>
 <link rel="stylesheet" href="/stylesheets/assets/pinky-hair.com/style.css">
@@ -101,7 +101,7 @@
                             <div class="staffbox">
 <%  photos = @seed.photos %>
 <%  unless photos.blank? %>
-                                <div style="background-image:url(<%= photos[0].clip.url(:image) %>);">
+                                <div style="background-image:url(<%= photos[0].clip.url() %>);">
 <%      photos.to_a.shift unless photos.blank? %>
 <%  else %>
                                 <div>
@@ -163,7 +163,7 @@
 <%
     unless photos.blank?
         photos.each do | photo |
-            image_url = photo.clip.url(:image)
+            image_url = photo.clip.url()
 %>
                         <div class="col-1p3">
                             <div class="staffbox">

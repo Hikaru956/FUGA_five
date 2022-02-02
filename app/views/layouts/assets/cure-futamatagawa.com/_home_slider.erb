@@ -20,7 +20,7 @@
 		<% else %>
         	<% widget_bag.photos.each do | photo | %>
 		        <li>
-		            <%= image_tag photo.clip.url(:image) %>
+		            <%= image_tag photo.clip.url() %>
 		        </li>
 			<% end %>
 		<% end %>

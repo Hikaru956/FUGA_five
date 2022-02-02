@@ -8,7 +8,7 @@
 <% if logo_img.blank? || !logo_img.is_valid? %>
         <img src="/images/assets/salud-hair.jp/logomark234.png" alt="Logomark">
 <% else %>
-        <img src="<%= logo_img.photos[0].clip.url(:image) %>" alt="Logomark">
+        <img src="<%= logo_img.photos[0].clip.url() %>" alt="Logomark">
 <% end %>
     </div>
     <div id="mIcon">
@@ -33,7 +33,7 @@
 <% if logo_img.blank? || !logo_img.is_valid? %>
             <img src="/images/assets/salud-hair.jp/logomark234.png" alt="Logomark">
 <% else %>
-            <img src="<%= logo_img.photos[0].clip.url(:image) %>" alt="Logomark">
+            <img src="<%= logo_img.photos[0].clip.url() %>" alt="Logomark">
 <% end %>
         </div>
         <div id="mNav_close">

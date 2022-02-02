@@ -24,7 +24,7 @@
 <meta property="og:site_name"         content="<%= @website.name %>">
 <% key_photo = key_photo(@seed) %>
 <% unless key_photo.blank? %>
-<meta property="og:image"             content="http://<%= request.host + key_photo.clip.url(:image) %>">
+<meta property="og:image"             content="http://<%= request.host + key_photo.clip.url() %>">
 <% end %>
 <% unless @website.social_facebook_uri.blank? %>
 <meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
@@ -39,11 +39,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <script src="https://use.fontawesome.com/9e789611aa.js"></script>
 <link rel="stylesheet" href="/stylesheets/assets/business-casual2/style.css">

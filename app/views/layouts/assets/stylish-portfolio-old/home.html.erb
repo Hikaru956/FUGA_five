@@ -18,7 +18,7 @@
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
 				  background: url(/images/assets/stylish-portfolio/bg.jpg) no-repeat center center fixed; 
 			<% else %>
-				  background: url(<%= widget_bag.photos[0].clip.url(:image) %>) no-repeat center center fixed; 
+				  background: url(<%= widget_bag.photos[0].clip.url() %>) no-repeat center center fixed; 
 			<% end %>			
 		  -webkit-background-size: cover;
 		  -moz-background-size: cover;
@@ -36,7 +36,7 @@
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
 				  background: url(/images/assets/stylish-portfolio/section-two.jpg) no-repeat center center fixed; 
 			<% else %>
-				  background: url(<%= widget_bag.photos[0].clip.url(:image) %>) no-repeat center center fixed; 
+				  background: url(<%= widget_bag.photos[0].clip.url() %>) no-repeat center center fixed; 
 			<% end %>			
 		  -webkit-background-size: cover;
 		  -moz-background-size: cover;
@@ -61,7 +61,7 @@
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
 	        	<img src="http://placehold.it/200x200&amp;text=Logo-S">
 			<% else %>
-				<img src="<%= widget_bag.photos[0].clip.url(:image) %>" title=<%=model_name(@website) %>>
+				<img src="<%= widget_bag.photos[0].clip.url() %>" title=<%=model_name(@website) %>>
 			<% end %>			
 			<br/>
 			<i class="icon-double-angle-down"></i>

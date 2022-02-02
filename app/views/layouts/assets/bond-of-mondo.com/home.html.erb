@@ -42,7 +42,7 @@
 <% end %>
 <meta property="og:title"             content="<%= @website.name %>">
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url(:image) %>">
+<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url() %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">
@@ -60,11 +60,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <link rel="stylesheet" href="/stylesheets/assets/bond-of-mondo.com/style.css?v=1">
 </head>
@@ -75,7 +75,7 @@
 <% if mv_bak.blank? || !mv_bak.is_valid? %>
 <aside id="mVisual">
 <% else %>
-<aside id="mVisual" style="background-image:url('<%= mv_bak.photos[0].clip.url(:image) %>')">
+<aside id="mVisual" style="background-image:url('<%= mv_bak.photos[0].clip.url() %>')">
 <% end %>
 <% unless mv_logo.blank? && !mv_logo.is_valid? %>
     <div>
@@ -103,7 +103,7 @@
 <% end %>
 <!-- セカンドヴィジュアル -->
 <% if !sv_bak.blank? && sv_bak.is_valid? %>
-<aside id="sVisual" style="background-image:url('<%= sv_bak.photos[0].clip.url(:image) %>')">
+<aside id="sVisual" style="background-image:url('<%= sv_bak.photos[0].clip.url() %>')">
     <div class="container">
         <h1>ACE inc.Philosophy</h1>
         <p>

@@ -1,4 +1,4 @@
 <% typ = VisualWidget.search_widget_bag_for(@website, "2461e69e98deab2a6d1df690c855918c") %>
 <% if !typ.photos.blank? %>
-                    <img src="<%= typ.photos[0].clip.url(:image) %>" alt="logo">
+                    <img src="<%= typ.photos[0].clip.url() %>" alt="logo">
 <% end %>

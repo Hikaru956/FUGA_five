@@ -9,9 +9,9 @@
     <% end %>
 <% else %>
     <% if request.host == 'sr2.swifty.jp' %>
-                <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="logomark"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="logo mark"></a>
+                <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="logomark"><img src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>
     <% else %>
-                <a href="/home" id="logomark"><img src="<%= logomark.photos[0].clip.url(:image) %>" alt="logo mark"></a>
+                <a href="/home" id="logomark"><img src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>
     <% end %>
 <% end %>
                 <div id="brand_job">

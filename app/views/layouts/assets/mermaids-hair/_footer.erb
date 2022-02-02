@@ -17,7 +17,7 @@
                 <% if logo1.photos[0].blank? %>
                     <img src="//placehold.it/260x120" alt="logo mark">
                 <% else %>
-                    <img src="<%= logo1.photos[0].clip.url(:image) %>" alt="logo mark">
+                    <img src="<%= logo1.photos[0].clip.url() %>" alt="logo mark">
                 <% end %>
                 </div>
                 <div>
@@ -38,7 +38,7 @@
 <!--
                 <div id="reserve1">
                     <a href="http://reserve.rasysa.com/wiz/index.phtml?gsArgv%5Breserve_kbn%5D=3&gsArgv%5Bsalon_no%5D=2537&gsArgv%5Bdesigner_no%5D=&gsArgv%5Bstyle_no%5D=&gsArgv%5Burl%5D=http://home.rasysa.com/mermaids-hair/" target="_blank">
-                        <img alt="インターネット予約はこちら" src="/photo/image/0001/9960/reserve.png">
+                        <img alt="インターネット予約はこちら" src="/photo/image/clip/19960/reserve.png">
                     </a>
                 </div>
 -->
@@ -46,7 +46,7 @@
                     <div>
                         <ul id="carousel1_ul">
 <% slid1.photos.each do | photo | %>
-                            <li><img src="<%= photo.clip.url(:image) %>"></li>
+                            <li><img src="<%= photo.clip.url() %>"></li>
 <% end %>
                         </ul>
                         <div id="carousel1_prev"><i class="fa fa-chevron-circle-left"></i></div>
@@ -59,7 +59,7 @@
                 <% if logo2.photos[0].blank? %>
                     <img src="//placehold.it/260x120" alt="logo mark">
                 <% else %>
-                    <img src="<%= logo2.photos[0].clip.url(:image) %>" alt="logo mark">
+                    <img src="<%= logo2.photos[0].clip.url() %>" alt="logo mark">
                 <% end %>
                 </div>
                 <div>
@@ -81,7 +81,7 @@
                 <div id="reserve2">
                     &nbsp;
                     <a href="http://reserve.rasysa.com/wiz/index.phtml?gsArgv%5Breserve_kbn%5D=3&gsArgv%5Bsalon_no%5D=2537&gsArgv%5Bdesigner_no%5D=&gsArgv%5Bstyle_no%5D=&gsArgv%5Burl%5D=http://home.rasysa.com/mermaids-hair/" target="_blank">
-                        <img alt="インターネット予約はこちら" src="/photo/image/0001/9960/reserve.png">
+                        <img alt="インターネット予約はこちら" src="/photo/image/clip/19960/reserve.png">
                     </a>
                 </div>
 -->
@@ -89,7 +89,7 @@
                     <div>
                         <ul id="carousel2_ul">
 <% slid2.photos.each do | photo | %>
-                            <li><img src="<%= photo.clip.url(:image) %>"></li>
+                            <li><img src="<%= photo.clip.url() %>"></li>
 <% end %>
                         </ul>
                         <div id="carousel2_prev"><i class="fa fa-chevron-circle-left"></i></div>

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
-          <li><a href="<%= url_for(:action=>'index', 												:wkey=>@website.wsite_hash_key) %>"><i class="icon-home"></i></a></li>
+          <li><a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>"><i class="icon-home"></i></a></li>
 		  <% unless @seed.my_type_root_category.has_only_a_public_bag? %>
 			  <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.my_type_root_category,	:wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
 		  <% end %>  

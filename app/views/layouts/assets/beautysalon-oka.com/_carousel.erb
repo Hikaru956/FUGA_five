@@ -1,6 +1,6 @@
 <%  widget_bag = VisualWidget.search_widget_bag_for(@website, "a0eff601a500ccbcaafecbaf39170e32") %>
 <%  if !widget_bag.blank? && widget_bag.is_valid? %>
     <div id="carousel">
-        <img src="<%= widget_bag.photos[0].clip.url(:image) %>" alt="店舗内装">
+        <img src="<%= widget_bag.photos[0].clip.url() %>" alt="店舗内装">
     </div>
 <%  end %>

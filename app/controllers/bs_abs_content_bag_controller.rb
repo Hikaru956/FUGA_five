@@ -92,8 +92,10 @@ class BsAbsContentBagController < ApplicationController
   ##  Actions For Leafs
   #
   def show_leaf
+    logger.error '■ ■ ■ '+@shop.name+' '+@shop.id.to_s
     @page = params[:page]
     @item = @shop.content_leafs.find_by_id(params[:id])
+    #@item = ContentLeaf.find_by_id(params[:id])
   end
 
   def new_leaf
@@ -404,5 +406,6 @@ end
 
   def session_operation
     @shop = Shop.find(params[:id])
+    xxxxxx1e1d2d2e2r42422490()
   end
 end

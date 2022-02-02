@@ -28,11 +28,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/style" %>
 </head>
@@ -75,7 +75,7 @@
 <%  elsif @seed.id == 3722 %>
         <h1><img class="logo" src="../../assets/lenahc.co.jp/img/logo_soin_b.png" alt="レナーク・ソワンロゴ"></h1>
 <%  elsif @seed.id == 3723 %>
-        <h1><img class="logo" src="../../photo/image/0003/2517/vivian_logo.png" alt="レナーク・ヴィヴィアンロゴ"></h1>
+        <h1><img class="logo" src="../../photo/image/clip/32517/vivian_logo.png" alt="レナーク・ヴィヴィアンロゴ"></h1>
 <%  elsif @seed.id == 3724 %>
         <h1><img class="logo" src="../../assets/lenahc.co.jp/img/logo_legrand_b.png" alt="レナーク・ルグランロゴ"></h1>
 <%  elsif @seed.id == 3725 %>

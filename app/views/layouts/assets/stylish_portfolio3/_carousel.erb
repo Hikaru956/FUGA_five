@@ -3,7 +3,7 @@
 <% if !bk_slider.blank? && bk_slider.is_valid? %>
 <ul id="carouselback">
 <%   bk_slider.photos.each do | photo | %>
-	<li><img src="<%= photo.clip.url(:image) %>" alt=""></li>
+	<li><img src="<%= photo.clip.url() %>" alt=""></li>
 <% end %>
 </ul>
 <aside id="carousel2">
@@ -11,6 +11,6 @@
 <aside id="carousel">
 <% end %>
 <% if !main_logo.blank? && main_logo.is_valid? %>
-	<img src="//<%= request.host %><%= main_logo.photos[0].clip.url(:image) %>" alt="logo">
+	<img src="//<%= request.host %><%= main_logo.photos[0].clip.url() %>" alt="logo">
 <% end %>
 </aside>

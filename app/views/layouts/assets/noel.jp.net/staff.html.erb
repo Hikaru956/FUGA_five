@@ -38,11 +38,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/css" %>
 </head>
@@ -75,13 +75,13 @@
     <h2><%= model_name(@seed) %></h2>
     <ul>
 <% unless @seed.social_gplus_uri.blank? %>
-      <li><a href="<%= @seed.social_gplus_uri %>" target="_blank"><img src="../../photo/image/0002/2281/ameba48.png" alt="アメブロ"></a></li>
+      <li><a href="<%= @seed.social_gplus_uri %>" target="_blank"><img src="../../photo/image/clip/22281/ameba48.png" alt="アメブロ"></a></li>
 <% end %>
 <% unless @seed.social_instagram_uri.blank? %>
-      <li><a href="<%= @seed.social_instagram_uri %>" target="_blank"><img src="../../photo/image/0002/2282/insta.png" alt="Instagram" /></a></li>
+      <li><a href="<%= @seed.social_instagram_uri %>" target="_blank"><img src="../../photo/image/clip/22282/insta.png" alt="Instagram" /></a></li>
 <% end %>
 <% unless @seed.social_line_uri.blank? %>
-      <li><a href="<%= @seed.social_line_uri %>" target="_blank"><img src="../../photo/image/0002/2283/line.png" alt="LINE" /></a></li>
+      <li><a href="<%= @seed.social_line_uri %>" target="_blank"><img src="../../photo/image/clip/22283/line.png" alt="LINE" /></a></li>
 <% end %>
     </ul>
   </div>

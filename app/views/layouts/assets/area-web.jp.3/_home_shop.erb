@@ -29,7 +29,7 @@
 <% if logo1.photos[0].blank? %>
                         <img src="//placehold.it/240x240" alt="shop image">
 <% else %>
-                        <img src="<%= logo1.photos[0].clip.url(:image) %>" alt="shop image">
+                        <img src="<%= logo1.photos[0].clip.url() %>" alt="shop image">
 <% end %>
                     </div>
                     <div class="home_shop_sns_area">
@@ -107,7 +107,7 @@
 <% if logo2.photos[0].blank? %>
                         <img src="//placehold.it/240x240" alt="shop image">
 <% else %>
-                        <img src="<%= logo2.photos[0].clip.url(:image) %>" alt="shop image">
+                        <img src="<%= logo2.photos[0].clip.url() %>" alt="shop image">
 <% end %>
                     </div>
                     <div class="home_shop_sns_area">

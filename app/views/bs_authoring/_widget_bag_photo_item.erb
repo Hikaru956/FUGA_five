@@ -19,17 +19,17 @@
 </div>
 
 <div id="modal_delete_photo_<%=photo.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">削除確認</h3>
-  </div>
-  <div class="modal-body">
-    <p>写真を削除します。よろしいですか？</p>
-  </div>
-  <div class="modal-footer">
-	<%= form_tag(bs_authoring_delete_widget_bag_photo_path(id: photo.id), method: :delete, class: "form-horizontal")  do %>
+  <%= form_tag(bs_authoring_delete_widget_bag_photo_path(id: photo.id), method: :delete, class: "form-horizontal")  do %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">削除確認</h3>
+	</div>
+	<div class="modal-body">
+		<p>写真を削除します。よろしいですか？</p>
+	</div>
+	<div class="modal-footer">
 		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-  	<%end%>  	
-  </div>
+	</div>
+  <%end%>
 </div>

@@ -11,7 +11,7 @@
 <% if logo_mark.blank? || !logo_mark.is_valid? %>
                             <img src="//placehold.it/200x53&amp;text=Enshant MAG">
 <% else %>
-                            <img src="<%= logo_mark.photos[0].clip.url(:image) %>" alt="logomark">
+                            <img src="<%= logo_mark.photos[0].clip.url() %>" alt="logomark">
 <% end %>
                         </a>
                     </div>

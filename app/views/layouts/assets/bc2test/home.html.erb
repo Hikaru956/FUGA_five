@@ -38,7 +38,7 @@
 <meta property="og:title"             content="<%= @website.name %>">
 <% og_img = VisualWidget.search_widget_bag_for(@website, "2cfc391f41d454f9be4fc9fa56db4caa") %>
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url(:image) %>">
+<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url() %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">
@@ -57,11 +57,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/stylesheets/assets/business-casual2-speed/style.css">

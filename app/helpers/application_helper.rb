@@ -46,11 +46,12 @@ module ApplicationHelper
   def photo_array(photos)
     array = Array.new
     photos.each do |photo|
-      if photo.image.blank?
-        file_name = photo.clip_file_name
-      else
-        file_name = photo.image
-      end
+#      if photo.image.blank?
+#        file_name = photo.clip_file_name
+#      else
+#        file_name = photo.clip_file_name
+#      end
+      file_name = photo.clip_file_name
       array << "{title: '"+ file_name + "',value: '" + photo.clip.url + "'}"
       #array << "{title: '" + File::basename(photo.image) + "',value: '" + url_for_file_column(photo, :image) + "'}"
     end

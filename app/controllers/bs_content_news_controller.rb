@@ -25,7 +25,7 @@ class BsContentNewsController < BsAbsContentBagController
     #c.and "content_leafs.content_category_id", @parent_category.id
     #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>"position desc")
 
-    @leafs = ContentLeaf.where("content_leafs.content_category_id", @parent_category.id).order(position: :desc)
+    @leafs = ContentLeaf.where("content_leafs.content_category_id =?", @parent_category.id).order(position: :desc)
     @leafs = @leafs.paginate(:page => params[:page], :per_page=>PER_PAGE)
 
   end

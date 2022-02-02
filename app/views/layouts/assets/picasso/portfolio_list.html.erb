@@ -24,11 +24,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <script src="https://use.fontawesome.com/9e789611aa.js"></script>
 <link rel="stylesheet" href="/stylesheets/assets/picasso/style.css?v=2019073101">
@@ -108,7 +108,7 @@
                     <article id="menu">
                         <section>
                             <h1>クーポン</h1>
-                            <p style="margin-bottom:1em;"><img src="/photo/image/0000/8594/coupon320.png" alt="クーポン"></p>
+                            <p style="margin-bottom:1em;"><img src="/photo/image/clip/8594/coupon320.png" alt="クーポン"></p>
                             <p>ご来店の際、受付時にこの画面をスタッフにご提示ください。割引料金にて施術させて頂きます。</p>
                             <p style="font-size:.8125em">※ 価格は、『通常価格 → 割引価格』と表記しています。</p>
                             <p style="font-size:.8125em">※ 価格はすべて税抜き価格です。別途消費税を頂きますのでご了承ください。</p>

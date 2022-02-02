@@ -4,7 +4,7 @@
 					<ul>
 <%  if !carousel.photos.blank? %>
 <%      carousel.photos.each do | photo | %>
-                        <li><img src="<%= photo.clip.url(:image) %>" alt=""></li>
+                        <li><img src="<%= photo.clip.url() %>" alt=""></li>
 <%      end %>
 <%  end %>
 					</ul>

@@ -25,7 +25,7 @@ class BsContentGalleryController < BsAbsContentBagController
     #c.and "content_leafs.content_category_id", @parent_category.id
     #@leafs = @shop.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>"position asc")
 
-    @leafs = @shop.content_leafs.where("content_leafs.content_category_id", @parent_category.id).order(position: :asc)
+    @leafs = @shop.content_leafs.where("content_leafs.content_category_id =?", @parent_category.id).order(position: :asc)
     @leafs = @leafs.paginate(:page => params[:page], :per_page=>PER_PAGE)
   end
 

@@ -7,7 +7,7 @@
 	public_categories.concat(first_bag.sons)
 	public_categories << first_bag
 
-	latest_leaf = ContentLeaf.public_leafs.where("content_category_id", public_categories).order(position: :desc).first
+	latest_leaf = ContentLeaf.public_leafs.where("content_category_id IN (?)", public_categories).order(position: :desc).first
 %>
 
 <% unless latest_leaf.blank? %>

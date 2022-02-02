@@ -5,7 +5,7 @@
 <% if logo_img.blank? || !logo_img.is_valid? %>
                     <a href="/home"><img src="/images/assets/salud-hair.jp/logomark234.png" alt="Logomark"></a>
 <% else %>
-                    <a href="/home"><img src="<%= logo_img.photos[0].clip.url(:image) %>" alt="Logomark"></a>
+                    <a href="/home"><img src="<%= logo_img.photos[0].clip.url() %>" alt="Logomark"></a>
 <% end %>
                 </div>
                 <nav id="gNav">

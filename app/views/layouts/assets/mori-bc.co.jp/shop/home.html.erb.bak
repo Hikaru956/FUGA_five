@@ -41,7 +41,7 @@
 <% end %>
 <% og_img = VisualWidget.search_widget_bag_for(@website, "3ee97b0471bc98ed53842a74affb7cad") %>
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url(:image) %>">
+<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url() %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">
@@ -56,11 +56,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/css" %>
 </head>
@@ -107,7 +107,7 @@
                     <div class="col-in">
                         <a target="_blank" href="https://www.google.com/maps/place/%E3%83%A2%E3%83%AA%E3%83%BB%E3%83%93%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BB%E3%82%B3%E3%83%BC%E3%83%9D%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B5%E3%83%AD%E3%83%B3%E3%83%BB%E3%83%89%E3%83%BB%E3%83%A2%E3%83%AA%E5%B9%B3%E8%B0%B7%E5%B7%9D%E7%80%AC%E5%BA%97/@37.047717,140.893584,17z/data=!3m1!4b1!4m5!3m4!1s0x6021110292bda327:0x1a31ec3f78823603!8m2!3d37.047717!4d140.895778?hl=ja">
 <%      if !map_img.blank? && map_img.is_valid? %>
-                            <img src="<%= map_img.photos[0].clip.url(:image) %>" alt="地図">
+                            <img src="<%= map_img.photos[0].clip.url() %>" alt="地図">
 <%      else %>
                             <img src="//placehold.it/512x217" alt="地図">
 <%      end %>
@@ -146,9 +146,9 @@
             <aside>
                 <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
                 <p class="text-center">
-                    <img src="/photo/image/0000/0756/kerastase_logo.png" alt="KERASTASE">
-                    <img src="/photo/image/0000/0753/adjuvant_logo.png" alt="ADJUVANT">
-                    <img src="/photo/image/0000/0755/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/clip/756/kerastase_logo.png" alt="KERASTASE">
+                    <img src="/photo/image/clip/753/adjuvant_logo.png" alt="ADJUVANT">
+                    <img src="/photo/image/clip/755/aveda_logo.png" alt="AVEDA">
                 </p>
             </aside>
 <%  elsif request.host == 'irom.mori-bc.co.jp'  || @website.wsite_hash_key == '1619cf7b4ebde9cd3a6b83d1d57a7e59' %>
@@ -185,7 +185,7 @@
                     <div class="col-in">
                         <a target="_blank" href="https://www.google.com/maps/place/%E3%83%A2%E3%83%AA%E3%83%BB%E3%83%93%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BB%E3%82%B3%E3%83%BC%E3%83%9D%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%A2%E3%83%AA%E3%83%BB%E3%82%A2%E3%82%A4%E3%83%AD%E3%83%A0%E3%82%A8%E3%83%96%E3%83%AA%E3%82%A2%E5%BA%97/@36.9938977,140.9029291,17z/data=!4m8!1m2!2m1!1z44Ki44Kk44Ot44OgIOemj-WztuecjOOBhOOCj-OBjeW4gum5v-WztueUuuexs-eUsOaXpea4oe-8lQ!3m4!1s0x602113be8b8a9ec7:0x22e3a104d992c63b!8m2!3d36.994064!4d140.90514?hl=ja">
 <%      if !map_img.blank? && map_img.is_valid? %>
-                            <img src="<%= map_img.photos[0].clip.url(:image) %>" alt="地図">
+                            <img src="<%= map_img.photos[0].clip.url() %>" alt="地図">
 <%      else %>
                             <img src="//placehold.it/512x217" alt="地図">
 <%      end %>
@@ -235,9 +235,9 @@
             <aside>
                 <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
                 <p class="text-center">
-                    <img src="/photo/image/0000/0754/aujua_logo.png" alt="Aujua">
-                    <img src="/photo/image/0000/0755/aveda_logo.png" alt="AVEDA">
-                    <img src="/photo/image/0000/0753/adjuvant_logo.png" alt="ADJUVANT">
+                    <img src="/photo/image/clip/754/aujua_logo.png" alt="Aujua">
+                    <img src="/photo/image/clip/755/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/clip/753/adjuvant_logo.png" alt="ADJUVANT">
                 </p>
             </aside>
 <%  elsif request.host == 'wings.mori-bc.co.jp' || @website.wsite_hash_key == 'b03e55355ea5ac4a8e7f0916a24a2505' %>
@@ -275,7 +275,7 @@
                     <div class="col-in">
                         <a target="_blank" href="https://www.google.com/maps/place/%E3%83%A2%E3%83%AA%E3%83%BB%E3%83%93%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BB%E3%82%B3%E3%83%BC%E3%83%9D%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%A2%E3%83%AA%E3%83%BB%E3%82%A6%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B9%E6%A4%8D%E7%94%B0%E5%BA%97/@36.9197788,140.7970755,16z/data=!4m8!1m2!2m1!1z44Oi44OqIOemj-WztuecjOOBhOOCj-OBjeW4guakjeeUsOeUuuS4reWkru-8keS4geebru-8ke-8lOKIku-8lQ!3m4!1s0x60210ce76c3bb087:0xb4887f20d576522f!8m2!3d36.919798!4d140.797094?hl=ja">
 <%      if !map_img.blank? && map_img.is_valid? %>
-                            <img src="<%= map_img.photos[0].clip.url(:image) %>" alt="地図">
+                            <img src="<%= map_img.photos[0].clip.url() %>" alt="地図">
 <%      else %>
                             <img src="//placehold.it/512x217" alt="地図">
 <%      end %>
@@ -325,9 +325,9 @@
             <aside>
                 <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
                 <p class="text-center">
-                    <img src="/photo/image/0000/0757/shiseido_logo.png" alt="SHISEIDO">
-                    <img src="/photo/image/0000/0753/adjuvant_logo.png" alt="ADJUVANT">
-                    <img src="/photo/image/0000/0755/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/clip/757/shiseido_logo.png" alt="SHISEIDO">
+                    <img src="/photo/image/clip/753/adjuvant_logo.png" alt="ADJUVANT">
+                    <img src="/photo/image/clip/755/aveda_logo.png" alt="AVEDA">
                 </p>
             </aside>
 <%  elsif request.host == 'green.mori-bc.co.jp' || @website.wsite_hash_key == '4f160f902541b6f384630d66ceff5cbb' %>
@@ -365,7 +365,7 @@
                     <div class="col-in">
                         <a target="_blank" href="https://www.google.com/maps/place/%E3%82%A2%E3%83%B4%E3%82%A7%E3%83%80%E3%83%BB%E3%82%B5%E3%83%AD%E3%83%B3%EF%BC%86%E3%82%B9%E3%83%91%E3%83%BB%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3/@36.98921,140.9000655,17z/data=!4m8!1m2!2m1!1z44Kw44Oq44O844OzIOemj-WztuecjOOBhOOCj-OBjeW4gum5v-WztueUuuS5heS_ne-8kuS4geebru-8k-KIku-8ke-8kg!3m4!1s0x602113bc94675623:0x5133c2480dfafae3!8m2!3d36.989456!4d140.9040011?hl=ja">
 <%      if !map_img.blank? && map_img.is_valid? %>
-                            <img src="<%= map_img.photos[0].clip.url(:image) %>" alt="地図">
+                            <img src="<%= map_img.photos[0].clip.url() %>" alt="地図">
 <%      else %>
                             <img src="//placehold.it/512x217" alt="地図">
 <%      end %>
@@ -415,7 +415,7 @@
             <aside>
                 <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
                 <p class="text-center">
-                    <img src="/photo/image/0000/0755/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/clip/755/aveda_logo.png" alt="AVEDA">
                 </p>
             </aside>
 
@@ -458,7 +458,7 @@
                         <a target="_blank" href="https://www.google.com/maps/place/%E3%82%A2%E3%83%B4%E3%82%A7%E3%83%80%E3%83%BB%E3%82%B5%E3%83%AD%E3%83%B3%EF%BC%86%E3%82%B9%E3%83%91%E3%83%BB%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3/@36.98921,140.9000655,17z/data=!4m8!1m2!2m1!1z44Kw44Oq44O844OzIOemj-WztuecjOOBhOOCj-OBjeW4gum5v-WztueUuuS5heS_ne-8kuS4geebru-8k-KIku-8ke-8kg!3m4!1s0x602113bc94675623:0x5133c2480dfafae3!8m2!3d36.989456!4d140.9040011?hl=ja">
 -->
 <%      if !map_img.blank? && map_img.is_valid? %>
-                            <img src="<%= map_img.photos[0].clip.url(:image) %>" alt="地図">
+                            <img src="<%= map_img.photos[0].clip.url() %>" alt="地図">
 <%      else %>
                             <img src="//placehold.it/512x217" alt="地図">
 <%      end %>
@@ -510,8 +510,8 @@
             <aside>
                 <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
                 <p class="text-center">
-                    <img src="/photo/image/0000/0756/kerastase_logo.png" alt="KERASTASE">
-                    <img src="/photo/image/0000/0755/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/clip/756/kerastase_logo.png" alt="KERASTASE">
+                    <img src="/photo/image/clip/755/aveda_logo.png" alt="AVEDA">
                 </p>
             </aside>
 
@@ -539,7 +539,7 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "62aa95cab0dd63e669fa466996f2b97b") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= logomark.photos[0].clip.url(:image) %>" alt="logomark">
+            <img src="//<%= request.host %><%= logomark.photos[0].clip.url() %>" alt="logomark">
         </div>
 <% end %>
         <ul>

@@ -20,7 +20,7 @@
             public_categories.concat(cat.sons)
             public_categories << cat
         end
-        latest_leafs = @website.public_leafs.where("content_category_id", public_categories).order(position: :desc).limit(@max)
+        latest_leafs = @website.public_leafs.where("content_category_id IN (?)", public_categories).order(position: :desc).limit(@max)
 
         #c = ContentLeaf.public_leafs_condition
         #c.and "content_category_id", public_categories

@@ -24,11 +24,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <link rel="stylesheet" href="/stylesheets/assets/wop/style.css">
 </head>
@@ -37,7 +37,7 @@
 <header id="header">
     <h1>
         <a href="/home">
-            <img src="/photo/image/0002/4329/site_title.png" alt="次世代を担う美容師さんを応援するウェッブマガジン、W.O.P!">
+            <img src="/photo/image/clip/24329/site_title.png" alt="次世代を担う美容師さんを応援するウェッブマガジン、W.O.P!">
         </a>
     </h1>
     <nav id="gnav">
@@ -46,22 +46,22 @@
         </ul>
     </nav>
     <div id="nav_opener">
-        <img src="/photo/image/0002/4325/menu.png" alt="MENU">
+        <img src="/photo/image/clip/24325/menu.png" alt="MENU">
     </div>
 </header>
 <div class="container">
 <!-- ページタイトル画像 -->
     <div id="page_image">
     <% if @seed.id == 2862 %>
-        <img src="/photo/image/0002/4311/salon.png" alt="SALON">
+        <img src="/photo/image/clip/24311/salon.png" alt="SALON">
     <% elsif @seed.id == 2867 %>
-        <img src="/photo/image/0002/4305/club.png" alt="CLUB">
+        <img src="/photo/image/clip/24305/club.png" alt="CLUB">
     <% elsif @seed.id == 2868 %>
-        <img src="/photo/image/0002/4313/words.png" alt="WORD">
+        <img src="/photo/image/clip/24313/words.png" alt="WORD">
     <% elsif @seed.id == 2869 %>
-        <img src="/photo/image/0002/4304/buzz.png" alt="BUZZ">
+        <img src="/photo/image/clip/24304/buzz.png" alt="BUZZ">
     <% elsif @seed.id == 2870 %>
-        <img src="/photo/image/0002/4303/bihatsu.png" alt="BIHATSU">
+        <img src="/photo/image/clip/24303/bihatsu.png" alt="BIHATSU">
     <% end %>
     </div>
 </div>

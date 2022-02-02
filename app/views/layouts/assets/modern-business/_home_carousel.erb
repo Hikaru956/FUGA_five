@@ -51,7 +51,7 @@
         <div class="carousel-inner">
         	<% widget_bag.photos.each do | photo | %>
 		          <div class="item <%if photo.position==1%>active<%end%>">
-		            <div class="fill" style='background-image:url("<%= photo.clip.url(:image)%>");'></div>
+		            <div class="fill" style='background-image:url("<%= photo.clip.url()%>");'></div>
 		            <div class="carousel-caption">
 		              <h1></h1>
 		            </div>

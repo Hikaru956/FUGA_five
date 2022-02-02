@@ -30,14 +30,14 @@ class Shop < ApplicationRecord
   has_many      :users,               :dependent=>:destroy  #, :order => "role desc, login asc"  
   has_many      :customers,           :dependent=>:destroy #, :order => "alt_id asc, furigana asc"
 
-  has_many      :photos,              :dependent=>:delete_all
+  has_many      :photos,              :dependent=>:destroy
 
   accepts_nested_attributes_for :photos
 
-  has_many      :web_pages,           :dependent=>:delete_all
+  has_many      :web_pages,           :dependent=>:destroy
   has_many      :content_bags,        :dependent=>:destroy
   has_many      :content_leafs,       :dependent=>:destroy  #:order=>'publish_from desc, created_at desc'
-  has_many      :content_categories,  :dependent=>:delete_all
+  has_many      :content_categories,  :dependent=>:destroy
   
   has_many      :attendances,         :dependent=>:destroy #, :order=>'attend_on asc'
   has_many      :reservations,        :dependent=>:destroy #, :order=>'reserved_on asc'

@@ -41,11 +41,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/css" %>
 </head>
@@ -145,7 +145,7 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "62aa95cab0dd63e669fa466996f2b97b") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= logomark.photos[0].clip.url(:image) %>" alt="logomark">
+            <img src="//<%= request.host %><%= logomark.photos[0].clip.url() %>" alt="logomark">
         </div>
 <% end %>
         <ul>

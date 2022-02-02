@@ -1,10 +1,8 @@
 <div class="thumbnail">
 	<%= image_tag photo.clip.url(:thumb) %>
-	<% if false %>
-		<% unless photo.info.blank? %>
-			<div class="caption">
-				<p><%= h photo.info%></p>
-			</div>
-		<% end %>
+	<% unless photo.info.blank? %>
+		<div class="caption">
+			<p><%= h photo.info%></p>
+		</div>
 	<% end %>
 </div>

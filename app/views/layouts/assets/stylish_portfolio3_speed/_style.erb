@@ -51,7 +51,7 @@
 <% logo_b = VisualWidget.search_widget_bag_for(@website, "bc88d2932be3f13c3380fa1481dd3168") %>
 <% if !logo_b.photos.blank? %>
     #home #carousel::before {
-        background-image: url('<%= logo_b.photos[0].clip.url(:image) %>');
+        background-image: url('<%= logo_b.photos[0].clip.url() %>');
     }
 <% end %>
 </style>

@@ -38,11 +38,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= @favicon.clip.url(:image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= @favicon.clip.url(:image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= @webclip.clip.url(:image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/stylesheets/assets/area-web.jp.2/style.css">
@@ -118,7 +118,7 @@
 <!--
 <%      @photos.each do | photo |  %>
                                     <li>
-                                        <%= image_tag photo.clip.url(:image) %>
+                                        <%= image_tag photo.clip.url() %>
 <%          unless photo.info.blank? %>
                                         <div class="caption"><%=h photo.info%></div>
 <%          end %>
@@ -127,7 +127,7 @@
 -->
 <%      photo = @photos[0]  %>
                                     <li>
-                                        <%= image_tag photo.clip.url(:image) %>
+                                        <%= image_tag photo.clip.url() %>
                                     </li>
                                 </ul>
                                 <div id="gallery_prev"><i class="fa fa-chevron-circle-left"></i></div>

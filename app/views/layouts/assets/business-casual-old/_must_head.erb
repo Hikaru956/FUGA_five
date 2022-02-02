@@ -5,7 +5,7 @@
 		<% else %>
 			<%= image_tag widget_bag.photos[0].clip.url(:thumb), title: model_name(@website) %>
 			<% if false %>
-				<img src="<%= widget_bag.photos[0].clip.url(:image) %>" title=<%=model_name(@website) %>>
+				<img src="<%= widget_bag.photos[0].clip.url() %>" title=<%=model_name(@website) %>>
 			<% end %>
 		<% end %>			
 	</div>

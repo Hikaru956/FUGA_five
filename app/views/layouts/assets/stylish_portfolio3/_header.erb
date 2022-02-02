@@ -7,7 +7,7 @@
 				<div class="logo">
 <% if !brand.blank? && brand.is_valid? %>
 					<a href="/home">
-		                <img src="//<%= request.host %><%= brand.photos[0].clip.url(:image) %>" alt="logo">
+		                <img src="//<%= request.host %><%= brand.photos[0].clip.url() %>" alt="logo">
 					</a>
 <% end %>
 				</div>

@@ -11,9 +11,9 @@
     <% end %>
 <% else %>
     <% if request.host == 'sr2.swifty.jp' %>
-                    <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="<%= logo.photos[0].clip.url(:image) %>" alt="logo"></a>
+                    <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="<%= logo.photos[0].clip.url() %>" alt="logo"></a>
     <% else %>
-                    <a href="/home" id="brand"><img src="<%= logo.photos[0].clip.url(:image) %>" alt="logo"></a>
+                    <a href="/home" id="brand"><img src="<%= logo.photos[0].clip.url() %>" alt="logo"></a>
     <% end %>
 <% end %>
                 </div>
