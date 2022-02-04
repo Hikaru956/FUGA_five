@@ -47,7 +47,7 @@
                 <div class="list_article">
                     <div class="list_date"><a href="<%= page_url %>"><%= publish %></a></div>
                     <h3 class="list_header"><a href="<%= page_url %>"><%= model_title(leaf) %></a></h3>
-                    <p><a href="<%= page_url %>"><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>80) %></a></p>
+                    <p><a href="<%= page_url %>"><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>80) unless leaf.description.blank? %></a></p>
                 </div>
                 <div class="list_image">
                     <div class="imgbox"><div style="background-image:url('<%= image_url %>')">

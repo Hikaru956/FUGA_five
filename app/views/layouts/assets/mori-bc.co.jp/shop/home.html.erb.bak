@@ -146,9 +146,9 @@
             <aside>
                 <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
                 <p class="text-center">
-                    <img src="/photo/image/clip/756/kerastase_logo.png" alt="KERASTASE">
-                    <img src="/photo/image/clip/753/adjuvant_logo.png" alt="ADJUVANT">
-                    <img src="/photo/image/clip/755/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/clip/756/original/kerastase_logo.png" alt="KERASTASE">
+                    <img src="/photo/image/clip/753/original/adjuvant_logo.png" alt="ADJUVANT">
+                    <img src="/photo/image/clip/755/original/aveda_logo.png" alt="AVEDA">
                 </p>
             </aside>
 <%  elsif request.host == 'irom.mori-bc.co.jp'  || @website.wsite_hash_key == '1619cf7b4ebde9cd3a6b83d1d57a7e59' %>
@@ -235,9 +235,9 @@
             <aside>
                 <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
                 <p class="text-center">
-                    <img src="/photo/image/clip/754/aujua_logo.png" alt="Aujua">
-                    <img src="/photo/image/clip/755/aveda_logo.png" alt="AVEDA">
-                    <img src="/photo/image/clip/753/adjuvant_logo.png" alt="ADJUVANT">
+                    <img src="/photo/image/clip/754/original/aujua_logo.png" alt="Aujua">
+                    <img src="/photo/image/clip/755/original/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/clip/753/original/adjuvant_logo.png" alt="ADJUVANT">
                 </p>
             </aside>
 <%  elsif request.host == 'wings.mori-bc.co.jp' || @website.wsite_hash_key == 'b03e55355ea5ac4a8e7f0916a24a2505' %>
@@ -325,9 +325,9 @@
             <aside>
                 <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
                 <p class="text-center">
-                    <img src="/photo/image/clip/757/shiseido_logo.png" alt="SHISEIDO">
-                    <img src="/photo/image/clip/753/adjuvant_logo.png" alt="ADJUVANT">
-                    <img src="/photo/image/clip/755/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/clip/757/original/shiseido_logo.png" alt="SHISEIDO">
+                    <img src="/photo/image/clip/753/original/adjuvant_logo.png" alt="ADJUVANT">
+                    <img src="/photo/image/clip/755/original/aveda_logo.png" alt="AVEDA">
                 </p>
             </aside>
 <%  elsif request.host == 'green.mori-bc.co.jp' || @website.wsite_hash_key == '4f160f902541b6f384630d66ceff5cbb' %>
@@ -415,7 +415,7 @@
             <aside>
                 <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
                 <p class="text-center">
-                    <img src="/photo/image/clip/755/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/clip/755/original/aveda_logo.png" alt="AVEDA">
                 </p>
             </aside>
 
@@ -510,8 +510,8 @@
             <aside>
                 <h1 class="en">BLAND <SPAN>取り扱いブランド</SPAN></h1>
                 <p class="text-center">
-                    <img src="/photo/image/clip/756/kerastase_logo.png" alt="KERASTASE">
-                    <img src="/photo/image/clip/755/aveda_logo.png" alt="AVEDA">
+                    <img src="/photo/image/clip/756/original/kerastase_logo.png" alt="KERASTASE">
+                    <img src="/photo/image/clip/755/original/aveda_logo.png" alt="AVEDA">
                 </p>
             </aside>
 

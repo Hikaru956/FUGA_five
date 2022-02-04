@@ -190,6 +190,7 @@ class ContentCategory < ApplicationRecord
     else
       items = ContentLeaf.all
       items = ContentLeaf.filter_latest(items).order(publish_from: :desc)
+      items = items.where("content_leafs.content_category_id =?", self)
       return items
       #return self.content_leafs.find(:all, :conditions=>ContentLeaf.public_leafs.where, :order=>'publish_from desc')
     end

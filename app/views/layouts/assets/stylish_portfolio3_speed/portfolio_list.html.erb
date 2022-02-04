@@ -33,7 +33,7 @@
 <% unless @webclip.blank? %>
 <link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/style" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/style" %>
 </head>
 <body id="portfolio_list">
 <!-- header area dummy height. -->
@@ -68,33 +68,33 @@
 </aside>
 <article id="menu">
     <div class="container">
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/portfolio_leafs", :locals=>{:seed=>@seed} %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/portfolio_leafs", :locals=>{:seed=>@seed} %>
     </div>
 </article>
 <!-- Footer sns links -->
 <aside id="footsns">
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/sns_links" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/sns_links" %>
 </aside>
 <!-- Footer nav -->
 <aside id="footnav">
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/navigation" %>
 </aside>
 <!-- Footer -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/footer" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/footer" %>
 <!-- Header -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/header" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/header" %>
 <div id="gotop"><a href="#top"></a></div>
 <!-- Navigation -->
 <div id="gnav" class="">
     <div class="container">
 	    <h1>- site navigation -</h1>
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/navigation" %>
 	    <div id="navcloser"></div>
 		<div id="scguide">SCROLL</div>
     </div>
 </div>
 <!-- common javascript -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/common_js" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/common_js" %>
 <!-- page specific javascript -->
 <!-- Instafeed js -->
 </body>

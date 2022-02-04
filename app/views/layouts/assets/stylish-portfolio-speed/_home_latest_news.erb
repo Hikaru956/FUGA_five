@@ -1,7 +1,11 @@
 <%
+	first_bag = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS).children.where("is_public=?", true).first
+	public_categories  = []
+	public_categories.concat(first_bag.sons)
+	public_categories << first_bag
+	latest_leafs = @website.public_leafs.where("content_category_id IN (?)", public_categories).order(position: :desc).limit(4)
 	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
 	news_navigation = type_root.web_page
-	latest_leafs = @website.public_leafs.where("content_category_id IN (?)", public_categories).order(position: :desc).limit(4)
 
 	#first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
 	#public_categories  = []
@@ -23,22 +27,22 @@
         <div class="row">
 			<% if latest_leafs.size>0 %>
 				<div class="col-md-2 col-md-offset-2 text-center">
-					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[0]} %>
+					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio-speed/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[0]} %>
 				</div>
 			 <% end %>
 			 <% if latest_leafs.size>1 %>
 				<div class="col-md-2 text-center">
-					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[1]} %>
+					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio-speed/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[1]} %>
 				</div>
 			 <% end %>
 			 <% if latest_leafs.size>2 %>
 				<div class="col-md-2 text-center">
-					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[2]} %>
+					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio-speed/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[2]} %>
 				</div>
 			 <% end %>
 			 <% if latest_leafs.size>3 %>
 				<div class="col-md-2 text-center">
-					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[3]} %>
+					<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio-speed/home_latest_news_item", :locals=>{:temp_local=>latest_leafs[3]} %>
 				</div>
 			 <% end %>
 		  

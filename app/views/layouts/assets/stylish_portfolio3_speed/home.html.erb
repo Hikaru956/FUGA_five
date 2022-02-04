@@ -69,62 +69,62 @@
 <% unless @webclip.blank? %>
 <link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/style" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/style" %>
 </head>
 <body id="home">
 <!-- header area dummy height. -->
 <div id="top">
 </div>
 <!-- CAROUSEL -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/carousel" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/carousel" %>
 <%  if request.host == 'www.feel-bs.jp' %>
 <!-- feel nav -->
 <aside id="feelnav">
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/navigation" %>
 </aside>
 <%  end %>
 <main>
 <!-- NEWS -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/news_list" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/news_list" %>
 <!-- BLOG -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/blog_list" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/blog_list" %>
 <!-- GALLERY -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/gallery_list" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/gallery_list" %>
 <!-- INSTAGRAM feed -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/instafeed" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/instafeed" %>
 <!-- SHOP INFORMATION -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/shop_info" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/shop_info" %>
 </main>
 <!-- iFrame -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/street_view" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/street_view" %>
 <!-- Maps -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/map" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/map" %>
 <!-- Footer sns links -->
 <aside id="footsns">
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/sns_links" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/sns_links" %>
 </aside>
 <!-- Footer nav -->
 <aside id="footnav">
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/navigation" %>
 </aside>
 <!-- Footer -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/footer" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/footer" %>
 <!-- Header -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/header" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/header" %>
 <div id="gotop"><a href="#top"></a></div>
 <!-- Navigation -->
 <div id="gnav" class="">
     <div class="container">
 	    <h1>- site navigation -</h1>
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/navigation" %>
 	    <div id="navcloser"></div>
 		<div id="scguide">SCROLL</div>
     </div>
 </div>
 <!-- common javascript -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/common_js" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/common_js" %>
 <!-- page specific javascript -->
 <!-- Instafeed js -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3/instafeed_js" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/stylish_portfolio3_speed/instafeed_js" %>
 </body>
 </html>

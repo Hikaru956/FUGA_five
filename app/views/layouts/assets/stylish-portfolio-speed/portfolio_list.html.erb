@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <title><%=model_name(@seed) %> - <%= @website.name %></title>
-    <%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/head_logic" %>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio-speed/head_logic" %>
 
     <!-- Add custom CSS here -->
     <style>
@@ -15,14 +15,14 @@
 
   <body>
 	<br/>
-	<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/navigation" %>
+	<%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio-speed/navigation" %>
     
     <div class="container">
 		<%= yield %>
     </div>
 
     <div class="container">
-	  <%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio/footer" %>
+	  <%= render :partial=>"#{LayoutScheme.asset_root}/stylish-portfolio-speed/footer" %>
     </div><!-- /.container -->
 
 
