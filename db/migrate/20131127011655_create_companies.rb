@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateCompanies < ActiveRecord::Migration
+class CreateCompanies < ActiveRecord::Migration[5.2]
   def self.up
     create_table :companies do |t|
       t.string  :alt_id

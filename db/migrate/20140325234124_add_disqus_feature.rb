@@ -1,4 +1,4 @@
-class AddDisqusFeature < ActiveRecord::Migration
+class AddDisqusFeature < ActiveRecord::Migration[5.2]
   def self.up
     add_column(:shops, :use_disqus,   :boolean, :default=>false)
     add_column(:shops, :disqus_code,  :text)

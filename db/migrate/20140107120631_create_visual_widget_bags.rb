@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateVisualWidgetBags < ActiveRecord::Migration
+class CreateVisualWidgetBags < ActiveRecord::Migration[5.2]
   def self.up
     create_table :visual_widget_bags do |t|
       t.integer   :shop_id

@@ -100,7 +100,7 @@
 
 
 <!-- modalEdit -->
-<%= form_tag url_for(:action=>"color_update", :id=>@color), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
+<%= form_tag url_for(:action=>"color_update", :id=>@color), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit", method: :patch} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">カラー・スキーム編集</h3>
@@ -115,7 +115,7 @@
 <% end %>
 
 <!-- modalDeleteUser -->
-<%= form_tag url_for(:action=>"color_delete", :id=>@color), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete"} do -%>
+<%= form_tag url_for(:action=>"color_delete", :id=>@color), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete", method: :delete} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">カラー・スキーム削除</h3>

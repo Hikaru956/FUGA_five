@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class AddSocialInstagram < ActiveRecord::Migration
+class AddSocialInstagram < ActiveRecord::Migration[5.2]
   def up
     add_column(:shops,  :social_instagram_uri, :string)
     add_column(:staffs, :social_instagram_uri, :string)

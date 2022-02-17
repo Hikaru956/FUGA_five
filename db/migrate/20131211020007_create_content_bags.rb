@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateContentBags < ActiveRecord::Migration
+class CreateContentBags < ActiveRecord::Migration[5.2]
   def self.up
     create_table :content_bags do |t|
       t.integer   :shop_id

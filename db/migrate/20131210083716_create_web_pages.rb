@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateWebPages < ActiveRecord::Migration
+class CreateWebPages < ActiveRecord::Migration[5.2]
   def self.up
     create_table :web_pages do |t|
       t.integer  :shop_id

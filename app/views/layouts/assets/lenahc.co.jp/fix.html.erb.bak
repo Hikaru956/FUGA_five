@@ -93,8 +93,9 @@ end
 </article>
 <%
 if ccid > 0
-  con = ["is_public = ? AND content_category_id = ?", true, ccid]
-  latest_leafs =  @website.content_leafs.find(:all, :conditions=>con, :order=>'publish_from desc')
+  latest_leafs =  @website.content_leafs.where("is_public = ? AND content_category_id = ?", true, ccid).order(publish_from: :desc)
+  #con = ["is_public = ? AND content_category_id = ?", true, ccid]
+  #latest_leafs =  @website.content_leafs.find(:all, :conditions=>con, :order=>'publish_from desc')
   unless latest_leafs.blank?
 %>
 <aside>

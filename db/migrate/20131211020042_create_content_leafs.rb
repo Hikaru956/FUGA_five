@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateContentLeafs < ActiveRecord::Migration
+class CreateContentLeafs < ActiveRecord::Migration[5.2]
   def self.up
     create_table :content_leafs do |t|
       t.integer   :shop_id

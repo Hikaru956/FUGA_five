@@ -74,7 +74,7 @@ $(function() {
 
 <% if true %>
 	<% item = Photo.new %>
-	<%= form_tag(bs_content_stream_create_photo_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<%= form_tag(bs_content_news_create_photo_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
 	<div class="fallback">
 		<%= file_field_tag('photo[clip]') %>
 	</div>

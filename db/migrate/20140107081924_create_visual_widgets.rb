@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateVisualWidgets < ActiveRecord::Migration
+class CreateVisualWidgets < ActiveRecord::Migration[5.2]
   def self.up
     create_table :visual_widgets do |t|
       t.integer   :layout_scheme_id

@@ -150,13 +150,34 @@ end
 #    category_path = current_category
 #    @parent_category = (category_path[0].blank?)? current_category: category_path[0]
 
-    current_category = @shop.content_categories.find_by_id(params[:id])
-    @parent_category = current_category.my_bag_root_category
+    @current_category = @shop.content_categories.find_by_id(params[:id])
+    @parent_category = @current_category.my_bag_root_category
     
 #    puts "#"*20+@parent_category.id.to_s
     
 #    render :layout=>"fuga_wo_jq"
   end
+
+  def content_category_higher
+    content_category = @shop.content_categories.find(params[:id])
+    content_category.move_higher
+    content_category.save
+    #bag_category = @shop.content_categories.find(params[:id])
+    #bag_category.move_higher
+    #bag_category.save
+    redirect_to :action=>'content_category_tree', :hash=>Time.now.to_i, :id=>content_category.id
+  end
+
+  def content_category_lower
+    content_category = @shop.content_categories.find(params[:id])
+    content_category.move_lower
+    content_category.save
+    #bag_category = @shop.content_categories.find(params[:id])
+    #bag_category.move_lower
+    #bag_category.save
+    redirect_to :action=>'content_category_tree', :hash=>Time.now.to_i, :id=>content_category.id
+  end
+
 
   def clear_sandbox
     render :update do | page |
@@ -185,7 +206,7 @@ end
   def content_category_edit
     @item = ContentCategory.find(params[:id])
     render :update do | page |
-      page.replace_html "sandbox", :partial=>'content_category_edit'  
+      page.replace_html "sandbox", :partial=>'content_category_edit'
       page.visual_effect :scrollTo, "overview"
     end
   end
@@ -193,7 +214,7 @@ end
   def content_category_update
       @item = ContentCategory.find(params[:id])
       @item.update_attributes(content_category_params)
-      redirect_to(:action=>'content_category_tree', :id=>@item.parent)
+      redirect_to(:action=>'content_category_tree', :id=>@item.id)
   end
 
   def sort_update
@@ -218,14 +239,15 @@ end
     end
   end
 
-  def content_catefory_delete
+  def content_category_delete
       model = ContentCategory.find(params[:id])
       model.destroy
-      render :update do | page |
-        page.delay(0.2) do 
-          page.visual_effect(:fade, "item_#{model.id}", :duration => '1', :delay=>'0')
-        end
-      end
+      redirect_to(:action=>'content_category_tree', :id=>model.parent.id)
+#      render :update do | page |
+#        page.delay(0.2) do 
+#          page.visual_effect(:fade, "item_#{model.id}", :duration => '1', :delay=>'0')
+#        end
+#      end
   end
 
   ###
@@ -406,6 +428,5 @@ end
 
   def session_operation
     @shop = Shop.find(params[:id])
-    xxxxxx1e1d2d2e2r42422490()
   end
 end

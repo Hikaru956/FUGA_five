@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class AddCopyrightNoticeForShop < ActiveRecord::Migration
+class AddCopyrightNoticeForShop < ActiveRecord::Migration[5.2]
   def up
     add_column(:shops, :copyright_notice, :string)
   end

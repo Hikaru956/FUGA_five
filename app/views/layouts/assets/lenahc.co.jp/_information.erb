@@ -5,8 +5,9 @@
     today = Date.today.strftime("%Y-%m-%d")
     latest_leafs = []
     bag_categories.each do | cat |
-        con = ["is_public = ? AND ((publish_from IS NULL AND publish_until IS NULL) OR (publish_from <= ? AND publish_until IS NULL) OR (publish_from <= ? AND publish_until >= ?)) AND content_category_id = ?",true,today,today,today,cat.id]
-        latest_leafs <<  @website.content_leafs.find(:first, :conditions=>con, :order=>'position desc')
+        latest_leafs <<  @website.content_leafs.where("is_public = ? AND ((publish_from IS NULL AND publish_until IS NULL) OR (publish_from <= ? AND publish_until IS NULL) OR (publish_from <= ? AND publish_until >= ?)) AND content_category_id = ?",true,today,today,today,cat.id).order(position: :desc).first
+        #con = ["is_public = ? AND ((publish_from IS NULL AND publish_until IS NULL) OR (publish_from <= ? AND publish_until IS NULL) OR (publish_from <= ? AND publish_until >= ?)) AND content_category_id = ?",true,today,today,today,cat.id]
+        #latest_leafs <<  @website.content_leafs.find(:first, :conditions=>con, :order=>'position desc')
     end
     unless latest_leafs.blank?
 %>

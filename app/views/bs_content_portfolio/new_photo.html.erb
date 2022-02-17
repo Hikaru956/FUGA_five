@@ -1,3 +1,4 @@
+<% if false %>
 <style type="text/css">@import url(/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
 
 <!-- Third party script for BrowserPlus runtime (Google Gears included in Gears runtime now) -->
@@ -30,6 +31,8 @@ $(function() {
 	});
 });
 </script>
+<div id="html5_uploader">You browser doesn't support native upload. Try Firefox, Chrome or Safari.</div>
+<% end %>
 
 
 <!-- === Masthead === -->
@@ -71,6 +74,23 @@ $(function() {
 </blockquote>
 
 <hr/>
-
-<div id="html5_uploader">You browser doesn't support native upload. Try Firefox, Chrome or Safari.</div>
-
+<% if true %>
+	<% item = Photo.new %>
+	<%= form_tag(bs_content_portfolio_create_photo_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<div class="fallback">
+		<%= file_field_tag('photo[clip]') %>
+	</div>
+	<% end %>
+	<script>
+		Dropzone.options.dropzone = {
+			paramName: "photo[clip]",
+			maxFilesize: 1,
+			acceptedFiles: "image/*",
+			init: function() {
+				this.on('complete', function (file) {
+					//location.reload();
+				})
+			}
+		}
+	</script>
+<% end %>

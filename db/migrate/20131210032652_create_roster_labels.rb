@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateRosterLabels < ActiveRecord::Migration
+class CreateRosterLabels < ActiveRecord::Migration[5.2]
   def self.up
     create_table :roster_labels do |t|
       t.integer   :shop_id

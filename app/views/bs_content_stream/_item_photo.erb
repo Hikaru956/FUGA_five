@@ -36,7 +36,7 @@
 <% end %>
 
 <div id="modal_delete_photo_<%=photo.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <%= form_tag({:action => 'delete_photo', :id=>@item}, :class=>"form-horizontal", method: :delete)  do %>
+  <%= form_tag({:action => 'delete_photo', :id=>photo}, :class=>"form-horizontal", method: :delete)  do %>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3 id="myModalLabel">削除確認</h3>

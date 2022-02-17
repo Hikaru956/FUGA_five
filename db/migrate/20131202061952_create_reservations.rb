@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateReservations < ActiveRecord::Migration
+class CreateReservations < ActiveRecord::Migration[5.2]
   def self.up
     create_table :reservations do |t|
       t.integer     :customer_id

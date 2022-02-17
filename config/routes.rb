@@ -48,6 +48,9 @@ Fuga326::Application.routes.draw do
 
 
   get 'bs' ,to: 'bs#index'
+
+  get 'bs_abs_content_bag/json_cat', to: 'bs_abs_content_bag#json_cat'
+
   get 'bs_config/company_show_shop', to: 'bs_config#company_show_shop'
   patch 'bs_config/company_update_shop', to: 'bs_config#company_update_shop'
   post 'bs_config/shop_create_staff', to: 'bs_config#shop_create_staff'
@@ -61,6 +64,8 @@ Fuga326::Application.routes.draw do
   post 'bs_config/shop_create_fixed_page', to: 'bs_config#shop_create_fixed_page'
   patch 'bs_config/navigation_update', to: 'bs_config#navigation_update'
   delete 'bs_config/shop_delete_fixed_link', to: 'bs_config#shop_delete_fixed_link'
+  post 'bs_config/create_page_photo', to: 'bs_config#create_page_photo'
+  delete 'bs_config/delete_page_photo', to: 'bs_config#delete_page_photo'
 
   post 'bs_config/create_staff_photo', to:'bs_config#create_staff_photo'
   delete 'bs_config/delete_staff_photo', to:'bs_config#delete_staff_photo'
@@ -83,6 +88,21 @@ Fuga326::Application.routes.draw do
   post 'dashboard/shop_create_user', to: 'dashboard#shop_create_user'
   patch 'dashboard/shop_update_user', to: 'dashboard#shop_update_user'
   delete 'dashboard/shop_delete_user', to: 'dashboard#shop_delete_user'
+  post 'dashboard/shop_create_favicon', to: 'dashboard#shop_create_favicon'
+
+  post 'dashboard/layout_create', to: 'dashboard#layout_create'
+  patch 'dashboard/layout_update', to: 'dashboard#layout_update'
+  delete 'dashboard/layout_delete', to: 'dashboard#layout_delete'
+  post 'dashboard/create_layout_photo', to: 'dashboard#create_layout_photo'
+  delete 'dashboard/delete_layout_photo', to: 'dashboard#delete_layout_photo'
+  post 'dashboard/color_create', to: 'dashboard#color_create'
+  patch 'dashboard/color_update', to: 'dashboard#color_update'
+  delete 'dashboard/color_delete', to: 'dashboard#color_delete'
+  post 'dashboard/create_color_photo', to: 'dashboard#create_color_photo'
+  delete 'dashboard/delete_color_photo', to: 'dashboard#delete_color_photo'
+  post 'dashboard/widget_create', to: 'dashboard#widget_create'
+  patch 'dashboard/widget_update', to: 'dashboard#widget_update'
+  delete 'dashboard/widget_delete', to: 'dashboard#widget_delete'
 
   patch 'dashboard/shop_update_website', to: 'dashboard#shop_update_website'
   delete 'dashboard/shop_reset_favicon', to: 'dashboard#shop_reset_favicon'
@@ -105,6 +125,7 @@ Fuga326::Application.routes.draw do
   patch 'bs_content_gallery/update_photo', to: 'bs_content_gallery#update_photo'
   delete 'bs_content_gallery/delete_photo', to: 'bs_content_gallery#delete_photo'
   post 'bs_content_gallery/content_category_create', to: 'bs_content_gallery#content_category_create'
+  
   get 'bs_content_portfolio/content_root', to: 'bs_content_portfolio#content_root'
   patch 'bs_content_portfolio/content_category', to: 'bs_content_portfolio#content_category'
   post 'bs_content_portfolio/create_bag', to: 'bs_content_portfolio#create_bag'
@@ -118,6 +139,9 @@ Fuga326::Application.routes.draw do
   patch 'bs_content_portfolio/update_face_photo', to: 'bs_content_portfolio#update_face_photo'
   delete 'bs_content_portfolio/delete_face_photo', to: 'bs_content_portfolio#delete_face_photo'
   post 'bs_content_portfolio/content_category_create', to: 'bs_content_portfolio#content_category_create'
+  patch 'bs_content_portfolio/content_category_update', to: 'bs_content_portfolio#content_category_update'
+  delete 'bs_content_portfolio/content_category_delete', to: 'bs_content_portfolio#content_category_delete'
+
   get 'bs_content_news/content_root', to: 'bs_content_news#content_root'
   post 'bs_content_news/create_bag', to: 'bs_content_news#create_bag'
   patch 'bs_content_news/update_bag', to: 'bs_content_news#update_bag'
@@ -125,7 +149,9 @@ Fuga326::Application.routes.draw do
   post 'bs_content_news/create_leaf', to: 'bs_content_news#create_leaf'
   patch 'bs_content_news/update_leaf', to: 'bs_content_news#update_leaf'
   delete 'bs_content_news/delete_leaf', to: 'bs_content_news#delete_leaf'
+  post 'bs_content_news/create_photo', to: 'bs_content_news#create_photo'
   delete 'bs_content_news/delete_photo', to: 'bs_content_news#delete_photo'
+
   get 'bs_content_stream/content_root', to: 'bs_content_stream#content_root'
   post 'bs_content_stream/create_bag', to: 'bs_content_stream#create_bag'
   patch 'bs_content_stream/update_bag', to: 'bs_content_stream#update_bag'

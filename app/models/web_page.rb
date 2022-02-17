@@ -114,18 +114,22 @@ class WebPage < ApplicationRecord
   end
 
   def self.favicon(target_shop)
-    WebPage.get_root_node(target_shop).photos.find_by_image('favicon.ico')
+    WebPage.get_root_node(target_shop).photos.find_by_clip_file_name('favicon.ico')
   end
 
   def self.apple_touch_icon(target_shop)
-    WebPage.get_root_node(target_shop).photos.find_by_image('apple-touch-icon-precomposed.png')
+    WebPage.get_root_node(target_shop).photos.find_by_clip_file_name('apple-touch-icon-precomposed.png')
   end
   
   def self.reset_favicon(target_shop)
-    Photo.destroy_all(["shop_id=? AND ref_id=? AND ref_type=? AND image=?", target_shop.id, WebPage.get_root_node(target_shop), 'WebPage', 'favicon.ico'])    
+    #Photo.destroy_all(["shop_id=? AND ref_id=? AND ref_type=? AND image=?", target_shop.id, WebPage.get_root_node(target_shop), 'WebPage', 'favicon.ico'])    
+    photos = Photo.where("shop_id=? AND ref_id=? AND ref_type=? AND clip_file_name=?", target_shop.id, WebPage.get_root_node(target_shop), 'WebPage', 'favicon.ico')
+    photos.destroy_all
   end
 
   def self.reset_apple_touch_icon(target_shop)
-    Photo.destroy_all(["shop_id=? AND ref_id=? AND ref_type=? AND image=?", target_shop.id, WebPage.get_root_node(target_shop), 'WebPage', 'apple-touch-icon-precomposed.png'])    
+    #Photo.destroy_all(["shop_id=? AND ref_id=? AND ref_type=? AND image=?", target_shop.id, WebPage.get_root_node(target_shop), 'WebPage', 'apple-touch-icon-precomposed.png'])
+    photos = Photo.where("shop_id=? AND ref_id=? AND ref_type=? AND image=?", target_shop.id, WebPage.get_root_node(target_shop), 'WebPage', 'apple-touch-icon-precomposed.png')
+    photos.destroy_all
   end
 end

@@ -140,11 +140,9 @@ class DashboardController < ApplicationController
   end
 
   def company_update_shop_room
-    if request.post?
       @item = Shop.find(params[:id])
       @item.update_attributes(params[:shop])
       redirect_to :action=>"company_show_shop_usage", :id=>@item
-    end
   end
 
   def company_show_shop_usage
@@ -163,23 +161,19 @@ class DashboardController < ApplicationController
   end
   
   def shop_update_position
-    if request.post?
       @item = Shop.find(params[:id])
       @item.lat = params[:lat]
       @item.lng = params[:lng]
       @item.save
       redirect_to :action=>"company_show_shop", :id=>@item
-    end
   end
 
   def shop_delete_position
-    if request.post?
       @item = Shop.find(params[:id])
       @item.lat = nil
       @item.lng = nil
       @item.save
       redirect_to :action=>"company_show_shop", :id=>@item
-    end
   end
 
   def shop_higher
@@ -304,36 +298,60 @@ class DashboardController < ApplicationController
   end
 
   def shop_create_favicon
-      @shop = Shop.find(params[:id])
+    @shop = Shop.find(params[:id])
       ###
       ##  Clear Current Favicon
       #
       WebPage.reset_favicon(@shop)
-      
-      @photo = { :image_temp=>"", :image=>params[:file] }
-      photo = Photo.new(@photo)
+      photo = Photo.new(photo_params)
       photo.shop = @shop
       photo.ref = WebPage.get_root_node(@shop)
       photo.save!
 
       redirect_to :action=>"shop_show_website", :id=>@shop
   end
+
+  #def shop_create_favicon
+  #    @shop = Shop.find(params[:id])
+      ###
+      ##  Clear Current Favicon
+      #
+  #    WebPage.reset_favicon(@shop)
+  #    @photo = { :image_temp=>"", :image=>params[:file] }
+  #    photo = Photo.new(@photo)
+  #    photo.shop = @shop
+  #    photo.ref = WebPage.get_root_node(@shop)
+  #    photo.save!
+  #    redirect_to :action=>"shop_show_website", :id=>@shop
+  #end
   
   def shop_create_apple_touch_icon
-      @shop = Shop.find(params[:id])
+    @shop = Shop.find(params[:id])
       ###
       ##  Clear Current Apple Touch Icon
       #
-      WebPage.reset_apple_touch_icon(@shop)
-      
-      @photo = { :image_temp=>"", :image=>params[:file] }
-      photo = Photo.new(@photo)
-      photo.shop = @shop
-      photo.ref = WebPage.get_root_node(@shop)
-      photo.save!
+    WebPage.reset_apple_touch_icon(@shop)
+    photo = Photo.new(photo_params)
+    photo.shop = @shop
+    photo.ref = WebPage.get_root_node(@shop)
+    photo.save!
 
-      redirect_to :action=>"shop_show_website", :id=>@shop
+    redirect_to :action=>"shop_show_website", :id=>@shop
   end
+
+  #def shop_create_apple_touch_icon
+  #    @shop = Shop.find(params[:id])
+      ###
+      ##  Clear Current Apple Touch Icon
+      #
+  #    WebPage.reset_apple_touch_icon(@shop)
+  #    @photo = { :image_temp=>"", :image=>params[:file] }
+  #    photo = Photo.new(@photo)
+  #    photo.shop = @shop
+  #    photo.ref = WebPage.get_root_node(@shop)
+  #    photo.save!
+  #    redirect_to :action=>"shop_show_website", :id=>@shop
+  #end
   
   def shop_reset_favicon
       @shop = Shop.find(params[:id])
@@ -370,7 +388,7 @@ class DashboardController < ApplicationController
   end
 
   def user_create
-      user = User.new(hikaru_params)
+      user = User.new(user_params)
       user.save
       redirect_to :action=>"user_list"
   end
@@ -381,7 +399,7 @@ class DashboardController < ApplicationController
 
   def user_update
       @item = User.find(params[:id])
-      if @item.update_attributes(params[:user])
+      if @item.update_attributes(user_params)
         @item.try_count=0
         @item.save!
       end
@@ -403,7 +421,7 @@ class DashboardController < ApplicationController
   end
 
   def color_create
-      color = ColorScheme.new(hikaru_params)
+      color = ColorScheme.new(color_scheme_params)
       color.save
       redirect_to :action=>"color_show", :id=>color
   end
@@ -414,7 +432,7 @@ class DashboardController < ApplicationController
 
   def color_update
       @item = ColorScheme.find(params[:id])
-      @item.update_attributes(params[:color])
+      @item.update_attributes(color_scheme_params)
       redirect_to :action=>"color_show", :id=>@item
   end
 
@@ -443,13 +461,22 @@ class DashboardController < ApplicationController
   end
 
   def create_color_photo
-      @item = ColorScheme.find(params[:id])
-      @photo = { :image_temp=>"", :image=>params[:file] }
-      photo = Photo.new(@photo)
-      photo.shop = nil
-      @item.photo = photo
-      redirect_to :action=>"color_show", :id=>@item
+    @item = ColorScheme.find(params[:id])
+    photo = Photo.new(photo_params)
+    photo.shop = nil
+    @item.photo = photo
+    @item.save
+    redirect_to :action=>"color_show", :id=>@item
   end
+
+  #def create_color_photo
+  #    @item = ColorScheme.find(params[:id])
+  #    @photo = { :image_temp=>"", :image=>params[:file] }
+  #    photo = Photo.new(@photo)
+  #    photo.shop = nil
+  #    @item.photo = photo
+  #    redirect_to :action=>"color_show", :id=>@item
+  #end
 
   def delete_color_photo
       photo = Photo.find(params[:id])
@@ -466,7 +493,7 @@ class DashboardController < ApplicationController
   end
 
   def layout_create
-      layout = LayoutScheme.new(hikaru_params)
+      layout = LayoutScheme.new(layout_scheme_params)
       layout.save
       redirect_to :action=>"layout_show", :id=>layout
   end
@@ -477,7 +504,7 @@ class DashboardController < ApplicationController
 
   def layout_update
       @item = LayoutScheme.find(params[:id])
-      @item.update_attributes(params[:layout])
+      @item.update_attributes(layout_scheme_params)
       redirect_to :action=>"layout_show", :id=>@item
   end
 
@@ -506,13 +533,22 @@ class DashboardController < ApplicationController
   end
 
   def create_layout_photo
-      @item = LayoutScheme.find(params[:id])
-      @photo = { :image_temp=>"", :image=>params[:file] }
-      photo = Photo.new(@photo)
-      photo.shop = nil
-      @item.photo = photo
-      redirect_to :action=>"layout_show", :id=>@item
+    @item = LayoutScheme.find(params[:id])
+    photo = Photo.new(photo_params)
+    photo.shop = nil
+    @item.photo = photo
+    @item.save
+    redirect_to :action=>"layout_show", :id=>@item
   end
+
+  #def create_layout_photo
+  #    @item = LayoutScheme.find(params[:id])
+  #    @photo = { :image_temp=>"", :image=>params[:file] }
+  #    photo = Photo.new(@photo)
+  #    photo.shop = nil
+  #    @item.photo = photo
+  #    redirect_to :action=>"layout_show", :id=>@item
+  #end
 
   def delete_layout_photo
       photo = Photo.find(params[:id])
@@ -528,14 +564,14 @@ class DashboardController < ApplicationController
   ##  Visual Widget
   #
   def widget_create
-      visual_widget = VisualWidget.new(hikaru_params)
+      visual_widget = VisualWidget.new(visual_widget_params)
       visual_widget.save
       redirect_to :action=>"widget_list", :id=>visual_widget.layout_scheme
   end
 
   def widget_update
       @item = VisualWidget.find(params[:id])
-      @item.update_attributes(params[:item])
+      @item.update_attributes(visual_widget_params)
       redirect_to :action=>"widget_list", :id=>@item.layout_scheme
   end
 
@@ -562,27 +598,35 @@ class DashboardController < ApplicationController
 #hikaru
 private
   def company_params
-      params.require(:company).permit(:alt_id, :name, :telephone_1, :postal, :address_1)
+    params.require(:company).permit(:alt_id, :name, :telephone_1, :postal, :address_1)
   end
 
   def layout_scheme_params
-      params.require(:layout_scheme).permit(:id, :is_public, :name, :position, :repository_path)
+    params.require(:layout).permit(:id, :is_public, :name, :description, :position, :repository_path)
   end
 
   def color_scheme_params
-      params.require(:color_scheme).permit(:id, :is_public, :name, :position, :repository_path)
+    params.require(:color).permit(:id, :is_public, :name, :description, :position, :repository_path)
   end
 
+  def photo_params
+    params.require(:photo).permit(:clip, :info)
+    #params.permit(:file)
+  end
+
+  def visual_widget_params
+    params.require(:item).permit(:layout_scheme_id, :hash_key, :position, :title, :description)
+  end
   def shop_params
-      params.require(:shop).permit(:alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice)
+    params.require(:shop).permit(:alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice)
   end
 
   def user_params
-      params.require(:user).permit(:login, :email, :name, :password, :password_confirmation, :role, :company_id, :shop_id)
+        params.require(:user).permit(:login, :email, :name, :password, :password_confirmation, :role, :company_id, :shop_id)
   end
 
   def staff_params
-      params.require(:staff).permit(:name, :job_title, :staff_status, :description, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri)
+    params.require(:staff).permit(:name, :job_title, :staff_status, :description, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri)
   end
 
 end

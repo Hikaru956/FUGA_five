@@ -38,13 +38,15 @@ class LayoutScheme < ApplicationRecord
   end
   
   def before_destroy
-    default_scehme = LayoutScheme.find(:first, :conditions=>["id!=? AND is_public=?", self.id, true], :order=>"position asc")
+    default_scehme = LayoutScheme.default_scheme
+    #default_scehme = LayoutScheme.where("id!=? AND is_public =?",self.id, true).order(position: :asc).first
+    #default_scehme = LayoutScheme.find(:first, :conditions=>["id!=? AND is_public=?", self.id, true], :order=>"position asc")
 
-    Shop.find_all_by_wsite_layout_deploy_id(self.id).each do | site |
+    Shop.where('wsite_layout_deploy_id =?',self.id).each do | site |
       site.wsite_layout_deploy = default_scehme
       site.save!
     end
-    Shop.find_all_by_wsite_layout_edit_id(self.id).each do | site |
+    Shop.where('wsite_layout_edit_id =?',self.id).each do | site |
       site.wsite_layout_edit = default_scehme
       site.save!
     end

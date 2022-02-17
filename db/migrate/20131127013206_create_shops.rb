@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateShops < ActiveRecord::Migration
+class CreateShops < ActiveRecord::Migration[5.2]
   def self.up
     create_table :shops do |t|
       t.integer :company_id

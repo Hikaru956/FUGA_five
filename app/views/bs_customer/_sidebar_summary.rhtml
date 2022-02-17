@@ -1,7 +1,7 @@
 <div class="alert alert-success">
 	<h5>今後の予約</h5>
 	<% if @shop.option_reservation_management %>
-		<% reservations = @item.reservations.find(:all, :conditions=>["reserved_on >= ?", Time.now], :order=>"reserved_on desc") %>
+		<% reservations = @item.reservations.where("reserved_on >=?", Time.now).order()reserved_on: :desc %>
 		<% unless reservations.blank? %>
 			<% reservations.each do |reservation| %>
 				<table class="table">

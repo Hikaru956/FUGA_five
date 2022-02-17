@@ -46,7 +46,7 @@ module BsAbsContentBagHelper
         html << "&nbsp;&nbsp;"
         html << link_to(image_tag("commons/edit_16x16.png", :class=>'icon_align', :title=>"編集"),   {:action=>'content_category_edit', :id=>item},    :remote=>true, :class=>'tree_action')
         html << "&nbsp;&nbsp;"
-        html << link_to(image_tag("commons/stop_16x16.png",:class=>"icon_align", :title=>"削除確認"), {:action=>'content_catefory_delete', :id=>item,   :remote=>true, :confirm=>"このカテゴリー【 #{item.title} 】とサブカテゴリーに関連する全ての情報も削除されます。"}, :method => "post", :class=>'tree_action')
+        html << link_to(image_tag("commons/stop_16x16.png",:class=>"icon_align", :title=>"削除確認"), {:action=>'content_category_delete', :id=>item,   :remote=>true, :confirm=>"このカテゴリー【 #{item.title} 】とサブカテゴリーに関連する全ての情報も削除されます。"}, :method => "post", :class=>'tree_action')
 
         # 子の存在を確認して、存在していたらcategory_treesを再帰呼出し
         if item.children.size > 0

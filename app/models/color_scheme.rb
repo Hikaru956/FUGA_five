@@ -32,13 +32,14 @@ class ColorScheme < ApplicationRecord
   end
   
   def before_destroy
-    default_scehme = ColorScheme.find(:first, :conditions=>["id!=? AND is_public=?", self.id, true], :order=>"position asc")
+    default_scehme = ColorScheme.default_scheme
+    #default_scehme = ColorScheme.find(:first, :conditions=>["id!=? AND is_public=?", self.id, true], :order=>"position asc")
 
-    Shop.find_all_by_wsite_color_deploy_id(self.id).each do | site |
+    Shop.where("wsite_color_deploy_id",self.id).each do | site |
       site.wsite_color_deploy = default_scehme
       site.save!
     end
-    Shop.find_all_by_wsite_color_edit_id(self.id).each do | site |
+    Shop.where("wsite_color_edit_id",self.id).each do | site |
       site.wsite_color_edit = default_scehme
       site.save!
     end

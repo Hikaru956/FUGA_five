@@ -41,21 +41,17 @@ class BsConfigController < ApplicationController
   end
 
   def shop_update_position
-    if request.post?
-      @shop.lat = params[:lat]
-      @shop.lng = params[:lng]
-      @shop.save
-      redirect_to :action=>"company_show_shop"
-    end
+    @shop.lat = params[:lat]
+    @shop.lng = params[:lng]
+    @shop.save
+    redirect_to :action=>"company_show_shop"
   end
 
   def shop_delete_position
-    if request.post?
-      @shop.lat = nil
-      @shop.lng = nil
-      @shop.save
-      redirect_to :action=>"company_show_shop"
-    end
+    @shop.lat = nil
+    @shop.lng = nil
+    @shop.save
+    redirect_to :action=>"company_show_shop"
   end
 
   ###
@@ -369,22 +365,18 @@ class BsConfigController < ApplicationController
   end
 
   def create_page_photo
-    if request.post?
-      @item = ContentLeaf.find_by_id(params[:id])
-      @photo = { :image_temp=>"", :image=>params[:file] }
-      photo = Photo.new(@photo)
-      photo.shop = @shop
-      @item.photos << photo
-      redirect_to :action=>"list_page_photo", :id=>@item
-    end
+    @item = ContentLeaf.find_by_id(params[:id])
+    #@photo = { :image_temp=>"", :image=>params[:file] }
+    photo = Photo.new(photo_params)
+    photo.shop = @shop
+    @item.photos << photo
+    redirect_to :action=>"list_page_photo", :id=>@item
   end
 
   def delete_page_photo
-    if request.post?
-      photo = @shop.photos.find(params[:id])
-      photo.destroy
-      redirect_to :action=>'list_page_photo', :id=>photo.ref_id
-    end
+    photo = @shop.photos.find(params[:id])
+    photo.destroy
+    redirect_to :action=>'list_page_photo', :id=>photo.ref_id
   end
 
 protected

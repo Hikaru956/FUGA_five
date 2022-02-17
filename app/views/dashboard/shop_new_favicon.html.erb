@@ -60,11 +60,29 @@ $(function() {
 	FAVICON.ICO
 </h4>
 
-<div id="html5_uploader">You browser doesn't support native upload. Try Firefox, Chrome or Safari.</div>
+<% if true %>
+	<% item = Photo.new %>
+	<%= form_tag(dashboard_shop_create_favicon_path(id: @shop),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<div class="fallback">
+		<%= file_field_tag('photo[clip]') %>
+	</div>
+	<% end %>
+	<script>
+		Dropzone.options.dropzone = {
+			paramName: "photo[clip]",
+			maxFilesize: 1,
+			acceptedFiles: "image/*",
+			init: function() {
+				this.on('complete', function (file) {
+					//location.reload();
+				})
+			}
+		}
+	</script>
+<% end %>
 
 <div class="alert alert-info">
 	画像のファイル名は'favicon.ico'。
 	画像のサイズは「16×16ピクセル」。
 	画像の種類は「ICO形式」。	
 </div>
-

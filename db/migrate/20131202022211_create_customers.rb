@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateCustomers < ActiveRecord::Migration
+class CreateCustomers < ActiveRecord::Migration[5.2]
   def self.up
     create_table :customers do |t|
       t.column  :company_id,      :integer, :default => nil

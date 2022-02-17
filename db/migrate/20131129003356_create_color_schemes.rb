@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateColorSchemes < ActiveRecord::Migration
+class CreateColorSchemes < ActiveRecord::Migration[5.2]
   def self.up
     create_table :color_schemes do |t|
       t.string  :name

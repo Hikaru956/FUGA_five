@@ -15,7 +15,7 @@
     <p>写真を削除します。よろしいですか？</p>
   </div>
   <div class="modal-footer">
-	<%= form_tag({:action => 'delete_layout_photo', :id=>photo}, :class=>"form-horizontal")  do %>
+	<%= form_tag({:action => 'delete_layout_photo', :id=>photo}, :class=>"form-horizontal", method: :delete)  do %>
 		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
   	<%end%>  	

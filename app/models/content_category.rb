@@ -42,7 +42,7 @@ class ContentCategory < ApplicationRecord
   before_save :before_save
   
   def before_save
-    self.shop         = parent.shop         if self.shop.blank?
+    self.shop = parent.shop if self.shop.blank?
   end
   
   def self.register_content_bag(content_bag)

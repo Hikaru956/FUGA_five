@@ -18,11 +18,13 @@ calendar({:year => @target_date.year, :month => @target_date.month}) do |d|
 
 
 	birthday_key_string = Time.mktime(d.year, d.month, d.day, 0,0,0).to_date.strftime("-%m-%d")
-	c = Condition.new
-	c.and("birthday", "LIKE", "%"+birthday_key_string )
+	#c = Condition.new
+	#c.and("birthday", "LIKE", "%"+birthday_key_string )
+	customers = @shop.customers.where("birthday LIKE ?", "%"+birthday_key_string)
 #	customers = @shop.customers.find(:all, :conditions => c.where) 
 	birthday_key_string = Time.mktime(d.year, d.month, d.day, 0,0,0).to_date.strftime("%m%d")
-	customers = @shop.customers.find(:all, :conditions=>["date_format(birthday,'%m%d')=?", birthday_key_string]) 
+	customers = @shop.customers.where("date_format(birthday,'%m%d')=?", birthday_key_string)
+#	customers = @shop.customers.find(:all, :conditions=>["date_format(birthday,'%m%d')=?", birthday_key_string]) 
 
 	list_url = url_for(:action=>'birthday', :id=>@shop, :target_date=>d)
 	cell_text = "<a href='#{list_url}'>"

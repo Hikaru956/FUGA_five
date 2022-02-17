@@ -5,23 +5,19 @@
 		<a class="btn btn-small" href="<%=url_for(:action=>"content_category", :id=>@parent_category)%>">
 			<i class="icon-arrow-left"></i>&nbsp;戻る</a>
 	</div>
-	<h3><%= @current_category.category_label %> : カテゴリー編集</h3>
+	<h3><%= @parent_category.category_label %> : カテゴリー編集</h3>
 </header>
 
 <ul class="breadcrumb">
   <li><%= link_to "ストリーム", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
-
-
-  <% ancs = @current_category.ancestors.reverse %>
-  <% ancs.each do |cat| %>
-    <% next if cat.category_type < 100 %>
-    <li><%= link_to cat.category_label, :action=>"content_category_tree", :id=>cat %>&nbsp;<span class="divider">/</span></li>
-  <% end %>
-  <li class="active"><%= @current_category.category_label%></li>
+  <li><%= link_to @parent_category.category_label, :action=>"content_category", :id=>@parent_category %>&nbsp;<span class="divider">/</span></li>
+  <li class="active">カテゴリー編集</li>
 </ul>
 
 <div>
 	<a class="btn btn-success btn-small"  data-toggle="modal" href="#modalNew"><i class="icon-plus"></i>&nbsp;新規登録</a>
+	<button type="button" class="btn btn-warning btn-small" onclick="demo_rename();"><i class="icon-pencil"></i> 変更</button>
+	<button type="button" class="btn btn-danger btn-small" onclick="demo_delete();"><i class="icon-trash"></i> 削除</button>
 </div>
 
 <div id="event_result"><br/></div>
@@ -61,28 +57,6 @@
 		</div>
 	<% end %>
 </div>
-
-<% unless @current_category.children.blank? %>
-	<h4>サブ・カテゴリー</h4>
-	<% array = @current_category.children.in_groups_of(3, false)%>
-	<div class="row-fluid">
-		<% for i in 0..(array.size-1) %>
-			<% @lines = array[i] %>
-		    <ul class="thumbnails">
-		        <li class="span4">
-		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
-				</li>		
-		        <li class="span4">
-		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
-				</li>		
-		        <li class="span4">
-		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
-				</li>		
-	        </ul>
-		<% end %>
-	</div>
-<% end %>
-
 
 <script type="text/javascript" src="/javascripts/jquery-1.9.1.min.js"></script>
 <%= javascript_include_tag "jstree.min.js"%>

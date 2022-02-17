@@ -99,7 +99,7 @@
 </div>
 
 <!-- modalEdit -->
-<%= form_tag url_for(:action=>"layout_update", :id=>@layout), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
+<%= form_tag url_for(:action=>"layout_update", :id=>@layout), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit", method: :patch} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">レイアウト・スキーム編集</h3>
@@ -113,8 +113,8 @@
 	</div>
 <% end %>
 
-<!-- modalDeleteUser -->
-<%= form_tag url_for(:action=>"layout_delete", :id=>@layout), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete"} do -%>
+<!-- modalDeleteLayout -->
+<%= form_tag url_for(:action=>"layout_delete", :id=>@layout), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete", method: :delete} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">レイアウト・スキーム削除</h3>

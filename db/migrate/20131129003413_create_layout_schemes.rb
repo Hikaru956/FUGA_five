@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateLayoutSchemes < ActiveRecord::Migration
+class CreateLayoutSchemes < ActiveRecord::Migration[5.2]
   def self.up
     create_table :layout_schemes do |t|
       t.string  :name

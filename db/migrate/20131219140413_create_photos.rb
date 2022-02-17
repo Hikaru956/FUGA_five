@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreatePhotos < ActiveRecord::Migration
+class CreatePhotos < ActiveRecord::Migration[5.2]
   def self.up
     create_table :photos do |t|
       t.integer   :shop_id

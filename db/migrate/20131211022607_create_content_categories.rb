@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateContentCategories < ActiveRecord::Migration
+class CreateContentCategories < ActiveRecord::Migration[5.2]
   def self.up
     create_table :content_categories do |t|
       t.integer   :shop_id
