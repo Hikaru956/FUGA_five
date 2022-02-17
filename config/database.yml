@@ -15,12 +15,13 @@ defaults: &defaults
   pool: 5
   #hikaru
   #socket: /var/lib/mysql/mysql.sock
-  socket: /tmp/mysql.sock
+  #socket: /tmp/mysql.sock
   username: 956
   password: 956service
   
 development:
   database: fuga_development
+  socket: /tmp/mysql.sock
   <<: *defaults
 
 # Warning: The database defined as 'test' will be erased and
@@ -32,5 +33,5 @@ test:
 
 production:
   database: fuga_production
-  <<: *defaults
   socket: /var/lib/mysql/mysql.sock
+  <<: *defaults
