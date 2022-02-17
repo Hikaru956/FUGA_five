@@ -622,7 +622,7 @@ private
   end
 
   def user_params
-        params.require(:user).permit(:login, :email, :name, :password, :password_confirmation, :role, :company_id, :shop_id)
+        params.require(:user).permit(:login, :email, :email_org, :name, :password, :password_confirmation, :role, :company_id, :shop_id)
   end
 
   def staff_params
