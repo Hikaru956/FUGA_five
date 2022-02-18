@@ -116,7 +116,7 @@ gem 'json'
 #hikatu
 gem "rmagick" #,  :require => 'RMagick'
 gem "acts_as_taggable_on_steroids"
-gem 'mini_racer'
+gem 'mini_racer', '~> 0.4.0' #libv8問題のためのversion指定
 gem 'holidays'
 #gem 'protected_attributes'
 gem 'holiday_japan'
@@ -135,3 +135,4 @@ gem "dropzonejs-rails"
 gem 'simple_form'
 gem "tinymce-rails"
 gem 'tinymce-rails-langs'
+gem 'mini_portile' #libv8問題のためのversion指定
