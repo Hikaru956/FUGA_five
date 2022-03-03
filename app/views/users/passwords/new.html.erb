@@ -31,8 +31,8 @@ ahtml, abody {
     <h2></h2>
     <p class="lead"></p>
 </header>
-<h2>パスワードを忘れましたか？</h2>
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "well" }) do |f| %>
+  <h3>パスワードを忘れましたか？</h3>
   <%= render "users/shared/error_messages", resource: resource %>
   <div class="field">
     <%= f.label :email %><br />

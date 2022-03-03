@@ -31,8 +31,8 @@ ahtml, abody {
     <h2></h2>
     <p class="lead"></p>
 </header>
-<h2>ログイン</h2>
 <%= form_for(resource, as: resource_name, html: { class: "well" }, url: session_path(resource_name)) do |f| %>
+  <h3>ログイン</h3>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
