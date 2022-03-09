@@ -59,7 +59,7 @@
 
 	      	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "527a3266c376ced4044eb1e72151c717") %>
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
-	        	<img src="http://placehold.it/200x200&amp;text=Logo-S">
+	        	<img src="https://placehold.jp/20/cfcfcf/ffffff/200x200.png?text=Logo-S%0A">
 			<% else %>
 				<img src="<%= widget_bag.photos[0].clip.url() %>" title=<%=model_name(@website) %>>
 			<% end %>			
@@ -124,9 +124,9 @@
   <!-- Bootstrap core JavaScript -->
   <!-- Placed at the end of the document so the pages load faster -->
 	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 	<script type="text/javascript" src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
 
   <!-- Custom JavaScript for the Side Menu - Put in a custom JS file if you want to clean this up -->

@@ -35,7 +35,7 @@
 			<% unless key_photo.blank? %>
 				<div class="thumbnail thumbnail-1"><%= image_tag key_photo.clip.url(:panel) %></div>
 			<% else %>
-				<img class="img-responsive" src="http://placehold.it/700x450/ffffff/cccccc&amp;text=<%=latest_leaf.publish_from.strftime('%Y-%m-%d')%>">
+				<img class="img-responsive" src="https://placehold.jp/40/cfcfcf/ffffff/700x450.png?text=<%=latest_leaf.publish_from.strftime('%Y-%m-%d')%>">
 	    	<% end %>
           </div>
         </div><!-- /.row -->

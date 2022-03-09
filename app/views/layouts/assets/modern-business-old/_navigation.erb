@@ -11,7 +11,7 @@
           <a class="navbar-brand" href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>">
           	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "fa2b3ba78546c4161a2c716c0b1a138a") %>
 			<% if widget_bag.blank? || !widget_bag.is_valid? %>
-				<img src="http://placehold.it/68x30&amp;text=Logo-S">
+				<img src="https://placehold.jp/10/cfcfcf/ffffff/68x30.png?text=Logo-S%0A">
 			<% else %>
 				<img src="<%= widget_bag.photos[0].clip.url() %>" title=<%=model_name(@website) %>>
 			<% end %>			

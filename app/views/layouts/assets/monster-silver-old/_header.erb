@@ -7,7 +7,7 @@
                                 	<a href="<%= url_for(:action=>'index', :wkey=>@website.wsite_hash_key) %>">
 							          	<% widget_bag = VisualWidget.search_widget_bag_for(@website, "35d8e05aa00769c4db74e765e4c210d4") %>
 										<% if widget_bag.blank? || !widget_bag.is_valid? %>
-											<img src="http://placehold.it/100x75&amp;text=Logo-S">
+											<img src="https://placehold.jp/12/cfcfcf/ffffff/100x75.png?text=Logo-S%0A">
 										<% else %>
 											<img src="<%= widget_bag.photos[0].clip.url() %>" title=<%=model_name(@website) %>>
 										<% end %>			

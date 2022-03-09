@@ -6,7 +6,7 @@
             <% unless key_photo.blank? %>
 		        <%= image_tag key_photo.clip.url(:panel), :class=>"img-responsive" %>
             <% else %>
-    	        <a href="#"><img class="img-responsive" src="http://placehold.it/700x300&amp;text=<%=@leaf.publish_from.strftime('%Y-%m-%d')%>"></a>
+    	        <a href="#"><img class="img-responsive" src="https://placehold.jp/40/cfcfcf/ffffff/700x300.png?text=<%=@leaf.publish_from.strftime('%Y-%m-%d')%>"></a>
 			<% end %>
         </div>
     </div>

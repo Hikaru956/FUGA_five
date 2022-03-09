@@ -3,7 +3,7 @@
 	<% unless key_photo.blank? %>
 		<%= image_tag key_photo.clip.url(:panel) %>
 	<% else %>
-		<img src="http://placehold.it/320x240&amp;text=No Face Photo">
+		<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Face%20Photo%0A">
 	<% end %>
 	<div class="caption">
 	  <h3><%= truncate(model_name(temp_local), :length=>50) %></h3>

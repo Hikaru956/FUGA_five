@@ -10,10 +10,10 @@
 					<% unless key_photo.blank? %>
 						<%= image_tag key_photo.clip.url(:panel), :style=>"visibility: visible; opacity: 1;", :alt=>model_name(temp_local) %>
 					<% else %>
-						<img src="http://placehold.it/800x500&amp;text=<%=latests[0].publish_from.strftime('%Y-%m-%d')%>">
+						<img src="https://placehold.jp/50/cfcfcf/ffffff/800x500.png?text=<%=latests[0].publish_from.strftime('%Y-%m-%d')%>">
 					<% end %>
 				<% else %>
-						<img src="http://placehold.it/800x500&amp;text=No Article">
+						<img src="https://placehold.jp/50/cfcfcf/ffffff/800x500.png?text=No%20Article%0A">
 				<% end %>
 			</div>
 	        <section>

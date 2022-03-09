@@ -28,7 +28,7 @@
 								<% unless key_photo.blank? %>
 									<div class="thumbnail thumbnail-1 img-left"><%= image_tag key_photo.clip.url(:thumb), :class=>"img-responsive img-border img-left" %></div>
 								<% else %>
-									<img class="thumbnail thumbnail-1 img-left" src="http://placehold.it/240x180/ffffff/cccccc&amp;text=<%=latest_leaf.publish_from.strftime('%Y-%m-%d')%>">
+									<img class="img-responsive" src="https://placehold.jp/20/cfcfcf/ffffff/240x180.png?text=<%=latest_leaf.publish_from.strftime('%Y-%m-%d')%>">
 								<% end %>
 							</div>
 							<div class="col-lg-9 col-md-9 col-sm-9">
