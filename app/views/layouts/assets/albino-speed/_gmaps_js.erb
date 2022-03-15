@@ -3,7 +3,7 @@
 <%      if @website.gps? %>
 <%         gmkey = VisualWidget.search_widget_bag_for(@website, "6f7b19f8f849675c612dba57daf0fb31") %>
 <%         if gmkey.blank? || !gmkey.is_valid? %>
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyCvYTVvqH3xpk1ORLQ-Y-d2WWfr1381Hg4"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer>></script>
 <%         else %>
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<%= gmkey.data_string %>"></script>
 <%         end %>

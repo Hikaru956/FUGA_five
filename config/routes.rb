@@ -70,6 +70,9 @@ Fuga326::Application.routes.draw do
   post 'bs_config/create_staff_photo', to:'bs_config#create_staff_photo'
   delete 'bs_config/delete_staff_photo', to:'bs_config#delete_staff_photo'
 
+  post 'bs_config/shop_update_position', to: 'bs_config#shop_update_position'
+  delete 'bs_config/shop_delete_position', to:'bs_config#shop_delete_position'
+
   post 'bs_authoring/create_widget_bag_photo', to: 'bs_authoring#create_widget_bag_photo'
   delete 'bs_authoring/delete_widget_bag_photo', to: 'bs_authoring#delete_widget_bag_photo'
 
@@ -110,6 +113,9 @@ Fuga326::Application.routes.draw do
   delete 'dashboard/shop_reset_apple_touch_icon', to: 'dashboard#shop_reset_apple_touch_icon'
   patch 'dashboard/set_disqus_mode', to: 'dashboard#set_disqus_mode'
   patch 'dashboard/set_disqus_code', to: 'dashboard#set_disqus_code'
+
+  post 'dashboard/shop_update_position', to: 'dashboard#shop_update_position'
+  delete 'dashboard/shop_delete_position', to: 'dashboard#shop_delete_position'
 
   get 'bs_content_gallery/content_root', to: 'bs_content_gallery#content_root'
   post 'bs_content_gallery/create_bag', to: 'bs_content_gallery#create_bag'

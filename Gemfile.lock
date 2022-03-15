@@ -77,11 +77,16 @@ GEM
     devise-i18n (1.9.4)
       devise (>= 4.7.1)
     devise-i18n-views (0.3.7)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     dropzonejs-rails (0.8.5)
       rails (> 3.1)
     erubi (1.10.0)
     execjs (2.8.1)
     ffi (1.15.5)
+    geocoder (1.7.3)
     geokit (1.13.1)
     geokit-rails (2.3.2)
       geokit (~> 1.5)
@@ -269,7 +274,9 @@ DEPENDENCIES
   devise-encryptable
   devise-i18n
   devise-i18n-views
+  dotenv-rails
   dropzonejs-rails
+  geocoder
   geokit-rails
   holiday_japan
   holidays

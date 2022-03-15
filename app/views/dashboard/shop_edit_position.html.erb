@@ -77,6 +77,77 @@
 	<% end %>
 </div>
 
+<h3>hikaru</h3>
+<script>
+  var map;
+  var shop_marker;
+	<% if @item.gps? %>
+	    var latlng = { lat: <%= @item.lat %>, lng: <%= @item.lng %> };
+	<% else %>
+	    var latlng = { lat: 35.681382, lng: 139.766084 };
+	<% end %>
+	function initMap() {
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: latlng,
+			zoom: 16
+		});
+		shop_marker = new google.maps.Marker({
+			position: latlng,
+			map: map
+		});
+		google.maps.event.addListener(map, 'click', function(event) {
+				if (shop_marker!=null) { shop_marker.setMap(null); }
+				shop_marker = new google.maps.Marker({
+					position: event.latLng,
+					map: map
+				});
+				document.getElementById('lat').value = event.latLng.lat();	
+				document.getElementById('lng').value = event.latLng.lng();	
+		});
+	}
+	function moveMap() {
+			var geocoder = new google.maps.Geocoder();
+			geocoder.geocode({
+				'address': document.getElementById('address').value
+			}, function(result, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					map.panTo(result[0].geometry.location);
+					/*
+					var marker = new google.maps.Marker({
+						position: result[0].geometry.location,
+						map: map
+					});
+					*/
+				} else {
+					alert("見つかりませんでした。");
+				}
+			});
+		}
+	window.onload = function () {
+		initMap();
+		}
+</script>
+
+<!-- modalDeletePosition -->
+<%= form_tag url_for(:action=>"shop_delete_position", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"modalDeletePosition", method: :delete} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">位置をクリア</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			「<%= model_name(@item) %>」
+			の位置情報（緯度、経度）をクリアします<br/>
+			よろしいですか？
+		</p>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;実行</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+	</div>
+<% end %>
+
+<% if false %>
 <script>
 	<% if @item.gps? %>
 	    var latlng = new google.maps.LatLng(<%= @item.lat %>, <%= @item.lng %>);
@@ -127,25 +198,4 @@
         });
     }
 </script>
-
-<!-- modalDeletePosition -->
-<%= form_tag url_for(:action=>"shop_delete_position", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"modalDeletePosition"} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">位置をクリア</h3>
-	</div>
-	<div class="modal-body">
-		<p>
-			「<%= model_name(@item) %>」
-			の位置情報（緯度、経度）をクリアします<br/>
-			よろしいですか？
-		</p>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;実行</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
-	</div>
 <% end %>
-
-
-

@@ -164,7 +164,7 @@ class DashboardController < ApplicationController
       @item = Shop.find(params[:id])
       @item.lat = params[:lat]
       @item.lng = params[:lng]
-      @item.save
+      @item.save!
       redirect_to :action=>"company_show_shop", :id=>@item
   end
 
@@ -172,7 +172,7 @@ class DashboardController < ApplicationController
       @item = Shop.find(params[:id])
       @item.lat = nil
       @item.lng = nil
-      @item.save
+      @item.save!
       redirect_to :action=>"company_show_shop", :id=>@item
   end
 

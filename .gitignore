@@ -15,3 +15,4 @@
 /tmp
 /public/photo
 Gemfile.lock
+.env

@@ -6,7 +6,7 @@
         <%= raw gmapcode.data_string %>
     </div>
 <%  else %>
-<script src="//maps.google.com/maps/api/js?language=ja&key=AIzaSyCvYTVvqH3xpk1ORLQ-Y-d2WWfr1381Hg4">
+<script src="//maps.google.com/maps/api/js?language=ja&key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer>>
 </script>
 <style>
     #map {

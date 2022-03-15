@@ -136,3 +136,6 @@ gem 'simple_form'
 gem "tinymce-rails"
 gem 'tinymce-rails-langs'
 gem 'mini_portile' #libv8問題のためのversion指定
+
+gem 'geocoder'
+gem 'dotenv-rails'

@@ -45,6 +45,15 @@ class Shop < ApplicationRecord
   
   has_many      :visual_widget_bags,  :dependent=>:destroy
 
+  #googlemap
+  #hikaru
+  #validates :lat, presence: true
+  #validates :lng, presence: true
+  #validates :address_1, presence: true
+
+  #geocoded_by :address_1
+  #after_validation :geocode
+
   #hikaru
   #attr_accessible :alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice
   
