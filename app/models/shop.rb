@@ -31,6 +31,7 @@ class Shop < ApplicationRecord
   has_many      :customers,           :dependent=>:destroy #, :order => "alt_id asc, furigana asc"
 
   has_many      :photos,              :dependent=>:destroy
+  has_many      :inquiries,           :dependent=>:destroy
 
   accepts_nested_attributes_for :photos
 

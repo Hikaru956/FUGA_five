@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+		<title><%= model_title(@seed) %> - <%= @website.name %></title>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/DEMO-TEST/head_logic" %>
+    </head>
+    <body>
+        <div class="spinner">
+        </div>
+        <!--============================== header =================================-->
+        <header>
+	        <%= render :partial=>"#{LayoutScheme.asset_root}/DEMO-TEST/header" %>
+        </header>
+        <div class="bg-content">
+
+            <!--============================== content =================================-->
+            <div id="content" class="content-extra">
+
+                <div class="ic">
+                </div>
+                <div class="row-1">
+                    <div class="container">
+						
+					  <br/>                    	
+			          <ol class="breadcrumb">
+			            <li><a href="<%= url_for(:action=>'index',	:wkey=>@website.wsite_hash_key) %>">TOP</a></li>
+			            <li class="active"><%= model_title(@seed) %></li>
+			          </ol>
+						<%= render :partial=>"#{LayoutScheme.asset_root}/956_common/inquiry_new" %>
+						
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--============================== footer =================================-->
+        <footer>
+	        <%= render :partial=>"#{LayoutScheme.asset_root}/DEMO-TEST/footer" %>
+        </footer>
+    </body>
+</html>

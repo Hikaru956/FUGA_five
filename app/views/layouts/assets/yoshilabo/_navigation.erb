@@ -7,6 +7,11 @@
         <li><a href="<%= url_for(:action=>'news_list', :id=>leaf, :wkey=>@website.wsite_hash_key) %>"><%= leaf.name %></a></li>
 <%      end %>
 <%  end %>
+    <li>
+        <% if @website.enable_inquiry %>
+            <%= link_to "お問い合わせ".html_safe, inquiry_new_path %>
+        <% end %>
+    </li>
 <% if @author_mode %>
         <li>
             <i class="fa fa-cog"></i> 設定

@@ -21,6 +21,11 @@
         <li><a href="/news?id=863&wkey=b7b9c82dd6be01f9cdc422eaaf04b049">サロン新聞</a></li>
         <li><a href="http://www.enchant-hair.com/shop/" target="_blank">店舗案内</a></li>
         <li><a href="http://www.enchant-hair.com/tel/" target="_blank">ご予約</a></li>
+        <li>
+            <% if @website.enable_inquiry %>
+                <%= link_to "お問い合わせ".html_safe, inquiry_new_path %>
+            <% end %>
+        </li>
 <% if @author_mode %>
         <li>
             <i class="fa fa-cog"></i> 設定
@@ -36,5 +41,3 @@
             </ul>
         </li>
 <% end %>
-
-

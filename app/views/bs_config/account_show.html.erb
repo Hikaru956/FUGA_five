@@ -43,7 +43,7 @@
 </table>
 
 <!-- modalEdit -->
-<%= form_tag url_for(:action=>"account_update"), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
+<%= form_tag url_for(:action=>"account_update"), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit",method: :patch} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">アカウント編集</h3>
@@ -58,7 +58,7 @@
 <% end %>
 
 <!-- modalEditPassword -->
-<%= form_tag url_for(:action=>"account_update"), {:class=>"modal hide fade form-horizontal", :id=>"modalEditPassword"} do -%>
+<%= form_tag url_for(:action=>"account_update"), {:class=>"modal hide fade form-horizontal", :id=>"modalEditPassword", method: :patch} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">パスワード再発行</h3>
@@ -71,4 +71,3 @@
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
 	</div>
 <% end %>
-

@@ -35,6 +35,11 @@
 			<% end %>
 		</li>
 	<% end %>
+		<li>
+			<% if @website.enable_inquiry %>
+				<%= link_to "お問い合わせ".html_safe, inquiry_new_path %>
+			<% end %>
+		</li>
 	<% if @author_mode %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-gear"></i> 設定 <b class="caret"></b></a>

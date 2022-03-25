@@ -31,9 +31,9 @@
 <% end %>
 <meta property="og:type"              content="website">
 <% if request.host == 'sr2.swifty.jp' %>
-<meta property="og:url"               content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
-<meta property="og:url"               content="http://<%= request.host %>/home">
+<meta property="og:url"               content="https://<%= request.host %>/home">
 <% end %>
 <% if hptitle.blank? || !hptitle.is_valid? %>
 <meta property="og:title"             content="<%= @website.name %>">
@@ -42,7 +42,7 @@
 <% end %>
 <% og_img = VisualWidget.search_widget_bag_for(@website, "97f79e8259443acef20089097759b24c") %>
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url() %>">
+<meta property="og:image"             content="<%= og_img.photos[0].clip.url() %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">

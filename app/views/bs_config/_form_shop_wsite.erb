@@ -23,6 +23,19 @@
 	</div>
 </div>
 <div class="control-group">
+	<label class="control-label" for="shop[enable_inquiry]">お問い合わせ機能</label>
+	<div class="controls">
+		<label class="radio inline">
+			<input type="radio" id="shop[enable_inquiry]" name="shop[enable_inquiry]" value="1" <% if @shop.enable_inquiry %>checked<% end %>>
+			有効
+		</label>
+		<label class="radio inline">
+			<input type="radio" id="shop[enable_inquiry]" name="shop[enable_inquiry]" value="0" <% if !@shop.enable_inquiry %>checked<% end %>>
+			無効
+		</label>
+	</div>
+</div>
+<div class="control-group">
 	<label class="control-label" for="shop[use_disqus]">ブログコメント</label>
 	<div class="controls">
 		<label class="radio inline">
@@ -41,6 +54,3 @@
 		<%= text_field 'shop', 'copyright_notice', :placeholder=>"カスタム・コピーライト表示", :autocomplete => "off" %>
 	</div>
 </div>
-
-
-

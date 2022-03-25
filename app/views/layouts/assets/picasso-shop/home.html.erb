@@ -30,14 +30,14 @@
 <% end %>
 <meta property="og:type"              content="article">
 <% if request.host == 'staffroom.swifty.jp' %>
-<meta property="og:url"               content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
-<meta property="og:url"               content="http://<%= request.host+shopalt %>/home">
+<meta property="og:url"               content="https://<%= request.host+shopalt %>/home">
 <% end %>
 <meta property="og:title"             content="<%= @website.name %>">
 <% og_img = VisualWidget.search_widget_bag_for(@website, "137a06c5e066811550883ac4975a16ad") %>
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="http://<%= request.host %><%= og_img.photos[0].clip.url() %>">
+<meta property="og:image"             content="<%= og_img.photos[0].clip.url() %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">

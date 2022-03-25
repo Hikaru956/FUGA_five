@@ -28,9 +28,9 @@
 <% end %>
 <meta property="og:type"              content="website">
 <% if request.host == 'staffroom.swifty.jp' %>
-<meta property="og:url"               content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
-<meta property="og:url"               content="http://<%= request.host %>/home">
+<meta property="og:url"               content="https://<%= request.host %>/home">
 <% end %>
 <meta property="og:title"             content="<%= @website.name %>">
 <% og_img = VisualWidget.search_widget_bag_for(@website, "7bd3cdb04b87a7314e892e3b51706f81") %>

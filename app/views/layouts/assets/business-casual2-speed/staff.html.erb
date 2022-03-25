@@ -27,7 +27,7 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="article">
-<meta property="og:url"               content="http://<%= request.host + staff_url %>">
+<meta property="og:url"               content="https://<%= request.host + staff_url %>">
 <meta property="og:title"             content="<%= model_name(contact_category.web_page) + model_name(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"         content="<%= @website.name %>">
 <% unless @website.social_facebook_uri.blank? %>

@@ -22,6 +22,11 @@
         <li><a href="/contact_us">講 師</a></li>
         <li><a href="/fix?id=30161">生徒さんの声</a></li>
 <% end %>
+        <li>
+                <% if @website.enable_inquiry %>
+                <%= link_to "お問い合わせ".html_safe, inquiry_new_path %>
+                <% end %>
+        </li>
 <% if @author_mode %>
     <% unless @website.wsite_layout_deploy.is_public.blank? %>
         <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>

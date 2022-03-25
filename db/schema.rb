@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_17_035500) do
+ActiveRecord::Schema.define(version: 2022_03_15_060358) do
 
   create_table "attendances", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "shop_id"
@@ -134,6 +134,16 @@ ActiveRecord::Schema.define(version: 2022_02_17_035500) do
     t.index ["shop_id"], name: "index_customers_on_shop_id"
   end
 
+  create_table "inquiries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "shop_id"
+    t.string "email"
+    t.text "name"
+    t.text "body"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "layout_schemes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -238,6 +248,7 @@ ActiveRecord::Schema.define(version: 2022_02_17_035500) do
     t.string "copyright_notice"
     t.string "social_instagram_uri"
     t.string "social_line_uri"
+    t.boolean "enable_inquiry", default: false
     t.index ["wsite_hash_key"], name: "index_shops_on_wsite_hash_key"
   end
 

@@ -2,7 +2,7 @@
 <header class="subhead" id="overview">
 	<h3>店舗設定</h3>
 </header>
-	
+
 <ul class="nav nav-tabs">
 	<li>				<a href="<%= url_for(:action=>'company_show_shop') %>">店舗情報</a></li>
 	<li>				<a href="<%= url_for(:action=>'shop_list_staffs') %>">店舗スタッフ</a></li>
@@ -61,6 +61,16 @@
 		<tr>
 			<td>問い合わせメールアドレス</td>
 			<td><%= @shop.wsite_email%></td>
+		</tr>
+		<tr>
+			<td>お問い合わせ機能</td>
+			<td>
+				<% if @shop.enable_inquiry %>
+					有効
+				<% else %>
+					無効
+				<% end %>
+			</td>
 		</tr>
 		<tr>
 			<td>ブログコメント機能</td>

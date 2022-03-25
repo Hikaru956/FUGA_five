@@ -169,6 +169,10 @@ Fuga326::Application.routes.draw do
   patch 'bs_content_stream/update_photo', to: 'bs_content_stream#update_photo'
   delete 'bs_content_stream/delete_photo', to: 'bs_content_stream#delete_photo'
 
+  post 'bs_content_inquiry/show', to: 'bs_content_inquiry#show'
+  patch 'bs_content_inquiry/update', to: 'bs_content_inquiry#update'
+  delete 'bs_content_inquiry/delete_inquiry', to: 'bs_content_inquiry#delete_inquiry'
+
   patch 'bs_attendance/update_business', to: 'bs_attendance#update_business'
   post 'bs_attendance/init_roster', to: 'bs_attendance#init_roster'
   post 'bs_attendance/day_on', to: 'bs_attendance#day_on'
@@ -209,6 +213,9 @@ Fuga326::Application.routes.draw do
   get 'staff'           => 'bs_renderer#staff',             :as => :staff
 
   get 'fix'             => 'bs_renderer#fix',               :as => :fix
+
+  get 'inquiry_new'     => 'bs_renderer#inquiry_new',       :as => :inquiry_new
+  post 'inquiry_create' => 'bs_renderer#inquiry_create',     :as => :inquiry_create
 
 #  match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
 

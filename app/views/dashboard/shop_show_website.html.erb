@@ -66,6 +66,16 @@
 			<td><%= @shop.wsite_email%></td>
 		</tr>
 		<tr>
+			<td>お問い合わせ機能</td>
+			<td>
+				<% if @shop.enable_inquiry? %>
+					有効
+				<% else %>
+					無効
+				<% end %>
+			</td>
+		</tr>
+		<tr>
 			<td>非スマートフォン向けレイアウト</td>
 			<td><%= h @shop.wsite_layout_pc_specific_basename %></td>
 		</tr>

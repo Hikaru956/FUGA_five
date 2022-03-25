@@ -30,6 +30,9 @@
 							<% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %>	<a href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
 						</li>
 					<% end %>
+						<li>
+							<a href="<%= url_for(:controller=>'bs_content_inquiry', 	:action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>">お問い合わせ</a>
+						</li>
 					<% unless MAKE_SECRET_FUGA_OPTION %>
 	                    <% if @shop.option_reservation_management %>	<li><a href="/bs_reservation/index"	>予約</a></li><% end %>
 	                    <% if @shop.option_customer_management %>		<li><a href="/bs_customer/index"	>顧客</a></li><% end %>

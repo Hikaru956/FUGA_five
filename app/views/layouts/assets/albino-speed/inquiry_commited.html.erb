@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="author"                   content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+    <%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
+<% end %>
+<script src="https://use.fontawesome.com/9e789611aa.js"></script>
+<link rel="stylesheet" href="/stylesheets/assets/albino/style.css">
+</head>
+<!-- このサイトはIE9未満では正しく表示されません。 -->
+<!--[if lt IE 9]>
+<body id="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<body id="ie9">
+<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+
+<body>
+<!--<![endif]-->
+<!-- タッチデバイス用ナビゲーション -->
+<aside id="tnav">
+    <ul class="scrooler">
+        <li>- MENU</li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/albino-speed/navigation" %>
+    </ul>
+</aside>
+<!-- 主ウインドウ -->
+<div id="body">
+    <div class="scrooler">
+<!-- サイトヘッダー -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/albino-speed/header" %>
+<!-- グローバルナビゲーション -->
+        <nav id="gnav">
+            <div class="container">
+                <ul id="gnav_main">
+<%= render :partial=>"#{LayoutScheme.asset_root}/albino-speed/navigation" %>
+                </ul>
+            </div>
+        </nav>
+<!-- パンくずリスト -->
+<aside id="breadcrumbs">
+    <div class="container">
+        <ol>
+            <% if request.host == 'sr2.swifty.jp' %>
+                <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+            <% else %>
+                <li><a href="/home"><i class="fa fa-home"></i></a></li>
+            <% end %>
+                <li><%= model_title(@seed) %></li>
+        </ol>
+    </div>
+</aside>
+<!-- メインコンテナ -->
+<div id="main_wrap" class="news">
+    <div class="container">
+<!-- 主エリア -->
+        <main id="main">
+            <h1><%= model_title(@seed) %></h1>
+            <section id="streem_table">
+                <ul class="wrapper">
+                    <%
+                        @public_bag =  @seed.public_bags
+                        unless @public_bag.blank?
+                            @public_bag.each do | bag |
+                                latests = bag.public_leafs
+                                unless latests.blank?
+                    # 2016/09/20 Tachikawa Start
+                                    position = 0
+                                    target   = nil
+                                    latests.each do | leaf |
+                                        if position < leaf.position
+                                            target = leaf
+                                            position = leaf.position
+                                        end
+                                    end
+                                    key_photo = key_photo(target)
+                    # 2016/09/20 Tachikawa End
+                    #                key_photo = key_photo(latests[0])
+                                    unless key_photo.blank?
+                                        image_url = key_photo.clip.url(:panel)
+                                    else
+                                        image_url = '//placehold.it/327x327&amp;text=No Photo'
+                                    end
+                                    if request.host == 'sr2.swifty.jp'
+                                        content_url = url_for(:action=>'news_list', :id=>bag, :wkey=>@website.wsite_hash_key)
+                                    else
+                                        content_url = url_for(:action=>'news_list', :id=>bag)
+                                    end
+                    %>
+                            <li class="col-1p2">
+                                <div class="imgbox"><div style="background-image:url('<%= image_url %>');">
+                                    <a href="<%= content_url %>"><img src="<%= image_url %>"></a>
+                                </div></div>
+                                <h1>
+                                    <a href="<%= content_url %>"><%= truncate(model_name(bag)) %></a>
+                                </h1>
+                            </li>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                </ul>
+                <main>
+                    <div class="container">
+                        <%= render :partial=>"#{LayoutScheme.asset_root}/956_common/inquiry_commited" %>
+                    </div>
+                </main>
+            </section>
+        </main>
+<!-- サイドエリア -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/albino-speed/sidebar" %>
+            </div>
+        </div>
+<!-- サイトフッター -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/albino-speed/footer" %>
+
+    </div>
+</div>
+<!-- common javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/albino-speed/common_js" %>
+<!-- page specific javascript -->
+<!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/albino-speed/social_js" %>
+<!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/albino-speed/gmaps_js" %>
+</body>
+</html>

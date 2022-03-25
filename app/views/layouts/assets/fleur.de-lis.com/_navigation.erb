@@ -45,6 +45,11 @@
 				Recruit
 			</a>
 		</li>
+		<li>
+			<% if @website.enable_inquiry %>
+				<%= link_to "お問い合わせ".html_safe, inquiry_new_path %>
+			<% end %>
+		</li>
 <% if @author_mode %>
         <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
         <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>

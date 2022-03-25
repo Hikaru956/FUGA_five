@@ -24,9 +24,9 @@
 <% end %>
 <meta property="og:type"              content="article">
 <% if request.host == 'staffroom.swifty.jp' %>
-<meta property="og:url"               content="http://<%= request.host + staff_url %>?wkey=<%= @website.wsite_hash_key %>">
+<meta property="og:url"               content="https://<%= request.host + staff_url %>?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
-<meta property="og:url"               content="http://<%= request.host + staff_url %>/home">
+<meta property="og:url"               content="https://<%= request.host + staff_url %>/home">
 <% end %>
 <meta property="og:title"             content="<%= model_name(contact_category.web_page) + model_name(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"         content="<%= @website.name %>">

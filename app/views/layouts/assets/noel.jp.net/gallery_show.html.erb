@@ -20,7 +20,7 @@
 <meta property="og:site_name"         content="<%= @website.name %>">
 <% key_photo = key_photo(@seed) %>
 <% unless key_photo.blank? %>
-<meta property="og:image"             content="http://<%= request.host + key_photo.clip.url() %>">
+<meta property="og:image"             content="<%= key_photo.clip.url() %>">
 <% end %>
 <% unless @website.social_facebook_uri.blank? %>
 <meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">

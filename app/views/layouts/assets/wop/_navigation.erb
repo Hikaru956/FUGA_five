@@ -5,6 +5,11 @@
             <li><a href="/news?id=2870">BIHATSU</a></li>
             <li><a href="/fix?id=9930">PHOTO</a></li>
             <li><a href="/home">HOME</a></li>
+            <li>
+                <% if @website.enable_inquiry %>
+                <%= link_to "お問い合わせ".html_safe, inquiry_new_path %>
+                <% end %>
+            </li>
 <% if @author_mode %>
     <% unless @website.wsite_layout_deploy.is_public.blank? %>
             <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>

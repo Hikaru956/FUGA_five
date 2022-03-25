@@ -199,6 +199,22 @@ class BsRendererController < ApplicationController
       format.rss { render :layout => false } #stream_feed.rss.builder
     end
   end
+  ###
+  ## INQUIRY
+  #
+  def inquiry_new
+    @seed = ContentCategory.new
+    @seed.title = "お問い合わせ"
+    render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.renderer_layout}/inquiry_new":  "#{@website.layout_pc_specific_basename}/inquiry_new")
+  end
+
+  def inquiry_create
+    @seed = ContentCategory.new
+    @seed.title = "お問い合わせ"
+    @item = Inquiry.new(inquiry_params)
+    @item.save!
+    render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.renderer_layout}/inquiry_commited":  "#{@website.layout_pc_specific_basename}/inquiry_commited")
+  end
 
   private
   def config_x_xss_protection
@@ -214,4 +230,9 @@ class BsRendererController < ApplicationController
       return
     end  
   end
+
+  def inquiry_params
+    params.require(:inquiry).permit(:id, :shop_id, :email, :name, :body, :status, :created_at, :updated_at)
+  end
+
 end

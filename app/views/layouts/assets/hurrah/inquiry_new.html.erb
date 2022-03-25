@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title><%= model_title(@seed) %> - HURRAH / HURRAH AND THINGS</title>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/head_logic" %>
+</head>
+<body>
+<div id="smart_tablet_nav">
+    <ul id="smart_tablet_nav_inner">
+        <li>Menu<span>メニュー</span></li>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/navigation" %>
+    </ul>
+</div>
+<div id="body">
+    <div id="body_inner">
+        <!-- このサイトはIE9未満では正しく表示されません。 -->
+        <!--[if lt IE 9]>
+        <p id="browserupgrade">あなたは<strong>古いブラウザ</strong>をご利用のようです。安心してインターネットをお楽しみいただくために<a href="http://windows.microsoft.com/ja-jp/internet-explorer/download-ie">最新のブラウザにアップグレード</a>してください。このサイトは古いブラウザでは正しく表示されません。</p>
+        <![endif]-->
+        <header id="header">
+            <div class="container">
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/header" %>
+            </div>
+        </header>
+        <nav id="nav">
+            <div class="container">
+                <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/navigation" %>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <div class="container">
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="latest_h1"><%= model_title(@seed) %></h1>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <%= render :partial=>"#{LayoutScheme.asset_root}/956_common/inquiry_new" %>
+                </div>
+
+
+            </div>
+        </main>
+        <footer id="footer">
+            <div class="container">
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/footer" %>
+            </div>
+        </footer>
+    </div>
+</div>
+<%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/footer_logic" %>
+</body>
+</html>

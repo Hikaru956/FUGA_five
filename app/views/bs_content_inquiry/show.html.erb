@@ -1,0 +1,96 @@
+<h3>お問い合わせ詳細</h3>
+<table class='table table-bordered table-hover'>
+    <tbody>
+        <tr>
+            <th>
+                日時
+            </th>
+            <td>
+                <%= @inquiry.created_at.strftime("%Y-%m-%d")%>(<%= (wday(@inquiry.created_at))%>)
+            </td>
+        </tr>
+        <tr class='<%= inquiry_status_color(@inquiry.status)%>'>
+            <th>
+                ステータス
+            </th>
+            <td>
+                <b><%= inquiry_status_label(@inquiry.status) %></b>
+            </td>
+        </tr>
+        <tr>
+            <th class='span3'>
+                お名前
+            </th>
+            <td class='span9'>
+                <%= @inquiry.name %>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                メールアドレス
+            </th>
+            <td>
+                <%= @inquiry.email %>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                お問い合わせ内容
+            </th>
+            <td>
+                <pre><%= @inquiry.body %></pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class='text-right'>
+    <% if current_user.has_permission?(User::ROLE_MANAGER)%>
+        <a class="btn btn-danger"  data-toggle="modal" href="#modal_delete">
+            <i class="icon-trash"></i>&nbsp;
+            削除
+        </a>
+    <% else %>
+        <a class="btn btn-danger" disabled='disabled'>
+            <i class="icon-trash"></i>&nbsp;
+            削除
+        </a>
+    <% end %>
+    <a class="btn btn-success"  data-toggle="modal" href="#modalEdit">
+        <i class="icon-pencil"></i>&nbsp;
+        ステータス
+    </a>
+    <a class='btn btn-info' href="mailto:<%= @inquiry.email%>"><i class="icon-envelope"></i>&nbsp;返信</a>
+    <a class='btn btn-default' href="<%= url_for(:controller=>'bs_content_inquiry', :action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>">戻る</a>
+</div>
+
+<div class="modal hide fade form-horizontal", id="modalEdit">
+	<%= form_for @inquiry, url: bs_content_inquiry_update_path(id: @shop.id, inquiry_id: @inquiry.id), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">編集</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_update", locals: {inquiry: @inquiry} %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+<div id="modal_delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <%= form_tag({:action => 'delete_inquiry', id: @shop.id, inquiry_id: @inquiry.id}, :class=>"form-horizontal", method: :delete)  do %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">削除確認</h3>
+	</div>
+	<div class="modal-body">
+		<p>お問い合わせを削除します。よろしいですか？</p>
+	</div>
+	<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+  <%end%>  
+</div>

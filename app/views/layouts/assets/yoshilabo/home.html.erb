@@ -24,11 +24,11 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"   content="website">
-<meta property="og:url"    content="http://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<meta property="og:url"    content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <meta property="og:title"  content="<%= @website.name %>">
 <% og_img = VisualWidget.search_widget_bag_for(@website, "06d412930701932523945cec79a4dcd8") %>
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"  content="http://<%= request.host %><%= og_img.photos[0].clip.url() %>">
+<meta property="og:image"  content="<%= og_img.photos[0].clip.url() %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description" content="<%= @website.wsite_description_shop %>">

@@ -8,11 +8,11 @@
     <meta name="copyright" content="<%= model_name(@website.company) %>">
 
     <meta property="og:type"              content="article">
-    <meta property="og:url"               content="http://<%= request.host + url_for(:action=>'stream_show', :id=>@seed) %>">
+    <meta property="og:url"               content="https://<%= request.host + url_for(:action=>'stream_show', :id=>@seed) %>">
     <meta property="og:title"             content="<%= model_title(@seed) %>">
 <% key_photo = key_photo(@seed) %>
 <% unless key_photo.blank? %>
-    <meta property="og:image"             content="http://<%= request.host + key_photo.clip.url() %>">
+    <meta property="og:image"             content="<%= key_photo.clip.url() %>">
 <% end %>
     <meta property="og:site_name"         content="<%= @website.name %>">
 <!--
