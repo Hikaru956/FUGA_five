@@ -38,6 +38,6 @@ set :environment, rails_env
 # cronのログの吐き出し場所
 set :output, "#{Rails.root}/log/cron.log"
 
-every 1.day, at: '12:00 am' do
+every 1.day, :at => '1:00' do
   rake 'sitemap:refresh'
 end
