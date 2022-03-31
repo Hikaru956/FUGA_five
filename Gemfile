@@ -139,3 +139,6 @@ gem 'mini_portile' #libv8問題のためのversion指定
 
 gem 'geocoder'
 gem 'dotenv-rails'
+
+gem "sitemap_generator"
+gem 'whenever'

@@ -16,3 +16,4 @@
 /public/photo
 Gemfile.lock
 .env
+public/sitemap.xml.gz

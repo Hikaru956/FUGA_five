@@ -56,6 +56,7 @@ GEM
     byebug (11.1.3)
     calendar_date_select (2.1.2)
       rails (>= 3.1)
+    chronic (0.10.2)
     climate_control (0.2.0)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -218,6 +219,8 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    sitemap_generator (6.2.1)
+      builder (~> 3.0)
     spring (3.1.1)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
@@ -253,6 +256,8 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     will_paginate (3.3.1)
     will_paginate-bootstrap (1.0.2)
       will_paginate (>= 3.0.3)
@@ -296,6 +301,7 @@ DEPENDENCIES
   sass-rails (~> 5.0.5)
   sdoc (~> 0.4.0)
   simple_form
+  sitemap_generator
   spring
   sqlite3 (~> 1.3.6)
   tinymce-rails
@@ -303,6 +309,7 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console
+  whenever
   will_paginate
   will_paginate-bootstrap
 
