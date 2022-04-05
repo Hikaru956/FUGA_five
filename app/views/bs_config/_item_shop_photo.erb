@@ -29,7 +29,7 @@
 		<div class="control-group">
 			<label class="control-label" for="job_title">写真の説明</label>
 			<div class="controls">
-				<%= text_area  'photo', 'info', :rows=>"5", :class=>'input-block-level' %>
+				<%= text_area 'photo', 'info', :rows=>"5", :class=>'input-block-level' %>
 			</div>
 		</div>
 	</div>
@@ -48,7 +48,7 @@
     <p>写真を削除します。よろしいですか？</p>
   </div>
   <div class="modal-footer">
-	<%= form_for photo, url: bs_config_delete_staff_photo_path(id: photo), method: :delete do |f| -%>
+	<%= form_for photo, url: bs_config_delete_shop_photo_path(id: photo), method: :delete do |f| -%>
 		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
   	<%end%>  	

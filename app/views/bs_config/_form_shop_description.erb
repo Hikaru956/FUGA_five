@@ -1,0 +1,26 @@
+<%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>nil} if false%>
+
+<div class="control-group">
+    <%= text_area  'item', 'wsite_description_business', {:class=>"tinymce input-block-level" , :rows => 30, :placeholder=>"記事の本文を入力します。"}  %>
+    <script type="text/javascript">
+        tinyMCE.init({
+            selector: 'textarea.tinymce',
+            cache_suffix: "?v=5.10.2",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_statusbar_location: "bottom",
+            theme_advanced_buttons3_add: ["tablecontrols"],
+            plugins: "table,image",
+            <% unless @item.blank? %>
+                <% shop_photos = @item.photos.where(:ref_type=>'shop')%>
+                    <% unless shop_photos.blank? %>
+                    image_list: [ 
+                        <%= photo_array(shop_photos).html_safe %>
+                        ],
+                    <% end %>
+            <% end %>
+            relative_urls : false,
+            convert_urls: false,
+            toolbar: ["undo redo | formatselect | fontselect | fontsizeselect | bold | italic | underline | alignleft | aligncenter | alignjustify | alignright"],
+            language: 'ja'})
+    </script>
+</div>

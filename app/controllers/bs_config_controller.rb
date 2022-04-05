@@ -114,6 +114,10 @@ class BsConfigController < ApplicationController
   ###
   ##  Actions For Photos
   #
+  def new_shop_photo
+    @item = Shop.find_by_id(params[:id])
+  end
+
   def new_staff_photo
     @item = @shop.staffs.find_by_id(params[:id])
   end
@@ -126,6 +130,22 @@ class BsConfigController < ApplicationController
   #  @item.photos << photo
   #  redirect_to :action=>"shop_show_staff", :id=>@item
   #end
+
+  def create_shop_photo
+    photo = Photo.new(photo_params)
+    photo.shop = @shop
+    photo.ref = @shop
+    @shop.photos << photo
+    @shop.photos.build
+    redirect_to :action=>"company_show_shop", :id=>@shop
+  end
+
+  def delete_shop_photo
+    photo = @shop.photos.find(params[:id])
+    photo.destroy
+    redirect_to :action=>'company_show_shop', :id=>photo.ref_id, :hash=>Time.now.to_i
+  end
+
 
   def create_staff_photo
     @item = @shop.staffs.find_by_id(params[:id])

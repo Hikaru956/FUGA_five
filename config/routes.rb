@@ -67,6 +67,9 @@ Fuga326::Application.routes.draw do
   post 'bs_config/create_page_photo', to: 'bs_config#create_page_photo'
   delete 'bs_config/delete_page_photo', to: 'bs_config#delete_page_photo'
 
+  post 'bs_config/create_shop_photo', to: 'bs_config#create_shop_photo'
+  delete 'bs_config/delete_shop_photo', to: 'bs_config#delete_shop_photo'
+
   post 'bs_config/create_staff_photo', to:'bs_config#create_staff_photo'
   delete 'bs_config/delete_staff_photo', to:'bs_config#delete_staff_photo'
 

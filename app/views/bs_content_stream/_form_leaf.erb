@@ -75,7 +75,7 @@
 <% 
 	@staffs = @shop.staffs.where("staffs.staff_status",'!=', Staff::STAFF_BLOCKED)
 		options = @staffs.map{ | s | [ s.name, s.id] }
-	options.unshift(["-- 指定なし --　", '']) 
+	options.unshift(["-- 指定なし -- ", '']) 
 %>
 <div class="control-group">
 	<label class="control-label" for="item_staff_id">スタッフ</label>
