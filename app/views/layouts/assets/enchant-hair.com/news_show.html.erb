@@ -76,6 +76,7 @@
 <%  unless @seed.description.blank? %><%= raw @seed.description %><% end %>
             </div>
         </article>
+        <%= leaf_navigation(@seed) %>
 <!-- SNS BUTTON -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/enchant-hair.com/sns_btn" %>
 <!-- サイトフッター -->

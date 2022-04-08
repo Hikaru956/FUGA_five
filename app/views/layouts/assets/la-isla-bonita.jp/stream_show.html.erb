@@ -108,6 +108,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
                 </div>
             </article>
+            <%= leaf_navigation(@seed) %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/la-isla-bonita.jp/sns_btn" %>
 <% if @website.disqus? %>
             <aside id="comments">

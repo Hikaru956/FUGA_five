@@ -127,6 +127,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
                         </div>
                     </article>
+                    <%= leaf_navigation(@seed) %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/business-casual2-speed/sns_btn" %>
 <% if @website.disqus? %>
                     <aside id="comments">

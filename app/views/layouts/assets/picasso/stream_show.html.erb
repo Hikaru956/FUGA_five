@@ -129,6 +129,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
                         </div>
                     </article>
+                    <%= leaf_navigation(@seed) %>
 <% if @website.disqus? %>
                     <aside id="comments">
 <%= raw @website.disqus_code %>

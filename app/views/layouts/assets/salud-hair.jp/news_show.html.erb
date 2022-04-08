@@ -60,6 +60,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
                         </div>
                     </article>
+                    <%= leaf_navigation(@seed) %>
             </div>
         </div>
 <%= render :partial=>"#{LayoutScheme.asset_root}/salud-hair.jp/footer" %>

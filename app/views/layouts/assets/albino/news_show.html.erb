@@ -124,6 +124,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
                         </div>
                     </article>
+                    <%= leaf_navigation(@seed) %>
                 </main>
 <!-- サイドエリア -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/albino/sidebar" %>

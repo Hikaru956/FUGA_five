@@ -65,6 +65,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
     </div>
 </article>
+<%= leaf_navigation(@seed) %>
 <!-- フッター -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/noel.jp.net/footer" %>
 <!-- モバイルナビ -->

@@ -86,6 +86,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
         </div>
     </div>
+    <%= leaf_navigation(@seed) %>
 </article>
 <!-- salon list -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp/salon_list" %>

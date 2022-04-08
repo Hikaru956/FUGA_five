@@ -65,6 +65,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
         </div>
     </article>
+    <%= leaf_navigation(@seed) %>
 </main>
 <!-- FOOTER -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-oka.com/footer" %>

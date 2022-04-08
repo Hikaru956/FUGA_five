@@ -64,6 +64,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
         </div>
     </article>
+    <%= leaf_navigation(@seed) %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/bond-of-mondo.com/sns_btn" %>
 </div>
 <!-- サイトフッター -->

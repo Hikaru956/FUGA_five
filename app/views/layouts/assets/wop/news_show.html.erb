@@ -71,6 +71,7 @@
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
         </div>
     </article>
+    <%= leaf_navigation(@seed) %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/wop/sns_btn" %>
 </div>
 <!-- サイトフッター -->

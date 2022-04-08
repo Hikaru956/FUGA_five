@@ -71,6 +71,7 @@
                 <div id="contents">
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
                 </div>
+                <%= leaf_navigation(@seed) %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/beautysalon-sayo.com/sns_btn" %>
             </div>
         </article>

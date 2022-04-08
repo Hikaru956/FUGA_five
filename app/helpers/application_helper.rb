@@ -231,4 +231,31 @@ EOF
     int << "." << frac if frac
     return int
   end
+
+  def next_leaf(leaf)
+    next_leaf = leaf.next_leaf(leaf)
+  end
+
+  def prev_leaf(leaf)
+    prev_leaf = leaf.prev_leaf(leaf)
+  end
+
+  def leaf_navigation(leaf)
+    older = leaf.prev_leaf(leaf)
+    newer = leaf.next_leaf(leaf)
+    return nil if older.blank? && newer.blank?
+    
+    html = '<h6>'
+    unless older.blank?
+        html += link_to('<< 前の記事', :action=>params[:action], :id=>older, :wkey=>leaf.shop.wsite_hash_key)
+    end
+    unless newer.blank?
+        html += '<span class="pull-right">'
+        html += link_to('>> 次の記事', :action=>params[:action], :id=>newer, :wkey=>leaf.shop.wsite_hash_key)
+        html += '</span>'
+    end
+    html += '</h6><br/>'
+    html.html_safe
+  end
+
 end

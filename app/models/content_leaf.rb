@@ -68,6 +68,21 @@ class ContentLeaf < ApplicationRecord
     items
   end
 
+  def next_leaf(leaf)
+    category = leaf.content_category
+    items = category.content_leafs.where("content_leafs.is_public", true)
+    item = items.where('content_leafs.created_at > ?',leaf.created_at).order(created_at: :asc).first
+
+    item
+  end
+
+  def prev_leaf(leaf)
+    category = leaf.content_category
+    items = category.content_leafs.where("content_leafs.is_public", true)
+    item = items.where('content_leafs.created_at < ?',leaf.created_at).order(created_at: :desc).first
+
+    item
+  end
   #hikaru
   #def self.public_leafs
   #  today = Time.now.to_date
