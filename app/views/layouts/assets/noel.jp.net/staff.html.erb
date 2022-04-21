@@ -83,6 +83,8 @@
 <% unless @seed.social_line_uri.blank? %>
       <li><a href="<%= @seed.social_line_uri %>" target="_blank"><img src="/photo/image/clip/22283/original/line.png" alt="LINE" /></a></li>
 <% end %>
+      <%= hotpepper_staff_banner(@seed, false, 'vertical-align: top; padding-top: 1px;') %>
+      <%= youtube_staff_banner(@seed, false) %>
     </ul>
   </div>
 <% unless @seed.description.blank? %>

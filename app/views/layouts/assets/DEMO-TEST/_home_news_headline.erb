@@ -1,12 +1,12 @@
 <%
 	type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_NEWS)
+	
+	first_bag = type_root.children.where("is_public=?", true).first#find(:first, :conditions=>["is_public=?", true])
+	public_categories  = []
+	public_categories.concat(first_bag.sons)
+	public_categories << first_bag
 	news_navigation = type_root.web_page
 	latest_leaf = @website.public_leafs.where("content_category_id IN (?)",public_categories).order(position: :desc).first
-
-	#first_bag = type_root.children.find(:first, :conditions=>["is_public=?", true])
-	#public_categories  = []
-	#public_categories.concat(first_bag.sons)
-	#public_categories << first_bag
 	#c = ContentLeaf.public_leafs_condition
 	#c.and "content_category_id", public_categories
 	#latest_leaf =  ContentLeaf.find(:first, :conditions=>c.where, :order=>'position desc')

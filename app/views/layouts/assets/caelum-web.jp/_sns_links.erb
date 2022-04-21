@@ -23,6 +23,8 @@
 <% unless @website.social_tumblr_uri.blank? %>
         <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fab fa-tumblr"></i></a>
 <% end %>
+        <%= hotpepper_shop_banner(@website, false, 'vertical-align: top; padding-top: 1px;') %>
+        <%= youtube_shop_banner(@website, false) %>
         <a href="https://www.aveda.jp/locator/get_the_facts.tmpl?vanity=1&SalonID=58694&utm_medium=referral&utm_source=aveda-salon&utm_campaign=acom_site-traffic&utm_content=caelum_fs&utm_keyword=online" target="_blank"><img src="/assets/caelum-web.jp/img/cart.png" alt=""></a>
 <% unless reserve.blank? || !reserve.is_valid? %>
         <a href="<%= reserve.data_string %>" target="_blank"><img src="/assets/caelum-web.jp/img/hpb-g.png" alt=""></a>

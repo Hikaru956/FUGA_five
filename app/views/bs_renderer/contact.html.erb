@@ -131,6 +131,8 @@
 	                <a href="<%= @staff.social_tumblr_uri %>" data-toggle="tooltip" data-placement="top" title="Tumblr" target='_blank'><i class="icon-tumblr-sign icon-2x"></i></a>
 	            </li>
 			<% end %>
+			<%= hotpepper_staff_banner(@staff, true, 'vertical-align: middle; padding-bottom: 12px;') %>
+            <%= youtube_staff_banner(@staff, true) %>
         </ul>
 	    <p><a href="<%= url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key) %>" class="btn btn-primary">Read</a></p>
 		</div>

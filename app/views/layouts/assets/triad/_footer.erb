@@ -72,6 +72,8 @@
             <% unless @website.social_tumblr_uri.blank? %>
             <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fa fa-tumblr-square"></i></a>
             <% end %>
+            <%= hotpepper_shop_banner(@website, false, 'vertical-align: top; padding-top: 1px;') %>
+            <%= youtube_shop_banner(@website, false) %>
         </div>
         <% unless @website.address_1.blank? %>
         <div>

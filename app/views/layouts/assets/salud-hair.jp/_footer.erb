@@ -9,6 +9,8 @@
 <% unless @website.social_line_uri.blank? %>
             <a class="line" href="<%= @website.social_line_uri %>" target="_blank"><i class="icon-line" aria-hidden="true"></i>LINE</a>
 <% end %>
+            <%= hotpepper_shop_banner(@website, false, 'vertical-align: top; padding-top: 1px;') %>
+            <%= youtube_shop_banner(@website, false) %>
         </aside>
 <!-- footer -->
         <footer id="page-footer">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_15_060358) do
+ActiveRecord::Schema.define(version: 2022_04_11_015442) do
 
   create_table "attendances", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "shop_id"
@@ -249,6 +249,8 @@ ActiveRecord::Schema.define(version: 2022_03_15_060358) do
     t.string "social_instagram_uri"
     t.string "social_line_uri"
     t.boolean "enable_inquiry", default: false
+    t.string "social_hotpepper_beauty_uri"
+    t.string "social_youtube_uri"
     t.index ["wsite_hash_key"], name: "index_shops_on_wsite_hash_key"
   end
 
@@ -270,6 +272,8 @@ ActiveRecord::Schema.define(version: 2022_03_15_060358) do
     t.datetime "updated_at", null: false
     t.string "social_instagram_uri"
     t.string "social_line_uri"
+    t.string "social_hotpepper_beauty_uri"
+    t.string "social_youtube_uri"
   end
 
   create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

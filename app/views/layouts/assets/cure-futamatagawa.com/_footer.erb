@@ -16,6 +16,8 @@
 			<%= raw("<a href=#{@website.social_line_uri} target='_blank' 		title=#{@website.social_line_uri}>		<img src='/images/assets/line_icon.png' alt='LINE' /></a>")			unless @website.social_line_uri.blank? %>
 			<%= raw("<a href=#{@website.social_pinterest_uri} target='_blank' 	title=#{@website.social_pinterest_uri}>	<i class='icon-pinterest-sign  icon-2x'></i></a>")		unless @website.social_pinterest_uri.blank? %>
 			<%= raw("<a href=#{@website.social_tumblr_uri} target='_blank' 		title=#{@website.social_tumblr_uri}>	<i class='icon-tumblr-sign  icon-2x'></i></a>")			unless @website.social_tumblr_uri.blank? %>
+			<%= hotpepper_shop_banner(@website, true, 'vertical-align: top; padding-top: 1px;') %>
+            <%= youtube_shop_banner(@website, true) %>
     </ul>
     <div class="privacy pull-left">
 		<strong>&copy; <%= copyright_notice(@website) %></strong>

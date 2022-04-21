@@ -140,6 +140,28 @@
                             <a href="<%= @seed.social_tumblr_uri %>" target='_blank'><i class="pico-tumblr"></i></a>
                         </li>
 <% end %>
+<% unless @seed.social_pinterest_uri.blank? %>
+                        <li>
+                            <a href="<%= @seed.social_pinterest_uri %>" target='_blank'><i class="pico-pinterest"></i></a>
+                        </li>
+<% end %>
+<% unless @seed.social_tumblr_uri.blank? %>
+                        <li>
+                            <a href="<%= @seed.social_tumblr_uri %>" target='_blank'><i class="pico-tumblr"></i></a>
+                        </li>
+<% end %>
+<% unless @website.social_hotpepper_beauty_uri.blank? %>
+                        <li>
+                            <a href="<%= @website.social_hotpepper_beauty_uri %>" target="_blank"><img src="/images/assets/hotpepperlogo.png" alt="HOT PEPPER Beauty" style="vertical-align: middle; padding-bottom: 25px;" />
+                            </a>
+                        </li>
+<% end %>
+<% unless @website.social_youtube_uri.blank? %>
+                        <li>
+                            <a href="<%= @website.social_youtube_uri %>" target="_blank"><span style="color: red;"><i class="pico-youtube"></i></span>
+                            </a>
+                        </li>
+<% end %>
                     </ul>
                 </footer>
             </div>

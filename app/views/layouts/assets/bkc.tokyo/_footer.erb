@@ -28,6 +28,8 @@
 <% unless @website.social_tumblr_uri.blank? %>
                     <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fa fa-tumblr-square"></i></a>
 <% end %>
+                    <%= hotpepper_shop_banner(@website, false, 'vertical-align: top; padding-top: 1px;') %>
+                <%= youtube_shop_banner(@website, false) %>
                     <a id="staffs" href="/contact_us"><i class="fa fa-user-circle"></i> STAFF</a>
                 </div>
                 <div id="addr"><strong>一般社団法人 BKC</strong> 東京都港区芝3丁目3-12 2階 TEL. 03-6699-9127</div>

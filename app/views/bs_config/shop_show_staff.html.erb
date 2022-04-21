@@ -72,6 +72,8 @@
 				<%= raw("<a href=#{@staff.social_instagram_uri} target='_blank' title=#{@staff.social_instagram_uri}><i class='icon-instagram icon-large'></i></a>")			unless @staff.social_instagram_uri.blank? %>
 				<%= raw("<a href=#{@staff.social_pinterest_uri} target='_blank' title=#{@staff.social_pinterest_uri}><i class='icon-pinterest-sign icon-large'></i></a>")	unless @staff.social_pinterest_uri.blank? %>
 				<%= raw("<a href=#{@staff.social_tumblr_uri} target='_blank' title=#{@staff.social_tumblr_uri}><i class='icon-tumblr-sign icon-large'></i></a>")				unless @staff.social_tumblr_uri.blank? %>
+				<%= raw("<a href=#{@shop.social_hotpepper_beauty_uri} target='_blank' title=#{@shop.social_hotpepper_beauty_uri}><i class='icon-flag icon-large'></i></a>")	unless @shop.social_hotpepper_beauty_uri.blank? %>
+				<%= raw("<a href=#{@shop.social_youtube_uri} target='_blank' title=#{@shop.social_youtube_uri}><i class='icon-youtube icon-large'></i></a>")			unless @shop.social_youtube_uri.blank? %>
 			</td>
 		</tr>
 
@@ -134,7 +136,22 @@
 		</a>
 	</p>
 <% end %>
-
+<!-- modalEditSocial -->
+<div class="modal hide fade form-horizontal", id="modalEditSocial">
+	<%= form_for @staff, url: bs_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">ソーシャル設定</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_staff_social" %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
 <!-- modalEdit -->
 <div class="modal hide fade form-horizontal", id="modalEdit">
 	<%= form_for @staff, url: bs_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>

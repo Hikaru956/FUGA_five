@@ -258,4 +258,70 @@ EOF
     html.html_safe
   end
 
+  def hotpepper_shop_banner(shop, small=false, style_code)
+    html = ''
+    unless shop.social_hotpepper_beauty_uri.blank?
+      uri = shop.social_hotpepper_beauty_uri
+      html += '<a href="'+ (uri +'" ')+ 'target="_blank" title=#{uri}>'
+      if small
+        html += '<img src="/images/assets/hotpepperlogosmall.png" alt="HOT PEPPER Beauty" style="'+style_code+'"/>'
+      else
+        html += '<img src="/images/assets/hotpepperlogo.png" alt="HOT PEPPER Beauty" />'
+      end
+      html += '</a>'
+    end
+    html.html_safe
+  end
+
+  def hotpepper_staff_banner(staff, small=false, style_code)
+    html = ''
+    unless staff.social_hotpepper_beauty_uri.blank?
+      uri = staff.social_hotpepper_beauty_uri
+      html += '<li>'
+      html += '<a href="'+ (uri +'" ')+ 'target="_blank">'
+      if small
+        html += '<img src="/images/assets/hotpepperlogosmall.png" alt="HOT PEPPER Beauty" style="'+style_code+'"/>'
+      else
+        html += '<img src="/images/assets/hotpepperlogo.png" alt="HOT PEPPER Beauty" />'
+      end
+      html += '</a>'
+      html += '</li>'
+    end
+    html.html_safe
+  end
+
+  def youtube_shop_banner(shop, small=false)
+    html = ''
+    unless shop.social_youtube_uri.blank?
+      uri = shop.social_youtube_uri
+      if small
+        html += '<a href="'+ (uri +'" ')+ 'target="_blank">'
+        html += '<i class="icon-youtube-play icon-2x"></i>'
+      else
+        html += '<a href="'+ (uri +'" ')+ 'target="_blank" title=#{uri}>'
+        html += '<span style="color: red;"><i class="fa fa-youtube-play"></i><span>'
+      end
+      html += '</a>'
+    end
+    html.html_safe
+  end
+
+  def youtube_staff_banner(staff, small=false)
+    html = ''
+    unless staff.social_youtube_uri.blank?
+      uri = staff.social_youtube_uri
+      html += '<li>'
+      if small
+        html += '<a href="'+ (uri +'" ')+ 'target="_blank">'
+        html += '<i class="icon-youtube-play icon-2x"></i>'
+      else
+        html += '<a href="'+ (uri +'" ')+ 'target="_blank" title=#{uri}>'
+        html += '<span style="color: red;"><i class="fa fa-youtube-play"></i><span>'
+      end
+      html += '</a>'
+      html += '</li>'
+    end
+    html.html_safe
+  end
+
 end

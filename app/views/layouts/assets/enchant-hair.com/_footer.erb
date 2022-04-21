@@ -23,6 +23,12 @@
 <% unless @website.social_tumblr_uri.blank? %>
             <a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fab fa-tumblr-square"></i></a>
 <% end %>
+<% unless @website.social_hotpepper_beauty_uri.blank? %>
+                <a href="<%= @website.social_hotpepper_beauty_uri %>" target="_blank"><img src="/images/assets/hotpepperlogo.png" alt="HOT PEPPER Beauty" style="vertical-align: middle; padding-bottom: 25px;" /></a>
+<% end %>
+<% unless @website.social_youtube_uri.blank? %>
+                <a href="<%= @website.social_youtube_uri %>" target="_blank"><span style="color: red;"><i class="fab fa-youtube"></i></span></a>
+<% end %>
         </p>
     </div>
     <div id="fNav">
