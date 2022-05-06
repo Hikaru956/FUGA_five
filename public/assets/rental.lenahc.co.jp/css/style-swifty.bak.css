@@ -1,0 +1,2397 @@
+@charset "UTF-8";
+@import url("ress.min.css");
+/*
+
+        root
+
+*/
+html,
+body {
+    line-height: 1.5;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    font-family: "Helvetica Neue", "小塚ゴシック Pr6N", "KozGoPr6N", "Hiragino Sans W3", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+h1, h2, h3, h4 {
+    font-family: "小塚明朝 Pr6N M", "KozMinPr6N-Medium", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-weight: normal;
+}
+h1 + p.en,
+h2 + p.en,
+h3 + p.en {
+    font-family: "小塚明朝 Pr6N M", "KozMinPr6N-Medium", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+}
+.top {
+    height: 66px;
+}
+.container {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+p {
+    margin-bottom: 1em;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+iframe {
+    max-width: 100%;
+}
+.contents a {
+    color: #0000ff;
+    text-decoration: underline;
+}
+.contents ul {
+    list-style: disc;
+    padding-left: 40px;
+}
+/*
+
+        footer
+
+*/
+#footer {
+    text-align: center;
+    margin-bottom: 4em;
+}
+#footer-nav {
+    list-style: none;
+    font-size: 0.75rem;
+    padding: 0;
+}
+#footer-nav li {
+    display: inline-block;
+}
+#footer-nav li:not(:last-child)::after {
+    content: " |";
+}
+#footer-nav li a {
+    color: inherit;
+    text-decoration: none;
+    padding-right: .15em;
+}
+@media screen and (min-width: 600px) {
+    #footer-nav {
+        font-size: 0.875rem;
+    }
+}
+/*
+
+        header
+
+*/
+#header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 66px;
+    background-color: #ffffff;
+    box-shadow: 0 0 3px rgba(0,0,0,.25);
+}
+#header .container {
+    display: flex;
+    height: 100%;
+    padding: 0 1rem;
+}
+@media screen and (min-width: 768px) {
+    .top {
+        height: 74px;
+    }
+    #header {
+        height: 74px;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .top {
+        height: 88px;
+    }
+    #header {
+        height: 88px;
+    }
+}
+/*
+        bland
+*/
+#bland {
+    flex: 0 0 74px;
+    align-self: center;
+    width: 74px;
+    height: 50px;
+}
+#bland a {
+    display: block;
+    height: 100%;
+}
+#bland img {
+    width: auto;
+    height: 100%;
+}
+@media screen and (min-width: 768px) {
+    #bland {
+        flex: 0 0 85px;
+        width: 85px;
+        height: 58px;
+    }
+}
+@media screen and (min-width: 1024px) {
+    #bland {
+        flex: 0 0 100px;
+        width: 100px;
+        height: 68px;
+    }
+}
+/*
+        pc-nav
+*/
+#pc-nav {
+    display: none;
+    flex: 1 1 auto;
+}
+#pc-nav a {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+}
+@media screen and (min-width: 600px) {
+    #pc-nav {
+        display: block;
+    }
+}
+#subnav ul {
+    list-style: none;
+    font-size: 0.75rem;
+    text-align: right;
+    padding: 0;
+    margin: 8px 0 1rem;
+}
+#subnav li {
+    display: inline-block;
+    margin: 0 0.5rem;
+}
+#nav ul {
+    list-style: none;
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 0;
+    margin: 1rem 6% 0 0;
+}
+#nav li {
+    display: inline-block;
+    margin: 0 1rem;
+}
+#nav li:last-child a {
+    font-size: 0.7rem;
+    line-height: 1.3rem;
+    color: #fff;
+    background-color: #666767;
+    padding: 0 0.5rem;
+    border-radius: 4px;
+}
+#cage-nav-opener,
+#grad-nav-opener {
+    cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+    #nav ul {
+        margin: 1rem 10% 0 0;
+    }
+    #nav li {
+        margin: 0 1.5rem;
+    }
+}
+@media screen and (min-width: 1024px) {
+    #nav ul {
+        font-size: 1rem;
+        margin: 1.5rem 14% 0 0;
+    }
+    #nav li {
+        margin: 0 2rem;
+    }
+}
+/*
+        mobile-nav-opener-box
+*/
+#mobile-nav-opener-box {
+    flex: 1 1 auto;
+    align-self: center;
+}
+#mobile-nav-opener {
+    width: 32px;
+    padding: 5px 0 3px;
+    margin-left: auto;
+}
+#mobile-nav-opener div:first-child {
+    box-sizing: content-box;
+    width: 100%;
+    height: 9px;
+    border-top:    2px solid #666767;
+    border-bottom: 2px solid #666767;
+}
+#mobile-nav-opener div:last-child {
+    box-sizing: content-box;
+    width: 100%;
+    height: 9px;
+    border-bottom: 2px solid #666767;
+}
+@media screen and (min-width: 600px) {
+    #mobile-nav-opener-box {
+        display: none;
+    }
+}
+/*
+        cage-nav
+        grad-nav
+*/
+#cage-nav,
+#grad-nav {
+    position: absolute;
+    top: -200px;
+    transition: top 0.8s;
+    width: 100%;
+    height: 74px;
+}
+#cage-nav.show,
+#grad-nav.show {
+    top: 72px;
+}
+#cage-nav div.container,
+#grad-nav div.container {
+    height: 100%;
+    background: #FAF3F8 url("/assets/rental.lenahc.co.jp/img/cage-nav-back.png");
+    background-size: cover;
+    background-position: left center;
+}
+#grad-nav div.container {
+    background: #FFFAEC url("/assets/rental.lenahc.co.jp/img/grad-nav-back.png");
+}
+#cage-nav ul,
+#grad-nav ul {
+    list-style: none;
+    padding: 1rem;
+    margin: 0;
+    text-align: right;
+}
+#cage-nav li,
+#grad-nav li {
+    display: inline-block;
+    line-height: 2.55rem;
+    width: 21.5%;
+    text-align: left;
+    font-size: 1.75rem;
+}
+#cage-nav a,
+#grad-nav a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    background-color: #fff;
+    width: 90%;
+    font-size: 0.875rem;
+    padding-left: 1em;
+    vertical-align: bottom;
+}
+#cage-nav a::before,
+#grad-nav a::before {
+    content: "";
+    width: 22px;
+    height: 0;
+    border-bottom: 1px solid #999;
+    position: absolute;
+    right: 1em;
+    top: 55%;
+}
+#cage-nav a::after,
+#grad-nav a::after {
+    content: "";
+    width: 10px;
+    height: 0;
+    border-bottom: 1px solid #999;
+    position: absolute;
+    right: 1em;
+    top: 55%;
+    transform-origin: right bottom;
+    transform: rotate(30deg);
+}
+@media screen and (min-width: 768px) {
+    #cage-nav.show,
+    #grad-nav.show {
+        height: 94px;
+        top: 80px;
+    }
+    #cage-nav ul,
+    #grad-nav ul {
+        padding: 20px;
+    }
+    #cage-nav li,
+    #grad-nav li {
+        line-height: 54px;
+    }
+}
+@media screen and (min-width: 1024px) {
+    #cage-nav.show,
+    #grad-nav.show {
+        height: 124px;
+        top: 96px;
+    }
+    #cage-nav ul,
+    #grad-nav ul {
+        padding: 24px;
+    }
+    #cage-nav li,
+    #grad-nav li {
+        line-height: 76px;
+    }
+    #cage-nav a,
+    #grad-nav a {
+        font-size: 1rem;
+        padding-left: 1.5em;
+    }
+    #cage-nav a::before,
+    #grad-nav a::before {
+        right: 1.5em;
+    }
+    #cage-nav a::after,
+    #grad-nav a::after {
+        right: 1.5em;
+    }
+}
+/*
+@media screen and (min-width: 1440px) {
+    #cage-nav.show,
+    #grad-nav.show {
+        height: 182px;
+    }
+    #cage-nav ul,
+    #grad-nav ul {
+        padding: 28px;
+    }
+    #cage-nav li,
+    #grad-nav li {
+        line-height: 126px;
+    }
+    #cage-nav a,
+    #grad-nav a {
+        padding-left: 2em;
+    }
+    #cage-nav a::before,
+    #grad-nav a::before {
+        right: 2em;
+    }
+    #cage-nav a::after,
+    #grad-nav a::after {
+        right: 2em;
+    }
+}
+*/
+/*
+
+        mobile-nav
+
+*/
+#mobile-nav {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    transition: top 0.8s;
+    padding: 8px 8px 16px;
+    background: #F5D6D1 url("/assets/rental.lenahc.co.jp/img/back_pink.jpg");
+    overflow-y: scroll;
+}
+#mobile-nav.show {
+    top: 70px;
+}
+#mobile-nav > div {
+    padding: 16px;
+    margin-bottom: 8px;
+    background-color: #ffffff;
+}
+#mobile-nav h2 {
+    font-size: 1.5em;
+    font-weight: normal;
+}
+#mobile-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+}
+#mobile-nav li {
+    flex: 0 0 50%;
+    padding: 10px;
+}
+#mobile-nav li:nth-child(1) {
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+}
+#mobile-nav li:nth-child(2) {
+    border-bottom: 1px solid #999;
+}
+#mobile-nav li:nth-child(3) {
+    border-right: 1px solid #999;
+}
+#mobile-nav li a {
+    position: relative;
+    display: block;
+    font-size: 14px;
+    color: inherit;
+    text-decoration: none;
+}
+#mobile-nav li a::before {
+    content: "";
+    width: 22px;
+    height: 0;
+    border-bottom: 1px solid #999;
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+}
+#mobile-nav li a::after {
+    content: "";
+    width: 10px;
+    height: 0;
+    border-bottom: 1px solid #999;
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    transform-origin: right bottom;
+    transform: rotate(30deg);
+}
+#mobile-nav p {
+    text-align: right;
+    margin: 8px 8px 0 0;
+}
+#mobile-nav p a {
+    text-align: right;
+    color: inherit;
+    text-decoration: none;
+    font-size: 12px;
+}
+#mobile-nav div.last {
+    display: flex;
+    text-align: center;
+    padding: 0;
+    margin: 16px -8px 0 -8px;
+}
+#mobile-nav div.last div:nth-child(1) {
+    flex: 0 1 30%;
+}
+#mobile-nav div.last div:nth-child(2) {
+    flex: 0 1 30%;
+}
+#mobile-nav div.last div:nth-child(2) a {
+    margin-right: 16px;
+}
+#mobile-nav div.last div:nth-child(3) {
+    flex: 1 0 40%;
+    background-color: #18499E;
+}
+#mobile-nav div.last a {
+    display: block;
+    font-size: smaller;
+    color: inherit;
+    text-decoration: none;
+    margin: 8px;
+}
+#mobile-nav div.last div:nth-child(3) a {
+    color: #fff;
+    font-weight: bold;
+}
+/*
+
+        gotop
+
+*/
+#gotop {
+    display: none;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    width: 33px;
+    height: 33px;
+    background-color: #EFC1B6;
+    border-radius: 6px;
+}
+#gotop.show {
+    display: block;
+}
+#gotop a {
+    display: block;
+    height: 100%;
+    position: relative;
+}
+#gotop span {
+    position: relative;
+    top:  3px;
+    left: 3.5px;
+    display: block;
+    width:  0;
+    height: 0;
+    border-bottom: 24px solid #fff;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+}
+/*
+
+        crousel
+
+*/
+#crousel,
+#crouselm {
+    position: relative;
+    overflow: hidden;
+}
+#crousel {
+    display: none;
+}
+#crousel ul,
+#crouselm ul {
+    position: relative;
+    top: 0;
+    left: 0;
+    list-style: none;
+    width: 500vw;
+    padding: 0;
+    margin:  0;
+}
+#crousel li,
+#crouselm li {
+    float: left;
+    width: 100vw;
+}
+@media screen and (min-width: 600px) {
+    #crousel {
+        display: block;
+    }
+    #crouselm {
+        display: none;
+    }
+}
+@media screen and (min-width: 1280px) {
+    #crousel ul {
+        width: 6400px;
+    }
+    #crousel li {
+        width: 1280px;
+    }
+}
+/*
+@media screen and (min-width: 1440px) {
+    #crousel ul {
+        width: 7200px;
+    }
+    #crousel li {
+        width: 1440px;
+    }
+}
+*/
+/*
+
+        contents-menu
+
+*/
+#contents-menu {
+    position: relative;
+}
+#contents-menu .backimg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 43vw;
+    background: url("/assets/rental.lenahc.co.jp/img/contents-menu/back_green.jpg") center top no-repeat;
+    z-index: -1;
+}
+#contents-menu ul {
+    max-width: 1280px;
+    display: flex;
+    list-style: none;
+    padding: 36px 0 0;
+    margin: 0 auto;
+}
+#contents-menu li {
+    flex: 0 1 50%;
+}
+#contents-menu .contents-menu-in {
+    position: relative;
+    display: block;
+    background-color: #FFF29B;
+    margin: 0 12px;
+    padding: 12px 12px 16px;
+}
+#contents-menu li.cage > .contents-menu-in {
+    background-color: #F7C5DB;
+}
+#contents-menu .contents-menu-in::before {
+    content: "";
+    width: 22px;
+    height: 0;
+    border-bottom: 1px solid #999;
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+}
+#contents-menu  .contents-menu-in::after {
+    content: "";
+    width: 10px;
+    height: 0;
+    border-bottom: 1px solid #999;
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    transform-origin: right bottom;
+    transform: rotate(30deg);
+}
+#contents-menu h2 {
+    font-size: 16px;
+    max-width: 464px;
+    margin: 0 auto;
+}
+#contents-menu p {
+    display: none;
+    max-width: 464px;
+    margin: 0 auto;
+}
+@media screen and (min-width: 600px) {
+    #contents-menu ul {
+        padding-top: 30px;
+    }
+    #contents-menu h2 {
+        margin-top: 4px;
+        font-size: 22px;
+    }
+    #contents-menu p {
+        display: block;
+        font-size: 13px;
+        height: 59px;
+    }
+}
+@media screen and (min-width: 768px) {
+    #contents-menu ul {
+        padding-top: 64px;
+    }
+    #contents-menu .contents-menu-in {
+        padding: 24px 24px 36px;
+    }
+    #contents-menu li.grad .contents-menu-in {
+        margin: 0 16px 0 32px;
+    }
+    #contents-menu li.cage .contents-menu-in {
+        margin: 0 32px 0 16px;
+    }
+    #contents-menu h2 {
+        margin-top: 8px;
+    }
+    #contents-menu p {
+        font-size: 14px;
+        height: 63px;
+    }
+    #contents-menu .contents-menu-in::before {
+        right: 24px;
+        bottom: 24px;
+    }
+    #contents-menu .contents-menu-in::after {
+        right: 24px;
+        bottom: 24px;
+    }
+}
+@media screen and (min-width: 1024px) {
+    #contents-menu li.grad .contents-menu-in {
+        margin: 0 32px 0 80px;
+    }
+    #contents-menu li.cage .contents-menu-in {
+        margin: 0 80px 0 32px;
+    }
+}
+@media screen and (min-width: 1280px) {
+    #contents-menu ul {
+        padding-top: 88px;
+    }
+    #contents-menu h2 {
+        font-size: 32px;
+    }
+    #contents-menu p {
+        font-size: 16px;
+        height: 72px;
+    }
+}
+/*
+
+        plan
+
+*/
+#plan h3 {
+    font-size: 1.7rem;
+    text-align: center;
+}
+#plan h3 + p.en {
+    text-align: center;
+    margin-bottom: 1em;
+}
+#planbox {
+    position: relative;
+    font-family: "小塚明朝 Pr6N M", "KozMinPr6N-Medium", "游明朝", "YuMincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+}
+#planbox .backimg {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 110vw;
+    background: url("/assets/rental.lenahc.co.jp/img/plan/back_yellow.jpg") center top no-repeat;
+}
+#planbox ul {
+    font-size: 0.875rem;
+    max-width: 1184px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 2.25rem 0 0;
+    margin: 0 auto;
+}
+#planbox li {
+    flex: 0 1 50%;
+    position: relative;
+    padding: 1em 1em 2em 2em;
+}
+#planbox a {
+    position: absolute;
+    top: 0;
+    left: 1em;
+    color: #fff;
+    background-color: #EC77A3;
+    width: 2.5em;
+    text-align: center;
+    padding: 0.75em 0.75em 2em;
+}
+#planbox a span {
+    display: block;
+    font-size: 0.75rem;
+}
+#planbox a::before {
+    content: "";
+    width: 1em;
+    height: 0;
+    border-bottom: 1px solid #fff;
+    position: absolute;
+    right: 0.75em;
+    bottom: 0.75em;
+}
+#planbox a::after {
+    content: "";
+    width: 8px;
+    height: 0;
+    border-bottom: 1px solid #fff;
+    position: absolute;
+    right: 0.75em;
+    bottom: 0.75em;
+    transform-origin: right bottom;
+    transform: rotate(30deg);
+}
+@media screen and (min-width: 600px) {
+    #planbox ul {
+        font-size: 1rem;
+    }
+    #planbox li {
+        padding: 2.25em 2.25em 3em;
+    }
+    #planbox a span {
+        font-size: 0.8rem;
+        padding-top: .5em;
+    }
+}
+@media screen and (min-width: 768px) {
+    #planbox .backimg {
+        height: 40vw;
+    }
+    #planbox li {
+        flex: 0 1 calc(100% / 3);
+        padding: 2.25em 1.5em 0 2.5em;
+    }
+}
+@media screen and (min-width: 1184px) {
+    #planbox .backimg {
+        height: 473px;
+    }
+}
+/*
+
+        gallery
+
+*/
+#gallery h3 {
+    font-size: 1.7rem;
+    text-align: center;
+}
+#gallery h3 + p.en {
+    text-align: center;
+    margin-bottom: 1em;
+}
+#gallerybox {
+    position: relative;
+}
+#gallerybox .backimg {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 80vw;
+    background: url("/assets/rental.lenahc.co.jp/img/gallery/back_pink.jpg") center top no-repeat;
+    background-size: cover;
+}
+#gallerybox ul {
+    max-width: 1184px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 1.5rem 0 0;
+    margin: 0 auto;
+}
+#gallerybox li {
+    flex: 0 1 50%;
+}
+#gallerybox a {
+    display: block;
+    margin: 0 0.75rem 1rem;
+}
+@media screen and (min-width: 600px) {
+    #gallerybox .backimg {
+        height: 24vw;
+    }
+    #gallerybox li {
+        flex: 0 1 calc(100% / 3);
+        padding: 2.25em 1.5em;
+    }
+}
+@media screen and (min-width: 1184px) {
+    #gallerybox .backimg {
+        height: 284px;
+    }
+}
+/*
+
+        istagram
+
+*/
+#instagram h2 {
+    font-size: 1.7rem;
+    text-align: center;
+}
+#instagram ul {
+    max-width: 960px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 2.25rem 0 0;
+    margin: 0 auto;
+}
+#instagram li {
+    flex: 0 1 50%;
+    margin-bottom: 2em;
+}
+#instagram img {
+    width: 141px;
+}
+#instagram div {
+    text-align: center;
+}
+#instagram h3 {
+    font-size: 0.75rem;
+    margin-top: 1em;
+}
+#instagram p {
+    font-size: 0.75rem;
+}
+#instagram p.summ {
+    display: none;
+}
+#instagram li a {
+    display: inline-block;
+    color: #fff;
+    font-size: 0.75rem;
+    line-height: 2;
+    padding: 0 2em;
+    background: linear-gradient(90deg, #F6EA2E, #F2902C);
+    border-radius: 4px;
+}
+#instagram li:nth-child(2n+0) a {
+    background: linear-gradient(90deg, #C0DEF2, #1A979F);
+}
+@media screen and (min-width: 600px) {
+    #instagram h3 {
+        font-size: 0.875rem;
+    }
+}
+@media screen and (min-width: 768px) {
+    #instagram li {
+        display: flex;
+        padding: 0 1em;
+        margin-bottom: 3em;
+    }
+    #instagram div {
+        flex: 1 1 auto;
+        text-align: left;
+    }
+    #instagram div.img {
+        flex: 0 0 136px;
+    }
+    #instagram div img {
+        width: 120px;
+    }
+    #instagram p.summ {
+        display: block;
+        font-size: 0.7rem;
+    }
+}
+@media screen and (min-width: 960px) {
+    #instagram li {
+        padding: 0 2em;
+    }
+    #instagram div.img {
+        flex: 0 0 160px;
+    }
+    #instagram div img {
+        width: 144px;
+    }
+    #instagram h3 {
+        font-size: 1.125rem;
+    }
+    #instagram p {
+        margin-bottom: 0.5em;
+    }
+    #instagram p.summ {
+        display: block;
+        font-size: 0.875rem;
+    }
+}
+/*
+
+        shop information
+
+*/
+#information h2 {
+    font-size: 1.7rem;
+    text-align: center;
+}
+#information h2 + p.en {
+    text-align: center;
+    margin-bottom: 1em;
+}
+#infobox {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+#infobox .txt {
+    font-size: 0.875rem;
+    text-align: center;
+    margin: 0 .5em 1em;
+}
+#infobox h3 {
+    font-size: 1.2rem;
+    margin: 1em 0;
+}
+#infobox .txt p {
+    margin: 1em 0;
+}
+#infobox .phone {
+    font-size: 2rem;
+}
+#infobox .phone img {
+    width: 44px;
+}
+@media screen and (min-width: 768px) {
+    #infobox {
+        display: flex;
+    }
+    #infobox > div {
+        flex: 1 1 auto;
+    }
+    #infobox > div.img {
+        flex: 0 0 45%;
+        margin-bottom: 1em;
+    }
+    #infobox .txt {
+        text-align: left;
+    }
+    #infobox .txt h3,
+    #infobox .txt p.phone {
+        margin: 0;
+    }
+    #info {
+        display: flex;
+    }
+    #info > div {
+        flex: 1 1 auto;
+    }
+    #info > div.img {
+        flex: 0 0 45%;
+    }
+    #info p.text {
+        font-size: 0.75rem;
+    }
+}
+@media screen and (min-width: 1024px) {
+    #infobox .txt {
+        margin-left: 1em;
+    }
+    #info > div.img {
+        flex: 0 0 50%;
+    }
+}
+/*
+ *
+ *      price list
+ *
+ */
+#menu {
+    max-width: 40rem;
+    margin: 0 auto;
+}
+#menu h1 {
+    font-size: 2.125rem;
+    padding-top: .5em;
+    margin-bottom: 1rem;
+}
+#menu > p {
+    font-size: .875em;
+    margin: -1rem 0 1rem 3rem;
+}
+#menu ul {
+    margin: 1em 1em 2em 1em;
+    list-style-type: none;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+}
+#menu li {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+    border-bottom: 1px dotted #999;
+}
+#menu li span {
+    font-size: smaller;
+}
+#menu p {
+    font-size: 87.5%;
+}
+.menu_name {
+    float: left;
+}
+.price {
+    width: 100%;
+    text-align: right;
+}
+.menu_note {
+    clear: both;
+    font-size: .875em;
+    margin-left: 2rem;
+}
+/*
+
+        PLAN comm
+
+*/
+.h1 {
+    font-size: 2.125rem;
+    padding-top: .5em;
+}
+.catch {
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+}
+.para {
+    font-size: 0.875rem;
+}
+.h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1em;
+}
+br.pc {
+    display: none;
+}
+.w820 {
+    display: none;
+}
+@media screen and (min-width: 600px) {
+    br.pc {
+        display: block;
+    }
+}
+@media screen and (min-width: 820px) {
+    .w820 {
+        display: block;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .h1 {
+        font-size: 3rem;
+    }
+    .h1 + p.en {
+        font-size: 1.25rem;
+    }
+    .para {
+        font-size: 1rem;
+    }
+    .catch {
+        font-size: 1.25rem;
+    }
+}
+/*
+        pack
+*/
+.pack-h {
+    text-align: center;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 1.25rem;
+    font-weight: normal;
+    margin: 3em 0 1em;
+}
+.pack-h > span {
+    display: inline-block;
+    padding: 0 0 .1em 1.8em;
+    background: url("/assets/rental.lenahc.co.jp/img/grad-plan/h2back.png") left center no-repeat;
+    background-size: contain;
+}
+.pack-h.grad-pack > span {
+    background-image: url("/assets/rental.lenahc.co.jp/img/grad-plan/h2back.png");
+}
+.pack-h.cage-pack > span {
+    background-image: url("/assets/rental.lenahc.co.jp/img/cage-plan/h2back.png");
+}
+.pack-h span span {
+    display: inline-block;
+    padding: 0 .1em;
+    background: linear-gradient(transparent 65%, #EFEA3C 0%);
+}
+.pack-h.grad-pack span span {
+    background: linear-gradient(transparent 65%, #EFEA3C 0%);
+}
+.pack-h.cage-pack.rental-pack span span {
+    background: linear-gradient(transparent 65%, #EFEA3C 0%);
+}
+.pack-h.cage-pack.mochikomi-pack span span {
+    background: linear-gradient(transparent 65%, #66B8C7 0%);
+}
+p.pack {
+    color: #ED797C;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.8rem;
+    vertical-align: middle;
+    margin: 0 0 .5em;
+}
+p.pack .kimono {
+    display: inline-block;
+    color: #313131;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 1rem;
+    font-weight: normal;
+    vertical-align: middle;
+    text-align: center;
+    width: 4em;
+    border: 1px solid #32A2D3;
+    border-radius: 6px;
+}
+p.pack .hakama {
+    display: inline-block;
+    color: #313131;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 1rem;
+    font-weight: normal;
+    vertical-align: middle;
+    text-align: center;
+    width: 4em;
+    border: 1px solid #88BE43;
+    border-radius: 6px;
+}
+p.pack .isyo {
+    display: block;
+    color: #313131;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 0.875rem;
+    font-weight: normal;
+    vertical-align: middle;
+    line-height: 2.5;
+    margin-bottom: .5em;
+}
+p.pack .isyo > span {
+    display: inline-block;
+    text-align: center;
+    padding: 0 2em;
+    border: 1px solid #F1AB40;
+    border-radius: 6px;
+}
+p.pack .isyo span span {
+    font-size: smaller;
+}
+p.pack .furisode {
+    display: inline-block;
+    color: #313131;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 1rem;
+    font-weight: normal;
+    vertical-align: middle;
+    text-align: center;
+    width: 6em;
+    border: 1px solid #EC77A3;
+    border-radius: 6px;
+}
+p.pack .mochikomi {
+    display: inline-block;
+    color: #313131;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 1rem;
+    font-weight: normal;
+    vertical-align: middle;
+    text-align: center;
+    width: 10em;
+    border: 1px solid #EC77A3;
+    border-radius: 6px;
+}
+p.pack .furisode2 {
+    display: block;
+    color: #313131;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 0.875rem;
+    font-weight: normal;
+    vertical-align: middle;
+    line-height: 2.5;
+    margin-bottom: .5em;
+}
+p.pack .furisode2 > span {
+    display: inline-block;
+    text-align: center;
+    padding: 0 2em;
+    border: 1px solid #EC77A3;
+    border-radius: 6px;
+}
+p.pack .furisode2 span span {
+    font-size: smaller;
+}
+@media screen and (min-width: 600px) {
+    .pack-h {
+        display: inline-block;
+    }
+    p.pack {
+        display: inline-block;
+        padding-top: .5rem;
+        margin-left: 2rem;
+    }
+    p.pack .isyo,
+    p.pack .furisode2 {
+        display: inline-block;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .pack-h {
+        font-size: 1.6rem;
+        margin: 4em 0 2em;
+    }
+    .pack-h + p.plan {
+        font-size: 2.35rem;
+    }
+    .pack .kimono,
+    .pack .hakama {
+        font-size: 1.5rem;
+        line-height: 1.5;
+    }
+}
+/*
+        set
+*/
+.set-h {
+    font-size: 1rem;
+    font-family: "Helvetica Neue", "小塚ゴシック Pr6N", "KozGoPr6N", "Hiragino Sans W3", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    font-weight: lighter;
+    text-align: center;
+    border-bottom: 1px solid #999;
+    margin-bottom: 1em;
+}
+.set dl {
+}
+.set dt {
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin-bottom: .5em;
+}
+.set dd {
+    font-size: 0.8rem;
+    line-height: 1.2;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: .5em;
+    margin-bottom: 1em;
+}
+.set dd + dd {
+    font-size: .8rem;
+    line-height: 1rem;
+    text-align: right;
+    border: none;
+}
+.set dd + dd .plus {
+    font-size: 1rem;
+    color: #66B8C7;
+}
+.set dd + dd .awase {
+    font-size: .7rem;
+    color: #fff;
+    padding: 0 0.5em;
+    background-color: #66B8C7;
+    border-radius: 4px;
+}
+@media screen and (min-width: 600px) {
+    .set {
+        display: flex;
+        align-items: center;
+    }
+    .set-h {
+        flex: 0 0 7rem;
+        width: 7rem;
+        height: 7rem;
+        line-height: 7rem;
+        border: 1px solid #666;
+        border-radius: 50%;
+        margin: 0;
+    }
+    .set dl {
+        flex: 1 1 auto;
+        padding-left: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .set dt {
+        flex: 0 0 7rem;
+        background-color: #eee;
+        margin: 0 0 .5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .set dd {
+        flex: 1 0 calc(100vw - 16rem);
+        padding: .5em;
+        margin: 0 0 .5rem;
+    }
+    .set dd + dd {
+        flex: 1 0 100%;
+    }
+}
+@media screen and (min-width: 768px) {
+    .set dd + dd {
+        text-align: center;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .set dt {
+        font-size: 1.125rem;
+        flex: 0 0 10rem;
+    }
+    .set dd {
+        font-size: 1rem;
+        flex: 1 0 calc(100vw - 19rem);
+        flex: 1 0 976px;
+    }
+}
+/*
+@media screen and (min-width: 1440px) {
+    .set dd {
+        flex: 1 0 1136px;
+    }
+}
+*/
+/*
+
+        grad plan
+
+*/
+#grad-plan {
+    padding: 0 8px;
+    background: url("/assets/rental.lenahc.co.jp/img/grad-plan/grad-plan-back.png") right top no-repeat;
+    background-size: contain;
+}
+@media screen and (min-width: 600px) {
+    #grad-plan {
+        background-size: 24em;
+    }
+}
+/*
+        grad-rental-plan
+*/
+p.grad-rental-plan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    margin: 2rem 0;
+}
+p.grad-rental-plan > span {
+    flex: 1 0 auto;
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+p.grad-rental-plan > span:first-child {
+    justify-content: center;
+}
+p.grad-rental-plan .plus {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    color: #ED797C;
+    font-size: 3.1rem;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0 0.5rem;
+}
+p.grad-rental-plan .kimono,
+p.grad-rental-plan .hakama {
+    flex: 0 0 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .5em 1em;
+    background-color: #fff;
+    border: 1px solid #32A2D3;
+    border-radius: 6px;
+}
+p.grad-rental-plan .hakama {
+    border: 1px solid #88BE43;
+}
+p.grad-rental-plan .up {
+    flex: 1 0 auto;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 1.125rem;
+    border-bottom: 1px solid #666;
+}
+p.grad-rental-plan .up span {
+    font-size: 0.875rem;
+}
+p.grad-rental-plan .dw {
+    flex: 1 0 auto;
+    font-size: 0.75rem;
+}
+p.grad-rental-plan .oshitaku {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+p.grad-rental-plan .otoku {
+    flex: 0 0 4.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    width: 4.5em;
+    height: 4.5em;
+    background-color: #EFEA3C;
+    border-radius: 50%;
+}
+p.grad-rental-plan .tebra {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 1rem;
+    line-height: 1.2;
+    margin-left: 0.5rem;
+}
+p.grad-rental-plan .tebra span:last-child {
+    font-size: 0.75rem;
+}
+@media screen and (min-width: 768px) {
+    p.grad-rental-plan {
+        flex-direction: row;
+    }
+    p.grad-rental-plan > span:first-child {
+        justify-content: flex-end;
+    }
+}
+@media screen and (min-width: 1280px) {
+    p.grad-rental-plan {
+        margin: 4em 0 2em;
+    }
+    p.grad-rental-plan .up {
+        font-size: 1.5rem;
+    }
+    p.grad-rental-plan .dw {
+        font-size: 1rem;
+    }
+    p.grad-rental-plan .plus {
+        align-self: center;
+    }
+    p.grad-rental-plan .kimono,
+    p.grad-rental-plan .hakama {
+        flex: 0 0 11.25rem;
+    }
+    p.grad-rental-plan .tebra {
+        font-size: 1.5rem;
+    }
+    p.grad-rental-plan .tebra span {
+        font-size: 1rem;
+    }
+}
+/*
+        grad-op
+*/
+.grad-op {
+    text-align: center;
+    background-color: #E7F2DF;
+    padding: 0.5em 0;
+    margin-top: 1em;
+}
+.grad-op-h {
+    font-family: "Helvetica Neue", "小塚ゴシック Pr6N", "KozGoPr6N", "Hiragino Sans W3", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    color: #ED797C;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+.grad-op-h span {
+    display: inline-block;
+    background: linear-gradient(transparent 50%, #EFEA3C 0%);
+}
+.grad-op > div {
+    display: flex;
+}
+.grad-op > div > div {
+    flex: 0 0 33.333333%;
+}
+.grad-op > div > div > div:first-child {
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #666;
+    border-radius: 4px;
+    width: 7em;
+    line-height: 2;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+.grad-op > div > div > div:last-child {
+    color: #ED797C;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+@media screen and (min-width: 600px) {
+    .grad-op {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        max-width: 54rem;
+        margin: 1em auto;
+    }
+    .grad-op-h {
+        flex: 1 0 auto;
+        margin: 0;
+    }
+    .grad-op > div {
+        flex: 1 0 auto;
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+    .grad-op > div > div {
+        flex: 1 0 auto;
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+    .grad-op > div > div > div:first-child {
+        flex: 0 1 5rem;
+        padding: .5rem 0;
+        margin: 0;
+        line-height: 1.5;
+    }
+    .grad-op > div > div > div:last-child {
+        flex: 1 0 auto;
+        margin: 0;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .grad-op {
+        padding: 2rem 0;
+    }
+    .grad-op-h {
+        font-size: 1.5rem;
+    }
+    .grad-op > div > div > div:first-child {
+        font-size: 0.875rem;
+    }
+    .grad-op > div > div > div:last-child {
+        font-size: 1.875rem;
+    }
+}
+/*
+
+        cage plan
+
+*/
+#cage-plan {
+    padding: 0 8px;
+    background: url("/assets/rental.lenahc.co.jp/img/cage-plan/cage-plan-back.png") right top no-repeat;
+    background-size: contain;
+}
+@media screen and (min-width: 600px) {
+    #cage-plan {
+        background-size: 24em;
+    }
+}
+/*
+        button
+*/
+.cage-plan-button {
+    text-align: center;
+}
+.cage-plan-button a {
+    display: inline-block;
+    width: 8em;
+    line-height: 3;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 0.875rem;
+    font-weight: bold;
+    background: #fff url('/assets/rental.lenahc.co.jp/img/cage-plan/rental.png') center center no-repeat;
+    background-size: cover;
+    border-radius: 6px;
+    margin: 1em;
+}
+.cage-plan-button a.mochi {
+    background: #fff url('/assets/rental.lenahc.co.jp/img/cage-plan/mochikomi.png') center center no-repeat;
+}
+@media screen and (min-width: 600px) {
+    .cage-plan-head {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .cage-plan-button {
+        display: inline-block;
+        margin-left: 3rem;
+    }
+}
+/*
+        cage-plan
+*/
+p.cage-plan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+}
+p.cage-plan > span {
+    flex: 1 0 auto;
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+p.cage-plan > span:first-child {
+    justify-content: center;
+}
+p.cage-plan .plus {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    color: #ED797C;
+    font-size: 3.1rem;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0 0.5rem;
+}
+p.cage-plan .furisode {
+    flex: 0 0 11rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .5em 1em;
+    border: 1px solid #EC77A3;
+    background-color: #fff;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+p.cage-plan .furisode3 {
+    padding: .5em 1em;
+    border: 1px solid #EC77A3;
+    background-color: #fff;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 1.125rem;
+}
+p.cage-plan .furisode3 span {
+    font-size: 0.875rem;
+}
+p.cage-plan .up {
+    flex: 1 0 auto;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 1.125rem;
+    border-bottom: 1px solid #666;
+}
+p.cage-plan .up span {
+    font-size: 0.875rem;
+}
+p.cage-plan .dw {
+    flex: 1 0 auto;
+    font-size: 0.75rem;
+}
+p.cage-plan .oshitaku {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+p.cage-plan .otoku {
+    flex: 0 0 4.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    width: 4.5em;
+    height: 4.5em;
+    background-color: #EFEA3C;
+    border-radius: 50%;
+}
+p.cage-plan .tebra {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    font-size: 1rem;
+    line-height: 1.2;
+    margin-left: 0.5rem;
+}
+p.cage-plan .tebra span:last-child {
+    font-size: 0.75rem;
+}
+@media screen and (min-width: 600px) {
+    p.cage-plan {
+        margin-top: 2em;
+    }
+}
+@media screen and (min-width: 768px) {
+    p.cage-plan {
+        flex-direction: row;
+    }
+    p.cage-plan > span {
+        margin: 0;
+    }
+    p.cage-plan > span:first-child {
+        justify-content: flex-end;
+    }
+    p.cage-plan .furisode,
+    p.cage-plan .furisode3 {
+        margin: 0;
+    }
+}
+@media screen and (min-width: 1280px) {
+    p.cage-plan {
+        margin: 4em 0 2em;
+    }
+    p.cage-plan .up {
+        font-size: 1.5rem;
+    }
+    p.cage-plan .dw {
+        font-size: 1rem;
+    }
+    p.cage-plan .plus {
+        align-self: center;
+    }
+    p.cage-plan .furisode,
+    p.cage-plan .furisode3 {
+        flex: 0 0 14rem;
+    }
+    p.cage-plan .tebra {
+        font-size: 1.5rem;
+    }
+    p.cage-plan .tebra span {
+        font-size: 1rem;
+    }
+}
+/*
+        option
+*/
+.cage-op {
+    text-align: center;
+    background-color: #E7F2DF;
+    padding: 0.5em 0;
+    margin-top: 1em;
+}
+.cage-op-h {
+    font-family: "Helvetica Neue", "小塚ゴシック Pr6N", "KozGoPr6N", "Hiragino Sans W3", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    color: #ED797C;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+.cage-op-h span {
+    display: inline-block;
+    background: linear-gradient(transparent 50%, #EFEA3C 0%);
+}
+.cage-op > div {
+    display: flex;
+    flex-wrap: wrap;
+}
+.cage-op > div > div {
+    flex: 0 0 50%;
+}
+.cage-op > div > div > div:first-child {
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #666;
+    border-radius: 4px;
+    width: 7em;
+    line-height: 2;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+.cage-op > div > div > div:last-child {
+    color: #ED797C;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+@media screen and (min-width: 600px) {
+    .cage-op > div {
+        justify-content: center;
+    }
+    .cage-op > div > div {
+        flex: 0 0 25%;
+    }
+    .cage-op > div > div > div:first-child {
+        line-height: 1.5;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+}
+@media screen and (min-width: 768px) {
+    .cage-op {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        max-width: 54rem;
+        margin: 1em auto;
+    }
+    .cage-op-h {
+        flex: 1 0 auto;
+        margin: 0;
+    }
+    .cage-op > div {
+        flex: 1 0 auto;
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+    .cage-op > div > div {
+        flex: 1 0 auto;
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+    .cage-op > div > div > div:first-child {
+        flex: 0 1 5rem;
+        padding: .5rem 0;
+        margin: 0;
+    }
+    .cage-op > div > div > div:last-child {
+        flex: 1 0 auto;
+        margin: 0;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .cage-op-h {
+        font-size: 1.5rem;
+    }
+    .cage-op {
+        padding: 2rem 0;
+    }
+    .cage-op > div > div > div:first-child {
+        font-size: 0.875rem;
+    }
+    .cage-op > div > div > div:last-child {
+        font-size: 1.875rem;
+    }
+}
+/*
+
+        rental plan
+        mochikomi plan
+        photo plan
+
+*/
+#rental-plan,
+#mochikomi-plan,
+#photo-plan {
+    padding: 0 8px;
+}
+.plan-menu {
+    display: flex;
+    font-size: 0.875rem;
+    list-style: none;
+    max-width: 50rem;
+    padding: 0;
+    margin: 1rem auto 0;
+}
+.plan-menu li {
+    flex: 0 0 50%;
+    padding: 0 0.5rem;
+}
+.plan-menu .plan-menu-in {
+    display: block;
+    position: relative;
+    height: 100%;
+    padding: 0.5rem;
+    background-color: #FFF29B;
+}
+.plan-menu .plan-menu-cage .plan-menu-in {
+    background-color: #F7C5DB;
+}
+.plan-menu .plan-menu-in::before {
+    content: "";
+    width: 22px;
+    height: 0;
+    border-bottom: 1px solid #999;
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+}
+.plan-menu .plan-menu-in::after {
+    content: "";
+    width: 10px;
+    height: 0;
+    border-bottom: 1px solid #999;
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    transform-origin: right bottom;
+    transform: rotate(30deg);
+}
+.plan-menu h2 {
+    font-size: 1rem;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+.plan-menu p {
+    display: none;
+}
+@media screen and (min-width: 600px) {
+    .plan-menu .plan-menu-in {
+        display: flex;
+        padding: 1rem;
+    }
+    .plan-menu .plan-menu-in::before {
+        right: 1rem;
+        bottom: 1rem;
+    }
+    .plan-menu .plan-menu-in::after {
+        right: 1rem;
+        bottom: 1rem;
+    }
+    .plan-menu .plan-menu-img {
+        flex: 0 0 7.2rem;
+    }
+    .plan-menu .plan-menu-txt {
+        flex: 1 1 auto;
+        padding-left: 1em;
+    }
+}
+@media screen and (min-width: 768px) {
+    .plan-menu h2 {
+        margin-bottom: 0.5em;
+    }
+    .plan-menu li p {
+        display: block;
+        margin: 0;
+    }
+}
+/*
+
+        faq
+
+*/
+#faq {
+    padding: 0 8px;
+}
+#faq h1 {
+    text-align: center;
+}
+#faq dl {
+    background-color: #E7F2DF;
+    padding: 2rem 1rem;
+    margin: 2rem -8px;
+}
+
+#faq dt {
+    display: flex;
+    position: relative;
+    font-family: "小塚明朝 Pr6N", "KozMinPr6N", "游明朝", "YuMincho", "游明朝体", "Yu Mincho", "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+    color: #fff;
+    background-color: #E55927;
+    padding: 0.5em 2.5em 0.5em 0.5em;
+    max-width: 768px;
+    margin: 0 auto;
+}
+#faq dt:not(:first-child) {
+    margin-top: 2em;
+}
+#faq dt::before {
+    position: absolute;
+    top: calc(50% - 1px);
+    right: 0.6em;
+    content: "";
+    width: 1.5em;
+    height: 0;
+    border-top:    1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
+#faq dt::after {
+    position: absolute;
+    top: calc(50% - 0.75em);
+    right: calc(1.35em - 1px);
+    content: "";
+    width: 0;
+    height: 1.5em;
+    border-left:  1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+}
+#faq dt > span:first-child {
+    flex: 0 0 3em;
+}
+#faq dt > span:first-child span {
+    display: inline-block;
+    position: relative;
+    line-height: 1;
+    color: #E55927;
+    background-color: #fff;
+    padding: 0.5em 0.15em 0.5em 0.5em;
+    border-radius: 6px 0 0 6px;
+}
+#faq dt span:first-child span::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -1em;
+    box-sizing: content-box;
+    width: 0;
+    height: 0;
+    border-left:   1em solid #ffffff;
+    border-top:    1em solid transparent;
+    border-bottom: 1em solid transparent;
+}
+#faq dt > span:last-child {
+    font-size: 0.875rem;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+}
+
+#faq dd {
+    display: flex;
+    background-color: #fff;
+    padding: 0.5em;
+    max-width: 768px;
+    margin: 0 auto;
+}
+#faq dd > span:first-child {
+    flex: 0 0 3em;
+}
+#faq dd > span:first-child span {
+    display: inline-block;
+    position: relative;
+    line-height: 1;
+    padding: 0.5em 0.15em 0.5em 0.5em;
+    color: #ffffff;
+    background-color: #E55927;
+    border-radius: 6px 0 0 6px;
+}
+#faq dd span:first-child span::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -1em;
+    box-sizing: content-box;
+    width: 0;
+    height: 0;
+    border-left:   1em solid #E55927;
+    border-top:    1em solid transparent;
+    border-bottom: 1em solid transparent;
+}
+#faq dd > span:last-child {
+    font-size: 0.875rem;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+}
+@media screen and (min-width: 768px) {
+    #faq dl {
+        font-size: 1.25rem;
+    }
+    #faq dt > span:last-child,
+    #faq dd > span:last-child {
+        font-size: 1rem;
+    }
+}
+/*
+ *      lists
+ */
+#gallery_index .container,
+#gallery_list .container,
+#gallery_show .container {
+    padding: 0 1rem;
+}
+#gallery_show article {
+    padding-top: 6rem;
+}
+ul.content-list,
+ul.article-list,
+ul.gallery-list {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+ul.content-list > li,
+ul.article-list > li,
+ul.gallery-list > li {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+ul.content-list h2 {
+    margin: 0;
+}
+.publish,
+p.property {
+    text-align: right;
+    margin: 0;
+}
+.publish i ,
+p.property i {
+    margin-left: 0.875rem;
+}
+p.property span {
+    display: block;
+    font-size: smaller;
+}
+p.viewmore {
+    text-align: center;
+    margin: 1em 0 0;
+}
+@media screen and (min-width:480px){
+    p.property span {
+        display: inline;
+    }
+}
+ul.wrapper,
+li.wrapper,
+div.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left:  -1rem;
+    margin-right: -1rem;
+}
+.wrapper > * {
+    padding-left:  1rem;
+    padding-right: 1rem;
+    margin: 0.75rem 0;
+}
+.m1p2,
+.m1p3,
+.m1p23 {
+    flex:  0 0 100%;
+    width: 100%;
+}
+.m2p3,
+.m2p4 {
+    flex:  0 0 50%;
+    width: 50%;
+}
+.m3p3 {
+    flex:  0 0 33.3333333%;
+    width: 33.3333333%;
+}
+@media screen and (min-width:768px){
+    .m1p2 {
+        flex:  0 0 50%;
+        width: 50%;
+    }
+    .m1p3,
+    .m2p3 {
+        flex:  0 0 33.3333333%;
+        width: 33.3333333%;
+    }
+    .m2p4 {
+        flex:  0 0 25%;
+        width: 25%;
+    }
+    .m1p23 {
+        flex:  0 0 66.6666667%;
+        width: 66.6666667%;
+    }
+}
+/*
+ *      images box
+*/
+.imgbox,
+.imgbox43,
+.imgbox169 {
+    position: relative;
+    height: 0;
+    padding-top: 100%;
+}
+.imgbox43 {
+    position: relative;
+    height: 0;
+    padding-top: 75%;
+}
+.imgbox169 {
+    padding-top: 61.54%;
+}
+.imgbox    > *,
+.imgbox43  > *,
+.imgbox169 > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #f8f8f8;
+}
+.imgbox    a,
+.imgbox43  a,
+.imgbox169 a {
+    width:  100%;
+    height: 100%;
+    position: relative;
+}
+.imgbox    img,
+.imgbox43  img,
+.imgbox169 img {
+    width:  100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+.imgbox    a .linkbutton,
+.imgbox43  a .linkbutton,
+.imgbox169 a .linkbutton,
+.imgbox    a .arrowbutton,
+.imgbox43  a .arrowbutton,
+.imgbox169 a .arrowbutton {
+    position: absolute;
+    bottom: 1em;
+    right: 0;
+    margin-left: 0;
+    margin-right: 1em;
+}
+.imgbox    a .arrowbutton,
+.imgbox43  a .arrowbutton,
+.imgbox169 a .arrowbutton {
+    bottom: 0.5em;
+    margin-right: 0.5em;
+}
+@media screen and (min-width:480px){
+    .imgbox    a .arrowbutton,
+    .imgbox43  a .arrowbutton,
+    .imgbox169 a .arrowbutton {
+        bottom: 1em;
+        margin-right: 1em;
+    }
+}
+/*
+ *
+ *      gallery
+ *
+ */
+#gallery {
+    position: relative;
+    overflow: hidden;
+}
+#gallery > ul {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 200%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#gallery > ul li {
+    width: 50%;
+    display: block;
+    float: left;
+}
+#gallery_prev,
+#gallery_next {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 100%;
+    color: rgba(255,255,255,.3);
+    background-color: rgba(0,0,0,0);
+    -webkit-transition: .5s;
+        -ms-transition: .5s;
+            transition: .5s;
+    cursor: pointer;
+}
+#gallery_next {
+    left: auto;
+    right: 0;
+}
+#gallery_prev:hover,
+#gallery_next:hover {
+    color: rgba(255,255,255,.8);
+    background-color: rgba(0,0,0,.1);
+}
+#gallery_prev div,
+#gallery_next div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: rgba(255,255,255,.5);
+    transform: translateX(-50%) translateY(-50%);
+}
+#gallery_prev div::after,
+#gallery_next div::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 57%;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid rgba(0,0,0,0.8);
+}
+#gallery_prev div::after {
+    border-left: 2px solid rgba(0,0,0,0.8);
+    transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+}
+#gallery_next div::after {
+    border-right: 2px solid rgba(0,0,0,0.8);
+    transform: translateX(-68%) translateY(-50%) rotate(45deg);
+}

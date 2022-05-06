@@ -1,0 +1,464 @@
+.container {
+    max-width: none;
+}
+/*
+
+    fn-header
+
+*/
+section {
+    margin-bottom: 6rem;
+}
+#fn-header h1 {
+    text-align: center;
+}
+#fn-header .sum {
+    text-align: center;
+}
+#fn-header .sum > div {
+    max-width: 875px;
+    margin: 0 auto;
+}
+#fn-header .sumr {
+    margin-top: 2rem;
+}
+@media screen and (min-width: 600px) {
+    #fn-header .sum > div {
+        display: flex;
+        margin-top: 3rem;
+    }
+    #fn-header .suml {
+        padding-right: 3%;
+    }
+    #fn-header .sumr {
+        padding-left: 3%;
+        margin-top: 0;
+    }
+}
+/*
+
+    fn-nav
+
+*/
+#fn-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1481px;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+}
+#fn-nav li {
+    flex: 0 0 50%;
+    align-items: center;
+    padding: 0 1rem;
+    margin: 1rem 0;
+}
+#fn-nav .boxo {
+    position: relative;
+    height: 0;
+    padding-top: 32.142857%;
+}
+#fn-nav .boxi {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #95D5F6;
+    background-image: url("../img/nav-back.png");
+    background-size: contain;
+    border-radius: 4px;
+}
+#fn-nav .boxi a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+}
+@media screen and (min-width: 600px) {
+    #fn-nav li {
+        flex: 0 0 20%;
+        align-items: center;
+        padding: 0 0.5%;
+        margin: 1rem 0;
+    }
+}
+/*
+
+    fn-process
+
+*/
+#fn-process h2 {
+    text-align: center;
+}
+#fn-process ul {
+    list-style: none;
+    max-width: 1280px;
+    padding: 0;
+    margin: 1rem auto;
+}
+#fn-process li {
+    margin-bottom: 2rem;
+}
+#fn-process li > div {
+    max-width: 340px;
+    margin: 0 auto;
+}
+#fn-process h3 {
+    font-family: serif;
+    color: #1279B8;
+    margin: 0.5em 0;
+}
+#fn-process h3 span {
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 85%;
+    font-weight: normal;
+    color: #C69C6D;
+    margin-left: 1rem;
+}
+#fn-process p {
+    font-size: 0.875rem;
+}
+#fn-process p.ppoint {
+    font-size: 0.8rem;
+    max-width: 978px;
+    margin: 0 auto;
+}
+#fn-process h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
+@media screen and (min-width: 600px) {
+    #fn-process h2 img {
+        max-width: 33%;
+    }
+    #fn-process > p {
+        text-align: center;
+    }
+    #fn-process ul {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 3rem;
+    }
+    #fn-process li {
+        flex: 1 0 50%;
+        padding: 0 2%;
+    }
+}
+@media screen and (min-width: 769px) {
+    #fn-process li {
+        flex: 1 0 33.3333333%;
+    }
+}
+@media screen and (min-width: 1024px) {
+    #fn-process li {
+        flex: 1 0 25%;
+    }
+}
+/*
+
+    fn-menu
+
+*/
+#fn-menu {
+    text-align: center;
+}
+#fn-menu > div {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+@media screen and (min-width: 600px) {
+    #fn-menu > div {
+        box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+    }
+    #fn-menu > div > div {
+        display: flex;
+    }
+}
+/*
+
+    fn-nailist
+
+*/
+#fn-nailist h2 {
+    text-align: center;
+}
+#fn-nailist > div {
+    position: relative;
+}
+#fn-nailist div.photo {
+    position: relative;
+    width: 150px;
+    margin: 0 3rem 0 auto;
+}
+#fn-nailist h3 {
+    display: inline-block;
+    line-height: 1.2;
+    font-family: serif;
+    color: #ffffff;
+    text-shadow: 2px -2px 2px #67C1D1;
+    padding: 0 0.5em;
+    margin: 0;
+    white-space: nowrap;
+}
+#fn-nailist div.photo h3 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 1.5rem;
+    transform: rotate(90deg);
+    transform-origin: right bottom;
+    background: linear-gradient(transparent 70%, #67C1D1 70%);
+    margin: 0;
+}
+#fn-nailist h3 span.ja {
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 0.875rem;
+    margin-left: 0.5em;
+}
+#fn-nailist div.info {
+    font-size: 0.875rem;
+    color: #ffffff;
+    background-color: #95D5F6;
+    margin: -8rem -1rem 0;
+}
+#fn-nailist div.info > div {
+    position: relative;
+    max-width: 1024px;
+    padding: 8rem 1rem 1rem 1rem;
+    margin: 0 auto;
+}
+#fn-nailist div.photo2 {
+    display: none;
+}
+#fn-nailist div.info h3 {
+    display: none;
+}
+#fn-nailist dt {
+    color: #95D5F6;
+    background-color: #ffffff;
+    text-align: center;
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    line-height: 1.2;
+    padding-top: 20px;
+    float: left;
+    clear: left;
+    margin-bottom: 1em;
+}
+#fn-nailist dt.tokui {
+    padding-top: 14px;
+}
+#fn-nailist dd {
+    line-height: 1.2;
+    height: 4em;
+    padding-top: 20px;
+    margin: 0 0 1em 6em;
+}
+#fn-nailist dd.tokui {
+    padding-top: 14px;
+}
+@media screen and (min-width: 600px) {
+    #fn-nailist h2 img {
+        max-width: 54%;
+    }
+    #fn-nailist > div {
+        padding-top: 8%;
+    }
+    #fn-nailist div.photo {
+        display: none;
+    }
+    #fn-nailist div.photo2 {
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 30%;
+        margin: 0;
+    }
+    #fn-nailist div.info {
+        margin-top: 0;
+    }
+    #fn-nailist div.info > div {
+        padding: 1rem 30% 1rem 1rem;
+    }
+    #fn-nailist div.info h3 {
+        display: inline-block;
+        font-size: 2rem;
+        background: linear-gradient(transparent 60%, #67C1D1 70%);
+    }
+}
+@media screen and (min-width: 768px) {
+    #fn-nailist h2 img {
+        max-width: 365px;
+    }
+    #fn-nailist div.photo2 {
+        bottom: -4%;
+    }
+    #fn-nailist div.info {
+        margin-bottom: 4%;
+    }
+    #fn-nailist div.info > div {
+        padding: 2rem 30% 2rem 2rem;
+    }
+}
+@media screen and (min-width: 900px) {
+    #fn-nailist div.photo2 {
+        width: 250px;
+        bottom: -8%;
+    }
+    #fn-nailist div.info {
+        margin-bottom: 8%;
+    }
+}
+@media screen and (min-width: 1024px) {
+    #fn-nailist h2 img {
+        max-width: 480px;
+    }
+    #fn-nailist div.info > div {
+        padding: 2rem;
+    }
+}
+/*
+
+    fn-gallery
+
+*/
+#fn-gallery {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#fn-gallery h2 {
+    text-align: center;
+}
+#fn-gallery h2 img {
+    max-width: 65%;
+}
+#fn-gallery-w {
+    max-width: 640px;
+    margin: 2rem auto;
+}
+#fn-gallery-h {
+    max-width: 360px;
+    margin: 2rem auto;
+}
+#fn-gallery-w-box,
+#fn-gallery-h-box {
+    position: relative;
+    overflow: hidden;
+}
+#fn-gallery-w-photo,
+#fn-gallery-h-photo {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: calc((100vw - 2rem) * 2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#fn-gallery-h-photo {
+    width: calc((100vw - 2rem) * 3);
+}
+#fn-gallery-w-photo li,
+#fn-gallery-h-photo li {
+    float: left;
+    width: calc(100vw - 2rem);
+}
+#fn-gallery-w-nav,
+#fn-gallery-h-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+#fn-gallery-w-nav li,
+#fn-gallery-h-nav li {
+    display: inline-block;
+    width: 1rem;
+    margin: 0 0.5rem;
+}
+#fn-gallery-w-nav li::before,
+#fn-gallery-h-nav li::before {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #999999;
+}
+#fn-gallery-w-nav li.cur::before,
+#fn-gallery-h-nav li.cur::before {
+    background-color: #67C1D1;
+}
+@media screen and (min-width: 1024px) {
+    #fn-gallery > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 -1rem;
+    }
+    #fn-gallery-w,
+    #fn-gallery-h {
+        padding: 0 1rem;
+    }
+}
+/*
+
+    fn-reserve
+
+*/
+#fn-reserve {
+    text-align: center;
+}
+#fn-reserve a {
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
+    line-height: 2.5;
+    padding: 0 1em;
+    color: #ffffff;
+    background-color: #95D5F6;
+    border-radius: 4px;
+}
+/*
+
+    fn-faq
+
+*/
+#fn-faq h2 {
+    text-align: center;
+}
+#fn-faq dl {
+    max-width: 800px;
+    margin: 3rem auto 6rem;
+}
+#fn-faq dt {
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #ff99cc;
+    padding: 4px 16px;
+    border-radius: 6px 6px 0 0;
+}
+#fn-faq dd {
+    font-size: 0.875rem;
+    border: 4px solid #ff99cc;
+    border-top: none;
+    padding: 8px 12px;
+    border-radius: 0 0 6px 6px;
+    margin-bottom: 3rem;
+}
+#fn-faq dt::first-letter,
+#fn-faq dd strong {
+    font: bold 1.25em 'Times New Roman', serif;
+}

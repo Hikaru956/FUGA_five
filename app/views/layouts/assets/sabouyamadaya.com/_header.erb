@@ -1,0 +1,22 @@
+<% hlogo  = VisualWidget.search_widget_bag_for(@website, "dd22d375d8d4514d39de7b1f45f5791e") %>
+<header id="header">
+    <a href="#footer" id="mNavOpener">
+        <span></span>
+        <span></span>
+    </a>
+<% if !hlogo.blank? && hlogo.is_valid? %>
+    <div>
+        <a href="/home">
+            <img src="<%= hlogo.photos[0].clip.url() %>" alt="<%= model_name(@website.company) %>ロゴ">
+        </a>
+    </div>
+<% end %>
+    <nav id="gNav">
+        <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/navigation" %>
+<% unless @website.social_instagram_uri.blank? %>
+        	<li><a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+<% end %>
+        </ul>
+    </nav>
+</header>

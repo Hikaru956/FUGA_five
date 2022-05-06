@@ -1,6 +1,32 @@
 <%  instaid = VisualWidget.search_widget_bag_for(@website, "b81c49067a4791cd67acc33d64adeee2") %>
 <%  instatk = VisualWidget.search_widget_bag_for(@website, "60bace4326a58eba29a70d635babc6e5") %>
-<%  if !instaid.blank? && !instatk.blank? && !instaid.data_string.blank? && !instatk.data_string.blank? %>
+<%  instaun = VisualWidget.search_widget_bag_for(@website, "1e4bb0f5e09b0950bd29409f1eaaaae9") %>
+<%  if !instaun.blank? && !instaun.data_string.blank? %>
+<script>
+$.getJSON("/php/insta_feed9.php",
+    {id: "<%= instaun.data_string %>"},
+    function(json){
+        if ('business_discovery' in json){
+            var ig = json.business_discovery.media.data;
+            var j  = 0;
+            var ht = '';
+            for (var i = 0; i < ig.length; i++) {
+                if (ig[i].media_type != 'VIDEO'){
+                    ht += '<li class="m3p3"><div class="imgbox"><div><a href="' + ig[i].permalink + '" target="_blank"><img src="' + ig[i].media_url + '" alt="' + ig[i].caption + '"></a></div></div></li>';
+                    j++;
+                }
+                if (j >= 9){
+                    break;
+                }
+            }
+        }else{
+            var ht = '<li>Error: Instagramのアカウントをプロアカウントに変更してください。</li>';
+        }
+        $("#instafeed").append(ht);
+    }
+);
+</script>
+<%  elsif !instaid.blank? && !instatk.blank? && !instaid.data_string.blank? && !instatk.data_string.blank? %>
 <script>
 $.ajax({
     type: 'GET',

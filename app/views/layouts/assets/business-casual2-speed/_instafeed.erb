@@ -3,7 +3,25 @@
 <%  instatk = VisualWidget.search_widget_bag_for(@website, "289d969709b3f09345dd1e1161f67d56") %>
 <%  newinstaid = VisualWidget.search_widget_bag_for(@website, "50d0aa9efc7a5e9747eb74c3e6c76acb") %>
 <%  newinstatk = VisualWidget.search_widget_bag_for(@website, "04cb171f043f572d8f9d4be18c1b17b9") %>
-<%  if !newinstaid.blank? && !newinstatk.blank? && !newinstaid.data_string.blank? && !newinstatk.data_string.blank? %>
+<%  instaun = VisualWidget.search_widget_bag_for(@website, "45c928e971de08502f36735328ea5187") %>
+<%  if !instaun.blank? && !instaun.data_string.blank? %>
+<aside>
+    <div class="container">
+        <div class="content_box">
+            <h1>
+<%    if @website.social_instagram_uri.blank? %>
+                INSTAGRAM
+<%    else %>
+                <a href="<%= @website.social_instagram_uri %>" target="_blank">INSTAGRAM</a>
+<%    end %>
+            </h1>
+            <div id="streem_table">
+                <ul id="instafeed" class="wrapper"></ul>
+            </div>
+        </div>
+    </div>
+</aside>
+<%  elsif !newinstaid.blank? && !newinstatk.blank? && !newinstaid.data_string.blank? && !newinstatk.data_string.blank? %>
 <aside>
     <div class="container">
         <div class="content_box">

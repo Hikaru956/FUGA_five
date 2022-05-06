@@ -1,0 +1,37 @@
+<aside id="contacts">
+    <ul>
+<% unless @website.wsite_telephone.blank? %>
+        <li><a href="tel:<%= @website.wsite_telephone %>"><i class="fa-solid fa-phone"></i></a></li>
+<% end %>
+<% form = VisualWidget.search_widget_bag_for(@website, "99f1b2cfa2fec7da1e89ede34034cfd1") %>
+<% if !form.blank? && form.is_valid? %>
+        <li><a href="<%= raw form.data_string %>" target="_blank"><i class="fa-solid fa-envelope"></i></a></li>
+<% end %>
+<% unless @website.social_instagram_uri.blank? %>
+        <li><a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+<% end %>
+<% shop = VisualWidget.search_widget_bag_for(@website, "0deba3cb437400f9052396a257a66bda") %>
+<% if !shop.blank? && shop.is_valid? %>
+        <li><a href="<%= raw shop.data_string %>" target="_blank"><i class="fa-solid fa-cart-shopping"></i></a></li>
+<% end %>
+<% unless @website.social_line_uri.blank? %>
+        <li><a href="<%= @website.social_line_uri %>" target="_blank"><i class="fa-brands fa-line"></i></a></li>
+<% end %>
+<% unless @website.social_facebook_uri.blank? %>
+        <li><a href="<%= @website.social_facebook_uri %>" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+<% end %>
+<% unless @website.social_twitter_uri.blank? %>
+        <li><a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+<% end %>
+<% unless @website.social_pinterest_uri.blank? %>
+        <li><a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="fa-brands fa-pinterest"></i></a></li>
+<% end %>
+<% unless @website.social_tumblr_uri.blank? %>
+        <li><a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fa-brands fa-tumblr"></i></a></li>
+<% end %>
+        <li><%= hotpepper_staff_banner(@website, false, 'vertical-align: top; padding-top: 1px;') %></li>
+<% unless @website.social_youtube_uri.blank? %>
+        <li><a href="<%= @website.social_youtube_uri %>" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>
+<% end %>
+    </ul>
+</aside>

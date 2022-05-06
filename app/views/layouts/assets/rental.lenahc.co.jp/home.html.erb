@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: https://ogp.me/ns#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= @website.name %></title>
+<% unless @website.wsite_description_shop.blank? %>
+<meta name="description"              content="<%= @website.wsite_description_shop %>">
+<% end %>
+<% unless @website.wsite_keywords.blank? %>
+<meta name="keywords"                 content="<%= @website.wsite_keywords %>">
+<% end %>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="copyright"                content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta property="og:type"              content="website">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+<% else %>
+<meta property="og:url"               content="https://<%= request.host %>/home">
+<% end %>
+<meta property="og:title"             content="<%= @website.name %>">
+<% unless @website.wsite_description_shop.blank? %>
+<meta property="og:description"       content="<%= @website.wsite_description_shop %>">
+<% end %>
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% else %>
+<meta property="article:publisher"    content="<%= model_name(@website.company) %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/rental.lenahc.co.jp/style" %>
+</head>
+<body>
+<%  @fix = @website.content_leafs.find_by_id(18873); %>
+<%  if !@fix.blank? %>
+<%      unless @fix.description.blank? %>
+    <article id="top-concept">
+<%=         raw @fix.description %>
+    </article>
+<%     end %>
+<%  end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/rental.lenahc.co.jp/common" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/rental.lenahc.co.jp/common_js" %>
+</body>
+</html>

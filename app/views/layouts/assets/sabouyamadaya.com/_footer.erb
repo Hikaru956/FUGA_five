@@ -1,0 +1,31 @@
+<footer id="footer">
+    <ul class="gNav">
+<%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/navigation" %>
+    </ul>
+    <ul class="sNav">
+<% name1 = VisualWidget.search_widget_bag_for(@website, "70d1355495f6fb6c345a8a7719359fd5") %>
+<% url1  = VisualWidget.search_widget_bag_for(@website, "0cb279a0d65c30aa99293472c3ad0b38") %>
+<% if !name1.blank? && name1.is_valid? && !url1.blank? && url1.is_valid? %>
+        <li><a href="<%= raw url1.data_string %>" target="_blank"><%= name1.data_string %></a></li>
+<% end %>
+<% name2 = VisualWidget.search_widget_bag_for(@website, "ef2e5d69645479512aa243f40a1df4c4") %>
+<% url2  = VisualWidget.search_widget_bag_for(@website, "9fe3bd743c170ed4a3cd354b22050525") %>
+<% if !name2.blank? && name2.is_valid? && !url2.blank? && url2.is_valid? %>
+        <li><a href="<%= raw url2.data_string %>" target="_blank"><%= name2.data_string %></a></li>
+<% end %>
+<% name3 = VisualWidget.search_widget_bag_for(@website, "60f91abe8719f3dfc46e7dc64349a405") %>
+<% url3  = VisualWidget.search_widget_bag_for(@website, "0d26d83e5c963246b29c1338d87fb92c") %>
+<% if !name3.blank? && name3.is_valid? && !url3.blank? && url3.is_valid? %>
+        <li><a href="<%= raw url3.data_string %>" target="_blank"><%= name3.data_string %></a></li>
+<% end %>
+    </ul>
+    <p>
+        COPYRIGHT&copy;
+        <script type="text/javascript">
+            myDate = new Date() ;
+            myYear = myDate.getFullYear();
+            document.write(myYear);
+        </script>
+        sabou Yamadaya.
+    </p>
+</footer>

@@ -1,0 +1,699 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import url("../../fontawesome-free-6.1.1-web/css/all.min.css"); /* Font Awesome */
+/*
+    RESET
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  color: #212121;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  font-family: 'EB Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+  font-family: "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+}
+iframe {
+  max-width: 100%;
+}
+input, button, textarea, select {
+  font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+/*
+    Float List
+*/
+.container {
+  max-width: 1440px; /* 90rem */
+  padding: 0 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.wrapper {
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+@media screen and (min-width:600px){
+}
+/*
+    ellipsis
+*/
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: transparent;
+}
+/*
+    header
+*/
+h1, h2, h3 {
+    font-family: 'EB Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    font-size: 1rem;
+    text-align: center;
+}
+h1 a, h2 a, h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+h1 span, h2 span, h3 span {
+    display: block;
+    font-size: smaller;
+}
+/*
+    footer
+*/
+#footer {
+    text-align: center;
+    color: #ffffff;
+    background-color: #212121;
+    padding: 1em;
+}
+#footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+#footer li {
+    margin: 0.5em;
+}
+#footer ul a {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    line-height: 2;
+    padding: 0 0.5em;
+}
+#footer .gNav {
+    font-family: 'EB Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    font-size: 0.875rem;
+    margin-top: 0;
+}
+#footer .sNav {
+    font-size: 0.7rem;
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+}
+#footer .sNav li {
+    display: inline-block;
+}
+#footer p {
+    font-family: 'EB Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    margin-bottom: 0;
+}
+@media screen and (min-width:600px){
+    #footer .gNav li {
+        display: inline-block;
+    }
+}
+/*
+    home
+*/
+/*
+    home header
+*/
+#homeHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+#homeMNavOpener {
+    display: block;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 48px;
+    height: 48px;
+    padding: 12px 8px;
+    background-color: rgba(0,0,0,0.15);
+    border-radius: 0.25rem;
+}
+#homeMNavOpener span:first-child {
+    display: block;
+    height: 13px;
+    border-top: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+#homeMNavOpener span:last-child {
+    display: block;
+    height: 11px;
+    border-bottom: 2px solid #ffffff;
+}
+#homeGNav {
+    display: none;
+}
+#homeGNav ul {
+    font-family: 'EB Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    width: 100%;
+    list-style: none;
+    text-align: center;
+    line-height: 3;
+    padding: 0;
+    margin: 0;
+}
+#homeGNav li {
+    display: inline-block;
+    margin: 0 0.5em;
+}
+#homeGNav a {
+    display: inline-block;
+    color: #ffffff;
+    text-decoration: none;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    padding: 0 0.5em;
+}
+@media screen and (min-width:600px){
+    #homeMNavOpener {
+        display: none;
+    }
+    #homeGNav {
+        display: block;
+    }
+}
+/*
+    home carousel
+*/
+#homeCarousel {
+    position: relative;
+    height: 100%;
+}
+#homeCarousel ul {
+    position: relative;
+    width:  100%;
+    height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+#homeCarousel li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: opacity 1s;
+}
+#homeCarousel li:not(:first-child) {
+    opacity: 0;
+}
+#homeCarousel li img {
+    object-fit: cover;
+    max-width: none;
+    width: 100%;
+    height: 100%;
+}
+/*
+    home vis
+*/
+#homeVis {
+    position: relative;
+    height: 100%;
+    background: #382219 url(https://staffroom.swifty.jp/photo/image/0008/7974/main.jpg) 50% 50% no-repeat;
+    background-size: cover;
+}
+#mainLogo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+#mainLogo img {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+#mainShop {
+    position: absolute;
+    left: 0;
+    bottom: 2em;
+    width: 100%;
+    text-align: center;
+}
+#mainShop a {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: inherit;
+    text-decoration: none;
+    background-color: #ffffff;
+    padding: 0.5em 3em;
+    border-radius: 0.25em;
+    margin: 0 2em;
+}
+#mainShop a span {
+    display: block;
+    font-family: 'EB Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    font-size: 2rem;
+    line-height: 1.2;
+}
+@media screen and (min-width:600px){
+    #mainShop {
+        text-align: right;
+    }
+}
+/*
+    home gallery
+*/
+#homeGallery {
+    margin-top: 3rem;
+}
+#homeGallery ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+}
+#homeGallery li {
+    flex: 0 1 50%;
+    padding: 0 0.5rem;
+    margin-top: 1rem;
+}
+#homeGallery h3 {
+    font-size: 0.875rem;
+    margin: 0;
+}
+#homeGallery a {
+    display: block;
+}
+@media screen and (min-width:600px){
+    #homeGallery li {
+        flex: 0 1 33.3333333%;
+    }
+}
+@media screen and (min-width:768px){
+    #homeGallery li {
+        padding: 0 1rem;
+        margin-top: 1.5rem;
+    }
+}
+@media screen and (min-width:1024px){
+    #homeGallery li {
+        padding: 0 2rem;
+        margin-top: 2rem;
+    }
+    #homeGallery h3 {
+        font-size: 1rem;
+    }
+}
+/*
+    home article
+*/
+#shopInfo dl {
+    font-family: "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    font-size: 0.7rem;
+}
+#shopInfo dt {
+    float: left;
+    clear: left;
+}
+#shopInfo dd {
+    margin-left: 3em;
+}
+#shopInfo span {
+    font-size: smaller;
+}
+@media screen and (min-width:375px){
+    #shopInfo dl {
+        font-size: 0.875rem;
+    }
+}
+@media screen and (min-width:425px){
+    #shopInfo dl {
+        margin-left: 1rem;
+    }
+}
+@media screen and (min-width:768px){
+    #homeArticle {
+        display: flex;
+        align-items: center;
+        width: 41rem;
+        margin: 1rem auto;
+    }
+    #homeArticle h1 {
+        flex: 0 1 280px;
+    }
+    #shopInfo {
+        flex: 1 1 auto;
+    }
+    #homeArticle h1 {
+        text-align: right;
+        margin: 0;
+    }
+    #shopInfo dl {
+        margin-left: 0;
+    }
+}
+/*
+    home gMap
+*/
+#gMap {
+    height: 20rem;
+    margin: 1rem 0;
+}
+#gMap iframe {
+    width: 100%;
+    height: 100%;
+}
+/*
+    home contacts
+*/
+#contacts ul {
+    list-style: none;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0;
+}
+#contacts li {
+    display: inline-block;
+}
+#contacts a {
+    color: inherit;
+    text-decoration: none;
+    padding: 0.5rem;
+}
+/*
+    noneHome
+*/
+/*
+    header
+*/
+#header {
+    text-align: center;
+}
+#mNavOpener {
+    display: block;
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    width: 48px;
+    height: 48px;
+    padding: 12px 8px;
+}
+#mNavOpener span:first-child {
+    display: block;
+    height: 13px;
+    border-top: 2px solid #212121;
+    border-bottom: 2px solid #212121;
+}
+#mNavOpener span:last-child {
+    display: block;
+    height: 11px;
+    border-bottom: 2px solid #212121;
+}
+#gNav {
+    display: none;
+}
+#gNav ul {
+    font-family: 'EB Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    width: 100%;
+    list-style: none;
+    text-align: center;
+    line-height: 3;
+    padding: 0;
+    margin: 0;
+}
+#gNav li {
+    display: inline-block;
+    margin: 0 0.5em;
+}
+#gNav a {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    padding: 0 0.5em;
+}
+@media screen and (min-width:600px){
+    #header {
+        margin-bottom: 2rem;
+    }
+    #mNavOpener {
+        display: none;
+    }
+    #gNav {
+        display: block;
+    }
+}
+/*
+    galleryList
+*/
+#galleryList {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+#galleryList ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+}
+#galleryList li {
+    flex: 0 1 50%;
+    padding: 0 0.5rem;
+    margin-top: 1rem;
+}
+#galleryList h2 {
+    font-size: 0.875rem;
+    margin: 0;
+}
+#galleryList a {
+    display: block;
+}
+@media screen and (min-width:600px){
+    #galleryList li {
+        flex: 0 1 33.3333333%;
+    }
+}
+@media screen and (min-width:768px){
+    #galleryList li {
+        padding: 0 1rem;
+        margin-top: 1.5rem;
+    }
+}
+@media screen and (min-width:1024px){
+    #galleryList li {
+        padding: 0 2rem;
+        margin-top: 2rem;
+    }
+    #galleryList h2 {
+        font-size: 1rem;
+    }
+}
+/*
+    content
+*/
+.content {
+    max-width: 64rem;
+    font-family: "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "MS PMincho", serif;
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 0 0.5rem;
+    margin: 3rem auto;
+}
+.catch {
+    font-size: larger;
+}
+.border {
+    display: inline-block;
+    font-size: inherit;
+    line-height: 2.5;
+    padding: 0 2em;
+    border: 1px solid #323232;
+}
+.content .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 1rem -0.5rem 0;
+}
+.m1p2 {
+    flex: 0 0 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-bottom: 1rem;
+}
+.m2p3 {
+    flex: 0 0 50%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-bottom: 1rem;
+}
+.m2p4 {
+    flex: 0 0 50%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-bottom: 1rem;
+}
+@media screen and (min-width:768px){
+    .m1p2 {
+        flex: 0 0 50%;
+        text-align: left;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .m2p3 {
+        flex: 0 0 33.3333333%;
+        text-align: left;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .m2p4 {
+        flex: 0 0 25%;
+        text-align: left;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+/*
+    carousel
+*/
+#carousel {
+    overflow: hidden;
+}
+#carousel div.img {
+    position: relative;
+    overflow: hidden;
+}
+#carousel div.img ul {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 500%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#carousel div.img li {
+    display: block;
+    float: left;
+    width: 20%;
+}
+#carousel div.img li img {
+    width: 100%;
+}
+#carousel ul.nav {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+#carousel ul.nav li {
+    display: inline-block;
+    width: 15%;
+    height: 6px;
+    background-color: #c8c8c8;
+    margin-right: 3px;
+}
+#carousel ul.nav li.current {
+    background-color: #212121;
+}
+/*
+    menu
+*/
+#menu {
+    text-align: center;
+}
+#menu div:first-child {
+    margin-bottom: 2rem;
+}
+#menu div:last-child {
+    margin: 0 0.5rem 2rem;
+}
+#menu p {
+    font-size: 0.875rem;
+}
+#menuphoto {
+    text-align: center;
+}
+#menuphoto h3 {
+    margin: 0.5rem 0 3rem;
+}
+@media screen and (min-width:768px){
+    #menu {
+        display: flex;
+        align-items: center;
+        width: 736px;
+        margin: 0 auto 2rem;
+    }
+    #menu div:first-child {
+        flex: 1 1 256px;
+        padding-right: 2rem;
+    }
+    #menu div:last-child {
+        flex: 0 0 480px;
+        text-align: left;
+        margin: 0 0 2rem;
+    }
+    #menu h2 {
+        text-align: left;
+    }
+    #menuphoto {
+        display: flex;
+        align-items: flex-start;
+        width: 720px;
+        margin: 0 auto 2rem;
+    }
+    #menuphoto div:first-child {
+        flex: 0 0 50%;
+        text-align: right;
+        padding-right: 2rem;
+    }
+    #menuphoto div:last-child {
+        flex: 0 0 50%;
+        text-align: left;
+        padding-left: 2rem;
+    }
+}
+@media screen and (min-width:1024px){
+    #menu {
+        width: 992px;
+    }
+    #menu div:first-child {
+        flex: 1 1 512px;
+    }
+    #menuphoto {
+        width: 832px;
+    }
+}
+/*
+    About Us
+*/
+#about {
+    margin: 2rem auto 0;
+}
+#about p.no {
+    margin: 3rem 0 0;
+}
+#about h2 {
+    margin: 0;
+}
+#about p.read {
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 0;
+}
+#about p.read + div {
+    overflow: hidden;
+}

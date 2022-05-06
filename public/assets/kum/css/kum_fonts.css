@@ -1,0 +1,381 @@
+@font-face {
+  font-family: 'kum';
+  src:
+    url('fonts/view.ttf?a0h8fn') format('truetype'),
+    url('fonts/view.woff?a0h8fn') format('woff'),
+    url('fonts/view.svg?a0h8fn#view') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'kum' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-head-bic {
+  position: relative;
+}
+.icon-head-bic .path1:before {
+  content: "\e90e";
+  color: rgb(113, 112, 113);
+}
+.icon-head-bic .path2 {
+  position: absolute;
+  left: 0;
+}
+.icon-head-bic .path2:before {
+  content: "\e90f";
+  color: rgb(62, 58, 57);
+}
+.icon-head-bic .path3 {
+  position: absolute;
+  left: 0;
+}
+.icon-head-bic .path3:before {
+  content: "\e910";
+  color: rgb(35, 24, 21);
+}
+.icon-head-bic .path4 {
+  position: absolute;
+  left: 0;
+}
+.icon-head-bic .path4:before {
+  content: "\e911";
+  color: rgb(255, 255, 255);
+}
+.icon-head-contact:before {
+  content: "\e912";
+}
+.icon-head-view:before {
+  content: "\e913";
+}
+.icon-icon-apli:before {
+  content: "\e900";
+}
+.icon-icon-businessplan:before {
+  content: "\e920";
+  color: #595757;
+}
+.icon-icon-crm:before {
+  content: "\e921";
+}
+.icon-icon-economy {
+  position: relative;
+}
+.icon-icon-economy .path1:before {
+  content: "\e922";
+  color: rgb(255, 255, 255);
+}
+.icon-icon-economy .path2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-economy .path2:before {
+  content: "\e923";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-economy .path3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-economy .path3:before {
+  content: "\e924";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-economy .path4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-economy .path4:before {
+  content: "\e925";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-economy .path5 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-economy .path5:before {
+  content: "\e926";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-economy .path6 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-economy .path6:before {
+  content: "\e927";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-education:before {
+  content: "\e928";
+  color: #595757;
+}
+.icon-icon-fullsupport {
+  position: relative;
+}
+.icon-icon-fullsupport .path1:before {
+  content: "\e929";
+  color: rgb(255, 255, 255);
+}
+.icon-icon-fullsupport .path2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-fullsupport .path2:before {
+  content: "\e92a";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-fullsupport .path3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-fullsupport .path3:before {
+  content: "\e92b";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-fullsupport .path4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-fullsupport .path4:before {
+  content: "\e92c";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-funding:before {
+  content: "\e92d";
+  color: #595757;
+}
+.icon-icon-hp:before {
+  content: "\e92e";
+}
+.icon-icon-menu:before {
+  content: "\e92f";
+  color: #595757;
+}
+.icon-icon-movie:before {
+  content: "\e930";
+}
+.icon-icon-open:before {
+  content: "\e931";
+  color: #595757;
+}
+.icon-icon-phone:before {
+  content: "\e932";
+}
+.icon-icon-pos:before {
+  content: "\e933";
+}
+.icon-icon-promotiontool:before {
+  content: "\e934";
+  color: #595757;
+}
+.icon-icon-shop:before {
+  content: "\e935";
+  color: #595757;
+}
+.icon-icon-sns:before {
+  content: "\e936";
+}
+.icon-icon-standard {
+  position: relative;
+
+}
+.icon-icon-standard .path1:before {
+  content: "\e937";
+  color: rgb(255, 255, 255);
+}
+.icon-icon-standard .path2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-standard .path2:before {
+  content: "\e938";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-standard .path3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-standard .path3:before {
+  content: "\e939";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-standard .path4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-standard .path4:before {
+  content: "\e93a";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-standard .path5 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-standard .path5:before {
+  content: "\e93b";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-standard .path6 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon-icon-standard .path6:before {
+  content: "\e93c";
+  position: absolute;
+  color: rgb(88, 88, 88);
+}
+.icon-icon-Tradearea:before {
+  content: "\e93d";
+}
+.icon-zedo-about:before {
+  content: "\e901";
+}
+.icon-zedo-contact:before {
+  content: "\e902";
+}
+.icon-zedo-contents:before {
+  content: "\e903";
+}
+.icon-zedo-degitalmedia:before {
+  content: "\e904";
+}
+.icon-zedo-education:before {
+  content: "\e905";
+}
+.icon-zedo-kumsupportguideline:before {
+  content: "\e906";
+}
+.icon-zedo-management:before {
+  content: "\e907";
+}
+.icon-zedo-merchandising:before {
+  content: "\e908";
+}
+.icon-zedo-news:before {
+  content: "\e909";
+}
+.icon-zedo-openconsultation:before {
+  content: "\e90a";
+}
+.icon-zedo-promotiontool:before {
+  content: "\e90b";
+}
+.icon-zedo-salespromotion:before {
+  content: "\e90c";
+}
+.icon-zedo-works:before {
+  content: "\e90d";
+}
+.icon-auto-caseforsupport:before {
+  content: "\e941";
+}
+.icon-auto-contact:before {
+  content: "\e942";
+}
+.icon-auto-flow:before {
+  content: "\e943";
+}
+.icon-auto-newstopic:before {
+  content: "\e944";
+}
+.icon-auto-openconsultation:before {
+  content: "\e945";
+}
+.icon-auto-ourpolicy:before {
+  content: "\e946";
+}
+.icon-auto-promotiontool:before {
+  content: "\e947";
+}
+.icon-auto-recruitsupport:before {
+  content: "\e948";
+}
+.icon-auto-support:before {
+  content: "\e949";
+}
+.icon-auto-whatwecando:before {
+  content: "\e94a";
+}
+.icon-kum:before {
+  content: "\e94b";
+}
+.icon-chevron-right:before {
+  content: "\f054";
+}
+.icon-angle-right:before {
+  content: "\f105";
+}
+.icon-twitter-square:before {
+  content: "\f081";
+}
+.icon-facebook-square:before {
+  content: "\f082";
+}
+.icon-twitter:before {
+  content: "\f099";
+}
+.icon-facebook:before {
+  content: "\f09a";
+}
+.icon-pinterest:before {
+  content: "\f0d2";
+}
+.icon-pinterest-square:before {
+  content: "\f0d3";
+}
+.icon-youtube:before {
+  content: "\f167";
+}
+.icon-instagram:before {
+  content: "\f16d";
+}
+.icon-tumblr:before {
+  content: "\f173";
+}
+.icon-tumblr-square:before {
+  content: "\f174";
+}
+.icon-facebook-f:before {
+  content: "\f39e";
+}
+.icon-line:before {
+  content: "\f3c0";
+}

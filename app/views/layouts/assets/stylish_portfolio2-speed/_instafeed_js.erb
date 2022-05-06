@@ -3,7 +3,33 @@
 <%  instatk = VisualWidget.search_widget_bag_for(@website, "d2f5b169c2d15a74518c4083407e6208") %>
 <%  newinstaid = VisualWidget.search_widget_bag_for(@website, "5e858f93dc22373516283972141f0455") %>
 <%  newinstatk = VisualWidget.search_widget_bag_for(@website, "9bc3b74da9b0933d274db234bafff8f6") %>
-<%  if !newinstaid.blank? && !newinstatk.blank? && !newinstaid.data_string.blank? && !newinstatk.data_string.blank? %>
+<%  instaun = VisualWidget.search_widget_bag_for(@website, "395e033f5c1c2ef185318d0180c9488f") %>
+<%  if !instaun.blank? && !instaun.data_string.blank? %>
+<script>
+$.getJSON("/php/insta_feed9.php",
+    {id: "<%= instaun.data_string %>"},
+    function(json){
+        if ('business_discovery' in json){
+            var ig = json.business_discovery.media.data;
+            var j  = 0;
+            var ht = '';
+            for (var i = 0; i < ig.length; i++) {
+                if (ig[i].media_type != 'VIDEO'){
+                    ht += '<li class="col-1p3"><div class="imgbox"><div style="background-image:url(' + ig[i].media_url + ')"><a href="' + ig[i].permalink + '" target="_blank"><img src="' + ig[i].media_url + '" alt="' + ig[i].caption + '"></a></div></div></li>';
+                    j++;
+                }
+                if (j >= 9){
+                    break;
+                }
+            }
+        }else{
+            var ht = '<li>Error: Instagramのアカウントをプロアカウントに変更してください。</li>';
+        }
+        $("#instafeed").append(ht);
+    }
+);
+</script>
+<%  elsif !newinstaid.blank? && !newinstatk.blank? && !newinstaid.data_string.blank? && !newinstatk.data_string.blank? %>
 <script>
 $.ajax({
     type: 'GET',

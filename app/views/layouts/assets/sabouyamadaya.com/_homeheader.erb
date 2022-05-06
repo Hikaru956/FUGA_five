@@ -1,0 +1,14 @@
+<header id="homeHeader">
+    <a href="#footer" id="homeMNavOpener">
+        <span></span>
+        <span></span>
+    </a>
+    <nav id="homeGNav">
+        <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/navigation" %>
+<% unless @website.social_instagram_uri.blank? %>
+        	<li><a href="<%= @website.social_instagram_uri %>" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+<% end %>
+        </ul>
+    </nav>
+</header>

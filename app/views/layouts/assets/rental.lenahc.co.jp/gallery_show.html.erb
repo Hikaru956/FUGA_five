@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head prefix="og: https://ogp.me/ns#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<title><%= model_title(@seed) %> - <%= @website.name %></title>
+<meta name="viewport"                 content="initial-scale=1">
+<meta name="format-detection"         content="telephone=no">
+<meta name="format-detection"         content="address=no">
+<meta name="application-name"         content="swifty2">
+<meta name="Targeted Geographic Area" content="Japan">
+<meta name="generator"                content="fuga">
+<meta name="copyright"                content="<%= model_name(@website.company) %>">
+<% if request.host == 'sr2.swifty.jp' %>
+<meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="https://<%= request.host + url_for(:action=>'gallery_show', :id=>@seed) %>">
+<meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% else %>
+<meta property="article:publisher"    content="<%= model_name(@website.company) %>">
+<% end %>
+<% unless @website.custom_metas.blank? %>
+<%= raw @website.custom_metas %>
+<% end %>
+<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
+<%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
+<%
+    @favicon = @website.favicon
+    @webclip = @website.apple_touch_icon
+%>
+<% unless @favicon.blank? %>
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
+<% end %>
+<% unless @webclip.blank? %>
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
+<% end %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/rental.lenahc.co.jp/style" %>
+</head>
+<body id="gallery_show">
+<article>
+    <div class="container">
+        <div class="wrapper">
+            <div class="m1p2">
+                <div id="gallery">
+<%  @photos = @seed.photos %>
+<%  unless @photos.blank? %>
+                    <ul>
+<%      @photos.each do | photo | %>
+                        <li>
+                            <img src="<%= photo.clip.url() %>" alt="">
+<%          unless photo.info.blank? %>
+                            <div class="caption"><%=h photo.info%></div>
+<%          end %>
+                        </li>
+<%      end %>
+                    </ul>
+                    <div id="gallery_prev"><div></div></div>
+                    <div id="gallery_next"><div></div></div>
+<%  else %>
+                    <ul>
+                        <li><img src="//placehold.jp/500x670.png?text=No Photo"></li>
+                    </ul>
+<%  end %>
+                </div>
+            </div>
+            <div class="m1p2">
+                <h1 class="staff"><%= model_title(@seed) %></h1>
+<% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+                <div class="publish">
+                    <i class="pico-user"></i> <a href="<%= url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>
+                </div>
+<% end %>
+<% unless @seed.description.blank? %>
+                <div class="contents">
+                    <%= raw @seed.description %>
+                </div>
+<% end %>
+            </div>
+        </div>
+    </div>
+</article>
+<%= render :partial=>"#{LayoutScheme.asset_root}/rental.lenahc.co.jp/common" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/rental.lenahc.co.jp/common_js" %>
+<script src="/assets/rental.lenahc.co.jp/js/gallery.js?v=0"></script>
+</body>
+</html>
