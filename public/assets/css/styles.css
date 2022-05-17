@@ -7,9 +7,9 @@
         url('http://localhost:3000/assets/font/view.woff?d0jc49') format('woff'),
         url('http://localhost:3000/assets/font/view.svg?d0jc49#view') format('svg'),
         url('https://speed.956.jp/assets/font/view.woff?d0jc49') format('woff'),
-        url('https://speed.956.jp/assets/font/view.svg?d0jc49#view') format('svg'),
-        url('https://www.view.jpn.com/assets/font/view.woff?d0jc49') format('woff'),
-        url('https://www.view.jpn.com/assets/font/view.svg?d0jc49#view') format('svg');
+        url('https://speed.956.jp/assets/font/view.svg?d0jc49#view') format('svg');
+        /* url('https://www.view.jpn.com/assets/font/view.woff?d0jc49') format('woff'), */
+        /* url('https://www.view.jpn.com/assets/font/view.svg?d0jc49#view') format('svg'); */
     font-weight: normal;
     font-style: normal;
     font-display: block;
