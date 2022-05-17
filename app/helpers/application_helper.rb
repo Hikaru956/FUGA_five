@@ -262,6 +262,7 @@ EOF
     html = ''
     unless shop.social_hotpepper_beauty_uri.blank?
       uri = shop.social_hotpepper_beauty_uri
+      html += '<li>'
       html += '<a href="'+ (uri +'" ')+ 'target="_blank" title=#{uri}>'
       if small
         html += '<img src="/images/assets/hotpepperlogosmall.png" alt="HOT PEPPER Beauty" style="'+style_code+'"/>'
@@ -269,6 +270,7 @@ EOF
         html += '<img src="/images/assets/hotpepperlogo.png" alt="HOT PEPPER Beauty" />'
       end
       html += '</a>'
+      html += '</li>'
     end
     html.html_safe
   end
@@ -294,6 +296,7 @@ EOF
     html = ''
     unless shop.social_youtube_uri.blank?
       uri = shop.social_youtube_uri
+      html += '<li>'
       if small
         html += '<a href="'+ (uri +'" ')+ 'target="_blank">'
         html += '<i class="icon-youtube-play icon-2x"></i>'
@@ -302,6 +305,7 @@ EOF
         html += '<span style="color: red;"><i class="fa fa-youtube-play"></i><span>'
       end
       html += '</a>'
+      html += '</li>'
     end
     html.html_safe
   end
