@@ -69,7 +69,7 @@
                     <h2><a href="<%= page_url %>"><%= model_title(leaf) %></a></h1>
                     <p class="publish"><i class="far fa-calendar-alt"></i> <time><%= publish %></time></p>
                     <p>
-                        <%= raw truncate(strip_tags(leaf.description), :length=>200) %>
+                        <%= raw truncate(strip_tags(leaf.description), :length=>200) unless leaf.description.blank? %>
                     </p>
                     <div class="text-center">
                         <a href="<%= page_url %>">

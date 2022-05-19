@@ -59,7 +59,7 @@
                             <div class="col-2p3">
                                 <div class="col-in2">
                                     <h2><a href="<%= page_url %>"><%= model_title(leaf) %></a></h2>
-                                    <div><%= raw truncate(strip_tags(leaf.description), :length=>200) %></div>
+                                    <div><%= raw truncate(strip_tags(leaf.description), :length=>200) unless leaf.description.blank? %></div>
                                 </div>
                             </div>
                         </li>

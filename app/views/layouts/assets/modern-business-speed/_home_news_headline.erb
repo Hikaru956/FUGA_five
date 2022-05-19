@@ -26,7 +26,7 @@
 				<% end %>
 	        </p>
 	        <p>
-	        	<%= h truncate(strip_tags(latest_leaf.description).gsub('&nbsp;', ' '), :length=>200) %>
+	        	<%= h truncate(strip_tags(latest_leaf.description).gsub('&nbsp;', ' '), :length=>200) unless latest_leaf.description.blank?%>
 	        </p>
 		    <p>
 		        <a href="<%= url_for(:action=>'news_show', :id=>latest_leaf, :wkey=>@website.wsite_hash_key) %>" class="btn btn-primary">Read</a>

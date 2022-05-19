@@ -23,7 +23,7 @@
                 <% end %>
                         </div>
                         <p class="headline_text">
-                            <%= h truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>200) %>
+                            <%= h truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>200) unless @leaf.description.blank?%>
                         </p>
                     </div>
                 </div>

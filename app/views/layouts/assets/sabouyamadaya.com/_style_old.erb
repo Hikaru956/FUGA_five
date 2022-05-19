@@ -1,0 +1,9 @@
+<% bkimg = VisualWidget.search_widget_bag_for(@website, "f75c22ae6a1dd7eeddae35b718c36221") %>
+<link rel="stylesheet" href="/assets/sabouyamadaya.com/css/style.css?v=8">
+<% if !bkimg.blank? && bkimg.is_valid? %>
+<style>
+#homeVis {
+    background-image: url("<%= bkimg.photos[0].clip.url %>");
+}
+</style>
+<% end %>

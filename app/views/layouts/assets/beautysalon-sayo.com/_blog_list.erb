@@ -72,7 +72,7 @@
 <% end %>
                                     <i class="fa fa-calendar"></i> <%= publish_label(leaf) %>
                                 </p>
-                                <p><%= raw truncate(strip_tags(leaf.description), :length=>200) %></p>
+                                <p><%= raw truncate(strip_tags(leaf.description), :length=>200) unless leaf.description.blank? %></p>
                             </div>
                         </div>
                     </li>

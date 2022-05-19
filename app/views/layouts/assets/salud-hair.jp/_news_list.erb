@@ -41,7 +41,7 @@
                                 <div>
                                     <p class="publish"><%= publish %></p>
                                     <h2><%= model_title(leaf) %></h2>
-                                    <p class="summary"><%= raw truncate(strip_tags(leaf.description), :length=>200) %></p>
+                                    <p class="summary"><%= raw truncate(strip_tags(leaf.description), :length=>200) unless leaf.description.blank? %></p>
                                     <div class="text-right">
                                         <span class="more">MORE</span>
                                     </div>

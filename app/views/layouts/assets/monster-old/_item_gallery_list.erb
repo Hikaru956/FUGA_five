@@ -16,7 +16,7 @@
         	<%= truncate(model_title(temp_local), :length=>50) %>
 			</a>
 		</h4>
-		<p><%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>30) %></p>
+		<p><%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>30) unless temp_local.description.blank?%></p>
         <p>
 			<% unless temp_local.staff.blank? || temp_local.staff.staff_status==Staff::STAFF_BLOCKED %>
 				by

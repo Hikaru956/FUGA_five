@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-2p3">
                             <p class="publish"><i class="fa fa-calendar"></i> <%= publish %></p>
-                            <p class="plain"><%= raw truncate(strip_tags(leaf.description), :length=>200) %></p>
+                            <p class="plain"><%= raw truncate(strip_tags(leaf.description), :length=>200) unless leaf.description.blank? %></p>
                         </div>
                     </li>
 <%          end %>

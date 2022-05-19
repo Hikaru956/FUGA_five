@@ -24,7 +24,7 @@
         	<% unless @leaf.description_3.blank? %>
  	           <%= h @leaf.description_3 %>
         	<% else %>
- 	           <%= h truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>100) %>
+ 	           <%= h truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>100) unless @leaf.description.blank?%>
            <% end %>
         </p>
         <a class="btn btn-primary" href="<%= link_url %>">Read More <i class="icon-angle-right"></i></a>

@@ -32,13 +32,13 @@
     <% unless temp_local.description_3.blank? %>
     <p>
         <!-- 記事ヘッドライン -->
-        <%= h truncate(strip_tags(temp_local.description_3).gsub('&nbsp;', ' '), :length=>200) %>
+        <%= h truncate(strip_tags(temp_local.description_3).gsub('&nbsp;', ' '), :length=>200) unless temp_local.description_3.blank?%>
     </p>
     <% end %>
     <% unless temp_local.description.blank? %>
     <p>
         <!-- 記事本文 -->
-        <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>200) %>
+        <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>200) unless temp_local.description.blank?%>
     </p>
     <div>
         <!-- 記事本文 -->

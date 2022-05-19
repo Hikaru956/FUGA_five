@@ -40,7 +40,7 @@
                     </div></div>
                     <p class="publish"><%= publish %></p>
                     <h2><a href="<%= page_url %>"><%= model_title(leaf) %></a></h2>
-                    <p class="text"><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>48) %></p>
+                    <p class="text"><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>48) unless leaf.description.blank?%></p>
                     <p><a href="<%= page_url %>">Read</a></p>
                 </div>
             </li>

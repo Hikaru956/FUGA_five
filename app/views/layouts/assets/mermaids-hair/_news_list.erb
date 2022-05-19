@@ -55,7 +55,7 @@
                             <div class="col-5p6s">
                                 <h1><a href="<%= page_url %>"><%= model_title(leaf) %></a></h1>
                                 <p class="publish"><i class="fa fa-calendar"></i> <%= publish %></p>
-                                <div><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>200) %></div>
+                                <div><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>200) unless leaf.description.blank?%></div>
                             </div>
                         </li>
 <%          end %>

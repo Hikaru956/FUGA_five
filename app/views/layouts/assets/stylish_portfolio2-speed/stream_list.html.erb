@@ -134,7 +134,7 @@
                                 <div class="col-2p3">
                                     <h1><a href="<%= content_url %>"><%= h model_title(@leaf) %></a></h1>
                                     <p class="publish"><i class="fa fa-calendar"></i> <%= publish_label(@leaf) %></p>
-                                    <p class="plain"><%= raw truncate(strip_tags(@leaf.description), :length=>150) %></p>
+                                    <p class="plain"><%= raw truncate(strip_tags(@leaf.description), :length=>150) unless @leaf.description.blank? %></p>
                                 </div>
                             </li>
 <%  end %>

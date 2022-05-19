@@ -21,7 +21,7 @@
             <i class="icon-time"></i>&nbsp;<%= publish_label(@leaf) %>
         </p>
         <p>
-            <%= h  truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>100) %>
+            <%= h  truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>100) unless @leaf.description.blank?%>
         </p>
         <a class="btn btn-primary" href="<%= link_url %>">Read More <i class="icon-angle-right"></i></a>
     </div>

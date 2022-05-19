@@ -79,7 +79,7 @@
                                     <div class="col-in">
                                         <h2><a href="<%= content_url %>"><%= h model_title(@leaf) %></a></h2>
                                         <p class="publish"><i class="fa fa-calendar"></i> <%= publish_label(@leaf) %></p>
-                                        <p class="description"><%= raw truncate(strip_tags(@leaf.description), :length=>150) %></p>
+                                        <p class="description"><%= raw truncate(strip_tags(@leaf.description), :length=>150) unless @leaf.description.blank? %></p>
                                         <p class="button_link">
                                             <a class="link_button" href="<%= content_url %>">
                                                 続きを読む <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>

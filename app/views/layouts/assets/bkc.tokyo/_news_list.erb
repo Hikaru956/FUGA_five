@@ -61,7 +61,7 @@
                                     <div>
                                         <h1 class="none-margin-top-bottom"><a href="<%= page_url %>"><%= model_title(leaf) %></a></h1>
                                         <p class="publish"><i class="fa fa-calendar"></i> <%= publish %></p>
-                                        <div><%= raw truncate(strip_tags(leaf.description), :length=>200) %></div>
+                                        <div><%= raw truncate(strip_tags(leaf.description), :length=>200) unless leaf.description.blank? %></div>
                                     </div>
                                 </div>
                             </li>

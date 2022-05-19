@@ -37,7 +37,7 @@
                                     <div class="col-2p3">
                                         <h1><a href="<%= link_url %>"><%= model_title(leaf) %></a></h1>
                                         <div class="cat"><%= model_name(leaf.content_category) %> <i class="fa fa-calendar"></i> <%= leaf.publish_from.strftime("%Y-%m-%d") %></div>
-                                        <p><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>200) %></p>
+                                        <p><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>200) unless leaf.description.blank?%></p>
                                     </div>
                                 </li>
    <% end %>

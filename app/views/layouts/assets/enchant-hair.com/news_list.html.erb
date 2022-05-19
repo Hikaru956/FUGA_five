@@ -104,7 +104,7 @@
                             <i class="far fa-calendar-alt"></i> <time><%= publish_label(@leaf) %></time>
                         </p>
                         <p>
-                            <%= raw truncate(strip_tags(@leaf.description), :length=>150) %>
+                            <%= raw truncate(strip_tags(@leaf.description), :length=>150) unless @leaf.description.blank? %>
                         </p>
                         <div class="text-center">
                             <a href="<%= content_url %>">

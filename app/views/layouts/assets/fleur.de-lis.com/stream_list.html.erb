@@ -118,7 +118,7 @@
 					<div class="col-m1p23">
                     	<h1><a href="<%= content_url %>"><%= h model_title(@leaf) %></a></h1>
 						<p class="date"><i class="icon-edit"></i> <%= publish_label(@leaf) %></p>
-						<p><%= raw truncate(strip_tags(@leaf.description), :length=>150) %></p>
+						<p><%= raw truncate(strip_tags(@leaf.description), :length=>150) unless @leaf.description.blank? %></p>
 					</div>
                 </li>
 <%  end %>

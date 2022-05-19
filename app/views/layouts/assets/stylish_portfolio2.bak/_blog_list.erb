@@ -63,7 +63,7 @@
 <% end %>
                                 <i class="fa fa-calendar"></i> <%= publish %>
                             </p>
-                            <p class="plain"><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>200) %></p>
+                            <p class="plain"><%= h truncate(strip_tags(leaf.description).gsub('&nbsp;', ' '), :length=>200) unless leaf.description.blank?%></p>
                         </div>
                     </li>
 <%          end %>

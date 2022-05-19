@@ -1,0 +1,17 @@
+<% logo = VisualWidget.search_widget_bag_for(@website, "e93526dac54e497bb09c909681f0e0a0") %>
+<% shop = VisualWidget.search_widget_bag_for(@website, "0deba3cb437400f9052396a257a66bda") %>
+<aside id="homeVis">
+<% if !logo.blank? && logo.is_valid? %>
+    <h1 id="mainLogo">
+        <img src="<%= logo.photos[0].clip.url() %>" alt="茶房やまだ屋ロゴ">
+    </h1>
+<% end %>
+<% if !shop.blank? && shop.is_valid? %>
+    <div id="mainShop">
+        <a href="<%= shop.data_string %>" target="_blank">
+            <span>ONLINE SHOP</span>
+            茶房やまだ屋 オンラインショップ
+        </a>
+    </div>
+<% end %>
+</aside>

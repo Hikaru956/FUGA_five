@@ -17,7 +17,7 @@
         	<%= truncate(model_title(temp_local), :length=>50) %>
 			</a>
 		</h4>
-		<p><%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>50) %></p>
+		<p><%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>50) unless temp_local.description.blank? %></p>
         <a class="btn btn-primary" href="<%= link_url %>">Read More <i class="icon-angle-right"></i></a>
     </div>    	
 </div>

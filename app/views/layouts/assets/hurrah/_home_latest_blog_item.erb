@@ -34,7 +34,7 @@
     <!-- 記事ヘッドライン -->
 <% unless temp_local.description_3.blank? %>
     <p class="latest_text">
-        <%= h truncate(strip_tags(temp_local.description_3).gsub('&nbsp;', ' '), :length=>100) %>
+        <%= h truncate(strip_tags(temp_local.description_3).gsub('&nbsp;', ' '), :length=>100) unless temp_local.description_3.blank?%>
     </p>
 <% end %>
 <% if false %>
@@ -42,7 +42,7 @@
     <% unless temp_local.description.blank? %>
     <p>
         <!-- 記事本文クリアテキスト -->
-        <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>200) %>
+        <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>200) unless temp_local.description.blank?%>
     </p>
     <div>
         <!-- 記事本文生HTMLタグ付き -->

@@ -6,7 +6,7 @@
 				<i class="icon-folder-close"></i>
 	        	<%= truncate(temp_local.title, :length=>50) %>
 			</h4>
-			<p><%= h truncate(strip_tags(temp_local.description), :length=>20) %></p>
+			<p><%= h truncate(strip_tags(temp_local.description), :length=>20) unless temp_local.description.blank?%></p>
 	    </div>
 	</div>
 </a>

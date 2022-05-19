@@ -58,7 +58,7 @@
                                 <div class="col-2p3">
                                     <h1><a href="<%= page_url %>"><%= model_title(leaf) %></a></h1>
                                     <p class="publish"><i class="fa fa-calendar"></i> <%= publish %></p>
-                                    <div><%= raw truncate(strip_tags(leaf.description), :length=>200) %></div>
+                                    <div><%= raw truncate(strip_tags(leaf.description), :length=>200) unless leaf.description.blank? %></div>
                                 </div>
                             </li>
 <%          end %>

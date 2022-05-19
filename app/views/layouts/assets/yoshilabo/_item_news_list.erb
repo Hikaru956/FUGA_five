@@ -21,6 +21,6 @@
                                     <div class="cat">
                                         <i class="fa fa-calendar"></i> <%= publish_label(@leaf) %>
                                     </div>
-                                    <p><%= h  truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>200) %></p>
+                                    <p><%= h  truncate(strip_tags(@leaf.description).gsub('&nbsp;', ' '), :length=>200) unless @leaf.description.blank?%></p>
                                 </div>
                             </li>

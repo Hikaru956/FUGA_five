@@ -15,7 +15,7 @@
 	    <h2><%= latest_leaf.publish_from.strftime("%Y-%m-%d") %></h2>
 	    <div>
 	        <p>
-	        	<%= h truncate(strip_tags(latest_leaf.description).gsub('&nbsp;', ' '), :length=>200) %>
+	        	<%= h truncate(strip_tags(latest_leaf.description).gsub('&nbsp;', ' '), :length=>200) unless latest_leaf.description.blank?%>
 	            <a href="<%= url_for(:action=>'news_show', :id=>latest_leaf,	:wkey=>@website.wsite_hash_key) %>" class="link-1">Read</a>
 	        </p>
 	    </div>

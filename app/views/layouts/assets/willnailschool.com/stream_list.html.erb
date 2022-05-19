@@ -109,7 +109,7 @@
             <div class="col-inner">
               <h2><a href="<%= content_url %>"><%= h model_title(@leaf) %></a></h2>
               <p class="publish"><i class="fas fa-calendar-alt"></i> <%= publish_label(@leaf) %></p>
-              <p><%= raw truncate(strip_tags(@leaf.description), :length=>150) %></p>
+              <p><%= raw truncate(strip_tags(@leaf.description), :length=>150) unless @leaf.description.blank? %></p>
             </div>
           </div>
         </div>

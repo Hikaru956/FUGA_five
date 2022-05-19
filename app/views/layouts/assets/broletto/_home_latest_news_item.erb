@@ -6,7 +6,7 @@
 </a>
 <p>
     <h5><%= model_title(temp_local) %></h5>
-    <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>100) %>
+    <%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>100) unless temp_local.description.blank?%>
     <a href="<%= url_for(:action=>'news_show', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>" class="link-1">Read</a>
 </p>
 </div>

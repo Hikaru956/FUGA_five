@@ -245,16 +245,18 @@ EOF
     newer = leaf.next_leaf(leaf)
     return nil if older.blank? && newer.blank?
     
-    html = '<h6>'
+    html = '<br/><div  style="font-size:medium;">'
     unless older.blank?
+        html += '<span>'
         html += link_to('<< 前の記事', :action=>params[:action], :id=>older, :wkey=>leaf.shop.wsite_hash_key)
-    end
-    unless newer.blank?
-        html += '<span class="pull-right">'
-        html += link_to('>> 次の記事', :action=>params[:action], :id=>newer, :wkey=>leaf.shop.wsite_hash_key)
         html += '</span>'
     end
-    html += '</h6><br/>'
+    unless newer.blank?
+        html += '<span style="float: right !important;">'
+        html += link_to('次の記事 >>', :action=>params[:action], :id=>newer, :wkey=>leaf.shop.wsite_hash_key)
+        html += '</span>'
+    end
+    html += '</div><br/>'
     html.html_safe
   end
 

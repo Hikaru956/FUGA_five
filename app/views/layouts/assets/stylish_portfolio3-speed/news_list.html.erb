@@ -114,7 +114,7 @@
 								<i class="pico-calendar-alt"></i> <%= publish %>
 							</span>
 						</p>
-						<p><%= raw truncate(strip_tags(@leaf.description), :length=>84) %></p>
+						<p><%= raw truncate(strip_tags(@leaf.description), :length=>84) unless @leaf.description.blank? %></p>
 						<p class="viewmore">
 							<a href="<%= content_url %>">
 								<img src="/images/assets/share/read_more.png">

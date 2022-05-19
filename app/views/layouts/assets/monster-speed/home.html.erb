@@ -2,23 +2,23 @@
 <html lang="ja">
     <head>
 		<title>ホーム - <%= @website.name %></title>
-        <%= render :partial=>"#{LayoutScheme.asset_root}/monster/head_logic" %>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/head_logic" %>
     </head>
     <body>
         <div class="spinner">
         </div>
         <!--============================== header =================================-->
         <header>
-	        <%= render :partial=>"#{LayoutScheme.asset_root}/monster/header" %>
+	        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/header" %>
         </header>
         <div class="bg-content">
             <div class="container">
                 <div class="row">
                     <div class="span12">
                         <!--============================== slider =================================-->
-						<%= render :partial=>"#{LayoutScheme.asset_root}/monster/home_slider"%>
+						<%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/home_slider"%>
                         <span id="responsiveFlag"></span>
-						<%= render :partial=>"#{LayoutScheme.asset_root}/monster/home_news_headline"%>
+						<%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/home_news_headline"%>
                     </div>
                 </div>
             </div>
@@ -29,17 +29,17 @@
                 <div class="row-1">
                     <div class="container">
                         <div class="row">
-                        	<%= render :partial=>"#{LayoutScheme.asset_root}/monster/home_gallery_list" %>
+                        	<%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/home_gallery_list" %>
                         </div>
                     </div>
                 </div>
                 <div class="container">
                     <div class="row">
                         <article class="span6">
-                        	<%= render :partial=>"#{LayoutScheme.asset_root}/monster/home_shop_info"%>
+                        	<%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/home_shop_info"%>
                         </article>
                         <article class="span6">
-                        	<%= render :partial=>"#{LayoutScheme.asset_root}/monster/home_latest_blogs" %>
+                        	<%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/home_latest_blogs" %>
                         </article>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
         </div>
         <!--============================== footer =================================-->
         <footer>
-	        <%= render :partial=>"#{LayoutScheme.asset_root}/monster/footer" %>
+	        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/footer" %>
         </footer>
     </body>
 </html>
