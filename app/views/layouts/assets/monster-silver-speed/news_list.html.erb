@@ -2,14 +2,14 @@
 <html lang="ja">
     <head>
         <title><%=model_name(@seed) %>- <%= @website.name %></title>
-        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/head_logic" %>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver-speed/head_logic" %>
     </head>
     <body>
         <div class="spinner">
         </div>
         <!--============================== header =================================-->
         <header>
-            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/header" %>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver-speed/header" %>
         </header>
 <% if request.host == 'www.bond-of-mondo.com' %>
         <div>
@@ -84,7 +84,7 @@
                                 #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'publish_from desc')
                                 %>
                                 <% @leafs.each do | leaf | @leaf = leaf %>
-                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/item_news_list" %>
+                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver-speed/item_news_list" %>
                                 <% end %>
                                 <div class="row">
                                     <div class="span12">

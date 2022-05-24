@@ -20,6 +20,12 @@ class DashboardController < ApplicationController
   layout  "fuga"
 
   def index
+    unless params[:wkey].blank?
+      return redirect_to :controller=>"bs_renderer", :action=>"home", :wkey=>params[:wkey]
+    end
+      p '■　■　■'
+      p params[:wkey]
+      p '■　■　■'
     return redirect_to :action=>"company_index"
   end
   

@@ -2,14 +2,14 @@
 <html lang="ja">
     <head>
         <title><%= model_name(@seed) %>- <%= @website.name %></title>
-        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/head_logic" %>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver-speed/head_logic" %>
     </head>
     <body>
         <div class="spinner">
         </div>
         <!--============================== header =================================-->
         <header>
-            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/header" %>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver-speed/header" %>
         </header>
 <% if request.host == 'www.bond-of-mondo.com' %>
         <div>
@@ -139,7 +139,7 @@
                 </div>
 
 				<% unless MAKE_SECRET_FUGA_OPTION %>
-					<% if @website.option_attendance_management %><%= render :partial=>'#{LayoutScheme.asset_root}/monster-silver/staff_attendances' %><% end%>
+					<% if @website.option_attendance_management %><%= render :partial=>'#{LayoutScheme.asset_root}/monster-silver-speed/staff_attendances' %><% end%>
 				<% end %>
 
             </div>

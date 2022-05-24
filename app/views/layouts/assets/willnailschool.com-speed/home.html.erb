@@ -63,11 +63,11 @@
 <link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <script src="https://kit.fontawesome.com/7e454da5c1.js" crossorigin="anonymous"></script>
-<%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com/style" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com-speed/style" %>
 </head>
 <body id="body">
   <div id="main">
-    <%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com/header" %>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com-speed/header" %>
     <aside id="pagegraphic">
       <img src="/images/assets/willnailschool.com/top_header.jpg" alt="ページグラフィック">
     </aside>
@@ -90,8 +90,8 @@
         <div id="instafeed" class="wrapper">
         </div>
     </div>
-<%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com/footinfo" %>
-<%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com/footer" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com-speed/footinfo" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com-speed/footer" %>
   </div><!-- #main -->
   <div id="goTop"><i class="fas fa-angle-up"></i></div>
   <div id="mNav">
@@ -100,12 +100,12 @@
     </div>
     <div class="scrollWrap">
       <ul class="scroller">
-        <%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com/navigation" %>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com-speed/navigation" %>
         <li><a href="https://form.willnailschool.com/index.html" target="_blank">お問い合わせ</a></li>
       </ul>
     </div>
   </div>
-  <%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com/common_js" %>
+  <%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com-speed/common_js" %>
   <!-- page specific javascript -->
     <script>
 $.getJSON("/php/insta_feed9.php",
@@ -147,6 +147,6 @@ $.getJSON("/php/insta_feed9.php",
 */
     </script>
   <!-- social net javascript -->
-  <%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com/social_js" %>
+  <%= render :partial=>"#{LayoutScheme.asset_root}/willnailschool.com-speed/social_js" %>
 </body>
 </html>

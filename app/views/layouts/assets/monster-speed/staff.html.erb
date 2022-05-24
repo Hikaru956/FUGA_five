@@ -2,14 +2,14 @@
 <html lang="ja">
     <head>
         <title><%= model_name(@seed) %>- <%= @website.name %></title>
-        <%= render :partial=>"#{LayoutScheme.asset_root}/monster/head_logic" %>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/head_logic" %>
     </head>
     <body>
         <div class="spinner">
         </div>
         <!--============================== header =================================-->
         <header>
-            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/header" %>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/header" %>
         </header>
         <div class="bg-content">
             <!--============================== content =================================-->
@@ -110,17 +110,17 @@
                                         <ul class="thumbnails thumbnails-1">
                                             <li class="span4">
                                                 <% if @lines.size>=1 %>
-                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_gallery_photo", :locals => {:temp_local => @lines[0]} %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/item_gallery_photo", :locals => {:temp_local => @lines[0]} %>
                                                 <% end %>
                                             </li>
                                             <li class="span4">
                                                 <% if @lines.size>=2 %>
-                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_gallery_photo", :locals => {:temp_local => @lines[1]} %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/item_gallery_photo", :locals => {:temp_local => @lines[1]} %>
                                                 <% end %>
                                             </li>
                                             <li class="span4">
                                                 <% if @lines.size>=3 %>
-                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster/item_gallery_photo", :locals => {:temp_local => @lines[2]} %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/item_gallery_photo", :locals => {:temp_local => @lines[2]} %>
                                                 <% end %>
                                             </li>
                                         </ul>
@@ -134,13 +134,13 @@
                 </div>
 
 				<% unless MAKE_SECRET_FUGA_OPTION %>
-					<% if @website.option_attendance_management %><%= render :partial=>'#{LayoutScheme.asset_root}/monster/staff_attendances' %><% end%>
+					<% if @website.option_attendance_management %><%= render :partial=>'#{LayoutScheme.asset_root}/monster-speed/staff_attendances' %><% end%>
 				<% end %>
             </div>
         </div>
         <!--============================== footer =================================-->
         <footer>
-            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/footer" %>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/footer" %>
         </footer>
     </body>
 </html>

@@ -2,14 +2,14 @@
 <html lang="ja">
     <head>
         <title><%= model_title(@seed) %>- <%= @website.name %></title>
-        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/head_logic" %>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver-speed/head_logic" %>
     </head>
     <body>
         <div class="spinner">
         </div>
         <!--============================== header =================================-->
         <header>
-            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/header" %>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver-speed/header" %>
         </header>
 <% if request.host == 'www.bond-of-mondo.com' %>
         <div>
@@ -87,17 +87,17 @@
                                         <ul class="thumbnails thumbnails-1">
                                             <li class="span4">
                                                 <% if @lines.size>=1 %>
-                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/item_portfolio_photo", :locals => {:temp_local => @lines[0]} %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver-speed/item_portfolio_photo", :locals => {:temp_local => @lines[0]} %>
                                                 <% end %>
                                             </li>
                                             <li class="span4">
                                                 <% if @lines.size>=2 %>
-                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/item_portfolio_photo", :locals => {:temp_local => @lines[1]} %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver-speed/item_portfolio_photo", :locals => {:temp_local => @lines[1]} %>
                                                 <% end %>
                                             </li>
                                             <li class="span4">
                                                 <% if @lines.size>=3 %>
-                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver/item_portfolio_photo", :locals => {:temp_local => @lines[2]} %>
+                                                <%= render :partial=>"#{LayoutScheme.asset_root}/monster-silver-speed/item_portfolio_photo", :locals => {:temp_local => @lines[2]} %>
                                                 <% end %>
                                             </li>
                                         </ul>

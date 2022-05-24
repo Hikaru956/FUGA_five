@@ -2,14 +2,14 @@
 <html lang="ja">
     <head>
         <title><%= model_title(@seed) %> - <%= @website.name %></title>
-        <%= render :partial=>"#{LayoutScheme.asset_root}/monster/head_logic" %>
+        <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/head_logic" %>
     </head>
     <body>
         <div class="spinner">
         </div>
         <!--============================== header =================================-->
         <header>
-            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/header" %>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/header" %>
         </header>
         <div class="bg-content">
             <!--============================== content =================================-->
@@ -189,7 +189,7 @@
         </div>
         <!--============================== footer =================================-->
         <footer>
-            <%= render :partial=>"#{LayoutScheme.asset_root}/monster/footer" %>
+            <%= render :partial=>"#{LayoutScheme.asset_root}/monster-speed/footer" %>
         </footer>
     </body>
 </html>
