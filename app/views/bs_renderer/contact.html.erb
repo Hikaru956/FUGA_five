@@ -151,20 +151,20 @@
 
 
 <% if @website.gps? %>
-<script>
-    		    var latlng = new google.maps.LatLng(<%= @website.lat %>, <%= @website.lng %>);
-    		    var options = {
-    		        zoom: 14,
-    		        center: latlng,
-    		        mapTypeId: google.maps.MapTypeId.ROADMAP
-    		    }
-    		    var map = new google.maps.Map(document.getElementById('map'), options);
-    			
-    			var shop_marker; 
-    		    shop_marker = new google.maps.Marker({
-    		        position:latlng,
-    		        map: map
-    		    });
-    		
-</script>
+	<script>
+		var latlng = new google.maps.LatLng(<%= @website.lat %>, <%= @website.lng %>);
+		var options = {
+			zoom: 14,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		var map = new google.maps.Map(document.getElementById('map'), options);
+
+		var shop_marker;
+		shop_marker = new google.maps.Marker({
+			position:latlng,
+			map: map
+		});
+
+	</script>
 <% end %>
