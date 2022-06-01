@@ -9,7 +9,7 @@
 #
 
 class BsRendererController < ApplicationController
-  before_action :authenticate_user!, except: :home
+  #before_action :authenticate_user!, except: :home
   before_action :session_operation
   before_action :config_x_xss_protection
   
