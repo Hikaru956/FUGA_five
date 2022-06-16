@@ -1,0 +1,17 @@
+<%  main_logo = VisualWidget.search_widget_bag_for(@website, "0587c6108a1aa937f68fe65c704d158d") %>
+<%  bk_slider = VisualWidget.search_widget_bag_for(@website, "5626a5caea6d4f4971d41f5151e86003") %>
+<article id="carousel">
+<%  if !bk_slider.blank? && bk_slider.is_valid? %>
+	<ul id="carouselback">
+<%    bk_slider.photos.each do | photo | %>
+		<li><img src="<%= photo.clip.url() %>" alt=""></li>
+<%    end %>
+	</ul>
+<%  end %>
+    <div id="header">
+<%  if !main_logo.blank? && main_logo.is_valid? %>
+	<img src="<%= main_logo.photos[0].clip.url() %>" alt="logo">
+    <div id="navopner"></div>
+<%  end %>
+    </div>
+</article>

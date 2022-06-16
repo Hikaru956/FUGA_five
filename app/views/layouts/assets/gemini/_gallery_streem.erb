@@ -19,7 +19,7 @@
                     <ul class="wrapper">
 <%
             gallery_bags.each do | leaf |
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     page_url  = url_for(:action=>'gallery_list', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 else
                     page_url  = url_for(:action=>'gallery_list', :id=>leaf)

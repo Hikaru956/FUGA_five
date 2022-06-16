@@ -1,0 +1,8 @@
+<%  @fix = @website.content_leafs.find_by_id(34507); %>
+<%  if !@fix.blank?%>
+<%      unless @fix.description.blank? %>
+<aside>
+<%=         raw @fix.description %>
+</aside>
+<%     end %>
+<%  end %>

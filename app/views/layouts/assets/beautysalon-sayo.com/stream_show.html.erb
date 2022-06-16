@@ -12,7 +12,7 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator"                content="fuga">
 <meta name="author"                   content="<%= model_name(@website.company) %>">
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
 <meta name="robots"                   content="noindex,nofollow">
 <% else %>
 <meta property="og:type"              content="article">
@@ -66,7 +66,7 @@
                     <h1 class="h1"><%= model_title(@seed) %></h1>
                     <p class="publish">
 <% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <i class="fa fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff, :wkey=>@website.wsite_hash_key) %>"><%= h model_name(@seed.staff) %></a>
 <%      else %>
                         <i class="fa fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>

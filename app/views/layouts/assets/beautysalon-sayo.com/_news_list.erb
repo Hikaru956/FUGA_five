@@ -30,7 +30,7 @@
 <%      unless latest_leafs.blank? %>
         <article id="newsList">
             <div class="container">
-<%          if request.host == 'sr2.swifty.jp' %>
+<%          if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="h1"><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id %></h1>
 <%          else %>
                 <h1 class="h1"><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id %></h1>
@@ -38,7 +38,7 @@
                 <ul class="wrapper">
 <%
             latest_leafs.each do | leaf |
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 else
                     page_url  = url_for(:action=>'news_show', :id=>leaf)

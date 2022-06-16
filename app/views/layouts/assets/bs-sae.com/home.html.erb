@@ -44,7 +44,7 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="website">
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
 <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
 <meta property="og:url"               content="https://<%= request.host %>/home">

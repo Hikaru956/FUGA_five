@@ -27,13 +27,13 @@
 %>
 <%      unless latest_leafs.blank? %>
                 <aside id="style">
-<%          if request.host == 'sr2.swifty.jp' %>
+<%          if true || request.host == 'sr2.swifty.jp' %>
                     <h3 class="en"><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id, :wkey=>@website.wsite_hash_key %> <span>最新のヘアスタイル集です</span></h3>
 <%          else %>
                     <h3 class="en"><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id %> <span>最新のヘアスタイル集です</span></h3>
 <%          end %>
                     <ul id="style_category">
-<%          if request.host == 'sr2.swifty.jp' %>
+<%          if true || request.host == 'sr2.swifty.jp' %>
                         <li><a href="/galleries?id=92&wkey=08ebd0bbcad881d718362fef54ee81e8">SHORT</a></li>
                         <li><a href="/galleries?id=11&wkey=08ebd0bbcad881d718362fef54ee81e8">MEDIUM</a></li>
                         <li><a href="/galleries?id=93&wkey=08ebd0bbcad881d718362fef54ee81e8">LONG</a></li>
@@ -52,7 +52,7 @@
                     <ul id="style_list" class="wrapper">
 <%
             latest_leafs.each do | leaf |
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     page_url  = url_for(:action=>'gallery_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 else
                     page_url  = url_for(:action=>'gallery_show', :id=>leaf)

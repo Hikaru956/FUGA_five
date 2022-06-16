@@ -81,20 +81,20 @@
 <!-- パンくずリスト -->
                     <aside id="breadcrumbs">
                         <ol>
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
 <% else %>
                             <li><a href="/home"><i class="fa fa-home"></i></a></li>
 <% end %>
 <% unless @seed.content_category.has_only_a_public_bag? %>
-<%      if request.host == 'staffroom.swifty.jp' %>
+<%      if true || request.host == 'staffroom.swifty.jp' %>
                             <li><a href="<%= url_for(:action=>'gallery_index', :id=>@seed.content_category.my_bag_root_category.parent, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
 <%      else %>
                             <li><a href="<%= url_for(:action=>'gallery_index', :id=>@seed.content_category.my_bag_root_category.parent) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
 <%      end %>
 <% end %>
 <% @seed.content_category.category_path(true).each do | category | %>
-<%      if request.host == 'staffroom.swifty.jp' %>
+<%      if true || request.host == 'staffroom.swifty.jp' %>
                             <li><%= link_to category.category_label, :action=>"gallery_list", :id=>category, :wkey=>@website.wsite_hash_key %></li>
 <%      else %>
                             <li><%= link_to category.category_label, :action=>"gallery_list", :id=>category %></li>

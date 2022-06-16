@@ -29,7 +29,7 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="website">
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
 <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
 <meta property="og:url"               content="https://<%= request.host %>/home">
@@ -78,14 +78,14 @@
                 <p>結婚式までの準備中は、楽しみな気持ちで胸がいっぱいになったり、少し不安になったり。<br />〈モリ・ウエディング〉は、ご準備されている間も前撮りやブライダルエステなど、様々な形で花嫁様の気持ちに寄り添っていきたいと考えています。<br />そして当日は、心置きなく結婚式を楽しんで頂けるように、美しさをお手伝い。<br />ぜひ、幸せを共感させてください。<br />自信に満ちあふれた輝く花嫁様になれる事を、お約束します。</p>
             </article>
             <aside id="home_staff">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h2 class="en"><a href="/contact_us?wkey=39e8502a1682c954819fb23dcb515433">STAFF</a> <span>スタッフ紹介</span></h2>
 <%      else %>
                 <h2 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h2>
 <%      end %>
             </aside>
             <aside>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h2 class="en"><a href="/menu_list?id=71&wkey=39e8502a1682c954819fb23dcb515433">ESTHE</a> <SPAN>エステ</SPAN></h2>
 <%      else %>
                 <h2 class="en"><a href="/menu_list?id=71">ESTHE</a> <SPAN>エステ</span></h2>
@@ -114,13 +114,13 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "4352e985f864dc10049914ced4427386") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= logomark.photos[0].clip.url() %>" alt="logomark">
+            <img src="<%= logomark.photos[0].clip.url() %>" alt="logomark">
         </div>
 <% end %>
         <ul>
 <%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/wedding/navigation" %>
             <li>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=08ebd0bbcad881d718362fef54ee81e8">MORI<span> BEAUTY CORPORATION</span></a>
 <%      else %>
                 <a href="http://www.mori-bc.co.jp/">MORI<span> BEAUTY CORPORATION</span></a>

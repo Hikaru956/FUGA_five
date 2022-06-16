@@ -17,7 +17,7 @@
                         <ul class="flex-container">
 <%
             gallery_bags.each do | leaf |
-                if request.host == 'staffroom.swifty.jp'
+                if true || request.host == 'staffroom.swifty.jp'
                     page_url  = url_for(:action=>'gallery_list', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 else
                     page_url  = url_for(:action=>'gallery_list', :id=>leaf)

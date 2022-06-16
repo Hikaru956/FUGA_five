@@ -4,13 +4,13 @@
             <div id="brand">
 <%  logomark = VisualWidget.search_widget_bag_for(@website, "4352e985f864dc10049914ced4427386") %>
 <%  if logomark.blank? || !logomark.is_valid? %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img id="logomark" src="//placehold.jp/107x68.jpg" alt="logo mark"></a>
 <%      else %>
                 <a href="/home"><img id="logomark" src="//placehold.jp/107x68.jpg" alt="logo mark"></a>
 <%      end %>
 <%  else %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img id="logomark" src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>
 <%      else %>
                 <a href="/home"><img id="logomark" src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>
@@ -23,7 +23,7 @@
                     <div id="tnav_open"><i class="fa fa-bars"></i><span>MENU</span></div>
                 </div>
                 <div id="corp">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=08ebd0bbcad881d718362fef54ee81e8">
 <%      else %>
                     <a href="http://www.mori-bc.co.jp/">

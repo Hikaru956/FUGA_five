@@ -20,7 +20,7 @@
                 <li><a href="/collcetions?id=3299">ギャラリー</a></li>
                 <li><a href="/streams?id=3298">BLOG</a></li>
 -->
-<%  if request.host == 'sr2.swifty.jp' %>
+<%  if true || request.host == 'sr2.swifty.jp' %>
                 <li><a href="#">お問い合わせ</a></li>
 <%  elsif !contact.blank? && contact.is_valid? %>
                 <li><a href="<%= raw contact.data_string %>">お問い合わせ</a></li>

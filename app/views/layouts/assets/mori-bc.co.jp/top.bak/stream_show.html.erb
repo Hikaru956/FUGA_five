@@ -57,7 +57,7 @@
                             <h2><%= model_title(@seed) %></h2>
                             <p class="publish">
 <% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                                 <i class="fa fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff, :wkey=>@website.wsite_hash_key) %>"><%= h model_name(@seed.staff) %></a>
 <%      else %>
                                 <i class="fa fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>
@@ -108,7 +108,7 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "e5ae2655654d0c9d0f467e59dc10a772") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= logomark.photos[0].clip.url() %>" alt="MORI BEAUTY CORPORATION.">
+            <img src="<%= logomark.photos[0].clip.url() %>" alt="MORI BEAUTY CORPORATION.">
         </div>
 <% end %>
         <ul>

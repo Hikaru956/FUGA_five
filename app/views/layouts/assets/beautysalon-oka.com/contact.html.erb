@@ -50,7 +50,7 @@
         else
             image_url = '//placehold.jp/256x384.png?text=STAFF'
         end
-        if request.host == 'sr2.swifty.jp'
+        if true || request.host == 'sr2.swifty.jp'
             staff_url = url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key)
         else
             staff_url = url_for(:action=>'staff', :id=>@staff)

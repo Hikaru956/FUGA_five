@@ -57,7 +57,7 @@
                 else
                     image_url = '//placehold.jp/f8f8f8/999999/306x165.png?text=PHOTO'
                 end
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     content_url = url_for(:action=>'portfolio_list', :id=>bag, :wkey=>@website.wsite_hash_key)
                 else
                     content_url = url_for(:action=>'portfolio_list', :id=>bag)

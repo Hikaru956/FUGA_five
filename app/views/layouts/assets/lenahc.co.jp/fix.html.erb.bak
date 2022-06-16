@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible"    content="IE=edge">
 <%
-    if request.host == 'sr2.swifty.jp'
+    if true || request.host == 'sr2.swifty.jp'
         fix_url = url_for(:action=>'fix', :id=>@seed, :wkey=>@website.wsite_hash_key)
     else
         fix_url = url_for(:action=>'fix', :id=>@seed)
@@ -54,7 +54,7 @@
 <aside id="breadcrumb">
     <div class="container">
         <ol>
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">HOME</a></li>
 <% else %>
             <li><a href="/home">HOME</a></li>
@@ -111,7 +111,7 @@ if ccid > 0
       else
         image_url = '//placehold.jp/640x480.png?text=NoPhoto'
       end
-      if request.host == 'sr2.swifty.jp'
+      if true || request.host == 'sr2.swifty.jp'
         content_url = url_for(:action=>'stream_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
       else
         content_url = url_for(:action=>'stream_show', :id=>leaf)

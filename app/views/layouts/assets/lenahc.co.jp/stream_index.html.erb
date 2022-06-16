@@ -38,7 +38,7 @@
 <aside id="breadcrumb">
     <div class="container">
         <ol>
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">HOME</a></li>
 <% else %>
             <li><a href="/home">HOME</a></li>
@@ -80,7 +80,7 @@ end
                 else
                     image_url = '/assets/lenahc.co.jp/img/aria_staff_title.jpg'
                 end
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     content_url = url_for(:action=>'stream_list', :id=>bag, :wkey=>@website.wsite_hash_key)
                 else
                     content_url = url_for(:action=>'stream_list', :id=>bag)

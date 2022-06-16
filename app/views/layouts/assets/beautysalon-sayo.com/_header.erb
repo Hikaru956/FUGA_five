@@ -4,13 +4,13 @@
             <div class="container">
                 <div id="bland">
 <% if logo.blank? || !logo.is_valid? %>
-    <% if request.host == 'sr2.swifty.jp' %>
+    <% if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="//placehold.jp/E0E0E0/FFFFFF/140x140.png?text=logo" alt="logo"></a>
     <% else %>
                     <a href="/home"><img src="//placehold.jp/140x140.jpg" alt="logo"></a>
     <% end %>
 <% else %>
-    <% if request.host == 'sr2.swifty.jp' %>
+    <% if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="<%= logo.photos[0].clip.url() %>" alt="logo"></a>
     <% else %>
                     <a href="/home"><img src="<%= logo.photos[0].clip.url() %>" alt="logo"></a>

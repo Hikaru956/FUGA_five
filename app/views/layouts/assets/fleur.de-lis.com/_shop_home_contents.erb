@@ -98,25 +98,25 @@
 <!--
 						<li>
 <%  if @website.wsite_hash_key == ens %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
 			                <a href="https://sr2.swifty.jp/collcetions?id=3527&wkey=<%= ens %>">
 <%      else %>
 			                <a href="https://fleur.de-lis.com/ens/collcetions?id=3527">
 <%      end %>
 <%  elsif @website.wsite_hash_key == lm %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
 			                <a href="https://sr2.swifty.jp/collcetions?id=3540&wkey=<%= lm %>">
 <%      else %>
 			                <a href="https://fleur.de-lis.com/lm/collcetions?id=3540">
 <%      end %>
 <%  elsif @website.wsite_hash_key == codo %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
 			                <a href="https://sr2.swifty.jp/collcetions?id=3748&wkey=<%= codo %>">
 <%      else %>
 			                <a href="https://fleur.de-lis.com/codo/collcetions?id=3748">
 <%      end %>
 <%  else %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
 			                <a href="https://sr2.swifty.jp/collcetions?id=3514&wkey=<%= lis %>">
 <%      else %>
 			                <a href="https://fleur.de-lis.com/lis/collcetions?id=3514">

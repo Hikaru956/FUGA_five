@@ -31,7 +31,7 @@
 <aside id="home_infoList">
     <div class="container">
         <h1>
-<%          if request.host == 'sr2.swifty.jp' %>
+<%          if true || request.host == 'sr2.swifty.jp' %>
             <a href="/news_list?id=160&wkey=<%= @website.wsite_hash_key %>">
 <%          else %>
             <a href="/news_list?id=160">
@@ -42,7 +42,7 @@
         <ul class="nonStyle">
 <%
             latest_leafs.each do | leaf |
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 else
                     page_url  = url_for(:action=>'news_show', :id=>leaf)

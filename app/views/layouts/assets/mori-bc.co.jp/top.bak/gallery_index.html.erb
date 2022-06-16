@@ -48,7 +48,7 @@
             else
                 image_url = '//placehold.jp/327x327.jpg?text=No Photo'
             end
-            if request.host == 'sr2.swifty.jp'
+            if true || request.host == 'sr2.swifty.jp'
                 gallery_url = url_for(:action=>'gallery_list', :id=>leaf, :wkey=>@website.wsite_hash_key)
             else
                 gallery_url = url_for(:action=>'gallery_list', :id=>leaf)
@@ -101,7 +101,7 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "e5ae2655654d0c9d0f467e59dc10a772") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= logomark.photos[0].clip.url() %>" alt="MORI BEAUTY CORPORATION.">
+            <img src="<%= logomark.photos[0].clip.url() %>" alt="MORI BEAUTY CORPORATION.">
         </div>
 <% end %>
         <ul>

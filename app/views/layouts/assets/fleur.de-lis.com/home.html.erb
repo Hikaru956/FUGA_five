@@ -36,7 +36,7 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator"                content="fuga">
 <meta name="copyright"                content="<%= model_name(@website.company) %>">
-<%  if request.host == 'sr2.swifty.jp' %>
+<%  if true || request.host == 'sr2.swifty.jp' %>
 <meta name="robots"                   content="noindex,nofollow">
 <%  end %>
 <%  unless fbappid.data_string.blank? %>
@@ -47,7 +47,7 @@
 <%  else %>
 <meta property="og:type"              content="article">
 <%  end %>
-<%  if request.host == 'sr2.swifty.jp' %>
+<%  if true || request.host == 'sr2.swifty.jp' %>
 <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <%  else %>
 <meta property="og:url"               content="https://<%= request.host + shopalt %>/home">
@@ -58,7 +58,7 @@
 <meta property="og:title"             content="<%= hptitle.data_string %>">
 <%  end %>
 <%  if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="https://<%= request.host %><%= og_img.photos[0].clip.url() %>">
+<meta property="og:image"             content="<%= og_img.photos[0].clip.url() %>">
 <%  end %>
 <%  unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">
@@ -95,7 +95,7 @@
 <main id="main">
 	<ul>
 		<li>
-<%  if request.host == 'sr2.swifty.jp' %>
+<%  if true || request.host == 'sr2.swifty.jp' %>
 			<a href="https://sr2.swifty.jp/home?wkey=27ac677851db26419e0d821b37dc9e22">
 <%  else %>
 			<a href="https://fleur.de-lis.com/lis/home">
@@ -104,7 +104,7 @@
 			</a>
 		</li>
 		<li>
-<%  if request.host == 'sr2.swifty.jp' %>
+<%  if true || request.host == 'sr2.swifty.jp' %>
 			<a href="https://sr2.swifty.jp/home?wkey=6d747da5bf38d7171f268545b0652d1c">
 <%  else %>
 			<a href="https://fleur.de-lis.com/ens/home">
@@ -113,7 +113,7 @@
 			</a>
 		</li>
 		<li>
-<%  if request.host == 'sr2.swifty.jp' %>
+<%  if true || request.host == 'sr2.swifty.jp' %>
 			<a href="https://sr2.swifty.jp/home?wkey=cd32ac74ed5ca6837f8c86d4ed67a149">
 <%  else %>
 			<a href="https://fleur.de-lis.com/lm/home">
@@ -122,7 +122,7 @@
 			</a>
 		</li>
 		<li>
-<%  if request.host == 'sr2.swifty.jp' %>
+<%  if true || request.host == 'sr2.swifty.jp' %>
 			<a href="https://sr2.swifty.jp/home?wkey=f90c2c82832eb4a51b59eb07559b7a05">
 <%  else %>
 			<a href="https://fleur.de-lis.com/codo/home">

@@ -27,7 +27,7 @@
 <meta name="robots"                   content="noindex,nofollow">
 <% end %>
 <meta property="og:type"              content="website">
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
 <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
 <meta property="og:url"               content="https://<%= request.host %>/home">

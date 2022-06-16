@@ -27,7 +27,7 @@
 <meta name="robots"                   content="noindex,nofollow">
 <% end %>
 <meta property="og:type"              content="website">
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
 <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
 <meta property="og:url"               content="https://<%= request.host %>/home">
@@ -38,7 +38,7 @@
 <meta property="og:title"             content="<%= hptitle.data_string %>">
 <% end %>
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="https://<%= request.host %><%= og_img.photos[0].clip.url() %>">
+<meta property="og:image"             content="<%= og_img.photos[0].clip.url() %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">
@@ -69,6 +69,7 @@
 </head>
 <body id="home">
 <%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/homevisual" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/fix34507" %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/homegallery" %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/shop_info" %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/map" %>

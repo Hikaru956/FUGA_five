@@ -29,7 +29,7 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="website">
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
 <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
 <meta property="og:url"               content="https://<%= request.host %>/home">
@@ -86,7 +86,7 @@
             <aside id="home_shop" class="wrapper">
                 <div class="col-1p2">
                     <div class="col-in">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <h1 class="en"><a href="/fix?id=8&wkey=9a6b3d0a73b16215b331252b73e5aff0">SHOP</a> <span>店舗情報</span></h1>
 <%      else %>
                         <h1 class="en"><a href="/fix?id=8">SHOP</a> <span>店舗情報</span></h1>
@@ -116,14 +116,14 @@
                 </div>
             </aside>
             <aside id="home_staff">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="en"><a href="/contact_us?wkey=9a6b3d0a73b16215b331252b73e5aff0">STAFF</a> <span>スタッフ紹介</span></h1>
 <%      else %>
                 <h1 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h1>
 <%      end %>
 <!--
                 <p class="text-center">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a class="link_button" href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
 <%      else %>
                     <a class="link_button" href="/contact_us %>">
@@ -137,7 +137,7 @@
 <%  end %>
             </aside>
             <aside>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="en"><a href="/menu_list?id=19&wkey=9a6b3d0a73b16215b331252b73e5aff0">PRICE</a> <SPAN>施術料金</SPAN></h1>
 <%      else %>
                 <h1 class="en"><a href="/menu_list?id=19">PRICE</a> <SPAN>施術料金</span></h1>
@@ -164,7 +164,7 @@
             <aside id="home_shop" class="wrapper">
                 <div class="col-1p2">
                     <div class="col-in">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <h1 class="en"><a href="/fix?id=208&wkey=1619cf7b4ebde9cd3a6b83d1d57a7e59">SHOP</a> <span>店舗情報</span></h1>
 <%      else %>
                         <h1 class="en"><a href="/fix?id=208">SHOP</a> <span>店舗情報</span></h1>
@@ -193,14 +193,14 @@
                 </div>
             </aside>
             <aside id="home_staff">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="en"><a href="/contact_us?wkey=1619cf7b4ebde9cd3a6b83d1d57a7e59">STAFF</a> <span>スタッフ紹介</span></h1>
 <%      else %>
                 <h1 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h1>
 <%      end %>
 <!--
                 <p class="text-center">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a class="link_button" href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
 <%      else %>
                     <a class="link_button" href="/contact_us %>">
@@ -214,14 +214,14 @@
 <%  end %>
             </aside>
             <aside>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="en"><a href="/menu_list?id=32&wkey=1619cf7b4ebde9cd3a6b83d1d57a7e59">PRICE</a> <SPAN>施術料金</SPAN></h1>
 <%      else %>
                 <h1 class="en"><a href="/menu_list?id=32">PRICE</a> <SPAN>施術料金</span></h1>
 <%      end %>
 <!--
                 <p class="text-center">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a class="link_button" href="/menu_list?id=32&wkey=<%= @website.wsite_hash_key %>">
 <%      else %>
                     <a class="link_button" href="/menu_list?id=32 %>">
@@ -254,7 +254,7 @@
             <aside id="home_shop" class="wrapper">
                 <div class="col-1p2">
                     <div class="col-in">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <h1 class="en"><a href="/fix?id=209&wkey=b03e55355ea5ac4a8e7f0916a24a2505">SHOP</a> <span>店舗情報</span></h1>
 <%      else %>
                         <h1 class="en"><a href="/fix?id=209">SHOP</a> <span>店舗情報</span></h1>
@@ -283,14 +283,14 @@
                 </div>
             </aside>
             <aside id="home_staff">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="en"><a href="/contact_us?wkey=b03e55355ea5ac4a8e7f0916a24a2505">STAFF</a> <span>スタッフ紹介</span></h1>
 <%      else %>
                 <h1 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h1>
 <%      end %>
 <!--
                 <p class="text-center">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a class="link_button" href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
 <%      else %>
                     <a class="link_button" href="/contact_us %>">
@@ -304,14 +304,14 @@
 <%  end %>
             </aside>
             <aside>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="en"><a href="/menu_list?id=45&wkey=b03e55355ea5ac4a8e7f0916a24a2505">PRICE</a> <SPAN>施術料金</SPAN></h1>
 <%      else %>
                 <h1 class="en"><a href="/menu_list?id=45">PRICE</a> <SPAN>施術料金</span></h1>
 <%      end %>
 <!--
                 <p class="text-center">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a class="link_button" href="/menu_list?id=45&wkey=<%= @website.wsite_hash_key %>">
 <%      else %>
                     <a class="link_button" href="/menu_list?id=45 %>">
@@ -344,7 +344,7 @@
             <aside id="home_shop" class="wrapper">
                 <div class="col-1p2">
                     <div class="col-in">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <h1 class="en"><a href="/fix?id=210&wkey=4f160f902541b6f384630d66ceff5cbb">SHOP</a> <span>店舗情報</span></h1>
 <%      else %>
                         <h1 class="en"><a href="/fix?id=210">SHOP</a> <span>店舗情報</span></h1>
@@ -373,14 +373,14 @@
                 </div>
             </aside>
             <aside id="home_staff">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="en"><a href="/contact_us?wkey=4f160f902541b6f384630d66ceff5cbb">STAFF</a> <span>スタッフ紹介</span></h1>
 <%      else %>
                 <h1 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h1>
 <%      end %>
 <!--
                 <p class="text-center">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a class="link_button" href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
 <%      else %>
                     <a class="link_button" href="/contact_us %>">
@@ -394,14 +394,14 @@
 <%  end %>
             </aside>
             <aside>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="en"><a href="/menu_list?id=58&wkey=4f160f902541b6f384630d66ceff5cbb">PRICE</a> <SPAN>施術料金</SPAN></h1>
 <%      else %>
                 <h1 class="en"><a href="/menu_list?id=58">PRICE</a> <SPAN>施術料金</span></h1>
 <%      end %>
 <!--
                 <p class="text-center">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a class="link_button" href="/menu_list?id=58&wkey=<%= @website.wsite_hash_key %>">
 <%      else %>
                     <a class="link_button" href="/menu_list?id=58 %>">
@@ -435,7 +435,7 @@
             <aside id="home_shop" class="wrapper">
                 <div class="col-1p2">
                     <div class="col-in">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <h1 class="en"><a href="/fix?id=2391&wkey=8077ed2b1aa6712717293e46f93cf59f">SHOP</a> <span>店舗情報</span></h1>
 <%      else %>
                         <h1 class="en"><a href="/fix?id=2391">SHOP</a> <span>店舗情報</span></h1>
@@ -468,14 +468,14 @@
                 </div>
             </aside>
             <aside id="home_staff">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="en"><a href="/contact_us?wkey=8077ed2b1aa6712717293e46f93cf59f">STAFF</a> <span>スタッフ紹介</span></h1>
 <%      else %>
                 <h1 class="en"><a href="/contact_us">STAFF</a> <span>スタッフ紹介</span></h1>
 <%      end %>
 <!--
                 <p class="text-center">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a class="link_button" href="/contact_us?wkey=<%= @website.wsite_hash_key %>">
 <%      else %>
                     <a class="link_button" href="/contact_us %>">
@@ -489,14 +489,14 @@
 <%  end %>
             </aside>
             <aside>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <h1 class="en"><a href="/menu_list?id=885&wkey=8077ed2b1aa6712717293e46f93cf59f">PRICE</a> <SPAN>施術料金</SPAN></h1>
 <%      else %>
                 <h1 class="en"><a href="/menu_list?id=885">PRICE</a> <SPAN>施術料金</span></h1>
 <%      end %>
 <!--
                 <p class="text-center">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a class="link_button" href="/menu_list?id=885&wkey=<%= @website.wsite_hash_key %>">
 <%      else %>
                     <a class="link_button" href="/menu_list?id=885 %>">
@@ -538,13 +538,13 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "62aa95cab0dd63e669fa466996f2b97b") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= logomark.photos[0].clip.url() %>" alt="logomark">
+            <img src="<%= logomark.photos[0].clip.url() %>" alt="logomark">
         </div>
 <% end %>
         <ul>
 <%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/navigation" %>
             <li>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=08ebd0bbcad881d718362fef54ee81e8">MORI<span> BEAUTY CORPORATION</span></a>
 <%      else %>
                 <a href="http://www.mori-bc.co.jp/">MORI<span> BEAUTY CORPORATION</span></a>

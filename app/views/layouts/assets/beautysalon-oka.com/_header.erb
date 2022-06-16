@@ -2,13 +2,13 @@
 <header id="header" class="">
     <div id="brand">
 <%  if logo.blank? || !logo.is_valid? %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
         <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="//placehold.jp/190x61.png?text=OKA" alt="logo"></a>
 <%      else %>
         <a href="/home><img src="//placehold.jp/190x61.png?text=OKA" alt="logo"></a>
 <%      end %>
 <%  else %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
         <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="<%= logo.photos[0].clip.url() %>" alt="logo"></a>
 <%      else %>
         <a href="/home"><img src="<%= logo.photos[0].clip.url() %>" alt="logo"></a>
@@ -20,13 +20,13 @@
     <nav id="nav">
         <div id="navbrand">
 <%  if logo.blank? || !logo.is_valid? %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
             <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="//placehold.jp/190x61.png?text=OKA" alt="logo"></a>
 <%      else %>
             <a href="/home><img src="//placehold.jp/190x61.png?text=OKA" alt="logo"></a>
 <%      end %>
 <%  else %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
             <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="<%= logo.photos[0].clip.url() %>" alt="logo"></a>
 <%      else %>
             <a href="/home"><img src="<%= logo.photos[0].clip.url() %>" alt="logo"></a>

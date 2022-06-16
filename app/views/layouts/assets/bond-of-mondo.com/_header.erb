@@ -1,13 +1,13 @@
 <% gn_logo = VisualWidget.search_widget_bag_for(@website, "fbda5b5183552f376897ad63552b51ac") %>
 <header id="header">
 <% if gn_logo.blank? || !gn_logo.is_valid? %>
-<%  if request.host == 'staffroom.swifty.jp' %>
+<%  if true || request.host == 'staffroom.swifty.jp' %>
     <a href="/home?wkey=<%= @website.wsite_hash_key %>"<img src="//placehold.it/7x20" alt="logo mark"></a>
 <%  else %>
     <a href="/home"><img src="//placehold.it/70x20" alt="logo mark"></a>
 <%  end %>
 <% else %>
-<%  if request.host == 'staffroom.swifty.jp' %>
+<%  if true || request.host == 'staffroom.swifty.jp' %>
     <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src ="<%= gn_logo.photos[0].clip.url(:thumb) %>" alt="ロゴマーク"></a>
 <%  else %>
     <a href="/home"><img src ="<%= gn_logo.photos[0].clip.url(:thumb) %>" alt="ロゴマーク"></a>

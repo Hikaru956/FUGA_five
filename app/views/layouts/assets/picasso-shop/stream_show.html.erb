@@ -77,20 +77,20 @@
 <!-- パンくずリスト -->
                     <aside id="breadcrumbs">
                         <ol>
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
 <% else %>
                             <li><a href="<%= shopalt %>/home"><i class="fa fa-home"></i></a></li>
 <% end %>
 <% unless @seed.content_category.has_only_a_public_bag? %>
-<%      if request.host == 'staffroom.swifty.jp' %>
+<%      if true || request.host == 'staffroom.swifty.jp' %>
                             <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.content_category.my_bag_root_category.parent, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
 <%      else %>
                             <li><a href="<%= shopalt+url_for(:action=>'stream_index', :id=>@seed.content_category.my_bag_root_category.parent) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
 <%      end %>
 <% end %>
 <% @seed.content_category.category_path(true).each do | category | %>
-<%      if request.host == 'staffroom.swifty.jp' %>
+<%      if true || request.host == 'staffroom.swifty.jp' %>
                             <li><%= link_to category.category_label, :action=>"stream_list", :id=>category, :wkey=>@website.wsite_hash_key %></li>
 <%      else %>
                             <li><a href="<%= shopalt+url_for(:action=>'stream_list', :id=>category) %>"><%= category.category_label %></a></li>
@@ -107,7 +107,7 @@
                             <h1><%= model_title(@seed) %></h1>
                             <p class="publish">
 <% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
-<%      if request.host == 'staffroom.swifty.jp' %>
+<%      if true || request.host == 'staffroom.swifty.jp' %>
                                 <i class="fa fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff, :wkey=>@website.wsite_hash_key) %>"><%= h model_name(@seed.staff) %></a>
 <%      else %>
                                 <i class="fa fa-user"></i> <a href="<%=shopalt+url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>

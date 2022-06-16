@@ -58,7 +58,7 @@
         <h1><%= model_title(@seed) %></h1>
         <div class="publish">
 <% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
             <i class="fas fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff, :wkey=>@website.wsite_hash_key) %>"><%= h model_name(@seed.staff) %></a>
 <%      else %>
             <i class="fas fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>

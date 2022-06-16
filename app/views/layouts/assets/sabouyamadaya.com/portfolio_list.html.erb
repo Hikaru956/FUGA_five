@@ -43,20 +43,20 @@
     <div class="container">
 <!-- パンくずリスト -->
         <ol>
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="pico-home"></i></a></li>
 <% else %>
             <li><a href="/home"><i class="pico-home"></i></a></li>
 <% end %>
 <% unless @seed.my_type_root_category.has_only_a_public_bag? %>
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
             <li><a href="<%= url_for(:action=>'portfolio_index', :id=>@seed.my_type_root_category, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
 <% else %>
             <li><a href="<%= url_for(:action=>'portfolio_index', :id=>@seed.my_type_root_category) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
 <% end %>
 <% end %>
 <% @seed.category_path.each do | category | %>
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
             <li><a href="<%= url_for(:action=>'portfolio_list', :id=>category, :wkey=>@website.wsite_hash_key) %>"><%= category.category_label %></a></li>
 <% else %>
             <li><a href="<%= url_for(:action=>'portfolio_list', :id=>category) %>"><%= category.category_label %></a></li>

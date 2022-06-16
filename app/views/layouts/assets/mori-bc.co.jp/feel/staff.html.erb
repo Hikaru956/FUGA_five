@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible"    content="IE=edge">
 <%
     contact_category = ContentCategory.type_root(@website, ContentCategory::TYPE_INFO)
-    if request.host == 'sr2.swifty.jp'
+    if true || request.host == 'sr2.swifty.jp'
         staff_url = url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key)
     else
         staff_url = url_for(:action=>'staff', :id=>@seed)
@@ -147,13 +147,13 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "62aa95cab0dd63e669fa466996f2b97b") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= logomark.photos[0].clip.url() %>" alt="logomark">
+            <img src="<%= logomark.photos[0].clip.url() %>" alt="logomark">
         </div>
 <% end %>
         <ul>
 <%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/shop/navigation" %>
             <li>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=08ebd0bbcad881d718362fef54ee81e8">MORI<span> BEAUTY CORPORATION</span></a>
 <%      else %>
                 <a href="http://www.mori-bc.co.jp/">MORI<span> BEAUTY CORPORATION</span></a>

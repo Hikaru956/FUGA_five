@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible"    content="IE=edge">
 <%
-    if request.host == 'sr2.swifty.jp'
+    if true || request.host == 'sr2.swifty.jp'
         fix_url = url_for(:action=>'fix', :id=>@seed, :wkey=>@website.wsite_hash_key)
     else
         fix_url = url_for(:action=>'fix', :id=>@seed)
@@ -93,7 +93,7 @@
             <div class="container">
 <!-- パンくずリスト -->
                 <ol>
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
                     <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
 <% else %>
                     <li><a href="/home"><i class="fa fa-home"></i></a></li>

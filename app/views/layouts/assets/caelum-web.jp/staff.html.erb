@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible"    content="IE=edge">
 <%
     contact_category = ContentCategory.type_root(@website, ContentCategory::TYPE_INFO)
-    if request.host == 'sr2.swifty.jp'
+    if true || request.host == 'sr2.swifty.jp'
         staff_url = url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key)
     else
         staff_url = url_for(:action=>'staff', :id=>@seed)
@@ -69,7 +69,7 @@
         <aside id="breadcrumbs">
             <div class="container">
                 <ol>
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
                     <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
                     <li><a href="<%= url_for(:action=>'contact', :id=>contact_category, :wkey=>@website.wsite_hash_key) %>"><%= model_name(contact_category.web_page) %></a></li>
 <% else %>

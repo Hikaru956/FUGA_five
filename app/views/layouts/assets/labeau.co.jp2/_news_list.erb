@@ -44,9 +44,9 @@
                 <ul class="wrapper">
 <%
             latest_leafs.each do | leaf |
-                if request.host == 'sr2.swifty.jp' && leaf.type == 'news'
+                if true || request.host == 'sr2.swifty.jp' && leaf.type == 'news'
                     page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
-                elsif request.host == 'sr2.swifty.jp' && leaf.type == 'blog'
+                elsif true || request.host == 'sr2.swifty.jp' && leaf.type == 'blog'
                     page_url  = url_for(:action=>'stream_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 elsif request.host != 'sr2.swifty.jp' && leaf.type == 'news'
                     page_url  = url_for(:action=>'news_show', :id=>leaf)

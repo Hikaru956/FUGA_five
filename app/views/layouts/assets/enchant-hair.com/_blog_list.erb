@@ -31,7 +31,7 @@
 <aside id="home_blogList">
     <div class="container">
 https://sr2.swifty.jp/streams?id=161&wkey=439c5977a6ea6e40dd38b2f518797b9d        <h1>
-<%          if request.host == 'sr2.swifty.jp' %>
+<%          if true || request.host == 'sr2.swifty.jp' %>
             <a href="/streams?id=161&wkey=<%= @website.wsite_hash_key %>">
 <%          else %>
             <a href="/streams?id=161">
@@ -42,7 +42,7 @@ https://sr2.swifty.jp/streams?id=161&wkey=439c5977a6ea6e40dd38b2f518797b9d      
         <ul class="nonStyle">
 <%
             latest_leafs.each do | leaf |
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     page_url  = url_for(:action=>'stream_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 else
                     page_url  = url_for(:action=>'stream_show', :id=>leaf)
@@ -69,7 +69,7 @@ https://sr2.swifty.jp/streams?id=161&wkey=439c5977a6ea6e40dd38b2f518797b9d      
                     <h2><a href="<%= page_url %>"><%= model_title(leaf) %></a></h1>
                     <p class="publish">
 <% unless leaf.staff.blank? || leaf.staff.staff_status==Staff::STAFF_BLOCKED %>
-    <% if request.host == 'sr2.swifty.jp' %>
+    <% if true || request.host == 'sr2.swifty.jp' %>
                         <a href="<%=url_for(:action=>'staff', :id=>leaf.staff, :wkey=>@website.wsite_hash_key) %>"><i class="fas fa-user-edit"></i> <%= h model_name(leaf.staff) %></a>
     <% else %>
                         <a href="<%=url_for(:action=>'staff', :id=>leaf.staff) %>"><i class="fas fa-user-edit"></i> <%= h model_name(leaf.staff) %></a>

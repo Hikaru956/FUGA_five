@@ -56,7 +56,7 @@
                 else
                     image_url = '//placehold.jp/ffffff/cccccc/326x326.jpg?text=No Photo'
                 end
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     content_url = url_for(:action=>'stream_list', :id=>bag, :wkey=>@website.wsite_hash_key)
                 else
                     content_url = url_for(:action=>'stream_list', :id=>bag)

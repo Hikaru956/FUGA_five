@@ -38,7 +38,7 @@
 <aside id="breadcrumb">
     <div class="container">
         <ol>
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">HOME</a></li>
 <% else %>
             <li><a href="/home">HOME</a></li>
@@ -61,7 +61,7 @@
             else
                 image_url = '//placehold.jp/352x264.png?text=No Photo'
             end
-            if request.host == 'sr2.swifty.jp'
+            if true || request.host == 'sr2.swifty.jp'
                 gallery_url = url_for(:action=>'gallery_list', :id=>leaf, :wkey=>@website.wsite_hash_key)
             else
                 gallery_url = url_for(:action=>'gallery_list', :id=>leaf)

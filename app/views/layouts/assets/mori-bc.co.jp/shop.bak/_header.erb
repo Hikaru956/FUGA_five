@@ -4,13 +4,13 @@
             <div id="brand">
 <%  logomark = VisualWidget.search_widget_bag_for(@website, "62aa95cab0dd63e669fa466996f2b97b") %>
 <%  if logomark.blank? || !logomark.is_valid? %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img id="logomark" src="//placehold.jp/107x68.jpg" alt="logo mark"></a>
 <%      else %>
                 <a href="/home"><img id="logomark" src="//placehold.jp/107x68.jpg" alt="logo mark"></a>
 <%      end %>
 <%  else %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img id="logomark" src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>
 <%      else %>
                 <a href="/home"><img id="logomark" src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>
@@ -20,7 +20,7 @@
             <div id="hnav">
                 <div id="tnav_open"><i class="fa fa-bars"></i><span>MENU</span></div>
                 <div id="corp">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=08ebd0bbcad881d718362fef54ee81e8">
 <%      else %>
                     <a href="http://www.mori-bc.co.jp/">
@@ -31,28 +31,28 @@
                 <nav id="nav">
                     <ul id ="nshop" class="clearfix">
 <%  if request.host != 'salon.mori-bc.co.jp' && @website.wsite_hash_key != '9a6b3d0a73b16215b331252b73e5aff0' %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <li><a href="/home?wkey=9a6b3d0a73b16215b331252b73e5aff0">SALON DE MORI</a></li>
 <%      else %>
                         <li><a href="//salon.mori-bc.co.jp/">SALON DE MORI</a></li>
 <%      end %>
 <%  end %>
 <%  if request.host != 'irom.mori-bc.co.jp' && @website.wsite_hash_key != '1619cf7b4ebde9cd3a6b83d1d57a7e59' %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <li><a href="/home?wkey=1619cf7b4ebde9cd3a6b83d1d57a7e59">IROM</a></li>
 <%      else %>
                         <li><a href="//irom.mori-bc.co.jp/">IROM</a></li>
 <%      end %>
 <%  end %>
 <%  if request.host != 'wings.mori-bc.co.jp' && @website.wsite_hash_key != 'b03e55355ea5ac4a8e7f0916a24a2505' %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <li><a href="/home?wkey=b03e55355ea5ac4a8e7f0916a24a2505">WINGS</a></li>
 <%      else %>
                         <li><a href="//wings.mori-bc.co.jp/">WINGS</a></li>
 <%      end %>
 <%  end %>
 <%  if request.host != 'green.mori-bc.co.jp' && @website.wsite_hash_key != '4f160f902541b6f384630d66ceff5cbb' %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <li><a href="/home?wkey=4f160f902541b6f384630d66ceff5cbb">GREEN</a></li>
 <%      else %>
                         <li><a href="//green.mori-bc.co.jp/">GREEN</a></li>

@@ -7,13 +7,13 @@
         <div class="header_shop">
             <div class="header_img">
                 <% if logo1.photos[0].blank? %>
-                    <% if request.host == 'staffroom.swifty.jp' %>
+                    <% if true || request.host == 'staffroom.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="//placehold.it/260x120" alt="logo mark"></a>
                     <% else %>
                 <a href="/home" class="brand"><img src="//placehold.it/260x120" alt="logo mark"></a>
                     <% end %>
                 <% else %>
-                    <% if request.host == 'staffroom.swifty.jp' %>
+                    <% if true || request.host == 'staffroom.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="<%= logo1.photos[0].clip.url() %>" alt="logo mark"></a>
                     <% else %>
                 <a href="/home" class="brand"><img src="<%= logo1.photos[0].clip.url() %>" alt="logo mark"></a>

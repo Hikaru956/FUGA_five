@@ -33,13 +33,13 @@
         <div class="header_shop">
             <div class="header_img">
                 <% if logo1.photos[0].blank? %>
-                    <% if request.host == 'sr2.swifty.jp' %>
+                    <% if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="//placehold.jp/260x120.jpg" alt="logo mark"></a>
                     <% else %>
                 <a href="/home" class="brand"><img src="//placehold.jp/260x120.jpg" alt="logo mark"></a>
                     <% end %>
                 <% else %>
-                    <% if request.host == 'sr2.swifty.jp' %>
+                    <% if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="<%= logo1.photos[0].clip.url() %>" alt="logo mark"></a>
                     <% else %>
                 <a href="/home" class="brand"><img src="<%= logo1.photos[0].clip.url() %>" alt="logo mark"></a>
@@ -95,13 +95,13 @@
         <div class="header_shop2">
             <div class="header_img">
                 <% if logo1.photos[0].blank? %>
-                    <% if request.host == 'sr2.swifty.jp' %>
+                    <% if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="//placehold.jp/260x120.jpg" alt="logo mark"></a>
                     <% else %>
                 <a href="/home" class="brand"><img src="//placehold.jp/260x120.jpg" alt="logo mark"></a>
                     <% end %>
                 <% else %>
-                    <% if request.host == 'sr2.swifty.jp' %>
+                    <% if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="<%= logo1.photos[0].clip.url() %>" alt="logo mark"></a>
                     <% else %>
                 <a href="/home" class="brand"><img src="<%= logo1.photos[0].clip.url() %>" alt="logo mark"></a>
@@ -148,7 +148,7 @@
         </div>
         <div class="header_shop2">
             <div class="header_img">
-                <% if request.host == 'sr2.swifty.jp' %>
+                <% if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="<%= logo2.photos[0].clip.url() %>" alt="logo mark"></a>
                 <% else %>
                 <a href="/home" class="brand"><img src="<%= logo2.photos[0].clip.url() %>" alt="logo mark"></a>
@@ -204,13 +204,13 @@
             <div class="header_shop3">
                 <div class="header_img">
                     <% if logo1.photos[0].blank? %>
-                        <% if request.host == 'sr2.swifty.jp' %>
+                        <% if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="//placehold.jp/260x120.jpg" alt="logo mark"></a>
                         <% else %>
                     <a href="/home" class="brand"><img src="//placehold.jp/260x120.jpg" alt="logo mark"></a>
                         <% end %>
                     <% else %>
-                        <% if request.host == 'sr2.swifty.jp' %>
+                        <% if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="<%= logo1.photos[0].clip.url() %>" alt="logo mark"></a>
                         <% else %>
                     <a href="/home" class="brand"><img src="<%= logo1.photos[0].clip.url() %>" alt="logo mark"></a>
@@ -257,7 +257,7 @@
             </div>
             <div class="header_shop3">
                 <div class="header_img">
-                    <% if request.host == 'sr2.swifty.jp' %>
+                    <% if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="<%= logo2.photos[0].clip.url() %>" alt="logo mark"></a>
                     <% else %>
                     <a href="/home" class="brand"><img src="<%= logo2.photos[0].clip.url() %>" alt="logo mark"></a>
@@ -303,7 +303,7 @@
             </div>
             <div class="header_shop3">
                 <div class="header_img">
-                    <% if request.host == 'sr2.swifty.jp' %>
+                    <% if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=<%= @website.wsite_hash_key %>" class="brand"><img src="<%= logo3.photos[0].clip.url() %>" alt="logo mark"></a>
                     <% else %>
                     <a href="/home" class="brand"><img src="<%= logo3.photos[0].clip.url() %>" alt="logo mark"></a>

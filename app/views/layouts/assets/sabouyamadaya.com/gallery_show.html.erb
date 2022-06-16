@@ -33,11 +33,11 @@
     @webclip = @website.apple_touch_icon
 %>
 <% unless @favicon.blank? %>
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="icon" type="image/vnd.microsoft.icon">
-<link href="<%= url_for_file_column(@favicon, :image) %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= @favicon.clip.url() %>" rel="icon" type="image/vnd.microsoft.icon">
+<link href="<%= @favicon.clip.url() %>" rel="shortcut icon" type="image/x-icon">
 <% end %>
 <% unless @webclip.blank? %>
-<link rel="apple-touch-icon" href="<%= url_for_file_column(@webclip, :image) %>">
+<link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/style" %>
 </head>
@@ -52,7 +52,7 @@
 <%  unless @photos.blank? %>
             <ul>
 <%      @photos.each do | photo | %>
-                <li><img src="<%= url_for_file_column(photo, :image) %>" alt=""></li>
+                <li><img src="<%= photo.clip.url() %>" alt=""></li>
 <%      end %>
             </ul>
 <%  else %>

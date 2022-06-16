@@ -9,13 +9,13 @@
                     </div>
                     <div id="brand">
 <% if logomark1.blank? || !logomark1.is_valid? %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="//placehold.jp/240x120.jpg" alt="logo mark"></a>
 <%      else %>
                         <a href="/home"><img src="//placehold.jp/240x120.jpg" alt="logo mark"></a>
 <%      end %>
 <% else %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                         <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="<%= logomark1.photos[0].clip.url() %>" alt="logo mark"></a>
 <%      else %>
                         <a href="/home"><img src="<%= logomark1.photos[0].clip.url() %>" alt="logo mark"></a>
@@ -28,13 +28,13 @@
                 </div>
                 <div id="hsalon">
 <% if logomark2.blank? || !logomark2.is_valid? %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="//placehold.jp/240x120.jpg" alt="Salon logo mark"></a>
 <%      else %>
                     <a href="/home"><img src="//placehold.jp/240x120.jpg" alt="Salon logo mark"></a>
 <%      end %>
 <% else %>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="<%= logomark2.photos[0].clip.url() %>" alt="Salon logo mark"></a>
 <%      else %>
                     <a href="/home"><img src="<%= logomark2.photos[0].clip.url() %>" alt="Salon logo mark"></a>

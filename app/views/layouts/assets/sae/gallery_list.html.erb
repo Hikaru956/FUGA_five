@@ -67,20 +67,20 @@
         <aside id="breadcrumbs">
             <div class="container">
                 <ol>
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                     <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
 <% else %>
                     <li><a href="/home"><i class="fa fa-home"></i></a></li>
 <% end %>
 <% unless @seed.my_type_root_category.has_only_a_public_bag? %>
-    <% if request.host == 'staffroom.swifty.jp' %>
+    <% if true || request.host == 'staffroom.swifty.jp' %>
                     <li><a href="<%= url_for(:action=>'gallery_index', :id=>@seed.my_type_root_category, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
     <% else %>
                     <li><a href="<%= url_for(:action=>'gallery_index', :id=>@seed.my_type_root_category) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
     <% end %>
 <% end %>
 <% @seed.category_path.each do | category | %>
-    <% if request.host == 'staffroom.swifty.jp' %>
+    <% if true || request.host == 'staffroom.swifty.jp' %>
                     <li><a href="<%= url_for(:action=>'gallery_list', :id=>category, :wkey=>@website.wsite_hash_key) %>"><%= category.category_label %></a></li>
     <% else %>
                     <li><a href="<%= url_for(:action=>'gallery_list', :id=>category) %>"><%= category.category_label %></a></li>
@@ -125,7 +125,7 @@
             else
                 image_url = '//placehold.it/327x327&amp;text=No Photo'
             end
-            if request.host == 'staffroom.swifty.jp'
+            if true || request.host == 'staffroom.swifty.jp'
                 gallery_url = url_for(:action=>'gallery_show', :id=>leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
             else
                 gallery_url = url_for(:action=>'gallery_show', :id=>leaf, :page=>@page)
@@ -143,7 +143,7 @@
                         </ul>
                     </section>
                     <aside class="pagination text-center">
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                             <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% else %>
                             <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>

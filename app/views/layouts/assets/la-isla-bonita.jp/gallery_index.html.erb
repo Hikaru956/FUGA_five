@@ -50,7 +50,7 @@
 <!-- パンくずリスト -->
             <aside id="breadcrumbs">
                 <ol>
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                     <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
 <% else %>
                     <li><a href="/home"><i class="fa fa-home"></i></a></li>
@@ -71,7 +71,7 @@
             else
                 image_url = '//placehold.it/327x327&amp;text=No Photo'
             end
-            if request.host == 'staffroom.swifty.jp'
+            if true || request.host == 'staffroom.swifty.jp'
                 gallery_url = url_for(:action=>'gallery_list', :id=>leaf, :wkey=>@website.wsite_hash_key)
             else
                 gallery_url = url_for(:action=>'gallery_list', :id=>leaf)

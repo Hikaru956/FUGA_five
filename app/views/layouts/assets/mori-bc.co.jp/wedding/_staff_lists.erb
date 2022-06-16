@@ -3,7 +3,7 @@
 <ul class="wrapper">
 <%
         @staffs.each do | staff | @staff = staff
-            if request.host == 'sr2.swifty.jp'
+            if true || request.host == 'sr2.swifty.jp'
                 page_url  = url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key)
             else
                 page_url  = url_for(:action=>'staff', :id=>@staff)

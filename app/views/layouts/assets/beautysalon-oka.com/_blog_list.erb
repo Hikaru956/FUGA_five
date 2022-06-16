@@ -33,7 +33,7 @@
         <ul class="p3m2">
 <%
             latest_leafs.each do | leaf |
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     page_url  = url_for(:action=>'stream_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 else
                     page_url  = url_for(:action=>'stream_show', :id=>leaf)

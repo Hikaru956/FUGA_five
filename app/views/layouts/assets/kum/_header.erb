@@ -39,7 +39,7 @@
 	<div id="overlay" class=""></div>
 	<nav id="nav">
 		<ul>
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
 			<li class="home"><a href="//staffroom.swifty.jp/home?wkey=<%= @website.wsite_hash_key %>">HOME</a></li>
 			<li class="about"><a href="//staffroom.swifty.jp/fix?id=32294&wkey=<%= @website.wsite_hash_key %>">ABOUT</a></li>
 			<li class="contents">

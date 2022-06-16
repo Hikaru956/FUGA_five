@@ -30,7 +30,7 @@
         <ul id="whatsnew_list">
 <%
             latest_leafs.each do | leaf |
-                if request.host == 'staffroom.swifty.jp'
+                if true || request.host == 'staffroom.swifty.jp'
                     page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 else
                     page_url  = url_for(:action=>'news_show', :id=>leaf)

@@ -1,6 +1,6 @@
 <header id="header" class="">
     <div id="brand">
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
         <a href="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
         <a href="https://<%= request.host %>/home">
@@ -15,7 +15,7 @@
     <div id="overlay"></div>
     <nav id="nav">
         <div id="navbrand">
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
             <a href="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
             <a href="https://<%= request.host %>/home">

@@ -11,7 +11,7 @@
         </div>
         <ul class="categorylist">
             <li>
-<%  if request.host == 'staffroom.swifty.jp' %>
+<%  if true || request.host == 'staffroom.swifty.jp' %>
                 <a href="https://<%= request.host %>/news?id=4226&wkey=<%= @website.wsite_hash_key %>">
 <%  else %>
                 <a href="https://<%= request.host %>/news?id=4226">
@@ -23,7 +23,7 @@
                 <img src="/assets/imgs/category_slash3.png" alt="">
             </li>
             <li>
-<%  if request.host == 'staffroom.swifty.jp' %>
+<%  if true || request.host == 'staffroom.swifty.jp' %>
                 <a href="https://<%= request.host %>/news?id=4230&wkey=<%= @website.wsite_hash_key %>">
 <%  else %>
                 <a href="https://<%= request.host %>/news?id=4230">
@@ -35,7 +35,7 @@
                 <img src="/assets/imgs/category_slash3.png" alt="">
             </li>
             <li>
-<%  if request.host == 'staffroom.swifty.jp' %>
+<%  if true || request.host == 'staffroom.swifty.jp' %>
                 <a href="https://<%= request.host %>/news?id=4231&wkey=<%= @website.wsite_hash_key %>">
 <%  else %>
                 <a href="https://<%= request.host %>/news?id=4231">
@@ -65,7 +65,7 @@
 <%
         latest_leafs.each do | leaf |
             if leaf.content_category_id == 4226 || leaf.content_category_id == 4230 || leaf.content_category_id == 4231
-                if request.host == 'staffroom.swifty.jp'
+                if true || request.host == 'staffroom.swifty.jp'
                     page_url  = url_for(:action=>'news_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 else
                     page_url  = url_for(:action=>'news_show', :id=>leaf)

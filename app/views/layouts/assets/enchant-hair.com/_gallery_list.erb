@@ -31,7 +31,7 @@
 <aside id="home_styleList">
     <div class="container">
         <h1>
-<%          if request.host == 'sr2.swifty.jp' %>
+<%          if true || request.host == 'sr2.swifty.jp' %>
             <a href="/collcetions?id=162&wkey=<%= @website.wsite_hash_key %>">
 <%          else %>
             <a href="/collcetions?id=162">
@@ -42,7 +42,7 @@
         <ul class="nonStyle wrapper">
 <%
             latest_leafs.each do | leaf |
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     page_url  = url_for(:action=>'gallery_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
                 else
                     page_url  = url_for(:action=>'gallery_show', :id=>leaf)

@@ -27,7 +27,7 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="website">
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
 <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
 <meta property="og:url"               content="https://<%= request.host %>/home">
@@ -86,7 +86,7 @@
 <div id="site_image">
 <% site_img = VisualWidget.search_widget_bag_for(@website, "605b57d0a6a19a9ac103d9a3e1f28df1") %>
 <% if !site_img.blank? && site_img.is_valid? %>
-<img src="//<%= request.host %><%= site_img.photos[0].clip.url() %>" alt="次世代を担う美容師さんを応援するウェッブマガジン、できました。">
+<img src="<%= site_img.photos[0].clip.url() %>" alt="次世代を担う美容師さんを応援するウェッブマガジン、できました。">
 <% end %>
 </div>
 <div class="container">

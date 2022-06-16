@@ -6,7 +6,7 @@
         <% elsif nav_item.page_type==WebPage::TYPE_FIX %>
             <% fixed_leaf = ContentLeaf.find_by_hash_key(nav_item.content_key) %>
             <% unless fixed_leaf.blank? %>
-                    <% if request.host == 'sr2.swifty.jp' %>
+                    <% if true || request.host == 'sr2.swifty.jp' %>
                     <%= link_to model_title(fixed_leaf), :action=>nav_item.action_name, :id=>fixed_leaf, :wkey=>@website.wsite_hash_key %>
                 <% else %>
                     <%= link_to model_title(fixed_leaf), :action=>nav_item.action_name, :id=>fixed_leaf %>
@@ -14,13 +14,13 @@
             <% end %>
         <% else %>
             <% if nav_item.content_type.blank? %>
-                <% if request.host == 'sr2.swifty.jp' %>
+                <% if true || request.host == 'sr2.swifty.jp' %>
                 <%= link_to model_name(nav_item), :action=>nav_item.action_name, :wkey=>@website.wsite_hash_key %>
                 <% else %>
                 <%= link_to model_name(nav_item), :action=>nav_item.action_name %>
                 <% end %>
             <% else %>
-                <% if request.host == 'sr2.swifty.jp' %>
+                <% if true || request.host == 'sr2.swifty.jp' %>
                     <%= link_to model_name(nav_item), :action=>nav_item.action_name, :id=>nav_item.content_category.id, :wkey=>@website.wsite_hash_key %>
                 <% else %>
                     <%= link_to model_name(nav_item), :action=>nav_item.action_name, :id=>nav_item.content_category.id %>

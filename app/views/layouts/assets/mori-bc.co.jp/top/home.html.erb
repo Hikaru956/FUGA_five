@@ -28,7 +28,7 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="website">
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
 <meta property="og:url"               content="//<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
 <meta property="og:url"               content="//<%= request.host %>/home">
@@ -40,7 +40,7 @@
 <% end %>
 <% og_img = VisualWidget.search_widget_bag_for(@website, "97c4eb1c6485af7ac876bd9158201da3") %>
 <% if !og_img.blank? && og_img.is_valid? %>
-<meta property="og:image"             content="//<%= request.host %><%= og_img.photos[0].clip.url() %>">
+<meta property="og:image"             content="<%= og_img.photos[0].clip.url() %>">
 <% end %>
 <% unless @website.wsite_description_shop.blank? %>
 <meta property="og:description"       content="<%= @website.wsite_description_shop %>">
@@ -131,7 +131,7 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "e5ae2655654d0c9d0f467e59dc10a772") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= logomark.photos[0].clip.url() %>" alt="MORI BEAUTY CORPORATION.">
+            <img src="<%= logomark.photos[0].clip.url() %>" alt="MORI BEAUTY CORPORATION.">
         </div>
 <% end %>
         <ul>

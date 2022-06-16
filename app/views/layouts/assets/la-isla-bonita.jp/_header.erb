@@ -7,13 +7,13 @@
         <div id="header_img">
 <% logomark = VisualWidget.search_widget_bag_for(@website, "f6053733ef0b04f74885976f9f3ef329") %>
 <% if logomark.blank? || !logomark.is_valid? %>
-    <% if request.host == 'staffroom.swifty.jp' %>
+    <% if true || request.host == 'staffroom.swifty.jp' %>
             <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="//placehold.it/240x120" alt="logo mark"></a>
     <% else %>
             <a href="/home" id="brand"><img src="//placehold.it/240x120" alt="logo mark"></a>
     <% end %>
 <% else %>
-    <% if request.host == 'staffroom.swifty.jp' %>
+    <% if true || request.host == 'staffroom.swifty.jp' %>
             <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>
     <% else %>
             <a href="/home" id="brand"><img src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>

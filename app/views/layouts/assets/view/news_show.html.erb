@@ -78,7 +78,7 @@
             else
                 image_url = '//placehold.jp/24/eeeeee/727272/320x180.png?text=Click'
             end
-            if request.host == 'staffroom.swifty.jp'
+            if true || request.host == 'staffroom.swifty.jp'
                 content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>1, :wkey=>@website.wsite_hash_key)
             else
                 content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>1)
@@ -101,7 +101,7 @@
         </ul>
 <%
     @seed.content_category.category_path(true).each do | category |
-        if request.host == 'staffroom.swifty.jp'
+        if true || request.host == 'staffroom.swifty.jp'
             category_url = url_for(:action=>'news_list', :id=>category, :wkey=>@website.wsite_hash_key)
         else
             category_url = url_for(:action=>'news_list', :id=>category)

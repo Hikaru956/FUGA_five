@@ -56,7 +56,7 @@
             else
                 image_url = '//placehold.jp/1020x680.png?text=No Photo'
             end
-            if request.host == 'staffroom.swifty.jp'
+            if true || request.host == 'staffroom.swifty.jp'
                 content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
             else
                 content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page)
@@ -70,7 +70,7 @@
     </ul>
 </article>
 <aside class="text-center">
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
     <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'＜', :next_label=>'＞') %>
 <% else %>
     <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'＜', :next_label=>'＞') %>

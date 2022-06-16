@@ -18,7 +18,7 @@
 <meta http-equiv="X-UA-Compatible"    content="IE=edge">
 <%
     contact_category = ContentCategory.type_root(@website, ContentCategory::TYPE_INFO)
-    if request.host == 'sr2.swifty.jp'
+    if true || request.host == 'sr2.swifty.jp'
         staff_url = "https://" + request.host + url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key)
     else
         staff_url = "https://" + request.host + shopalt + url_for(:action=>'staff', :id=>@seed)
@@ -71,7 +71,7 @@
 <!-- パンくずリスト -->
 			<div id="breadcrumbs">
                 <ol>
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
                     <li><a href="https://sr2.swifty.jp/home?wkey=<%= home %>"><i class="icon-home"></i></a></li>
 <%      if @website.wsite_hash_key != home %>
                     <li><a href="https://sr2.swifty.jp/home?wkey=<%= @website.wsite_hash_key %>"><%= @website.name %></a></li>

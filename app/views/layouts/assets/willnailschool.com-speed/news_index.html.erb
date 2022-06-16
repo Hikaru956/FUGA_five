@@ -40,7 +40,7 @@
     </aside>
     <aside id="breadcrumbs">
         <ol>
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>">WILL Nail School</a></li>
 <% else %>
             <li><a href="/home">WILL Nail School</a></li>
@@ -79,7 +79,7 @@
                 else
                     image_url = '//placehold.jp/327x327.png?text=No Photo'
                 end
-                if request.host == 'staffroom.swifty.jp'
+                if true || request.host == 'staffroom.swifty.jp'
                     content_url = url_for(:action=>'news_list', :id=>bag, :wkey=>@website.wsite_hash_key)
                 else
                     content_url = url_for(:action=>'news_list', :id=>bag)

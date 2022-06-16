@@ -63,7 +63,7 @@
             else
                 image_url = '//placehold.jp/ffffff/cccccc/256x256.jpg?text='+publish
             end
-            if request.host == 'sr2.swifty.jp'
+            if true || request.host == 'sr2.swifty.jp'
                 content_url = url_for(:action=>'stream_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
             else
                 content_url = url_for(:action=>'stream_show', :id=>@leaf, :page=>@page)
@@ -88,7 +88,7 @@
 <%  end %>
                 </ul>
                 <aside class="pagination text-center">
-<% if request.host == 'sr2.swifty.jp' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
                     <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% else %>
                     <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>

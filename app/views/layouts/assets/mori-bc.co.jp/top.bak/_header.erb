@@ -2,13 +2,13 @@
             <div id="brand">
 <% logomark = VisualWidget.search_widget_bag_for(@website, "e5ae2655654d0c9d0f467e59dc10a772") %>
 <% if logomark.blank? || !logomark.is_valid? %>
-    <% if request.host == 'sr2.swifty.jp' %>
+    <% if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="logomark"><img src="//placehold.jp/240x120.jpg" alt="logo mark"></a>
     <% else %>
                 <a href="/home" id="logomark"><img src="//placehold.jp/240x120.jpg" alt="logo mark"></a>
     <% end %>
 <% else %>
-    <% if request.host == 'sr2.swifty.jp' %>
+    <% if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="logomark"><img src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>
     <% else %>
                 <a href="/home" id="logomark"><img src="<%= logomark.photos[0].clip.url() %>" alt="logo mark"></a>

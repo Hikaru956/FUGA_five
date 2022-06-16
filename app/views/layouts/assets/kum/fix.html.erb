@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible"    content="IE=edge">
 <%
-    if request.host == 'staffroom.swifty.jp'
+    if true || request.host == 'staffroom.swifty.jp'
         fix_url = url_for(:action=>'fix', :id=>@seed, :wkey=>@website.wsite_hash_key)
     else
         fix_url = url_for(:action=>'fix', :id=>@seed)

@@ -5,7 +5,7 @@
 <%  codo = "f90c2c82832eb4a51b59eb07559b7a05" %>
 <%  if @website.wsite_hash_key == lis %>
 			<div id="brand">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
 				 <a href="https://sr2.swifty.jp/home?wkey=<%= lis %>">
 <%      else %>
 				 <a href="https://fleur.de-lis.com/lis/home">
@@ -15,7 +15,7 @@
 			</div>
 <%  elsif @website.wsite_hash_key == ens %>
 			<div id="brand">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
 				 <a href="https://sr2.swifty.jp/home?wkey=<%= ens %>">
 <%      else %>
 				 <a href="https://fleur.de-lis.com/ens/home">
@@ -25,7 +25,7 @@
 			</div>
 <%  elsif @website.wsite_hash_key == lm %>
 			<div id="brand">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
 				 <a href="https://sr2.swifty.jp/home?wkey=<%= lm %>">
 <%      else %>
 				 <a href="https://fleur.de-lis.com/lm/home">
@@ -35,7 +35,7 @@
 			</div>
 <%  elsif @website.wsite_hash_key == codo %>
 			<div id="brand">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
 				 <a href="https://sr2.swifty.jp/home?wkey=<%= codo %>">
 <%      else %>
 				 <a href="https://fleur.de-lis.com/codo/home">
@@ -45,7 +45,7 @@
 			</div>
 <%  else %>
 			<div id="brand">
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
 				 <a href="https://sr2.swifty.jp/home?wkey=<%= home %>">
 <%      else %>
 				 <a href="https://fleur.de-lis.com/home">

@@ -1,7 +1,7 @@
 <% logo    = VisualWidget.search_widget_bag_for(@website, "6ac0ac1f23a3d4b308d6b802feb29255") %>
 <header id="header">
   <h1>
-<% if request.host == 'staffroom.swifty.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
     <a href="/home?wkey=<%= @website.wsite_hash_key %>">
 <% else %>
     <a href="/home">

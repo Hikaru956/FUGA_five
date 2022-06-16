@@ -4,13 +4,13 @@
 <!-- ロゴマーク -->
                 <div id="header_img">
 <% if logo.blank? || !logo.is_valid? %>
-    <% if request.host == 'sr2.swifty.jp' %>
+    <% if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="//placehold.jp/240x120.jpg" alt="logo mark"></a>
     <% else %>
                     <a href="/home" id="brand"><img src="//placehold.jp/240x120.jpg" alt="logo mark"></a>
     <% end %>
 <% else %>
-    <% if request.host == 'sr2.swifty.jp' %>
+    <% if true || request.host == 'sr2.swifty.jp' %>
                     <a href="/home?wkey=<%= @website.wsite_hash_key %>" id="brand"><img src="<%= logo.photos[0].clip.url() %>" alt="logo"></a>
     <% else %>
                     <a href="/home" id="brand"><img src="<%= logo.photos[0].clip.url() %>" alt="logo"></a>

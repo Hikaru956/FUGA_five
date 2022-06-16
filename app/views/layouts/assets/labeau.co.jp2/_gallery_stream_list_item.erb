@@ -1,5 +1,5 @@
 <%
-if request.host == 'sr2.swifty.jp'
+if true || request.host == 'sr2.swifty.jp'
     art_url = url_for(:action=>'gallery_list', :id=>temp_local, :wkey=>@website.wsite_hash_key)
 else
     art_url = url_for(:action=>'gallery_list', :id=>temp_local)

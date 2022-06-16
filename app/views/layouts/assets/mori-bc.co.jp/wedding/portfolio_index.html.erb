@@ -48,7 +48,7 @@
                 else
                     image_url = '//placehold.jp/327x327.jpg?text=No Photo'
                 end
-                if request.host == 'sr2.swifty.jp'
+                if true || request.host == 'sr2.swifty.jp'
                     content_url = url_for(:action=>'portfolio_list', :id=>bag, :wkey=>@website.wsite_hash_key)
                 else
                     content_url = url_for(:action=>'portfolio_list', :id=>bag)
@@ -82,13 +82,13 @@
 <% logomark = VisualWidget.search_widget_bag_for(@website, "4352e985f864dc10049914ced4427386") %>
 <% if !logomark.blank? && logomark.is_valid? %>
         <div id="tnav_logo">
-            <img src="//<%= request.host %><%= logomark.photos[0].clip.url() %>" alt="logomark">
+            <img src="<%= logomark.photos[0].clip.url() %>" alt="logomark">
         </div>
 <% end %>
         <ul>
 <%= render :partial=>"#{LayoutScheme.asset_root}/mori-bc.co.jp/wedding/navigation" %>
             <li>
-<%      if request.host == 'sr2.swifty.jp' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                 <a href="/home?wkey=08ebd0bbcad881d718362fef54ee81e8">MORI<span> BEAUTY CORPORATION</span></a>
 <%      else %>
                 <a href="http://www.mori-bc.co.jp/">MORI<span> BEAUTY CORPORATION</span></a>

@@ -61,7 +61,7 @@
             else
                 image_url = '//placehold.jp/E0E0E0/FFFFFF/326x320.png?text=NoPhoto'
             end
-            if request.host == 'sr2.swifty.jp'
+            if true || request.host == 'sr2.swifty.jp'
                 gallery_url = url_for(:action=>'gallery_list', :id=>leaf, :wkey=>@website.wsite_hash_key)
             else
                 gallery_url = url_for(:action=>'gallery_list', :id=>leaf)
