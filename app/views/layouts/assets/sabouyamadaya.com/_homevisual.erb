@@ -26,7 +26,7 @@
 <aside id="homeVis">
 <%      if !logo.blank? && logo.is_valid? %>
     <h1 id="mainLogo">
-        <img src="<%= url_for_file_column(logo.photos[0], :image) %>" alt="茶房やまだ屋ロゴ">
+        <img src="<%= logo.photos[0].clip.url() %>" alt="茶房やまだ屋ロゴ">
     </h1>
 <%      end %>
 <%      if !shop.blank? && shop.is_valid? %>

@@ -15,13 +15,9 @@
 <meta name="robots"                   content="noindex,nofollow">
 <% end %>
 <meta property="og:type"              content="article">
-<meta property="og:url"               content="https://<%= request.host + url_for(:action=>'news_show', :id=>@seed) %>">
+<meta property="og:url"               content="https://<%= request.host + url_for(:action=>'gallery_show', :id=>@seed) %>">
 <meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"         content="<%= @website.name %>">
-<% key_photo = key_photo(@seed) %>
-<% unless key_photo.blank? %>
-<meta property="og:image"             content="https://<%= request.host + key_photo.clip.url() %>">
-<% end %>
 <% unless @website.social_facebook_uri.blank? %>
 <meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
 <% else %>
@@ -45,25 +41,32 @@
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/style" %>
 </head>
-<body id="news_show">
-<!-- Header -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
-<!-- article -->
-<article id="article">
-    <h1><%= model_title(@seed) %></h1>
-<% unless @seed.description.blank? %>
-    <div class="contents">
-<%= raw @seed.description %>
+
+  <body>
+	<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
+
+    <div class="container">
+      <div class="row">
+        <div class="box">
+			<%= yield %>
+            <main>
+                <div class="container">
+                    <%= render :partial=>"#{LayoutScheme.asset_root}/956_common/inquiry_new" %>
+                </div>
+            </main>
+	    </div>
+      </div>
     </div>
-    <%= leaf_navigation(@seed) %>
-<% end %>
-</article>
-<!-- Footer -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/footer" %>
-<!-- gnav -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/gnav" %>
-<!-- common javascript -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/common_js" %>
-<!-- page specific javascript -->
-</body>
+    
+	<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/homefooter" %>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Make sure to add jQuery - download the most recent version at http://jquery.com/ -->
+	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+	<script type="text/javascript" src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+  </body>
 </html>

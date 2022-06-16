@@ -5,7 +5,7 @@
 <%    if !bkimg.blank? && bkimg.is_valid? %>
 <style>
 #homeVis {
-    background-image: url("<%= url_for_file_column(bkimg.photos[0], :image) %>");
+    background-image: url("<%= bkimg.photos[0].clip.url() %>");
 }
 </style>
 <%    end %>

@@ -55,6 +55,7 @@
     <div class="content">
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
     </div>
+    <%= leaf_navigation(@seed) %>
 </article>
 <%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/footer" %>
 <% unless @website.analytics_code.blank? %>
