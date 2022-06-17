@@ -41,7 +41,9 @@ $(function() {
         $(window).scroll(function() {
             ns = $(this).scrollTop();
             if (ns > os) {
+/*
                 hd.removeClass('show');
+*/
             } else {
                 hd.addClass('show');
             }
