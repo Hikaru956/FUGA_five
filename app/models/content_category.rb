@@ -178,7 +178,7 @@ class ContentCategory < ApplicationRecord
   def public_leafs(recurse=false)
     if recurse
       items = ContentLeaf.all
-      items = ContentLeaf.eager_load(:content_category).where('content_categories.is_public=TRUE AND content_leafs.is_public=TRUE').filter_latest(items).order(publish_from: :desc)
+      items = ContentLeaf.eager_load(:content_category).where('content_categories.is_public=TRUE AND content_leafs.is_public=TRUE').filter_latest(items).order(publish_from: :desc).order(created_at: :desc)
       sons = self.sons
       sons << self
       items = items.where("content_leafs.content_category_id IN (?)", sons)
@@ -189,7 +189,7 @@ class ContentCategory < ApplicationRecord
       #return ContentLeaf.find(:all, :conditions=>c.where, :order=>'publish_from desc')
     else
       items = ContentLeaf.all
-      items = ContentLeaf.filter_latest(items).order(publish_from: :desc)
+      items = ContentLeaf.filter_latest(items).order(publish_from: :desc).order(created_at: :desc)
       items = items.where("content_leafs.content_category_id =?", self)
       return items
       #return self.content_leafs.find(:all, :conditions=>ContentLeaf.public_leafs.where, :order=>'publish_from desc')

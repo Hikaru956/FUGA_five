@@ -427,6 +427,7 @@ end
   end
 
   def session_operation
-    @shop = Shop.find(params[:id])
+    @shop = Shop.find_by_id(params[:id])
+    @shop = Shop.find_by_id(params[:hikaru]) if @shop.blank?
   end
 end

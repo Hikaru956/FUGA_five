@@ -1,9 +1,9 @@
 <div class="thumbnail">
 	<div class="caption">
 		<p class="wewll" style="text-align:center;">
-			<%= (photo.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"widget_bag_photo_higher",	:id=>photo) %>
+			<%= (photo.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"widget_bag_photo_higher", :id=>photo) %>
 			<%= photo.position %>
-			<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"widget_bag_photo_lower",	:id=>photo) %>				
+			<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), :action=>"widget_bag_photo_lower", :id=>photo) %>
 		</p>
 	</div>
 	<% unless photo.blank? %>

@@ -27,7 +27,7 @@
 		public_categories << cat
 	end
 
-	latest_leafs = @website.content_leafs.where("content_category_id IN (?)", public_categories).limit(@max).order(publish_from: :desc)
+	latest_leafs = @website.content_leafs.where("content_category_id IN (?)", public_categories).limit(@max).order(publish_from: :desc).order(created_at: :desc)
 %>
 <% unless latest_leafs.blank? %>
 	<h3><%= model_name(navigation) %></h3>

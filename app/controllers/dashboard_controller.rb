@@ -23,10 +23,7 @@ class DashboardController < ApplicationController
     unless params[:wkey].blank?
       return redirect_to :controller=>"bs_renderer", :action=>"home", :wkey=>params[:wkey]
     end
-      p '■　■　■'
-      p params[:wkey]
-      p '■　■　■'
-    return redirect_to :action=>"company_index"
+      return redirect_to :action=>"company_index"
   end
   
   def delegating
@@ -51,14 +48,14 @@ class DashboardController < ApplicationController
   #
   def company_index
     unless current_user.has_permission?(User::ROLE_OPERATOR)
-      return redirect_to(:action=>"company_show", :id=>current_user.company) if current_user.has_permission?(User::ROLE_OWNER) 
-      return redirect_to(:action=>"company_show_shop", :id=>current_user.shop) if current_user.has_permission?(User::ROLE_MANAGER)
+        return redirect_to(:action=>"company_show", :id=>current_user.company) if current_user.has_permission?(User::ROLE_OWNER) 
+        return redirect_to(:action=>"company_show_shop", :id=>current_user.shop) if current_user.has_permission?(User::ROLE_MANAGER)
     end
     #return redirect_to(:action=>"company_show_shop", :id=>current_user.shop) if current_user.has_permission?(User::ROLE_BLOGGER)
     #hikaru
     #@items =Company.paginate(:page => params[:page], :order=>"alt_id asc", :per_page=>PER_PAGE)
-    @items = Company.all.order(alt_id: :asc)
-    @items = @items.paginate(page: params[:page], per_page: PER_PAGE).order(alt_id: :asc)
+    @items = Company.all.order(name: :asc)
+    @items = @items.paginate(page: params[:page], per_page: PER_PAGE).order(name: :asc)
   end
 
   def company_create
@@ -621,10 +618,10 @@ private
   end
 
   def visual_widget_params
-    params.require(:item).permit(:layout_scheme_id, :hash_key, :position, :title, :description)
+    params.require(:item).permit(:id, :layout_scheme_id, :hash_key, :position, :title, :description, :widget_type, :created_at, :updated_at)
   end
   def shop_params
-    params.require(:shop).permit(:alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice, :social_hotpepper_beauty_uri, :social_youtube_uri)
+    params.require(:shop).permit(:alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice, :social_hotpepper_beauty_uri, :social_youtube_uri, :social_line_uri)
   end
 
   def user_params
@@ -632,7 +629,7 @@ private
   end
 
   def staff_params
-    params.require(:staff).permit(:name, :job_title, :staff_status, :description, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :social_hotpepper_beauty_uri)
+    params.require(:staff).permit(:name, :job_title, :staff_status, :description, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :social_hotpepper_beauty_uri, :social_line_uri)
   end
 
 end

@@ -22,7 +22,7 @@
             public_categories << cat
         end
         latest_leafs = @website.public_leafs
-        latest_leafs = latest_leafs.where("content_category_id IN (?)", public_categories).order(publish_from: :desc).limit(@max)
+        latest_leafs = latest_leafs.where("content_category_id IN (?)", public_categories).order(publish_from: :desc).order(created_at: :desc).limit(@max)
         #latest_leafs = ContentLeaf.public_leafs
         #latest_leafs = latest_leafs.where("content_category_id IN (?)", public_categories)
         #c = ContentLeaf.public_leafs

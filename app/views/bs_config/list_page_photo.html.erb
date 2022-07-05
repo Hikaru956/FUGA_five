@@ -29,7 +29,7 @@
 </h4>
 
 <div class="row-fluid">
-	<% array = @shop.photos.order(position: :asc).in_groups_of(3, false)%>
+	<% array = @item.photos.order(position: :asc).in_groups_of(3, false)%>
 	<% for i in 0..(array.size-1) %>
 		<% @lines = array[i] %>
 	    <ul class="thumbnails">
@@ -49,11 +49,5 @@
 				<% end %>
 			</li>		
         </ul>
-		<p class="pull-xright">
-			<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>">
-				<i class="icon-camera"></i>&nbsp;
-				写真追加
-			</a>
-		</p>
 	<% end %>
 </div>

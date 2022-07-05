@@ -59,6 +59,16 @@
 		<tr>
 			<td>住所</td><td><%= @item.address_1 %></td>
 		</tr>
+		<tr>
+			<td>新操作画面　</td>
+			<td>
+				<% if @item.new_ui? %>
+					有効
+				<% else %>
+					無効
+				<% end %>
+			</td>
+		</tr>
 	</tbody>
 </table>
 		

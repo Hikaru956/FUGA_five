@@ -109,15 +109,13 @@ class BsAuthoringController < ApplicationController
   end
 
   def layout_for_edit
-    if true || request.post?
-      unless @website.wsite_layout_edit.blank?
-        item = LayoutScheme.find_by_id(params[:id])
+    unless @website.wsite_layout_edit.blank?
+      item = LayoutScheme.find_by_id(params[:id])
 
-        @website.wsite_layout_edit    = item
-        @website.wsite_layout_deploy  = item  if @website.wsite_layout_deploy.blank?
-        @website.save
-        redirect_to :action=>'index'
-      end
+      @website.wsite_layout_edit    = item
+      @website.wsite_layout_deploy  = item  if @website.wsite_layout_deploy.blank?
+      @website.save
+      redirect_to :controller=>'bs_authoring', :action=>'index'
     end
   end
 
@@ -129,7 +127,7 @@ class BsAuthoringController < ApplicationController
         @website.wsite_layout_deploy  = item
         @website.wsite_layout_edit    = item
         @website.save
-        redirect_to :action=>'index'
+        redirect_to :controller=>'bs_authoring', :action=>'index'
       end
     end
   end
@@ -139,7 +137,7 @@ class BsAuthoringController < ApplicationController
       unless @website.wsite_layout_edit.blank?
         @website.wsite_layout_edit    = @website.wsite_layout_deploy
         @website.save
-        redirect_to :action=>'index'
+        redirect_to :controller=>'bs_authoring', :action=>'index'
       end
     end
   end
@@ -152,7 +150,7 @@ class BsAuthoringController < ApplicationController
         @website.wsite_color_edit    = item
         @website.wsite_color_deploy  = item  if @website.wsite_color_deploy.blank?
         @website.save
-        redirect_to :action=>'index'
+        redirect_to :controller=>'bs_authoring', :action=>'index'
       end
     end
   end
@@ -165,17 +163,17 @@ class BsAuthoringController < ApplicationController
         @website.wsite_color_deploy  = item
         @website.wsite_color_edit    = item
         @website.save
-        redirect_to :action=>'index'
+        redirect_to :controller=>'bs_authoring', :action=>'index'
       end
     end
   end
 
   def color_for_nil
     if true || request.post?
-      unless @website.wsite_layout_edit.blank?
-        @website.wsite_layout_edit    = @website.wsite_layout_deploy
+      unless @website.wsite_color_edit.blank?
+        @website.wsite_color_edit    = @website.wsite_color_deploy
         @website.save
-        redirect_to :action=>'index'
+        redirect_to :controller=>'bs_authoring', :action=>'index'
       end
     end
   end
@@ -192,13 +190,13 @@ class BsAuthoringController < ApplicationController
   def update_layout_edit
       @website.layout_edit = params[:layout_edit]
       @website.save
-      redirect_to :action=>'index'
+      redirect_to :controller=>'bs_authoring', :action=>'index'
   end
 
   def update_colors_edit
       @website.colors_edit = params[:colors_edit]
       @website.save
-      redirect_to :action=>'index'
+      redirect_to :controller=>'bs_authoring', :action=>'index'
   end
 
   def apply_layout
@@ -206,7 +204,7 @@ class BsAuthoringController < ApplicationController
         @website.layout_deploy  = @website.layout_edit
         @website.layout_edit    = nil
         @website.save
-        redirect_to :action=>'index'
+        redirect_to :controller=>'bs_authoring', :action=>'index'
       end
   end
 
@@ -216,7 +214,7 @@ class BsAuthoringController < ApplicationController
         @website.colors_deploy  = @website.colors_edit
         @website.colors_edit    = nil
         @website.save
-        redirect_to :action=>'index'
+        redirect_to :controller=>'bs_authoring', :action=>'index'
       end
   end
 
@@ -230,7 +228,7 @@ class BsAuthoringController < ApplicationController
 
   def update_widget_bag
       @widget_bag = VisualWidgetBag.find_by_id(params[:id])
-      @widget_bag.update_attributes(params[:widget_bag])
+      @widget_bag.update_attributes(widget_bag_params)
       redirect_to :action=>'manage_widget'
   end
 
@@ -275,8 +273,8 @@ class BsAuthoringController < ApplicationController
 
   def session_operation
     session[:wkey]  = params[:wkey] unless params[:wkey].blank?
-    @shop = @website  = Shop.find_by_wsite_hash_key(session[:wkey])  unless session[:wkey].blank?
-
+    @website  = Shop.find_by_wsite_hash_key(session[:wkey])  unless session[:wkey].blank?
+    @shop = @website
     @author_mode      = true
     redirect_to :action=>'/'  if @website.blank? || @website.wsite_run_mode==Shop::WSITE_BLOCKED
   end
@@ -285,4 +283,9 @@ class BsAuthoringController < ApplicationController
     params.require(:photo).permit(:clip)
     #params.permit(:file)
   end
+
+  def widget_bag_params
+    params.require(:widget_bag).permit(:id, :shop_id, :visual_widget_id, :data_string, :data_text, :data_url, :data_boolean, :data_code, :created_at, :updated_at)
+  end
+
 end

@@ -52,7 +52,7 @@
 			</table>
 
 			<%= will_paginate(@items, 	:params=> { :action=>'list', :page=>@page, :search_alt=>@search_alt, :search_name=>@search_name, :search_furigana=>@search_furigana, :search_telephone=>@search_telephone, :search_shop_id=>@search_shop_id }, 
-										 :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+										 class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 		<% end %>
 	</div>
 </div>

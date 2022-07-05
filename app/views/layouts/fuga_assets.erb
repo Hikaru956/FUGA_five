@@ -31,7 +31,7 @@
 		<!--[if IE 7]>
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet">
 		<![endif]-->
-        <%= stylesheet_link_tag "pagination.css" %>
+        <%= stylesheet_link_tag "pagination.css" if false %>
 		<link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
 
 		<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>" async defer></script>
@@ -40,9 +40,10 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 
+		<script src="/assets/dropzone.self-9dc8eb2d84a1a7f9de81f656d04dcfd010f1afb042d46aa3f933ba256cb8f0f0.js?body=1" data-turbolinks-track="false"></script>
+
 		<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
-		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-		<%= javascript_include_tag "main.js" if false %>
+		<%= javascript_include_tag "main.js" %>
 		<%= javascript_include_tag "modernizr-2.6.2-respond-1.1.0.min.js"%>	
     </head>
     <body>

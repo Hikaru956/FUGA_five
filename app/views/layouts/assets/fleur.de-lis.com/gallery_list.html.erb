@@ -120,7 +120,7 @@
             </ul>
 		</article>
         <aside class="pagination text-center">
-            <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+            <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
         </aside>
 	</div>
 </main>

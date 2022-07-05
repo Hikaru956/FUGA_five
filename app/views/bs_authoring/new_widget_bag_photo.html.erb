@@ -15,21 +15,21 @@
 	<blockquote><%= h @widget_bag.visual_widget.description %></blockquote>
 
 
-<% item = Photo.new %>
-<%= form_tag(bs_authoring_create_widget_bag_photo_path(id: @widget_bag),method: :post, class: "dropzone",id: 'dropzone') do %>
-<div class="fallback">
-	<%= file_field_tag('photo[clip]') %>
-</div>
-<% end %>
-<script>
-	Dropzone.options.dropzone = {
-		paramName: "photo[clip]",
-		maxFilesize: 1,
-		acceptedFiles: "image/*",
-		init: function() {
-			this.on('complete', function (file) {
-				//location.reload();
-			})
+	<% item = Photo.new %>
+	<%= form_tag(bs_authoring_create_widget_bag_photo_path(id: @widget_bag),method: :post, class: "dropzone",id: 'dropzone') do %>
+		<div class="fallback">
+			<%= file_field_tag('photo[clip]') %>
+		</div>
+	<% end %>
+	<script>
+		Dropzone.options.dropzone = {
+			paramName: "photo[clip]",
+			maxFilesize: 1,
+			acceptedFiles: "image/*",
+			init: function() {
+				this.on('complete', function (file) {
+					//location.reload();
+				})
+			}
 		}
-	}
-</script>
+	</script>

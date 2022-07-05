@@ -8,7 +8,7 @@
             public_categories.concat(cat.sons)
             public_categories << cat
         end
-        latest_news = @website.public_leafs.where("content_category_id IN (?)", public_categories).order(publish_from: :desc).limit(@max)
+        latest_news = @website.public_leafs.where("content_category_id IN (?)", public_categories).order(publish_from: :desc).order(created_at: :desc).limit(@max)
         #c = ContentLeaf.public_leafs
         #c.and "content_category_id", public_categories
         #latest_news = @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
@@ -24,7 +24,7 @@
             public_categories.concat(cat.sons)
             public_categories << cat
         end
-        latest_blog = @website.public_leafs.where("content_category_id IN (?)", public_categories).order(publish_from: :desc).limit(@max)
+        latest_blog = @website.public_leafs.where("content_category_id IN (?)", public_categories).order(publish_from: :desc).order(created_at: :desc).limit(@max)
         #c = ContentLeaf.public_leafs
         #c.and "content_category_id", public_categories
         #latest_blog = @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')

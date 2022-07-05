@@ -14,24 +14,21 @@
 	</h4>
 	<blockquote><%= h @visual_widget.description %></blockquote>
 	
-	<% array = @widget_bag.photos.in_groups_of(3, false)%>
-	<% for i in 0..(array.size-1) %>
-		<% @lines = array[i] %>
-	    <ul class="thumbnails">
-	        <li class="span4">
-	        	<%= render :partial=>"widget_bag_photo_item", :locals => {:photo => @lines[0]}  if @lines.size>=1 %>
-			</li>		
-	        <li class="span4">
-	        	<%= render :partial=>"widget_bag_photo_item", :locals => {:photo => @lines[1]}  if @lines.size>=2 %>
-			</li>		
-	        <li class="span4">
-	        	<%= render :partial=>"widget_bag_photo_item", :locals => {:photo => @lines[2]}  if @lines.size>=3 %>
-			</li>		
-        </ul>
-	<% end %>
-	
-	
+	<% array = @widget_bag.photos.order(position: :asc).in_groups_of(3, false)%>
+	<div class="row-fluid">
+		<% for i in 0..(array.size-1) %>
+			<% @lines = array[i] %>
+			<ul class="thumbnails">
+				<li class="span4">
+					<%= render :partial=>"widget_bag_photo_item", :locals => {:photo => @lines[0]}  if @lines.size>=1 %>
+				</li>		
+				<li class="span4">
+					<%= render :partial=>"widget_bag_photo_item", :locals => {:photo => @lines[1]}  if @lines.size>=2 %>
+				</li>		
+				<li class="span4">
+					<%= render :partial=>"widget_bag_photo_item", :locals => {:photo => @lines[2]}  if @lines.size>=3 %>
+				</li>		
+			</ul>
+		<% end %>
+	</div>
 <% end %>
-
-
-

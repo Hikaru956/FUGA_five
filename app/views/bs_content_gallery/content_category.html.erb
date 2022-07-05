@@ -88,12 +88,12 @@
 				</li>		
 	        </ul>
 		<% end %>
-		<%= will_paginate(@leafs, :params=> {:action=>'content_category', :id=>@parent_category, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+		<%= will_paginate(@leafs, :params=> {:action=>'content_category', :id=>@parent_category, :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 	</div>
 <% end %>
 
 <% unless @bag_roots.blank? %>
-	<%= form_tag({:action=>"content_category", :id=>nil}, :class=>"form-horizontal")  do %>
+	<%= form_tag({:action=>"content_category", :id=>nil}, :class=>"form-horizontal", method: :patch)  do %>
 		<div id="modal_category_select" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

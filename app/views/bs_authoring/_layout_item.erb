@@ -2,9 +2,6 @@
 	<% key_photo = temp_local.photo %>
 	<% unless key_photo.blank? %>
 		<%= image_tag key_photo.clip.url(:thumb)%>
-		<% if false %>
-			<%= image_tag key_photo.clip.url(:thumb) %>
-		<% end %>
 	<% else %>
 		<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Photo%0A">
 	<% end %>
@@ -20,21 +17,21 @@
     	<% if @website.wsite_layout_edit_id==temp_local.id %>
             <p>
 				<% if @website.wsite_layout_deploy_id!=@website.wsite_layout_edit_id%>
-	            	<%= link_to(raw("<i class='icon-hand-right'></i>&nbsp;適用"), {:action=>'layout_for_deploy', :id=>temp_local}, {:class=>"btn btn-info btn-small", :method=>:post}) %>
-	            	<%= link_to(raw("<i class='icon-remove'></i>&nbsp;編集解除"), {:action=>'layout_for_nil'}, {:class=>"btn btn-danger btn-small", :method=>:post}) %>
+	            	<%= link_to(raw("<i class='icon-hand-right'></i>&nbsp;適用"), {:action=>'layout_for_deploy', :id=>temp_local}, {:class=>"btn btn-info btn-small", method: :post}) %>
+	            	<%= link_to(raw("<i class='icon-remove'></i>&nbsp;編集解除"), {:action=>'layout_for_nil'}, {:class=>"btn btn-danger btn-small", method: :post}) %>
 				<% else %>
 	            	<%= link_to(raw("<i class='icon-globe'></i>&nbsp;運用サイト表示"), {:controller=>'bs_renderer'}, {:class=>"btn btn-success btn-small", :target=>"_blank?"}) %>
-	            	<%= link_to(raw("<i class='icon-pencil'></i>&nbsp;編集開始"), {:action=>'layout_for_edit', :id=>temp_local}, {:class=>"btn btn-primary btn-small", :method=>:post}) %>
+	            	<%= link_to(raw("<i class='icon-pencil'></i>&nbsp;編集開始"), {:action=>'layout_for_edit', :id=>temp_local}, {:class=>"btn btn-primary btn-small", method: :post}) %>
 				<% end %>
 			</p>
 		<% elsif @website.wsite_layout_deploy_id==temp_local.id %>
 			<p>
-            	<%= link_to(raw("<i class='icon-pencil'></i>&nbsp;編集"), {:action=>'layout_for_edit', :id=>temp_local}, {:class=>"btn btn-primary btn-small", :method=>:post}) %>
+            	<%= link_to(raw("<i class='icon-pencil'></i>&nbsp;編集"), {:action=>'layout_for_edit', :id=>temp_local}, {:class=>"btn btn-primary btn-small", method: :post}) %>
 				<%= link_to(raw("<i class='icon-globe'></i>&nbsp;運用サイト表示"), {:controller=>'bs_renderer', :action=>'index', :wkey=>@website.wsite_hash_key}, {:class=>"btn btn-success btn-small", :target=>"_blank?"}) %>
 			</p>
 		<% else %>
             <p>
-            	<%= link_to(raw("<i class='icon-pencil'></i>&nbsp;編集開始"), {:action=>'layout_for_edit', :id=>temp_local}, {:class=>"btn btn-primary btn-small", :method=>:post}) %>
+            	<%= link_to(raw("<i class='icon-pencil'></i>&nbsp;編集開始"), {:action=>'layout_for_edit', :id=>temp_local}, {:class=>"btn btn-primary btn-small", method: :post}) %>
 			</p>
 		<% end %>
         </p>

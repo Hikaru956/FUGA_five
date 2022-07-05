@@ -76,8 +76,18 @@ Fuga326::Application.routes.draw do
   post 'bs_config/shop_update_position', to: 'bs_config#shop_update_position'
   delete 'bs_config/shop_delete_position', to:'bs_config#shop_delete_position'
 
+  get 'bs_authoring/index', to: 'bs_authoring#index'
   post 'bs_authoring/create_widget_bag_photo', to: 'bs_authoring#create_widget_bag_photo'
   delete 'bs_authoring/delete_widget_bag_photo', to: 'bs_authoring#delete_widget_bag_photo'
+  post 'bs_authoring/update_widget_bag', to: 'bs_authoring#update_widget_bag'
+  post 'bs_authoring/layout_for_edit', to: 'bs_authoring#layout_for_edit'
+  post 'bs_authoring/layout_for_deploy', to: 'bs_authoring#layout_for_deploy'
+  post 'bs_authoring/layout_for_nil', to: 'bs_authoring#layout_for_nil'
+  post 'bs_authoring/color_for_deploy', to: 'bs_authoring#color_for_deploy'
+  post 'bs_authoring/color_for_edit', to: 'bs_authoring#color_for_edit'
+  post 'bs_authoring/color_for_nil', to: 'bs_authoring#color_for_nil'
+
+
 
   post 'dashboard/company_create', to: 'dashboard#company_create'
   patch 'dashboard/company_update', to: 'dashboard#company_update'
@@ -121,6 +131,7 @@ Fuga326::Application.routes.draw do
   delete 'dashboard/shop_delete_position', to: 'dashboard#shop_delete_position'
 
   get 'bs_content_gallery/content_root', to: 'bs_content_gallery#content_root'
+  patch 'bs_content_gallery/content_category', to: 'bs_content_gallery#content_category'
   post 'bs_content_gallery/create_bag', to: 'bs_content_gallery#create_bag'
   patch 'bs_content_gallery/update_bag', to: 'bs_content_gallery#update_bag'
   delete 'bs_content_gallery/delete_bag', to: 'bs_content_gallery#delete_bag'
@@ -134,6 +145,8 @@ Fuga326::Application.routes.draw do
   patch 'bs_content_gallery/update_photo', to: 'bs_content_gallery#update_photo'
   delete 'bs_content_gallery/delete_photo', to: 'bs_content_gallery#delete_photo'
   post 'bs_content_gallery/content_category_create', to: 'bs_content_gallery#content_category_create'
+  patch 'bs_content_gallery/content_category_update', to: 'bs_content_gallery#content_category_update'
+  delete 'bs_content_gallery/content_category_delete', to: 'bs_content_gallery#content_category_delete'
   
   get 'bs_content_portfolio/content_root', to: 'bs_content_portfolio#content_root'
   patch 'bs_content_portfolio/content_category', to: 'bs_content_portfolio#content_category'
@@ -152,6 +165,7 @@ Fuga326::Application.routes.draw do
   delete 'bs_content_portfolio/content_category_delete', to: 'bs_content_portfolio#content_category_delete'
 
   get 'bs_content_news/content_root', to: 'bs_content_news#content_root'
+  patch 'bs_content_news/content_category', to: 'bs_content_news#content_category'
   post 'bs_content_news/create_bag', to: 'bs_content_news#create_bag'
   patch 'bs_content_news/update_bag', to: 'bs_content_news#update_bag'
   delete 'bs_content_news/delete_bag', to: 'bs_content_news#delete_bag'
@@ -160,8 +174,12 @@ Fuga326::Application.routes.draw do
   delete 'bs_content_news/delete_leaf', to: 'bs_content_news#delete_leaf'
   post 'bs_content_news/create_photo', to: 'bs_content_news#create_photo'
   delete 'bs_content_news/delete_photo', to: 'bs_content_news#delete_photo'
+  post 'bs_content_news/content_category_create', to: 'bs_content_news#content_category_create'
+  patch 'bs_content_news/content_category_update', to: 'bs_content_news#content_category_update'
+  delete 'bs_content_news/content_category_delete', to: 'bs_content_news#content_category_delete'
 
   get 'bs_content_stream/content_root', to: 'bs_content_stream#content_root'
+  patch 'bs_content_stream/content_category', to: 'bs_content_stream#content_category'
   post 'bs_content_stream/create_bag', to: 'bs_content_stream#create_bag'
   patch 'bs_content_stream/update_bag', to: 'bs_content_stream#update_bag'
   delete 'bs_content_stream/delete_bag', to: 'bs_content_stream#delete_bag'
@@ -171,6 +189,9 @@ Fuga326::Application.routes.draw do
   post 'bs_content_stream/create_photo', to: 'bs_content_stream#create_photo'
   patch 'bs_content_stream/update_photo', to: 'bs_content_stream#update_photo'
   delete 'bs_content_stream/delete_photo', to: 'bs_content_stream#delete_photo'
+  post 'bs_content_stream/content_category_create', to: 'bs_content_stream#content_category_create'
+  patch 'bs_content_stream/content_category_update', to: 'bs_content_stream#content_category_update'
+  delete 'bs_content_stream/content_category_delete', to: 'bs_content_stream#content_category_delete'
 
   post 'bs_content_inquiry/show', to: 'bs_content_inquiry#show'
   patch 'bs_content_inquiry/update', to: 'bs_content_inquiry#update'
@@ -180,6 +201,8 @@ Fuga326::Application.routes.draw do
   post 'bs_attendance/init_roster', to: 'bs_attendance#init_roster'
   post 'bs_attendance/day_on', to: 'bs_attendance#day_on'
   post 'bs_attendance/day_off', to: 'bs_attendance#day_off'
+
+
 
   get 'bs_roster/index', to: 'bs_roster#index'
   patch 'bs_roster/update_rosters', to: 'bs_roster#update_rosters'

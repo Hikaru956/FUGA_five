@@ -18,11 +18,11 @@
     	<% if @website.wsite_color_edit_id==temp_local.id %>
             <p>
 				<% if @website.wsite_color_deploy_id!=@website.wsite_color_edit_id%>
-	            	<%= link_to(raw("<i class='icon-hand-right'></i>&nbsp;適用"), {:action=>'color_for_deploy', :id=>temp_local}, {:class=>"btn btn-info btn-small", :method=>:post}) %>
-	            	<%= link_to(raw("<i class='icon-remove'></i>&nbsp;試用解除"), {:action=>'color_for_nil'}, {:class=>"btn btn-danger btn-small", :method=>:post}) %>
+	            	<%= link_to(raw("<i class='icon-hand-right'></i>&nbsp;適用"), {:action=>'color_for_deploy', :id=>temp_local}, {:class=>"btn btn-info btn-small", method: :post}) %>
+	            	<%= link_to(raw("<i class='icon-remove'></i>&nbsp;試用解除"), {:action=>'color_for_nil'}, {:class=>"btn btn-danger btn-small", method: :post}) %>
 				<% else %>
 	            	<%= link_to(raw("<i class='icon-globe'></i>&nbsp;運用サイト表示"), {:controller=>'bs_renderer'}, {:class=>"btn btn-success btn-small", :target=>"_blank?"}) %>
-	            	<%= link_to(raw("<i class='icon-hand-right'></i>&nbsp;適用"), {:action=>'color_for_deploy', :id=>temp_local}, {:class=>"btn btn-info btn-small", :method=>:post}) %>
+	            	<%= link_to(raw("<i class='icon-hand-right'></i>&nbsp;適用"), {:action=>'color_for_deploy', :id=>temp_local}, {:class=>"btn btn-info btn-small", method: :post}) %>
 				<% end %>
 			</p>
 		<% elsif @website.wsite_color_deploy_id==temp_local.id %>
@@ -31,7 +31,7 @@
 			</h4>
 		<% else %>
             <p>
-            	<%= link_to(raw("<i class='icon-pencil'></i>&nbsp;試用"), {:action=>'color_for_edit', :id=>temp_local}, {:class=>"btn btn-primary btn-small", :method=>:post}) %>
+            	<%= link_to(raw("<i class='icon-pencil'></i>&nbsp;試用"), {:action=>'color_for_edit', :id=>temp_local}, {:class=>"btn btn-primary btn-small", method: :post}) %>
 			</p>
 		<% end %>
         </p>

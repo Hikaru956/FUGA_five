@@ -95,9 +95,9 @@
                 </ul>
                 <aside class="pagination text-center">
 <% if true || request.host == 'sr2.swifty.jp' %>
-                    <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+                    <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% else %>
-                    <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+                    <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% end %>
                 </aside>
             </div>

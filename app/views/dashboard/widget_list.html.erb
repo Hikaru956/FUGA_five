@@ -2,7 +2,7 @@
 <header class="subhead" id="overview">
 	<h3>レイアウト管理</h3>
 </header>
-	
+
 
 <ul class="breadcrumb">
   <li>					<%= link_to "一覧",	:controller=>"dashboard", :action=>"layout_list" %>&nbsp;<span class="divider">/</span></li>
@@ -33,7 +33,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% @layout.visual_widgets.each do | widget | %>
+		<% @layout.visual_widgets.order(position: :asc).each do | widget | %>
 			<tr>
 				<td>
 					<%= (widget.first?)?	"△":	link_to("▲", :action=>"widget_higher",	:id=>widget) %>

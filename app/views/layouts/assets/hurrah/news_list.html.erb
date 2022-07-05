@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
-                            <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+                            <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
                         </div>
                     </div>
                 </div>
