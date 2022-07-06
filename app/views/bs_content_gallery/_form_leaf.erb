@@ -80,33 +80,16 @@
 	</div>
 </div>
 
-<% if false %>
-	<div class="control-group">
-		<label class="control-label" for="item_telephone">公開開始日</label>
-		<div class="controls controls-row">
-			<input class="span2" type="text" id="datepicker_from", name="item[publish_from]", value="<%= @item.publish_from %>", placeholder="yyyy-mm-dd">
-		</div>
+<div class="control-group">
+	<label class="control-label" for="item_telephone">公開開始日</label>
+	<div class="controls controls-row">
+		<input class="span2" type="date" id="datepicker_from", name="item[publish_from]", value="<%= @item.publish_from %>", placeholder="yyyy-mm-dd">
 	</div>
-	
-	<div class="control-group">
-		<label class="control-label" for="item_telephone">公開終了日</label>
-		<div class="controls controls-row">
-			<input class="span2" type="text" id="datepicker_until", name="item[publish_until]", value="<%= @item.publish_until %>", placeholder="yyyy-mm-dd">
-		</div>
-	</div>
-<% end %>
+</div>
 
-<script type="text/javascript">
-	$(function(){
-	　$("#datepicker_from").datepicker({
-		dateFormat: "yy-mm-dd",
-		showButtonPanel: true
-	　});
-	});
-	$(function(){
-	　$("#datepicker_until").datepicker({
-		dateFormat: "yy-mm-dd",
-		showButtonPanel: true
-	　});
-	});
-</script>
+<div class="control-group">
+	<label class="control-label" for="item_telephone">公開終了日</label>
+	<div class="controls controls-row">
+		<input class="span2" type="date" id="datepicker_until", name="item[publish_until]", value="<%= @item.publish_until %>", placeholder="yyyy-mm-dd">
+	</div>
+</div>

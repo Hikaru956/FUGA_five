@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="/"><%=BRAND_NAME%></a>
+            <a class="brand" href="/" data-turbolinks='false'><%=BRAND_NAME%></a>
 			<% unless current_user.blank? %>
             <div class="nav-collapse collapse">
 				<ul class="nav pull-right">
@@ -18,7 +18,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="<%= url_for(:controller=>'bs_config', :action=>'account_show') %>"><i class="icon-wrench"></i><i class="icon-user"></i>&nbsp;マイアカウント</a></li>
 							<li class="divider"></li>
-							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :delete, :class =>'dropdown-item' %>
+							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %>
 							</li>
 							<% if current_user.role==User::ROLE_SUPER %>
 								<li class="divider"></li>

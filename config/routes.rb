@@ -129,6 +129,9 @@ Fuga326::Application.routes.draw do
 
   post 'dashboard/shop_update_position', to: 'dashboard#shop_update_position'
   delete 'dashboard/shop_delete_position', to: 'dashboard#shop_delete_position'
+  post 'dashboard/delegating', to: 'dashboard#delegating'
+  post 'dashboard/roll_back', to: 'dashboard#roll_back'
+
 
   get 'bs_content_gallery/content_root', to: 'bs_content_gallery#content_root'
   patch 'bs_content_gallery/content_category', to: 'bs_content_gallery#content_category'

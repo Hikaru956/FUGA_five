@@ -16,11 +16,11 @@
 <h4>
 	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
 		<p class="pull-right">
-			<a class="btn btn-small btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank">
+			<a class="btn btn-small btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
 				<i class="icon-share"></i>
 				店舗サイト表示
 			</a>
-			<a class="btn btn-small btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>">
+			<a class="btn btn-small btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
 				<i class="icon-globe"></i>
 				デザイン編集
 			</a>

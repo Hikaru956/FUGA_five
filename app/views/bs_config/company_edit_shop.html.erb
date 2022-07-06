@@ -31,7 +31,7 @@
 	<div class="span12">
 		<h4>
 			<span class="pull-right">
-				<a class="btn btn-small btn-success" href="<%= url_for(:action=>'company_show_shop') %>">
+				<a class="btn btn-small btn-success" href="<%= url_for(:action=>'company_show_shop') %>" data-turbolinks='false'>
 					<i class="icon-arrow-left"></i>&nbsp;戻る
 				</a>
 			</span>
@@ -43,7 +43,7 @@
 				<div class="form-actions">
 		        	<button type="submit" class="btn btn-small btn-success"><i class="icon-refresh"></i>&nbsp;&nbsp;更新</button>
 					<% url_cancel = url_for(:action=>"company_show_shop", :id=>@item) %>
-			  		<a class="btn btn-small" href="<%= url_cancel %>"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
+			  		<a class="btn btn-small" href="<%= url_cancel %>" data-turbolinks='false'><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
 		      	</div>
 			</fieldset>
 		<% end -%>

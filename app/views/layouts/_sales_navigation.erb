@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="/dashboard/index"><%=BRAND_NAME%></a>
+            <a class="brand" href="/dashboard/index" data-turbolinks='false'><%=BRAND_NAME%></a>
 			<% unless current_user.blank? %>
             <div class="nav-collapse collapse">
 				<ul class="nav pull-right">
@@ -18,7 +18,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="<%= url_for(:controller=>'dashboard', :action=>'user_show', :id=>current_user) %>"><i class="icon-user"></i>&nbsp;マイアカウント</a></li>
 							<li class="divider"></li>
-							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :delete, :class =>'dropdown-item' %>
+							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %>
 							</li>
 						</ul>
 					</li>						

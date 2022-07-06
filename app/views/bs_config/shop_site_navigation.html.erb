@@ -88,7 +88,7 @@
 
 						<% if @item.page_type==WebPage::TYPE_FIX %>
 							<% edit_fix_page_url = url_for(:action=>'edit_fix_page', :id=>ContentLeaf.find_by_hash_key(@item.content_key))%>
-							<a class="btn btn-mini btn-success"  href="<%=edit_fix_page_url%>">
+							<a class="btn btn-mini btn-success"  href="<%=edit_fix_page_url%>" data-turbolinks='false'>
 								<i class="icon-pencil"></i>&nbsp;
 					  			編集
 							</a>

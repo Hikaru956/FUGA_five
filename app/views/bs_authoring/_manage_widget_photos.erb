@@ -2,7 +2,7 @@
 <% unless @widget_bag.blank? %>
 	<h4>
 		<div class="pull-right">
-			<a class="btn btn-small btn-success" href="<%= url_for(:action=>'new_widget_bag_photo', :id=>@widget_bag)%>">
+			<a class="btn btn-small btn-success" href="<%= url_for(:action=>'new_widget_bag_photo', :id=>@widget_bag)%>" data-turbolinks='false'>
 				<i class="icon-plus"></i>&nbsp;
 	  			追加
 			</a>

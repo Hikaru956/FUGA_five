@@ -76,7 +76,7 @@
 
 		<h4>
 			<span class="pull-right">
-				<a class="btn btn-small btn-success" href="<%= url_for(:action=>'company_edit_shop') %>">
+				<a class="btn btn-small btn-success" href="<%= url_for(:action=>'company_edit_shop') %>" data-turbolinks='false'>
 					<i class="icon-pencil"></i>&nbsp;編集
 				</a>
 			</span>
@@ -111,7 +111,7 @@
 
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 			<p>
-				<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_shop_photo', :id=>@shop) %>">
+				<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_shop_photo', :id=>@shop) %>" data-turbolinks='false'>
 					<i class="icon-camera"></i>&nbsp;
 					写真追加
 				</a>
@@ -163,7 +163,7 @@
 			<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
 			<span class="pull-right">
 				<% url_edit_position = url_for(:action=>"shop_edit_position") %>							
-		  		<a class="btn btn-mini btn-info" href="<%= url_edit_position %>">
+		  		<a class="btn btn-mini btn-info" href="<%= url_edit_position %>" data-turbolinks='false'>
 					<i class="icon-globe"></i>&nbsp;
 		  			設定
 				</a>
@@ -184,12 +184,12 @@
 		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
 			<div class="btn-toolbar text-center">
 			  <div class="btn-group">
-					<a class="btn btn-small btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank">
+					<a class="btn btn-small btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
 						<i class="icon-share"></i>
 						サイト表示
 					</a>
 					<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
-						<a class="btn btn-small btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>">
+						<a class="btn btn-small btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
 							<i class="icon-globe"></i>
 							サイト編集
 						</a>

@@ -130,7 +130,7 @@
 
 <% if current_user.has_permission?(User::ROLE_MANAGER) %>
 	<p>
-		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>">
+		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
 			<i class="icon-camera"></i>&nbsp;
 			写真追加
 		</a>
@@ -157,7 +157,7 @@
 	<%= form_for @staff, url: bs_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">ユーザー編集</h3>
+			<h3 id="myModalLabel">スタッフ編集</h3>
 		</div>
 		<div class="modal-body">
 			<%= render :partial=>"form_staff" %>
@@ -189,7 +189,7 @@
 	<%= form_for @staff, url: bs_config_shop_delete_staff_path(id: @staff), method: :delete do |f| -%>
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">ユーザー削除</h3>
+			<h3 id="myModalLabel">スタッフ削除</h3>
 		</div>
 		<div class="modal-body">
 			<p>

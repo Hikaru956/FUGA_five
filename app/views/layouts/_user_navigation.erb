@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="<%= url_for(:controller=>'bs_config', :action=>'company_show_shop') %>"><%=BRAND_NAME%></a>
+            <a class="brand" href="<%= url_for(:controller=>'bs_config', :action=>'company_show_shop') %>" data-turbolinks='false'><%=BRAND_NAME%></a>
 			<% unless current_user.blank? %>
             <div class="nav-collapse collapse">
                 <ul class="nav">
@@ -24,10 +24,10 @@
 					%>
 					<% navs.each do | nav | %>
 						<li>
-							<% if nav.category_type==ContentCategory::TYPE_NEWS %>		<a href="<%= url_for(:controller=>'bs_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
-							<% if nav.category_type==ContentCategory::TYPE_STREAM %>	<a href="<%= url_for(:controller=>'bs_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
-							<% if nav.category_type==ContentCategory::TYPE_GALLERY %>	<a href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
-							<% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %>	<a href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>"><%= category_title(nav) %></a><% end %>
+							<% if nav.category_type==ContentCategory::TYPE_NEWS %>		<a href="<%= url_for(:controller=>'bs_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+							<% if nav.category_type==ContentCategory::TYPE_STREAM %>	<a href="<%= url_for(:controller=>'bs_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+							<% if nav.category_type==ContentCategory::TYPE_GALLERY %>	<a href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+							<% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %>	<a href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
 						</li>
 					<% end %>
 						<li>
@@ -55,7 +55,7 @@
 								<% end %>
 								<li class="divider"></li>
 							<% end %>
-							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :delete, :class =>'dropdown-item' %>
+							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %>
 							</li>
 							<% if current_user.role>=User::ROLE_SALES %>
 								<li class="divider"></li>

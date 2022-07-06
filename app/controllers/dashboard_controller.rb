@@ -13,7 +13,7 @@ class DashboardController < ApplicationController
   #hikaru
   #before_action :check_super_privilege
   #before_action :check_super_privilege #hikaru :login_required,
-  skip_before_action :verify_authenticity_token ,:only=>[:create_color_photo, :create_layout_photo, :shop_create_favicon, :shop_create_apple_touch_icon]
+  skip_before_action :verify_authenticity_token ,:only=>[:create_color_photo, :create_layout_photo, :shop_create_favicon, :shop_create_apple_touch_icon, :delegating, :roll_back]
 
   #skip_before_action :verify_authenticity_token ,:only=>[:create_color_photo, :create_layout_photo, :shop_create_favicon, :shop_create_apple_touch_icon]
 
