@@ -19,7 +19,7 @@
 		<div class="form-actions">
         	<button type="submit" class="btn btn-small btn-success"><i class="icon-plus"></i>&nbsp;&nbsp;登録</button>
 			<% url_cancel = url_for(:action=>"content_category", :id=>@item.content_category) %>
-	  		<a class="btn btn-small" href="<%= url_cancel %>"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
+	  		<a class="btn btn-small" href="<%= url_cancel %>" data-turbolinks='false'><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
       	</div>
 	</fieldset>
 <% end -%>

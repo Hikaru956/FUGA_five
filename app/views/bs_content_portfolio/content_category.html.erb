@@ -11,7 +11,7 @@
 				<%end%>
 				<% if @bag_roots.index(@parent_category).blank? %>
 				<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
-				<a class="btn btn-success btn-small" href="<%=url_new%>">
+				<a class="btn btn-success btn-small" href="<%=url_new%>" data-turbolinks='false'>
 					<i class="icon-plus"></i>&nbsp;
 					項目登録
 				</a>

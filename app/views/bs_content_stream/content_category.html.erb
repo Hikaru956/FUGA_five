@@ -10,7 +10,7 @@
 					</a>
 				<%end%>  	
 				<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
-				<a class="btn btn-success btn-small" href="<%=url_new%>">
+				<a class="btn btn-success btn-small" href="<%=url_new%>" data-turbolinks='false'>
 					<i class="icon-plus"></i>&nbsp;
 					記事登録
 				</a>
