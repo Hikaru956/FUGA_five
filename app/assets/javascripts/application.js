@@ -12,7 +12,6 @@
 //
 //= require jquery2
 //= require jquery-ui
-//= require dropzone
 //= require tinymce
 //= require tinymce-jquery
 //= require rails-ujs
