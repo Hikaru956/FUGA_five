@@ -1,10 +1,10 @@
-<%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>@item} %>
+<%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>@item} if false%>
 
 <div class="control-group">
 	<%= text_field  'item', 'title', :class=>"input-block-level", :placeholder=>"記事のタイトルを入力します。", :autocomplete=>false%>
 </div>
 <div class="control-group">
-	<%= text_area  'item', 'description', :class => "tinymce input-block-level", rows: 20, :placeholder=>"記事の本文を入力します。" %>
+	<%= text_area  'item', 'description', :class => "tinymce input-block-level", rows: 40, :placeholder=>"記事の本文を入力します。" %>
 	<%= tinymce if false%>
 	<script type="text/javascript">
 		tinyMCE.init({

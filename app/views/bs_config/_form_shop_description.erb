@@ -1,7 +1,7 @@
 <%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>nil} if false%>
 
 <div class="control-group">
-    <%= text_area  'item', 'wsite_description_business', {:class=>"tinymce input-block-level" , :rows => 30, :placeholder=>"記事の本文を入力します。"}  %>
+    <%= text_area  'item', 'wsite_description_business', {:class=>"tinymce input-block-level" , :rows => 40, :placeholder=>"記事の本文を入力します。"}  %>
     <script type="text/javascript">
         tinyMCE.init({
             selector: 'textarea.tinymce',
