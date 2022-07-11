@@ -1,0 +1,89 @@
+<% if false %>
+<style type="text/css">@import url(/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
+
+<!-- Third party script for BrowserPlus runtime (Google Gears included in Gears runtime now) -->
+<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+
+<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+<script type="text/javascript" src="/plupload/js/plupload.full.js"></script>
+<script type="text/javascript" src="/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="/plupload/js/i18n/ja.js"></script>
+
+<script type="text/javascript">
+// Convert divs to queue widgets when the DOM is ready
+$(function() {
+	// Setup html5 version
+	$("#html5_uploader").pluploadQueue({
+		// General settings
+		runtimes : 'html5',
+		url : "/<%=params[:controller]%>/shop_create_apple_touch_icon?id=<%=@shop.id%>",
+		max_file_size : '10mb',
+		//chunk_size : '1mb',
+		unique_names : true,
+
+		// Resize images on clientside if we can
+		//resize : {width : 320, height : 240, quality : 90},
+
+		// Specify what files to browse for
+		filters : [
+			{title : "Image files", extensions : "png"}
+		]
+	});
+});
+</script>
+<% end %>
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>レジストリー</h3>
+</header>
+	
+
+<ul class="breadcrumb">
+  <li><%= link_to "レジストリー", 					:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@shop.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@shop.company %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@shop) %></li>
+</ul>
+
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show_shop', 	:id=>@shop) %>">店舗情報</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@shop) %>">店舗スタッフ</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@shop) %>">店舗ユーザー</a></li>
+	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+</ul>
+
+<h4>
+	<span class="pull-right">
+		<a class="btn btn-small btn-warn" href="<%= url_for(:action=>'shop_show_website', :id=>@shop) %>">
+		<i class="icon-arrow-left"></i>&nbsp;
+			戻る
+		</a>
+	</span>
+	WebClip画像
+</h4>
+
+<% if true %>
+	<% item = Photo.new %>
+	<%= form_tag(dashboard_shop_create_apple_touch_icon_path(id: @shop),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<div class="fallback">
+		<%= file_field_tag('photo[clip]') %>
+	</div>
+	<% end %>
+	<script>
+		Dropzone.options.dropzone = {
+			paramName: "photo[clip]",
+			maxFilesize: 1,
+			acceptedFiles: "image/*",
+			init: function() {
+				this.on('complete', function (file) {
+					//location.reload();
+				})
+			}
+		}
+	</script>
+<% end %>
+
+<div class="alert alert-info">
+	画像のファイル名は'apple-touch-icon-precomposed.png'。
+	画像のサイズは「114x114ピクセル」以上の正方形。
+	画像の種類は「PNG形式」。	
+</div>

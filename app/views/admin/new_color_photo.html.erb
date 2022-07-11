@@ -1,0 +1,82 @@
+<% if false %>
+<style type="text/css">@import url(/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
+
+<!-- Third party script for BrowserPlus runtime (Google Gears included in Gears runtime now) -->
+<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+
+<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+<script type="text/javascript" src="/plupload/js/plupload.full.js"></script>
+<script type="text/javascript" src="/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="/plupload/js/i18n/ja.js"></script>
+
+<script type="text/javascript">
+// Convert divs to queue widgets when the DOM is ready
+$(function() {
+	// Setup html5 version
+	$("#html5_uploader").pluploadQueue({
+		// General settings
+		runtimes : 'html5',
+		url : "/<%=params[:controller]%>/create_color_photo?id=<%=@item.id%>",
+		max_file_size : '10mb',
+		// chunk_size : '1mb',
+		unique_names : true,
+
+		// Resize images on clientside if we can
+		//resize : {width : 320, height : 240, quality : 90},
+
+		// Specify what files to browse for
+		filters : [
+			{title : "Image files", extensions : "jpg,jpeg,gif,png"}
+		]
+	});
+});
+</script>
+<% end %>
+
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>カラー管理</h3>
+</header>
+	
+
+<ul class="breadcrumb">
+  <li><%= link_to "一覧",	:controller=>"dashboard", :action=>"color_list" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to(model_name(@item), :action=>"color_show", :id=>@item) %>&nbsp;<span class="divider">/</span></li>
+  <li class="active">写真追加</li>
+</ul>
+
+<h4>
+	<div class="pull-right">
+		<p>
+			<% url_back = url_for(:action=>"color_show", :id=>@item) %>
+			<a class="btn btn-small" href="<%=url_back%>">
+				<i class="icon-arrow-left"></i>&nbsp;
+				戻る
+			</a>
+		</p>
+	</div>
+	<%= scheme_state_icons(@item) %>
+	<%= model_name(@item) %>
+</h4>
+
+<hr/>
+<% if true %>
+	<% item = Photo.new %>
+	<%= form_tag(dashboard_create_color_photo_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<div class="fallback">
+		<%= file_field_tag('photo[clip]') %>
+	</div>
+	<% end %>
+	<script>
+		Dropzone.options.dropzone = {
+			paramName: "photo[clip]",
+			maxFilesize: 1,
+			acceptedFiles: "image/*",
+			init: function() {
+				this.on('complete', function (file) {
+					//location.reload();
+				})
+			}
+		}
+	</script>
+<% end %>

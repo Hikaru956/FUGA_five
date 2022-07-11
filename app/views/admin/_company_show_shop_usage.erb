@@ -1,0 +1,71 @@
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th class="span4">ディスク容量</th>
+			<th class="span4">画像ファイル</th>
+			<th class="span4">固定ページ</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<div  class="text-right">
+					<%= (@shop.room_size_mb.blank?)? "無制限": number_to_human_size(@shop.room_size_mb*1024*1024) %>
+					<a class="btn btn-mini btn-success"  data-toggle="modal" href="#modalEditRoom">
+						<i class="icon-pencil"></i>&nbsp;変更
+					</a>
+				</div>
+			</td>
+			<td>
+				<div  class="text-right">
+					<% total_photos = @shop.photos%>
+					<%= total_photos.size%>
+					<%
+						photo_sum_size = Photo.total_file_size(total_photos)
+						#total_photos.each{ |photo|  photo_sum_size+=photo.clip_file_size : photo_sum_size+=photo.my_size}	unless total_photos.blank?
+						#total_photos.each{ |photo|  photo_sum_size+=photo.my_size }	unless total_photos.blank?
+					%>
+					【<%= number_to_human_size(photo_sum_size)  %>
+				</div>
+			</td>
+			<td>
+				<div  class="text-right">
+					<% fix_pages_bag = ContentBag.retrieve_fixed_page_bag(@shop) %>
+					<%= fix_pages_bag.content_leafs.size %>
+					ページ
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<% rate = (@shop.room_size_mb.blank?||@shop.room_size_mb==0)? 0 : (photo_sum_size*100)/(@shop.room_size_mb*1024*1024) %>
+<%
+	bar_class = "progress-info"
+	bar_class = "progress-warning"	if rate>60
+	bar_class = "progress-danger"	if rate>80
+%>
+<div class="progress progress-striped active <%=bar_class%>">
+	利用率 : <%= rate.to_i%>%
+	<div class="bar" style="width: <%=rate.to_i%>%;"></div>
+</div>
+
+<!-- modalEdit -->
+<%= form_tag url_for(:action=>"company_update_shop_room", :id=>@shop), {:class=>"modal hide fade form-horizontal", :id=>"modalEditRoom"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">店舗情報編集</h3>
+	</div>
+	<div class="modal-body">
+		<div class="control-group">
+			<label class="control-label" for="shop_alt_id">利用容量</label>
+			<div class="controls">
+				<%= text_field 'shop', 'room_size_mb', :placeholder=>"MB単位で入力 (1024=1GB)", :autocomplete => "off" %>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+				

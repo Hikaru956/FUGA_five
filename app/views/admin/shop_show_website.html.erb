@@ -1,0 +1,480 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>レジストリー</h3>
+</header>
+	
+
+<ul class="breadcrumb">
+  <li><%= link_to "レジストリー", 					:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@shop.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@shop.company %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@shop) %></li>
+</ul>
+
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show_shop', 	:id=>@shop) %>">店舗情報</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@shop) %>">店舗スタッフ</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@shop) %>">店舗ユーザー</a></li>
+	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+</ul>
+
+<h4>
+	<span class="pull-right">
+		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+			<i class="icon-pencil"></i>&nbsp;
+  			編集
+		</a>
+	</span>
+	サイト属性
+</h4>
+<table class="table table-bordered">
+	<tbody>
+		<% site_status_class = (@shop.wsite_run_mode==Shop::WSITE_BLOCKED)? 'error': ((@shop.wsite_run_mode==Shop::WSITE_TRIAL)? 'warning': 'success') %>
+		<tr class="<%=site_status_class%>">
+			<td class="span4">サイト・ステータス</td>
+			<td class="span8">
+				<span class='pull-right'>
+					  <div class="btn-group">
+							<a class="btn btn-mini btn-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
+								<i class="icon-share"></i>
+								サイト表示
+							</a>
+							<%= link_to raw("<i class='icon-signin'></i>&nbsp;&nbsp;店舗管理画面"), {:action=>'delegating', :id=>@shop}, :method => :post, :class=>"btn btn-mini btn-primary" %>
+							<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
+							<a href="<%=url_business%>" class="btn btn-warning btn-mini">
+								<%= icon_site_status(@shop.wsite_run_mode) %>
+								利用状況表示
+							</a>
+					  </div>
+				</span>
+				<%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;<%= label_site_status(@shop.wsite_run_mode) %>
+			</td>
+		</tr>
+		<tr>
+			<td>サイト・キーワード</td>
+			<td><%= @shop.wsite_keywords%></td>
+		</tr>
+		<tr>
+			<td>サイトの説明</td>
+			<td><%= @shop.wsite_description_shop%></td>
+		</tr>
+		<tr>
+			<td>問い合わせ電話番号</td>
+			<td><%= @shop.wsite_telephone%></td>
+		</tr>
+		<tr>
+			<td>問い合わせメールアドレス</td>
+			<td><%= @shop.wsite_email%></td>
+		</tr>
+		<tr>
+			<td>お問い合わせ機能</td>
+			<td>
+				<% if @shop.enable_inquiry? %>
+					有効
+				<% else %>
+					無効
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td>非スマートフォン向けレイアウト</td>
+			<td><%= h @shop.wsite_layout_pc_specific_basename %></td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td class="span4"><i class="icon-google-plus"></i>&nbsp;店舗カレンダー</td>
+			<td class="span8">
+				<span class="pull-right">
+					<a class="btn btn-small btn-info"  data-toggle="modal" href="#modalGCalendar">
+						<i class="icon-plus"></i>&nbsp;
+			  			設定
+					</a>
+				</span>
+				<% unless @shop.google_calendar_url.blank? %><p><i class="icon-calendar"></i>&nbsp;<%= h truncate(@shop.google_calendar_url, :length=>50) %></p><% end %>
+			</td>
+		</tr>
+		<tr>
+			<td><i class="icon-google-plus"></i>&nbsp;店舗カレンダー埋込コード</td>
+			<td>
+				<span class="pull-right">
+					<a class="btn btn-small btn-info"  data-toggle="modal" href="#modalGCalendarCode">
+						<i class="icon-plus"></i>&nbsp;
+			  			設定
+					</a>
+				</span>
+				<% unless @shop.google_calendar_emb_frame_code.blank? %><p><%=h truncate(@shop.google_calendar_emb_frame_code, :length=>100) %></p><% end %>
+			</td>
+		</tr>
+		<tr>
+			<td><i class="icon-google-plus"></i>&nbsp;アクセス解析コード</td>
+			<td>
+				<span class="pull-right">
+					<a class="btn btn-small btn-info"  data-toggle="modal" href="#modalGAnalytics">
+						<i class="icon-plus"></i>&nbsp;
+			  			設定
+					</a>
+				</span>
+				<% unless @shop.analytics_code.blank? %><p><%=h truncate(@shop.analytics_code, :length=>100) %></p><% end %>
+			</td>
+		</tr>
+		<tr>
+			<td><i class="icon-globe"></i>&nbsp;カスタム・メタタグ</td>
+			<td>
+				<span class="pull-right">
+					<a class="btn btn-small btn-info"  data-toggle="modal" href="#modalMetaTags">
+						<i class="icon-plus"></i>&nbsp;
+			  			設定
+					</a>
+				</span>
+				<% unless @shop.custom_metas.blank? %><p><%=h truncate(@shop.custom_metas, :length=>100) %></p><% end %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td class="span4">ブログコメント機能</td>
+			<td class="span8">
+				<span class="pull-right">
+					<a class="btn btn-small btn-info"  data-toggle="modal" href="#modalDisqusMode">
+						<i class="icon-plus"></i>&nbsp;
+			  			設定
+					</a>
+				</span>
+				<%= (@shop.use_disqus)? raw("使用する (by &copy;&nbsp;DISQUS)"): "使用しない"%>
+			</td>
+		</tr>
+		<% if @shop.use_disqus %>
+			<tr>
+				<td class="span4">DISQUS CODE</td>
+				<td class="span8">
+					<span class="pull-right">
+						<a class="btn btn-small btn-info"  data-toggle="modal" href="#modalDisqusCode">
+							<i class="icon-plus"></i>&nbsp;
+				  			設定
+						</a>
+					</span>
+					<% if @shop.use_disqus && @shop.disqus_code.blank? %>
+						<p class="text-error">
+							<i class="icon-warning-sign"></i>
+							<a href="https://disqus.com/profile/login/?next=https://disqus.com/" target="_blank">DISQUS</a>
+							からユニバーサルコードを取得して設定する必要があります。
+						</p>
+					<% else %>
+						<%= h truncate(@shop.disqus_code, :length=>100) %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<!-- modalDisqusMode -->
+<div class="modal hide fade form-horizontal", id="modalDisqusMode">
+	<%= form_for @shop, url: dashboard_set_disqus_mode_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">ブログコメント機能</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="shop[use_disqus]">アクション</label>
+				<div class="controls">
+					<label class="radio inline">
+						<input type="radio" id="shop[use_disqus]" name="shop[use_disqus]" value="1" <% if @shop.use_disqus %>checked<% end %>>
+						使用する
+					</label>
+					<label class="radio inline">
+						<input type="radio" id="shop[use_disqus]" name="shop[use_disqus]" value="0" <% if !@shop.use_disqus %>checked<% end %>>
+						使用しない
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;設定</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
+</div>
+<!-- modalDisqusCode -->
+<div class="modal hide fade form-horizontal", id="modalDisqusCode">
+	<%= form_for @shop, url: dashboard_set_disqus_code_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">DISQUSコード設定</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="job_title">コード</label>
+				<div class="controls">
+					<%= text_area 'shop', 'disqus_code', :placeholder=>"DISQUS ユニバーサルコードを入力", :autocomplete => "off", :rows=>"5", :class=>"span3" %>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;設定</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td class="span4">HashKey</td>
+			<td class="span8"><%= @shop.wsite_hash_key%></td>
+		</tr>
+		<tr>
+			<td>QRコード</td>
+			<td>
+				<%
+				    mypage_url = url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key, :only_path=>false)
+					@encode_url = URI.encode(mypage_url)
+				%>		
+				<img src="https://chart.googleapis.com/chart?chs=256x256&amp;cht=qr&amp;chl=<%= @encode_url %>&amp;choe=UTF-8" alt="<%=model_name(@shop) %>" /><br/>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="table table-bordered">
+	<tbody>
+		<% @icon = @shop.favicon %>
+		<tr>
+			<td class="span4">favicon.ico</td>
+			<td class="span8">
+				<% if @icon.blank? %>
+					<small>
+						画像のファイル名は'favicon.ico'。画像の種類は「ICO形式」。	
+					</small>
+					<span class="pull-right">
+						<a class="btn btn-small btn-success" href="<%= url_for(:action=>'shop_new_favicon', :id=>@shop) %>">
+							<i class="icon-plus"></i>&nbsp;
+				  			設定
+						</a>
+					</span>
+				<% else %>
+					<span class="pull-right">
+						<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDeleteFavicon">
+							<i class="icon-remove"></i>&nbsp;
+				  			クリア
+						</a>
+					</span>
+					<%= image_tag @icon.clip.url() %>
+				<% end %>
+			</td>
+		</tr>
+		<% @icon = @shop.apple_touch_icon %>
+		<tr>
+			<td>WebClip画像</td>
+			<td>
+				<% if @icon.blank? %>
+					<small>
+					画像のファイル名は'apple-touch-icon-precomposed.png'。<br/>
+					画像のサイズは「114x114ピクセル」以上の正方形。
+					画像の種類は「PNG形式」。	
+					</small>
+					<span class="pull-right">
+						<a class="btn btn-small btn-success" href="<%= url_for(:action=>'shop_new_apple_touch_icon', :id=>@shop) %>">
+							<i class="icon-plus"></i>&nbsp;
+				  			設定
+						</a>
+					</span>
+				<% else %>
+					<span class="pull-right">
+						<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDeleteAppleTouchIcon">
+							<i class="icon-remove"></i>&nbsp;
+				  			クリア
+						</a>
+					</span>
+					<%= image_tag @icon.clip.url() %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td>ソーシャル</td>
+			<td>
+				<span class="pull-right">
+					<a class="btn btn-small btn-info"  data-toggle="modal" href="#modalEditSocial">
+						<i class="icon-pencil"></i>&nbsp;
+			  			ソーシャル設定
+					</a>
+				</span>
+				<%= raw "<a href=#{@shop.social_facebook_uri} target='_blank' title=#{@shop.social_facebook_uri}><i class='icon-facebook-sign icon-large'></i></a>"		unless @shop.social_facebook_uri.blank? %>
+				<%= raw "<a href=#{@shop.social_gplus_uri} target='_blank' title=#{@shop.social_gplus_uri}><i class='icon-google-plus-sign icon-large'></i></a>"		unless @shop.social_gplus_uri.blank? %>
+				<%= raw "<a href=#{@shop.social_twitter_uri} target='_blank' title=#{@shop.social_twitter_uri}><i class='icon-twitter-sign icon-large'></i></a>"		unless @shop.social_twitter_uri.blank? %>
+				<%= raw "<a href=#{@shop.social_instagram_uri} target='_blank' title=#{@shop.social_instagram_uri}><i class='icon-instagram icon-large'></i></a>"		unless @shop.social_instagram_uri.blank? %>
+				<%= raw "<a href=#{@shop.social_pinterest_uri} target='_blank' title=#{@shop.social_pinterest_uri}><i class='icon-pinterest-sign icon-large'></i></a>"	unless @shop.social_pinterest_uri.blank? %>
+				<%= raw "<a href=#{@shop.social_tumblr_uri} target='_blank' title=#{@shop.social_tumblr_uri}><i class='icon-tumblr-sign icon-large'></i></a>"			unless @shop.social_tumblr_uri.blank? %>
+				<%= raw "<a href=#{@shop.social_hotpepper_beauty_uri} target='_blank' title=#{@shop.social_hotpepper_beauty_uri}><i class='icon-flag icon-large'></i></a>"	unless @shop.social_hotpepper_beauty_uri.blank? %>
+				<%= raw "<a href=#{@shop.social_youtube_uri} target='_blank' title=#{@shop.social_youtube_uri}><i class='icon-youtube icon-large'></i></a>"			unless @shop.social_youtube_uri.blank? %>
+				<%= raw "<a href=#{@shop.social_line_uri} target='_blank' title=#{@shop.social_line_uri}><img src='/images/assets/line_icon.png' alt='LINE' /></a>"			unless @shop.social_line_uri.blank? %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- modalEdit -->
+<div class="modal hide fade form-horizontal", id="modalEdit">
+	<%= form_for @shop, url: dashboard_shop_update_website_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">サイト属性編集</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_shop_wsite" %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+<!-- modalEdit -->
+<div class="modal hide fade form-horizontal", id="modalGCalendar">
+	<%= form_for @shop, url: dashboard_shop_update_website_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">店舗カレンダー</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="google_calendar_url"><i class="icon-google-plus"></i>&nbsp;店舗カレンダー</label>
+				<div class="controls">
+					<%= text_field 'shop', 'google_calendar_url', :placeholder=>"店舗カレンダーのアドレスを入力", :autocomplete => "off" %>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+<div class="modal hide fade form-horizontal", id="modalGCalendarCode">
+	<%= form_for @shop, url: dashboard_shop_update_website_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">店舗カレンダー埋込コード</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="google_calendar_emb_frame_code"><i class="icon-google-plus"></i>&nbsp;店舗カレンダー埋込コード</label>
+				<div class="controls">
+					<%= text_area 'shop', 'google_calendar_emb_frame_code', :rows=>"5", :class=>"span3", :placeholder=>"店舗カレンダーの埋込コードを入力", :autocomplete => "off" %>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+<div class="modal hide fade form-horizontal", id="modalGAnalytics">
+	<%= form_for @shop, url: dashboard_shop_update_website_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">アクセス解析コード</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="google_calendar_emb_frame_code">アクセス解析コード</label>
+				<div class="controls">
+					<%= text_area 'shop', 'analytics_code', :rows=>"5", :class=>"span3", :placeholder=>"アクセス解析コードを入力", :autocomplete => "off" %>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+<div class="modal hide fade form-horizontal", id="modalMetaTags">
+	<%= form_for @shop, url: dashboard_shop_update_website_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">カスタム・メタタグ</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="google_calendar_emb_frame_code">カスタム・メタタグ</label>
+				<div class="controls">
+					<%= text_area 'shop', 'custom_metas', :rows=>"5", :class=>"span3", :placeholder=>"<HEAD>エリアに挿入したいコードを入力", :autocomplete => "off" %>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+<!-- modalEditSocial -->
+<div class="modal hide fade form-horizontal", id="modalEditSocial">
+	<%= form_for @shop, url: dashboard_shop_update_website_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">店舗ソーシャル設定</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_shop_social" %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+<!-- modalDeleteFavicon -->
+<div class="modal hide fade form-horizontal", id="modalDeleteFavicon">
+	<%= form_for @shop, url: dashboard_shop_reset_favicon_path(id: @shop), method: :delete do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">FAVICON削除</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+				FAICON.ICOを削除します。<br/>
+				よろしいですか？
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+<!-- modalDeleteAppleTouchIcon -->
+<div class="modal hide fade form-horizontal", id="modalDeleteAppleTouchIcon">
+	<%= form_for @shop, url: dashboard_shop_reset_apple_touch_icon_path(id: @shop), method: :delete do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">WebClip画像削除</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+				WebClip画像を削除します。<br/>
+				よろしいですか？
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
+</div>

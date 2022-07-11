@@ -330,4 +330,16 @@ EOF
     html.html_safe
   end
 
+  def trash_icon(title='削除'); sprintf("<i class='fa-solid fa-trash' title=%s></i>", title).html_safe; end
+  def new_icon(title='新規');   sprintf("<i class='fa-solid fa-circle-plus' title=%s></i>", title).html_safe; end
+  def edit_icon(title='編集');     sprintf("<i class='fa-solid fa-pen-to-square' title=%s></i>", title).html_safe; end
+  def update_icon(title='更新');     sprintf("<i class='fa-solid fa-rotate' title=%s></i>", title).html_safe; end
+  def cancel_icon(title='キャンセル');    sprintf("<i class='fa-solid fa-circle-xmark' title=%s></i>", title).html_safe; end
+  def forward_icon(title='続ける');    sprintf("<i class='fa-solid fa-forward' title=s></i>", title).html_safe; end
+  def backward_icon(title='戻る');    sprintf("<i class='fa-solid fa-backward' title=%s></i>", title).html_safe; end
+  def caution_icon(title='警告'); sprintf("<i class='fa-solid fa-diamond-exclamation' title=%s></i>", title).html_safe; end
+  def error_icon(title='エラー'); sprintf("<i class='fa-solid fa-triangle-exclamation text-danger' title=%s></i> ", title).html_safe; end
+
+  def staff_icon(title='スタッフ');  sprintf("<i class='fa-solid fa-user-large' title=%s></i>", title).html_safe; end
+
 end

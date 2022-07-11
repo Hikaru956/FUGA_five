@@ -1,0 +1,109 @@
+<style>
+    #map {
+        width: 100%;
+        height: 277px;
+    }
+</style>
+<style>
+	 #map img { max-width: none; }
+</style>
+
+
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>レジストリー</h3>
+</header>
+	
+<ul class="breadcrumb">
+  <li><%= link_to "レジストリー", 	:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@item) %></li>
+</ul>
+
+<ul class="nav nav-tabs">
+	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show', 		:id=>@item) %>">レジストリー</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_list_shop', 	:id=>@item) %>">登録店舗</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_list_user', 	:id=>@item) %>">オーナー・ユーザー</a></li>
+</ul>
+
+<table class="table table-bordered">
+	<thead>
+		<tr class="info">
+			<th colspan="2">
+				<% if current_user.role==User::ROLE_SUPER %>
+					<span class="pull-right">
+						<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+							<i class="icon-pencil"></i>&nbsp;
+				  			編集
+						</a>
+					</span>
+				<% end %>
+				レジストリー情報
+			</th>
+		</tr>
+	<thead>
+	<tbody>
+		<tr>
+			<td class="span3">レジストリーID</td>
+			<td class="span9"><%= model_alt_id(@item) %></td>
+		</tr>
+		<tr>
+			<td>レジストリー名称</td>
+			<td><%= model_name(@item) %></td>
+		</tr>
+		<tr>
+			<td>電話番号</td><td><%= @item.telephone_1 %></td>
+		</tr>
+		<tr>
+			<td>郵便番号</td><td><%= @item.postal %> </td>
+		</tr>
+		<tr>
+			<td>住所</td><td><%= @item.address_1 %></td>
+		</tr>
+	</tbody>
+</table>
+		
+<% if current_user.has_permission?(User::ROLE_SUPER) %>
+	<div class="well">
+		<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
+		<i class="icon-trash"></i>&nbsp;
+			削除確認
+		</a>
+	</div>
+<% end %>
+
+<!-- modalEdit -->
+<div class="modal hide fade form-horizontal", id="modalEdit">
+	<%= form_for @item, url: dashboard_company_update_path(id: @item), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">レジストリー編集</h3>
+		</div>
+		<div class="modal-body">
+			<%= render partial: "form_company", locals: {f: f, item: @item } %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+<!-- modalDelete -->
+<div class="modal hide fade form-horizontal", id="modalDelete">
+	<%= form_for @item, url: dashboard_company_delete_path(id: @item), method: :delete do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">レジストリー削除</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+				「<%= @item.name %>」を削除します。<br/>
+				このレジストリーに関連するサイト情報も一括削除されます。<br/>
+				よろしいですか？
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
+</div>

@@ -1,0 +1,45 @@
+<div class="control-group">
+	<label class="control-label" for="item_alt_id">レジストリーID</label>
+	<div class="controls">
+		<%= f.text_field  :alt_id, :placeholder=>"レジストリーIDを入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="item_name">レジストリー名</label>
+	<div class="controls">
+		<%= f.text_field :name, :placeholder=>"レジストリー名を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="item_telephone_1">電話番号</label>
+	<div class="controls">
+		<%= f.text_field :telephone_1, :placeholder=>"電話番号", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="item_postal">郵便番号</label>
+	<div class="controls">
+		<%= f.text_field :postal, :placeholder=>"郵便番号を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="item_address_1">住所</label>
+	<div class="controls">
+		<%= f.text_field :address_1, :placeholder=>"住所を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<% if false %>
+<div class="control-group">
+	<label class="control-label" for="company[new_ui]">新操作画面</label>
+	<div class="controls">
+		<label class="radio inline">
+			<input type="radio" id="company[new_ui]" name="company[new_ui]" value="1" <% if item.new_ui %>checked<% end %>>
+			有効
+		</label>
+		<label class="radio inline">
+			<input type="radio" id="company[new_ui]" name="company[new_ui]" value="0" <% if !item.new_ui %>checked<% end %>>
+			無効
+		</label>
+	</div>
+</div>
+<% end %>

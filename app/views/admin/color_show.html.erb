@@ -1,0 +1,134 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>カラー管理</h3>
+</header>
+	
+
+<ul class="breadcrumb">
+  <li>					<%= link_to "一覧",	:controller=>"dashboard", :action=>"color_list" %>&nbsp;<span class="divider">/</span></li>
+  <li class="active">	<%= model_name(@color) %></li>
+</ul>
+
+<table class="table table-bordered">
+	<tbody>
+		<tr class="info">
+			<td colspan="2">
+				<span class="pull-right">
+					<a class="btn btn-small btn-warn" href="<%= url_for(:action=>'color_list') %>">
+					<i class="icon-arrow-left"></i>&nbsp;
+						戻る
+					</a>
+					<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+						<i class="icon-pencil"></i>&nbsp;
+			  			編集
+					</a>
+				</span>
+				<strong>
+					<i class="icon-stackexchange"></i>
+					<%= model_name(@color) %>
+				</strong>
+			</td>
+		</tr>
+		<tr>
+			<td class="span3">公開設定</td>
+			<td class="span9">
+				<%= scheme_state_icons(@color) %>
+			</td>
+		</tr>
+		<tr>
+			<td class="span3">表示名</td>
+			<td class="span9"><%= model_name(@color) %></td>
+		</tr>
+		<tr>
+			<td class="span3">説明文</td>
+			<td class="span9">
+				<% unless @color.description.blank? %>
+				<pre><%= h @color.description %></pre>
+				<% end %>
+			</td>
+		</tr>
+		<% unless @color.wsite_color_deploys.blank? %>
+			<tr>
+				<td class="span3">
+					運用サイト
+					<span class="pull-right">
+						<% unless @color.wsite_color_deploys.blank? %>
+							<span class="label label-success">運用中 : <%= @color.wsite_color_deploys.size %></span>
+						<% end %>
+						<% if false %>
+							<% unless @color.wsite_color_edits.blank? %>
+								<span class="label">編集中 : <%= @color.wsite_color_edits.size %></span>
+							<% end %>
+						<% end %>
+					</span>
+				</td>
+				<td class="span9">
+					<%= @color.wsite_color_deploys.map{|s| model_name(s.company)+":"+model_name(s) }.join(', ')%>
+				</td>
+			</tr>
+		<% end %>
+		<tr>
+			<td>アセット・パス</td>
+			<td><%= @color.repository_path %></td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="well">
+	<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
+	<i class="icon-trash"></i>&nbsp;
+		削除確認
+	</a>
+</div>
+				
+<div class="row-fluid">
+	<% unless @color.photo.blank? %>
+	    <ul class="thumbnails">
+	        <li class="span4">
+				<%= render :partial=>"item_color_photo", :locals => {:photo => @color.photo} %>
+			</li>
+		</ul>		
+	<% else %>
+		<p>
+			<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_color_photo', :id=>@color) %>">
+				<i class="icon-camera"></i>&nbsp;
+				写真追加
+			</a>
+		</p>
+	<% end %>
+</div>
+
+
+<!-- modalEdit -->
+<%= form_tag url_for(:action=>"color_update", :id=>@color), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit", method: :patch} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">カラー・スキーム編集</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_color" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<!-- modalDeleteUser -->
+<%= form_tag url_for(:action=>"color_delete", :id=>@color), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete", method: :delete} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">カラー・スキーム削除</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			「<%= model_name(@color) %>」を削除します。<br/>
+			運用サイトのカラー設定は、デフォルトのカラー・スキームに差し替えられます。<br/>
+			よろしいですか？
+		</p>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+	</div>
+<% end %>

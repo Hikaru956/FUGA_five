@@ -38,30 +38,24 @@ class BsController < ApplicationController
   end
   
   def create_news
-    if request.post?
       @item = ContentLeaf.new(hikaru_params)
       if @item.save
         redirect_to :action=>"show_news", :hash_leaf=>@item.hash_key, :hash_bag=>(@bag.blank?)? nil: @bag.hash_key
       else
         redirect_to :action=>"list"
       end
-    end
   end
   
   def update_news
-    if request.post?
       @item = ContentLeaf.find_by_hash_key(params[:hash_leaf])
       @item.update_attributes(params[:item])
       redirect_to :action=>"show_news", :hash_leaf=>@item.hash_key, :hash_bag=>(@bag.blank?)? nil: @bag.hash_key
-    end
   end
   
   def delete_customer
-    if request.post?
       item = ContentLeaf.find_by_hash_key(params[:hash_leaf])
       item.destroy
       redirect_to :action=>"list_news", :hash_bag=>(@bag.blank?)? nil: @bag.hash_key
-    end
   end
   
   

@@ -56,6 +56,7 @@ class DashboardController < ApplicationController
     #@items =Company.paginate(:page => params[:page], :order=>"alt_id asc", :per_page=>PER_PAGE)
     @items = Company.all.order(name: :asc)
     @items = @items.paginate(page: params[:page], per_page: PER_PAGE).order(name: :asc)
+    render :layout=>'fuga5'
   end
 
   def company_create

@@ -1,0 +1,55 @@
+<div class="control-group">
+	<label class="control-label" for="shop_wsite_run_mode">サイト・ステータス</label>
+	<div class="controls">
+		<select name="shop[wsite_run_mode]" id="shop_wsite_run_mode">
+			<option <% if @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>selected<% end %> 	value="<%=Shop::WSITE_BLOCKED%>">	<%=label_site_status(Shop::WSITE_BLOCKED)%></option>
+			<option <% if @shop.wsite_run_mode==Shop::WSITE_TRIAL %>selected<% end %> 		value="<%=Shop::WSITE_TRIAL%>">		<%=label_site_status(Shop::WSITE_TRIAL)%></option>
+			<option <% if @shop.wsite_run_mode===Shop::WSITE_PUBLISHED %>selected<% end %> 	value="<%=Shop::WSITE_PUBLISHED%>">	<%=label_site_status(Shop::WSITE_PUBLISHED)%></option>
+		</select>
+	</div>
+</div>					
+
+<div class="control-group">
+	<label class="control-label" for="wsite_keywords">サイト・キーワード</label>
+	<div class="controls">
+		<%= text_field 'shop', 'wsite_keywords', :placeholder=>"サイト・キーワードを入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="job_title">サイトの説明</label>
+	<div class="controls">
+		<%= text_field 'shop', 'wsite_description_shop', :placeholder=>"サイトの説明を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="wsite_telephone">問い合わせ電話番号</label>
+	<div class="controls">
+		<%= text_field 'shop', 'wsite_telephone', :placeholder=>"サイトに掲示される電話番号を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="wsite_email">メールアドレス</label>
+	<div class="controls">
+		<%= text_field 'shop', 'wsite_email', :placeholder=>"サイトに掲示されるメールアドレスを入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="shop[enable_inquiry]">お問い合わせ機能</label>
+	<div class="controls">
+		<label class="radio inline">
+			<input type="radio" id="shop[enable_inquiry]" name="shop[enable_inquiry]" value="1" <% if @shop.enable_inquiry %>checked<% end %>>
+			有効
+		</label>
+		<label class="radio inline">
+			<input type="radio" id="shop[enable_inquiry]" name="shop[enable_inquiry]" value="0" <% if !@shop.enable_inquiry %>checked<% end %>>
+			無効
+		</label>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="wsite_layout_pc_specific_basename">オプション</label>
+	<div class="controls">
+		<%= text_field 'shop', 'wsite_layout_pc_specific_basename', :placeholder=>"レイアウトフォルダー名", :autocomplete => "off" %>
+	</div>
+	<span class="help-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;非スマートフォン向けレイアウト</span>
+</div>

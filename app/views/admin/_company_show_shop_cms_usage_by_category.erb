@@ -1,0 +1,42 @@
+<table class="table table-hover table-bordered">
+	<thead>
+		<tr>
+			<th class="span3"><%= model_name(@anchor) %></th>
+			<th class="span3">公開/非公開</th>
+			<th class="span3">記事・項目数</th>
+			<th class="span3">
+				<% category_photos = @anchor.total_photos %>
+				<span class="pull-right">
+					<% unless category_photos.blank? %>
+						<% 
+							photo_sum_size = Photo.total_file_size(category_photos)
+							#category_photos.each{ |photo|  photo_sum_size+=photo.my_size }
+						%> 
+						【<%= number_to_human_size(photo_sum_size)  %>】							
+					<% end %>
+				</span>
+				画像ファイル
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @anchor.children.each do | bag | %>
+			<tr>
+				<td><i class='icon-cloud'>&nbsp;<%= model_name(bag) %></td>
+				<td><%= bag_state_icons(bag) %></td>
+				<td><div  class="text-right"><%= commify(bag.total_leafs.size.to_s) %></div></td>
+				<% category_photos = bag.total_photos %>
+				<td>
+					<div  class="text-right">
+						<%= category_photos.size%>
+						<% 
+							photo_sum_size = Photo.total_file_size(category_photos)
+							#category_photos.each{ |photo|  photo_sum_size+=photo.my_size }	unless category_photos.blank?
+						%> 
+						【<%= number_to_human_size(photo_sum_size) %>】							
+					</div>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

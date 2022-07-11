@@ -1,0 +1,106 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>レジストリー</h3>
+</header>
+	
+<ul class="breadcrumb">
+  <li><%= link_to "レジストリー", 	:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@item) %></li>
+</ul>
+
+<ul class="nav nav-tabs">
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show', 		:id=>@item) %>">レジストリー</a></li>
+	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'company_list_shop', 	:id=>@item) %>">登録店舗</a></li>
+	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_list_user', 	:id=>@item) %>">オーナー・ユーザー</a></li>
+</ul>
+
+<h4>
+	<% if current_user.role==User::ROLE_SUPER %>
+		<p class="pull-right">
+			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNewShop">
+				<i class="icon-plus"></i>&nbsp;
+				店舗登録
+			</a>
+		</p>
+	<% end %>
+	登録店舗一覧
+</h4>
+
+<% @shops = @item.shops %>
+<% if @shops.blank? %>
+	<p class="text-error">店舗が登録されていません</p>
+<% else %>
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr class="info">
+				<th class="span6">
+					<span class="pull-right"><span class="badge badge-success"><%= @item.shops.size %></span></span>
+					店舗名
+				</th>
+				<th class="span2">ディスク容量</th>
+				<th class="span2">使用率</th>
+				<th class="span2">固定ページ</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @shops.each do | shop | %>
+				<tr>
+					<td>
+						<span class="pull-right">
+							
+							<%= (shop.first?)?	"△":	link_to("▲", :action=>"shop_higher",	:id=>shop) %>
+							<%= (shop.last?)? 	"▽": 	link_to("▼", :action=>"shop_lower", 	:id=>shop) %>
+						</span>
+						
+						<% url = url_for(:action=>"company_show_shop", :id=>shop) %>
+						<a href="<%=url%>">
+							<i class='icon-chevron-sign-right'></i>
+							<%= model_name(shop) %>
+						</a>
+					</td>
+					<td style="text-align:right">
+						<%= (shop.room_size_mb.blank?)? "無制限": number_to_human_size(shop.room_size_mb*1024*1024, :locale=>I18n.locale) %>
+						<a href="<%= url_for(:action=>"company_show_shop_usage", :id=>shop) %>" class="btn btn-warning btn-mini">
+							<i class="icon-info-sign"></i>
+						</a>
+					</td>
+					<td style="text-align:right">
+						<% 
+							total_photos = shop.photos
+							photo_sum_size = Photo.total_file_size(total_photos)
+							#total_photos.each{ |photo|  photo_sum_size+=photo.my_size }	unless total_photos.blank?
+							rate = (shop.room_size_mb.blank?||shop.room_size_mb==0)? nil : (photo_sum_size*100)/(shop.room_size_mb*1024*1024) 
+						%>
+						利用率 : <%= (rate.blank?)? "-": rate.to_i %>%
+					</td>
+					<td style="text-align:right">
+						<a href="<%= url_for(:action=>"company_show_shop_usage", :id=>shop) %>" class="btn btn-warning btn-mini">
+							<i class="icon-info-sign"></i>
+						</a>
+						<% fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop) %>
+						<%= fix_pages_bag.content_leafs.size %>
+						ページ
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+
+<!-- modalNewShop -->
+<div class="modal hide fade form-horizontal", id="modalNewShop">
+	<% @shop = Shop.new %>
+	<%= form_for @shop, url: dashboard_company_create_shop_path(company_id: @item.id), method: :post do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">新規店舗登録</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_shop" %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>

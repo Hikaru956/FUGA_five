@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 Fuga326::Application.routes.draw do
+  get 'reception/index'
+  get 'receptions/index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

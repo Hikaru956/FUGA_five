@@ -1,0 +1,127 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>管理ユーザー設定</h3>
+</header>
+	
+
+<ul class="breadcrumb">
+	<% if current_user.has_permission?(User::ROLE_SUPER) %>	
+		<li><%= link_to "一覧",	:controller=>"dashboard", :action=>"user_list" %>&nbsp;<span class="divider">/</span></li>
+	<% end %>
+	<li class="active">	<%= model_name(@user) %></li>
+</ul>
+
+<table class="table table-bordered">
+	<tbody>
+		<tr class="info">
+			<td colspan="2">
+				<span class="pull-right">
+					<% if current_user.has_permission?(User::ROLE_SUPER) %>	
+						<a class="btn btn-small btn-warn" href="<%= url_for(:action=>'user_list') %>">
+						<i class="icon-arrow-left"></i>&nbsp;
+							戻る
+						</a>
+					<% end %>
+					<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+						<i class="icon-pencil"></i>&nbsp;
+			  			編集
+					</a>
+				</span>
+				<strong>ユーザー情報</strong>
+			</td>
+		</tr>
+		<tr>
+			<td class="span3">表示名</td>
+			<td class="span9"><%= model_name(@user) %></td>
+		</tr>
+		<tr <% if @user.banned? %>class="error"<%end%>>
+			<td class="span3">ログイン</td>
+			<td class="span9">
+				<%= @user.login %>
+				<% if @user.banned? %>
+					<br/>
+					<small>
+						<i class="icon-ban-circle"></i>
+						アカウントがブロックされています。
+						ユーザー情報の更新（パスワード更新等）が必要です。
+					</small>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td>ロール</td><td><%= label_user_role(@user.role)%></td>
+		</tr>
+		<tr>
+			<td>メールアドレス</td>
+			<td><%= @user.email %></td>
+		</tr>
+		<tr>
+			<td>パスワード</td>
+			<td>
+				<a class="btn btn-small btn-warning"  data-toggle="modal" href="#modalEditPassword">
+				<i class="icon-refresh"></i>&nbsp;
+					パスワード再発行
+				</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<% unless current_user==@user %>
+	<div class="well">
+		<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
+		<i class="icon-trash"></i>&nbsp;
+			削除確認
+		</a>
+	</div>
+<% end %>
+				
+
+
+<!-- modalEdit -->
+<%= form_tag url_for(:action=>"user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">管理ユーザー編集</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_user_super" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<!-- modalEditPassword -->
+<%= form_tag url_for(:action=>"user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEditPassword"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">パスワード再発行</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_user_password" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<!-- modalDeleteUser -->
+<%= form_tag url_for(:action=>"user_delete", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete"} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">管理ユーザー削除</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			「<%= model_name(@user) %>」を削除します。<br/>
+			よろしいですか？
+		</p>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+	</div>
+<% end %>
