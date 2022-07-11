@@ -1,3 +1,29 @@
+<div class="card" xstyle="width: 18rem;">
+	<% key_photo = temp_local.photo %>
+	<% unless key_photo.blank? %>
+		<%= image_tag key_photo.clip.url(:thumb) %>
+	<% else %>
+		<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Photo%0A">
+	<% end %>
+	<div class="card-body">
+		<h5 class="card-title">
+        	<%= scheme_state_icons(temp_local) %>
+        	<%= truncate(model_name(temp_local), :length=>50) %>
+		</h5>
+		<p class="card-text"><%= h truncate(temp_local.description, :length=>20) %></p>
+	</div>
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">An item</li>
+		<li class="list-group-item">A second item</li>
+		<li class="list-group-item">A third item</li>
+	</ul>
+	<div class="card-body">
+		<a href="#" class="btn btn-primary">Go somewhere</a>
+		<a href="#" class="card-link">Another link</a>
+	</div>
+</div>
+
+<% if false %>
 <div class="thumbnail">
 	<div class="caption">
 		<% if temp_local.position==1 %>
@@ -30,3 +56,4 @@
 		<p><%= h truncate(temp_local.description, :length=>20) %></p>
     </div>
 </div>
+<% end %>

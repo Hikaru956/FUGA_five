@@ -1,64 +1,56 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">カラー・スキーム</li>
+  </ol>
+</nav>
+
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<p class="pull-right">
-		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
-			<i class="icon-plus"></i>&nbsp;
-			カラー・スキーム登録
-		</a>
-	</p>
-	<h3>カラー管理</h3>
+	<span class="float-right">
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+			<%= new_icon %>&nbsp;カラー登録
+		</button>
+	</span>
+	<h3>カラー・スキーム管理</h3>
 </header>
-	
-
-
-<ul class="breadcrumb">
-  <li class="active">一覧</li>
-</ul>
-
-<h4>
-	<i class="icon-stackexchange"></i>
-	カラー・スキーム
-</h4>
 
 <% if @colors.blank? %>
 	<div class="alert alert-block">
 		 <strong>Warning!</strong> 項目がありません。
 	</div>
 <% else %>
-	<div class="row-fluid">
+	<div class="row">
 		<% array = @colors.in_groups_of(3, false)%>
 		<% for i in 0..(array.size-1) %>
 			<% @lines = array[i] %>
-		    <ul class="thumbnails">
-		        <li class="span4">
-		        	<%= render :partial=>"item_color", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
-				</li>		
-		        <li class="span4">
-		        	<%= render :partial=>"item_color", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
-				</li>		
-		        <li class="span4">
-		        	<%= render :partial=>"item_color", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
-				</li>		
-	        </ul>
+			<div class="col-sm-4"><%= render :partial=>"item_color", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %></div>
+			<div class="col-sm-4"><%= render :partial=>"item_color", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %></div>
+			<div class="col-sm-4"><%= render :partial=>"item_color", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %></div>
+			<hr/>
 		<% end %>
 	</div>
 <% end %>
 
 <!-- modalNew -->
-<%= form_tag url_for(:action=>"color_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
-	<% 
-		@color = ColorScheme.new
-	%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">カラー・スキーム登録</h3>
+<div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+		<%= form_tag url_for(:action=>"color_create"), {:class=>"form-horizontal"} do -%>
+			<% 
+				@color = ColorScheme.new
+			%>
+			<div class="modal-header">
+				<h5 class="modal-title">カラー・スキーム登録</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<%= render :partial=>"form_color" %>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+			</div>
+		<% end %>
+		</div>
 	</div>
-	<div class="modal-header">
-		<%= render :partial=>"form_color" %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-	</div>
-<% end %>
-
+</div>

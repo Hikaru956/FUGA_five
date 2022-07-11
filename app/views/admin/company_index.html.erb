@@ -1,12 +1,17 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">レジストリー</li>
+  </ol>
+</nav>
+
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
 	<% if current_user.role==User::ROLE_SUPER %>
-		<p class="float-right">
-			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
-				<%= new_icon('新規登録') %>&nbsp;
-				レジストリー登録
-			</a>
-		</p>
+		<span class="float-right">
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+				<%= new_icon %>&nbsp;レジストリー登録
+			</button>
+		</span>
 	<% end %>
 	<h3>レジストリー</h3>
 </header>
@@ -75,19 +80,23 @@
 <% end %>
 
 <!-- modalNewShop -->
-<div class="modal hide fade form-horizontal", id="modalNew">
-<% item = Company.new %>
-<%= form_for item, url: dashboard_company_create_path, method: :post do |f| -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">新規レジストリー登録</h3>
+<div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<% item = Company.new %>
+			<%= form_for item, url: dashboard_company_create_path, method: :post do |f| -%>
+				<div class="modal-header">
+					<h5 class="modal-title">新規レジストリー登録</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<%= render partial: "form_company", locals: {f: f, item: item } %>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success"><%= new_icon('新規登録') %>&nbsp;&nbsp;登録</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+				</div>
+			<% end %>
+		</div>
 	</div>
-	<div class="modal-body">
-		<%= render partial: "form_company", locals: {f: f, item: item } %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><%= new_icon('新規登録') %>&nbsp;&nbsp;登録</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</button>
-	</div>
-<% end %>
 </div>
