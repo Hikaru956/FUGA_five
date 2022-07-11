@@ -8,43 +8,48 @@
 	 #map img { max-width: none; }
 </style>
 
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'レジストリ', admin_index_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= model_name(@item) %></li>
+  </ol>
+</nav>
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<h3>レジストリー</h3>
+	<h3><%= model_name(@item) %>&nbsp;<small><%= model_alt_id(@item) %></h3>
 </header>
-	
-<ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 	:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li class="active"><%= model_name(@item) %></li>
-</ul>
 
 <ul class="nav nav-tabs">
-	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show', 		:id=>@item) %>">レジストリー</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_list_shop', 	:id=>@item) %>">登録店舗</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_list_user', 	:id=>@item) %>">オーナー・ユーザー</a></li>
+	<li class="nav-item">
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'company_show',:id=>@item) %>">レジストリー</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_list_shop',:id=>@item) %>">登録店舗</a>
+	<li class="nav-item">
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_list_user', :id=>@item) %>">オーナー・ユーザー</a>
+	</li>
 </ul>
+<br/>
+
+<h4>
+	<% if current_user.role==User::ROLE_SUPER %>
+		<p class="float-right">
+			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+				<i class="icon-pencil"></i>&nbsp;編集
+			</a>
+		</p>
+	<% end %>
+	レジストリー情報
+</h4>
 
 <table class="table table-bordered">
-	<thead>
-		<tr class="info">
-			<th colspan="2">
-				<% if current_user.role==User::ROLE_SUPER %>
-					<span class="pull-right">
-						<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
-							<i class="icon-pencil"></i>&nbsp;
-				  			編集
-						</a>
-					</span>
-				<% end %>
-				レジストリー情報
-			</th>
-		</tr>
-	<thead>
 	<tbody>
 		<tr>
-			<td class="span3">レジストリーID</td>
-			<td class="span9"><%= model_alt_id(@item) %></td>
+			<td width='30%'>レジストリーID</td>
+			<td width='70%'><%= model_alt_id(@item) %></td>
 		</tr>
 		<tr>
 			<td>レジストリー名称</td>
@@ -61,14 +66,13 @@
 		</tr>
 	</tbody>
 </table>
-		
+
 <% if current_user.has_permission?(User::ROLE_SUPER) %>
-	<div class="well">
+	<p class="text-right">
 		<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
-		<i class="icon-trash"></i>&nbsp;
-			削除確認
+			<i class="icon-trash"></i>&nbsp;削除確認
 		</a>
-	</div>
+	</p>
 <% end %>
 
 <!-- modalEdit -->
