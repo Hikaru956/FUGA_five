@@ -1,35 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/admin/index" data-turbolinks='false'><%=BRAND_NAME%></a>
+    <a class="navbar-brand" href="<%= admin_index_path %>" data-turbolinks='false'><%=BRAND_NAME%></a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/dashboard/index" data-turbolinks='false'>レジストリー</a>
+          <a class="nav-link" aria-current="page" href="<%= admin_index_path%>" data-turbolinks='false'>レジストリー</a>
         </li>
         <% if current_user.has_permission?(User::ROLE_OPERATOR) %>
             <li class="nav-item">
-            <a class="nav-link" href="/dashboard/color_list" data-turbolinks='false'>カラー</a>
+            <a class="nav-link" href="<%= color_list_path%>" data-turbolinks='false'>カラー</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="/dashboard/layout_list" data-turbolinks='false'>レイアウト</a>
+            <a class="nav-link" href="<%= layout_list_path%>" data-turbolinks='false'>レイアウト</a>
             </li>
         <% end %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <%= current_user.name %>
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="<%= url_for(:controller=>'dashboard', :action=>'user_show', :id=>current_user) %>"><i class="icon-user"></i>&nbsp;マイアカウント</a></a></li>
-            <% if current_user.has_permission?(User::ROLE_SUPER) %>
-                <li><a class="dropdown-item" href="<%= url_for(:controller=>'dashboard', :action=>'user_list') %>"><i class="icon-gear"></i>&nbsp;管理ユーザー設定</a></a></li>
-            <% end %>
-            <li class="divider"></li>
-            <li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %></li>
-          </ul>
-        </li>
+      </ul>
+
+      <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.name %>
+            </a>
+            <div style='left: auto;' class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="<%= url_for(:controller=>'dashboard', :action=>'user_show', :id=>current_user) %>"><i class="icon-user"></i>&nbsp;マイアカウント</a>
+              <% if current_user.has_permission?(User::ROLE_SUPER) %>
+                  <a class="dropdown-item" href="<%= url_for(:controller=>'dashboard', :action=>'user_list') %>"><i class="icon-gear"></i>&nbsp;管理ユーザー設定</a>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %>
+            </div>
+          </li>
       </ul>
     </div>
   </div>

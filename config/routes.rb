@@ -248,6 +248,15 @@ Fuga326::Application.routes.draw do
   get 'inquiry_new'     => 'bs_renderer#inquiry_new',       :as => :inquiry_new
   post 'inquiry_create' => 'bs_renderer#inquiry_create',     :as => :inquiry_create
 
+
+  #  FUGA 5 ADMIN
+  get 'admin_index'     => 'admin#index'
+  get 'color_list'      => 'admin#clor_list'
+  get 'layout_list'     => 'admin#layout_list'
+
+
+
+
 #  match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
 
   # Sample resource route with options:
