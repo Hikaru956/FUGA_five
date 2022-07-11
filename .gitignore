@@ -17,3 +17,4 @@
 Gemfile.lock
 .env
 public/sitemap.xml.gz
+db/schema.rb
