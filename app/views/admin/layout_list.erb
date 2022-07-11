@@ -24,8 +24,8 @@
 		<% for i in 0..(array.size-1) %>
 			<% @lines = array[i] %>
 			<div class="col-sm-4"><%= render :partial=>"item_layout", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %></div>
-			<div class="col-sm-4"><%= render :partial=>"item_color", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %></div>
-			<div class="col-sm-4"><%= render :partial=>"item_color", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %></div>
+			<div class="col-sm-4"><%= render :partial=>"item_layout", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %></div>
+			<div class="col-sm-4"><%= render :partial=>"item_layout", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %></div>
 			<hr/>
 		<% end %>
 	</div>
@@ -47,7 +47,7 @@
 				<%= render :partial=>"form_layout" %>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+				<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;登録</button>
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
 			</div>
 		<% end %>

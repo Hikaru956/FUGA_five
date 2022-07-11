@@ -19,55 +19,60 @@
 <% if @items.blank? %>
 	<p class="text-error">レジストリーが見つかりません。</p>
 <% else %>
-	<table class="table table-hover table-bordered">
+	<table class="table table-hover table-bordered table-striped">
 		<thead>
-			<tr class="info">
+			<tr class="table-dark">
 				<th class="span4">
 					<span class="float-right"><span class="badge badge-success"><%= Company.count %></span></span>
 					レジストリー名
 				</th>
 				<th class="span3"><strong><span class="float-right"><span class="badge badge-success"><%= Shop.count %></span></span>店舗数</th>
-				<th class="span3">ディスク</th>
+				<th class="span3">ストレージ</th>
 				<th class="span2">固定ページ</th>
 			</tr>
 		<head>
 		<tbody>
 			<% @items.each do | company | @company = company %>
 				<tr>
-					<td>
+					<td style="vertical-align: middle">
 						<% url = url_for(:action=>"company_show", :id=>@company) %>
 						<a href="<%=url%>">
 							<i class="fa-solid fa-chevron-right"></i>
 							<%= model_name(@company) %>
 						</a>
-					<td style="text-align:right"><%= @company.shops.size %></td>
+					<td style="vertical-align: middle; text-align:right">
+						<%= @company.shops.size %>
+					</td>
 
-					<% 
+					<%
 						company_room_size_mb = @company.room_size_mb
 						company_photo_size 	 = @company.photo_size
 						rate = (company_room_size_mb.blank?||company_room_size_mb==0)? 0 : (company_photo_size*100)/(company_room_size_mb*1024*1024)
-						
-						room_class = "muted"
-						room_class = "label-warning"	if rate>60
-						room_class = "label-important"	if rate>80
+
+						pbar_class = "bg-success"
+						pbar_class = "bg-warning"	if rate>60
+						pbar_class = "bg-danger"	if rate>80
 					%>
-					<td style="text-align:right">
+					<td style=" vertical-align: middle; text-align:right">
 						<% url = url_for(:action=>"company_list_shop", :id=>@company) %>
 						<a href="<%=url%>">
-							<i class="fa-solid fa-chevron-right"></i>
 							<%= number_to_human_size(company_photo_size)  %>
-							/						
+							/
 							<%= (company_room_size_mb.blank?)? "無制限": number_to_human_size(company_room_size_mb*1024*1024) %>
 						</a>
-						<span class="label <%=room_class%>"><%= rate.to_i%>%</span>
+						<span class="label"><%= rate.to_i%>%</span>
+						</span>
+						<div class="progress">
+							<div class="progress-bar <%= pbar_class %>" role="progressbar" style="width: <%= rate %>%;" aria-valuenow="<%= rate %>" aria-valuemin="0" aria-valuemax="100"><%= rate %>%</div>
+						</div>
 					</td>
-					<td style="text-align:right">
+					<td style=" vertical-align: middle; text-align:right">
 						<%
 						 	f_pages = 0
 						 	@company.shops.each do | shop |
-					 		fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop) 
+					 		fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop)
 					 		f_pages += fix_pages_bag.content_leafs.size
-					 		end 
+					 		end
 						%>
 						<%= f_pages %>
 						ページ
@@ -80,7 +85,28 @@
 <% end %>
 
 <!-- modalNewShop -->
+
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+		<% item = Company.new %>
+		<%= form_for item, url: dashboard_company_create_path, method: :post do |f| -%>
+			<div class="modal-header">
+				<h5 class="modal-title">新規レジストリー登録</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+					<%= render partial: "form_company", locals: {f: f, item: item } %>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-success"><%= new_icon %>&nbsp;登録</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+<div class="modal fade" id="xmodalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<% item = Company.new %>
@@ -93,7 +119,7 @@
 					<%= render partial: "form_company", locals: {f: f, item: item } %>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-success"><%= new_icon('新規登録') %>&nbsp;&nbsp;登録</button>
+					<button type="submit" class="btn btn-success"><%= new_icon('新規登録') %>&nbsp;登録</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
 				</div>
 			<% end %>

@@ -1,0 +1,35 @@
+<!-- ダイアログを開くボタン -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#<<ID_TO_JUMP>>">
+    <%= icon %>&nbsp;<<ボタン・ラベル>>
+</button>
+
+
+
+
+
+
+<!-- ダイアログ本体 -->
+<div class="modal fade" id="__ID_TO_JUMP__" tabindex="-1" aria-labelledby="__ID_TO_JUMP__" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+        __formタグ等__
+
+            <div class="modal-header">
+                <h5 class="modal-title">__ダイアログのタイトル__</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                __form_メッセージなど__
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-<< color >>"><%= icon %>&nbsp;__登録_更新_削除__</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+            </div>
+
+        __formのエンド・タグ等__
+
+	</div>
+</div>

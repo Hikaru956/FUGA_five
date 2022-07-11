@@ -15,11 +15,18 @@
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item">An item</li>
 		<li class="list-group-item">A second item</li>
-		<li class="list-group-item">A third item</li>
 	</ul>
 	<div class="card-body">
-		<a href="#" class="btn btn-primary">Go somewhere</a>
-		<a href="#" class="card-link">Another link</a>
+		<% if temp_local.position==1 %>
+			<span class="pull-right"><i class="icon-spinner icon-spin icon-large"></i></span>
+		<% end %>
+		<%= (temp_local.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"color_higher",	:id=>temp_local) %>
+		<%= temp_local.position %>
+		<%= (temp_local.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"color_lower",	:id=>temp_local) %>				
+
+		<span class='float-right'>
+			<a href="#" class="btn btn-primary">Go somewhere</a>
+		</span>
 	</div>
 </div>
 
