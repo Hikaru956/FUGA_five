@@ -7,11 +7,11 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
 	<% if current_user.role==User::ROLE_SUPER %>
-		<span class="float-right">
+		<p class="float-right">
 			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 				<%= new_icon %>&nbsp;レジストリー登録
 			</button>
-		</span>
+		</p>
 	<% end %>
 	<h3>レジストリー</h3>
 </header>
@@ -90,7 +90,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
 		<% item = Company.new %>
-		<%= form_for item, url: dashboard_company_create_path, method: :post do |f| -%>
+		<%= form_for item, url: admin_company_create_path, method: :post do |f| -%>
 			<div class="modal-header">
 				<h5 class="modal-title">新規レジストリー登録</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

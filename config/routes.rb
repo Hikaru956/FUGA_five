@@ -250,9 +250,12 @@ Fuga326::Application.routes.draw do
 
 
   #  FUGA 5 ADMIN
-  get 'admin_index'     => 'admin#index'
-  get 'color_list'      => 'admin#color_list'
-  get 'layout_list'     => 'admin#layout_list'
+  get     'admin_index'     => 'admin#index'
+  post    'admin_company_create'  => 'admin#company_create'
+  patch   'admin_company_update'  => 'admin#company_update'
+  delete  'admin_company_delete'  => 'admin#company_delete'
+  get     'color_list'      => 'admin#color_list'
+  get     'layout_list'     => 'admin#layout_list'
 
 
 
