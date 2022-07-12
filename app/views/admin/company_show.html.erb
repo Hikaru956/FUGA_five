@@ -37,9 +37,9 @@
 <h4>
 	<% if current_user.role==User::ROLE_SUPER %>
 		<p class="float-right">
-			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
-				<i class="icon-pencil"></i>&nbsp;編集
-			</a>
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+				<%= __icon__ if false%>&nbsp;編集
+			</button>
 		</p>
 	<% end %>
 	レジストリー情報
@@ -69,13 +69,34 @@
 
 <% if current_user.has_permission?(User::ROLE_SUPER) %>
 	<p class="text-right">
-		<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
-			<i class="icon-trash"></i>&nbsp;削除確認
-		</a>
+		<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+			<%= icon if false%>&nbsp;削除確認
+		</button>
 	</p>
 <% end %>
 
 <!-- modalEdit -->
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
+  <div class="modal-dialog">
+		<div class="modal-content">
+			<%= form_for @item, url: dashboard_company_update_path(id: @item), method: :delete do |f| -%>
+				<div class="modal-header">
+					<h5 class="modal-title">レジストリー編集</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<%= render partial: "form_company", locals: {f: f, item: @item } %>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success"><%= __icon__ if false %>&nbsp;更新</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+
 <div class="modal hide fade form-horizontal", id="modalEdit">
 	<%= form_for @item, url: dashboard_company_update_path(id: @item), method: :patch do |f| -%>
 		<div class="modal-header">
@@ -91,23 +112,31 @@
 		</div>
 	<% end %>
 </div>
+
+
+
+
 <!-- modalDelete -->
-<div class="modal hide fade form-horizontal", id="modalDelete">
-	<%= form_for @item, url: dashboard_company_delete_path(id: @item), method: :delete do |f| -%>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">レジストリー削除</h3>
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDelete" aria-hidden="true">
+  <div class="modal-dialog">
+		<div class="modal-content">
+			<%= form_for @item, url: dashboard_company_delete_path(id: @item), method: :delete do |f| -%>
+				<div class="modal-header">
+					<h5 class="modal-title">レジストリー削除</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>
+						「<%= model_name(@item) %>」を削除します。<br/>
+						このレジストリーに関連するすべての情報が削除されます。<br/>
+						よろしいですか？
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-danger"><%= icon if false %>&nbsp;削除</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+				</div>
+			<% end %>
 		</div>
-		<div class="modal-body">
-			<p>
-				「<%= @item.name %>」を削除します。<br/>
-				このレジストリーに関連するサイト情報も一括削除されます。<br/>
-				よろしいですか？
-			</p>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
-		</div>
-	<% end %>
+	</div>
 </div>
