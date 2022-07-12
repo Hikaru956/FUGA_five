@@ -259,6 +259,9 @@ Fuga326::Application.routes.draw do
   patch   'color_update'    => 'admin#color_update'
   delete  'color_delete'    => 'admin#color_delete'
   get     'layout_list'     => 'admin#layout_list'
+  post    'layout_create'    => 'admin#layout_create'
+  patch   'layout_update'    => 'admin#layout_update'
+  delete  'layout_delete'    => 'admin#layout_delete'
 
 
 
