@@ -1,18 +1,19 @@
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">カラー・スキーム</li>
+    <li class="breadcrumb-item active" aria-current="page">カラー</li>
   </ol>
 </nav>
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<span class="float-right">
+	<p class="float-right">
 		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon %>&nbsp;カラー登録
 		</button>
-	</span>
+	</p>
 	<h3>カラー・スキーム管理</h3>
 </header>
+<br/>
 
 <% if @colors.blank? %>
 	<div class="alert alert-block">
@@ -35,16 +36,14 @@
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-		<%= form_tag url_for(:action=>"color_create"), {:class=>"form-horizontal"} do -%>
-			<% 
-				@color = ColorScheme.new
-			%>
+		<% item = ColorScheme.new %>
+		<%= form_for item, url: color_create_path, method: :post do |f| -%>
 			<div class="modal-header">
 				<h5 class="modal-title">カラー・スキーム登録</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<%= render :partial=>"form_color" %>
+				<%= render :partial=>"form_color", locals: {f: f, item: item } %>
 			</div>
 			<div class="modal-footer">
 				<button type="submit" class="btn btn-success"><%= new_icon %>&nbsp;登録</button>

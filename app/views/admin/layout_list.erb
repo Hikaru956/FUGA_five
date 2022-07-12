@@ -6,13 +6,14 @@
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<span class="float-right">
+	<p class="float-right">
 		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon %>&nbsp;レイアウト登録
 		</button>
-	</span>
+	</p>
 	<h3>レイアウト・スキーム管理</h3>
 </header>
+<br/>
 
 <% if @layouts.blank? %>
 	<div class="alert alert-block">

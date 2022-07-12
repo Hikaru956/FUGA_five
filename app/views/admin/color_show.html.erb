@@ -1,37 +1,29 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to('カラー', color_list_path) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= model_name(@color) %></li>
+  </ol>
+</nav>
+
+
+
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<h3>カラー管理</h3>
+	<p class='float-right'%>
+		<a class="btn btn-small btn-dark" href="<%= url_for(:action=>'color_list') %>">
+		<i class="icon-arrow-left"></i>&nbsp;
+			戻る
+		</a>
+	</p>
+	<h3><%= model_name(@color) %></h3>
 </header>
-	
 
-<ul class="breadcrumb">
-  <li>					<%= link_to "一覧",	:controller=>"dashboard", :action=>"color_list" %>&nbsp;<span class="divider">/</span></li>
-  <li class="active">	<%= model_name(@color) %></li>
-</ul>
 
 <table class="table table-bordered">
 	<tbody>
-		<tr class="info">
-			<td colspan="2">
-				<span class="pull-right">
-					<a class="btn btn-small btn-warn" href="<%= url_for(:action=>'color_list') %>">
-					<i class="icon-arrow-left"></i>&nbsp;
-						戻る
-					</a>
-					<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
-						<i class="icon-pencil"></i>&nbsp;
-			  			編集
-					</a>
-				</span>
-				<strong>
-					<i class="icon-stackexchange"></i>
-					<%= model_name(@color) %>
-				</strong>
-			</td>
-		</tr>
 		<tr>
-			<td class="span3">公開設定</td>
-			<td class="span9">
+			<td width='30%'>公開設定</td>
+			<td width='70%'>
 				<%= scheme_state_icons(@color) %>
 			</td>
 		</tr>
@@ -74,20 +66,23 @@
 	</tbody>
 </table>
 
-<div class="well">
-	<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
-	<i class="icon-trash"></i>&nbsp;
-		削除確認
-	</a>
-</div>
-				
+<p class='text-right'>
+	<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+		<%= __icon__ if false %>&nbsp;削除確認
+	</button>
+	|
+	<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+		<%= __icon__ if false %>&nbsp;編集
+	</button>
+</p>
+
 <div class="row-fluid">
 	<% unless @color.photo.blank? %>
 	    <ul class="thumbnails">
 	        <li class="span4">
 				<%= render :partial=>"item_color_photo", :locals => {:photo => @color.photo} %>
 			</li>
-		</ul>		
+		</ul>
 	<% else %>
 		<p>
 			<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_color_photo', :id=>@color) %>">
@@ -99,36 +94,46 @@
 </div>
 
 
-<!-- modalEdit -->
-<%= form_tag url_for(:action=>"color_update", :id=>@color), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit", method: :patch} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">カラー・スキーム編集</h3>
-	</div>
-	<div class="modal-body">
-		<%= render :partial=>"form_color" %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-	</div>
-<% end %>
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @color, url: color_update_path(id: @color.id), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">カラー・スキーム編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render :partial=>"form_color", locals: {f: f, item: @color } %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= __icon__ if false %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+           <% end %>
+        </div>
+    </div>
+</div>
 
-<!-- modalDeleteUser -->
-<%= form_tag url_for(:action=>"color_delete", :id=>@color), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete", method: :delete} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">カラー・スキーム削除</h3>
-	</div>
-	<div class="modal-body">
-		<p>
-			「<%= model_name(@color) %>」を削除します。<br/>
-			運用サイトのカラー設定は、デフォルトのカラー・スキームに差し替えられます。<br/>
-			よろしいですか？
-		</p>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
-	</div>
-<% end %>
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDelete" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @color, url: color_delete_path(id: @color.id), method: :delete do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">カラー・スキーム削除</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<p>
+						「<%= model_name(@color) %>」を削除します。<br/>
+						運用サイトのカラー設定は、デフォルトのカラー・スキームに差し替えられます。<br/>
+						よろしいですか？
+					</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><%= __icon__ if false %>&nbsp;削除</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

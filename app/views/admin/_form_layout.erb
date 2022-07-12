@@ -1,6 +1,6 @@
-<div class="control-group">
-	<label class="control-label" for="layout[is_public]">公開設定</label>
-	<div class="controls">
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">公開設定</label>
+	<div class="col-sm-8">
 		<label class="radio inline">
 			<input type="radio" id="layout[is_public]" name="layout[is_public]" value="1" <% if @layout.is_public %>checked<% end %>>
 			公開
@@ -12,21 +12,24 @@
 	</div>
 </div>
 
-<div class="control-group">
-	<label class="control-label" for="login">レイアウト・スキーム名</label>
-	<div class="controls">
-		<%= text_field 'layout', 'name', :placeholder=>"レイアウト・スキーム名を入力", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">カラー・スキーム名</label>
+	<div class="col-sm-8">
+		<%= text_field 'layout', 'name', {class: "form-control", placeholder: "名称を入力", :required => true, autofocus: true} %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="description">説明文</label>
-	<div class="controls">
-		<%= text_area  'layout', 'description', :rows=>"5", :class=>"span4" %>
+
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">説明文</label>
+	<div class="col-sm-8">
+		<%= text_area 'layout', 'description', {class: "form-control", :rows=>"5", placeholder: "説明文を入力", autofocus: true} %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="login">アセット・パス</label>
-	<div class="controls">
-		<%= text_field 'layout', 'repository_path', :placeholder=>"アセット・パスを入力", :autocomplete => "off" %>
+
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">アセット・パス</label>
+	<div class="col-sm-8">
+		<%= text_field 'layout', 'repository_path', {class: "form-control", placeholder: "アセット・パスを入力", :required => true, autofocus: true} %>
 	</div>
 </div>
+

@@ -562,7 +562,7 @@ class AdminController < ApplicationController
     end
 
     def color_scheme_params
-        params.require(:color).permit(:id, :is_public, :name, :description, :position, :repository_path)
+        params.require(:color_scheme).permit(:id, :is_public, :name, :description, :position, :repository_path)
     end
 
     def photo_params
