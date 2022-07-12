@@ -5,8 +5,6 @@
   </ol>
 </nav>
 
-
-
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
 	<p class='float-right'%>
@@ -22,17 +20,17 @@
 <table class="table table-bordered">
 	<tbody>
 		<tr>
-			<td width='30%'>公開設定</td>
+			<th width='30%'>公開設定</th>
 			<td width='70%'>
 				<%= scheme_state_icons(@color) %>
 			</td>
 		</tr>
 		<tr>
-			<td class="span3">表示名</td>
+			<th class="span3">表示名</th>
 			<td class="span9"><%= model_name(@color) %></td>
 		</tr>
 		<tr>
-			<td class="span3">説明文</td>
+			<th class="span3">説明文</th>
 			<td class="span9">
 				<% unless @color.description.blank? %>
 				<pre><%= h @color.description %></pre>
@@ -41,7 +39,7 @@
 		</tr>
 		<% unless @color.wsite_color_deploys.blank? %>
 			<tr>
-				<td class="span3">
+				<th class="span3">
 					運用サイト
 					<span class="pull-right">
 						<% unless @color.wsite_color_deploys.blank? %>
@@ -53,14 +51,14 @@
 							<% end %>
 						<% end %>
 					</span>
-				</td>
+				</th>
 				<td class="span9">
 					<%= @color.wsite_color_deploys.map{|s| model_name(s.company)+":"+model_name(s) }.join(', ')%>
 				</td>
 			</tr>
 		<% end %>
 		<tr>
-			<td>アセット・パス</td>
+			<th>アセット・パス</th>
 			<td><%= @color.repository_path %></td>
 		</tr>
 	</tbody>
@@ -92,7 +90,6 @@
 		</p>
 	<% end %>
 </div>
-
 
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
     <div class="modal-dialog">

@@ -15,7 +15,7 @@ class AdminController < ApplicationController
         end
         return redirect_to :action=>"company_index"
     end
-    
+
     def delegating
     #    if request.post?
         current_user.shop = Shop.find(params[:id])
@@ -23,7 +23,7 @@ class AdminController < ApplicationController
         redirect_to :controller=>'bs', :action=>'index'
     #    end
     end
-    
+
     def roll_back
     #    if request.post?
         current_user.shop = nil
@@ -32,13 +32,13 @@ class AdminController < ApplicationController
         (target_shop.blank?)? redirect_to(:action=>'index'): redirect_to(:action=>'company_show_shop', :id=>target_shop)
     #    end
     end
-    
+
     ###
     ##  Controllers For Company
     #
     def company_index
         unless current_user.has_permission?(User::ROLE_OPERATOR)
-            return redirect_to(:action=>"company_show", :id=>current_user.company) if current_user.has_permission?(User::ROLE_OWNER) 
+            return redirect_to(:action=>"company_show", :id=>current_user.company) if current_user.has_permission?(User::ROLE_OWNER)
             return redirect_to(:action=>"company_show_shop", :id=>current_user.shop) if current_user.has_permission?(User::ROLE_MANAGER)
         end
         #return redirect_to(:action=>"company_show_shop", :id=>current_user.shop) if current_user.has_permission?(User::ROLE_BLOGGER)
@@ -153,7 +153,7 @@ class AdminController < ApplicationController
         @item = Shop.find(params[:id])
         render :layout=>"fuga_map"
     end
-    
+
     def shop_update_position
         @item = Shop.find(params[:id])
         @item.lat = params[:lat]
@@ -220,7 +220,7 @@ class AdminController < ApplicationController
         staff = Staff.find(params[:id])
         staff.move_higher
         staff.save
-        
+
         @item = staff.shop
         @staffs = @item.staffs
         render :action=>'shop_list_staffs'
@@ -230,7 +230,7 @@ class AdminController < ApplicationController
         staff = Staff.find(params[:id])
         staff.move_lower
         staff.save
-        
+
         @item = staff.shop
         @staffs = @item.staffs
         render :action=>'shop_list_staffs'
@@ -286,7 +286,7 @@ class AdminController < ApplicationController
     def shop_new_favicon
         @shop = Shop.find(params[:id])
     end
-    
+
     def shop_new_apple_touch_icon
         @shop = Shop.find(params[:id])
     end
@@ -304,7 +304,7 @@ class AdminController < ApplicationController
 
         redirect_to :action=>"shop_show_website", :id=>@shop
     end
-    
+
     def shop_create_apple_touch_icon
         @shop = Shop.find(params[:id])
         ###
@@ -324,19 +324,19 @@ class AdminController < ApplicationController
         WebPage.reset_favicon(@shop)
         redirect_to :action=>"shop_show_website", :id=>@shop
     end
-    
+
     def shop_reset_apple_touch_icon
         @shop = Shop.find(params[:id])
         WebPage.reset_apple_touch_icon(@shop)
         redirect_to :action=>"shop_show_website", :id=>@shop
     end
-    
+
     def set_disqus_mode
         @shop = Shop.find(params[:id])
         @shop.update_attributes(shop_params)
         redirect_to :action=>"shop_show_website", :id=>@shop
     end
-    
+
     def set_disqus_code
         @shop = Shop.find(params[:id])
         @shop.update_attributes(shop_params)
@@ -558,7 +558,7 @@ class AdminController < ApplicationController
     end
 
     def layout_scheme_params
-        params.require(:layout).permit(:id, :is_public, :name, :description, :position, :repository_path)
+        params.require(:layout_scheme).permit(:id, :is_public, :name, :description, :position, :repository_path)
     end
 
     def color_scheme_params

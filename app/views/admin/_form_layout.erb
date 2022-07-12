@@ -2,12 +2,11 @@
 	<label for="name" class="col-sm-4 col-form-label">公開設定</label>
 	<div class="col-sm-8">
 		<label class="radio inline">
-			<input type="radio" id="layout[is_public]" name="layout[is_public]" value="1" <% if @layout.is_public %>checked<% end %>>
-			公開
+			<%= f.radio_button :is_public, true %>&nbsp;<%= f.label :is_public, '公開', value: 1 %>
 		</label>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<label class="radio inline">
-			<input type="radio" id="layout[is_public]" name="layout[is_public]" value="0" <% if !@layout.is_public %>checked<% end %>>
-			非公開
+			<%= f.radio_button :is_public, false %>&nbsp;<%= f.label :is_public, '非公開', value: 0 %>
 		</label>
 	</div>
 </div>
@@ -15,21 +14,21 @@
 <div class="mb-3 row">
 	<label for="name" class="col-sm-4 col-form-label">カラー・スキーム名</label>
 	<div class="col-sm-8">
-		<%= text_field 'layout', 'name', {class: "form-control", placeholder: "名称を入力", :required => true, autofocus: true} %>
+		<%= f.text_field :name, {class: "form-control", placeholder: "名称を入力", :required => true, autofocus: true} %>
 	</div>
 </div>
 
 <div class="mb-3 row">
 	<label for="name" class="col-sm-4 col-form-label">説明文</label>
 	<div class="col-sm-8">
-		<%= text_area 'layout', 'description', {class: "form-control", :rows=>"5", placeholder: "説明文を入力", autofocus: true} %>
+		<%= f.text_area :description, {class: "form-control", :rows=>"5", placeholder: "説明文を入力", autofocus: true} %>
 	</div>
 </div>
 
 <div class="mb-3 row">
 	<label for="name" class="col-sm-4 col-form-label">アセット・パス</label>
 	<div class="col-sm-8">
-		<%= text_field 'layout', 'repository_path', {class: "form-control", placeholder: "アセット・パスを入力", :required => true, autofocus: true} %>
+		<%= f.text_field :repository_path, {class: "form-control", placeholder: "アセット・パスを入力", :required => true, autofocus: true} %>
 	</div>
 </div>
 

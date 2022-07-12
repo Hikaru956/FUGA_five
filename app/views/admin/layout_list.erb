@@ -36,16 +36,14 @@
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-		<%= form_tag url_for(:action=>"layout_create"), {:class=>"form-horizontal"} do -%>
-			<% 
-				@layout = LayoutScheme.new
-			%>
+		<% item = LayoutScheme.new %>
+		<%= form_for item, url: layout_create_path, method: :post do |f| -%>
 			<div class="modal-header">
 				<h5 class="modal-title">レイアウト・スキーム登録</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<%= render :partial=>"form_layout" %>
+				<%= render :partial=>"form_layout", locals: {f: f, item: item } %>
 			</div>
 			<div class="modal-footer">
 				<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;登録</button>

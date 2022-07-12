@@ -24,7 +24,7 @@
 		<%= temp_local.position %>
 		<%= (temp_local.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"layout_lower",	:id=>temp_local) %>
 		<span class='float-right'>
-			<a href="#" class="btn btn-primary">Go somewhere</a>
+			<a href="<%= url_for(:action=>'layout_show', :id=>temp_local) %>" class="btn btn-primary">表示</a>
 		</span>
 	</div>
 </div>
