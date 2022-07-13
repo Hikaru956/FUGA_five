@@ -1,31 +1,31 @@
-	<div class="control-group">
-		<label class="control-label" for="item_reservation_range_from">役割</label>
-		<div class="controls">
-			<select name="user[role]" id="user_role">
-				<% if current_user.has_permission?(User::ROLE_SUPER) %>
-					<option <% if @user.role==User::ROLE_SUPER %>selected<% end %> value="<%=User::ROLE_SUPER%>"><%= label_user_role(User::ROLE_SUPER)%></option>
-				<% end %>
-				<option <% if @user.role==User::ROLE_OPERATOR %>selected<% end %> value="<%=User::ROLE_OPERATOR%>"><%= label_user_role(User::ROLE_OPERATOR)%></option>
-				<option <% if @user.role==User::ROLE_REGISTRAR %>selected<% end %> value="<%=User::ROLE_REGISTRAR%>"><%= label_user_role(User::ROLE_REGISTRAR)%></option>
-			</select>
-		</div>
-	</div>
-<div class="control-group">
-	<label class="control-label" for="login">表示名</label>
-	<div class="controls">
-		<%= text_field 'user', 'name', :placeholder=>"表示名を入力", :autocomplete => "off" %>
+<%
+	opts = []
+	opts << [label_user_role(User::ROLE_SUPER),		User::ROLE_SUPER]	if current_user.has_permission?(User::ROLE_SUPER)
+	opts << [label_user_role(User::ROLE_REGISTRAR),	User::ROLE_REGISTRAR]
+	opts << [label_user_role(User::ROLE_SALES),		User::ROLE_SALES]
+%>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">役割</label>
+	<div class="col-sm-8">
+        <%= f.select :role, options_for_select(opts, item.role), {include_blank:'選択してください' }, {:required => true, class: 'form-control'} %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="login">ログイン</label>
-	<div class="controls">
-		<%= text_field 'user', 'email', :placeholder=>"ログインIDを入力", :autocomplete => "off" %>
-		<span class="help-block">3文字以上。他のシステムを含めて登録済みのログインIDは使用できません。</span>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">表示名</label>
+	<div class="col-sm-8">
+		<%= f.text_field :name, {class: "form-control", placeholder: "表示名を入力", :required => true, autofocus: true} %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="email">メールアドレス</label>
-	<div class="controls">
-		<%= text_field 'user', 'email_org', :placeholder=>"メールアドレスを入力", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">ログイン</label>
+	<div class="col-sm-8">
+		<%= f.text_field :email, {class: "form-control", placeholder: "Email形式", :required => true, autofocus: true} %>
+		<span class="help-block">Emailアドレス。登録済みのログインIDは使用できません。</span>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">連絡先</label>
+	<div class="col-sm-8">
+		<%= f.text_field :email_org, {class: "form-control", placeholder: "メールアドレスを入力", :required => FALSE, autofocus: true} %>
 	</div>
 </div>

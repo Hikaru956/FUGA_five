@@ -85,24 +85,24 @@
 <% end %>
 
 <!-- modalNewShop -->
-
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-		<% item = Company.new %>
-		<%= form_for item, url: admin_company_create_path, method: :post do |f| -%>
-			<div class="modal-header">
-				<h5 class="modal-title">新規レジストリー登録</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<%= render partial: "form_company", locals: {f: f, item: item } %>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-success"><%= new_icon %>&nbsp;登録</button>
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-			</div>
-		<% end %>
+	  <div class="modal-dialog">
+		<div class="modal-content">
+			<% item = Company.new %>
+			<%= form_for item, url: admin_company_create_path, method: :post do |f| %>
+				<div class="modal-header">
+					<h5 class="modal-title">新規レジストリー登録</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<%= render partial: "form_company", locals: {f: f, item: item } %>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success"><%= new_icon %>&nbsp;登録</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+				</div>
+			<% end %>
+		</div>
 	</div>
 </div>
 

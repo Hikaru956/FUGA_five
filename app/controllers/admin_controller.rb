@@ -353,8 +353,8 @@ class AdminController < ApplicationController
     end
 
     def user_create
-        user = User.new(user_params)
-        user.save
+        new_user = User.new(user_params)
+        new_user = new_user.save!
         redirect_to :action=>"user_list"
     end
 

@@ -28,9 +28,9 @@
               <%= current_user.name %>
             </a>
             <div style='left: auto;' class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="<%= url_for(:controller=>'dashboard', :action=>'user_show', :id=>current_user) %>"><i class="icon-user"></i>&nbsp;マイアカウント</a>
+              <a class="dropdown-item" href="<%= url_for(:controller=>'admin', :action=>'user_show', :id=>current_user) %>"><i class="icon-user"></i>&nbsp;マイアカウント</a>
               <% if current_user.has_permission?(User::ROLE_SUPER) %>
-                  <a class="dropdown-item" href="<%= url_for(:controller=>'dashboard', :action=>'user_list') %>"><i class="icon-gear"></i>&nbsp;管理ユーザー設定</a>
+                  <a class="dropdown-item" href="<%= url_for(:controller=>'admin', :action=>'user_list') %>"><i class="icon-gear"></i>&nbsp;管理ユーザー設定</a>
               <% end %>
               <div class="dropdown-divider"></div>
               <%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %>
