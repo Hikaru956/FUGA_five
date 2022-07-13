@@ -1,3 +1,24 @@
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">表示名</label>
+	<div class="col-sm-8">
+		<%= f.text_field :name,  {class: "form-control", placeholder: "表示名を入力", :required =>true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="login" class="col-sm-4 col-form-label">ログイン</label>
+	<div class="col-sm-8">
+		<%= f.text_field :email,  {class: "form-control", placeholder: "ログインIDを入力", :required =>true, autofocus: true}  %>
+		<span class="help-block">Emailアドレス。登録済みのログインIDは使用できません。</span>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="email" class="col-sm-4 col-form-label">連絡先</label>
+	<div class="col-sm-8">
+		<%= f.text_field :email_org,  {class: "form-control", placeholder: "メールアドレスを入力", :required =>false, autofocus: true}  %>
+	</div>
+</div>
+
+<% if false %>
 <div class="control-group">
 	<label class="control-label" for="name">表示名</label>
 	<div class="controls">
@@ -17,3 +38,4 @@
 		<%= text_field 'user', 'email_org', :placeholder=>"メールアドレスを入力", :autocomplete => "off" %>
 	</div>
 </div>
+<% end %>

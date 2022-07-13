@@ -38,7 +38,7 @@
 	<% if current_user.role==User::ROLE_SUPER %>
 		<p class="float-right">
 			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
-				<%= __icon__ if false%>&nbsp;編集
+				<%= edit_icon('編集') %>&nbsp;編集
 			</button>
 		</p>
 	<% end %>
@@ -70,7 +70,7 @@
 <% if current_user.has_permission?(User::ROLE_SUPER) %>
 	<p class="text-right">
 		<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
-			<%= icon if false%>&nbsp;削除確認
+			<%= trash_icon('削除') %>&nbsp;削除確認
 		</button>
 	</p>
 <% end %>
@@ -88,7 +88,7 @@
 					<%= render partial: "form_company", locals: {f: f, item: @item } %>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-success"><%= __icon__ if false %>&nbsp;更新</button>
+					<button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
 				</div>
 			<% end %>
@@ -113,7 +113,7 @@
 					</p>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-danger"><%= icon if false %>&nbsp;削除</button>
+					<button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
 				</div>
 			<% end %>

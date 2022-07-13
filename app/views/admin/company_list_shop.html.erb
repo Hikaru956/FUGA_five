@@ -27,9 +27,9 @@
 <h4>
 	<% if current_user.role==User::ROLE_SUPER %>
 		<p class="float-right">
-			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNewShop">
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNewShop">
 				<%= new_icon %>&nbsp;店舗登録
-			</a>
+			</button>
 		</p>
 	<% end %>
 	登録店舗一覧
@@ -96,8 +96,30 @@
 	</table>
 <% end %>
 
+<div class="modal fade" id="modalNewShop" tabindex="-1" aria-labelledby="modalNewShop" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<% @shop = Shop.new %>
+			<%= form_for @shop, url: admin_company_create_shop_path(company_id: @item.id), method: :post do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">新規店舗登録</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render partial: "form_shop", locals: {f: f, shop: @shop} %>
+				</div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<% if false %>
 <!-- modalNewShop -->
-<div class="modal hide fade form-horizontal", id="modalNewShop">
+<div class="modal hide fade form-horizontal", id="xxxmodalNewShop">
 	<% @shop = Shop.new %>
 	<%= form_for @shop, url: dashboard_company_create_shop_path(company_id: @item.id), method: :post do |f| -%>
 		<div class="modal-header">
@@ -113,3 +135,4 @@
 		</div>
 	<% end %>
 </div>
+<% end %>

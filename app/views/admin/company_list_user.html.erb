@@ -26,9 +26,9 @@
 
 <h4>
 	<p class="float-right">
-		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon %>&nbsp;オーナー・ユーザー登録
-		</a>
+		</button>
 	</p>
 	オーナー・ユーザー一覧
 </h4>
@@ -64,7 +64,33 @@
 	</table>
 <% end %>
 
+<div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<% 
+				@user = User.new 
+				@user.role = User::ROLE_OWNER
+			%>
+			<%= form_for @user, url: admin_company_create_user_path(id: @item.id), method: :post do |f| -%>
+				<%= hidden_field 'user', 'role'%>
+                <div class="modal-header">
+                    <h5 class="modal-title">オーナー・ユーザー登録</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render partial: "form_user_owner", locals: {f: f, item: @user} %>
+					<%= render partial: "form_user_password", locals: {f: f, item: @user} %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
 
+<% if false %>
 <!-- modalNew -->
 <div class="modal hide fade form-horizontal", id="modalNew">
 	<%= form_for @item, url: dashboard_company_create_user_path(id: @item), method: :post do |f| -%>
@@ -87,3 +113,4 @@
 		</div>
 	<% end %>
 </div>
+<% end %>

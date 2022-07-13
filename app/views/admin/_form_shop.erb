@@ -1,3 +1,54 @@
+<div class="mb-3 row">
+	<label for="shop_alt_id" class="col-sm-4 col-form-label">店舗ID</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :alt_id, {class: "form-control", placeholder: "店舗IDを入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">レジストリー名</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :name,  {class: "form-control", placeholder: "店舗名を入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="item_reservation_range_from" class="col-sm-4 col-form-label">営業時間</label>
+	<div class="col-sm-8">
+		<%
+            opts_from = []
+            opts_from << ['8:00AM', 8]
+			opts_from << ['9:00AM', 9]
+            opts_from << ['10:00AM', 10]
+			opts_from << ['11:00AM', 11]
+			opts_from << ['12:00PM', 8]
+			opts_from << ['13:00PM', 13]
+			opts_until = []
+			opts_until << ['7:00PM', 19]
+			opts_until << ['8:00PM', 20]
+			opts_until << ['9:00PM', 21]
+			opts_until << ['10:00PM', 22]
+			opts_until << ['11:00PM', 23]
+			opts_until << ['12:00AM', 24]
+			opts_until << ['1:00AM', 25]
+		%>
+		<%= f.select :business_hour_from, options_for_select(opts_from, shop.business_hour_from), {include_blank:'選択してください' }, {:required => true, class: 'form-control'} %>
+		〜
+		<%= f.select :business_hour_until, options_for_select(opts_until, shop.business_hour_until), {include_blank:'選択してください' }, {:required => true, class: 'form-control'} %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="shop_alt_id" class="col-sm-4 col-form-label">郵便番号</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :postal, {class: "form-control", placeholder: "郵便番号を半角数字で入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">住所</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :address_1,  {class: "form-control", placeholder: "住所を入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+
+<% if false %>
 <div class="control-group">
 	<label class="control-label" for="shop_alt_id">店舗ID</label>
 	<div class="controls">
@@ -14,7 +65,7 @@
 	<label class="control-label" for="item_reservation_range_from">営業時間</label>
 	<div class="controls form-inline">
 		<select class="span2" name="shop[business_hour_from]" id="shop_business_hour_from">
-			<option <% if @shop.business_hour_from==8  %>selected<% end %> value="9">08:00 AM</option>
+			<option <% if @shop.business_hour_from==8  %>selected<% end %> value="8">08:00 AM</option>
 			<option <% if @shop.business_hour_from==9  %>selected<% end %> value="9">09:00 AM</option>
 			<option <% if @shop.business_hour_from==10 %>selected<% end %> value="10">10:00 AM</option>
 			<option <% if @shop.business_hour_from==11 %>selected<% end %> value="11">11:00 AM</option>
@@ -46,4 +97,4 @@
 		<%= text_field 'shop', 'address_1', :placeholder=>"住所を入力", :autocomplete => "off" %>
 	</div>
 </div>
-
+<% end %>
