@@ -12,7 +12,7 @@
 				<%= ('. '+model_name(current_user.company)) %>
 			<% end %>
 			]
-			<%= link_to 'Back To Original I/F', url_for(:controller=>'dashboard', :action=>'index'), data: {"turbolinks" => false} %>
+			<%= link_to 'Back To Original I/F', root_path, data: {"turbolinks" => false} %>
 		</small>
 	<% end %>
 </p>
