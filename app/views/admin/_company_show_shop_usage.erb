@@ -12,7 +12,7 @@
 				<div  class="text-right">
 					<%= (@shop.room_size_mb.blank?)? "無制限": number_to_human_size(@shop.room_size_mb*1024*1024) %>
 					<a class="btn btn-mini btn-success"  data-toggle="modal" href="#modalEditRoom">
-						<i class="icon-pencil"></i>&nbsp;変更
+						<%= edit_icon('変更') %>&nbsp;変更
 					</a>
 				</div>
 			</td>
@@ -40,13 +40,17 @@
 </table>
 <% rate = (@shop.room_size_mb.blank?||@shop.room_size_mb==0)? 0 : (photo_sum_size*100)/(@shop.room_size_mb*1024*1024) %>
 <%
-	bar_class = "progress-info"
-	bar_class = "progress-warning"	if rate>60
-	bar_class = "progress-danger"	if rate>80
+	bar_class = "bg-info"
+	bar_class = "bg-warning"	if rate>60
+	bar_class = "bg-danger"	if rate>80
 %>
-<div class="progress progress-striped active <%=bar_class%>">
-	利用率 : <%= rate.to_i%>%
-	<div class="bar" style="width: <%=rate.to_i%>%;"></div>
+<span class="label"><%= rate.to_i%>%</span>
+</span>
+<div class="progress">
+	<div class="progress-bar <%=bar_class%>" role="progressbar" style="width: <%= rate %>%;" aria-valuenow="<%= rate %>" aria-valuemin="0" aria-valuemax="100">
+		利用率 : <%= rate.to_i%>%
+		<div class="bar" style="width: <%=rate.to_i%>%;"></div>
+	</div>
 </div>
 
 <!-- modalEdit -->

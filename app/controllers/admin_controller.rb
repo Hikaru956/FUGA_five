@@ -124,7 +124,7 @@ class AdminController < ApplicationController
 
     def company_show_shop
         @shop = @item = Shop.find(params[:id])
-        render :layout=>"fuga_map"
+        render :layout=>"fuga5"
     end
 
     def company_update_shop

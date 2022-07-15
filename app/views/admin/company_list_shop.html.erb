@@ -69,8 +69,8 @@
 					</td>
 					<td style="text-align:right">
 						<%= (shop.room_size_mb.blank?)? "無制限": number_to_human_size(shop.room_size_mb*1024*1024, :locale=>I18n.locale) %>
-						<a href="<%= url_for(:action=>"company_show_shop_usage", :id=>shop) %>" class="btn btn-warning btn-mini">
-							<i class="icon-info-sign"></i>
+						<a href="<%= url_for(:action=>"company_show_shop_usage", :id=>shop) %>" class="btn btn-warning btn-sm">
+							<%= info_icon('情報')%>
 						</a>
 					</td>
 					<td style="text-align:right">
@@ -83,8 +83,8 @@
 						利用率 : <%= (rate.blank?)? "-": rate.to_i %>%
 					</td>
 					<td style="text-align:right">
-						<a href="<%= url_for(:action=>"company_show_shop_usage", :id=>shop) %>" class="btn btn-warning btn-mini">
-							<i class="icon-info-sign"></i>
+						<a href="<%= url_for(:action=>"company_show_shop_usage", :id=>shop) %>" class="btn btn-warning btn-sm">
+							<%= info_icon('情報')%>
 						</a>
 						<% fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop) %>
 						<%= fix_pages_bag.content_leafs.size %>

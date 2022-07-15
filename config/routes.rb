@@ -260,6 +260,8 @@ Fuga326::Application.routes.draw do
   delete  'admin_user_delete'     => 'admin#user_delete'
   post    'admin_company_create_user' => 'admin#company_create_user'
   post    'admin_company_create_shop' => 'admin#company_create_shop'
+  patch   'admin_company_update_shop' => 'admin#company_update_shop'
+  delete  'admin_company_delete_shop' => 'admin#company_delete_shop'
   get     'color_list'      => 'admin#color_list'
   post    'color_create'    => 'admin#color_create'
   patch   'color_update'    => 'admin#color_update'
