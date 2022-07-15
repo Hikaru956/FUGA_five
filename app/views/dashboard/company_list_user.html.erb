@@ -32,7 +32,7 @@
 			<tr class="info">
 				<th class="span4">表示名</th>
 				<th class="span4"><span class="pull-right"><span class="badge badge-success"><%= @users.size %></span></span>ログイン</th>
-				<th class="span4">Email</th>
+				<th class="span4">連絡先</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,7 +46,7 @@
 						<% url = url_for(:action=>"company_show_user", :id=>user) %>
 						<a href="<%=url%>">
 							<i class='icon-chevron-sign-right'></i>
-							<%= user.login %>
+							<%= user.email %>
 						</a>
 					</td>
 					<td><%= user.email %></td>
