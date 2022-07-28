@@ -2,22 +2,30 @@
 	<%= image_tag photo.clip.url(:thumb) %>
 	<div class="caption">
 		<p><%=photo.info%></p>
-		<p class="text-center"><a class="btn btn-danger btn-mini"  data-toggle="modal" href="#modal_delete_photo_<%=photo.id%>">	<i class="icon-trash"></i>&nbsp;削除確認</a></p>
+		<p class="text-center">
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_photo_<%=photo.id%>">
+          <%= trash_icon('削除確認') %>&nbsp;削除確認
+      </button>
+    </p>
 	</div>
 </div>
 
-<div id="modal_delete_photo_<%=photo.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">削除確認</h3>
-  </div>
-  <div class="modal-body">
-    <p>写真を削除します。よろしいですか？</p>
-  </div>
-  <div class="modal-footer">
-	<%= form_tag({:action => 'delete_color_photo', :id=>photo}, :class=>"form-horizontal", method: :delete)  do %>
-		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-  	<%end%>  	
-  </div>
+<div class="modal fade" id="modal_delete_photo_<%=photo.id%>" tabindex="-1" aria-labelledby="modal_delete_photo_<%=photo.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <%= form_for @color, url: delete_color_photo_path(id: photo.id), method: :delete do |f| -%>
+            <div class="modal-header">
+                <h5 class="modal-title">削除確認</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>写真を削除します。よろしいですか？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+            </div>
+          <% end %>
+        </div>
+    </div>
 </div>

@@ -39,13 +39,13 @@ $(function() {
 	
 
 <ul class="breadcrumb">
-  <li><%= link_to "一覧",	:controller=>"dashboard", :action=>"layout_list" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "一覧",	:controller=>"admin", :action=>"layout_list" %>&nbsp;<span class="divider">/</span></li>
   <li><%= link_to(model_name(@item), :action=>"layout_show", :id=>@item) %>&nbsp;<span class="divider">/</span></li>
   <li class="active">写真追加</li>
 </ul>
 
 <h4>
-	<div class="pull-right">
+	<div class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"layout_show", :id=>@item) %>
 			<a class="btn btn-small" href="<%=url_back%>">

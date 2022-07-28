@@ -151,7 +151,7 @@ class AdminController < ApplicationController
 
     def shop_edit_position
         @item = Shop.find(params[:id])
-        render :layout=>"fuga_map"
+        render :layout=>"fuga5"
     end
 
     def shop_update_position
@@ -189,7 +189,7 @@ class AdminController < ApplicationController
     #
     def shop_list_staffs
         @item = Shop.find(params[:id])
-        @staffs = @item.staffs
+        @staffs = @item.staffs.order(position: :asc)
     end
 
     def shop_create_staff
@@ -222,8 +222,7 @@ class AdminController < ApplicationController
         staff.save
 
         @item = staff.shop
-        @staffs = @item.staffs
-        render :action=>'shop_list_staffs'
+        redirect_to :action=>'shop_list_staffs', :id=>@item
     end
 
     def staff_lower
@@ -232,8 +231,7 @@ class AdminController < ApplicationController
         staff.save
 
         @item = staff.shop
-        @staffs = @item.staffs
-        render :action=>'shop_list_staffs'
+        redirect_to :action=>'shop_list_staffs', :id=>@item
     end
 
 
@@ -558,11 +556,11 @@ class AdminController < ApplicationController
     end
 
     def layout_scheme_params
-        params.require(:layout_scheme).permit(:id, :is_public, :name, :description, :position, :repository_path)
+        params.require(:layout_scheme).permit(:is_public, :name, :description, :position, :repository_path)
     end
 
     def color_scheme_params
-        params.require(:color_scheme).permit(:id, :is_public, :name, :description, :position, :repository_path)
+        params.require(:color_scheme).permit( :is_public, :name, :description, :position, :repository_path)
     end
 
     def photo_params
@@ -571,10 +569,10 @@ class AdminController < ApplicationController
     end
 
     def visual_widget_params
-        params.require(:item).permit(:id, :layout_scheme_id, :hash_key, :position, :title, :description, :widget_type, :created_at, :updated_at)
+        params.require(:item).permit(:layout_scheme_id, :hash_key, :position, :title, :description, :widget_type, :created_at, :updated_at)
     end
     def shop_params
-        params.require(:shop).permit(:alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice, :social_hotpepper_beauty_uri, :social_youtube_uri, :social_line_uri)
+        params.require(:shop).permit(:alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice, :social_hotpepper_beauty_uri, :social_youtube_uri, :social_line_uri, :enable_inquiry)
     end
 
     def user_params

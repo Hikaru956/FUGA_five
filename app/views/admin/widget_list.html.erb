@@ -5,21 +5,26 @@
 
 
 <ul class="breadcrumb">
-  <li>					<%= link_to "一覧",	:controller=>"dashboard", :action=>"layout_list" %>&nbsp;<span class="divider">/</span></li>
+  <li>					<%= link_to "一覧",	:controller=>"admin", :action=>"layout_list" %>&nbsp;<span class="divider">/</span></li>
   <li class="active">	<%= model_name(@layout) %></li>
 </ul>
 
-<ul class="nav nav-tabs">
-	<li>				<a href="<%= url_for(:action=>'layout_show', 	:id=>@layout) %>">レイアウト情報</a></li>
-	<li class="active">	<a href="<%= url_for(:action=>'widget_list', 	:id=>@layout) %>">Visual Widget</a></li>
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'layout_show', :id=>@layout) %>">レイアウト情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'widget_list', :id=>@layout) %>">Visual Widget</a>
+	</li>
 </ul>
+
 
 <h3>
 	<p class="pull-right">
-		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
-			<i class="icon-plus"></i>&nbsp;
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+			<%= new_icon('登録')%>&nbsp;
 			Widget 登録
-		</a>
+		</button>
 	</p>
 	Widget リスト
 </h3>
@@ -42,10 +47,14 @@
 				</td>
 				<td><%= widget_type_string(widget.widget_type) %></td>
 				<td>
-					<span class="pull-right">
-						<a class="btn btn-mini btn-danger"  	data-toggle="modal" href="#modalDelete_<%=widget.id%>">	<i class="icon-remove"></i></a>
+					<span class="float-right">
+						<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+							<%= edit_icon('編集') %>&nbsp;編集
+						</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+							<%= trash_icon('削除') %>&nbsp;削除
+						</button>
 					</span> 
-					<a class="btn btn-mini btn-success"  	data-toggle="modal" href="#modalEdit_<%=widget.id%>">		<i class="icon-pencil"></i></a>
 					<strong><%= model_title(widget) %></strong>
 					<% unless widget.description.blank? %>
 						<br/><br/>
@@ -57,26 +66,82 @@
 	</tbody>
 </table>
 
-<!-- modalNew -->
-<%= form_tag url_for(:action=>"widget_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew", method: :post} do -%>
-	<% 
-		@item = VisualWidget.new
-		@item.layout_scheme = @layout 
-	%>
-	<%= hidden_field 'item', 'layout_scheme_id' %>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">Visual Widget 登録</h3>
+<div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<% 
+				@item = VisualWidget.new
+				@item.layout_scheme = @layout 
+			%>
+			<%= hidden_field 'item', 'layout_scheme_id' %>
+			<%= form_for @item, url: admin_widget_create_path(id: @layout.id), method: :post do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">Visual Widget 登録</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render :partial=>"form_visual_widget", locals:{f: f, item: @item} %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+<% @layout.visual_widgets.each do | item | @item = item %>
+	<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<% 
+					@item = VisualWidget.new
+					@item.layout_scheme = @layout 
+				%>
+				<%= hidden_field 'item', 'layout_scheme_id' %>
+				<%= form_for @item, url: admin_widget_update_path(id: @item.id), method: :patch do |f| -%>
+					<div class="modal-header">
+						<h5 class="modal-title">Visual Widget 設定</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<%= render :partial=>"form_visual_widget", locals:{f: f, item: @item} %>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					</div>
+				<% end %>
+			</div>
+		</div>
 	</div>
-	<div class="modal-header">
-		<%= render :partial=>"form_visual_widget" %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDelete" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<%= form_for @item, url: admin_widget_delete_path(id: @item.id), method: :delete do |f| -%>
+					<div class="modal-header">
+						<h5 class="modal-title">Visual Widget 設定</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>
+							「<%= model_title(@item) %>」を削除します。<br/>
+							利用者がこのWidgetに設定した全ての要素も削除されます。<br/>
+							よろしいですか？
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					</div>
+				<% end %>
+			</div>
+		</div>
 	</div>
 <% end %>
 
+
+<% if false %>
 <% @layout.visual_widgets.each do | item | @item = item %>
 	<!-- modalEdit -->
 	<%= form_tag url_for(:action=>"widget_update", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit_#{@item.id}", method: :patch} do -%>
@@ -111,4 +176,5 @@
 			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
 		</div>
 	<% end %>
+<% end %>
 <% end %>

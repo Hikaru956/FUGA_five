@@ -97,6 +97,12 @@ module ApplicationHelper
   
   def logout_icon(title='ログアウト');    sprintf("<i class='icon-off' title=%s></i>", title).html_safe; end
 
+  def site_status_icon(site_status)
+    return raw("<i class='fa-solid fa-spinner fa-spin'></i>")  if site_status == Shop::WSITE_PUBLISHED    
+    return raw("<i class='fa-solid fa-flask-round-potion'></i>")             if site_status == Shop::WSITE_TRIAL
+    return raw("<i class='fa-solid fa-ban'></i>")             if site_status == Shop::WSITE_BLOCKED    
+  end
+
 
   def icon_site_status(site_status)
     return raw("<i class='icon-spinner icon-spin'></i>")  if site_status == Shop::WSITE_PUBLISHED    
@@ -340,6 +346,9 @@ EOF
   def caution_icon(title='警告'); sprintf("<i class='fa-solid fa-diamond-exclamation' title=%s></i>", title).html_safe; end
   def error_icon(title='エラー'); sprintf("<i class='fa-solid fa-triangle-exclamation text-danger' title=%s></i> ", title).html_safe; end
   def info_icon(title='情報'); sprintf("<i class='fa-solid fa-circle-info' title=%s></i>", title).html_safe; end
+  def share_icon(title='表示'); sprintf("<i class='fa-solid fa-arrow-up-right-from-square' title=%s></i>", title).html_safe; end
+  def setting_icon(title='設定'); sprintf("<i class='fa-solid fa-wrench' title=%s></i>", title).html_safe; end
+  def submit_icon(title='決定'); sprintf("<i class='fa-solid fa-check' title=%s></i>", title).html_safe; end
 
   def staff_icon(title='スタッフ');  sprintf("<i class='fa-solid fa-user-large' title=%s></i>", title).html_safe; end
 

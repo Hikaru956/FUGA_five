@@ -1,8 +1,8 @@
 <% if @item.id.blank? %>
-<div class="control-group">
-	<label class="control-label" for="item_widget_type">ウィジッドのタイプ</label>
-	<div class="controls">
-		<select name="item[widget_type]" id="item_widget_type">
+<div class="mb-3 row">
+	<label for="item_widget_type" class="col-sm-4 col-form-label">サイト・ステータス</label>
+	<div class="col-sm-8">
+		<select class="form-select" aria-label="Default select example" name="item[widget_type]" id="item_widget_type">
 			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_STRING %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_STRING%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_STRING)%></option>
 			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_TEXT %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_TEXT%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_TEXT)%></option>
 			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_CODE %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_CODE%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_CODE)%></option>
@@ -11,18 +11,17 @@
 			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_PHOTOS %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_PHOTOS%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_PHOTOS)%></option>
 		</select>
 	</div>
-</div>					
+</div>
 <% end %>
-
-<div class="control-group">
-	<label class="control-label" for="item_titles">ウィジットのタイトル</label>
-	<div class="controls">
-		<%= text_field 'item', 'title', :placeholder=>"ヘッドテキスト、ロゴ画像等", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="item_title" class="col-sm-4 col-form-label">ウィジットのタイトル</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :title, {class: "form-control", placeholder: "ヘッドテキスト、ロゴ画像等", :required => true, autofocus: true}  %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="item_description">入力するデータの説明</label>
-	<div class="controls">
-		<%= text_area  'item', 'description', :rows=>"5", :class=>"span4", :placeholder=>"文字数、画像サイズ等" %>
+<div class="mb-3 row">
+	<label for="item_description" class="col-sm-4 col-form-label">入力するデータの説明</label>
+	<div class="col-sm-8">
+		<%= f.text_area  :description,  {class: "form-control", :rows=>"5", placeholder: "文字数、画像サイズ等", :required => true, autofocus: true}  %>
 	</div>
 </div>

@@ -5,28 +5,36 @@
 	
 
 <ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 						:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@user.shop.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@user.shop.company %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "レジストリー", 						:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@user.shop.company), 	:controller=>"admin", :action=>"company_show", :id=>@user.shop.company %>&nbsp;<span class="divider">/</span></li>
   <li class="active"><%= model_name(@user.shop) %></li>
 </ul>
 
-<ul class="nav nav-tabs">
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show', 		 	:id=>@user.shop) %>">店舗情報</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@user.shop) %>">店舗スタッフ</a></li>
-	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@user.shop) %>">店舗ユーザー</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@user.shop) %>"><%= icon_site_status(@user.shop.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@user.shop) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_staffs', :id=>@user.shop) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'shop_list_users', :id=>@user.shop) %>">店舗ユーザー</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@user.shop.wsite_run_mode) %>&nbsp;サイト属性</a>
+	</li>
 </ul>
 
+
 <h4>
-	<span class="pull-right">
-		<a class="btn btn-small btn-warn" href="<%= url_for(:action=>'shop_list_users', :id=>@user.shop) %>">
-		<i class="icon-arrow-left"></i>&nbsp;
+	<span class="float-right">
+		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'shop_list_users', :id=>@user.shop) %>">
+		<i class="fa-solid fa-arrow-left"></i>&nbsp;
 			一覧
 		</a>
-		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
-			<i class="icon-pencil"></i>&nbsp;
-  			編集
-		</a>
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+			<%= edit_icon('編集') %>&nbsp;編集
+		</button>
 	</span>
 	ユーザー情報
 </h4>
@@ -49,72 +57,78 @@
 		<tr>
 			<td>パスワード</td>
 			<td>
-				<a class="btn btn-small btn-warning"  data-toggle="modal" href="#modalEditPassword">
-				<i class="icon-refresh"></i>&nbsp;
-					パスワード再発行
-				</a>
+				<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditPassword">
+						<%= update_icon('編集') %>&nbsp;パスワード再発行
+				</button>
 			</td>
 		</tr>
 	</tbody>
 </table>
 
 <div class="well">
-	<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
-	<i class="icon-trash"></i>&nbsp;
-		削除確認
-	</a>
+	<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+			<%= trash_icon('削除確認') %>&nbsp;削除確認
+	</button>
 </div>
 				
 
-
-<!-- modalEdit -->
-<div class="modal hide fade form-horizontal", id="modalEdit">
-	<%= form_for @user, url: dashboard_shop_update_user_path(id: @user), method: :patch do |f| -%>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">ユーザー編集</h3>
-		</div>
-		<div class="modal-body">
-			<%= render :partial=>"form_user" %>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-		</div>
-	<% end %>
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @user, url: admin_shop_update_user_path(id: @user), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">ユーザー編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render :partial=>"form_user", locals:{f: f} %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
 </div>
-<!-- modalEditPassword -->
-<div  class="modal hide fade form-horizontal", id="modalEditPassword">
-	<%= form_for @user, url: dashboard_shop_update_user_path(id: @user), method: :patch do |f| -%>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">パスワード再発行</h3>
-		</div>
-		<div class="modal-body">
-			<%= render :partial=>"form_user_password" %>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-		</div>
-	<% end %>
+<div class="modal fade" id="modalEditPassword" tabindex="-1" aria-labelledby="modalEditPassword" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @user, url: admin_shop_update_user_path(id: @user), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">パスワード再発行</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render :partial=>"form_user_password", locals:{f: f} %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
 </div>
-<!-- modalDeleteUser -->
-<div  class="modal hide fade form-horizontal", id="modalDelete">
-	<%= form_for @user, url: dashboard_shop_delete_user_path(id: @user), method: :delete do |f| -%>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">ユーザー削除</h3>
-		</div>
-		<div class="modal-body">
-			<p>
-				「<%= @user.login %>」を削除します。<br/>
-				よろしいですか？
-			</p>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
-		</div>
-	<% end %>
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDelete" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @user, url: admin_shop_delete_user_path(id: @user), method: :delete do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">パスワード再発行</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<p>
+						「<%= @user.login %>」を削除します。<br/>
+						よろしいですか？
+					</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
 </div>

@@ -1,3 +1,35 @@
+<div class="mb-3 row">
+	<label for="item_reservation_range_from" class="col-sm-4 col-form-label">役割</label>
+	<div class="col-sm-8">
+		<select class="form-select" aria-label="Default select example" name="user[role]" id="user_role">
+			<option <% if @user.role==User::ROLE_MANAGER %>selected<% end %> value="<%=User::ROLE_MANAGER%>"><%= label_user_role(User::ROLE_MANAGER)%></option>
+			<option <% if @user.role==User::ROLE_BLOGGER %>selected<% end %> value="<%=User::ROLE_BLOGGER%>"><%= label_user_role(User::ROLE_BLOGGER)%></option>
+			<option <% if @user.role==User::ROLE_BLOCKED %>selected<% end %> value="<%=User::ROLE_BLOCKED%>"><%= label_user_role(User::ROLE_BLOCKED)%></option>
+		</select>
+	</div>
+</div>
+
+<div class="mb-3 row">
+	<label for="login" class="col-sm-4 col-form-label">表示名</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :name, {class: "form-control", placeholder: "表示名を入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="login" class="col-sm-4 col-form-label">ログイン</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :email,  {class: "form-control", placeholder: "Email形式", :required => true, autofocus: true}  %>
+		<span class="help-block">Emailアドレス。登録済みのログインIDは使用できません。</span>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="email" class="col-sm-4 col-form-label">連絡先</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :email_org,  {class: "form-control", placeholder: "メールアドレスを入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+
+<% if false %>
 <div class="control-group">
 	<label class="control-label" for="item_reservation_range_from">役割</label>
 	<div class="controls">
@@ -27,3 +59,4 @@
 		<%= text_field 'user', 'email_org', :placeholder=>"メールアドレスを入力", :autocomplete => "off" %>
 	</div>
 </div>
+<% end %>

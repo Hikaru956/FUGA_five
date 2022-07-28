@@ -16,24 +16,31 @@
 	
 
 <ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 					:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@item.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "レジストリー", 					:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@item.company), 	:controller=>"admin", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
   <li class="active"><%= model_name(@item) %></li>
 </ul>
 
-<ul class="nav nav-tabs">
-	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show_shop', 	:id=>@item) %>">店舗情報</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@item) %>">店舗スタッフ</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@item) %>">店舗ユーザー</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link  active" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@item) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_staffs', :id=>@item) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_users', :id=>@item) %>">店舗ユーザー</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a>
+	</li>
 </ul>
-
 <div class="row">
 	<div class="span8">
 		<h4>
-			<span class="pull-right">
-				<a class="btn btn-small btn-warn" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
-				<i class="icon-arrow-left"></i>&nbsp;戻る
+			<span class="float-right">
+				<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
+				<%= backward_icon('戻る')%>&nbsp;戻る
 				</a>
 				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
 					<%= edit_icon('編集') %>&nbsp;編集
@@ -52,16 +59,16 @@
 				<tr>
 					<td>名称</td>
 					<td>
-						<span class='pull-right'>
+						<span class='float-right'>
 							  <div class="btn-group">
 									<a class="btn btn-mini btn-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
-										<i class="icon-share"></i>
+										<%= share_icon('サイト表示')%>
 										サイト表示
 									</a>
-									<%= link_to raw("<i class='icon-signin'></i>&nbsp;&nbsp;店舗管理画面"), {:action=>'delegating', :id=>@item}, :method => :post, :class=>"btn btn-mini btn-primary" %>
+									<%= link_to raw("<i class='fa-solid fa-right-to-bracket'></i>&nbsp;&nbsp;店舗管理画面"), {:action=>'delegating', :id=>@item}, :method => :post, :class=>"btn btn-mini btn-primary" %>
 									<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
 									<a href="<%=url_business%>" class="btn btn-warning btn-mini">
-										<%= icon_site_status(@shop.wsite_run_mode) %>
+										<%= site_status_icon(@shop.wsite_run_mode) %>
 										利用状況表示
 									</a>
 							  </div>
@@ -99,7 +106,7 @@
 					<th colspan="2">
 						<span class="pull-right">
 							<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEditOption">
-								<i class="icon-wrench"></i>&nbsp;
+								<%= setting_icon('設定') %>&nbsp;
 									設定
 							</a>
 						</span>
@@ -140,21 +147,21 @@
 
 		<% if current_user.has_permission?(User::ROLE_SUPER) || @item.wsite_run_mode<Shop::WSITE_PUBLISHED %>
 		<div class="well">
-			<a class="btn btn-small btn-danger"  data-toggle="modal" href="#modalDelete">
-			<i class="icon-trash"></i>&nbsp;
+			<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+				<%= trash_icon('削除確認')%>&nbsp;
 				削除確認
-			</a>
+			</button>
 		</div>
 		<% end %>
-				
 	</div>
+	<hr/>
 	<div class="span4">
 
 		<h5>
-			<span class="pull-right">
+			<span class="float-right">
 				<% url_edit_position = url_for(:action=>"shop_edit_position", :id=>@item) %>							
 		  		<a class="btn btn-mini btn-info" href="<%= url_edit_position %>">
-					<i class="icon-globe"></i>&nbsp;
+					<i class="fa-solid fa-gears"></i>&nbsp;
 		  			設定
 				</a>
 			</span>
@@ -162,7 +169,7 @@
 		</h5>
 		
 		<% if @shop.gps? %>
-			<div id="map"></div>
+			<div id="map" style='height: 400px;'></div>
 		<% else %>
 			<div class="alert alert-block">
 			  <h4>Warning!</h4>
@@ -184,7 +191,7 @@
 					<%= render :partial=>"form_shop", locals: {f: f, shop: @shop} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-__color__"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                 </div>
 			<% end %>
@@ -227,6 +234,31 @@
 <% end %>
 
 <!-- modalDeleteShop -->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDelete" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @item, url: admin_company_delete_shop_path(id: @item), method: :delete do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">店舗削除</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<p>
+						「<%= @item.name %>」を削除します。<br/>
+						この店舗に関連する情報も削除されます。<br/>
+						よろしいですか？
+					</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<% if false %>
 <div class="modal hide fade form-horizontal", id="modalDelete">
 	<%= form_for @item, url: admin_company_delete_shop_path(id: @item), method: :delete do |f| -%>
 		<div class="modal-header">
@@ -246,6 +278,7 @@
 		</div>
 	<% end %>
 </div>
+<% end %>
 
 <script>
     var latlng = new google.maps.LatLng(<%= @item.lat %>, <%= @item.lng %>);

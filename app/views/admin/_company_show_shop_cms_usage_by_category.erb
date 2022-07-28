@@ -6,7 +6,7 @@
 			<th class="span3">記事・項目数</th>
 			<th class="span3">
 				<% category_photos = @anchor.total_photos %>
-				<span class="pull-right">
+				<span class="float-right">
 					<% unless category_photos.blank? %>
 						<% 
 							photo_sum_size = Photo.total_file_size(category_photos)

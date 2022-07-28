@@ -1,81 +1,54 @@
-<div class="control-group">
-	<label class="control-label" for="social_facebook_uri">
-		Facebook
-		<i class="icon-facebook-sign icon-large"></i>
-	</label>
-	<div class="controls">
-		<%= text_field 'shop', 'social_facebook_uri', :placeholder=>"Facebook URI", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label"><i class='fa-brands fa-facebook fa-lg'></i>Facebook</label>
+	<div class="col-sm-8">
+		<%= f.text_field :social_facebook_uri,  {class: "form-control", placeholder: "Facebook URI", :required => false, autofocus: true}  %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="social_gplus_uri">
-		Google+
-		<i class="icon-google-plus-sign icon-large"></i>
-	</label>
-	<div class="controls">
-		<%= text_field 'shop', 'social_gplus_uri', :placeholder=>"Google+ URI", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label"><i class='fa-brands fa-google-plus fa-lg'></i>Google+</label>
+	<div class="col-sm-8">
+		<%= f.text_field :social_gplus_uri,  {class: "form-control", placeholder: "Google+ URI", :required => false, autofocus: true}  %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="social_twitter_uri">
-		twitter
-		<i class="icon-twitter-sign icon-large"></i>
-	</label>
-	<div class="controls">
-		<%= text_field 'shop', 'social_twitter_uri', :placeholder=>"Twitter URI", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label"><i class='fa-brands fa-twitter fa-lg'></i>twitter</label>
+	<div class="col-sm-8">
+		<%= f.text_field :social_twitter_uri,  {class: "form-control", placeholder: "Twitter URI", :required => false, autofocus: true}  %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="social_instagram_uri">
-		Instagram
-		<i class="icon-instagram icon-large"></i>
-	</label>
-	<div class="controls">
-		<%= text_field 'shop', 'social_instagram_uri', :placeholder=>"Instagram URI", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label"><i class='fa-brands fa-instagram fa-lg'></i>Instagram</label>
+	<div class="col-sm-8">
+		<%= f.text_field :social_instagram_uri,  {class: "form-control", placeholder: "Instagram URI", :required => false, autofocus: true}  %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="social_pinterest_uri">
-		pinterest
-		<i class="icon-pinterest-sign icon-large"></i>
-	</label>
-	<div class="controls">
-		<%= text_field 'shop', 'social_pinterest_uri', :placeholder=>"pinterest URI", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label"><i class='fa-brands fa-pinterest fa-lg'></i>pinterest</label>
+	<div class="col-sm-8">
+		<%= f.text_field :social_pinterest_uri,  {class: "form-control", placeholder: "pinterest URI", :required => false, autofocus: true}  %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="social_tumblr_uri">
-		tumlr.
-		<i class="icon-tumblr-sign icon-large"></i>
-	</label>
-	<div class="controls">
-		<%= text_field 'shop', 'social_tumblr_uri', :placeholder=>"tumblr. URI", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label"><i class='fa-brands fa-tumblr fa-lg'></i>tumblr.</label>
+	<div class="col-sm-8">
+		<%= f.text_field :social_tumblr_uri,  {class: "form-control", placeholder: "tumblr. URI", :required => false, autofocus: true}  %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="social_instagram_uri">
-		HOTPEPPER Beauty
-		<i class="icon-flag icon-large"></i>
-	</label>
-	<div class="controls">
-		<%= text_field 'shop', 'social_hotpepper_beauty_uri', :placeholder=>"HOTPEPPER Beauty URI", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label"><img src="/images/assets/hotpepperlogosmall.png" alt="HOTPEPPER Beauty" />HOTPEPPER Beauty</label>
+	<div class="col-sm-8">
+		<%= f.text_field :social_hotpepper_beauty_uri,  {class: "form-control", placeholder: "HOTPEPPER Beauty URI", :required => false, autofocus: true}  %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="social_youtube_uri">
-		YouTube
-		<i class="icon-youtube icon-large"></i>
-	</label>
-	<div class="controls">
-		<%= text_field 'shop', 'social_youtube_uri', :placeholder=>"Youtube URI", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label"><i class='fa-brands fa-youtube fa-lg'></i>YouTube</label>
+	<div class="col-sm-8">
+		<%= f.text_field :social_youtube_uri,  {class: "form-control", placeholder: "YouTube URI", :required => false, autofocus: true}  %>
 	</div>
 </div>
-<div class="control-group">
-	<label class="control-label" for="social_line_uri">
-		LINE
-		<img src="/images/assets/line_icon.png" alt="LINE" />
-	</label>
-	<div class="controls">
-		<%= text_field 'shop', 'social_line_uri', :placeholder=>"LINE URI", :autocomplete => "off" %>
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label"><i class='fa-brands fa-line fa-lg'></i>LINE</label>
+	<div class="col-sm-8">
+		<%= f.text_field :social_line_uri,  {class: "form-control", placeholder: "LINE", :required => false, autofocus: true}  %>
 	</div>
 </div>

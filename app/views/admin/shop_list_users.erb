@@ -5,24 +5,32 @@
 	
 
 <ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 					:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@item.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "レジストリー", 					:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@item.company), 	:controller=>"admin", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
   <li class="active"><%= model_name(@item) %></li>
 </ul>
 
-<ul class="nav nav-tabs">
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show_shop', 	:id=>@item) %>">店舗情報</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@item) %>">店舗スタッフ</a></li>
-	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@item) %>">店舗ユーザー</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@item) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_staffs', :id=>@item) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'shop_list_users', :id=>@item) %>">店舗ユーザー</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a>
+	</li>
 </ul>
 
 <h4>
 	<p class="pull-right">
-		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
-			<i class="icon-plus"></i>&nbsp;
-			ユーザー登録
-		</a>
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+			<%= new_icon('登録') %>&nbsp;ユーザー登録
+		</button>
 	</p>
 	店舗ユーザー一覧
 </h4>
@@ -57,6 +65,29 @@
 	</table>
 <% end %>
 
+<div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<% @user = User.new %>
+			<%= form_for @user, url: admin_shop_create_user_path(shop_id: @item), method: :post do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">新規ユーザー登録</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render :partial=>"form_user", locals: {f: f, item: @user}  %>
+					<%= render :partial=>"form_user_password", locals: {f: f, item: @user}  %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<% if false %>
 <!-- modalNew -->
 <div class="modal hide fade form-horizontal", id="modalNew">
 <%= form_for @item, url: dashboard_shop_create_user_path(shop_id: @item), method: :post do |f| -%>
@@ -66,8 +97,8 @@
 		<h3 id="myModalLabel">新規ユーザー登録</h3>
 	</div>
 	<div class="modal-header">
-		<%= render :partial=>"form_user" %>
-		<%= render :partial=>"form_user_password" %>
+		<%= render :partial=>"form_user", locals: {f: f, item: @user}  %>
+		<%= render :partial=>"form_user_password", locals: {f: f, item: @user}  %>
 	</div>
 	<div class="modal-footer">
     	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
@@ -75,3 +106,4 @@
 	</div>
 <% end %>
 </div>
+<% end %>

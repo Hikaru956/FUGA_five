@@ -8,8 +8,8 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
 	<p class='float-right'%>
-		<a class="btn btn-small btn-dark" href="<%= url_for(:action=>'color_list') %>">
-		<i class="icon-arrow-left"></i>&nbsp;
+		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'color_list') %>">
+		<%= backward_icon('戻る')%>&nbsp;
 			戻る
 		</a>
 	</p>
@@ -66,11 +66,11 @@
 
 <p class='text-right'>
 	<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
-		<%= __icon__ if false %>&nbsp;削除確認
+		<%= trash_icon('削除確認') %>&nbsp;削除確認
 	</button>
 	|
 	<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
-		<%= __icon__ if false %>&nbsp;編集
+		<%= edit_icon('編集') %>&nbsp;編集
 	</button>
 </p>
 
@@ -103,7 +103,7 @@
 					<%= render :partial=>"form_color", locals: {f: f, item: @color } %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= __icon__ if false %>&nbsp;更新</button>
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                 </div>
            <% end %>
@@ -127,7 +127,7 @@
 					</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= __icon__ if false %>&nbsp;削除</button>
+                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                 </div>
             <% end %>

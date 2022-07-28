@@ -11,9 +11,9 @@
 			<td>
 				<div  class="text-right">
 					<%= (@shop.room_size_mb.blank?)? "無制限": number_to_human_size(@shop.room_size_mb*1024*1024) %>
-					<a class="btn btn-mini btn-success"  data-toggle="modal" href="#modalEditRoom">
+					<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEditRoom">
 						<%= edit_icon('変更') %>&nbsp;変更
-					</a>
+					</button>
 				</div>
 			</td>
 			<td>
@@ -53,6 +53,32 @@
 	</div>
 </div>
 
+<div class="modal fade" id="modalEditRoom" tabindex="-1" aria-labelledby="modalEditRoom" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @shop, url: admin_company_update_shop_room_path(id: @shop.id), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">店舗情報編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<div class="mb-3 row">
+						<label for="name" class="col-sm-4 col-form-label">利用容量</label>
+						<div class="col-sm-8">
+							<%= f.text_field  :room_size_mb,  {class: "form-control", placeholder: "MB単位で入力 (1024=1GB)", :required => true, autofocus: true}  %>
+						</div>
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+		</div>
+    </div>
+</div>
+
+<% if false %>
 <!-- modalEdit -->
 <%= form_tag url_for(:action=>"company_update_shop_room", :id=>@shop), {:class=>"modal hide fade form-horizontal", :id=>"modalEditRoom"} do -%>
 	<div class="modal-header">
@@ -72,4 +98,4 @@
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
 	</div>
 <% end %>
-				
+<% end %>

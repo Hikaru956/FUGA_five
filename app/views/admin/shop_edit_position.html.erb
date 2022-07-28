@@ -15,16 +15,24 @@
 	
 
 <ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 						:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@item.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "レジストリー", 						:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@item.company), 	:controller=>"admin", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
   <li class="active"><%= model_name(@item) %></li>
 </ul>
 
-<ul class="nav nav-tabs">
-	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show_shop', 	:id=>@item) %>">店舗情報</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@item) %>">店舗スタッフ</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@item) %>">店舗ユーザー</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link  active" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@item) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_staffs', :id=>@item) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_users', :id=>@item) %>">店舗ユーザー</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a>
+	</li>
 </ul>
 
 <div class="form-horizontal well">
@@ -33,14 +41,14 @@
 		<div class="control-group">
 			<label class="control-label" for="alt_id">住所/ランドマーク</label>
 			<div class="controls">
-				<i class="icon-search"></i>
+				<i class="fa-solid fa-magnifying-glass"></i>
 				<input class="input-large search-query" type="text" id="address">
 				<input class="btn btn-primary" type="button" value="検索" onclick="moveMap();">
-				</div>
+			</div>
 		</div>
 	</fieldset>
 </div>
-
+<hr/>
 
 <%= form_tag url_for(:action=>"shop_update_position", :id=>@item), :class=>"form-horizontal" do -%>
 	<%= hidden_field_tag 'lat', @item.lat %>
@@ -50,30 +58,30 @@
 			<tr class="warning">
 				<td>
 					<strong><%= model_name(@item) %></strong>
-					<span class="pull-right">
-						<button type="submit" class="btn btn-success btn-small"><i class="icon-ok"></i>&nbsp;&nbsp;ピンの位置に設定</button>
+					<span class="float-right">
+						<button type="submit" class="btn btn-success btn-small"><%= submit_icon('設定')%>&nbsp;&nbsp;ピンの位置に設定</button>
 					</span>
 				</td>
 			</tr>
 			<tr>
-				<td><div id="map"></div></td>
+				<td><div id="map" style='height: 600px;'></div></td>
 			</tr>
 		</tbody>
 	</table>
 <% end %>
 
 <div class="well">
-	<a class="btn btn-middle btn-warn" href="<%= url_for(:action=>'company_show_shop', :id=>@item) %>">
+	<a class="btn btn-middle btn-secondary" href="<%= url_for(:action=>'company_show_shop', :id=>@item) %>">
 	<i class="icon-arrow-left"></i>&nbsp;
-		戻る
+		<%= backward_icon('戻る')%>&nbsp;戻る
 	</a>
 	
 	<% if @item.gps? %>
 		&nbsp;<span class="divider">|</span>&nbsp;
-		<a class="btn btn-middle btn-danger"  data-toggle="modal" href="#modalDeletePosition">
-		<i class="icon-remove"></i>&nbsp;
+		<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDeletePosition">
+			<%= submit_icon('位置をクリア')%>&nbsp;
 			位置をクリア
-		</a>
+		</button>
 	<% end %>
 </div>
 
@@ -129,7 +137,32 @@
 </script>
 
 <!-- modalDeletePosition -->
-<%= form_tag url_for(:action=>"shop_delete_position", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"modalDeletePosition", method: :delete} do -%>
+<div class="modal fade" id="modalDeletePosition" tabindex="-1" aria-labelledby="modalDeletePosition" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @item, url: admin_shop_delete_position_path(id: @item), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">位置をクリア</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<p>
+						「<%= model_name(@item) %>」
+						の位置情報（緯度、経度）をクリアします<br/>
+						よろしいですか？
+					</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;位置をクリア</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<% if false %>
+<%= form_tag url_for(:action=>"shop_delete_position", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"xxxmodalDeletePosition", method: :delete} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">位置をクリア</h3>
@@ -146,8 +179,6 @@
 		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
 	</div>
 <% end %>
-
-<% if false %>
 <script>
 	<% if @item.gps? %>
 	    var latlng = new google.maps.LatLng(<%= @item.lat %>, <%= @item.lng %>);

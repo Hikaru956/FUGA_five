@@ -5,24 +5,32 @@
 	
 
 <ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 						:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@item.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "レジストリー", 						:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@item.company), 	:controller=>"admin", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
   <li class="active"><%= model_name(@item) %></li>
 </ul>
 
-<ul class="nav nav-tabs">
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show_shop', 	:id=>@item) %>">店舗情報</a></li>
-	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@item) %>">店舗スタッフ</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@item) %>">店舗ユーザー</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@item) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'shop_list_staffs', :id=>@item) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_users', :id=>@item) %>">店舗ユーザー</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a>
+	</li>
 </ul>
+
 
 <h4>
 	<p class="pull-right">
-		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalNew">
-			<i class="icon-plus"></i>&nbsp;
-			スタッフ登録
-		</a>
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+			<%= new_icon('登録') %>&nbsp;スタッフ登録
+		</button>
 	</p>
 	店舗スタッフ一覧
 </h4>
@@ -32,7 +40,7 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr>
-				<th class="span4"><span class="pull-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
+				<th class="span4"><span class="float-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
 				<th class="span4">職位/タイトル</th>
 				<th class="span4">ソーシャル</th>
 			</tr>
@@ -41,7 +49,7 @@
 			<% @staffs.each do | staff | %>
 				<tr>
 					<td>
-						<span class="pull-right">
+						<span class="float-right">
 							<%= (staff.first?)?	"△":	link_to("▲", :action=>"staff_higher",	:id=>staff) %>
 							<%= (staff.last?)? 	"▽": 	link_to("▼", :action=>"staff_lower", 	:id=>staff) %>
 						</span>
@@ -55,12 +63,15 @@
 					</td>
 					<td><%=staff.job_title%></td>
 					<td>
-						<%= raw '<i class="icon-facebook-sign icon-large"></i>'		unless staff.social_facebook_uri.blank? %>
-						<%= raw '<i class="icon-google-plus-sign icon-large"></i>'	unless staff.social_gplus_uri.blank? %>
-						<%= raw '<i class="icon-twitter-sign icon-large"></i>'		unless staff.social_twitter_uri.blank? %>
-						<%= raw '<i class="icon-instagram icon-large"></i>'			unless staff.social_instagram_uri.blank? %>
-						<%= raw '<i class="icon-pinterest-sign icon-large"></i>'	unless staff.social_pinterest_uri.blank? %>
-						<%= raw '<i class="icon-tumblr-sign icon-large"></i>'		unless staff.social_tumblr_uri.blank? %>
+						<%= raw "<i class='fa-brands fa-facebook fa-2x'></i>"		unless staff.social_facebook_uri.blank? %>
+						<%= raw "<i class='fa-brands fa-google-plus fa-2x'></i>"	unless staff.social_gplus_uri.blank? %>
+						<%= raw "<i class='fa-brands fa-twitter fa-2x'></i></a>"		unless staff.social_twitter_uri.blank? %>
+						<%= raw "<i class='fa-brands fa-instagram fa-2x'></i>"			unless staff.social_instagram_uri.blank? %>
+						<%= raw "<i class='fa-brands fa-pinterest fa-2x'></i>"	unless staff.social_pinterest_uri.blank? %>
+						<%= raw "<i class='fa-brands fa-tumblr fa-2x'></i>"		unless staff.social_tumblr_uri.blank? %>
+						<%= raw "<img src='/images/assets/hpb_icon.png' alt='HOTPEPPER Beauty'/>"unless staff.social_hotpepper_beauty_uri.blank? %>
+						<%= raw "<i class='fa-brands fa-youtube fa-2x'></i>"		unless staff.social_youtube_uri.blank? %>
+						<%= raw "<i class='fa-brands fa-line fa-2x'></i>"		unless staff.social_line_uri.blank? %>
 					</td>
 				</tr>
 			<% end %>
@@ -68,21 +79,24 @@
 	</table>
 <% end %>
 
-<!-- modalNew -->
-<div class="modal hide fade form-horizontal", id="modalNew">
-	<% @shop = Shop.new %>
-	<%= form_for @shop, url: dashboard_shop_create_staff_path(shop_id: @item.id), method: :post do |f| -%>
-		<% @staff = Staff.new %>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">新規スタッフ登録</h3>
-		</div>
-		<div class="modal-body">
-			<%= render :partial=>"form_staff" %>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-		</div>
-	<% end %>
+<div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<% @shop = Shop.new %>
+			<% @staff = Staff.new %>
+			<%= form_for @staff, url: admin_shop_create_staff_path(shop_id: @item.id), method: :post do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">新規スタッフ登録</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render partial: "form_staff", locals: {f: f, staff: @staff }  %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
 </div>

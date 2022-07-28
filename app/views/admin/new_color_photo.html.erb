@@ -40,17 +40,17 @@ $(function() {
 	
 
 <ul class="breadcrumb">
-  <li><%= link_to "一覧",	:controller=>"dashboard", :action=>"color_list" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "一覧",	:controller=>"admin", :action=>"color_list" %>&nbsp;<span class="divider">/</span></li>
   <li><%= link_to(model_name(@item), :action=>"color_show", :id=>@item) %>&nbsp;<span class="divider">/</span></li>
   <li class="active">写真追加</li>
 </ul>
 
 <h4>
-	<div class="pull-right">
+	<div class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"color_show", :id=>@item) %>
-			<a class="btn btn-small" href="<%=url_back%>">
-				<i class="icon-arrow-left"></i>&nbsp;
+			<a class="btn btn-small btn-secondary" href="<%=url_back%>">
+				<%= backward_icon('戻る')%>&nbsp;
 				戻る
 			</a>
 		</p>
