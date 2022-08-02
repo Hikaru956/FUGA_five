@@ -281,20 +281,24 @@
 <% end %>
 
 <script>
-    var latlng = new google.maps.LatLng(<%= @item.lat %>, <%= @item.lng %>);
-    var options = {
-        zoom: 14,
-        center: latlng,
-		disableDefaultUI: true,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    var map = new google.maps.Map(document.getElementById('map'), options);
+	var map;
+  	var shop_marker;
+    <% if @item.gps? %>
+	    var latlng = { lat: <%= @item.lat %>, lng: <%= @item.lng %> };
+	<% else %>
+	    var latlng = { lat: 35.681382, lng: 139.766084 };
+	<% end %>
 
-	var marker = new google.maps.Marker({
-            position: latlng,
-            map: map
-        });	
-    
+    function initMap() {
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: latlng,
+			zoom: 16
+		});
+		shop_marker = new google.maps.Marker({
+			position: latlng,
+			map: map
+		});
+	}
     function moveMap() {
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({
@@ -311,4 +315,7 @@
             }
         });
     }
+	window.onload = function () {
+		initMap();
+	}
 </script>
