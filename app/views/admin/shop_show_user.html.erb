@@ -21,7 +21,7 @@
 		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'shop_list_users', :id=>@user.shop) %>">店舗ユーザー</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@user.shop.wsite_run_mode) %>&nbsp;サイト属性</a>
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@user.shop) %>"><%= icon_site_status(@user.shop.wsite_run_mode) %>&nbsp;サイト属性</a>
 	</li>
 </ul>
 
@@ -41,21 +41,27 @@
 <table class="table table-bordered">
 	<tbody>
 		<tr>
-			<td>役割</td><td><%= label_user_role(@user.role)%></td>
+			<th width='25%'>役割</th><td width='75%'><%= label_user_role(@user.role)%></td>
 		</tr>
 		<tr>
-			<td>表示名</td><td><%= model_name(@user)%></td>
+			<th>表示名</th><td><%= model_name(@user)%></td>
 		</tr>
 		<tr>
-			<td class="span3">ログイン</td>
-			<td class="span9"><%= @user.login %></td>
-		</tr>
-		<tr>
-			<td>メールアドレス</td>
+			<th >ログイン</th>
 			<td><%= @user.email %></td>
 		</tr>
 		<tr>
-			<td>パスワード</td>
+			<th>メールアドレス</th>
+			<td><%= @user.email_org %></td>
+		</tr>
+		<tr>
+			<th>バージョン</th>
+			<td>
+				<%= user_ui_version_label(@user) %>
+			</td>
+		</tr>
+		<tr>
+			<th>パスワード</th>
 			<td>
 				<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditPassword">
 						<%= update_icon('編集') %>&nbsp;パスワード再発行
@@ -73,7 +79,7 @@
 				
 
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 			<%= form_for @user, url: admin_shop_update_user_path(id: @user), method: :patch do |f| -%>
                 <div class="modal-header">
@@ -115,12 +121,12 @@
         <div class="modal-content">
 			<%= form_for @user, url: admin_shop_delete_user_path(id: @user), method: :delete do |f| -%>
                 <div class="modal-header">
-                    <h5 class="modal-title">パスワード再発行</h5>
+                    <h5 class="modal-title">ユーザー削除</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 					<p>
-						「<%= @user.login %>」を削除します。<br/>
+						「<%= @user.email %>」を削除します。<br/>
 						よろしいですか？
 					</p>
                 </div>

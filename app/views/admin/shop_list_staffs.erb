@@ -40,15 +40,15 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr>
-				<th class="span4"><span class="float-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
-				<th class="span4">職位/タイトル</th>
-				<th class="span4">ソーシャル</th>
+				<th ><span class="float-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
+				<th >職位/タイトル</th>
+				<th >ソーシャル</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @staffs.each do | staff | %>
 				<tr>
-					<td>
+					<td style="vertical-align: middle;">
 						<span class="float-right">
 							<%= (staff.first?)?	"△":	link_to("▲", :action=>"staff_higher",	:id=>staff) %>
 							<%= (staff.last?)? 	"▽": 	link_to("▼", :action=>"staff_lower", 	:id=>staff) %>
@@ -61,15 +61,15 @@
 							<%= model_name(staff) %>
 						</a>
 					</td>
-					<td><%=staff.job_title%></td>
-					<td>
+					<td style="vertical-align: middle;"><%=staff.job_title%></td>
+					<td style="vertical-align: top;">
 						<%= raw "<i class='fa-brands fa-facebook fa-2x'></i>"		unless staff.social_facebook_uri.blank? %>
 						<%= raw "<i class='fa-brands fa-google-plus fa-2x'></i>"	unless staff.social_gplus_uri.blank? %>
 						<%= raw "<i class='fa-brands fa-twitter fa-2x'></i></a>"		unless staff.social_twitter_uri.blank? %>
 						<%= raw "<i class='fa-brands fa-instagram fa-2x'></i>"			unless staff.social_instagram_uri.blank? %>
 						<%= raw "<i class='fa-brands fa-pinterest fa-2x'></i>"	unless staff.social_pinterest_uri.blank? %>
 						<%= raw "<i class='fa-brands fa-tumblr fa-2x'></i>"		unless staff.social_tumblr_uri.blank? %>
-						<%= raw "<img src='/images/assets/hpb_icon.png' alt='HOTPEPPER Beauty'/>"unless staff.social_hotpepper_beauty_uri.blank? %>
+						<%= raw "<img src='/images/assets/hpb_icon.png' style='vertical-align: top;' alt='HOTPEPPER Beauty'/>"unless staff.social_hotpepper_beauty_uri.blank? %>
 						<%= raw "<i class='fa-brands fa-youtube fa-2x'></i>"		unless staff.social_youtube_uri.blank? %>
 						<%= raw "<i class='fa-brands fa-line fa-2x'></i>"		unless staff.social_line_uri.blank? %>
 					</td>

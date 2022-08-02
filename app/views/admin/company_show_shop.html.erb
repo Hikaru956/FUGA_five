@@ -36,7 +36,7 @@
 	</li>
 </ul>
 <div class="row">
-	<div class="span8">
+	<div>
 		<h4>
 			<span class="float-right">
 				<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
@@ -51,13 +51,13 @@
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
-					<td class="span3">店舗ID</td>
-					<td class="span9">
+					<th width='25%'>店舗ID</th>
+					<td width='75%'>
 						<%= model_alt_id(@item) %>
 					</td>
 				</tr>
 				<tr>
-					<td>名称</td>
+					<th>名称</th>
 					<td>
 						<span class='float-right'>
 							  <div class="btn-group">
@@ -77,7 +77,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>営業時間</td>
+					<th>営業時間</th>
 					<td>
 						<%= @item.operation_from.strftime("%l:%M %p")%>
 						〜
@@ -86,14 +86,14 @@
 				</tr>
 				<% if false %>
 				<tr>
-					<td>電話番号</td><td><%= @item.telephone_1 %></td>
+					<th>電話番号</th><td><%= @item.telephone_1 %></td>
 				</tr>
 				<% end %>
 				<tr>
-					<td>郵便番号</td><td><%= @item.postal %>&nbsp;</td>
+					<th>郵便番号</th><td><%= @item.postal %>&nbsp;</td>
 				</tr>
 				<tr>
-					<td>住所</td><td><%= @item.address_1 %>&nbsp;</td>
+					<th>住所</th><td><%= @item.address_1 %>&nbsp;</td>
 				</tr>
 			</tbody>
 		</table>

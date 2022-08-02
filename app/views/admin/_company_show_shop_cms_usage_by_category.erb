@@ -23,7 +23,7 @@
 		<% @anchor.children.each do | bag | %>
 			<tr>
 				<td><i class='icon-cloud'>&nbsp;<%= model_name(bag) %></td>
-				<td><%= bag_state_icons(bag) %></td>
+				<td><%= icon_bag_state(bag) %></td>
 				<td><div  class="text-right"><%= commify(bag.total_leafs.size.to_s) %></div></td>
 				<% category_photos = bag.total_photos %>
 				<td>

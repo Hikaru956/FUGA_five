@@ -7,10 +7,10 @@
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<h3><%= model_name(@item) %>&nbsp;<small><%= model_alt_id(@item) %></h3>
+	<h3><%= model_name(@item) %>&nbsp;<small><%= model_alt_id(@item) %></small></h3>
 </header>
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs"  style="margin-bottom: 15px;">
 	<li class="nav-item">
 		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_show',:id=>@item) %>">レジストリー</a>
 	</li>
@@ -22,7 +22,6 @@
 		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_list_user', :id=>@item) %>">オーナー・ユーザー</a>
 	</li>
 </ul>
-<br/>
 
 <h4>
 	<% if current_user.role==User::ROLE_SUPER %>

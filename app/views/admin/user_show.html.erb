@@ -22,8 +22,8 @@
 			<td width='70%'><%= model_name(@user) %></td>
 		</tr>
 		<tr <% if @user.banned? %>class="error"<%end%>>
-			<th class="span3">ログイン</th>
-			<td class="span9">
+			<th>ログイン</th>
+			<td>
 				<%= @user.email %>
 				<% if @user.banned? %>
 					<br/>
@@ -41,6 +41,12 @@
 		<tr>
 			<th>連絡先</th>
 			<td><%= @user.email_org %></td>
+		</tr>
+		<tr>
+			<th>バージョン</th>
+			<td>
+				<%= user_ui_version_label(@user) %>
+			</td>
 		</tr>
 		<tr>
 			<th>パスワード</th>
@@ -70,7 +76,7 @@
 
 <!-- EditModal -->
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 			<%= form_for @user, url: admin_user_update_path(id: @user.id), method: :patch do |f| %>
                 <div class="modal-header">

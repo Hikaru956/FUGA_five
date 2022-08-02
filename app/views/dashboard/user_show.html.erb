@@ -56,6 +56,12 @@
 			<td><%= @user.email %></td>
 		</tr>
 		<tr>
+			<td>バージョン</td>
+			<td>
+				<%= user_ui_version_label(@user) %>
+			</td>
+		</tr>
+		<tr>
 			<td>パスワード</td>
 			<td>
 				<a class="btn btn-small btn-warning"  data-toggle="modal" href="#modalEditPassword">
@@ -79,13 +85,13 @@
 
 
 <!-- modalEdit -->
-<%= form_tag url_for(:action=>"user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit"} do -%>
+<%= form_tag url_for(:action=>"user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit", method: :patch} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">管理ユーザー編集</h3>
 	</div>
 	<div class="modal-body">
-		<%= render :partial=>"form_user_super" %>
+		<%= render :partial=>"form_user_super", locals:{user: @user} %>
 	</div>
 	<div class="modal-footer">
     	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
@@ -94,7 +100,7 @@
 <% end %>
 
 <!-- modalEditPassword -->
-<%= form_tag url_for(:action=>"user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEditPassword"} do -%>
+<%= form_tag url_for(:action=>"user_update", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalEditPassword", method: :patch} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">パスワード再発行</h3>
@@ -109,7 +115,7 @@
 <% end %>
 
 <!-- modalDeleteUser -->
-<%= form_tag url_for(:action=>"user_delete", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete"} do -%>
+<%= form_tag url_for(:action=>"user_delete", :id=>@user), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete", method: :delete} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">管理ユーザー削除</h3>

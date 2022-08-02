@@ -59,7 +59,18 @@
 				<td>
 					<strong><%= model_name(@item) %></strong>
 					<span class="float-right">
-						<button type="submit" class="btn btn-success btn-small"><%= submit_icon('設定')%>&nbsp;&nbsp;ピンの位置に設定</button>
+						<a class="btn btn-middle btn-secondary" href="<%= url_for(:action=>'company_show_shop', :id=>@item) %>">
+							<%= backward_icon('戻る')%>&nbsp;戻る
+						</a>
+						&nbsp;<span class="divider">|</span>&nbsp;
+						<% if @item.gps? %>
+							<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDeletePosition">
+								<i class="fa-solid fa-eraser"></i>&nbsp;
+								位置をクリア
+							</button>
+						<% end %>
+						&nbsp;<span class="divider">|</span>&nbsp;
+						<button type="submit" class="btn btn-success"><%= submit_icon('設定')%>&nbsp;&nbsp;ピンの位置に設定</button>
 					</span>
 				</td>
 			</tr>
@@ -70,20 +81,7 @@
 	</table>
 <% end %>
 
-<div class="well">
-	<a class="btn btn-middle btn-secondary" href="<%= url_for(:action=>'company_show_shop', :id=>@item) %>">
-	<i class="icon-arrow-left"></i>&nbsp;
-		<%= backward_icon('戻る')%>&nbsp;戻る
-	</a>
-	
-	<% if @item.gps? %>
-		&nbsp;<span class="divider">|</span>&nbsp;
-		<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDeletePosition">
-			<%= submit_icon('位置をクリア')%>&nbsp;
-			位置をクリア
-		</button>
-	<% end %>
-</div>
+
 
 
 <script>

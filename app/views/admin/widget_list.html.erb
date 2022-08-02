@@ -67,7 +67,7 @@
 </table>
 
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 			<% 
 				@item = VisualWidget.new
@@ -92,7 +92,7 @@
 </div>
 <% @layout.visual_widgets.each do | item | @item = item %>
 	<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<% 
 					@item = VisualWidget.new

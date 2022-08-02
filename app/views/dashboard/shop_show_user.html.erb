@@ -47,6 +47,12 @@
 			<td><%= @user.email %></td>
 		</tr>
 		<tr>
+			<td>バージョン</td>
+			<td>
+				<%= user_ui_version_label(@user) %>
+			</td>
+		</tr>
+		<tr>
 			<td>パスワード</td>
 			<td>
 				<a class="btn btn-small btn-warning"  data-toggle="modal" href="#modalEditPassword">

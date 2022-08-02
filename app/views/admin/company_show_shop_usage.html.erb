@@ -3,36 +3,34 @@
 	<h3>レジストリー</h3>
 </header>
 
-<ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 					:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@item.company), 	:controller=>"admin", :action=>"company_show", 		:id=>@item.company %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@item), 			:controller=>"admin", :action=>"company_show_shop", :id=>@item %>&nbsp;<span class="divider">/</span></li>
-  <li class="active">利用状況</li>
-</ul>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'レジストリ', admin_index_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= model_name(@item) %></li>
+  </ol>
+</nav>
 
-<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+<ul class="nav nav-tabs"  style="margin-bottom: 15px;">
 	<li class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@item) %>">店舗情報</a>
-	</li>
-	<li  class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_staffs', :id=>@item) %>">店舗スタッフ</a>
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_show',:id=>@item) %>">レジストリー</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_users', :id=>@item) %>">店舗ユーザー</a>
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'company_list_shop',:id=>@item) %>">登録店舗</a>
+	<li class="nav-item">
 	</li>
 	<li class="nav-item">
-		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a>
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_list_user', :id=>@item) %>">オーナー・ユーザー</a>
 	</li>
 </ul>
 
 <h4>
-	<span class="pull-right">
-		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'company_show_shop', :id=>@item) %>">
+	<span class="float-right">
+		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
 		<%= backward_icon('戻る')%>&nbsp;
 			戻る
 		</a>
 	</span>
-	<%= icon_site_status(@shop.wsite_run_mode) %>
+	<%= site_status_icon(@shop.wsite_run_mode) %>
 	<%=model_name(@item)%>
 	利用状況
 </h4>

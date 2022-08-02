@@ -23,7 +23,9 @@ class DashboardController < ApplicationController
     unless params[:wkey].blank?
       return redirect_to :controller=>"bs_renderer", :action=>"home", :wkey=>params[:wkey]
     end
-      return redirect_to :action=>"company_index"
+    return redirect_to sign_in_path if current_user.blank?
+    return redirect_to(:controller=>'admin', :action=>'company_index') unless current_user.ui_version.blank?
+    return redirect_to :action=>"company_index"
   end
   
   def delegating
@@ -270,7 +272,8 @@ class DashboardController < ApplicationController
   def shop_update_user
     @item = User.find(params[:id])
     @item.update_attributes(user_params)
-    redirect_to :action=>"shop_show_user", :id=>@item
+    redirect_to(:controller=>'admin', :action=>"shop_show_user", :id=>@item) unless @item.ui_version.blank?
+    redirect_to(:action=>"shop_show_user", :id=>@item) if @item.ui_version.blank?
   end
 
   def shop_delete_user
@@ -406,7 +409,8 @@ class DashboardController < ApplicationController
         @item.try_count=0
         @item.save!
       end
-      redirect_to :action=>"user_show", :id=>@item
+      redirect_to(:controller=>'admin', :action=>"user_show", :id=>@item) unless @item.ui_version.blank?
+      redirect_to(:action=>"user_show", :id=>@item) if @item.ui_version.blank?
   end
 
   def user_delete
@@ -625,7 +629,7 @@ private
   end
 
   def user_params
-        params.require(:user).permit(:login, :email, :email_org, :name, :password, :password_confirmation, :role, :company_id, :shop_id)
+        params.require(:user).permit(:login, :email, :email_org, :name, :password, :password_confirmation, :role, :company_id, :shop_id, :ui_version)
   end
 
   def staff_params

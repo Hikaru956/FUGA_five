@@ -22,7 +22,7 @@
 		<tr>
 			<th width='30%'>公開設定</th>
 			<td width='70%'>
-				<%= scheme_state_icons(@color) %>
+				<%= icon_scheme_state(@color) %>
 			</td>
 		</tr>
 		<tr>
@@ -84,7 +84,7 @@
 	<% else %>
 		<p>
 			<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_color_photo', :id=>@color) %>">
-				<i class="icon-camera"></i>&nbsp;
+				<i class="fa-solid fa-camera"></i>&nbsp;
 				写真追加
 			</a>
 		</p>
@@ -92,7 +92,7 @@
 </div>
 
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 			<%= form_for @color, url: color_update_path(id: @color.id), method: :patch do |f| -%>
                 <div class="modal-header">

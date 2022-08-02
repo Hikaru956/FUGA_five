@@ -1,12 +1,4 @@
-<style>
-    #map {
-        width: 100%;
-        height: 277px;
-    }
-</style>
-<style>
-	 #map img { max-width: none; }
-</style>
+
 
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -17,10 +9,12 @@
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<h3><%= model_name(@item) %>&nbsp;<small><%= model_alt_id(@item) %></h3>
+	<h3><%= model_name(@item) %>&nbsp;<small><%= model_alt_id(@item) %></small></h3>
 </header>
 
-<ul class="nav nav-tabs">
+
+
+<ul class="nav nav-tabs"  style="margin-bottom: 15px;">
 	<li class="nav-item">
 		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'company_show',:id=>@item) %>">レジストリー</a>
 	</li>
@@ -32,7 +26,6 @@
 		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_list_user', :id=>@item) %>">オーナー・ユーザー</a>
 	</li>
 </ul>
-<br/>
 
 <h4>
 	<% if current_user.role==User::ROLE_SUPER %>
@@ -48,21 +41,21 @@
 <table class="table table-bordered">
 	<tbody>
 		<tr>
-			<td width='30%'>レジストリーID</td>
-			<td width='70%'><%= model_alt_id(@item) %></td>
+			<th width='25%'>レジストリーID</th>
+			<td width='75%'><%= model_alt_id(@item) %></td>
 		</tr>
 		<tr>
-			<td>レジストリー名称</td>
+			<th>レジストリー名称</th>
 			<td><%= model_name(@item) %></td>
 		</tr>
 		<tr>
-			<td>電話番号</td><td><%= @item.telephone_1 %></td>
+			<th>電話番号</th><td><%= @item.telephone_1 %></td>
 		</tr>
 		<tr>
-			<td>郵便番号</td><td><%= @item.postal %> </td>
+			<th>郵便番号</th><td><%= @item.postal %> </td>
 		</tr>
 		<tr>
-			<td>住所</td><td><%= @item.address_1 %></td>
+			<th>住所</th><td><%= @item.address_1 %></td>
 		</tr>
 	</tbody>
 </table>
@@ -77,7 +70,7 @@
 
 <!-- modalEdit -->
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<%= form_for @item, url: admin_company_update_path(id: @item), method: :patch do |f| -%>
 				<div class="modal-header">

@@ -44,17 +44,25 @@ $(function() {
   <li class="active"><%= model_name(@shop) %></li>
 </ul>
 
-<ul class="nav nav-tabs">
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'company_show_shop', 	:id=>@shop) %>">店舗情報</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_staffs', 	:id=>@shop) %>">店舗スタッフ</a></li>
-	<li>				<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_list_users', 		:id=>@shop) %>">店舗ユーザー</a></li>
-	<li class="active">	<a href="<%= url_for(:controller=>'dashboard', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト属性</a></li>
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@shop) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_staffs', :id=>@shop) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_users', :id=>@shop) %>">店舗ユーザー</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト属性</a>
+	</li>
 </ul>
 
 <h4>
-	<span class="pull-right">
-		<a class="btn btn-small btn-warn" href="<%= url_for(:action=>'shop_show_website', :id=>@shop) %>">
-		<i class="icon-arrow-left"></i>&nbsp;
+	<span class="float-right">
+		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'shop_show_website', :id=>@shop) %>">
+		<%= backward_icon('戻る')%>&nbsp;
 			戻る
 		</a>
 	</span>

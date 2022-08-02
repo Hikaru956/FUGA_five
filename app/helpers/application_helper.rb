@@ -143,6 +143,11 @@ module ApplicationHelper
     return raw '<span class="label label-info">公開中</span>' if bag.is_public
     return raw '<span class="label">非公開</span>'
   end
+
+  def icon_bag_state(bag)
+    return raw '<span class="badge badge-primary">公開中</span>' if bag.is_public
+    return raw '<span class="badge badge-secondary">非公開</span>'
+  end
   
   def category_state_icons(category)
     cal = <<EOF
@@ -162,6 +167,11 @@ EOF
   def scheme_state_icons(leaf)
     return raw '<span class="label">非公開</span>' unless leaf.is_public
     return raw '<span class="label label-info">公開中</span>'
+  end
+
+  def icon_scheme_state(leaf)
+    return raw '<span class="badge badge-primary">公開中</span>' if leaf.is_public
+    return raw '<span class="badge badge-secondary">非公開</span>'
   end
   
   def widget_type_string(type)
@@ -334,6 +344,11 @@ EOF
       html += '</li>'
     end
     html.html_safe
+  end
+
+  def user_ui_version_label(user)
+    return "バージョン3" if user.ui_version.blank?
+    return "バージョン6" unless user.ui_version.blank?
   end
 
   def trash_icon(title='削除'); sprintf("<i class='fa-solid fa-trash' title=%s></i>", title).html_safe; end

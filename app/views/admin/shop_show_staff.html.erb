@@ -41,16 +41,16 @@
 <table class="table table-bordered">
 	<tbody>
 		<tr>
-			<td class="span3">スタッフ名</td>
-			<td class="span9">
+			<th width='25%'>スタッフ名</th>
+			<td width='75%'>
 				<%= model_name(@staff) %>
 			</td>
 		</tr>
 		<tr>
-			<td>職位/タイトル</td><td><%= @staff.job_title %></td>
+			<th>職位/タイトル</th><td><%= @staff.job_title %></td>
 		</tr>
 		<tr>
-			<td>ステータス</td>
+			<th>ステータス</th>
 			<td>
 				<%=icon_staff_status(@staff.staff_status)%>
 				<%=label_staff_status(@staff.staff_status)%>
@@ -58,8 +58,8 @@
 		</tr>
 
 		<tr>
-			<td>ソーシャル</td>
-			<td>
+			<th style="vertical-align: middle;">ソーシャル</th>
+			<td style="vertical-align: top;">
 				<span class="float-right">
 					<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
 						<%= new_icon('設定')%>&nbsp;
@@ -72,7 +72,7 @@
 				<%= raw "<a href=#{@staff.social_instagram_uri} target='_blank' title=#{@staff.social_instagram_uri}><i class='fa-brands fa-instagram fa-2x'></i></a>"		unless @staff.social_instagram_uri.blank? %>
 				<%= raw "<a href=#{@staff.social_pinterest_uri} target='_blank' title=#{@staff.social_pinterest_uri}><i class='fa-brands fa-pinterest fa-2x'></i></a>"	unless @staff.social_pinterest_uri.blank? %>
 				<%= raw "<a href=#{@staff.social_tumblr_uri} target='_blank' title=#{@staff.social_tumblr_uri}><i class='fa-brands fa-tumblr fa-2x'></i></a>"			unless @staff.social_tumblr_uri.blank? %>
-				<%= raw "<a href=#{@staff.social_hotpepper_beauty_uri} target='_blank' title=#{@staff.social_hotpepper_beauty_uri}><img src='/images/assets/hpb_icon.png' alt='HOTPEPPER Beauty'/></a>"	unless @staff.social_hotpepper_beauty_uri.blank? %>
+				<%= raw "<a href=#{@staff.social_hotpepper_beauty_uri} target='_blank' title=#{@staff.social_hotpepper_beauty_uri}><img src='/images/assets/hpb_icon.png' style='vertical-align: top;' alt='HOTPEPPER Beauty'/></a>"	unless @staff.social_hotpepper_beauty_uri.blank? %>
 				<%= raw "<a href=#{@staff.social_youtube_uri} target='_blank' title=#{@staff.social_youtube_uri}><i class='fa-brands fa-youtube fa-2x'></i></a>"			unless @staff.social_youtube_uri.blank? %>
 				<%= raw "<a href=#{@staff.social_line_uri} target='_blank' title=#{@staff.social_line_uri}><i class='fa-brands fa-line fa-2x'></i></a>"			unless @staff.social_line_uri.blank? %>
 			</td>
@@ -109,7 +109,7 @@
 </div>
 
 <div class="modal fade" id="modalEditSocial" tabindex="-1" aria-labelledby="modalEditSocial" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 			<%= form_for @staff, url: admin_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
                 <div class="modal-header">

@@ -133,6 +133,8 @@ Fuga326::Application.routes.draw do
   delete 'dashboard/shop_delete_position', to: 'dashboard#shop_delete_position'
   post 'dashboard/delegating', to: 'dashboard#delegating'
   post 'dashboard/roll_back', to: 'dashboard#roll_back'
+  patch 'dashboard/user_update', to: 'dashboard#user_update'
+  delete 'dashboard/user_delete', to: 'dashboard#user_delete'
 
 
   get 'bs_content_gallery/content_root', to: 'bs_content_gallery#content_root'
@@ -263,6 +265,8 @@ Fuga326::Application.routes.draw do
   patch   'admin_company_update_shop' => 'admin#company_update_shop'
   delete  'admin_company_delete_shop' => 'admin#company_delete_shop'
   patch   'admin_company_update_shop_room' => 'admin#company_update_shop_room'
+  patch   'admin_company_update_user' => 'admin#company_update_user'
+  delete  'admin_company_delete_user' => 'admin#company_delete_user'
   post    'admin_shop_update_position' => 'admin#shop_update_position'
   patch   'admin_shop_delete_position' => 'admin#shop_delete_position'
   post    'admin_shop_create_staff'  => 'admin#shop_create_staff'

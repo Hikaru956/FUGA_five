@@ -46,7 +46,6 @@ class AdminController < ApplicationController
         #@items =Company.paginate(:page => params[:page], :order=>"alt_id asc", :per_page=>PER_PAGE)
         @items = Company.all.order(name: :asc)
         @items = @items.paginate(page: params[:page], per_page: PER_PAGE).order(name: :asc)
-        render :layout=>'fuga5'
     end
 
     def company_create
@@ -135,7 +134,7 @@ class AdminController < ApplicationController
 
     def company_update_shop_room
         @item = Shop.find(params[:id])
-        @item.update_attributes(params[:shop])
+        @item.update_attributes(shop_params)
         redirect_to :action=>"company_show_shop_usage", :id=>@item
     end
 
@@ -259,7 +258,8 @@ class AdminController < ApplicationController
     def shop_update_user
         @item = User.find(params[:id])
         @item.update_attributes(user_params)
-        redirect_to :action=>"shop_show_user", :id=>@item
+        redirect_to(:controller=>'dashboard', :action=>"shop_show_user", :id=>@item) if @item.ui_version.blank?
+        redirect_to(:action=>"shop_show_user", :id=>@item) unless @item.ui_version.blank?
     end
 
     def shop_delete_user
@@ -366,7 +366,8 @@ class AdminController < ApplicationController
             @item.try_count=0
             @item.save!
         end
-        redirect_to :action=>"user_show", :id=>@item
+        redirect_to(:controller=>'dashboard', :action=>"user_show", :id=>@item) if @item.ui_version.blank?
+        redirect_to(:action=>"user_show", :id=>@item) unless @item.ui_version.blank?
     end
 
     def user_delete
@@ -572,11 +573,11 @@ class AdminController < ApplicationController
         params.require(:item).permit(:layout_scheme_id, :hash_key, :position, :title, :description, :widget_type, :created_at, :updated_at)
     end
     def shop_params
-        params.require(:shop).permit(:alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice, :social_hotpepper_beauty_uri, :social_youtube_uri, :social_line_uri, :enable_inquiry)
+        params.require(:shop).permit(:alt_id, :name, :business_hour_from, :business_hour_until, :postal, :address_1, :wsite_run_mode, :wsite_keywords, :wsite_description_shop, :wsite_description_business, :wsite_telephone, :telephone_1, :wsite_email, :google_calendar_url, :google_calendar_emb_frame_code, :wsite_layout_pc_specific_basename, :social_facebook_uri, :social_gplus_uri, :social_twitter_uri, :social_pinterest_uri, :social_tumblr_uri, :social_instagram_uri, :use_disqus, :disqus_code, :wsite_ga_code, :analytics_code, :custom_metas, :copyright_notice, :social_hotpepper_beauty_uri, :social_youtube_uri, :social_line_uri, :enable_inquiry, :room_size_mb)
     end
 
     def user_params
-            params.require(:user).permit(:login, :email, :email_org, :name, :password, :password_confirmation, :role, :company_id, :shop_id)
+            params.require(:user).permit(:login, :email, :email_org, :name, :password, :password_confirmation, :role, :company_id, :shop_id, :ui_version)
     end
 
     def staff_params
