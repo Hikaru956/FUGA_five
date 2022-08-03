@@ -35,10 +35,12 @@ class Shop < ApplicationRecord
 
   accepts_nested_attributes_for :photos
 
-  has_many      :web_pages,           :dependent=>:destroy
+  
   has_many      :content_bags,        :dependent=>:destroy
   has_many      :content_leafs,       :dependent=>:destroy  #:order=>'publish_from desc, created_at desc'
-  has_many      :content_categories,  :dependent=>:destroy
+  #ひかる　要対応　model dependent destroy効いてない
+  has_many      :content_categories #,  :dependent=>:destroy
+  has_many      :web_pages  #,           :dependent=>:destroy
   
   has_many      :attendances,         :dependent=>:destroy #, :order=>'attend_on asc'
   has_many      :reservations,        :dependent=>:destroy #, :order=>'reserved_on asc'

@@ -143,7 +143,13 @@ class AdminController < ApplicationController
     end
 
     def company_delete_shop
-        item = Shop.find(params[:id])
+        item = Shop.find_by(id: params[:id])
+        redirect_to :action=>"index" if item.blank?
+        #logger.error '■　■　■　■　■　■　■　■　'
+        #item = Shop.find_by(id: params[:id])
+        #item.web_pages.map{|p| p.destroy}
+        #item = Shop.find_by(id: params[:id])
+        #item.content_categories.map{|p| p.destroy}
         item.destroy
         redirect_to :action=>"company_list_shop", :id=>item.company
     end

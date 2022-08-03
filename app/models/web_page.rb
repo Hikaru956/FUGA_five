@@ -13,7 +13,7 @@ class WebPage < ApplicationRecord
   acts_as_list :scope => :parent
   acts_as_tree :order => :position
 
-  has_one       :content_category,  :dependent=>:destroy
+  has_one       :content_category
   has_many      :content_bag,       :dependent=>:destroy
 
   #hikaru

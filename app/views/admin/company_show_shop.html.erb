@@ -146,18 +146,18 @@
 		<% end %>
 
 		<% if current_user.has_permission?(User::ROLE_SUPER) || @item.wsite_run_mode<Shop::WSITE_PUBLISHED %>
-		<div class="well">
+		<p class="text-right">
 			<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
 				<%= trash_icon('削除確認')%>&nbsp;
 				削除確認
 			</button>
-		</div>
+		</p>
 		<% end %>
 	</div>
 	<hr/>
 	<div class="span4">
 
-		<h5>
+		<h4>
 			<span class="float-right">
 				<% url_edit_position = url_for(:action=>"shop_edit_position", :id=>@item) %>							
 		  		<a class="btn btn-mini btn-info" href="<%= url_edit_position %>">
@@ -166,7 +166,7 @@
 				</a>
 			</span>
 			位置情報
-		</h5>
+		</h4>
 		
 		<% if @shop.gps? %>
 			<div id="map" style='height: 400px;'></div>
