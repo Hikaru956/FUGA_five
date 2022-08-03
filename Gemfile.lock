@@ -52,6 +52,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.10.3)
       msgpack (~> 1.2)
+    bootstrap5-kaminari-views (0.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.4)
     byebug (11.1.3)
     calendar_date_select (2.1.2)
@@ -274,6 +277,7 @@ DEPENDENCIES
   acts_as_tree
   bcrypt
   bootsnap
+  bootstrap5-kaminari-views (~> 0.0.1)
   byebug
   calendar_date_select
   coffee-rails (~> 4.2.0)

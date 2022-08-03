@@ -106,6 +106,7 @@ gem 'devise', '~> 4.7.3'
 gem 'devise-encryptable'
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 
 gem "acts_as_list"
 gem 'will_paginate'

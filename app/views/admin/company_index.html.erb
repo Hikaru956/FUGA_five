@@ -81,7 +81,8 @@
 			<% end %>
 		</tbody>
 	</table>
-	<%= will_paginate(@items, :params=> {:action=>'company_index', :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+	
+	<%= paginate @items, theme: 'bootstrap-5' %>
 <% end %>
 
 <!-- modalNewShop -->
