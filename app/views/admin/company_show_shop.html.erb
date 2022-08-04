@@ -171,9 +171,8 @@
 		<% if @shop.gps? %>
 			<div id="map" style='height: 400px;'></div>
 		<% else %>
-			<div class="alert alert-block">
-			  <h4>Warning!</h4>
-			  位置情報が未設定です。
+			<div class="alert alert-warning">
+			  <%= info_icon('注意')%>&nbsp;Warning!位置情報が未設定です。
 			</div>
 		<% end%>
 	</div>

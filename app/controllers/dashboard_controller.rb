@@ -41,7 +41,9 @@ class DashboardController < ApplicationController
       current_user.shop = nil
       current_user.save
       target_shop = Shop.find_by_id(params[:id])
-      (target_shop.blank?)? redirect_to(:action=>'index'): redirect_to(:action=>'company_show_shop', :id=>target_shop)
+      return redirect_to(:action=>'index') if target_shop.blank? 
+      return redirect_to(:action=>'company_show_shop', :id=>target_shop) if current_user.ui_version.blank?
+      redirect_to(:controller=>'admin', :action=>'company_show_shop', :id=>target_shop)
 #    end
   end
   
