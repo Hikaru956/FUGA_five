@@ -67,7 +67,6 @@
 					</span>
 				<% end %>
 				<%= raw("<a href=#{@staff.social_facebook_uri} target='_blank' title=#{@staff.social_facebook_uri}><i class='icon-facebook-sign icon-large'></i></a>")		unless @staff.social_facebook_uri.blank? %>
-				<%= raw("<a href=#{@staff.social_gplus_uri} target='_blank' title=#{@staff.social_gplus_uri}><i class='icon-google-plus-sign icon-large'></i></a>")			unless @staff.social_gplus_uri.blank? %>
 				<%= raw("<a href=#{@staff.social_twitter_uri} target='_blank' title=#{@staff.social_twitter_uri}><i class='icon-twitter-sign icon-large'></i></a>")			unless @staff.social_twitter_uri.blank? %>
 				<%= raw("<a href=#{@staff.social_instagram_uri} target='_blank' title=#{@staff.social_instagram_uri}><i class='icon-instagram icon-large'></i></a>")			unless @staff.social_instagram_uri.blank? %>
 				<%= raw("<a href=#{@staff.social_pinterest_uri} target='_blank' title=#{@staff.social_pinterest_uri}><i class='icon-pinterest-sign icon-large'></i></a>")	unless @staff.social_pinterest_uri.blank? %>

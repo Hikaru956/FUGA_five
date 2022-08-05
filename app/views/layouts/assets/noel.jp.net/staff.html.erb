@@ -74,9 +74,7 @@
   <div class="staff-name">
     <h2><%= model_name(@seed) %></h2>
     <ul>
-<% unless @seed.social_gplus_uri.blank? %>
-      <li><a href="<%= @seed.social_gplus_uri %>" target="_blank"><img src="/photo/image/clip/22281/original/ameba48.png" alt="アメブロ"></a></li>
-<% end %>
+
 <% unless @seed.social_instagram_uri.blank? %>
       <li><a href="<%= @seed.social_instagram_uri %>" target="_blank"><img src="/photo/image/clip/22282/original/insta.png" alt="Instagram" /></a></li>
 <% end %>

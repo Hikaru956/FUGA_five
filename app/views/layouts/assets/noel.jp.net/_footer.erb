@@ -24,9 +24,7 @@
 <% unless @website.social_tumblr_uri.blank? %>
         <li><a href="<%= @website.social_tumblr_uri %>" target="_blank"><i class="fab fa-tumblr"></i></a></li>
 <% end %>
-<% unless @website.social_gplus_uri.blank? %>
-        <li><a href="<%= @website.social_gplus_uri %>" target="_blank"><i class="fab fa-google-plus"></i></a></li>
-<% end %>
+
         <li>
             <%= hotpepper_shop_banner(@website, true, 'vertical-align: top; padding-top: 3px;') %>
         </li>

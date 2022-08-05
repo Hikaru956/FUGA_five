@@ -39,8 +39,10 @@ module ApplicationHelper
   end
 
   def key_photo(model)
-    return nil if model.blank?
-    (model.photos.blank?)? nil: model.photos.first   
+    return nil if model.blank? || model.photos.blank?
+    photos = model.photos
+    photos.sort{|a,b| a.position<=>b.position}.first
+    #(model.photos.blank?)? nil: model.photos.first   
   end
 
   def photo_array(photos)
