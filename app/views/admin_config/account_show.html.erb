@@ -1,0 +1,73 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<div class="pull-right">
+		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+			<i class="icon-pencil"></i>&nbsp;
+			編集
+		</a>
+	</div>
+	<h3>アカウント設定</h3>
+</header>
+	
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td>役割</td><td><%= label_user_role(@user.role)%></td>
+		</tr>
+		<tr>
+			<td>表示名</td><td><%= model_name(@user)%></td>
+		</tr>
+		<tr>
+			<td class="span3">ログイン</td>
+			<td class="span9"><%= @user.login %></td>
+		</tr>
+		<% if false %>
+		<tr>
+			<td>メールアドレス</td>
+			<td><%= @user.email %></td>
+		</tr>
+		<% end %>
+
+		<% if current_user==@user || current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<tr>
+			<td>パスワード</td>
+			<td>
+				<a class="btn btn-small btn-warning"  data-toggle="modal" href="#modalEditPassword">
+				<i class="icon-refresh"></i>&nbsp;
+					パスワード再発行
+				</a>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<!-- modalEdit -->
+<%= form_tag url_for(:action=>"account_update"), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit",method: :patch} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">アカウント編集</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_account" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>
+
+<!-- modalEditPassword -->
+<%= form_tag url_for(:action=>"account_update"), {:class=>"modal hide fade form-horizontal", :id=>"modalEditPassword", method: :patch} do -%>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 id="myModalLabel">パスワード再発行</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_user_password" %>
+	</div>
+	<div class="modal-footer">
+    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+<% end %>

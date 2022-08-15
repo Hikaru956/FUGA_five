@@ -1,0 +1,47 @@
+<div class="mb-3 row">
+	<label for="name" class="col-sm-4 col-form-label">スタッフ名</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :name, {class: "form-control", placeholder: "スタッフ名を入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="job_title" class="col-sm-4 col-form-label">職位/タイトル</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :job_title,  {class: "form-control", placeholder: "職位/タイトルを入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="item_reservation_range_from" class="col-sm-4 col-form-label">役割</label>
+	<div class="col-sm-8">
+		<select class="form-select" aria-label="Default select example" name="staff[staff_status]" id="staff_staff_status">
+			<option <% if @staff.staff_status==Staff::STAFF_PROPER %>selected<% end %> value="<%=Staff::STAFF_PROPER%>"><%= label_staff_status(Staff::STAFF_PROPER)%></option>
+			<option <% if @staff.staff_status==Staff::STAFF_HELPER %>selected<% end %> value="<%=Staff::STAFF_HELPER%>"><%= label_staff_status(Staff::STAFF_HELPER)%></option>
+			<option <% if @staff.staff_status==Staff::STAFF_BLOCKED %>selected<% end %> value="<%=Staff::STAFF_BLOCKED%>"><%= label_staff_status(Staff::STAFF_BLOCKED)%></option>
+		</select>
+	</div>
+</div>
+
+<% if false %>
+<div class="control-group">
+	<label class="control-label" for="name">スタッフ名</label>
+	<div class="controls">
+		<%= text_field 'staff', 'name', :placeholder=>"スタッフ名を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="job_title">職位/タイトル</label>
+	<div class="controls">
+		<%= text_field 'staff', 'job_title', :placeholder=>"職位/タイトルを入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="item_reservation_range_from">ステータス</label>
+	<div class="controls">
+		<select name="staff[staff_status]" id="staff_staff_status">
+			<option <% if @staff.staff_status==Staff::STAFF_PROPER %>selected<% end %> value="<%=Staff::STAFF_PROPER%>"><%= label_staff_status(Staff::STAFF_PROPER)%></option>
+			<option <% if @staff.staff_status==Staff::STAFF_HELPER %>selected<% end %> value="<%=Staff::STAFF_HELPER%>"><%= label_staff_status(Staff::STAFF_HELPER)%></option>
+			<option <% if @staff.staff_status==Staff::STAFF_BLOCKED %>selected<% end %> value="<%=Staff::STAFF_BLOCKED%>"><%= label_staff_status(Staff::STAFF_BLOCKED)%></option>
+		</select>
+	</div>
+</div>					
+<% end %>

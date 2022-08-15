@@ -1,0 +1,289 @@
+<style>
+    #map {
+        width: 100%;
+        height: 277px;
+    }
+</style>
+<style>
+	 #map img { max-width: none; }
+</style>
+
+
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop', :id=>@shop) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_staffs', :id=>@shop) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_users', :id=>@shop) %>">店舗ユーザー</a>
+	</li>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<li class="nav-item">
+			<a class="nav-link " href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a>
+		</li>
+			<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+				<li class="nav-item">
+					<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_site_navigation', :id=>@shop) %>">ナビゲーション</a>
+				</li>
+			<% end %>
+	<% end %>
+</ul>
+
+<div class="row">
+	<div class="span8">
+		<h4>
+			<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+				<span class="float-right">
+					<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+						<%= edit_icon('編集') %>&nbsp;
+							編集
+					</button>
+				</span>
+			<% end %>
+			店舗情報
+		</h4>
+
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th width="25%">名称</th>
+					<td width="75%">
+						<%= model_name(@shop) %>
+					</td>
+				</tr>
+				<tr>
+					<th>営業時間</th>
+					<td>
+						<%= @shop.operation_from.strftime("%l:%M %p")%>
+						〜
+						<%= @shop.operation_until.strftime("%l:%M %p")%>
+					</td>
+				</tr>
+				<tr>
+					<th>郵便番号</th><td><%= @shop.postal %></td>
+				</tr>
+				<tr>
+					<th>住所</th><td><%= @shop.address_1 %></td>
+				</tr>
+				<% if false %>
+				<tr>
+					<th>電話番号</th><td><%= @shop.telephone_1 %></td>
+				</tr>
+				<tr>
+					<th>メール</th><td><%= @shop.wsite_email %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		<h4>
+			<span class="float-right">
+				<a class="btn btn-small btn-success" href="<%= url_for(:action=>'company_edit_shop') %>" data-turbolinks='false'>
+					<%= edit_icon('編集') %>&nbsp;編集
+				</a>
+			</span>
+			店舗説明文
+		</h4>
+		<div class="well">
+			<%= raw(@shop.wsite_description_business) %>
+		</div>
+		<div class="row">
+			<% array = @shop.photos.where(ref_type: 'Shop').order(position: :asc).limit(15).in_groups_of(3, false)%>
+			<% for i in 0..(array.size-1) %>
+				<% @lines = array[i] %>
+					<div class="col-sm-4">
+						<% if @lines.size>=1 %>
+							<%= render :partial=>"item_shop_photo", locals: {photo: @lines[0], shop: @shop} %>
+						<% end %>
+					</div>		
+					<div class="col-sm-4">
+						<% if @lines.size>=2 %>
+							<%= render :partial=>"item_shop_photo", locals: {photo: @lines[1], shop: @shop} %>
+						<% end %>
+					</div>		
+					<div class="col-sm-4">
+						<% if @lines.size>=3 %>
+							<%= render :partial=>"item_shop_photo", locals: {photo: @lines[2], shop: @shop} %>
+						<% end %>
+					</div>
+			<% end %>
+		</div>
+		<br/>
+
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+			<p>
+				<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_shop_photo', :id=>@shop) %>" data-turbolinks='false'>
+					<i class="fa-solid fa-camera"></i>&nbsp;
+					写真追加
+				</a>
+			</p>
+		<% end %>
+
+		<% unless MAKE_SECRET_FUGA_OPTION %>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th colspan="2">
+						オプション
+					</th>
+				</tr>
+				<tr>
+					<th width="25%">勤怠管理</th>
+					<td width="75%">
+						<%= (@shop.option_attendance_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
+					</td>
+				</tr>
+				<tr>
+					<th>簡易予約管理</th>
+					<td>
+						<%= (@shop.option_reservation_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
+					</td>
+				</tr>
+				<tr>
+					<th>顧客管理</th>
+					<td>
+						<%= (@shop.option_customer_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
+					</td>
+				</tr>
+				<% if false %>
+				<tr>
+					<th>売上管理</th>
+					<td>
+						<%= (@shop.option_sales_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>		
+		<div class="float-right muted"><small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
+		<% end %>
+
+	</div>
+	<div class="span4">
+		<h5>
+			<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+			<span class="float-right">
+				<% url_edit_position = url_for(:action=>"shop_edit_position") %>							
+		  		<a class="btn btn-mini btn-info" href="<%= url_edit_position %>" data-turbolinks='false'>
+					<%= setting_icon('マップ設定') %>&nbsp;
+		  			設定
+				</a>
+			</span>
+			<% end %>
+			位置情報
+		</h5>
+		
+		<% if @shop.gps? %>
+			<div id="map"></div>
+		<% else %>
+			<div class="alert alert-warning">
+			  Warning!<small>位置情報が未設定です。</small>
+			</div>
+		<% end%>
+		
+		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
+			<div class="btn-toolbar text-center">
+			  <div class="btn-group">
+					<a class="btn btn-small btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
+						<%= share_icon('表示') %>&nbsp;
+						サイト表示
+					</a>
+					<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+						<a class="btn btn-small btn-success" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
+							<%= edit_icon('編集') %>&nbsp;
+							サイト編集
+						</a>
+					<% end %>
+			  </div>
+			</div>
+		<% end%>
+
+	</div>
+</div>
+
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @shop, url: admin_config_company_update_shop_path(id: @shop), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">店舗情報編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render :partial=>"form_shop", locals:{f: f, shop: @shop} %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<% if false %>
+<!-- modalEdit -->
+<div class="modal hide fade form-horizontal", id="modalEdit">
+	<%= form_for @shop, url: admin_config_company_update_shop_path(id: @shop), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">店舗情報編集</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_shop", locals:{f: f, shop: @shop}  %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+<% end %>
+
+<script>
+	var map;
+  	var shop_marker;
+    <% if @shop.gps? %>
+	    var latlng = { lat: <%= @shop.lat %>, lng: <%= @shop.lng %> };
+	<% else %>
+	    var latlng = { lat: 35.681382, lng: 139.766084 };
+	<% end %>
+
+    function initMap() {
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: latlng,
+			zoom: 16
+		});
+		shop_marker = new google.maps.Marker({
+			position: latlng,
+			map: map
+		});
+	}
+    function moveMap() {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'address': document.getElementById('address').value
+        }, function(result, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.panTo(result[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    position: result[0].geometry.location,
+                    map: map
+                });
+            } else {
+                alert("見つかりませんでした。");
+            }
+        });
+    }
+	window.onload = function () {
+		initMap();
+	}
+</script>

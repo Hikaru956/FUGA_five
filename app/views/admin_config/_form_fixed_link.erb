@@ -1,0 +1,55 @@
+<div class="form-group row">
+	<div class="col-sm-4">
+		<%= f.label :is_open_new, 'アクション', {class: 'form-label'} %>
+	</div>
+	<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
+		<input type="radio" class="btn-check" name="user[ui_version]" id="btnradio9" value='1' checked>
+		<label class="btn btn-outline-primary" for="btnradio9">新しいウィンドウで開く</label>
+
+		<input type="radio" class="btn-check" name="user[ui_version]" id="btnradio10" value='0'>
+		<label class="btn btn-outline-primary" for="btnradio10">表示ウィンドウで開く</label>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="login" class="col-sm-4 col-form-label">タイトル</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :name,  {class: "form-control", placeholder: "タイトルを入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="email" class="col-sm-4 col-form-label">リンクアドレス</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :external_url,  {class: "form-control", placeholder: "リンク先アドレスを入力", :required => true, autofocus: true}  %>
+		<span class="help-block">外部サイトへのリンクを指定する場合、プロトコル(http://, https:// 等)も含める必要があります。</span>
+	</div>
+</div>
+
+<% if false %>
+<div class="control-group">
+	<label class="control-label" for="web_page[is_open_new]">アクション</label>
+	<div class="controls">
+		<label class="radio inline">
+			<input type="radio" id="web_page[is_open_new]" name="web_page[is_open_new]" value="1" <% if web_page.is_open_new %>checked<% end %>>
+			新しいウィンドウで開く
+		</label>
+		<label class="radio inline">
+			<input type="radio" id="web_page[is_open_new]" name="web_page[is_open_new]" value="0" <% if !web_page.is_open_new %>checked<% end %>>
+			表示ウィンドウで開く
+		</label>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="web_page[name]">タイトル</label>
+	<div class="controls">
+		<%= text_field 'web_page', 'name', :placeholder=>"タイトルを入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="web_page[external_url]">リンクアドレス</label>
+	<div class="controls">
+		<%= text_field 'web_page', 'external_url', :placeholder=>"リンク先アドレスを入力", :autocomplete => "off" %>
+		<span class="help-block">外部サイトへのリンクを指定する場合、プロトコル(http://, https:// 等)も含める必要があります。</span>
+	</div>
+</div>
+<% end %>

@@ -293,7 +293,31 @@ Fuga326::Application.routes.draw do
   patch 'admin_widget_update' => 'admin#widget_update'
   delete 'admin_widget_delete' => 'admin#widget_delete'
 
+  patch 'admin_config/company_update_shop', to: 'admin_config#company_update_shop'
+  post 'admin_config/shop_create_staff', to: 'admin_config#shop_create_staff'
+  patch 'admin_config/shop_update_staff', to: 'admin_config#shop_update_staff'
+  delete 'admin_config/shop_delete_staff', to: 'admin_config#shop_delete_staff'
+  post 'admin_config/shop_create_user', to: 'admin_config#shop_create_user'
+  patch 'admin_config/shop_update_user', to: 'admin_config#shop_update_user'
+  delete 'admin_config/shop_delete_user', to: 'admin_config#shop_delete_user'
+  patch 'admin_config/shop_update_website', to: 'admin_config#shop_update_website'
+  post 'admin_config/shop_create_fixed_link', to: 'admin_config#shop_create_fixed_link'
+  post 'admin_config/shop_create_fixed_page', to: 'admin_config#shop_create_fixed_page'
+  patch 'admin_config/navigation_update', to: 'admin_config#navigation_update'
+  delete 'admin_config/shop_delete_fixed_link', to: 'admin_config#shop_delete_fixed_link'
+  post 'admin_config/create_page_photo', to: 'admin_config#create_page_photo'
+  delete 'admin_config/delete_page_photo', to: 'admin_config#delete_page_photo'
 
+  post 'admin_config/create_shop_photo', to: 'admin_config#create_shop_photo'
+  patch 'admin_config/update_shop_photo', to: 'admin_config#update_shop_photo'
+  delete 'admin_config/delete_shop_photo', to: 'admin_config#delete_shop_photo'
+
+  post 'admin_config/create_staff_photo', to:'admin_config#create_staff_photo'
+  patch 'admin_config/update_staff_photo', to: 'admin_config#update_staff_photo'
+  delete 'admin_config/delete_staff_photo', to:'admin_config#delete_staff_photo'
+
+  post 'admin_config/shop_update_position', to: 'admin_config#shop_update_position'
+  delete 'admin_config/shop_delete_position', to:'admin_config#shop_delete_position'
 
 
 #  match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil

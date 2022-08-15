@@ -1,0 +1,238 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop', :id=>@shop) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_staffs', :id=>@shop) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_users', :id=>@shop) %>">店舗ユーザー</a>
+	</li>
+	<li class="nav-item">
+			<a class="nav-link " href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a>
+		</li>
+	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+		<li class="nav-item">
+			<a class="nav-link  active" href="<%= url_for(:controller=>'admin_config', :action=>'shop_site_navigation', :id=>@shop) %>">ナビゲーション</a>
+		</li>
+	<% end %>
+</ul>
+
+<h4>
+	<p class="float-right">
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+			<%= new_icon('登録') %>&nbsp;
+			固定リンク登録
+		</button>
+		<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalNewPage">
+			<i class="fa-solid fa-file-lines"></i>&nbsp;
+			固定ページ追加
+		</button>
+	</p>
+	ナビゲーション
+</h4>
+<% if @shop.default_navigation_item.blank? %>
+	<div class="alert alert-block">
+	  <strong><i class="icon-exclamation-sign"></i>&nbsp;Warning</strong>&nbsp;公開されたナビゲーション項目がありません。
+	</div>
+<% end %>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th class="span2">ステータス</th>
+			<th class="span10">ナビゲーション項目</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @items.each do | item | @item = item %>
+			<tr class=<%= (@item.is_public)? '': 'warning' %>>
+				<td>
+					<span >
+						<%= icon_bag_state(@item) %>
+					</span>
+					<% if @item.is_public %>
+						<a class="btn btn-mini btn-refresh btn-warning"  href="<%= url_for(:action=>'make_private', :id=>@item) %>" title="非公開にする">
+							<i class="fa-solid fa-lock-open"></i>
+						</a>
+					<% else %>					
+						<a class="btn btn-mini btn-refresh btn-info"  href="<%= url_for(:action=>'make_public', :id=>@item) %>" title="公開する">
+							<i class="fa-solid fa-lock"></i>
+						</a>
+					<% end %>
+				</td>
+				<td>
+					<span class="float-right">
+						<% if @item.page_type==WebPage::TYPE_LINK || @item.page_type==WebPage::TYPE_FIX %>
+							<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteLink_<%=@item.id%>">
+								<%= trash_icon('削除') %>&nbsp;削除
+							</button>
+							<!-- modalDeleteLink -->
+							<div class="modal fade" id="modalDeleteLink_<%= @item.id %>" tabindex="-1" aria-labelledby="modalDeleteLink_<%= @item.id %>" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<%= form_for @item, url: admin_config_shop_delete_fixed_link_path(id: @item), method: :delete do |f| -%>
+											<div class="modal-header">
+												<h5 class="modal-title">固定リンク削除</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<p>
+													<% if @item.page_type==WebPage::TYPE_FIX %>
+														固定ページの内容と、
+													<% end %>
+													リンクを削除します。<br/>
+													よろしいですか？
+												</p>
+											</div>
+											<div class="modal-footer">
+												<button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+											</div>
+										<% end %>
+									</div>
+								</div>
+							</div>
+						<% end %>
+
+						<% if @item.page_type==WebPage::TYPE_FIX %>
+							<% edit_fix_page_url = url_for(:action=>'edit_fix_page', :id=>ContentLeaf.find_by_hash_key(@item.content_key))%>
+							<a class="btn btn-mini btn-success"  href="<%=edit_fix_page_url%>" data-turbolinks='false'>
+								<%= edit_icon('編集') %>&nbsp;
+					  			編集
+							</a>
+						<% else %>
+							<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit_<%=@item.id%>">
+								<%= edit_icon('編集') %>&nbsp;
+					  			編集
+							</button>
+						<% end %>
+
+					</span>
+					<%= (@item.first?)?	"△":	link_to("▲", :action=>"web_page_higher",	:id=>@item) %>
+					<%= (@item.last?)? 	"▽": 	link_to("▼", :action=>"web_page_lower", 	:id=>@item) %>
+					<% if @item.page_type==WebPage::TYPE_FIX %>
+						<%= model_title(ContentLeaf.find_by(hash_key: @item.content_key)) %>
+					<% else %>
+						<%= model_name(@item) %>
+					<% end %>
+					<small><%= "【"+h(@item.external_url)+"】" unless @item.external_url.blank? %></small>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<% @items.each do |item| @item = item%>
+	<%
+		web_page = item
+	%>
+	<div class="modal fade" id="modalEdit_<%= @item.id %>" tabindex="-1" aria-labelledby="modalEdit_<%= @item.id %>" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<%= form_for @item, url: admin_config_navigation_update_path(id: @item), method: :patch do |f| -%>
+					<div class="modal-header">
+						<h5 class="modal-title">ナビゲーション項目編集</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-3 row">
+							<label for="item_reservation_range_from" class="col-sm-4 col-form-label">ステータス</label>
+							<div class="col-sm-8">
+								<select class="form-select" aria-label="Default select example" name="web_page[is_public]" id="staff_staff_status">
+									<option <% if @item.is_public %>selected<% end %> value="1">公開</option>
+									<option <% if !@item.is_public %>selected<% end %> value="0">非公開</option>
+								</select>
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<label for="job_title" class="col-sm-4 col-form-label">タイトル</label>
+							<div class="col-sm-8">
+								<%= f.text_field  :name,  {class: "form-control", placeholder: "タイトルを入力", :required => true, autofocus: true}  %>
+							</div>
+						</div>
+						<% if @item.page_type==WebPage::TYPE_LINK %>
+							<%= render :partial=>'form_fixed_link', locals: {f: f,web_page: @item} %>
+						<% end %>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+<% end %>
+
+<div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<% 
+				web_page = WebPage.new
+				web_page.is_open_new = true
+			%>
+			<%= form_for web_page, url: admin_config_shop_create_fixed_link_path(id: web_page), method: :post do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">固定リンク登録</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render :partial=>"form_fixed_link", locals: {f: f, web_page: web_page} %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalNewPage" tabindex="-1" aria-labelledby="modalNewPage" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<% 
+				web_page = WebPage.new
+				web_page.is_open_new = false
+			%>
+			<%= form_for web_page, url: admin_config_shop_create_fixed_page_path(id: web_page), method: :post do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">固定ページ追加</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					 <%= render :partial=>"form_fixed_page", locals: {f: f, web_page: web_page} %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= new_icon('追加') %>&nbsp;追加</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<div class="modal hide fade form-horizontal", id="modalNewPage">
+	<% 
+			web_page = WebPage.new
+			web_page.is_open_new = false
+	%>
+	<%= form_for web_page, url: bs_config_shop_create_fixed_page_path(id: web_page), method: :post do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">固定ページ追加</h3>
+		</div>
+		<div class="modal-header">
+			<%= render :partial=>"form_fixed_page", locals: {f: f, web_page: web_page} %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>

@@ -1,0 +1,283 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+<ul class="breadcrumb">
+  <li><%= link_to "一覧", url_for(:action=>'shop_list_staffs', :id=>@staff.shop)  %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@staff) %></li>
+</ul>
+
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop', :id=>@shop) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_staffs', :id=>@shop) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_users', :id=>@shop) %>">店舗ユーザー</a>
+	</li>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<li class="nav-item">
+			<a class="nav-link " href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a>
+		</li>
+		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+			<li class="nav-item">
+				<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_site_navigation', :id=>@shop) %>">ナビゲーション</a>
+			</li>
+		<% end %>
+	<% end %>
+</ul>
+
+<h4>
+	<span class="float-right">
+		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
+		<%= backward_icon('一覧') %>&nbsp;
+			一覧
+		</a>
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+				<%= edit_icon('編集')%>&nbsp;
+	  			編集
+			</button>
+		<% end %>
+	</span>
+	スタッフ情報
+</h4>
+
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<th width="25%">スタッフ名</th>
+			<td width="75%">
+				<%= model_name(@staff) %>
+			</td>
+		</tr>
+		<tr>
+			<th>職位/タイトル</th><td><%= @staff.job_title %></td>
+		</tr>
+		<tr>
+			<th>ステータス</th>
+			<td>
+				<%=icon_staff_status(@staff.staff_status)%>
+				<%=label_staff_status(@staff.staff_status)%>
+			</td>
+		</tr>
+
+		<tr>
+			<th>ソーシャル</th>
+			<td>
+				<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+					<span class="float-right">
+						<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
+							<i class="fa-solid fa-pencil"></i>&nbsp;
+				  			ソーシャル設定
+						</button>
+					</span>
+				<% end %>
+				<%= raw "<a href=#{@staff.social_facebook_uri} target='_blank' title=#{@staff.social_facebook_uri}><i class='fa-brands fa-facebook fa-2x'></i></a>"		unless @staff.social_facebook_uri.blank? %>
+				<%= raw "<a href=#{@staff.social_twitter_uri} target='_blank' title=#{@staff.social_twitter_uri}><i class='fa-brands fa-twitter fa-2x'></i></a>"		unless @staff.social_twitter_uri.blank? %>
+				<%= raw "<a href=#{@staff.social_instagram_uri} target='_blank' title=#{@staff.social_instagram_uri}><i class='fa-brands fa-instagram fa-2x'></i></a>"		unless @staff.social_instagram_uri.blank? %>
+				<%= raw "<a href=#{@staff.social_pinterest_uri} target='_blank' title=#{@staff.social_pinterest_uri}><i class='fa-brands fa-pinterest fa-2x'></i></a>"	unless @staff.social_pinterest_uri.blank? %>
+				<%= raw "<a href=#{@staff.social_tumblr_uri} target='_blank' title=#{@staff.social_tumblr_uri}><i class='fa-brands fa-tumblr fa-2x'></i></a>"			unless @staff.social_tumblr_uri.blank? %>
+				<%= raw "<a href=#{@staff.social_hotpepper_beauty_uri} target='_blank' title=#{@staff.social_hotpepper_beauty_uri}><img src='/images/assets/hpb_icon.png' style='vertical-align: top;' alt='HOTPEPPER Beauty'/></a>"	unless @staff.social_hotpepper_beauty_uri.blank? %>
+				<%= raw "<a href=#{@staff.social_youtube_uri} target='_blank' title=#{@staff.social_youtube_uri}><i class='fa-brands fa-youtube fa-2x'></i></a>"			unless @staff.social_youtube_uri.blank? %>
+				<%= raw "<a href=#{@staff.social_line_uri} target='_blank' title=#{@staff.social_line_uri}><i class='fa-brands fa-line fa-2x'></i></a>"			unless @staff.social_line_uri.blank? %>
+			</td>
+		</tr>
+
+	</tbody>
+</table>
+
+<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+	<div class="well">
+		<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+			<%= trash_icon('削除確認') %>&nbsp;
+			削除確認
+		</button>
+	</div>
+<% end %>
+
+<hr/>
+
+<h4>
+	<span class="float-right">
+		<a class="btn btn-small btn-success" href="<%= url_for(:action=>'shop_edit_staff', :id=>@staff) %>">
+			<i class="fa-solid fa-pencil"></i>&nbsp;編集
+		</a>
+	</span>
+	自己紹介
+</h4>
+<div class="well">
+	<%= raw(@staff.description) %>
+</div>
+
+
+<div class="row">
+	<% array = @staff.photos.order(position: :asc).in_groups_of(3, false)%>
+	<% for i in 0..(array.size-1) %>
+		<% @lines = array[i] %>
+	        <div class="col-sm-4">
+	        	<% if @lines.size>=1 %>
+					<%= render :partial=>"item_staff_photo", locals: {photo: @lines[0], staff: @staff} %>
+				<% end %>
+			</div>		
+	        <div class="col-sm-4">
+	        	<% if @lines.size>=2 %>
+					<%= render :partial=>"item_staff_photo", locals: {photo: @lines[1], staff: @staff} %>
+				<% end %>
+			</div>		
+	        <div class="col-sm-4">
+	        	<% if @lines.size>=3 %>
+					<%= render :partial=>"item_staff_photo", locals: {photo: @lines[2], staff: @staff} %>
+				<% end %>
+			</div>
+	<% end %>
+</div>
+
+<br/>
+
+<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+	<p>
+		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
+			<i class="fa-solid fa-camera"></i>&nbsp;
+			写真追加
+		</a>
+	</p>
+<% end %>
+
+<div class="modal fade" id="modalEditSocial" tabindex="-1" aria-labelledby="modalEditSocial" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+			<%= form_for @staff, url: admin_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">ソーシャル設定</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render :partial=>"form_staff_social", locals:{f: f} %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @staff, url: admin_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">スタッフ編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<%= render :partial=>"form_staff", locals:{f: f} %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDelete" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @staff, url: admin_config_shop_delete_staff_path(id: @staff), method: :delete do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">スタッフ削除</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<p>
+					「<%= model_name(@staff) %>」を削除します。<br/>
+					このスタッフに関連する情報も削除されます。<br/>
+					よろしいですか？
+					</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<% if false %>
+<!-- modalEditSocial -->
+<div class="modal hide fade form-horizontal", id="modalEditSocial">
+	<%= form_for @staff, url: bs_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">ソーシャル設定</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_staff_social" %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+<!-- modalEdit -->
+<div class="modal hide fade form-horizontal", id="modalEdit">
+	<%= form_for @staff, url: bs_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">スタッフ編集</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_staff", locals:{f: f} %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+<!-- modalEditSocial -->
+<div  class="modal hide fade form-horizontal", id="modalEditPassword">
+	<%= form_for @staff, url: bs_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">パスワード再発行</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_staff_social" %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+<!-- modalDeleteStaff -->
+<div  class="modal hide fade form-horizontal", id="modalDelete">
+	<%= form_for @staff, url: bs_config_shop_delete_staff_path(id: @staff), method: :delete do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">スタッフ削除</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+			「<%= model_name(@staff) %>」を削除します。<br/>
+			このスタッフに関連する情報も削除されます。<br/>
+			よろしいですか？
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
+</div>
+<% end %>

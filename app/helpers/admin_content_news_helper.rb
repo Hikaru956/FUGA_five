@@ -1,0 +1,2 @@
+module AdminContentNewsHelper
+end

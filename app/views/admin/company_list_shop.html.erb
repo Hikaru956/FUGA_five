@@ -54,7 +54,7 @@
 			<% @shops.each do | shop | %>
 				<tr>
 					<td>
-						<span class="pull-right">
+						<span class="float-right">
 							
 							<%= (shop.first?)?	"△":	link_to("▲", :action=>"shop_higher",	:id=>shop) %>
 							<%= (shop.last?)? 	"▽": 	link_to("▼", :action=>"shop_lower", 	:id=>shop) %>

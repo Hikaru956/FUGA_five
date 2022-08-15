@@ -1,0 +1,56 @@
+<div class="mb-3 row">
+	<label for="login" class="col-sm-4 col-form-label">サイト・キーワード</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :wsite_keywords, {class: "form-control", placeholder: "サイト・キーワードを入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="job_title" class="col-sm-4 col-form-label">サイトの説明</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :wsite_description_shop,  {class: "form-control", placeholder: "サイトの説明を入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="wsite_telephone" class="col-sm-4 col-form-label">問い合わせ電話番号</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :wsite_telephone,  {class: "form-control", placeholder: "サイトに掲示される電話番号を入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="wsite_email" class="col-sm-4 col-form-label">メールアドレス</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :wsite_email,  {class: "form-control", placeholder: "サイトに掲示されるメールアドレスを入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="form-group row">
+	<div class="col-sm-4">
+		<%= f.label :enable_inquiry, 'お問い合わせ機能', {class: 'form-label'} %>
+	</div>
+	<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
+		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio3" value='1' checked>
+		<label class="btn btn-outline-primary" for="btnradio3">有効</label>
+
+		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio4" value='0'>
+		<label class="btn btn-outline-primary" for="btnradio4">無効</label>
+
+	</div>
+</div>
+<div class="form-group row">
+	<div class="col-sm-4">
+		<%= f.label :use_disqus, 'ブログコメント', {class: 'form-label'} %>
+	</div>
+	<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
+		<input type="radio" class="btn-check" name="shop[use_disqus]" id="btnradio13" value='1' checked>
+		<label class="btn btn-outline-primary" for="btnradio13">使用する</label>
+
+		<input type="radio" class="btn-check" name="shop[use_disqus]" id="btnradio14" value='0'>
+		<label class="btn btn-outline-primary" for="btnradio14">使用しない</label>
+
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="copyright_notice" class="col-sm-4 col-form-label">コピーライト</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :copyright_notice,  {class: "form-control", placeholder: "カスタム・コピーライト表示", :required => false, autofocus: true}  %>
+	</div>
+</div>

@@ -1,0 +1,2 @@
+module AdminConfigHelper
+end

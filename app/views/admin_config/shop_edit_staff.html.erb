@@ -1,0 +1,73 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop', :id=>@shop) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_staffs', :id=>@shop) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_users', :id=>@shop) %>">店舗ユーザー</a>
+	</li>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<li class="nav-item">
+			<a class="nav-link " href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a>
+		</li>
+		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+			<li class="nav-item">
+				<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_site_navigation', :id=>@shop) %>">ナビゲーション</a>
+			</li>
+		<% end %>
+	<% end %>
+</ul>
+
+
+<ul class="breadcrumb">
+  <li><%= link_to "一覧", url_for(:action=>'shop_list_staffs', :id=>@staff.shop)  %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@staff) %></li>
+</ul>
+
+<h4>
+	<span class="float-right">
+		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'shop_show_staff', :id=>@staff) %>" data-turbolinks='false'>
+			<%= backward_icon('戻る') %>&nbsp;戻る
+		</a>
+	</span>
+	自己紹介
+</h4>
+
+<%= form_tag url_for(:action=>"shop_update_staff", :id=>@staff), :class=>"xform-horizontal", method: :patch do -%>
+	<%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>nil} if false %>
+		<div class="control-group">
+			<%= text_area 'staff', 'description', :class=>"tinymce input-block-level", :rows => 40, :autocomplete=>false, :placeholder=>"記事の本文を入力します。" %>
+			<script type="text/javascript">
+				tinyMCE.init({
+					selector: 'textarea.tinymce',
+					cache_suffix: "?v=5.10.2",
+					theme_advanced_toolbar_location: "top",
+					theme_advanced_statusbar_location: "bottom",
+					theme_advanced_buttons3_add: ["tablecontrols"],
+					plugins: "table,image",
+					<% unless @staff.blank? %>
+						<% unless @staff.photos.blank? %>
+						image_list: [
+							<%= photo_array(@staff.photos).html_safe %>
+							],
+						<% end %>
+					<% end %>
+					relative_urls : false,
+					convert_urls: false,
+					toolbar: ["undo redo | formatselect | fontselect | fontsizeselect | bold | italic | underline | alignleft | aligncenter | alignjustify | alignright"],
+					language: 'ja'})
+			</script>
+		</div>
+		<div class="form-actions text-right">
+        	<button type="submit" class="btn btn-small btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
+			<% url_cancel = url_for(:action=>'shop_show_staff', :id=>@staff) %>
+	  		<a class="btn btn-small btn-secondary" href="<%= url_cancel %>" data-turbolinks='false'><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</a>
+      	</div>
+<% end -%>

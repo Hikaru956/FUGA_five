@@ -1,0 +1,39 @@
+<%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>@item} %>
+
+<div class="mb-3 row">
+	<label for="name" class="col-sm-2 col-form-label">タイトル</label>
+	<div class="col-sm-10">
+		<%= text_field_tag :title, @item.title,  {class: "form-control", placeholder: "タイトルを入力", :required => true, autofocus: true}  %>
+	</div>
+</div>
+
+<div class="mb-3 row">
+	<label for="name" class="col-sm-2 col-form-label">説明文</label>
+	<div class="col-sm-10">
+		<%= text_area_tag :title, @item.description_2,  {class: "form-control", placeholder: "説明文を入力", rows: 5, :required => true, autofocus: true}  %>
+	</div>
+</div>
+
+<div class="control-group">
+	<%= text_area  'item', 'description', :class => "tinymce input-block-level", rows: 40, :placeholder=>"ページコンテンツを入力します。" %>
+	<script type="text/javascript">
+		tinyMCE.init({
+			selector: 'textarea.tinymce',
+			cache_suffix: "?v=5.10.2",
+			theme_advanced_toolbar_location: "top",
+			theme_advanced_statusbar_location: "bottom",
+			theme_advanced_buttons3_add: ["tablecontrols"],
+			plugins: "table,image",
+			<% unless @item.blank? %>
+				<% unless @item.photos.blank? %>
+				image_list: [ 
+					<%= photo_array(@item.photos).html_safe %>
+					],
+				<% end %>
+    		<% end %>
+			relative_urls : false,
+    		convert_urls: false,
+			toolbar: ["undo redo | formatselect | fontselect | fontsizeselect | bold | italic | underline | alignleft | aligncenter | alignjustify | alignright"],
+			language: 'ja'})
+	</script>
+</div>

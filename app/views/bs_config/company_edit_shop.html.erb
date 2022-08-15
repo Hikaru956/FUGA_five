@@ -39,7 +39,7 @@
 		</h4>
 		<%= form_tag url_for(:action=>"company_update_shop", :id=>@shop), :class=>"form-horizontal well", method: :patch do -%>
 			<fieldset>
-				<%= render :partial=>"form_shop_description", :locals=>{:@item=>@shop} %>
+				<%= render :partial=>"form_shop_description", locals:{shop: @shop} %>
 				<div class="form-actions">
 		        	<button type="submit" class="btn btn-small btn-success"><i class="icon-refresh"></i>&nbsp;&nbsp;更新</button>
 					<% url_cancel = url_for(:action=>"company_show_shop", :id=>@item) %>

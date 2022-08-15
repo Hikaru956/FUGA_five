@@ -1,0 +1,100 @@
+<div class="card" style="height: 40rem;">
+	<div class="card-body text-center">
+		<%= (photo.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"photo_shop_higher", :id=>photo) %>
+		<%= photo.position %>
+		<%= (photo.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"photo_shop_lower",	:id=>photo) %>
+	</div>
+	<% unless photo.blank? %>
+		<%= image_tag photo.clip.url(:thumb) %>
+	<% else %>
+		<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Photo%0A">
+	<% end %>
+	<div class="card-body">
+		<p class="card-text"><%= h truncate(photo.info, :length=>20) %></p>
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+			<p class="text-center">
+				<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
+					<%= info_icon('キャプション')%>&nbsp;キャプション
+				</button>
+				<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_photo_<%=photo.id%>">
+					<%= trash_icon('削除確認')%>&nbsp;削除確認
+				</button>
+			</p>
+		<% end %>
+	</div>
+</div>
+
+<% if false %>
+<div class="thumbnail">
+	<div class="caption">
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+			<p class="well" style="text-align:center;">
+				<%= (photo.first?)?	raw("<i class='fa-solid fa-backward-fast'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"photo_shop_higher",	:id=>photo) %>
+				<%= photo.position %>
+				<%= (photo.last?)? 	raw("<i class='fa-solid fa-forward-fast'></i>"): 	link_to(raw("<i class='fa-solid fa-forward-fast'></i>"), 	:action=>"photo_shop_lower",		:id=>photo) %>
+			</p>
+		<% end %>
+	</div>
+	<%= image_tag photo.clip.url(:thumb) %>
+	<div class="caption">
+		<p><%=photo.info%></p>
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+			<p class="text-center">
+				<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
+					<%= info_icon('キャプション')%>&nbsp;キャプション
+				</button>
+				<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_photo_<%=photo.id%>">
+					<%= trash_icon('削除確認')%>&nbsp;削除確認
+				</button>
+			</p>
+		<% end %>
+	</div>
+</div>
+<% end %>
+
+<div class="modal fade" id="modal_edit_photo_<%= photo.id %>" tabindex="-1" aria-labelledby="modal_edit_photo_<%= photo.id %>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for photo, url: admin_config_update_shop_photo_path(id: photo), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">キャプション編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<div class="mb-3 row">
+						<label for="job_title" class="col-sm-4 col-form-label">写真の説明</label>
+						<div class="col-sm-8">
+							<%= f.text_area :info,  {class: "form-control", placeholder: "写真の説明を入力", :required => false, autofocus: true}  %>
+						</div>
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_delete_photo_<%=photo.id%>" tabindex="-1" aria-labelledby="modal_delete_photo_<%=photo.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for photo, url: admin_config_delete_shop_photo_path(id: photo), method: :delete do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">削除確認</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<div class="mb-3 row">
+						<p>写真を削除します。よろしいですか？</p>
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>

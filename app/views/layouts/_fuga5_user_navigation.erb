@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= root_path %>" data-turbolinks='false'><%=BRAND_NAME%></a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <% 
+            #hikaru
+            #if false
+            #	c = Condition.new
+            #	c.and "content_categories.is_public", true 
+            #	c.and "content_categories.category_type", ">=", ContentCategory::TYPE_NEWS 
+            #	c.and "content_categories.category_type", "<=", ContentCategory::TYPE_PORTFOLIO
+            #	navs = @shop.content_categories.find(:all, :conditions=>c.where, :order=>"position asc")
+            #end
+            
+            navs = @shop.content_categories.where('content_categories.is_public =? AND content_categories.category_type >= ? AND content_categories.category_type <= ?', true, ContentCategory::TYPE_NEWS ,ContentCategory::TYPE_PORTFOLIO).order(position: :asc)
+        %>
+        <ul class="navbar-nav mr-auto">
+            <% navs.each do | nav | %>
+                <li class="nav-item">
+                <% if nav.category_type==ContentCategory::TYPE_NEWS %><a class="nav-link" href="<%= url_for(:controller=>'bs_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                </li>
+                <li class="nav-item">
+                <% if nav.category_type==ContentCategory::TYPE_STREAM %><a class="nav-link" href="<%= url_for(:controller=>'bs_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                </li>
+                <li class="nav-item">
+                <% if nav.category_type==ContentCategory::TYPE_GALLERY %><a class="nav-link" href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                </li>
+                <li class="nav-item">
+                <% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %><a class="nav-link" href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                </li>
+            <% end %>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= url_for(:controller=>'bs_content_inquiry', :action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>">お問い合わせ</a>
+                </li>
+            <% unless MAKE_SECRET_FUGA_OPTION %>
+                <% if @shop.option_reservation_management %>	<li><a href="/bs_reservation/index"	>予約</a></li><% end %>
+                <% if @shop.option_customer_management %>		<li><a href="/bs_customer/index"	>顧客</a></li><% end %>
+                <% if @shop.option_attendance_management %>		<li><a href="/bs_attendance/index"	>勤怠</a></li><% end %>
+            <% end %>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <%= model_name(current_user) %>
+                    <b class="caret"></b>
+                </a>
+                <div style='left: auto;' class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <% if current_user.has_permission?(User::ROLE_BLOGGER) %>
+                        <a class="dropdown-item" href="<%= url_for(:controller=>'bs_config', :action=>'index') %>"><i class="icon-wrench"></i>&nbsp;店舗設定</a>
+                        <% if false %>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>"><i class="icon-sitemap"></i>&nbsp;ナビゲーション</a>
+                            <a class="dropdown-item" href="<%= url_for(:action=>'shop_site_navigation') %>"><i class="icon-globe"></i>&nbsp;デザイン</a>
+                        <% end %>
+                    <% end %>
+                    <%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %>
+                    <% if current_user.role>=User::ROLE_SALES %>
+                        <%= link_to raw("<i class='icon-signout'></i>&nbsp;ダッシュボードに戻る"), {:controller=>'dashboard', :action=>'roll_back', :id=>current_user.shop}, :method=>:post, :class =>'dropdown-item' %>
+                    <% end %>
+                    <% if current_user.role==User::ROLE_OWNER %>
+                        <%= link_to raw("<i class='icon-signout'></i>&nbsp;店舗選択"), {:controller=>'owner', :action=>'switch_shop'}, :method=>:post, :class =>'dropdown-item' %>
+                    <% end %>
+                </div>
+            </li>
+        </ul>
+    </div>
+  </div>
+</nav>

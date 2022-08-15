@@ -12,7 +12,7 @@
 </div>
 <div class="mb-3 row">
 	<label for="item_reservation_range_from" class="col-sm-4 col-form-label">営業時間</label>
-	<div class="col-sm-8  form-inline">
+	<div class="col-sm-8 form-inline">
 		<%
             opts_from = []
             opts_from << ['8:00AM', 8]
@@ -48,6 +48,7 @@
 	</div>
 </div>
 
+
 <% if false %>
 <div class="control-group">
 	<label class="control-label" for="shop_alt_id">店舗ID</label>
@@ -65,7 +66,7 @@
 	<label class="control-label" for="item_reservation_range_from">営業時間</label>
 	<div class="controls form-inline">
 		<select class="span2" name="shop[business_hour_from]" id="shop_business_hour_from">
-			<option <% if @shop.business_hour_from==8  %>selected<% end %> value="8">08:00 AM</option>
+			<option <% if @shop.business_hour_from==8  %>selected<% end %> value="9">08:00 AM</option>
 			<option <% if @shop.business_hour_from==9  %>selected<% end %> value="9">09:00 AM</option>
 			<option <% if @shop.business_hour_from==10 %>selected<% end %> value="10">10:00 AM</option>
 			<option <% if @shop.business_hour_from==11 %>selected<% end %> value="11">11:00 AM</option>
@@ -84,11 +85,16 @@
 		</select>
 	</div>
 </div>
-
+<div class="control-group">
+	<label class="control-label" for="alt_id">電話番号</label>
+	<div class="controls">
+		<%= text_field 'shop', 'telephone_1', :placeholder=>"電話番号", :autocomplete => "off" %>
+	</div>
+</div>
 <div class="control-group">
 	<label class="control-label" for="alt_id">郵便番号</label>
 	<div class="controls">
-		<%= text_field 'shop', 'postal', :placeholder=>"電話番号を半角数字で入力", :autocomplete => "off" %>
+		<%= text_field 'shop', 'postal', :placeholder=>"郵便番号を半角数字で入力", :autocomplete => "off" %>
 	</div>
 </div>
 <div class="control-group">

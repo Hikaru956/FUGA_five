@@ -116,28 +116,28 @@
 			<thead>
 			<tbody>
 				<tr>
-					<td class="span3">勤怠管理</td>
-					<td class="span9">
-						<%= (@item.option_attendance_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
+					<th width="25%">勤怠管理</th>
+					<td width="75%">
+						<%= (@item.option_attendance_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
 					</td>
 				</tr>
 				<tr>
-					<td>簡易予約管理</td>
+					<th>簡易予約管理</th>
 					<td>
-						<%= (@item.option_reservation_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
+						<%= (@item.option_reservation_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
 					</td>
 				</tr>
 				<tr>
-					<td>顧客管理</td>
+					<th>顧客管理</th>
 					<td>
-						<%= (@item.option_customer_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
+						<%= (@item.option_customer_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
 					</td>
 				</tr>
 				<% if false %>
 				<tr>
-					<td>売上管理</td>
+					<th>売上管理</th>
 					<td>
-						<%= (@item.option_sales_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
+						<%= (@item.option_sales_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
 					</td>
 				</tr>
 				<% end %>
@@ -198,24 +198,7 @@
     </div>
 </div>
 
-<% if false %>
-<!-- modalEdit -->
-<div class="modal hide fade form-horizontal", id="modalEdit">
-	<%= form_for @shop, url: admin_company_update_shop_path(id: @shop), method: :patch do |f| -%>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">店舗情報編集</h3>
-		</div>
-		<div class="modal-body">
-			<%= render :partial=>"form_shop", locals: {f: f, shop: @shop} %>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-		</div>
-	<% end %>
-</div>
-<% end %>
+
 
 <!-- modalEditOption -->
 <%= form_tag url_for(:action=>"company_update_shop", :id=>@shop), {:class=>"modal hide fade form-horizontal", :id=>"modalEditOption"} do -%>
@@ -257,27 +240,6 @@
     </div>
 </div>
 
-<% if false %>
-<div class="modal hide fade form-horizontal", id="modalDelete">
-	<%= form_for @item, url: admin_company_delete_shop_path(id: @item), method: :delete do |f| -%>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">店舗削除</h3>
-		</div>
-		<div class="modal-body">
-			<p>
-				「<%= @item.name %>」を削除します。<br/>
-				この店舗に関連する情報も削除されます。<br/>
-				よろしいですか？
-			</p>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
-		</div>
-	<% end %>
-</div>
-<% end %>
 
 <script>
 	var map;

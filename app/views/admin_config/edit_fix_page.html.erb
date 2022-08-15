@@ -1,0 +1,51 @@
+<!-- === Masthead === -->
+<header class="subhead" id="overview">
+	<h3>店舗設定</h3>
+</header>
+	
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop', :id=>@shop) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_staffs', :id=>@shop) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_users', :id=>@shop) %>">店舗ユーザー</a>
+	</li>
+	<li class="nav-item">
+			<a class="nav-link active" href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a>
+		</li>
+	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+		<li class="nav-item">
+			<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_site_navigation', :id=>@shop) %>">ナビゲーション</a>
+		</li>
+	<% end %>
+</ul>
+
+<h4>
+	<p class="float-right">
+		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'shop_site_navigation') %>" data-turbolinks='false'>
+			<%= cancel_icon('キャンセル')%>&nbsp;
+			キャンセル
+		</a>
+		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'list_page_photo', :id=>@item) %>">
+			<i class="fa-solid fa-camera"></i>&nbsp;
+			素材一覧
+		</a>
+	</p>
+	<%=model_title(@item)%>
+	:
+	固定ページ編集
+</h4>
+
+
+<%= form_tag url_for(:action=>"update_fix_page", :id=>@item), :class=>"xform-horizontal " do |f| %>
+	<legend>ページ設定</legend>
+	<%= render :partial=>"form_fixed_page_content", locals: {f: f} %>
+	<div class="form-actions text-right">
+		<% url_cancel = url_for(:action=>"shop_site_navigation") %>
+		<a class="btn btn-small btn-secondary" href="<%= url_cancel %>"><%= cancel_icon('キャンセル')%>&nbsp;&nbsp;キャンセル</a>
+		<button type="submit" class="btn btn-small btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
+	</div>
+<% end %>

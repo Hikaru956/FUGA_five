@@ -10,29 +10,29 @@
 
 
 <header class="subhead" id="overview">
-	<h3>レジストリー</h3>
+	<h3>店舗設定</h3>
 </header>
 	
-
-<ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 						:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@item.company), 	:controller=>"admin", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
-  <li class="active"><%= model_name(@item) %></li>
-</ul>
-
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
 	<li class="nav-item">
-		<a class="nav-link  active" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@item) %>">店舗情報</a>
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop', :id=>@shop) %>">店舗情報</a>
 	</li>
 	<li  class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_staffs', :id=>@item) %>">店舗スタッフ</a>
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_staffs', :id=>@shop) %>">店舗スタッフ</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_list_users', :id=>@item) %>">店舗ユーザー</a>
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_users', :id=>@shop) %>">店舗ユーザー</a>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a>
-	</li>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<li class="nav-item">
+			<a class="nav-link " href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a>
+		</li>
+			<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+				<li class="nav-item">
+					<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_site_navigation', :id=>@shop) %>">ナビゲーション</a>
+				</li>
+			<% end %>
+	<% end %>
 </ul>
 
 <div class="form-horizontal well">
@@ -50,20 +50,21 @@
 </div>
 <br/>
 
-<%= form_tag url_for(:action=>"shop_update_position", :id=>@item), :class=>"form-horizontal" do -%>
-	<%= hidden_field_tag 'lat', @item.lat %>
-	<%= hidden_field_tag 'lng', @item.lng %>
+
+<%= form_tag url_for(:action=>"shop_update_position", :id=>@shop), :class=>"form-horizontal" do -%>
+	<%= hidden_field_tag 'lat', @shop.lat %>
+	<%= hidden_field_tag 'lng', @shop.lng %>
 	<table class="table table-bordered">
 		<tbody>
 			<tr class="warning">
 				<td>
-					<strong><%= model_name(@item) %></strong>
+					<strong><%= model_name(@shop) %></strong>
 					<span class="float-right">
-						<a class="btn btn-middle btn-secondary" href="<%= url_for(:action=>'company_show_shop', :id=>@item) %>">
+						<a class="btn btn-middle btn-secondary" href="<%= url_for(:action=>'company_show_shop', :id=>@shop) %>">
 							<%= backward_icon('戻る')%>&nbsp;戻る
 						</a>
 						&nbsp;<span class="divider">|</span>&nbsp;
-						<% if @item.gps? %>
+						<% if @shop.gps? %>
 							<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDeletePosition">
 								<i class="fa-solid fa-eraser"></i>&nbsp;
 								位置をクリア
@@ -82,13 +83,11 @@
 <% end %>
 
 
-
-
 <script>
   var map;
   var shop_marker;
-	<% if @item.gps? %>
-	    var latlng = { lat: <%= @item.lat %>, lng: <%= @item.lng %> };
+	<% if @shop.gps? %>
+	    var latlng = { lat: <%= @shop.lat %>, lng: <%= @shop.lng %> };
 	<% else %>
 	    var latlng = { lat: 35.681382, lng: 139.766084 };
 	<% end %>
@@ -135,39 +134,14 @@
 </script>
 
 <!-- modalDeletePosition -->
-<div class="modal fade" id="modalDeletePosition" tabindex="-1" aria-labelledby="modalDeletePosition" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-			<%= form_for @item, url: admin_shop_delete_position_path(id: @item), method: :patch do |f| -%>
-                <div class="modal-header">
-                    <h5 class="modal-title">位置をクリア</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-					<p>
-						「<%= model_name(@item) %>」
-						の位置情報（緯度、経度）をクリアします<br/>
-						よろしいですか？
-					</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;位置をクリア</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                </div>
-			<% end %>
-        </div>
-    </div>
-</div>
-
-<% if false %>
-<%= form_tag url_for(:action=>"shop_delete_position", :id=>@item), {:class=>"modal hide fade form-horizontal", :id=>"xxxmodalDeletePosition", method: :delete} do -%>
+<%= form_tag url_for(:action=>"shop_delete_position"), {:class=>"modal hide fade form-horizontal", :id=>"modalDeletePosition", method: :delete} do -%>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 		<h3 id="myModalLabel">位置をクリア</h3>
 	</div>
 	<div class="modal-body">
 		<p>
-			「<%= model_name(@item) %>」
+			「<%= model_name(@shop) %>」
 			の位置情報（緯度、経度）をクリアします<br/>
 			よろしいですか？
 		</p>
@@ -177,9 +151,11 @@
 		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
 	</div>
 <% end %>
+
+<% if false %>
 <script>
-	<% if @item.gps? %>
-	    var latlng = new google.maps.LatLng(<%= @item.lat %>, <%= @item.lng %>);
+	<% if @shop.gps? %>
+	    var latlng = new google.maps.LatLng(<%= @shop.lat %>, <%= @shop.lng %>);
 	<% else %>
 	    var latlng = new google.maps.LatLng(35.681382, 139.766084);
 	<% end %>
@@ -191,7 +167,7 @@
     var map = new google.maps.Map(document.getElementById('map'), options);
 	
 	var shop_marker; 
-	<% if @item.gps? %>
+	<% if @shop.gps? %>
 	    shop_marker = new google.maps.Marker({
 	        position:latlng,
 	        map: map

@@ -1,0 +1,21 @@
+<div class="control-group">
+	<label class="control-label" for="login">表示名</label>
+	<div class="controls">
+		<%= text_field 'user', 'name', :placeholder=>"表示名を入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="login">ログイン</label>
+	<div class="controls">
+		<%= text_field 'user', 'email', :placeholder=>"ログインIDを入力", :autocomplete => "off" %>
+		<span class="help-block">3文字以上。システム全体で固有のログインIDを指定する必要があります。</span>
+	</div>
+</div>
+<% if false %>
+<div class="control-group">
+	<label class="control-label" for="email">メールアドレス</label>
+	<div class="controls">
+		<%= text_field 'user', 'email_org', :placeholder=>"メールアドレスを入力", :autocomplete => "off" %>
+	</div>
+</div>
+<% end %>
