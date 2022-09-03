@@ -21,7 +21,7 @@
 		</small>
 	<% end %>
 </p>
-
+<% unless current_user.blank? %>
 <div class="modal fade" id="modalUIEdit" tabindex="-1" aria-labelledby="modalUIEdit" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -53,3 +53,4 @@
         </div>
     </div>
 </div>
+<% end  %>

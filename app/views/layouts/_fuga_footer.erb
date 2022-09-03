@@ -22,6 +22,7 @@
 		</small>
 	<% end %>
 </p>
+<% unless current_user.blank? %>
 <div class="modal hide fade form-horizontal", id="modalUIEdit">
 	<%= form_for current_user, url: dashboard_shop_update_user_ui_path(id: current_user.id), method: :patch do |f| -%>
 		<div class="modal-header">
@@ -49,3 +50,4 @@
 		</div>
 	<% end %>
 </div>
+<% end %>
