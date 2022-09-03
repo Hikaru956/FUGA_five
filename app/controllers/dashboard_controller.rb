@@ -278,6 +278,12 @@ class DashboardController < ApplicationController
     redirect_to(:action=>"shop_show_user", :id=>@item) if @item.ui_version.blank?
   end
 
+  def shop_update_user_ui
+    @item = User.find(params[:id])
+    @item.update_attributes(user_params)
+    redirect_to root_path
+  end
+
   def shop_delete_user
     item = User.find(params[:id])
     item.destroy

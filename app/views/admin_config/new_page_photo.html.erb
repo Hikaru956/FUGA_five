@@ -1,28 +1,43 @@
 <!-- === Masthead === -->
-<header class="subhead" id="overview">
-	<h3>店舗設定</h3>
-</header>
+<ul class="breadcrumb">
+  <li><%= link_to "一覧", url_for(:action=>'company_show_shop', :id=>@shop)  %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "固定ページ編集", url_for(:action=>'edit_fix_page', :id=>@item)  %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "画像素材一覧", url_for(:action=>'list_page_photo', :id=>@item)  %>&nbsp;<span class="divider">/</span></li>
+  <li class="active"><%= model_name(@shop) %></li>
+</ul>
 	
-<ul class="nav nav-tabs">
-	<li>				<a href="<%= url_for(:action=>'company_show_shop') %>">店舗情報</a></li>
-	<li>				<a href="<%= url_for(:action=>'shop_list_staffs') %>">店舗スタッフ</a></li>
-	<li>				<a href="<%= url_for(:action=>'shop_list_users') %>">店舗ユーザー</a></li>
-	<li>				<a href="<%= url_for(:action=>'shop_show_website') %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a></li>
-	<li class="active">	<a href="<%= url_for(:action=>'shop_site_navigation') %>">ナビゲーション</a></li>
+<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+	<li class="nav-item">
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop', :id=>@shop) %>">店舗情報</a>
+	</li>
+	<li  class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_staffs', :id=>@shop) %>">店舗スタッフ</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_users', :id=>@shop) %>">店舗ユーザー</a>
+	</li>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<li class="nav-item">
+			<a class="nav-link " href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a>
+		</li>
+			<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
+				<li class="nav-item">
+					<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_site_navigation', :id=>@shop) %>">ナビゲーション</a>
+				</li>
+			<% end %>
+	<% end %>
 </ul>
 
 <h4>
-	<div class="pull-right">
+	<div class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"list_page_photo", :id=>@item) %>
-			<a class="btn btn-small" href="<%=url_back%>">
-				<i class="icon-arrow-left"></i>&nbsp;
+			<a class="btn btn-small btn-secondary" href="<%=url_back%>">
+				<%= backward_icon('戻る')%>&nbsp;
 				戻る
 			</a>
 		</p>
 	</div>
-	<%= model_title(@item) %>
-	:
 	画像素材追加
 </h4>
 

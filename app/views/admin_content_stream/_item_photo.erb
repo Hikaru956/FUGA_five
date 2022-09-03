@@ -1,0 +1,116 @@
+<div class="card">
+	<div class="caption">
+		<p class="wewll" style="text-align:center;">
+			<%= (photo.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), :action=>"photo_higher",	:id=>photo) %>
+			<%= photo.position %>
+			<%= (photo.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"photo_lower",		:id=>photo) %>				
+		</p>
+	</div>
+	<%= image_tag photo.clip.url(:thumb) %>
+	<div class="card-body">
+		<p>
+			<%=
+				unless photo.image.blank?
+					photo.image
+				else
+					photo.clip_file_name
+				end
+			 %>
+		</p>
+		<p>
+			<%=
+				photo.info unless photo.info.blank?
+			 %>
+		</p>
+		<p>
+			<button type="button" class="btn btn-success btn-small" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
+				<%= info_icon('キャプション') %>&nbsp;キャプション
+			</button>
+			<button type="button" class="btn btn-danger btn-small" data-bs-toggle="modal" data-bs-target="#modal_delete_photo_<%=photo.id%>">
+				<%= trash_icon('削除確認') %>&nbsp;削除確認
+			</button>
+		</p>
+	</div>
+</div>
+
+<div class="modal fade" id="modal_edit_photo_<%=photo.id%>" tabindex="-1" aria-labelledby="modal_edit_photo_<%=photo.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for photo, url: admin_content_stream_update_photo_path(id: photo.id), method: :patch do |f| %>
+                <div class="modal-header">
+                    <h5 class="modal-title">キャプション編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<div class="mb-3 row">
+						<label for="name" class="col-sm-4 col-form-label">写真の説明</label>
+						<div class="col-sm-8">
+							<%= f.text_area :info, {value: photo.info, class: "form-control", placeholder: "説明を入力", :required => false, autofocus: true}  %>
+						</div>
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_delete_photo_<%=photo.id%>" tabindex="-1" aria-labelledby="modal_delete_photo_<%=photo.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for photo, url: admin_content_stream_delete_photo_path(id: photo.id), method: :delete do |f| %>
+                <div class="modal-header">
+                    <h5 class="modal-title">削除確認</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<p>写真を削除します。よろしいですか？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<% if false %>
+	<%= form_tag url_for(:action=>"update_photo", :id=>photo), {:class=>"modal hide fade form-horizontal", :id=>"modal_edit_photo_#{photo.id}",method: :patch} do -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">キャプション編集</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="job_title">写真の説明</label>
+				<div class="controls">
+					<%= text_area  'photo', 'info', :rows=>"5" %>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+
+	<div id="modal_delete_photo_<%=photo.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<%= form_tag({:action => 'delete_photo', :id=>photo}, :class=>"form-horizontal", method: :delete)  do %>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">削除確認</h3>
+		</div>
+		<div class="modal-body">
+			<p>写真を削除します。よろしいですか？</p>
+		</div>
+		<div class="modal-footer">
+				<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+				<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<%end%>  
+	</div>
+<% end %>

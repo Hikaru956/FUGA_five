@@ -1,0 +1,67 @@
+<!-- === Masthead === -->
+<ul class="breadcrumb">
+  <li><%= link_to "トップ", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <% @parent_category.category_path.each do | category | %>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+  <% end %>
+  <li class="active"><%= @parent_category.category_label %></li>
+</ul>
+
+  	
+<h4>
+	<div class="float-right">
+		<p>
+			<% url_back = url_for(:action=>"content_root") %>
+			<a class="btn btn-small btn-secondary" href="<%=url_back%>" data-turbolinks='false'>
+				<%= backward_icon('戻る') %>&nbsp;
+				戻る
+			</a>
+		</p>
+	</div>
+	表紙写真
+</h4>
+
+<div class="row">
+	<% 
+		array = @parent_category.photos.all.order(position: :asc).in_groups_of(3, false)
+	%>
+	<% for i in 0..(array.size-1) %>
+		<% @lines = array[i] %>
+	        <div class="col-sm-4">
+	        	<% if @lines.size>=1 %>
+					<%= render :partial=>"item_face_photo", :locals => {:photo => @lines[0]} %>
+				<% end %>
+			</div>		
+	        <div class="col-sm-4">
+	        	<% if @lines.size>=2 %>
+					<%= render :partial=>"item_face_photo", :locals => {:photo => @lines[1]} %>
+				<% end %>
+			</div>		
+	        <div class="col-sm-4">
+	        	<% if @lines.size>=3 %>
+					<%= render :partial=>"item_face_photo", :locals => {:photo => @lines[2]} %>
+				<% end %>
+			</div>
+	<% end %>
+</div>
+<hr/>
+<% if true %>
+	<% item = Photo.new %>
+	<%= form_tag(bs_content_portfolio_create_face_photo_path(id: @parent_category.id),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<div class="fallback">
+		<%= file_field_tag('photo[clip]') %>
+	</div>
+	<% end %>
+	<script>
+		Dropzone.options.dropzone = {
+			paramName: "photo[clip]",
+			maxFilesize: 1,
+			acceptedFiles: "image/*",
+			init: function() {
+				this.on('complete', function (file) {
+					//location.reload();
+				})
+			}
+		}
+	</script>
+<% end %>

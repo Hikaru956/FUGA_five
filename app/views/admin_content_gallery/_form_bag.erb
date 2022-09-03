@@ -1,0 +1,37 @@
+<div class="mb-3 row">
+	<label for="job_title" class="col-sm-4 col-form-label">ストリーム名</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :name,  {value: @item.name, class: "form-control", placeholder: "キャンペーン情報等", :required => false, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="content_bag[is_public]" class="col-sm-4 col-form-label">公開設定</label>
+	<div class="col-sm-8">
+		<select class="form-select" aria-label="Default select example" name="content_bag[is_public]" id="content_bag[is_public]">
+			<option <% if @item.is_public %>selected<% end %> value="1">公開</option>
+			<option <% if !@item.is_public %>selected<% end %> value="0">非公開</option>
+		</select>
+	</div>
+</div>
+
+<% if false %>
+<div class="control-group">
+	<label class="control-label" for="wsite_keywords">ストリーム名</label>
+	<div class="controls">
+		<%= text_field 'item', 'name', :placeholder=>"キャンペーン情報等", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="item[is_public]">公開設定</label>
+	<div class="controls">
+		<label class="radio inline">
+			<input type="radio" id="item[is_public]" name="item[is_public]" value="1" <% if @item.is_public %>checked<% end %>>
+			公開
+		</label>
+		<label class="radio inline">
+			<input type="radio" id="item[is_public]" name="item[is_public]" value="0" <% if !@item.is_public %>checked<% end %>>
+			非公開
+		</label>
+	</div>
+</div>
+<% end %>

@@ -22,6 +22,6 @@
 <div class="mb-3 row">
 	<label for="item_description" class="col-sm-4 col-form-label">入力するデータの説明</label>
 	<div class="col-sm-8">
-		<%= f.text_area  :description,  {class: "form-control", :rows=>"5", placeholder: "文字数、画像サイズ等", :required => true, autofocus: true}  %>
+		<%= f.text_area  :description, {value: @item.description, class: "form-control", :rows=>"5", placeholder: "文字数、画像サイズ等", :required => true, autofocus: true}  %>
 	</div>
 </div>

@@ -1,8 +1,4 @@
 <!-- === Masthead === -->
-<header class="subhead" id="overview">
-	<h3>店舗設定</h3>
-</header>
-	
 <ul class="breadcrumb">
   <li><%= link_to "一覧", url_for(:action=>'shop_list_users', :id=>@user.shop)  %>&nbsp;<span class="divider">/</span></li>
   <li class="active"><%= model_name(@user) %></li>
@@ -73,7 +69,6 @@
 			<td><%= @user.email_org %></td>
 		</tr>
 		<% end %>
-
 		<% if current_user==@user || current_user.has_permission?(User::ROLE_MANAGER) %>	
 		<tr>
 			<th>パスワード</th>
@@ -84,6 +79,12 @@
 			</td>
 		</tr>
 		<% end %>
+		<tr>
+			<th>バージョン</th>
+			<td>
+				<%= user_ui_version_label(@user) %>
+			</td>
+		</tr>
 	</tbody>
 </table>
 

@@ -33,15 +33,12 @@ $(function() {
 </script>
 <% end %>
 <!-- === Masthead === -->
-<header class="subhead" id="overview">
-	<h3>レジストリー</h3>
-</header>
-	
 
 <ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 					:controller=>"dashboard", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@shop.company), 	:controller=>"dashboard", :action=>"company_show", :id=>@shop.company %>&nbsp;<span class="divider">/</span></li>
-  <li class="active"><%= model_name(@shop) %></li>
+  <li><%= link_to "レジストリー", 					:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@shop.company), 	:controller=>"admin", :action=>"company_show", :id=>@shop.company %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@shop), 	:controller=>"admin", :action=>"shop_show_website", :id=>@shop %>&nbsp;<span class="divider">/</span></li>
+  <li class="active">Favicon設定</li>
 </ul>
 
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">

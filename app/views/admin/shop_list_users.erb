@@ -1,8 +1,5 @@
 <!-- === Masthead === -->
-<header class="subhead" id="overview">
-	<h3>レジストリー</h3>
-</header>
-	
+
 
 <ul class="breadcrumb">
   <li><%= link_to "レジストリー", 					:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
@@ -27,7 +24,7 @@
 </ul>
 
 <h4>
-	<p class="pull-right">
+	<p class="float-right">
 		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon('登録') %>&nbsp;ユーザー登録
 		</button>
@@ -41,8 +38,8 @@
 		<thead>
 			<tr class="info">
 				<th class="span2">役割</th>
-				<th class="span3"><span class="pull-right"><span class="badge badge-success"><%= @users.size %></span></span>表示名</th>
-				<th class="span3"><span class="pull-right"><span class="badge badge-success"><%= @users.size %></span></span>ログイン</th>
+				<th class="span3"><span class="float-right"><span class="badge badge-success"><%= @users.size %></span></span>表示名</th>
+				<th class="span3"><span class="float-right"><span class="badge badge-success"><%= @users.size %></span></span>ログイン</th>
 				<th class="span4">Email</th>
 			</tr>
 		</thead>

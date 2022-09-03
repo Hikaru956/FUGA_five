@@ -1,0 +1,2 @@
+module AdminContentGalleryHelper
+end

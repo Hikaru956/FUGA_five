@@ -402,6 +402,12 @@ class AdminConfigController < ApplicationController
     redirect_to :action=>"list_page_photo", :id=>@item
   end
 
+  def update_page_photo
+    photo = @shop.photos.find(params[:id])
+    photo.update_attributes(photo_params)
+    redirect_to :action=>"list_page_photo", :id=>photo.ref_id
+  end
+
   def delete_page_photo
     photo = @shop.photos.find(params[:id])
     photo.destroy
@@ -418,7 +424,7 @@ protected
   end
 
   def user_params
-      params.require(:user).permit(:login, :email, :email_org, :name, :password, :password_confirmation, :role, :company_id, :shop_id)
+      params.require(:user).permit(:login, :email, :email_org, :name, :password, :password_confirmation, :role, :company_id, :shop_id, :ui_version)
   end
 
   def staff_params
@@ -430,7 +436,7 @@ protected
   end
 
   def photo_params
-    params.require(:photo).permit(:clip)
+    params.require(:photo).permit(:clip, :info)
     #params.permit(:file)
   end
 end

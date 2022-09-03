@@ -1,0 +1,23 @@
+<!-- === Masthead === -->
+
+
+<ul class="breadcrumb">
+  <li><%= link_to "トップ", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <% @item.content_category.category_path(true).each do |category | %>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+  <% end %>
+  <li class="active"><%= @item.title%></li>
+</ul>
+
+<%= form_for @item , url: admin_content_news_update_leaf_path(id: @item.id), method: :patch do |f|  %>
+	<%= f.hidden_field :shop_id, value: @item.shop.id %>
+	<fieldset>
+		<legend>記事編集</legend>
+		<%= render :partial=>"form_leaf", locals:{f: f} %>
+		<div class="form-actions text-right">
+        	<button type="submit" class="btn btn-small btn-success"><%= update_icon('更新')%>&nbsp;&nbsp;更新</button>
+			<% url_cancel = url_for(:action=>"show_leaf", :id=>@item) %>							
+	  		<a class="btn btn-small btn-secondary" href="<%= url_cancel %>" data-turbolinks='false'><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
+      	</div>
+	</fieldset>
+<% end -%>

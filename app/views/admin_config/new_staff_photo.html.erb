@@ -1,10 +1,10 @@
 
-
-
 <!-- === Masthead === -->
-<header class="subhead" id="overview">
-	<h3>店舗設定</h3>
-</header>
+<ul class="breadcrumb">
+  <li><%= link_to "一覧", url_for(:action=>'shop_list_staffs', :id=>@item.shop)  %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to model_name(@item), url_for(:action=>'shop_show_staff', :id=>@item)  %>&nbsp;<span class="divider">/</span></li>
+  <li class="active">写真追加</li>
+</ul>
 	
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
 	<li class="nav-item">

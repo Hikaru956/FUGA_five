@@ -1,0 +1,21 @@
+<!-- === Masthead === -->
+<ul class="breadcrumb">
+  <li><%= link_to "トップ", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <% @item.content_category.category_path(true).each do | category | %>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+  <% end %>
+  <li class="active">新規登録</li>
+</ul>
+
+<%= form_for @item , url: admin_content_portfolio_create_leaf_path, method: :post do |f|  %>
+	<%= f.hidden_field :shop_id, value: @item.shop.id %>
+	<fieldset>
+		<legend>新規登録</legend>
+		<%= render :partial=>"form_leaf", locals:{f: f, item: @item} %>
+		<div class="form-actions text-right">
+			<% url_cancel = url_for(:action=>"content_category", :id=>@item.content_category) %>
+	  		<a class="btn btn-small btn-secondary" href="<%= url_cancel %>" data-turbolinks='false'><%= cancel_icon('キャンセル')%>&nbsp;&nbsp;キャンセル</a>
+			<button type="submit" class="btn btn-small btn-success"><%= new_icon('登録')%>&nbsp;&nbsp;登録</button>
+      	</div>
+	</fieldset>
+<% end -%>

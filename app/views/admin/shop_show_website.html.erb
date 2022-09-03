@@ -1,9 +1,4 @@
 <!-- === Masthead === -->
-<header class="subhead" id="overview">
-	<h3>レジストリー</h3>
-</header>
-	
-
 <ul class="breadcrumb">
   <li><%= link_to "レジストリー", 					:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
   <li><%= link_to model_name(@shop.company), 	:controller=>"admin", :action=>"company_show", :id=>@shop.company %>&nbsp;<span class="divider">/</span></li>
@@ -226,7 +221,7 @@
 					<div class="mb-3 row">
 						<label for="job_title" class="col-sm-4 col-form-label">コード</label>
 						<div class="col-sm-8">
-							<%= f.text_area :disqus_code,  {class: "form-control", placeholder: "DISQUS ユニバーサルコードを入力", :required => false, autofocus: true}  %>
+							<%= f.text_area :disqus_code, {value: @shop.disqus_code, class: "form-control", placeholder: "DISQUS ユニバーサルコードを入力", :required => false, autofocus: true}  %>
 						</div>
 					</div>
                 </div>
@@ -394,7 +389,7 @@
                     <div class="mb-3 row">
 						<label for="google_calendar_url" class="col-sm-4 col-form-label">店舗カレンダー埋込コード</label>
 						<div class="col-sm-8">
-							<%= f.text_area :google_calendar_emb_frame_code,  {class: "form-control", placeholder: "店舗カレンダーの埋込コードを入力", :required => false, autofocus: true}  %>
+							<%= f.text_area :google_calendar_emb_frame_code, {value: @shop.google_calendar_emb_frame_code, class: "form-control", placeholder: "店舗カレンダーの埋込コードを入力", :required => false, autofocus: true}  %>
 						</div>
 					</div>
                 </div>
@@ -419,7 +414,7 @@
                     <div class="mb-3 row">
 						<label for="google_calendar_url" class="col-sm-4 col-form-label">アクセス解析コード</label>
 						<div class="col-sm-8">
-							<%= f.text_area :analytics_code,  {class: "form-control", placeholder: "アクセス解析コードを入力", :required => false, autofocus: true}  %>
+							<%= f.text_area :analytics_code, {value: @shop.analytics_code, class: "form-control", placeholder: "アクセス解析コードを入力", :required => false, autofocus: true}  %>
 						</div>
 					</div>
                 </div>
@@ -444,7 +439,7 @@
                     <div class="mb-3 row">
 						<label for="google_calendar_url" class="col-sm-4 col-form-label">カスタム・メタタグ</label>
 						<div class="col-sm-8">
-							<%= f.text_area :analytics_code,  {class: "form-control", placeholder: "<HEAD>エリアに挿入したいコードを入力", :required => false, autofocus: true}  %>
+							<%= f.text_area :custom_metas, {value: @shop.custom_metas, class: "form-control", placeholder: "<HEAD>エリアに挿入したいコードを入力", :required => false, autofocus: true}  %>
 						</div>
 					</div>
                 </div>

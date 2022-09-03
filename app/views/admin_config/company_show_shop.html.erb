@@ -119,7 +119,7 @@
 		<br/>
 
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
-			<p>
+			<p class='text-right'>
 				<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_shop_photo', :id=>@shop) %>" data-turbolinks='false'>
 					<i class="fa-solid fa-camera"></i>&nbsp;
 					写真追加

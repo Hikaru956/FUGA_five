@@ -12,7 +12,40 @@
 				<%= ('. '+model_name(current_user.company)) %>
 			<% end %>
 			]
-			<%= link_to 'Try New I/F', url_for(:controller=>'admin', :action=>'index'), data: {"turbolinks" => false} %>
+			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalUIEdit">
+				<i class="icon-pencil"></i>&nbsp;
+				新インターフェース設定
+			</a>
+			<% if false %>
+				<%= link_to 'Try New I/F', url_for(:controller=>'admin', :action=>'index'), data: {"turbolinks" => false} %>
+			<% end %>
 		</small>
 	<% end %>
 </p>
+<div class="modal hide fade form-horizontal", id="modalUIEdit">
+	<%= form_for current_user, url: dashboard_shop_update_user_ui_path(id: current_user.id), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">新インターフェース設定</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="user[ui_version]">画面構成</label>
+				<div class="controls">
+					<label class="radio inline">
+						<input type="radio" id="user[ui_version]" name="user[ui_version]" value="1" <% if current_user.ui_version.blank? %>checked<% end %>>
+						従来画面
+					</label>
+					<label class="radio inline">
+						<input type="radio" id="user[ui_version]" name="user[ui_version]" value="0" <% if !current_user.ui_version.blank? %>checked<% end %>>
+						新画面
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>

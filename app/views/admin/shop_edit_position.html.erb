@@ -8,16 +8,11 @@
 	 #map img { max-width: none; }
 </style>
 
-
-<header class="subhead" id="overview">
-	<h3>レジストリー</h3>
-</header>
-	
-
 <ul class="breadcrumb">
   <li><%= link_to "レジストリー", 						:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
   <li><%= link_to model_name(@item.company), 	:controller=>"admin", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
-  <li class="active"><%= model_name(@item) %></li>
+  <li><%= link_to model_name(@item), 	:controller=>"admin", :action=>"company_show_shop", :id=>@item%>&nbsp;<span class="divider">/</span></li>
+  <li class="active">住所設定</li>
 </ul>
 
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">

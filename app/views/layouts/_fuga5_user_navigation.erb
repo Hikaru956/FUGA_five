@@ -22,20 +22,20 @@
         <ul class="navbar-nav mr-auto">
             <% navs.each do | nav | %>
                 <li class="nav-item">
-                <% if nav.category_type==ContentCategory::TYPE_NEWS %><a class="nav-link" href="<%= url_for(:controller=>'bs_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                <% if nav.category_type==ContentCategory::TYPE_NEWS %><a class="nav-link" href="<%= url_for(:controller=>'admin_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
                 </li>
                 <li class="nav-item">
-                <% if nav.category_type==ContentCategory::TYPE_STREAM %><a class="nav-link" href="<%= url_for(:controller=>'bs_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                <% if nav.category_type==ContentCategory::TYPE_STREAM %><a class="nav-link" href="<%= url_for(:controller=>'admin_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
                 </li>
                 <li class="nav-item">
-                <% if nav.category_type==ContentCategory::TYPE_GALLERY %><a class="nav-link" href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                <% if nav.category_type==ContentCategory::TYPE_GALLERY %><a class="nav-link" href="<%= url_for(:controller=>'admin_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
                 </li>
                 <li class="nav-item">
-                <% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %><a class="nav-link" href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                <% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %><a class="nav-link" href="<%= url_for(:controller=>'admin_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
                 </li>
             <% end %>
                 <li class="nav-item">
-                    <a class="nav-link" href="<%= url_for(:controller=>'bs_content_inquiry', :action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>">お問い合わせ</a>
+                    <a class="nav-link" href="<%= url_for(:controller=>'admin_content_inquiry', :action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>">お問い合わせ</a>
                 </li>
             <% unless MAKE_SECRET_FUGA_OPTION %>
                 <% if @shop.option_reservation_management %>	<li><a href="/bs_reservation/index"	>予約</a></li><% end %>
@@ -51,7 +51,7 @@
                 </a>
                 <div style='left: auto;' class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <% if current_user.has_permission?(User::ROLE_BLOGGER) %>
-                        <a class="dropdown-item" href="<%= url_for(:controller=>'bs_config', :action=>'index') %>"><i class="icon-wrench"></i>&nbsp;店舗設定</a>
+                        <a class="dropdown-item" href="<%= url_for(:controller=>'admin_config', :action=>'index') %>"><%= setting_icon('設定') %>&nbsp;店舗設定</a>
                         <% if false %>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>"><i class="icon-sitemap"></i>&nbsp;ナビゲーション</a>

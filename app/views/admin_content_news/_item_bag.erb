@@ -1,0 +1,154 @@
+<% @item = temp_local.content_bag %>
+<div class="card" xstyle="width: 18rem;">
+	<a href="<%= url_for(:action=>'content_category', :id=>temp_local) %>">
+		<% @latest = temp_local.latest_news_article %>
+		<% unless @latest.blank? %>
+			<% key_photo = key_photo(@latest) %>
+			<% unless key_photo.blank? %>
+				<%= image_tag key_photo.clip.url(:thumb) %>
+			<% else %>
+				<img src="https://placehold.jp/20/cfcfcf/ffffff/320x240.png?text=<%=@latest.publish_from.strftime('%Y-%m-%d')%>">
+			<% end %>
+		<% else %>
+			<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Public%20Article%0A">
+		<% end %>
+	</a>
+	<div class="card-body">
+		<h5 class="card-title">
+        	<%= icon_scheme_state(temp_local) %>
+        	<%= truncate(model_name(temp_local), :length=>50) %>
+		</h5>
+		<p class="card-text"><%= h truncate(temp_local.description, :length=>20) %></p>
+	</div>
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">An item</li>
+		<li class="list-group-item">A second item</li>
+	</ul>
+	<div class="card-body">
+		<%= (temp_local.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"bag_category_higher", :id=>temp_local) %>
+		<%= temp_local.position %>
+		<%= (temp_local.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"bag_category_lower",	:id=>temp_local) %>
+		<span class='float-right'>
+			<a href="<%= url_for(:action=>'content_category', :id=>temp_local) %>" class="btn btn-primary"><%= share_icon('表示')%>&nbsp;表示</a>
+		</span>
+		<div class="caption">
+			<h4>
+				<%= bag_state_icons(@item) %>
+				<%= truncate(model_name(@item), :length=>50) %>
+			</h4>
+				<button type="button" class="btn btn-info btn-mini" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=@item.id%>">
+					<%= edit_icon('編集')%>
+				</button>
+				<% unless @item.is_public %>
+				<button type="button" class="btn btn-danger btn-mini" data-bs-toggle="modal" data-bs-target="#modal_delete_<%=@item.id%>">
+					<%= trash_icon('削除')%>
+				</button>
+				<% end %>
+		</div>
+	</div>
+</div>
+
+<% if false %>
+<div class="thumbnail">
+	<div class="caption">
+		<p style="text-align:center;">
+			<%= (temp_local.first?)?	raw("<i class='fa-solid fa-backward-fast'></i>"):	link_to(raw("<i class='fa-solid fa-backward-fast'></i>"), {:action=>"bag_category_higher",	:id=>temp_local}, :title=>"表示順を前に") %>
+			<%= temp_local.position %>
+			<%= (temp_local.last?)? 	raw("<i class='fa-solid fa-forward-fast'></i>"): 	link_to(raw("<i class='fa-solid fa-forward-fast'></i>"), 	{:action=>"bag_category_lower",		:id=>temp_local}, :title=>"表示順を後ろに") %>				
+		</p>
+	</div>
+	
+	<div  style="text-align:center;">
+		<a href="<%= url_for(:action=>'content_category', :id=>temp_local) %>">
+			<% @latest = temp_local.latest_news_article %>
+			<% unless @latest.blank? %>
+				<% key_photo = key_photo(@latest) %>
+				<% unless key_photo.blank? %>
+					<%= image_tag key_photo.clip.url(:thumb) %>
+				<% else %>
+					<img src="https://placehold.jp/20/cfcfcf/ffffff/320x240.png?text=<%=@latest.publish_from.strftime('%Y-%m-%d')%>">
+				<% end %>
+			<% else %>
+				<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Public%20Article%0A">
+			<% end %>
+		</a>
+	</div>
+</div>
+<% end %>
+
+
+<div class="modal fade" id="modal_edit_<%=@item.id%>" tabindex="-1" aria-labelledby="modal_edit_<%=@item.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @item, url: admin_content_news_update_bag_path(id: @item), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">ストリーム編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					 <%= render :partial=>"form_bag", locals:{f: f}%>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_delete_<%=@item.id%>" tabindex="-1" aria-labelledby="modal_delete_<%=@item.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @item, url: admin_content_news_delete_bag_path(id: @item), method: :delete do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">削除確認</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					 <p>ストリームを削除します。ストリーム内のすべてのコンテンツも削除されます。よろしいですか？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+
+<% if false %>
+<!-- Modals -->
+<%= form_tag({:action => 'update_bag', :id=>@item}, :class=>"form-horizontal", method: :patch)  do |f| %>
+<div id="modal_edit_<%=@item.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">ストリーム編集</h3>
+	</div>
+	<div class="modal-body">
+		<%= render :partial=>"form_bag", locals:{f: f}%>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+</div>
+<% end %>
+
+<div id="modal_delete_<%=@item.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">削除確認</h3>
+  </div>
+  <div class="modal-body">
+    <p>ストリームを削除します。ストリーム内のすべてのコンテンツも削除されます。よろしいですか？</p>
+  </div>
+  <div class="modal-footer">
+	<%= form_tag({:action => 'delete_bag', :id=>@item}, :class=>"form-horizontal", method: :delete)  do %>
+		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+  	<%end%>  	
+  </div>
+</div>
+<% end %>

@@ -196,7 +196,7 @@ EOF
     # so the user can choose a parent_id of 0
     if init
         # Add "Root" to the options
-        html << "<select name=\"#{model}[#{name}]\" id=\"#{model}_#{name}\">\n"
+        html << "<select name=\"#{model}[#{name}]\" class='form-select' id=\"#{model}_#{name}\">\n"
 #        html << "\t<option value=\"0\""
 #        html << " selected=\"selected\"" if selected.parent_id == 0
 #        html << ">Root</option>\n"
@@ -226,7 +226,7 @@ EOF
     # so the user can choose a parent_id of 0
     if init
         # Add "Root" to the options
-        html << "<select name=\"#{name}\" id=\"#{name}\">\n"
+        html << "<select name=\"#{name}\" class='form-select' id=\"#{name}\">\n"
     end
 
     if categories.length > 0
@@ -354,8 +354,8 @@ EOF
   end
 
   def user_ui_version_label(user)
-    return "バージョン3" if user.ui_version.blank?
-    return "バージョン6" unless user.ui_version.blank?
+    return "従来画面" if user.ui_version.blank?
+    return "新画面" unless user.ui_version.blank?
   end
 
   def trash_icon(title='削除'); sprintf("<i class='fa-solid fa-trash' title=%s></i>", title).html_safe; end

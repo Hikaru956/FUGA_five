@@ -1,0 +1,23 @@
+<div class="mb-3 row">
+	<label for="inquiry[status]" class="col-sm-3 col-form-label">ステータス</label>
+	<div class="col-sm-9">
+		<select class="form-select" aria-label="Default select example" name="inquiry[status]" id="inquiry_status">
+			<option <% if inquiry.status==Inquiry::INQ_OPEN %>selected<% end %> value="<%=Inquiry::INQ_OPEN%>">未処理</option>
+			<option <% if inquiry.status==Inquiry::INQ_WORKING %>selected<% end %> value="<%=Inquiry::INQ_WORKING%>">処理中</option>
+			<option <% if inquiry.status==Inquiry::INQ_CLOSE %>selected<% end %> value="<%=Inquiry::INQ_CLOSE%>">処理済</option>
+		</select>
+	</div>
+</div>
+
+<% if false %>
+<div class="control-group">
+	<label class="control-label" for="item_reservation_range_from">ステータス</label>
+	<div class="controls">
+		<select name="inquiry[status]" id="inquiry_status">
+			<option <% if inquiry.status==Inquiry::INQ_OPEN %>selected<% end %> value="<%=Inquiry::INQ_OPEN%>">未処理</option>
+			<option <% if inquiry.status==Inquiry::INQ_WORKING %>selected<% end %> value="<%=Inquiry::INQ_WORKING%>">処理中</option>
+			<option <% if inquiry.status==Inquiry::INQ_CLOSE %>selected<% end %> value="<%=Inquiry::INQ_CLOSE%>">処理済</option>
+		</select>
+	</div>
+</div>	
+<% end %>

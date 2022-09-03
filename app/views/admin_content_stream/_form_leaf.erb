@@ -1,0 +1,107 @@
+<%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>@item} if false %>
+
+<div class="mb-3 row">
+	<label for="job_title" class="col-sm-3 col-form-label">記事のタイトル</label>
+	<div class="col-sm-9">
+		<%= f.text_field  :title,  {class: "form-control", placeholder: "記事のタイトルを入力します。", :required => true, autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="job_title" class="col-sm-3 col-form-label">記事のヘッドライン</label>
+	<div class="col-sm-9">
+		<%= f.text_area :description_3, {value: item.description_3, rows: 3, class: "form-control", placeholder: "記事のヘッドラインを入力します。", :required => false, autofocus: true}  %>
+	</div>
+</div>
+<% 
+	bag_roots = ContentCategory.type_root(@shop, ContentCategory::TYPE_STREAM).children
+%>
+<div class="mb-3 row">
+	<label class="col-sm-3 col-form-label" for="item_alt_id">ストリーム/カテゴリー</label>
+	<div class="col-sm-9">
+		<%
+		cat_options = Array.new
+		#cat_options << @item.content_category.category_path(true)[0]
+		bag_roots.each do |cat|
+			#next if bag.category_type==ContentCategory::TYPE_BAG_ROOT
+			cat_options << cat
+		end
+		%>
+		<%= tree_select(cat_options, 'content_leaf', 'content_category_id', item.content_category.id) %> 
+	</div>
+</div>
+<% 
+	#c = Condition.new
+	#c.and "staffs.staff_status",'!=', Staff::STAFF_BLOCKED
+	#@staffs = @shop.staffs.find(:all, :conditions => c.where)
+	@staffs = @shop.staffs.where("staffs.staff_status !=?", Staff::STAFF_BLOCKED)
+	options = @staffs.map{ | s | [ s.name, s.id] }
+	options.unshift(["-- 指定なし -- ", ''])
+%>
+<div class="mb-3 row">
+	<label for="item_staff_id" class="col-sm-3 col-form-label">投稿スタッフ</label>
+	<div class="col-sm-9">
+		<%= f.collection_select(:staff_id, options, :last, :first, {prompt: false}, {class: "form-control"})%>
+	</div>
+</div>
+
+<div class="control-group">
+	<%= f.text_area  :description, value: item.description, :class => "tinymce input-block-level", rows: 20, :placeholder=>"記事の本文を入力します。" %>
+	<script type="text/javascript">
+		tinyMCE.init({
+			selector: 'textarea.tinymce',
+			cache_suffix: "?v=5.10.2",
+			theme_advanced_toolbar_location: "top",
+			theme_advanced_statusbar_location: "bottom",
+			theme_advanced_buttons3_add: ["tablecontrols"],
+			plugins: "table,image",
+			<% unless item.blank? %>
+				<% unless item.photos.blank? %>
+				image_list: [ 
+					<%= photo_array(item.photos).html_safe %>
+					],
+				<% end %>
+    		<% end %>
+			relative_urls : false,
+    		convert_urls: false,
+			toolbar: ["undo redo | formatselect | fontselect | fontsizeselect | bold | italic | underline | alignleft | aligncenter | alignjustify | alignright"],
+			language: 'ja'})
+	</script>
+</div>
+<% if true || bag_roots.size==1 %>
+	<% item.content_bag 		= bag_roots[0].content_bag %>
+	<%= f.hidden_field :content_bag_id, value: bag_roots[0].content_bag.id %>
+<% else %>
+	<%
+		options = bag_roots.map{ | s | [s.content_bag.id, s.content_bag.name] }
+		options.unshift(["-- 指定なし --　", ''])
+	%>
+	<% if false %>
+	<div class="mb-3 row">
+		<label for="in_charge" class="col-sm-3 col-form-label">ストリーム</label>
+		<div class="col-sm-9">
+			<%= f.collection_select(:content_bag_id, options, :first, :last, {prompt: false}, {class: "form-control"})%>
+		</div>
+	</div>
+	<% end %>
+<% end %>
+<div class="mb-3 row">
+	<label for="item[is_public]" class="col-sm-3 col-form-label">公開設定</label>
+	<div class="col-sm-9">
+		<select class="form-select" aria-label="Default select example" name="content_leaf[is_public]" id="content_leaf[is_public]">
+			<option <% if item.is_public %>selected<% end %> value="1">公開</option>
+			<option <% if !item.is_public %>selected<% end %> value="0">非公開</option>
+		</select>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="item[is_public]" class="col-sm-3 col-form-label">公開開始日</label>
+	<div class="col-sm-9">
+		<%= f.date_field(:publish_from, class: 'form-control') %>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="item[is_public]" class="col-sm-3 col-form-label">公開終了日</label>
+	<div class="col-sm-9">
+		<%= f.date_field(:publish_until, class: 'form-control') %>
+	</div>
+</div>

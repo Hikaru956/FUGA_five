@@ -36,9 +36,9 @@
 			<span class="pull-right"><i class="icon-spinner icon-spin icon-large"></i></span>
 		<% end %>
 		<p class="wewll" style="text-align:center;">
-			<%= (temp_local.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"layout_higher",	:id=>temp_local) %>
+			<%= (temp_local.first?)?	raw("<i class='fa-solid fa-backward-fast'></i>"):	link_to(raw("<i class='fa-solid fa-backward-fast'></i>"), :action=>"layout_higher",	:id=>temp_local) %>
 			<%= temp_local.position %>
-			<%= (temp_local.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"layout_lower",	:id=>temp_local) %>				
+			<%= (temp_local.last?)? 	raw("<i class='fa-solid fa-forward-fast'></i>"): 	link_to(raw("<i class='fa-solid fa-forward-fast'></i>"), 	:action=>"layout_lower",	:id=>temp_local) %>				
 		</p>
 	</div>
 	<div  style="text-align:center;">

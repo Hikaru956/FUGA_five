@@ -1,0 +1,56 @@
+<!-- === Masthead === -->
+<ul class="breadcrumb">
+  <li><%= link_to "トップ", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <% @item.content_category.category_path(true).each do |category | %>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+  <% end %>
+  <li><%= link_to(@item.title, :action=>"show_leaf", :id=>@item) %>&nbsp;<span class="divider">/</span></li>
+  <li class="active">写真追加</li>
+</ul>
+
+<h4>
+	<div class="float-right">
+		<p>
+			<% url_back = url_for(:action=>"show_leaf", :id=>@item) %>
+			<a class="btn btn-small btn-secondary" href="<%=url_back%>">
+				<%= backward_icon('戻る') %>&nbsp;
+				戻る
+			</a>
+		</p>
+	</div>
+	<%= leaf_state_icons(@item) %>
+	<%= @item.title %>
+</h4>
+<blockquote>
+  <p>
+  	on
+  	<%= @item.publish_from.strftime("%Y-%m-%d") %>
+	<% unless @item.staff.blank? %>
+		by
+		<%= model_name(@item.staff) %>
+	<% end %>
+  </p>
+</blockquote>
+
+<hr/>
+
+<% if true %>
+	<% item = Photo.new %>
+	<%= form_tag(admin_content_gallery_create_photo_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<div class="fallback">
+		<%= file_field_tag('photo[clip]') %>
+	</div>
+	<% end %>
+	<script>
+		Dropzone.options.dropzone = {
+			paramName: "photo[clip]",
+			maxFilesize: 1,
+			acceptedFiles: "image/*",
+			init: function() {
+				this.on('complete', function (file) {
+					//location.reload();
+				})
+			}
+		}
+	</script>
+<% end %>

@@ -21,7 +21,7 @@
 <div class="mb-3 row">
 	<label for="name" class="col-sm-4 col-form-label">説明文</label>
 	<div class="col-sm-8">
-		<%= f.text_area :description, {class: "form-control", :rows=>"5", placeholder: "説明文を入力", autofocus: true} %>
+		<%= f.text_area :description, {value: item.description, class: "form-control", :rows=>"5", placeholder: "説明文を入力", autofocus: true} %>
 	</div>
 </div>
 
@@ -31,4 +31,3 @@
 		<%= f.text_field :repository_path, {class: "form-control", placeholder: "アセット・パスを入力", :required => true, autofocus: true} %>
 	</div>
 </div>
-

@@ -1,0 +1,56 @@
+<% if @shop.enable_inquiry %>
+    <ul class="breadcrumb">
+        <li>お問い合わせ&nbsp;<span class="divider">/</span></li>
+    </ul>
+    <% unless @items.blank? %>
+        <table class='table table-bordered table-hover' >
+            <thead>
+                <tr>
+                    <th>日時</th>
+                    <th>ステータス</th>
+                    <th>お名前</th>
+                    <th>メールアドレス</th>
+                    <th>お問い合わせ内容</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @items.each do |item| %>
+                    <tr>
+                        <td>
+                            <%= item.created_at.strftime("%Y-%m-%d")%>(<%= (wday(item.created_at))%>)
+                        </td>
+                        <td class='table-<%= inquiry_status_color(item.status)%>' style='text-align: center;'>
+                            <span class='text-dark'><b><%= inquiry_status_label(item.status) %></b></span>
+                        </td>
+                        <td>
+                            <%= item.name %>
+                        </td>
+                        <td>
+                            <%= item.email %>
+                        </td>
+                        <td>
+                            <%= truncate(item.body, :length=>20) %>
+                        </td>
+                        <td style='text-align: center;'>
+                            <%= link_to share_icon+"&nbsp;表示".html_safe, admin_content_inquiry_show_path(id: @shop.id, inquiry_id: item.id), class: 'btn btn-info' %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= paginate @items, theme: 'bootstrap-5' %>
+        <% if false %>
+        <%= will_paginate(@items, :params=> {:action=>'index', :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+        <% end %>
+    <% else %>
+        <div class='alert alert-info'>
+            <div><%= info_icon('情報') %>&nbsp;お問い合わせが見つかりませんでした。</div>
+        </div>
+    <% end %>
+<% else %>
+    <div class='alert alert-info'>
+        <h4><%= info_icon('情報') %>&nbsp;お問い合わせ機能が有効になっていません。</h4>
+        <div>お問い合わせ機能を有効にするにはサービス管理者にご連絡ください。</div>
+    </div>
+<% end %>

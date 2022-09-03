@@ -1,0 +1,140 @@
+<ul class="breadcrumb">
+  <li><%= link_to "お問い合わせ", :controller=>"admin_content_inquiry", :action=>"index",:id=>@shop, :hash=>Time.now.to_i %>&nbsp;<span class="divider">/</span></li>
+  <li>お問い合わせ内容&nbsp;<span class="divider"></span></li>
+</ul>
+
+<table class='table table-bordered table-hover'>
+    <tbody>
+        <tr>
+            <th>
+                日時
+            </th>
+            <td>
+                <%= @inquiry.created_at.strftime("%Y-%m-%d")%>(<%= (wday(@inquiry.created_at))%>)
+            </td>
+        </tr>
+        <tr class='table-<%= inquiry_status_color(@inquiry.status)%>'>
+            <th>
+                ステータス
+            </th>
+            <td>
+                <b><%= inquiry_status_label(@inquiry.status) %></b>
+            </td>
+        </tr>
+        <tr>
+            <th width='25%'>
+                お名前
+            </th>
+            <td width='75%'>
+                <%= @inquiry.name %>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                メールアドレス
+            </th>
+            <td>
+                <%= @inquiry.email %>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                お問い合わせ内容
+            </th>
+            <td>
+                <pre><%= @inquiry.body %></pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class='text-right'>
+    <% if current_user.has_permission?(User::ROLE_MANAGER)%>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete">
+            <%= trash_icon('削除') %>&nbsp;削除確認
+        </button>
+    <% else %>
+        <a class="btn btn-danger" disabled='disabled'>
+            <%= trash_icon('削除') %>&nbsp;
+            削除確認
+        </a>
+    <% end %>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+        <%= edit_icon('編集') %>&nbsp;ステータス
+    </button>
+    <a class='btn btn-info' href="mailto:<%= @inquiry.email%>"><i class="fa-solid fa-envelope"></i>&nbsp;返信</a>
+    <a class='btn btn-default btn-secondary' href="<%= url_for(:controller=>'admin_content_inquiry', :action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>"><%= backward_icon('戻る') %>&nbsp;戻る</a>
+</div>
+
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <%= form_for @inquiry, url: admin_content_inquiry_update_path(id: @shop.id, inquiry_id: @inquiry.id), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <%= render :partial=>"form_update", locals: {inquiry: @inquiry} %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="modal_delete" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <%= form_tag({:action => 'delete_inquiry', id: @shop.id, inquiry_id: @inquiry.id}, :class=>"form-horizontal", method: :delete)  do %>
+                <div class="modal-header">
+                    <h5 class="modal-title">削除確認</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>お問い合わせを削除します。よろしいですか？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<% if false %>
+<div class="modal hide fade form-horizontal", id="modalEdit">
+	<%= form_for @inquiry, url: bs_content_inquiry_update_path(id: @shop.id, inquiry_id: @inquiry.id), method: :patch do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">編集</h3>
+		</div>
+		<div class="modal-body">
+			<%= render :partial=>"form_update", locals: {inquiry: @inquiry} %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+<div id="modal_delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <%= form_tag({:action => 'delete_inquiry', id: @shop.id, inquiry_id: @inquiry.id}, :class=>"form-horizontal", method: :delete)  do %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">削除確認</h3>
+	</div>
+	<div class="modal-body">
+		<p>お問い合わせを削除します。よろしいですか？</p>
+	</div>
+	<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+  <%end%>  
+</div>
+<% end %>

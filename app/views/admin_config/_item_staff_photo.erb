@@ -60,7 +60,7 @@
 					<div class="mb-3 row">
 						<label for="job_title" class="col-sm-4 col-form-label">写真の説明</label>
 						<div class="col-sm-8">
-							<%= f.text_area :info,  {class: "form-control", placeholder: "写真の説明を入力", :required => false, autofocus: true}  %>
+							<%= f.text_area :info, {value: photo.info, class: "form-control", placeholder: "写真の説明を入力", :required => false, autofocus: true}  %>
 						</div>
 					</div>
                 </div>

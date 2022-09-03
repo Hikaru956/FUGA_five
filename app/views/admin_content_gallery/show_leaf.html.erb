@@ -1,0 +1,147 @@
+<!-- === Masthead === -->
+<ul class="breadcrumb">
+  <li><%= link_to "トップ", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <% @item.content_category.category_path(true).each do |category | %>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+  <% end %>
+  <li class="active"><%= model_title(@item) %></li>
+</ul>
+<header class="subhead" id="overview">
+	<h3><%= model_title(@item) %></h3>
+</header>
+
+
+<h4>
+	<div class="float-right">
+		<p>
+			<% url_back = url_for(:action=>"content_category", :id=>@item.content_category, :page=>@page) %>
+			<a class="btn btn-small btn-secondary" href="<%=url_back%>">
+				<%= backward_icon('戻る') %>&nbsp;
+				戻る
+			</a>
+			<% url_new = url_for(:action=>"edit_leaf", :id=>@item) %>
+			<a class="btn btn-success btn-small" href="<%=url_new%>">
+				<%= edit_icon('編集')%>&nbsp;
+				編集
+			</a>
+			<button type="button" class="btn btn-danger btn-small" data-bs-toggle="modal" data-bs-target="#modal_delete">
+				<%= trash_icon('削除')%>&nbsp;
+				削除確認
+			</button>
+		</p>
+	</div>
+	<%= leaf_state_icons(@item) %>
+	<%= model_title(@item) %>
+</h4>
+<blockquote>
+  <p>
+  	on
+  	<%= @item.publish_from.strftime("%Y-%m-%d") %>
+	<% unless @item.staff.blank? %>
+		by
+		<%= model_name(@item.staff) %>
+	<% end %>
+  </p>
+</blockquote>
+
+<div class="row-fluid">
+	<% unless @item.description.blank? %>
+		<%=  raw @item.description %>
+	<% end %>
+</div>
+
+<hr/>
+
+<div class="row-fluid">
+	<h4>
+		<p class="float-right">
+			<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
+				<i class="fa-solid fa-camera"></i>&nbsp;
+				写真追加
+			</a>
+		</p>
+		画像集
+	</h4>
+	<p>
+	  <small>この項目に関する画像を登録します。先頭の写真が一覧表示の際の代表写真になります。登録された画像は記事にも挿入することが出来ます。</small>
+	</p>	
+	<% array = @item.photos.order(position: :asc).in_groups_of(3, false)%>
+	<% for i in 0..(array.size-1) %>
+		<% @lines = array[i] %>
+	    	<div class="col-sm-4">
+	        	<% if @lines.size>=1 %>
+					<%= render :partial=>"item_photo", :locals => {:photo => @lines[0]} %>
+				<% end %>
+			</div>		
+	        <div class="col-sm-4">
+	        	<% if @lines.size>=2 %>
+					<%= render :partial=>"item_photo", :locals => {:photo => @lines[1]} %>
+				<% end %>
+			</div>		
+	        <div class="col-sm-4">
+	        	<% if @lines.size>=3 %>
+					<%= render :partial=>"item_photo", :locals => {:photo => @lines[2]} %>
+				<% end %>
+			</div>
+	<% end %>
+	<p class="float-right">
+		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
+			<i class="fa-solid fa-camera"></i>&nbsp;
+			写真追加
+		</a>
+	</p>
+</div>
+
+<div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="modal_delete" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @item, url: admin_content_gallery_delete_leaf_path(id: @item.id), method: :delete do |f| %>
+                <div class="modal-header">
+                    <h5 class="modal-title">削除確認</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<p>記事を削除します。よろしいですか？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><%=  trash_icon('削除') %>&nbsp;削除</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
+
+<% if false %>
+<div id="modal_delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <%= form_tag({:action => 'delete_leaf', :id=>@item}, :class=>"form-horizontal", method: :delete)  do %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">削除確認</h3>
+	</div>
+	<div class="modal-body">
+		<p>記事を削除します。よろしいですか？</p>
+	</div>
+	<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	</div>
+  <%end%>  
+</div>
+
+<div id="modal_delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">削除確認</h3>
+  </div>
+  <div class="modal-body">
+    <p>記事を削除します。よろしいですか？</p>
+  </div>
+  <div class="modal-footer">
+	<%= form_tag({:action => 'delete_leaf', :id=>@item}, :class=>"form-horizontal", method: :delete)  do %>
+		<button type="submit" class="btn btn-danger"><i class="icon-trash"></i> 削除</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+  	<%end%>  	
+  </div>
+</div>
+<% end %>
