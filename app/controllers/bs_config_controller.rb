@@ -198,7 +198,7 @@ class BsConfigController < ApplicationController
       user = User.new(user_params)
       user.company  = @shop.company
       user.shop     = @shop
-      user.save
+      user.save!
       redirect_to :action=>"shop_list_users"
   end
 
@@ -407,7 +407,7 @@ protected
   end
 
   def user_params
-      params.require(:user).permit(:login, :email, :email_org, :name, :password, :password_confirmation, :role, :company_id, :shop_id)
+      params.require(:user).permit(:login, :email, :email_org, :name, :password, :password_confirmation, :role, :company_id, :shop_id, :ui_version)
   end
 
   def staff_params
