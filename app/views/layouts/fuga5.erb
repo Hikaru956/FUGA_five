@@ -39,7 +39,8 @@
 
         <div class='container-fluid' style="padding-top:77px;">
             <% unless current_user.blank? %>
-                <% if !current_user.shop.blank? %>
+                <% @shop = current_user.shop %>
+                <% if !@shop.blank? %>
                     <%= render :partial=>"layouts/fuga5_user_navigation" %>
                 <% elsif 		current_user.role==User::ROLE_SALES %>
                     <%= render :partial=>"layouts/fuga5_sales_navigation" %>
