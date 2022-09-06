@@ -9,20 +9,20 @@
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div>
 <% if widget_bag0.blank? || !widget_bag0.is_valid? %>
-                <img src="//placehold.jp/260x100.png?text=HURRAH" class="foot_shop_logo">
+                <img src="//placehold.it/260x100&amp;text=HURRAH" class="foot_shop_logo">
 <% else %>
-                <img src="<%= url_for_file_column(widget_bag0.photos[0], :image) %>" class="foot_shop_logo">
+                <img src="<%= widget_bag0.photos[0].clip.url() %>" class="foot_shop_logo">
 <% end %>
             </div>
             <div class="foot_shop_text">
-                新潟市中央区万代1-2-3 コープ野村万代1F<br>
+                新潟市中央区万代1-2-3 コーポ野村万代1F<br>
                 <a href="tel:025-250-7434"><i class="icon-phone"></i> 025-250-7434</a><br>
                 営業時間：[通常] 11:00〜20:00[木曜]12:00〜21:00[日・祝]11:00〜19:00<br>
                 定休日：月曜／第3火曜
             </div>
             <div>
 <% if widget_bag2.blank? || !widget_bag2.is_valid? %>
-                <img src="//placehold.jp/640x300.png?text=No Photo" class="foot_shop_img">
+                <img src="//placehold.it/640x300&amp;text=No Photo" class="foot_shop_img">
 <% else %>
                 <div id="carousel-example-generic2" class="carousel slide">
                     <!-- Indicators -->
@@ -51,24 +51,23 @@
                 </div>
 <% end %>
             </div>
-        </div>
-        <!-- shop2 -->
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div style="margin-top:6em;">
+            <div style="margin-top:1em;">
 <%  if !gmapcode1.blank? && gmapcode1.is_valid? %>
-                <div id="gmap1" style="height:560px;overflow:hidden;">
+                <div id="gmap1" style="height:480px;overflow:hidden;">
                     <%= raw gmapcode1.data_string %>
                 </div>
 <%  else %>
                 <div id="gmap1" style="height:480px;"></div>
 <%  end %>
             </div>
-<!--
+        </div>
+        <!-- shop2 -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div>
 <% if widget_bag1.blank? || !widget_bag1.is_valid? %>
-                <img src="//placehold.jp/260x100.png?text=THINGS" class="foot_shop_logo">
+                <img src="//placehold.it/260x100&amp;text=THINGS" class="foot_shop_logo">
 <% else %>
-                <img src="<%= url_for_file_column(widget_bag1.photos[0], :image) %>" class="foot_shop_logo">
+                <img src="<%= widget_bag1.photos[0].clip.url() %>" class="foot_shop_logo">
 <% end %>
             </div>
             <div class="foot_shop_text">
@@ -79,7 +78,7 @@
             </div>
             <div>
 <% if widget_bag3.blank? || !widget_bag3.is_valid? %>
-                <img src="//placehold.jp/640x300.png?text=No Photo" class="foot_shop_img">
+                <img src="//placehold.it/640x300&amp;text=No Photo" class="foot_shop_img">
 <% else %>
                 <div id="carousel-example-generic3" class="carousel slide">
                     <!-- Indicators -->
@@ -117,7 +116,6 @@
                 <div id="gmap2" style="height:480px;"></div>
 <%  end %>
             </div>
--->
         </div>
     </div>
     <div class="row">
@@ -132,7 +130,7 @@
     		<% end %>
 
 			<%= raw("<a href=#{@website.social_facebook_uri} target='_blank' 	title=#{@website.social_facebook_uri}>	<i class='icon-facebook-sign  icon-2x'></i></a>")		unless @website.social_facebook_uri.blank? %>
-			<%= raw("<a href=#{@website.social_gplus_uri} target='_blank' 		title=#{@website.social_gplus_uri}>		<i class='icon-google-plus-sign  icon-2x'></i></a>")	unless @website.social_gplus_uri.blank? %>
+			
 			<%= raw("<a href=#{@website.social_twitter_uri} target='_blank' 	title=#{@website.social_twitter_uri}>	<i class='icon-twitter-sign  icon-2x'></i></a>")		unless @website.social_twitter_uri.blank? %>
 			<%= raw("<a href=#{@website.social_instagram_uri} target='_blank' 	title=#{@website.social_instagram_uri}>	<i class='icon-instagram  icon-2x'></i></a>")			unless @website.social_instagram_uri.blank? %>
 			<%= raw("<a href=#{@website.social_line_uri} target='_blank' 		title=#{@website.social_line_uri}>		<img src='/images/assets/line_icon.png' alt='LINE' /></a>")			unless @website.social_line_uri.blank? %>

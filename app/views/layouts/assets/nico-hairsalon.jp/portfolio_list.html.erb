@@ -36,13 +36,13 @@
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/style" %>
 </head>
 <body id="portfolio_list">
-<!-- Header -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
 <!-- article -->
 <article id="article">
     <h1><%= model_name(@seed) %></h1>
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/portfolio_leafs", :locals=>{:seed=>@seed} %>
 </article>
+<!-- Header -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
 <!-- Footer -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/footer" %>
 <!-- gnav -->

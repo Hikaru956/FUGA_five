@@ -182,15 +182,6 @@ div.container {
   padding-right: 1rem;
   margin-bottom: 3.5rem;
 }
-.col-m2t2 {
-  -webkit-box-flex: 1;
-  -ms-flex: 0 1 50%;
-  -webkit-flex: 0 1 50%;
-  flex: 0 1 50%;
-  padding-left:  1rem;
-  padding-right: 1rem;
-  margin-bottom: 3.5rem;
-}
 .col-m2t4 {
   -webkit-box-flex: 1;
   -ms-flex: 0 1 50%;
@@ -582,9 +573,6 @@ div.container {
 */
 .shopLogo img {
   margin: 1rem auto;
-}
-#shoplist {
-/*    max-width: 650px; */
 }
 #shoplist h2 {
   text-align: center;

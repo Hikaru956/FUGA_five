@@ -1,0 +1,101 @@
+<%  shop1img = VisualWidget.search_widget_bag_for(@website, "425c71ea5bc52e7f562d0ab14381f67e") %>
+<%  shop2img = VisualWidget.search_widget_bag_for(@website, "16582be38739fa02730b5371606defed") %>
+<%  shop3img = VisualWidget.search_widget_bag_for(@website, "900cce61e619730e8fef3fd2ed1b418f") %>
+<%  gmapcode1 = VisualWidget.search_widget_bag_for(@website, "af3d0e78199777ef54ebd84be5903379") %>
+<%  gmapcode2 = VisualWidget.search_widget_bag_for(@website, "9e0054367ef8ec1792d09307a1c2edc5") %>
+<%  gmapcode3 = VisualWidget.search_widget_bag_for(@website, "2f4d584a991c23e38f292aa2ba5aefbf") %>
+<aside id="salon_info">
+    <h1 class="page_h">Salon</h1>
+    <p>
+        Saeは弁天橋通（姥ケ山店）、西大通（寺尾店）の2店舗ございます。<br>
+        最寄りのSaeへ是非ご予約ください。
+    </p>
+    <div class="wrapper salon_info">
+        <div class="col-1p3">
+<% if !shop1img.blank? && shop1img.is_valid? %>
+            <div class="shop_info_img">
+                <img src="<%= shop1img.photos[0].clip.url() %>" alt="姥ケ山店">
+            </div>
+<% end %>
+            <h2>姥ケ山店</h2>
+            <ul>
+                <li>新潟市中央区姥ケ山1-2-7 TEL.025-286-0223</li>
+                <li>OPEN / 9:30〜19:00※18:30以降要予約</li>
+                <li> 【日・祭】9:30〜17:00</li>
+                <li>定休日 / 毎週月曜日、第2・第3火曜日</li>
+            </ul>
+        </div>
+        <div class="col-2p3">
+<%  if !gmapcode1.blank? && gmapcode1.is_valid? %>
+            <div class="gmap_wrapper">
+                <div id="gmap1" class="gmap">
+                    <%= raw gmapcode1.data_string %>
+                </div>
+            </div>
+<%  else %>
+            <div class="gmap_wrapper"><div id="gmap1" class="gmap"></div></div>
+<%  end %>
+        </div>
+    </div>
+    <div class="wrapper salon_info">
+        <div class="col-1p3">
+<% if !shop2img.blank? && shop2img.is_valid? %>
+            <div class="shop_info_img">
+                <img src="<%= shop2img.photos[0].clip.url() %>" alt="寺尾店">
+            </div>
+<% end %>
+            <h2>寺尾店</h2>
+            <ul>
+                <li>新潟市西区寺尾上5-9-10 TEL.025-268-8200</li>
+                <li>OPEN / 9:30〜19:00※18:30以降要予約</li>
+                <li> 【日・祭】9:30〜17:00</li>
+                <li>定休日 / 毎週月曜日、第2・第3火曜日</li>
+            </ul>
+        </div>
+        <div class="col-2p3">
+<%  if !gmapcode2.blank? && gmapcode2.is_valid? %>
+            <div class="gmap_wrapper">
+                <div id="gmap2" class="gmap">
+                    <%= raw gmapcode2.data_string %>
+                </div>
+            </div>
+<%  else %>
+            <div class="gmap_wrapper"><div id="gmap2" class="gmap"></div></div>
+<%  end %>
+        </div>
+    </div>
+<!--
+    <div class="wrapper salon_info">
+        <div class="col-1p3">
+<% if !shop3img.blank? && shop3img.is_valid? %>
+            <div class="shop_info_img">
+                <img src="<%= shop3img.photos[0].clip.url() %>" alt="紫竹山店">
+            </div>
+<% end %>
+            <h2>紫竹山店</h2>
+            <ul>
+                <li>新潟市中央区紫竹山3-4-6 TEL.025-241-6100</li>
+                <li>OPEN / 9:30〜19:00※18:30以降要予約</li>
+                <li> 【日・祭】9:30〜17:00</li>
+                <li>定休日 / 毎週月曜日、第2・第3火曜日</li>
+            </ul>
+        </div>
+        <div class="col-2p3">
+<%  if !gmapcode3.blank? && gmapcode3.is_valid? %>
+            <div class="gmap_wrapper">
+                <div id="gmap3" class="gmap">
+                    <%= raw gmapcode3.data_string %>
+                </div>
+            </div>
+<%  else %>
+            <div class="gmap_wrapper"><div id="gmap3" class="gmap"></div></div>
+<%  end %>
+        </div>
+    </div>
+-->
+</aside>
+<footer id="footer">
+    <div id="copyright">
+        <small><%= copyright_notice(@website) %></small>
+    </div>
+</footer>

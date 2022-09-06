@@ -37,11 +37,9 @@
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/style" %>
 </head>
 <body id="stream_list">
-<!-- Header -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
-<article>
+<article id="article">
     <h1><%= model_name(@seed) %></h1>
-    <ul id="content_lists">
+    <ul class="lists23">
 <%
     sons = @seed.sons
     sons << @seed
@@ -73,12 +71,14 @@
     </ul>
     <div class="text-center">
 <% if true || request.host == 'staffroom.swifty.jp' %>
-            <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'＜', :next_label=>'＞') %>
+            <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'＜', :next_label=>'＞') %>
 <% else %>
-            <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page }, class: 'pagination', :previous_label=>'＜', :next_label=>'＞') %>
+            <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'＜', :next_label=>'＞') %>
 <% end %>
     </div>
 </article>
+<!-- Header -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
 <!-- Footer -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/footer" %>
 <!-- gnav -->
@@ -86,5 +86,24 @@
 <!-- common javascript -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/common_js" %>
 <!-- page specific javascript -->
+<script>
+$(function()
+{
+    new function(){
+        $(window).on('scroll load', function(){
+            $('.lists23 > li').each(function(){
+                let target = $(this).offset().top;
+                let scroll = $(window).scrollTop();
+                let height = $(window).height();
+                if (scroll > target - height + 100){
+                    $(this).addClass('show');
+                }else{
+                    $(this).removeClass('show');
+                }
+            });
+        });
+    }
+});
+</script>
 </body>
 </html>

@@ -15,7 +15,7 @@
 <meta name="robots"                   content="noindex,nofollow">
 <% end %>
 <% unless @website.custom_metas.blank? %>
-<%= raw @website.custom_metas %>
+    <%= raw @website.custom_metas %>
 <% end %>
 <%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
 <%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
@@ -32,41 +32,35 @@
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/style" %>
 </head>
-<body id="stream_index">
-<article id="article">
+<body id="contact_us">
+<!-- Header -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
+<article>
     <h1><%= model_title(@seed) %></h1>
     <ul id="content_lists">
 <%
-    @public_bag =  @seed.public_bags
-    unless @public_bag.blank?
-        @public_bag.each do | bag |
-            latests = bag.public_leafs
-            unless latests.blank?
-                key_photo = key_photo(latests[0])
-                unless key_photo.blank?
-                    image_url = key_photo.clip.url(:panel)
-                else
-                    image_url = '//placehold.jp/327x327.png?text=No Photo'
-                end
-                if true || request.host == 'staffroom.swifty.jp'
-                    content_url = url_for(:action=>'stream_list', :id=>bag, :wkey=>@website.wsite_hash_key)
-                else
-                    content_url = url_for(:action=>'stream_list', :id=>bag)
-                end
+    @staffs.each do | staff | @staff = staff
+        key_photo = key_photo(@staff)
+        unless key_photo.blank?
+            image_url = key_photo.clip.url(:panel)
+        else
+            image_url = '//placehold.jp/640x300.png?text=No Photo'
+        end
+        if true || request.host == 'staffroom.swifty.jp'
+            staff_url = url_for(:action=>'staff', :id=>@staff, :wkey=>@website.wsite_hash_key)
+        else
+            staff_url = url_for(:action=>'staff', :id=>@staff)
+        end
 %>
         <li>
             <div class="imgbox"><div>
-                <a href="<%= content_url %>"><img src="<%= image_url %>" alt="<%= truncate(model_name(bag)) %>"></a>
+                <a href="<%= staff_url %>"><img src="<%= image_url %>" alt="<%= model_name(@staff) %>"></a>
             </div></div>
-            <h2><a href="<%= content_url %>"><%= truncate(model_name(bag)) %></a></h2>
+            <h2><a href="<%= staff_url %>"><%= model_name(@staff) %> <span><%= h @staff.job_title %></span></a></h2>
         </li>
-<%          end %>
-<%      end %>
 <%  end %>
     </ul>
 </article>
-<!-- Header -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
 <!-- Footer -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/footer" %>
 <!-- gnav -->

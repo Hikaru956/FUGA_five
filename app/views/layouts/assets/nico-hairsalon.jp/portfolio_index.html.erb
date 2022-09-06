@@ -33,9 +33,7 @@
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/style" %>
 </head>
 <body id="portfolio_index">
-<!-- Header -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
-<article>
+<article id="article">
     <h1><%= model_title(@seed) %></h1>
     <ul id="content_lists">
 <%
@@ -66,6 +64,8 @@
 <%  end %>
     </ul>
 </article>
+<!-- Header -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
 <!-- Footer -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/footer" %>
 <!-- gnav -->

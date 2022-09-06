@@ -36,49 +36,46 @@
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/style" %>
 </head>
-<body id="news_list">
-<article id="article">
+<body id="gallery_list">
+<article>
     <h1><%= model_name(@seed) %></h1>
     <ul id="content_lists">
 <%
     sons = @seed.sons
     sons << @seed
-    @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(position: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+    @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(position: :asc).paginate(:page => params[:page], :per_page=>PER_PAGE)
     #c = ContentLeaf.public_leafs
     #c.and "content_leafs.content_category_id", 'IN', sons
-    #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'position: :desc')
-    @leafs.each do | leaf | @leaf = leaf
-            publish   = leaf.publish_from.strftime("%Y-%m-%d")
+    #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'position')
+    @leafs.each do | leaf |
             key_photo = key_photo(leaf)
             unless key_photo.blank?
                 image_url = key_photo.clip.url(:panel)
             else
-                image_url = '//placehold.jp/640x480.png?text='+publish
+                image_url = '//placehold.jp/327x327.png?text=No Photo'
             end
             if true || request.host == 'staffroom.swifty.jp'
-                content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
+                gallery_url = url_for(:action=>'gallery_show', :id=>leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
             else
-                content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page)
+                gallery_url = url_for(:action=>'gallery_show', :id=>leaf, :page=>@page)
             end
 %>
         <li>
             <div class="imgbox"><div>
-                <a href="<%= content_url %>"><img src="<%= image_url %>" alt="<%= h model_title(@leaf) %>"></a>
+                <a href="<%= gallery_url %>"><img src="<%= image_url %>" alt="<%= model_name(leaf) %>"></a>
             </div></div>
-            <h2><a href="<%= content_url %>"><%= h model_title(@leaf) %></a></h2>
+            <h2><a href="<%= gallery_url %>"><%= model_title(leaf) %></a></h2>
         </li>
 <%  end %>
     </ul>
     <div class="text-center">
 <% if true || request.host == 'staffroom.swifty.jp' %>
-            <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, :renderer => BootstrapPagination::Rails, :previous_label=>'＜', :next_label=>'＞') %>
+            <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'＜', :next_label=>'＞') %>
 <% else %>
-            <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page }, :renderer => BootstrapPagination::Rails, :previous_label=>'＜', :next_label=>'＞') %>
+            <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page }, class: 'pagination', :previous_label=>'＜', :next_label=>'＞') %>
 <% end %>
     </div>
 </article>
-<!-- Header -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
 <!-- Footer -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/footer" %>
 <!-- gnav -->

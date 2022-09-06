@@ -1,8 +1,15 @@
 <!doctype html>
 <html lang="ja">
-<head>
+<head prefix="og: https://ogp.me/ns#">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<%
+    if true || request.host == 'staffroom.swifty.jp'
+        fix_url = url_for(:action=>'fix', :id=>@seed, :wkey=>@website.wsite_hash_key)
+    else
+        fix_url = url_for(:action=>'fix', :id=>@seed)
+    end
+%>
 <title><%= model_title(@seed) %> - <%= @website.name %></title>
 <meta name="viewport"                 content="initial-scale=1">
 <meta name="format-detection"         content="telephone=no">
@@ -13,6 +20,15 @@
 <meta name="copyright"                content="<%= model_name(@website.company) %>">
 <% if request.host == 'staffroom.swifty.jp' %>
 <meta name="robots"                   content="noindex,nofollow">
+<% end %>
+<meta property="og:type"              content="article">
+<meta property="og:url"               content="https://<%= request.host + fix_url %>">
+<meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
+<meta property="og:site_name"         content="<%= @website.name %>">
+<% unless @website.social_facebook_uri.blank? %>
+<meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
+<% else %>
+<meta property="article:publisher"    content="<%= model_name(@website.company) %>">
 <% end %>
 <% unless @website.custom_metas.blank? %>
 <%= raw @website.custom_metas %>
@@ -32,41 +48,30 @@
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/style" %>
 </head>
-<body id="stream_index">
-<article id="article">
-    <h1><%= model_title(@seed) %></h1>
-    <ul id="content_lists">
-<%
-    @public_bag =  @seed.public_bags
-    unless @public_bag.blank?
-        @public_bag.each do | bag |
-            latests = bag.public_leafs
-            unless latests.blank?
-                key_photo = key_photo(latests[0])
-                unless key_photo.blank?
-                    image_url = key_photo.clip.url(:panel)
-                else
-                    image_url = '//placehold.jp/327x327.png?text=No Photo'
-                end
-                if true || request.host == 'staffroom.swifty.jp'
-                    content_url = url_for(:action=>'stream_list', :id=>bag, :wkey=>@website.wsite_hash_key)
-                else
-                    content_url = url_for(:action=>'stream_list', :id=>bag)
-                end
-%>
-        <li>
-            <div class="imgbox"><div>
-                <a href="<%= content_url %>"><img src="<%= image_url %>" alt="<%= truncate(model_name(bag)) %>"></a>
-            </div></div>
-            <h2><a href="<%= content_url %>"><%= truncate(model_name(bag)) %></a></h2>
-        </li>
-<%          end %>
-<%      end %>
-<%  end %>
-    </ul>
-</article>
+<body id="fix">
 <!-- Header -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
+<!-- article -->
+<article id="article">
+    <h1><%= model_title(@seed) %></h1>
+    <div class="contents">
+<% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+    </div>
+</article>
+<% if @seed.id == 34623 %>
+<!-- access -->
+<aside id="access">
+<%   @fix = @website.content_leafs.find_by_id(34653); %>
+    <h1><%= model_title(@fix) %></h1>
+<%   unless @fix.description.blank? %><%= raw @fix.description %><% end %>
+<%   map = VisualWidget.search_widget_bag_for(@website, "0c7ec52d36480674f7573f59e2afc2b9") %>
+<%   if !map.blank? && map.is_valid? %>
+    <div class="text-center">
+<%= raw map.data_string %>
+    </div>
+<%   end %>
+</aside>
+<% end %>
 <!-- Footer -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/footer" %>
 <!-- gnav -->

@@ -49,10 +49,12 @@
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/style" %>
 </head>
 <body id="fix">
-<!-- Header -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
 <!-- article -->
+<% if @seed.id == 34623 %>
+<article id="article" class="about">
+<% else %>
 <article id="article">
+<% end %>
     <h1><%= model_title(@seed) %></h1>
     <div class="contents">
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
@@ -72,6 +74,8 @@
 <%   end %>
 </aside>
 <% end %>
+<!-- Header -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/header" %>
 <!-- Footer -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/nico-hairsalon.jp/footer" %>
 <!-- gnav -->
