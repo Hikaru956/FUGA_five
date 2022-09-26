@@ -11,7 +11,7 @@
 <% if widget_bag0.blank? || !widget_bag0.is_valid? %>
                 <img src="//placehold.jp/260x100.png?text=HURRAH" class="foot_shop_logo">
 <% else %>
-                <img src="<%= url_for_file_column(widget_bag0.photos[0], :image) %>" class="foot_shop_logo">
+                <img src="<%= widget_bag0.photos[0].clip.url() %>" class="foot_shop_logo">
 <% end %>
             </div>
             <div class="foot_shop_text">
