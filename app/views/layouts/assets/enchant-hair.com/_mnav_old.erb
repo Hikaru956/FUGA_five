@@ -1,7 +1,7 @@
 <%  reserve = VisualWidget.search_widget_bag_for(@website, "5d8f71b16f892ef6e5cfa900650ba5d8") %>
 <div id="mNav">
     <ul class="nonStyle">
-<%  if true ||  request.host == 'sr2.swifty.jp' %>
+<%  if true || request.host == 'sr2.swifty.jp' %>
         <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><span>HOME</span>ホーム</a></li>
 <!--
         <li><a href="/news_list?id=160&wkey=<%= @website.wsite_hash_key %>"><span>INFO</span>お知らせ</a></li>
@@ -25,7 +25,7 @@
         <li><a href="<%= raw reserve.data_string %>" target="_blank"><span>RESERVE</span>WEB予約</a></li>
 -->
 <%      end %>
-        <li><a href="https://recruit.enchant-hair.com/" target="_blank"><span>RECRUIT</span>求人</a></li>
+        <li><a href="/fix?id=4017&wkey=<%= @website.wsite_hash_key %>"><span>RECRUIT</span>求人</a></li>
 <%      if @author_mode %>
         <li><a href="<%= url_for(:action=>'list_layout_schemes') %>">デザイン</a></li>
         <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
@@ -55,7 +55,7 @@
         <li><a href="<%= raw reserve.data_string %>" target="_blank"><span>RESERVE</span>WEB予約</a></li>
 -->
 <%      end %>
-        <li><a href="https://recruit.enchant-hair.com/" target="_blank"><span>RECRUIT</span>求人</a></li>
+        <li><a href="/fix?id=4017"><span>RECRUIT</span>求人</a></li>
 <%  end %>
     </ul>
 </div>
