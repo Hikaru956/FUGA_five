@@ -1,4 +1,4 @@
-<%= form_tag({:action => 'content_category_create', :parent_id=>@parent_category}, :class=>"well form-horizontal")  do %>
+<%= form_tag({:action => 'content_category_create', :parent_id=>@parent_category, method: :post}, :class=>"well form-horizontal")  do %>
 	<%= hidden_field 'item', 'shop_id' %>
 	<%= hidden_field 'item', 'parent_id' %>
 	<%= hidden_field 'item', 'web_page_id' %>

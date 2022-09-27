@@ -1,4 +1,4 @@
-<%= form_tag({:action => 'content_category_update', :id=>@item}, :class=>"well form-horizontal")  do %>
+<%= form_tag({:action => 'content_category_update', :id=>@item}, :class=>"well form-horizontal", method: :patch)  do %>
 	<legend>カテゴリー編集</legend>
 	<div class="control-group">
 		<label class="control-label" for="item_title">カテゴリー</label>

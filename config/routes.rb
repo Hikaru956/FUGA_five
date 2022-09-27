@@ -134,6 +134,7 @@ Fuga326::Application.routes.draw do
   delete 'dashboard/shop_delete_position', to: 'dashboard#shop_delete_position'
   post 'dashboard/delegating', to: 'dashboard#delegating'
   post 'dashboard/roll_back', to: 'dashboard#roll_back'
+  post 'dashboard/user_create', to: 'dashboard#user_create'
   patch 'dashboard/user_update', to: 'dashboard#user_update'
   delete 'dashboard/user_delete', to: 'dashboard#user_delete'
 

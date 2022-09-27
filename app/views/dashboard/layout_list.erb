@@ -45,7 +45,7 @@
 <% end %>
 
 <!-- modalNew -->
-<%= form_tag url_for(:action=>"layout_create"), :class=>"modal hide fade form-horizontal", :id=>"modalNew" do -%>
+<%= form_tag url_for(:action=>"layout_create", method: :post), :class=>"modal hide fade form-horizontal", :id=>"modalNew" do -%>
 	<% 
 		@layout = LayoutScheme.new
 	%>

@@ -45,7 +45,7 @@
 <% end %>
 
 <!-- modalNew -->
-<%= form_tag url_for(:action=>"color_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+<%= form_tag url_for(:action=>"color_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew", method: :create} do -%>
 	<% 
 		@color = ColorScheme.new
 	%>
@@ -61,4 +61,3 @@
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
 	</div>
 <% end %>
-

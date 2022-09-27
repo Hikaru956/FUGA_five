@@ -67,7 +67,7 @@
 	@item.publish_from	= Time.now.to_date
   %>
   <div class="modal-body">
-	<%= form_tag({:action => 'create_news'}, :class=>"form-horizontal")  do %>
+	<%= form_tag({:action => 'create_news'}, :class=>"form-horizontal", method: :post)  do %>
 		<%= hidden_field_tag 	'hash_bag',  @bag.hash %>
 		<%= hidden_field 		'item', 'shop_id' %>
 

@@ -38,7 +38,7 @@
 </div>
 
 
-<%= form_tag url_for(:action=>"shop_update_position"), :class=>"form-horizontal" do -%>
+<%= form_tag url_for(:action=>"shop_update_position", method: :patch), :class=>"form-horizontal" do -%>
 	<%= hidden_field_tag 'lat', @shop.lat %>
 	<%= hidden_field_tag 'lng', @shop.lng %>
 	<table class="table table-bordered">

@@ -51,7 +51,7 @@
 <% end %>
 
 <!-- modalNew -->
-<%= form_tag url_for(:action=>"user_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew"} do -%>
+<%= form_tag url_for(:action=>"user_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew", method: :post} do -%>
 	<% 
 		@user = User.new
 		@user.role = User::ROLE_SALES 
@@ -70,4 +70,3 @@
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
 	</div>
 <% end %>
-

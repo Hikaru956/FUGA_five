@@ -10,7 +10,7 @@
 	@item.company	= current_user.company
   %>
   <div class="modal-body">
-	<%= form_tag({:action => 'create_customer'}, :class=>"form-horizontal")  do %>
+	<%= form_tag({:action => 'create_customer', method: :post}, :class=>"form-horizontal")  do %>
 		<%= hidden_field 'item', 'company_id'%>
 		<%= hidden_field 'item', 'shop_id'%>
 	  <div class="control-group">
