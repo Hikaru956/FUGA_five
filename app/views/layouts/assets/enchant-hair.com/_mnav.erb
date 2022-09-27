@@ -1,7 +1,7 @@
 <%  reserve = VisualWidget.search_widget_bag_for(@website, "5d8f71b16f892ef6e5cfa900650ba5d8") %>
 <div id="mNav">
     <ul class="nonStyle">
-<%  if true ||  request.host == 'sr2.swifty.jp' %>
+<%  if true || request.host == 'sr2.swifty.jp' %>
         <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><span>HOME</span>ホーム</a></li>
 <!--
         <li><a href="/news_list?id=160&wkey=<%= @website.wsite_hash_key %>"><span>INFO</span>お知らせ</a></li>

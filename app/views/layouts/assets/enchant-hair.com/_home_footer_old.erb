@@ -15,7 +15,9 @@
 <% unless @website.social_twitter_uri.blank? %>
                 <a href="<%= @website.social_twitter_uri %>" target="_blank"><i class="fab fa-twitter-square"></i></a>
 <% end %>
-
+<% unless @website.social_gplus_uri.blank? %>
+                <a href="<%= @website.social_gplus_uri %>" target="_blank"><i class="fab fa-google-plus-square"></i></a>
+<% end %>
 <% unless @website.social_pinterest_uri.blank? %>
                 <a href="<%= @website.social_pinterest_uri %>" target="_blank"><i class="fab fa-pinterest-square"></i></a>
 <% end %>
@@ -49,7 +51,7 @@
 <!--
                     <li><a href="/streams?id=161&wkey=<%= @website.wsite_hash_key %>">BLOG</a></li>
 -->
-                    <li><a href="/fix?id=4017&wkey=<%= @website.wsite_hash_key %>">RECRUIT</a></li>
+                    <li><a href="https://recruit.enchant-hair.com/" target="_blank">RECRUIT</a></li>
 <% else %>
                     <li><a href="/home">HOME</a></li>
 <!--
@@ -66,7 +68,7 @@
 <!--
                     <li><a href="/streams?id=161">BLOG</a></li>
 -->
-                    <li><a href="/fix?id=4017">RECRUIT</a></li>
+                    <li><a href="https://recruit.enchant-hair.com/" target="_blank">RECRUIT</a></li>
 <%  end %>
                 </ul>
         </div>
