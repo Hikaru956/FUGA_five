@@ -209,7 +209,7 @@ class AdminConfigController < ApplicationController
       user = User.new(user_params)
       user.company  = @shop.company
       user.shop     = @shop
-      user.save!
+      user.save
       redirect_to :action=>"shop_list_users"
   end
 
