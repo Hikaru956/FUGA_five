@@ -19,7 +19,7 @@
 <meta name="generator"                content="fuga">
 <meta name="author"                   content="<%= model_name(@website.company) %>">
 <% fbappid = VisualWidget.search_widget_bag_for(@website, "ab81113c316f011b80bf97aa53180a0c") %>
-<% unless fbappid.data_string.blank? %>
+<% unless fbappid.blank? || fbappid.data_string.blank? %>
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="article">

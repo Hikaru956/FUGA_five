@@ -27,7 +27,7 @@
 <meta name="robots"                   content="noindex,nofollow">
 <% end %>
 <% fbappid = VisualWidget.search_widget_bag_for(@website, "b11f9ea223e31f26d5d98ed2e8437da1") %>
-<% unless fbappid.data_string.blank? %>
+<% unless fbappid.blank? || fbappid.data_string.blank? %>
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="article">
