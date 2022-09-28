@@ -81,7 +81,9 @@
 					<%= render :partial=>"layouts/super_navigation" %>
 				<% end %>
 			<% end %>
-
+			<% unless flash[:alert].blank? %>
+				<p class='alert alert-danger'><%= flash[:alert] %></p>
+			<% end %>
         	<%= yield %>
 
             <hr>

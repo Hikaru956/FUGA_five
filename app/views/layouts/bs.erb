@@ -67,7 +67,9 @@
 					<% end %>
 				<% end %>
 			<% end %>
-
+			<% unless flash[:alert].blank? %>
+				<p class='alert alert-danger'><%= flash[:alert] %></p>
+			<% end %>
         	<%= yield %>
 
             <hr>

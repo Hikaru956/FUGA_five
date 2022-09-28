@@ -210,6 +210,9 @@ class AdminConfigController < ApplicationController
       user.company  = @shop.company
       user.shop     = @shop
       user.save
+      unless user.valid?
+          flash[:alert] = '新規ユーザーの作成に失敗しました(ログインIDの重複など)'
+      end
       redirect_to :action=>"shop_list_users"
   end
 
@@ -221,7 +224,10 @@ class AdminConfigController < ApplicationController
     @item = User.find(params[:id])
     @item.update_attributes(user_params)
     @item.try_count = 0
-    @item.save!
+    @item.save
+    unless @item.valid?
+        flash[:alert] = 'ユーザーの更新に失敗しました(ログインIDの重複など)'
+    end
     redirect_to :action=>"shop_show_user", :id=>@item
   end
 

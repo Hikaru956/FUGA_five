@@ -64,7 +64,9 @@
 				<% elsif 		current_user.role>=User::ROLE_OPERATOR %>
 					<%= render :partial=>"layouts/super_navigation" %>
 				<% end %>
-
+			<% unless flash[:alert].blank? %>
+				<p class='alert alert-danger'><%= flash[:alert] %></p>
+			<% end %>
         	<%= yield %>
 
             <hr>

@@ -255,6 +255,9 @@ class AdminController < ApplicationController
         user.company  = shop.company
         user.shop     = shop
         user.save
+        unless user.valid?
+            flash[:alert] = '新規ユーザーの作成に失敗しました(ログインIDの重複など)'
+        end
         redirect_to :action=>"shop_list_users", :id=>shop
     end
 
@@ -265,6 +268,9 @@ class AdminController < ApplicationController
     def shop_update_user
         @item = User.find(params[:id])
         @item.update_attributes(user_params)
+        unless @item.valid?
+            flash[:alert] = 'ユーザーの更新に失敗しました(ログインIDの重複など)'
+        end
         redirect_to(:action=>"shop_show_user", :id=>@item)
     end
 
@@ -364,7 +370,10 @@ class AdminController < ApplicationController
 
     def user_create
         new_user = User.new(user_params)
-        new_user = new_user.save!
+        new_user = new_user.save
+        unless new_user.valid?
+            flash[:alert] = '新規ユーザーの作成に失敗しました(ログインIDの重複など)'
+        end
         redirect_to :action=>"user_list"
     end
 
@@ -377,6 +386,9 @@ class AdminController < ApplicationController
         if @item.update_attributes(user_params)
             @item.try_count=0
             @item.save!
+            unless @item.valid?
+                flash[:alert] = 'ユーザーの更新に失敗しました(ログインIDの重複など)'
+            end
         end
         redirect_to(:controller=>'dashboard', :action=>"user_show", :id=>@item) if @item.ui_version.blank?
         redirect_to(:action=>"user_show", :id=>@item) unless @item.ui_version.blank?

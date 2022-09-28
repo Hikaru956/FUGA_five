@@ -48,7 +48,9 @@
                     <%= render :partial=>"layouts/fuga5_navigation" %>
                 <% end %>
             <% end %>
-
+            <% unless flash[:alert].blank? %>
+				<p class='alert alert-danger'><%= flash[:alert] %></p>
+			<% end %>
         	<%= yield %>
 
             <hr>
