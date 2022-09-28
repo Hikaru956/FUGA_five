@@ -367,7 +367,7 @@ class AdminConfigController < ApplicationController
   #hikaru
   def update_fix_page
     @item = ContentLeaf.find_by_id(params[:id])
-    @item.update_attributes(params[:item])
+    @item.update_attributes(content_leafs_params)
     redirect_to :action=>'shop_site_navigation'
   end
 
@@ -425,6 +425,10 @@ protected
 
   def user_params
       params.require(:user).permit(:login, :email, :email_org, :name, :password, :password_confirmation, :role, :company_id, :shop_id, :ui_version)
+  end
+
+  def content_leafs_params
+      params.require(:item).permit(:id, :shop_id, :content_bag_id, :content_category_id, :staff_id, :position, :title, :description, :description_2, :description_3, :is_public, :publish_from, :publish_until)
   end
 
   def staff_params

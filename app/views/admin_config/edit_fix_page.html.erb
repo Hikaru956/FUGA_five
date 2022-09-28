@@ -39,7 +39,7 @@
 </h4>
 
 
-<%= form_tag url_for(:action=>"update_fix_page", :id=>@item), :class=>"xform-horizontal " do |f| %>
+<%= form_tag url_for(:action=>"update_fix_page", :id=>@item, method: :patch), :class=>"xform-horizontal " do |f| %>
 	<legend></legend>
 	<%= render :partial=>"form_fixed_page_content", locals: {f: f} %>
 	<div class="form-actions text-right">
