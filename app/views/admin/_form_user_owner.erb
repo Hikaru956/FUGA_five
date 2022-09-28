@@ -7,14 +7,14 @@
 <div class="mb-3 row">
 	<label for="login" class="col-sm-4 col-form-label">ログイン</label>
 	<div class="col-sm-8">
-		<%= f.text_field :email,  {class: "form-control", placeholder: "ログインIDを入力", :required =>true, autofocus: true}  %>
+		<%= f.text_field :login,  {class: "form-control", placeholder: "ログインIDを入力", :required =>true, autofocus: true}  %>
 		<span class="help-block">Emailアドレス。登録済みのログインIDは使用できません。</span>
 	</div>
 </div>
 <div class="mb-3 row">
 	<label for="email" class="col-sm-4 col-form-label">連絡先</label>
 	<div class="col-sm-8">
-		<%= f.text_field :email_org,  {class: "form-control", placeholder: "メールアドレスを入力", :required =>false, autofocus: true}  %>
+		<%= f.text_field :email,  {class: "form-control", placeholder: "メールアドレスを入力", :required =>false, autofocus: true}  %>
 	</div>
 </div>
 

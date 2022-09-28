@@ -354,8 +354,11 @@ EOF
   end
 
   def user_ui_version_label(user)
-    return "従来画面" if user.ui_version.blank?
-    return "新画面" unless user.ui_version.blank?
+    if user.ui_version.blank? || user.ui_version == 0
+      return "従来画面"
+    else
+      return "新画面"
+    end
   end
 
   def trash_icon(title='削除'); sprintf("<i class='fa-solid fa-trash' title=%s></i>", title).html_safe; end

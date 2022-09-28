@@ -17,25 +17,25 @@
 <div class="control-group">
 	<label class="control-label" for="login">ログイン</label>
 	<div class="controls">
-		<%= text_field 'user', 'email', :placeholder=>"ログインIDを入力", :autocomplete => "off" %>
+		<%= text_field 'user', 'login', :placeholder=>"ログインIDを入力", :autocomplete => "off" %>
 		<span class="help-block">3文字以上。他のシステムを含めて登録済みのログインIDは使用できません。</span>
 	</div>
 </div>
 <div class="control-group">
 	<label class="control-label" for="email">メールアドレス</label>
 	<div class="controls">
-		<%= text_field 'user', 'email_org', :placeholder=>"メールアドレスを入力", :autocomplete => "off" %>
+		<%= text_field 'user', 'email', :placeholder=>"メールアドレスを入力", :autocomplete => "off" %>
 	</div>
 </div>
 <div class="control-group">
 	<label class="control-label" for="user[ui_version]">画面構成</label>
 	<div class="controls">
 		<label class="radio inline">
-			<input type="radio" id="user[ui_version]" name="user[ui_version]" value="1" <% if @user.ui_version.blank? %>checked<% end %>>
+			<input type="radio" id="user[ui_version]" name="user[ui_version]" value="" <% if @user.ui_version.blank? %>checked<% end %>>
 			従来画面
 		</label>
 		<label class="radio inline">
-			<input type="radio" id="user[ui_version]" name="user[ui_version]" value="0" <% if !@user.ui_version.blank? %>checked<% end %>>
+			<input type="radio" id="user[ui_version]" name="user[ui_version]" value="1" <% if !@user.ui_version.blank? %>checked<% end %>>
 			新画面
 		</label>
 	</div>

@@ -26,9 +26,12 @@ class Shop < ApplicationRecord
   belongs_to    :wsite_layout_deploy,   :class_name=>'LayoutScheme',  :foreign_key => 'wsite_layout_deploy_id', optional: true
   belongs_to    :wsite_layout_edit,     :class_name=>'LayoutScheme',  :foreign_key => 'wsite_layout_edit_id', optional: true
   #hikaru
-  has_many      :staffs,              :dependent=>:destroy #,:order => "position asc"  
-  has_many      :users,               :dependent=>:destroy  #, :order => "role desc, login asc"  
-  has_many      :customers,           :dependent=>:destroy #, :order => "alt_id asc, furigana asc"
+  has_many    :users, ->{order('users.role DESC, users.login ASC')},  :dependent=>:destroy
+  has_many    :staffs, ->{order('staffs.position ASC')},  :dependent=>:destroy
+  has_many    :customers, ->{order('customers.alt_id ASC, customers.furigana ASC')},  :dependent=>:destroy
+  #has_many      :staffs,              :dependent=>:destroy #,:order => "position asc"  
+  #has_many      :users,               :dependent=>:destroy  #, :order => "role desc, login asc"  
+  #has_many      :customers,           :dependent=>:destroy #, :order => "alt_id asc, furigana asc"
 
   has_many      :photos,              :dependent=>:destroy
   has_many      :inquiries,           :dependent=>:destroy

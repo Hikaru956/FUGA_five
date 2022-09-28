@@ -265,8 +265,7 @@ class AdminController < ApplicationController
     def shop_update_user
         @item = User.find(params[:id])
         @item.update_attributes(user_params)
-        redirect_to(:controller=>'dashboard', :action=>"shop_show_user", :id=>@item) if @item.ui_version.blank?
-        redirect_to(:action=>"shop_show_user", :id=>@item) unless @item.ui_version.blank?
+        redirect_to(:action=>"shop_show_user", :id=>@item)
     end
 
     def shop_update_user_ui

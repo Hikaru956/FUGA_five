@@ -18,14 +18,13 @@
 <div class="mb-3 row">
 	<label for="login" class="col-sm-4 col-form-label">ログイン</label>
 	<div class="col-sm-8">
-		<%= f.text_field  :email,  {value: @user.email, class: "form-control", placeholder: "Email形式", :required => true, autofocus: true}  %>
-		<span class="help-block">Emailアドレス。登録済みのログインIDは使用できません。</span>
+		<%= f.text_field  :login,  {value: @user.login, class: "form-control", placeholder: "Email形式", :required => true, autofocus: true}  %>
 	</div>
 </div>
 <div class="mb-3 row">
 	<label for="email" class="col-sm-4 col-form-label">連絡先</label>
 	<div class="col-sm-8">
-		<%= f.text_field  :email_org,  {value: @user.email_org, class: "form-control", placeholder: "メールアドレスを入力", :required => true, autofocus: true}  %>
+		<%= f.text_field  :email,  {value: @user.email, class: "form-control", placeholder: "メールアドレスを入力", :xrequired => true, autofocus: true}  %>
 	</div>
 </div>
 <div class="form-group row">
@@ -36,7 +35,7 @@
 		<input type="radio" class="btn-check" name="user[ui_version]" id="btnradio7" value='' checked>
 		<label class="btn btn-outline-primary" for="btnradio7">従来画面</label>
 
-		<input type="radio" class="btn-check" name="user[ui_version]" id="btnradio8" value='6'>
+		<input type="radio" class="btn-check" name="user[ui_version]" id="btnradio8" value='1'>
 		<label class="btn btn-outline-primary" for="btnradio8">新画面</label>
 
 	</div>
