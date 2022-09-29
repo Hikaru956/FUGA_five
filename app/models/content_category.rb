@@ -17,11 +17,11 @@ class ContentCategory < ApplicationRecord
   belongs_to    :shop
   #belongs_to    :content_bag, optional: true
   belongs_to    :web_page, optional: true
-  has_many      :content_leafs, :dependent=>:nullify #, :order=>'publish_from desc, created_at desc'
+  has_many      :content_leafs, ->{order('content_leafs.publish_from DESC, content_leafs.created_at DESC')}, :dependent=>:nullify
   has_one       :content_bag,   :dependent=>:destroy
   
   #hikaru
-  has_many  :photos,  :as => :ref, :dependent => :destroy #, ->{order('position ASC')}
+  has_many  :photos, ->{order('photos.position ASC')},  :as => :ref, :dependent => :destroy
 
   accepts_nested_attributes_for :photos
 

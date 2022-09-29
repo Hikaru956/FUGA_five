@@ -12,11 +12,8 @@
 #class Company < ActiveRecord::Base
 class Company < ApplicationRecord  
   #hikaru
-  #has_many  :users,         :dependent=>:destroy #, :order => "role desc, login asc"
   has_many    :users, ->{order('users.role DESC, users.login ASC')},  :dependent=>:destroy
-  #has_many  :shops,         :dependent=>:destroy #, :order => "position asc"
   has_many    :shops, ->{order('shops.position ASC')},  :dependent=>:destroy
-  #has_many  :customers,     :dependent=>:destroy #, :order => "alt_id asc, furigana asc"
   has_many    :customers, ->{order('customers.alt_id ASC, customers.furigana ASC')},  :dependent=>:destroy
   
   #attr_accessible  :alt_id, :name, :telephone_1, :postal, :address_1

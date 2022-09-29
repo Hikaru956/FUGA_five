@@ -13,8 +13,7 @@ class VisualWidgetBag < ApplicationRecord
   belongs_to    :shop
   belongs_to    :visual_widget
 
-  has_many      :photos,  :as => :ref, :dependent => :destroy #, :order=>"position asc"
-
+  has_many      :photos, ->{order('photos.position ASC')},  :as => :ref, :dependent => :destroy 
   accepts_nested_attributes_for :photos
 
   #attr_accessible :data_string

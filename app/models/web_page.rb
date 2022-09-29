@@ -17,7 +17,7 @@ class WebPage < ApplicationRecord
   has_many      :content_bag,       :dependent=>:destroy
 
   #hikaru
-  has_many      :photos,            :as => :ref, :dependent => :destroy #, :order=>"position asc"
+  has_many      :photos, ->{order('photos.position ASC')}, :as => :ref, :dependent => :destroy
 
   accepts_nested_attributes_for :photos
 

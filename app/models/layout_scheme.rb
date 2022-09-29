@@ -15,7 +15,7 @@ class LayoutScheme < ApplicationRecord
   has_many  :wsite_layout_deploys, :class_name=>'Shop', :foreign_key => 'wsite_layout_deploy_id'
   has_many  :wsite_layout_edits,   :class_name=>'Shop', :foreign_key => 'wsite_layout_deploy_id'
 
-  has_many  :visual_widgets, :dependent => :destroy #, :order=>"position asc"
+  has_many  :visual_widgets, ->{order('visual_widgets.position ASC')}, :dependent => :destroy #, :order=>"position asc"
 
   has_one   :photo,  :as => :ref, :dependent => :destroy
 

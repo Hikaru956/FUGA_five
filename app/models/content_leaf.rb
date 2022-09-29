@@ -19,7 +19,7 @@ class ContentLeaf < ApplicationRecord
 
   #has_many  :photos,  :as => :ref, :dependent => :destroy #hikaru, :order=>"position asc"
 
-  has_many      :photos,  as: :ref, :dependent => :destroy
+  has_many      :photos, ->{order('photos.position ASC')},  as: :ref, :dependent => :destroy
 
   accepts_nested_attributes_for :photos
 

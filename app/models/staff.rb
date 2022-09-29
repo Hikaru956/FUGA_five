@@ -15,13 +15,13 @@ class Staff < ApplicationRecord
   belongs_to    :shop
   
   #hikaru
-  has_many      :attendances,   :dependent=>:destroy #,  :order=>'attend_on asc'
-  has_many      :reservations,  :dependent=>:destroy #,  :order=>'reserved_on asc'
-  has_many      :content_leafs, :dependent=>:destroy #,  :order=>'created_at desc'
+  has_many      :attendances, ->{order('attendances.attend_on ASC')},   :dependent=>:destroy 
+  has_many      :reservations, ->{order('reservations.reserved_on ASC')},  :dependent=>:destroy
+  has_many      :content_leafs, ->{order('content_leafs.created_at DESC')}, :dependent=>:destroy
 
-  has_many      :photos,  as: :ref, :dependent => :destroy
+  has_many      :photos, ->{order('photos.position ASC')},  as: :ref, :dependent => :destroy
 
-  accepts_nested_attributes_for :photos #, :order=>"position asc"
+  accepts_nested_attributes_for :photos
 
   STAFF_PROPER    = 100
   STAFF_HELPER    = 10

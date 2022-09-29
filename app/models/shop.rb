@@ -29,9 +29,6 @@ class Shop < ApplicationRecord
   has_many    :users, ->{order('users.role DESC, users.login ASC')},  :dependent=>:destroy
   has_many    :staffs, ->{order('staffs.position ASC')},  :dependent=>:destroy
   has_many    :customers, ->{order('customers.alt_id ASC, customers.furigana ASC')},  :dependent=>:destroy
-  #has_many      :staffs,              :dependent=>:destroy #,:order => "position asc"  
-  #has_many      :users,               :dependent=>:destroy  #, :order => "role desc, login asc"  
-  #has_many      :customers,           :dependent=>:destroy #, :order => "alt_id asc, furigana asc"
 
   has_many      :photos,              :dependent=>:destroy
   has_many      :inquiries,           :dependent=>:destroy
@@ -40,13 +37,13 @@ class Shop < ApplicationRecord
 
   
   has_many      :content_bags,        :dependent=>:destroy
-  has_many      :content_leafs,       :dependent=>:destroy  #:order=>'publish_from desc, created_at desc'
+  has_many      :content_leafs, ->{order('content_leafs.publish_from DESC, content_leafs.created_at DESC')}, :dependent=>:destroy
   #ひかる　要対応　model dependent destroy効いてない
   has_many      :content_categories #,  :dependent=>:destroy
   has_many      :web_pages  #,           :dependent=>:destroy
   
-  has_many      :attendances,         :dependent=>:destroy #, :order=>'attend_on asc'
-  has_many      :reservations,        :dependent=>:destroy #, :order=>'reserved_on asc'
+  has_many      :attendances, ->{order('attendances.attend_on ASC')}, :dependent=>:destroy 
+  has_many      :reservations, ->{order('reservations.reserved_on ASC')}, :dependent=>:destroy
   has_many      :roster_labels,       :dependent=>:destroy
   
   has_many      :visual_widget_bags,  :dependent=>:destroy
