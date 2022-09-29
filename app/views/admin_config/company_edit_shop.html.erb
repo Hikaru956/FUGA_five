@@ -47,6 +47,7 @@
 	</span>
 	店舗説明文
 </h4>
+<br/>
 <%= form_tag url_for(:action=>"company_update_shop", :id=>@shop), :class=>"xxform-horizontal", method: :patch do -%>
 		<%= render :partial=>"form_shop_description", locals:{shop: @shop} %>
 		<div class="form-actions text-right">
