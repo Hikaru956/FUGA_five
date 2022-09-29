@@ -265,7 +265,7 @@ class DashboardController < ApplicationController
     user.shop     = shop
     user.save
     unless user.valid?
-      flash[:alert] = '新規ユーザーの作成に失敗しました(ログインIDの重複など)'
+      flash[:alert] = '新規ユーザーの作成に失敗しました (ログインIDの重複など)。'
     end
     redirect_to :action=>"shop_list_users", :id=>shop
   end
@@ -410,7 +410,7 @@ class DashboardController < ApplicationController
       user = User.new(user_params)
       user.save
       unless user.valid?
-        flash[:alert] = '新規ユーザーの作成に失敗しました(ログインIDの重複など)'
+        flash[:alert] = '新規ユーザーの作成に失敗しました (ログインIDの重複など)。'
       end
       redirect_to :action=>"user_list"
   end

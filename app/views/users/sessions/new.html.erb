@@ -34,12 +34,12 @@ ahtml, abody {
 <%= form_for(resource, as: resource_name, html: { class: "well" }, url: session_path(resource_name)) do |f| %>
   <h3>ログイン</h3>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
+    <label for="login">ログインID</label>
+    <%= f.text_field :login, autofocus: true, autocomplete: "login" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
+    <%= f.label :password %>
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
 
@@ -54,7 +54,3 @@ ahtml, abody {
     <%= f.submit "ログイン" %>
   </div>
 <% end %>
-
-<div class='well'>
-  <%= render "users/shared/links" %>
-</div>

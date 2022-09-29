@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   belongs_to  :company, optional: true
   belongs_to  :shop, optional: true
 
+  validates_uniqueness_of :login
+
   #hikaru
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, 
@@ -63,6 +65,10 @@ class User < ActiveRecord::Base
   # We really need a Dispatch Chain here or something.
   # This will also let us return a human error message.
   #
+  def email_required?
+    false
+  end
+
   def self.authenticate(login, password)
     return nil if login.blank? || password.blank?
     u = find_by_login(login.downcase) # need to get the salt

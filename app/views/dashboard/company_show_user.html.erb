@@ -37,7 +37,7 @@
 		<tr <% if @user.banned? %>class="error"<%end%>>
 			<td class="span3">ログイン</td>
 			<td class="span9">
-				<%= @user.email %>
+				<%= @user.login %>
 				<% if @user.banned? %>
 					<br/>
 					<small>

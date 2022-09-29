@@ -13,6 +13,7 @@ require 'jcode' if RUBY_VERSION < '1.9'
 class ApplicationController < ActionController::Base
   #include AuthenticatedSystem
   helper :all # include all helpers, all the time
+  
 
   protect_from_forgery
 
@@ -57,7 +58,6 @@ class ApplicationController < ActionController::Base
     public_leafs = public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(position: :desc).order(created_at: :desc)
     public_leafs = public_leafs.limit(limit) unless limit.blank?
     return public_leafs
-    
     
     #c = ContentLeaf.public_leafs
     #c.and "content_leafs.content_category_id", 'IN', sons

@@ -7,13 +7,12 @@
 <div class="control-group">
 	<label class="control-label" for="login">ログイン</label>
 	<div class="controls">
-		<%= text_field 'user', 'email', :placeholder=>"メールアドレスを入力", :autocomplete => "off" %>
-		<span class="help-block">Emailアドレス。登録済みのログインIDは使用できません。</span>
+		<%= text_field 'user', 'login', :placeholder=>"ログインIDを入力", :autocomplete => "off" %>
 	</div>
 </div>
 <div class="control-group">
 	<label class="control-label" for="email">連絡先</label>
 	<div class="controls">
-		<%= text_field 'user', 'email_org', :placeholder=>"連絡先を入力", :autocomplete => "off" %>
+		<%= text_field 'user', 'email', :placeholder=>"連絡先を入力", :autocomplete => "off" %>
 	</div>
 </div>

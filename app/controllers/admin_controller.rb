@@ -256,7 +256,7 @@ class AdminController < ApplicationController
         user.shop     = shop
         user.save
         unless user.valid?
-            flash[:alert] = '新規ユーザーの作成に失敗しました(ログインIDの重複など)'
+            flash[:alert] = '新規ユーザーの作成に失敗しました (ログインIDの重複など)。'
         end
         redirect_to :action=>"shop_list_users", :id=>shop
     end
@@ -372,7 +372,7 @@ class AdminController < ApplicationController
         new_user = User.new(user_params)
         new_user = new_user.save
         unless new_user.valid?
-            flash[:alert] = '新規ユーザーの作成に失敗しました(ログインIDの重複など)'
+            flash[:alert] = '新規ユーザーの作成に失敗しました (ログインIDの重複など)。'
         end
         redirect_to :action=>"user_list"
     end
