@@ -14,9 +14,18 @@ class AccountsController < ApplicationController
 
   # render new.erb.html
   def new
+    redirect_to new_user_session_path
   end
 
   def create
+    redirect_to new_user_session_path
+  end
+
+  def destroy
+    redirect_to new_user_session_path
+  end
+
+  def xxx_create
     logout_keeping_session!
     user = User.authenticate(params[:login], params[:password])
     if user && user.try_count < USER_AUTH_FAIL_COUNT
@@ -57,7 +66,7 @@ class AccountsController < ApplicationController
     end
   end
 
-  def destroy
+  def xxx_destroy
     #hikaru
     #logout_killing_session!
     flash[:notice] = "You have been logged out."
