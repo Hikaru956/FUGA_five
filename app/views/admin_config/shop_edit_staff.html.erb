@@ -47,7 +47,7 @@
 					theme_advanced_toolbar_location: "top",
 					theme_advanced_statusbar_location: "bottom",
 					theme_advanced_buttons3_add: ["tablecontrols"],
-					plugins: "table,image,code,link,forecolor,backcolor",
+					plugins: "table,image,code,link,forecolor,backcolor,emoticons",
 					<% unless @staff.blank? %>
 						<% unless @staff.photos.blank? %>
 						image_list: [
@@ -57,7 +57,7 @@
 					<% end %>
 					relative_urls : false,
 					convert_urls: false,
-					toolbar: ["undo redo | blocks | formatselect | fontselect | fontsizeselect | bold italic underline| forecolor backcolor | image | table | code link | outdent indent | alignleft aligncenter alignjustify  alignright"],
+					toolbar: ["undo redo | blocks | formatselect | fontselect | fontsizeselect | bold italic underline| forecolor backcolor | image emoticons | table | code link | outdent indent | alignleft aligncenter alignjustify  alignright"],
 					language: 'ja'})
 			</script>
 		</div>
