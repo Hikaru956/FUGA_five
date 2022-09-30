@@ -24,10 +24,6 @@
 	<a class="btn btn-success btn-small"  data-toggle="modal" href="#modalNew"><i class="icon-plus"></i>&nbsp;新規登録</a>
 </div>
 
-<div id="event_result"><br/></div>
-
-<div id="category_trees"></div>
-
 <!-- Modal -->
 <div id="modalNew" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<%= form_tag({:action => 'content_category_create', :parent_id=>@parent_category}, :class=>"form-horizontal", method: :post)  do %>

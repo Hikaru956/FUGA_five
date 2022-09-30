@@ -101,6 +101,7 @@
 
 <% unless @current_category.children.blank? %>
 	<h4>サブ・カテゴリー</h4>
+	<br/>
 	<% array = @current_category.children.in_groups_of(3, false)%>
 	<div class="row">
 		<% for i in 0..(array.size-1) %>

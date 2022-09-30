@@ -165,7 +165,7 @@ end
     #bag_category = @shop.content_categories.find(params[:id])
     #bag_category.move_higher
     #bag_category.save
-    redirect_to :action=>'content_category_tree', :hash=>Time.now.to_i, :id=>content_category.id
+    redirect_to :action=>'content_category_tree', :hash=>Time.now.to_i, :id=>content_category.parent_id
   end
 
   def content_category_lower
@@ -175,7 +175,7 @@ end
     #bag_category = @shop.content_categories.find(params[:id])
     #bag_category.move_lower
     #bag_category.save
-    redirect_to :action=>'content_category_tree', :hash=>Time.now.to_i, :id=>content_category.id
+    redirect_to :action=>'content_category_tree', :hash=>Time.now.to_i, :id=>content_category.parent_id
   end
 
 

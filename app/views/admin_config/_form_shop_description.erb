@@ -10,8 +10,8 @@
             theme_advanced_statusbar_location: "bottom",
             theme_advanced_buttons3_add: ["tablecontrols"],
             plugins: "table,image,code,link,forecolor,backcolor,emoticons",
-            <% unless @item.blank? %>
-                <% shop_photos = @item.photos.where(:ref_type=>'shop')%>
+            <% unless @shop.blank? %>
+                <% shop_photos = @shop.photos.where(:ref_type=>'shop')%>
                     <% unless shop_photos.blank? %>
                     image_list: [ 
                         <%= photo_array(shop_photos).html_safe %>
