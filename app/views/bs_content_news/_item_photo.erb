@@ -1,4 +1,3 @@
-<% require 'cgi' %>
 <div class="thumbnail">
 	<div class="caption">
 		<p class="wewll" style="text-align:center;">
@@ -24,9 +23,12 @@
 			<% end %>
 			<a class="btn btn-danger btn-small"  data-toggle="modal" href="#modal_delete_photo_<%=photo.id%>">	<i class="icon-trash"></i>&nbsp;削除確認</a></p>
 	</div>
-	<%= photo.clip.url %>
-	<%= photo.clip.path %>
-	<%= CGI.unescape(photo.clip.url)%>
+	<% if false %>
+	<% require 'cgi' %>
+		<%= photo.clip.url %>
+		<%= photo.clip.path %>
+		<%= CGI.unescape(photo.clip.url)%>
+	<% end %>
 </div>
 
 <%= form_tag url_for(:action=>"update_photo", :id=>photo), {:class=>"modal hide fade form-horizontal", :id=>"modal_edit_photo_#{photo.id}"} do -%>
