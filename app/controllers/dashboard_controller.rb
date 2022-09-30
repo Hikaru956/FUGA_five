@@ -53,11 +53,8 @@ class DashboardController < ApplicationController
   def company_index
     unless current_user.has_permission?(User::ROLE_OPERATOR)
         return redirect_to(:action=>"company_show", :id=>current_user.company) if current_user.has_permission?(User::ROLE_OWNER) 
-        return redirect_to(:action=>"company_show_shop", :id=>current_user.shop) if current_user.has_permission?(User::ROLE_MANAGER)
+        return redirect_to(:controller=>'bs_config', :action=>"company_show_shop", :id=>current_user.shop)
     end
-    #return redirect_to(:action=>"company_show_shop", :id=>current_user.shop) if current_user.has_permission?(User::ROLE_BLOGGER)
-    #hikaru
-    #@items =Company.paginate(:page => params[:page], :order=>"alt_id asc", :per_page=>PER_PAGE)
     @items = Company.all.order(name: :asc)
     @items = @items.paginate(page: params[:page], per_page: PER_PAGE).order(name: :asc)
   end
