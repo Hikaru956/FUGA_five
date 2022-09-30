@@ -10,7 +10,9 @@
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 defaults: &defaults
   adapter: mysql2
+  charset: utf8mb4
   encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
   reconnect: false
   pool: 5
   #hikaru
@@ -20,7 +22,7 @@ defaults: &defaults
   password: 956service
   
 development:
-  database: fuga_speed
+  database: fuga_queen2
   socket: /tmp/mysql.sock
   <<: *defaults
 
