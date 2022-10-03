@@ -36,6 +36,6 @@ test:
   <<: *defaults
 
 production:
-  database: fuga_production_2
+  database: fuga_production
   socket: /var/lib/mysql/mysql.sock
   <<: *defaults
