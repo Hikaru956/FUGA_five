@@ -45,7 +45,7 @@
 <% end %>
 
 <!-- modalNew -->
-<%= form_tag url_for(:action=>"color_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew", method: :create} do -%>
+<%= form_tag url_for(:action=>"color_create"), {:class=>"modal hide fade form-horizontal", :id=>"modalNew", method: :post} do -%>
 	<% 
 		@color = ColorScheme.new
 	%>
