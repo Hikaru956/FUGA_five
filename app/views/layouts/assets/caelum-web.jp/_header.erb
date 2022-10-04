@@ -14,7 +14,7 @@
 <% if !sbaner.blank? && sbaner.is_valid? %>
     <div class="text-center" style="margin: 2rem auto;">
         <a href="https://www.aveda.jp/locator/get_the_facts.tmpl?vanity=1&SalonID=58694&utm_medium=referral&utm_source=aveda-salon&utm_campaign=acom_site-traffic&utm_content=caelum_fs&utm_keyword=online" target="_blank">
-            <img src="//<%= request.host %><%= url_for_file_column(sbaner.photos[0], :image) %>" alt="公式ショップ">
+            <img src="//<%= request.host %><%= sbaner.photos[0].clip.url(:image) %>" alt="公式ショップ">
         </a>
     </div>
 <% else %>
