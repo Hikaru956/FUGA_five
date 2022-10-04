@@ -47,7 +47,29 @@
     <h1>online Gallery 　<i class="fa-solid fa-caret-right"></i> 　<%= model_title(@seed) %></h1>
     <div id="carousel">
         <div class="img">
-<%  @photos = @seed.photos %>
+            
+            <%  @photos = @seed.photos %>
+            <% if @photos.blank? || @photos.size<2 %>
+                <ul>
+                    <li><img src="//placehold.jp/1024x683.png?text=No Photo"></li>
+                </ul>
+            <% else %>
+                <ul>
+                <% for i in 1..(@photos.size-1) %>
+                    <li><img src="<%= @photos[i].clip.url() %>" alt=""></li>
+                <% end %>
+                </ul>
+            <% end %>
+            <ul class="nav">
+            </ul>
+        </div>
+    </div>
+
+
+
+<% if false #original code %>
+    <div id="carousel">
+        <div class="img">
 <%  @photos.shift %>
 <%  unless @photos.blank? %>
             <ul>
@@ -64,6 +86,9 @@
         <ul class="nav">
         </ul>
     </div>
+<% end %>
+
+
     <div class="content">
 <% unless @seed.description.blank? %>
         <%= raw @seed.description %>
