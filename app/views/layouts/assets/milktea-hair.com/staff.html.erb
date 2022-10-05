@@ -141,22 +141,43 @@
                         </div>
                     </div>
                 </article>
-<%  @photos = @seed.photos %>
-<%  @photos.to_a.shift unless @photos.blank? %>
-<%  unless @photos.blank? %>
-                <aside class="wrapper2">
-<%      @photos.each do | photo |  %>
-                    <div class="col-1p3">
-                        <div class="col-in2">
-                            <%= image_tag photo.clip.url(:panel) %>
-<%          unless photo.info.blank? %>
-                            <p><%=h photo.info%></p>
-<%          end %>
+                <%  @photos = @seed.photos %>
+                <% if @photos.blank? || @photos.size<2 %>
+                <% else %>
+                    <aside class="wrapper">
+                    <% for i in 1..(@photos.size-1) %>
+                        <div class="col-1p3">
+                            <div class="col-in2">
+                                <%= image_tag @photos[i].clip.url(:panel) %>
+                                <% unless @photos[i].info.blank? %>
+                                    <p><%=h @photos[i].info%></p>
+                                <% end %>
+                            </div>
                         </div>
-                    </div>
-<%      end %>
-                </aside>
-<%  end %>
+                    <% end %>
+                    </aside>
+                <% end %>
+
+
+                <% if false #original code%>
+                <%  @photos = @seed.photos %>
+                <%  @photos.to_a.shift unless @photos.blank? %>
+                <%  unless @photos.blank? %>
+                                <aside class="wrapper2">
+                <%      @photos.each do | photo |  %>
+                                    <div class="col-1p3">
+                                        <div class="col-in2">
+                                            <%= image_tag photo.clip.url(:panel) %>
+                <%          unless photo.info.blank? %>
+                                            <p><%=h photo.info%></p>
+                <%          end %>
+                                        </div>
+                                    </div>
+                <%      end %>
+                                </aside>
+                <%  end %>
+                <% end %>
+
 <%= render :partial=>"#{LayoutScheme.asset_root}/milktea-hair.com/sns_btn" %>
             </div>
         </div>

@@ -158,20 +158,44 @@
 <%= render :partial=>"#{LayoutScheme.asset_root}/caelum-web.jp/sns_btn" %>
                     </div>
                 </article>
-<%  @photos = @seed.photos %>
-<%  @photos.to_a.shift unless @photos.blank? %>
-<%  unless @photos.blank? %>
-                <aside id="photo" class="wrapper">
-<%      @photos.each do | photo |  %>
-                    <div class="col-1p3">
-                        <%= image_tag photo.clip.url(:panel) %>
-<%          unless photo.info.blank? %>
-                        <p><%=h photo.info%></p>
-<%          end %>
-                    </div>
-<%      end %>
-                </aside>
-<%  end %>
+
+
+
+                <%  @photos = @seed.photos %>
+                <% if @photos.blank? || @photos.size<2 %>
+                <% else %>
+                    <aside id="photo" class="wrapper">
+                    <% for i in 1..(@photos.size-1) %>
+                        <div class="col-1p3">
+                            <%= image_tag @photos[i].clip.url(:panel) %>
+                            <% unless @photos[i].info.blank? %>
+                                <p><%=h @photos[i].info%></p>
+                            <% end %>
+                        </div>
+                    <% end %>
+                    </aside>
+                <% end %>
+
+
+
+
+
+                <% if false #original code%>
+                <%  @photos = @seed.photos %>
+                <%  @photos.to_a.shift unless @photos.blank? %>
+                <%  unless @photos.blank? %>
+                                <aside id="photo" class="wrapper">
+                <%      @photos.each do | photo |  %>
+                                    <div class="col-1p3">
+                                        <%= image_tag photo.clip.url(:panel) %>
+                <%          unless photo.info.blank? %>
+                                        <p><%=h photo.info%></p>
+                <%          end %>
+                                    </div>
+                <%      end %>
+                                </aside>
+                <%  end %>
+                <% end %>
             </div>
         </div>
 <!-- SNS Links -->

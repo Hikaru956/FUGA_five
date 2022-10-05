@@ -93,20 +93,38 @@
                         </ul>
                     </div>
                 </div>
-<%  @photos = @seed.photos %>
-<%  @photos.to_a.shift unless @photos.blank? %>
-<%  unless @photos.blank? %>
-                <div class="row">
-<%      @photos.each do | photo |  %>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <%= image_tag photo.clip.url(:panel) %>
-<%          unless photo.info.blank? %>
-						<p><%=h photo.info%></p>
-<%          end %>
+                <%  @photos = @seed.photos %>
+                <% if @photos.blank? || @photos.size<2 %>
+                <% else %>
+                    <div class="row">
+                    <% for i in 1..(@photos.size-1) %>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <%= image_tag @photos[i].clip.url(:panel) %>
+                            <% unless photo.info.blank? %>
+                                <p><%=h photo.info%></p>
+                            <% end %>
+                        </div>
+                    <% end %>
                     </div>
-<%      end %>
-                </div>
-<%  end %>
+                <% end %>
+
+            <% if false #original code %>
+                <%  @photos = @seed.photos %>
+                <%  @photos.to_a.shift unless @photos.blank? %>
+                <%  unless @photos.blank? %>
+                                <div class="row">
+                <%      @photos.each do | photo |  %>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <%= image_tag photo.clip.url(:panel) %>
+                <%          unless photo.info.blank? %>
+                                        <p><%=h photo.info%></p>
+                <%          end %>
+                                    </div>
+                <%      end %>
+                                </div>
+                <%  end %>
+            <% end %>
+            
             </article>
         </main>
         <footer id="footer">

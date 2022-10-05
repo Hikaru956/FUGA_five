@@ -139,17 +139,34 @@
                     </ul>
                 </li>
             </ul>
-<%  @photos = @seed.photos %>
-<%  @photos.shift %>
-<%  unless @photos.blank? %>
-            <ul class="wrapper">
-<%      @photos.each do | photo |  %>
-                <li class="col-m2p3">
-                    <%= image_tag photo.clip.url(:panel) %>
-                </li>
-<%      end %>
-            </ul>
-<%  end %>
+
+
+            <%  @photos = @seed.photos %>
+            <% if @photos.blank? || @photos.size<2 %>
+            <% else %>
+                <ul class="wrapper">
+                <% for i in 1..(@photos.size-1) %>
+                    <li class="col-m2p3">
+                        <%= image_tag @photos[i].clip.url(:panel) %>
+                    </li>
+                <% end %>
+                </ul>
+            <% end %>
+
+            <% if false #original code%>
+                <%  @photos = @seed.photos %>
+                <%  @photos.shift %>
+                <%  unless @photos.blank? %>
+                        <ul class="wrapper">
+                <%      @photos.each do | photo |  %>
+                            <li class="col-m2p3">
+                                <%= image_tag photo.clip.url(:panel) %>
+                            </li>
+                <%      end %>
+                        </ul>
+                <%  end %>
+            <% end %>
+
 		</article>
 	</div>
 </main>
