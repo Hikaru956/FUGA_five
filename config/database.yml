@@ -24,7 +24,7 @@ defaults: &defaults
   password: 956service
   
 development:
-  database: fuga_queen3
+  database: fuga_development
   socket: /tmp/mysql.sock
   <<: *defaults
 

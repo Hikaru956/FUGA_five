@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_11_022748) do
+ActiveRecord::Schema.define(version: 2022_09_07_022542) do
 
   create_table "attendances", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "shop_id"
@@ -132,16 +132,6 @@ ActiveRecord::Schema.define(version: 2022_10_11_022748) do
     t.index ["birthday"], name: "index_customers_on_birthday"
     t.index ["company_id"], name: "index_customers_on_company_id"
     t.index ["shop_id"], name: "index_customers_on_shop_id"
-  end
-
-  create_table "inquiries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "shop_id"
-    t.string "email"
-    t.text "name"
-    t.text "body"
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "layout_schemes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
