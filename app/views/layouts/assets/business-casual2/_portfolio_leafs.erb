@@ -29,6 +29,8 @@
                         </section>
 <%  end %>
 <%  seed.children.each do |sub| %>
-<h1><%= sub.name%> <%= sub.shop.name %></h1>
+<% if false %>
+    <h1><%= sub.name%> <%= sub.shop.name %></h1>
+<% end %>
 <%=     render :partial=>"#{LayoutScheme.asset_root}/albino/portfolio_leafs", :locals=>{:seed=>sub} %>
 <%  end %>
