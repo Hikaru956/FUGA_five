@@ -115,21 +115,21 @@
 </div>
 <!-- modalDeleteShop -->
 <div class="modal hide fade form-horizontal", id="modalDelete">
-<%= form_tag url_for(:action=>"shop_staff_delete", :id=>@staff), {:class=>"modal hide fade form-horizontal", :id=>"modalDelete"} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">店舗スタッフ削除</h3>
-	</div>
-	<div class="modal-body">
-		<p>
+	<%= form_for @staff, url: dashboard_shop_delete_staff_path(id: @staff), method: :delete do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">店舗削除</h3>
+		</div>
+		<div class="modal-body">
+			<p>
 			「<%= model_name(@staff) %>」を削除します。<br/>
 			このスタッフに関連する情報も削除されます。<br/>
 			よろしいですか？
 		</p>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
-	</div>
-<% end %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		</div>
+	<% end %>
 </div>
