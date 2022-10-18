@@ -17,7 +17,8 @@ class Staff < ApplicationRecord
   #hikaru
   has_many      :attendances, ->{order('attendances.attend_on ASC')},   :dependent=>:destroy 
   has_many      :reservations, ->{order('reservations.reserved_on ASC')},  :dependent=>:destroy
-  has_many      :content_leafs, ->{order('content_leafs.created_at DESC')}, :dependent=>:destroy
+  #has_many      :content_leafs, ->{order('content_leafs.created_at DESC')}, :dependent=>:destroy
+  has_many      :content_leafs, ->{order('content_leafs.created_at DESC')}, :dependent=>:nullify
 
   has_many      :photos, ->{order('photos.position ASC')},  as: :ref, :dependent => :destroy
 
