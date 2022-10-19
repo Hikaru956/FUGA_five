@@ -1,0 +1,25 @@
+<script>
+  var quill = new Quill('#editor', {
+  modules: {
+    toolbar: [
+        ['image'],
+        ['bold', 'italic', 'underline'],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'indent': '-1'}, { 'indent': '+1' }],
+        ['blockquote', 'code-block'],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        ['clean']
+    ]
+  },
+  placeholder: 'Compose an epic...',
+  theme: 'snow'  // or 'bubble'
+});
+function clickSubmit(){
+    $("#contents").val(quill.root.innerHTML);
+    $('#form')[0].submit();
+};
+</script>

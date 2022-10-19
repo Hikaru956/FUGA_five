@@ -44,30 +44,41 @@
 	</div>
 </div>
 
-<div class="control-group">
-	<%= f.text_area  :description, value: item.description, :class => "tinymce input-block-level", rows: 20, :placeholder=>"記事の本文を入力します。" %>
-	<script type="text/javascript">
-		tinyMCE.init({
-			selector: 'textarea.tinymce',
-			theme_advanced_toolbar_location: "top",
-			theme_advanced_statusbar_location: "bottom",
-			theme_advanced_buttons3_add: ["tablecontrols"],
-			plugins: "table,image,code,link,forecolor,backcolor,emoticons",
-			<% unless item.blank? %>
-				<% unless item.photos.blank? %>
-				image_list: [ 
-					<%= photo_array(item.photos).html_safe %>
-					],
+<% if is_test_shop?(@shop) %>
+	<textarea name="content_leaf[description]" style="display:none" id="contents"></textarea>
+	<div id="div_editor1"><%= item.description.html_safe %></div>
+	<%= render :partial=>"layouts/richtext_editor" %>
+	<% if false %>
+		<textarea name="content_leaf[description]" style="display:none" id="contents"></textarea>
+		<div id="editor"><%= item.description.html_safe %></div>
+		<%= render :partial=>"layouts/quill" %>
+	<% end %>
+<% else %>
+	<div class="control-group">
+		<%= f.text_area  :description, value: item.description, :class => "tinymce input-block-level", rows: 20, :placeholder=>"記事の本文を入力します。" %>
+		<script type="text/javascript">
+			tinyMCE.init({
+				selector: 'textarea.tinymce',
+				theme_advanced_toolbar_location: "top",
+				theme_advanced_statusbar_location: "bottom",
+				theme_advanced_buttons3_add: ["tablecontrols"],
+				plugins: "table,image,code,link,forecolor,backcolor,emoticons",
+				<% unless item.blank? %>
+					<% unless item.photos.blank? %>
+					image_list: [ 
+						<%= photo_array(item.photos).html_safe %>
+						],
+					<% end %>
 				<% end %>
-    		<% end %>
-			relative_urls : false,
-    		convert_urls: false,
-			content_style: 'img { max-width: 100%; height: auto; }' ,
-			resize: 'both',
-			toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
-			language: 'ja'})
-	</script>
-</div>
+				relative_urls : false,
+				convert_urls: false,
+				content_style: 'img { max-width: 100%; height: auto; }' ,
+				resize: 'both',
+				toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
+				language: 'ja'})
+		</script>
+	</div>
+<% end %>
 <% if true || bag_roots.size==1 %>
 	<% item.content_bag 		= bag_roots[0].content_bag %>
 	<%= f.hidden_field :content_bag_id, value: bag_roots[0].content_bag.id %>
