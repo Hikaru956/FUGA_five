@@ -280,12 +280,12 @@ EOF
     html = '<br/><div  style="font-size:medium;">'
     unless older.blank?
         html += '<span>'
-        html += link_to('<< 前の記事', :action=>params[:action], :id=>older, :wkey=>leaf.shop.wsite_hash_key)
+        html += link_to(raw('<<'+ ' ' +(truncate(prev_leaf(leaf).title, :length=>15))), :action=>params[:action], :id=>older, :wkey=>leaf.shop.wsite_hash_key)
         html += '</span>'
     end
     unless newer.blank?
         html += '<span style="float: right !important;">'
-        html += link_to('次の記事 >>', :action=>params[:action], :id=>newer, :wkey=>leaf.shop.wsite_hash_key)
+        html += link_to(raw((truncate(next_leaf(leaf).title, :length=>15))+ ' ' +'>>'), :action=>params[:action], :id=>newer, :wkey=>leaf.shop.wsite_hash_key)
         html += '</span>'
     end
     html += '</div><br/>'
@@ -377,6 +377,12 @@ EOF
   def cancel_icon(title='キャンセル');    sprintf("<i class='fa-solid fa-circle-xmark' title=%s></i>", title).html_safe; end
   def forward_icon(title='続ける');    sprintf("<i class='fa-solid fa-forward' title=s></i>", title).html_safe; end
   def backward_icon(title='戻る');    sprintf("<i class='fa-solid fa-backward' title=%s></i>", title).html_safe; end
+
+  def move_to_top_icon(title='先頭へ');    sprintf("<i class='fa-solid fa-backward-step' title=%s></i>", title).html_safe; end
+  def move_to_bottom_icon(title='末尾へ');    sprintf("<i class='fa-solid fa-forward-step' title=%s></i>", title).html_safe; end
+  def reservation_icon(title='WEB予約',icon_size='');    sprintf("<i class='fa-solid fa-calendar-days %s' title=%s></i>", icon_size, title).html_safe; end
+
+
   def caution_icon(title='警告'); sprintf("<i class='fa-solid fa-diamond-exclamation' title=%s></i>", title).html_safe; end
   def error_icon(title='エラー'); sprintf("<i class='fa-solid fa-triangle-exclamation text-danger' title=%s></i> ", title).html_safe; end
   def info_icon(title='情報'); sprintf("<i class='fa-solid fa-circle-info' title=%s></i>", title).html_safe; end

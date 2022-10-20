@@ -327,6 +327,7 @@
 				<%= raw "<a href=#{@shop.social_hotpepper_beauty_uri} target='_blank' title=#{@shop.social_hotpepper_beauty_uri}><img src='/images/assets/hpb_icon.png' style='vertical-align: top;' alt='HOTPEPPER Beauty'/></a>"	unless @shop.social_hotpepper_beauty_uri.blank? %>
 				<%= raw "<a href=#{@shop.social_youtube_uri} target='_blank' title=#{@shop.social_youtube_uri}><i class='fa-brands fa-youtube fa-2x'></i></a>"			unless @shop.social_youtube_uri.blank? %>
 				<%= raw "<a href=#{@shop.social_line_uri} target='_blank' title=#{@shop.social_line_uri}><i class='fa-brands fa-line fa-2x'></i></a>"			unless @shop.social_line_uri.blank? %>
+				<%= raw "<a href=#{@shop.web_reservation_uri} target='_blank' title=#{@shop.web_reservation_uri}>#{reservation_icon('WEB予約', 'fa-2x')}</a>"			unless @shop.web_reservation_uri.blank? %>
 			</td>
 		</tr>
 	</tbody>

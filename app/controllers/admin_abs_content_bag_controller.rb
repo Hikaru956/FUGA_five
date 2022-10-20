@@ -133,6 +133,20 @@ class AdminAbsContentBagController < ApplicationController
         redirect_to :action=>'content_category', :id=>leaf.content_category, :hash=>Time.now.to_i
     end
 
+    def move_to_top
+        leaf = @shop.content_leafs.find(params[:id])
+        leaf.move_to_top
+        leaf.save
+        redirect_to :action=>'content_category', :id=>leaf.content_category, :hash=>Time.now.to_i
+    end
+
+    def move_to_bottom
+        leaf = @shop.content_leafs.find(params[:id])
+        leaf.move_to_bottom
+        leaf.save
+        redirect_to :action=>'content_category', :id=>leaf.content_category, :hash=>Time.now.to_i
+    end
+
     ###
     ##  Actions For Category Structure
     #

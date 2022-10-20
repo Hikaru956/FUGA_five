@@ -1,9 +1,11 @@
 <div class="card">
 	<div class="card-body">
 		<p class="wewll" style="text-align:center;">
+			<%= (temp_local.last?)?	move_to_top_icon :	link_to(move_to_top_icon, :action=>"move_to_bottom",	:id=>temp_local) %>
 			<%= (temp_local.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), :action=>"leaf_higher",	:id=>temp_local) %>
 			<%= temp_local.position %>
-			<%= (temp_local.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"leaf_lower",	:id=>temp_local) %>				
+			<%= (temp_local.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"leaf_lower",	:id=>temp_local) %>
+			<%= (temp_local.first?)? 	move_to_bottom_icon : 	link_to(move_to_bottom_icon, 	:action=>"move_to_top",	:id=>temp_local) %>
 		</p>
 	</div>
 	<div class="card-body" style="text-align:center;">

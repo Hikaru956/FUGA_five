@@ -70,6 +70,7 @@
 				<%= raw "<a href=#{@staff.social_hotpepper_beauty_uri} target='_blank' title=#{@staff.social_hotpepper_beauty_uri}><img src='/images/assets/hpb_icon.png' style='vertical-align: top;' alt='HOTPEPPER Beauty'/></a>"	unless @staff.social_hotpepper_beauty_uri.blank? %>
 				<%= raw "<a href=#{@staff.social_youtube_uri} target='_blank' title=#{@staff.social_youtube_uri}><i class='fa-brands fa-youtube fa-2x'></i></a>"			unless @staff.social_youtube_uri.blank? %>
 				<%= raw "<a href=#{@staff.social_line_uri} target='_blank' title=#{@staff.social_line_uri}><i class='fa-brands fa-line fa-2x'></i></a>"			unless @staff.social_line_uri.blank? %>
+				<%= raw "<a href=#{@staff.web_reservation_uri} target='_blank' title=#{@staff.web_reservation_uri}>#{reservation_icon('WEB予約', 'fa-2x')}</a>"			unless @staff.web_reservation_uri.blank? %>
 			</td>
 		</tr>
 

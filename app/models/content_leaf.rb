@@ -71,7 +71,9 @@ class ContentLeaf < ApplicationRecord
   def next_leaf(leaf)
     category = leaf.content_category
     items = category.content_leafs.where("content_leafs.is_public", true)
-    item = items.where('content_leafs.created_at > ?',leaf.created_at).order(created_at: :asc).first
+    items = items.where('content_leafs.created_at > ?',leaf.created_at)
+
+    item = (items.blank?)? nil: items.to_a.sort{|a,b| a.created_at <=> b.created_at}.first
 
     item
   end
@@ -79,7 +81,9 @@ class ContentLeaf < ApplicationRecord
   def prev_leaf(leaf)
     category = leaf.content_category
     items = category.content_leafs.where("content_leafs.is_public", true)
-    item = items.where('content_leafs.created_at < ?',leaf.created_at).order(created_at: :desc).first
+    items = items.where('content_leafs.created_at < ?',leaf.created_at)
+
+    item = (items.blank?)? nil: items.to_a.sort{|a,b| b.created_at <=> a.created_at}.first
 
     item
   end

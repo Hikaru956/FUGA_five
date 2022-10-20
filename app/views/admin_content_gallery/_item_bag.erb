@@ -4,7 +4,7 @@
 		<% leaves = temp_local.public_leafs(true) %>
 		<% unless leaves.blank? %>
 			<% @latest = leaves[0] %>
-			<% key_photo = key_photo(@latest) %>
+			<% key_photo = key_photo(temp_local) %>
 			<% unless key_photo.blank? %>
 				<%= image_tag key_photo.clip.url(:thumb) %>
 			<% else %>

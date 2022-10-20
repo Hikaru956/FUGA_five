@@ -5,16 +5,18 @@
 </ul>
 
 <header class="subhead" id="overview">
-	<div class="float-right">
-		<div class="btn-toolbar" style="margin: 0;">
-			<div class="btn-group">
-			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_new">
-				<%= new_icon('追加') %>&nbsp;
-				ストリーム
-			</button>
-			</div><!-- /btn-group -->
+	<% if current_user.role==User::ROLE_SUPER %>
+		<div class="float-right">
+			<div class="btn-toolbar" style="margin: 0;">
+				<div class="btn-group">
+				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_new">
+					<%= new_icon('追加') %>&nbsp;
+					ストリーム
+				</button>
+				</div><!-- /btn-group -->
+			</div>
 		</div>
-	</div>
+	<% end %>
 	<h3><%=@bag_title %>・ストリーム</h3>
 </header>
 
