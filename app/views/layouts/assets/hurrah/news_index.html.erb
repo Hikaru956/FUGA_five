@@ -40,12 +40,18 @@
                 </div>
 
 
-<% @public_bag =  @seed.public_bags %>
-<% unless @public_bag.blank? %>
+                <% @public_bag =  @seed.public_bags %>
+                <% categories = [] %>
+                <% @public_bag.each do |category| %>
+                    <% next if category.public_leafs.blank? %>
+                    <% categories << category %>
+                <% end %>
+
+<% unless categories.blank? %>
 
                 <div class="row">
                     <ul class="box latest_ul clearfix">
-    <% @public_bag.each do | bag |  %>
+    <% categories.each do | bag |  %>
                         <li class="latest_li col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <%= render :partial=>"#{LayoutScheme.asset_root}/hurrah/item_news_bag", :locals => {:temp_local => bag}  %>
                         </li>

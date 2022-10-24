@@ -1,9 +1,9 @@
 <div class="card">
 	<div class="card-body">
 		<p class="wewll" style="text-align:center;">
-			<%= (photo.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<<i class='fa-solid fa-backward fa-lg'></i>"), :action=>"photo_higher",	:id=>photo) %>
+			<%= (photo.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), :action=>"photo_higher",	:id=>@item.id, :photo_id=>photo) %>
 			<%= photo.position %>
-			<%= (photo.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"photo_lower",		:id=>photo) %>				
+			<%= (photo.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"photo_lower",	:id=>@item.id, :photo_id=>photo) %>
 		</p>
 	</div>
 	<%= image_tag photo.clip.url(:thumb) %>

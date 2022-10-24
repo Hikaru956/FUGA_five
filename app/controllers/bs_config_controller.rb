@@ -403,6 +403,39 @@ class BsConfigController < ApplicationController
     redirect_to :action=>'list_page_photo', :id=>photo.ref_id
   end
 
+  def photo_higher
+    @item = ContentLeaf.find_by_id(params[:id])
+    photo = @item.photos.find(params[:photo_id])
+    photo.move_higher
+    photo.save
+    redirect_to :action=>'list_page_photo', :id=>photo.ref_id, :hash=>Time.now.to_i
+  end
+
+  def photo_lower
+    @item = ContentLeaf.find_by_id(params[:id])
+    photo = @item.photos.find(params[:photo_id])
+    photo.move_lower
+    photo.save
+    redirect_to :action=>'list_page_photo', :id=>photo.ref_id, :hash=>Time.now.to_i
+  end
+
+  def move_to_top
+    @item = ContentLeaf.find_by_id(params[:id])
+    photo = @item.photos.find(params[:photo_id])
+    photo.move_to_top
+    photo.save
+    redirect_to :action=>'list_page_photo', :id=>photo.ref_id, :hash=>Time.now.to_i
+  end
+
+  def move_to_bottom
+    @item = ContentLeaf.find_by_id(params[:id])
+    photo = @item.photos.find(params[:photo_id])
+    photo.move_to_bottom
+    photo.save
+    redirect_to :action=>'list_page_photo', :id=>photo.ref_id, :hash=>Time.now.to_i
+  end
+
+
 protected
   def session_operation
     @shop = current_user.shop

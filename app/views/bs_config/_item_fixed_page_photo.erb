@@ -1,20 +1,16 @@
 <div class="thumbnail">
-	<% if false %>
 	<div class="caption">
 		<p class="wewll" style="text-align:center;">
-			<%= (photo.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"photo_higher",	:id=>photo) %>
+			<%= (photo.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"photo_higher",	:id=>@item.id, :photo_id=>photo) %>
 			<%= photo.position %>
-			<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"photo_lower",		:id=>photo) %>				
+			<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"photo_lower",	:id=>@item.id, :photo_id=>photo) %>
 		</p>
 	</div>
-	<% end %>
 	<%= image_tag photo.clip.url(:thumb) %>
 	<div class="caption">
 		<p><%= photo.clip_file_name %></p>
 		<p>
-			<% if false %>
-				<a class="btn btn-success btn-small" data-toggle="modal" href="#modal_edit_photo_<%=photo.id%>">	<i class="icon-info-sign"></i>&nbsp;キャプション</a></a> 
-			<% end %>
+			<a class="btn btn-success btn-small" data-toggle="modal" href="#modal_edit_photo_<%=photo.id%>">	<i class="icon-info-sign"></i>&nbsp;キャプション</a></a> 
 			<a class="btn btn-danger btn-small"  data-toggle="modal" href="#modal_delete_photo_<%=photo.id%>">	<i class="icon-trash"></i>&nbsp;削除確認</a></p>
 	</div>
 </div>

@@ -100,8 +100,8 @@
                     <% for i in 1..(@photos.size-1) %>
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <%= image_tag @photos[i].clip.url(:panel) %>
-                            <% unless photo.info.blank? %>
-                                <p><%=h photo.info%></p>
+                            <% unless @photos[i].info.blank? %>
+                                <p><%=h @photos[i].info%></p>
                             <% end %>
                         </div>
                     <% end %>

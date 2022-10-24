@@ -181,9 +181,17 @@ class Shop < ApplicationRecord
   ##  Renderer Utility
   #
   def default_navigation_item
+    #hikaruやばい
     root = self.content_categories.find_by_category_type(ContentCategory::TYPE_SHOP_ROOT)
     #root.children.find(:first, :conditions=>["is_public=?", true], :order=>"position asc")
-    root.children.where(is_public: true).order(position: :asc).first
+    #root.children.where(is_public: true).order(position: :asc).first
+
+    children = root.children.where(is_public: true)
+    root_child = (children.blank?)? nil: children.to_a.sort{|a,b| a.position<=>b.position}.first
+    #logger.error ' ■　'*20
+    #logger.error children.to_a.sort{|a,b| a.position<=>b.position}.map{|c| c.name}.join(',')
+    #logger.error children.to_a.sort{|a,b| a.position<=>b.position}.map{|c| c.position}.join(',')
+    root_child
   end
 
   def public_navigation_items

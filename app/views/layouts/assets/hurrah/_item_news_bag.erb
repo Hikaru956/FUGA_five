@@ -1,9 +1,8 @@
-
-    <!-- 記事リストへのリンク -->
-    <a href="<%= url_for(:action=>'news_list', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
+<!-- 記事リストへのリンク -->
+<a href="<%= url_for(:action=>'news_list', :id=>temp_local, :wkey=>@website.wsite_hash_key) %>">
 <% latests = temp_local.public_leafs %>
 <% unless latests.blank? %>
-        <!-- 最初の記事の写真 -->
+    <!-- 最初の記事の写真 -->
 	<% key_photo = key_photo(latests[0]) %>
 	<% unless key_photo.blank? %>
         <div class="latest_imgbox"><div><%= image_tag key_photo.clip.url(:panel) %></div></div>

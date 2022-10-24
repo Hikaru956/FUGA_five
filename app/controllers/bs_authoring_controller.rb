@@ -25,7 +25,7 @@ class BsAuthoringController < ApplicationController
     unless default_navi_item.blank? || default_navi_item.web_page.blank?
       redirect_to :controller=>'bs_authoring', :action=>default_navi_item.web_page.action_name, :hash=>Time.now.to_i
     else
-      redirect_to "/404.html"    
+      redirect_to "/404.html"
     end
   end
   
