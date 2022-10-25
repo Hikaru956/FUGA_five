@@ -65,7 +65,7 @@
 	<% end %>
 <% else %>
 	<% 
-		leafs = reorder_by_position(@leafs)
+		leafs = reorder_by_position(@leafs, true)
 		array = leafs.in_groups_of(3, false)
 	%>
 	<div class="row">
