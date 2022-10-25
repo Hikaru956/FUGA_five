@@ -81,7 +81,13 @@
 <%
 sons = @seed.sons
 sons << @seed
-@leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(position: :asc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+#@leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(position: :asc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+
+@leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons)
+@leafs = reorder_by_position(@leafs, true)
+@leafs = reorder_paginate(@leafs)
+#@leafs = @leafs.to_a.sort{|a,b| b.position<=>a.position}
+#@leafs = Kaminari.paginate_array(@leafs).page(params[:page]).per(PER_PAGE)
 #c = ContentLeaf.public_leafs
 #c.and "content_leafs.content_category_id", 'IN', sons
 #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'position')
@@ -113,9 +119,9 @@ sons << @seed
                 </section>
                 <aside class="pagination text-center">
 <% if true || request.host == 'sr2.swifty.jp' %>
-                        <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+                    <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% else %>
-                        <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+                    <%= will_paginate(@leafs, :params=> {:action=>'gallery_list', :id=>@seed, :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% end %>
                 </aside>
             </div>

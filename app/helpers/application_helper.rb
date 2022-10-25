@@ -370,6 +370,20 @@ EOF
     end
   end
 
+  def reorder_by_position(leafs, make_desc = false)
+    #trueがdesc
+    if make_desc
+      return leafs.to_a.sort{|a,b| b.position<=>a.position}
+    else 
+      return leafs.to_a.sort{|a,b| a.position<=>b.position}
+    end
+  end
+
+  def reorder_paginate(leafs)
+    leafs = Kaminari.paginate_array(leafs).page(params[:page]).per(PER_PAGE)
+    leafs
+  end
+
   def trash_icon(title='削除'); sprintf("<i class='fa-solid fa-trash' title=%s></i>", title).html_safe; end
   def new_icon(title='新規');   sprintf("<i class='fa-solid fa-circle-plus' title=%s></i>", title).html_safe; end
   def edit_icon(title='編集');     sprintf("<i class='fa-solid fa-pen-to-square' title=%s></i>", title).html_safe; end

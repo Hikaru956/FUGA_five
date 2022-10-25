@@ -72,7 +72,10 @@
 	<% end %>
 <% else %>
 	<h4>項目一覧</h4>
-	<% array = @leafs.in_groups_of(3, false)%>
+	<% 
+		leafs = reorder_by_position(@leafs)
+		array = leafs.in_groups_of(3, false)
+	%>
 	<div class="row-fluid">
 		<% for i in 0..(array.size-1) %>
 			<% @lines = array[i] %>
