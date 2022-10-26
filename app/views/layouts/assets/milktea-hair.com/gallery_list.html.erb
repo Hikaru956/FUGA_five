@@ -84,7 +84,7 @@ sons << @seed
 #@leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(position: :asc).paginate(:page => params[:page], :per_page=>PER_PAGE)
 
 @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons)
-@leafs = reorder_by_position(@leafs, false)
+@leafs = reorder_by_position(@leafs, true)
 @leafs = reorder_paginate(@leafs)
 #@leafs = @leafs.to_a.sort{|a,b| b.position<=>a.position}
 #@leafs = Kaminari.paginate_array(@leafs).page(params[:page]).per(PER_PAGE)
