@@ -395,6 +395,8 @@ EOF
   def move_to_top_icon(title='先頭へ');    sprintf("<i class='fa-solid fa-backward-step' title=%s></i>", title).html_safe; end
   def move_to_bottom_icon(title='末尾へ');    sprintf("<i class='fa-solid fa-forward-step' title=%s></i>", title).html_safe; end
   def reservation_icon(title='WEB予約',icon_size='');    sprintf("<i class='fa-solid fa-calendar-days %s' title=%s></i>", icon_size, title).html_safe; end
+  def top_icon(title='先頭へ'); sprintf('<i class="icon-step-backward" tittle=%s></i>', title).html_safe; end
+  def bottom_icon(title='末尾へ'); sprintf('<i class="icon-step-forward" tittle=%s></i>', title).html_safe; end
 
 
   def caution_icon(title='警告'); sprintf("<i class='fa-solid fa-diamond-exclamation' title=%s></i>", title).html_safe; end
