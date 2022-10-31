@@ -428,7 +428,7 @@ end
   end
 
   def content_leafs_params
-    params.require(:item).permit(:id, :shop_id, :content_bag_id, :content_category_id, :staff_id, :position, :title, :description, :description_2, :description_3, :is_public)
+    params.require(:item).permit(:id, :shop_id, :content_bag_id, :content_category_id, :staff_id, :position, :title, :description, :description_2, :description_3, :is_public, :publish_from, :publish_until)
   end
 
   def content_category_params
