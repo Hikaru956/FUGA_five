@@ -17,21 +17,45 @@
             #	navs = @shop.content_categories.find(:all, :conditions=>c.where, :order=>"position asc")
             #end
             
-            navs = @shop.content_categories.where('content_categories.is_public =? AND content_categories.category_type >= ? AND content_categories.category_type <= ?', true, ContentCategory::TYPE_NEWS ,ContentCategory::TYPE_PORTFOLIO).order(position: :asc)
+            navs = @shop.content_categories.where('content_categories.category_type >= ? AND content_categories.category_type <= ?', ContentCategory::TYPE_NEWS ,ContentCategory::TYPE_PORTFOLIO).order(position: :asc)
         %>
         <ul class="navbar-nav mr-auto">
             <% navs.each do | nav | %>
                 <li class="nav-item">
-                <% if nav.category_type==ContentCategory::TYPE_NEWS %><a class="nav-link" href="<%= url_for(:controller=>'admin_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                    <% if nav.category_type==ContentCategory::TYPE_NEWS %>
+                        <% unless nav.is_public? %>
+                            <a class="nav-link" href="<%= url_for(:controller=>'admin_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="fa-solid fa-lock"></i>&nbsp;<%= category_title(nav) %></a>
+                        <% else %>
+                            <a class="nav-link" href="<%= url_for(:controller=>'admin_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+                        <% end %>
+                    <% end %>
                 </li>
                 <li class="nav-item">
-                <% if nav.category_type==ContentCategory::TYPE_STREAM %><a class="nav-link" href="<%= url_for(:controller=>'admin_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                    <% if nav.category_type==ContentCategory::TYPE_STREAM %>
+                        <% unless nav.is_public? %>
+                            <a class="nav-link" href="<%= url_for(:controller=>'admin_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="fa-solid fa-lock"></i>&nbsp;<%= category_title(nav) %></a>
+                        <% else %>
+                            <a class="nav-link" href="<%= url_for(:controller=>'admin_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+                        <% end %>
+                    <% end %>
                 </li>
                 <li class="nav-item">
-                <% if nav.category_type==ContentCategory::TYPE_GALLERY %><a class="nav-link" href="<%= url_for(:controller=>'admin_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                    <% if nav.category_type==ContentCategory::TYPE_GALLERY %>
+                        <% unless nav.is_public? %>
+                            <a class="nav-link" href="<%= url_for(:controller=>'admin_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="fa-solid fa-lock"></i>&nbsp;<%= category_title(nav) %></a>
+                        <% else %>
+                            <a class="nav-link" href="<%= url_for(:controller=>'admin_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+                        <% end %>
+                    <% end %>
                 </li>
                 <li class="nav-item">
-                <% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %><a class="nav-link" href="<%= url_for(:controller=>'admin_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a><% end %>
+                    <% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %>
+                        <% unless nav.is_public? %>
+                            <a class="nav-link" href="<%= url_for(:controller=>'admin_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="fa-solid fa-lock"></i>&nbsp;<%= category_title(nav) %></a>
+                        <% else %>
+                            <a class="nav-link" href="<%= url_for(:controller=>'admin_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+                        <% end %>
+                    <% end %>
                 </li>
             <% end %>
                 <li class="nav-item">
