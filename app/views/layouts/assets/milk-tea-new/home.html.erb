@@ -132,7 +132,7 @@ $(document).ready(function(){
 								<div class="wrapper-flex">
 									<% 
 										staffs = @website.staffs 
-										staffs = staffs.order(position: :asc)
+										staffs = staffs.where('staffs.staff_status!=?', Staff::STAFF_BLOCKED).order(position: :asc)
 									%>
 									<% staffs.each do |staff| %>
 										<% 
