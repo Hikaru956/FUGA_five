@@ -65,20 +65,142 @@
 																<a href="<%= @seed.social_tumblr_uri %>" target='_blank'><i class='fa-brands fa-tumblr fa-2x'></i></a>
 															<% end %>
 															<% unless @seed.web_reservation_uri.blank? %>
-																<a href="<%= @staff.web_reservation_uri %>" target='_blank'><%= reservation_icon('WEB予約', 'fa-2x') %></a>
+																<a href="<%= @seed.web_reservation_uri %>" target='_blank'><%= reservation_icon('WEB予約', 'fa-2x') %></a>
 															<% end %>
 																<%= hotpepper_staff_banner(@seed, false, 'vertical-align: top; padding-top: 1px;') %>
 																<%= youtube_staff_banner(@seed, false) %>
 														</div>
 														<div class="hotpepper-cover">
-															<a href="https://beauty.hotpepper.jp/slnH000230521/coupon/">
-																<div class="hotpepper pointer1">
-																	<div class="hot-logo-cover">
-																		<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+															<% if @seed.id == 92 %>
+																<a href="https://beauty.hotpepper.jp/slnH000230521/coupon/">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
 																	</div>
-																		<div class="hotpepper-text">指名して予約する</div>
-																</div>
-															</a>
+																</a>
+															<% elsif @seed.id == 98%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000230521&stylistId=T000367247">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 99%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000230521&stylistId=T000191268">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 569%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000230521&stylistId=T000191268">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 248%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000348459&stylistId=T000490834">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 512%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000348459&stylistId=T000610124">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 619%>
+															<% elsif @seed.id == 620%>
+															<% elsif @seed.id == 103%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000424555&stylistId=T000557454">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 96%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000424555&stylistId=T000511636">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 453%>
+																<a href="https://beauty.hotpepper.jp/slnH000424555/coupon/">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 334%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000349275&stylistId=T000355987">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 335%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000349275&stylistId=T000383759">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 571%>
+															<% elsif @seed.id == 97%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000526228&stylistId=T000685455">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 454%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000526228&stylistId=T000691762">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% elsif @seed.id == 621%>
+																<a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000536979&stylistId=T000699386">
+																	<div class="hotpepper pointer1">
+																		<div class="hot-logo-cover">
+																			<img src="/images/assets/milk-tea-new/hpb_icon_bk.png" alt="ホットペッパー　ロゴ">
+																		</div>
+																			<div class="hotpepper-text">指名して予約する</div>
+																	</div>
+																</a>
+															<% end %>
 														</div>
 													</div>
 												</div>
