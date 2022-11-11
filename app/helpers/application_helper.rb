@@ -379,6 +379,15 @@ EOF
     end
   end
 
+  def reorder_by_position_photo(photos, make_desc = false)
+    #trueがdesc
+    if make_desc
+      return photos.sort{|a,b| b.position<=>a.position}
+    else 
+      return photos.sort{|a,b| a.position<=>b.position}
+    end
+  end
+
   def reorder_paginate(leafs)
     leafs = Kaminari.paginate_array(leafs).page(params[:page]).per(PER_PAGE)
     leafs
