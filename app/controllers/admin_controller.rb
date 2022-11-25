@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
     before_action :authenticate_user!, except: :index
+    before_action :peek_params
+
     #hikaru
     #before_action :check_super_privilege
     #before_action :check_super_privilege #hikaru :login_required,
@@ -11,9 +13,9 @@ class AdminController < ApplicationController
 
     def index
         unless params[:wkey].blank?
-            return redirect_to :controller=>"bs_renderer", :action=>"home", :wkey=>params[:wkey]
+            return redirect_to :controller=>"bs_renderer", :action=>"home", :wkey=>params[:wkey], :search_word=>@search_word
         end
-        return redirect_to :action=>"company_index"
+        return redirect_to :action=>"company_index", :search_word=>@search_word
     end
 
     def delegating
@@ -44,7 +46,9 @@ class AdminController < ApplicationController
         end
         #hikaru
         #@items =Company.paginate(:page => params[:page], :order=>"alt_id asc", :per_page=>PER_PAGE)
-        @items = Company.all.order(name: :asc)
+        @items = (@search_word.blank?)? Company.all:
+                Company.where('companies.alt_id LIKE ? OR companies.name LIKE ? OR companies.postal LIKE ? OR companies.address_1 LIKE ? OR companies.address_2 LIKE ? OR companies.telephone_1 LIKE ? OR companies.telephone_2 LIKE ?', "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%")
+        @items = @items.order(name: :asc)
         @items = @items.paginate(page: params[:page], per_page: PER_PAGE).order(name: :asc)
     end
 
@@ -575,6 +579,10 @@ class AdminController < ApplicationController
 
     #hikaru
     private
+    def peek_params
+        @search_word = params[:search_word]
+    end
+
     def company_params
         params.require(:company).permit(:alt_id, :name, :telephone_1, :postal, :address_1)
     end

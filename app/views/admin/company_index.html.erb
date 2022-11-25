@@ -9,7 +9,12 @@
 	<% if current_user.role==User::ROLE_SUPER %>
 		<p class="float-right">
 			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
-				<%= new_icon %>&nbsp;レジストリー登録
+				<%= new_icon %>&nbsp;登録
+			</button>
+			|
+		    <% seach_btn_class = (@search_word.blank?)? 'btn xbtn-sm btn-info': 'btn xbtn-sm btn-warning' %>
+			<button type="button" class="<%= seach_btn_class %>" data-bs-toggle="modal" data-bs-target="#modalSearch">
+				<%= search_icon %>&nbsp;検索
 			</button>
 		</p>
 	<% end %>
@@ -121,6 +126,30 @@
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-success"><%= new_icon('新規登録') %>&nbsp;登録</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="modalSearch" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<%= form_tag(admin_index_path, :method => 'get') do %>
+				<div class="modal-header">
+					<h5 class="modal-title">レジストリー検索</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<%= text_field_tag :search_word, @search_word,{class: "form-control form-control-lg", placeholder: "検索文字列", autofocus: true} %>
+				</div>
+				<div class="modal-footer">
+					<% unless @search_word.blank? %>
+			            <%= link_to reset_search_icon+' リセット', admin_index_path, class: 'btn btn-outline-dark' %>
+						|
+					<% end %>
+					<button type="submit" class="btn btn-info"><%= search_icon %>&nbsp;検索</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
 				</div>
 			<% end %>

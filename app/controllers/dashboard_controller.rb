@@ -9,7 +9,7 @@
 #
 # require 'file_column'
 class DashboardController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, :peek_params
   #hikaru
   #before_action :check_super_privilege
   #before_action :check_super_privilege #hikaru :login_required,
@@ -24,8 +24,8 @@ class DashboardController < ApplicationController
       return redirect_to :controller=>"bs_renderer", :action=>"home", :wkey=>params[:wkey]
     end
     return redirect_to sign_in_path if current_user.blank?
-    return redirect_to(:controller=>'admin', :action=>'company_index') unless current_user.ui_version.blank?
-    return redirect_to :action=>"company_index"
+    return redirect_to(:controller=>'admin', :action=>'company_index', search_word: @search_word) unless current_user.ui_version.blank?
+    return redirect_to :action=>"company_index", search_word: @search_word
   end
   
   def delegating
@@ -55,7 +55,9 @@ class DashboardController < ApplicationController
         return redirect_to(:action=>"company_show", :id=>current_user.company) if current_user.has_permission?(User::ROLE_OWNER) 
         return redirect_to(:controller=>'bs_config', :action=>"company_show_shop", :id=>current_user.shop)
     end
-    @items = Company.all.order(name: :asc)
+    @items = (@search_word.blank?)? Company.all:
+              Company.where('companies.alt_id LIKE ? OR companies.name LIKE ? OR companies.postal LIKE ? OR companies.address_1 LIKE ? OR companies.address_2 LIKE ? OR companies.telephone_1 LIKE ? OR companies.telephone_2 LIKE ?', "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%")
+    @items = @items.order(name: :asc)
     @items = @items.paginate(page: params[:page], per_page: PER_PAGE).order(name: :asc)
   end
 
@@ -620,6 +622,10 @@ class DashboardController < ApplicationController
 
 #hikaru
 private
+  def peek_params
+    @search_word = params[:search_word]
+  end
+
   def company_params
     params.require(:company).permit(:alt_id, :name, :telephone_1, :postal, :address_1)
   end

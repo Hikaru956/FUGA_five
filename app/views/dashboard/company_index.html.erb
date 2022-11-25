@@ -6,6 +6,12 @@
 				<i class="icon-plus"></i>&nbsp;
 				レジストリー登録
 			</a>
+			|
+		    <% seach_btn_class = (@search_word.blank?)? 'btn btn-small btn-info': 'btn btn-small btn-warning' %>
+			<a class="<%= seach_btn_class %>"  data-toggle="modal" href="#modalSearch">
+				<i class="icon-search"></i>&nbsp;
+				レジストリー検索
+			</a>
 		</p>
 	<% end %>
 	<h3>レジストリー</h3>
@@ -76,18 +82,43 @@
 
 <!-- modalNewShop -->
 <div class="modal hide fade form-horizontal", id="modalNew">
-<% item = Company.new %>
-<%= form_for item, url: dashboard_company_create_path, method: :post do |f| -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">新規レジストリー登録</h3>
-	</div>
-	<div class="modal-body">
-		<%= render partial: "form_company", locals: {f: f, item: item } %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-	</div>
-<% end %>
+	<% item = Company.new %>
+	<%= form_for item, url: dashboard_company_create_path, method: :post do |f| -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">新規レジストリー登録</h3>
+		</div>
+		<div class="modal-body">
+			<%= render partial: "form_company", locals: {f: f, item: item } %>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
+</div>
+
+<div class="modal hide fade form-horizontal", id="modalSearch">
+	<%= form_tag(home_path, :method => 'get') do %>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">レジストリー検索</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="item_name">検索文字</label>
+				<div class="controls">
+					<%= text_field_tag :search_word, @search_word,{class: "form-control form-control-lg", placeholder: "任意の文字列", autofocus: true} %>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<% unless @search_word.blank? %>
+				<%= link_to reset_search_icon+' リセット', home_path, class: 'btn btn-outline-dark' %>
+				|
+			<% end %>
+			<button type="submit" class="btn btn-info"><i class="icon-search"></i>&nbsp;&nbsp;検索</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
 </div>

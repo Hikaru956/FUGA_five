@@ -400,6 +400,8 @@ EOF
   def cancel_icon(title='キャンセル');    sprintf("<i class='fa-solid fa-circle-xmark' title=%s></i>", title).html_safe; end
   def forward_icon(title='続ける');    sprintf("<i class='fa-solid fa-forward' title=s></i>", title).html_safe; end
   def backward_icon(title='戻る');    sprintf("<i class='fa-solid fa-backward' title=%s></i>", title).html_safe; end
+  def search_icon(title='検索');   sprintf("<i class='fas fa-search' title=%s></i>", title).html_safe; end
+  def reset_search_icon(title='検索リセット');    sprintf("<i class='fas fa-undo-alt fa-fw' title=%s></i>", title).html_safe; end
 
   def move_to_top_icon(title='先頭へ');    sprintf("<i class='fa-solid fa-backward-step' title=%s></i>", title).html_safe; end
   def move_to_bottom_icon(title='末尾へ');    sprintf("<i class='fa-solid fa-forward-step' title=%s></i>", title).html_safe; end
