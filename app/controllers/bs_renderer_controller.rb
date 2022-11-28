@@ -158,7 +158,14 @@ class BsRendererController < ApplicationController
   ##  Contact
   #  
   def contact
-    render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.renderer_layout}/contact":  "#{@website.layout_pc_specific_basename}/contact");  end
+    staffs = @website.staffs.where("staffs.staff_status !=?", Staff::STAFF_BLOCKED)
+    if staffs.size == 1
+      return redirect_to(:action=>'staff', :id=>staffs[0].id, :wkey=>@website.wsite_hash_key)
+    else
+      render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.renderer_layout}/contact":  "#{@website.layout_pc_specific_basename}/contact")
+    end
+  end
+
   def staff
     @target_date = (params[:target_date].blank?)? Time.now.to_date: parse_date(params[:target_date])
     @target_date = (@target_date-@target_date.wday)+1
