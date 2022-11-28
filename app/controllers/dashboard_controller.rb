@@ -9,7 +9,8 @@
 #
 # require 'file_column'
 class DashboardController < ApplicationController
-  before_action :authenticate_user!, :peek_params
+  before_action :authenticate_user!, except: :index
+  before_action :peek_params
   #hikaru
   #before_action :check_super_privilege
   #before_action :check_super_privilege #hikaru :login_required,
