@@ -40,6 +40,7 @@
 				<th class="span2">ディスク容量</th>
 				<th class="span2">使用率</th>
 				<th class="span2">固定ページ</th>
+				<th class="span2">サイト表示</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -80,6 +81,12 @@
 						<% fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop) %>
 						<%= fix_pages_bag.content_leafs.size %>
 						ページ
+					</td>
+					<td style="text-align:center">
+						<a class="btn btn-mini btn-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>shop.wsite_hash_key) %>" target="_blank">
+							<i class="icon-share"></i>
+							サイト表示
+						</a>
 					</td>
 				</tr>
 			<% end %>

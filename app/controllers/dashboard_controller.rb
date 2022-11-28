@@ -9,7 +9,7 @@
 #
 # require 'file_column'
 class DashboardController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: :index #この行を絶対に消すな。NEVER.
   before_action :peek_params
   #hikaru
   #before_action :check_super_privilege
