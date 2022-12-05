@@ -45,13 +45,13 @@ SitemapGenerator::Sitemap.create do
     category = ContentCategory.type_root(shop, ContentCategory::TYPE_STREAM)
     articles = category.public_leafs(true).order(updated_at: :desc).limit(10)
     articles.each do |art|
-      add news_show_path(id: art, wkey: shop.wsite_hash_key), priority: 1.0, lastmod: art.updated_at, changefreq: 'daily'
+      add stream_show_path(id: art, wkey: shop.wsite_hash_key), priority: 1.0, lastmod: art.updated_at, changefreq: 'daily'
     end
 
     category = ContentCategory.type_root(shop, ContentCategory::TYPE_GALLERY)
     articles = category.public_leafs(true).order(updated_at: :desc).limit(10)
     articles.each do |art|
-      add news_show_path(id: art, wkey: shop.wsite_hash_key), priority: 1.0, lastmod: art.updated_at, changefreq: 'daily'
+      add gallery_show_path(id: art, wkey: shop.wsite_hash_key), priority: 1.0, lastmod: art.updated_at, changefreq: 'daily'
     end
 
   end
