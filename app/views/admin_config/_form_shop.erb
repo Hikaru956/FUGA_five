@@ -10,6 +10,7 @@
 		<%= f.text_field  :name,  {class: "form-control", placeholder: "店舗名を入力", :required => true, autofocus: true}  %>
 	</div>
 </div>
+<% if false %>
 <div class="mb-3 row">
 	<label for="item_reservation_range_from" class="col-sm-4 col-form-label">営業時間</label>
 	<div class="col-sm-8 form-inline">
@@ -35,6 +36,7 @@
 		<%= f.select :business_hour_until, options_for_select(opts_until, shop.business_hour_until), {include_blank:'閉店時間' }, {:required => true, class: 'form-control'} %>
 	</div>
 </div>
+<% end %>
 <div class="mb-3 row">
 	<label for="shop_alt_id" class="col-sm-4 col-form-label">郵便番号</label>
 	<div class="col-sm-8">

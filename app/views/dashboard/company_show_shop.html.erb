@@ -70,6 +70,7 @@
 						<%= model_name(@item) %>
 					</td>
 				</tr>
+				<% if false %>
 				<tr>
 					<td>営業時間</td>
 					<td>
@@ -78,7 +79,6 @@
 						<%= @item.operation_until.strftime("%l:%M %p")%>
 					</td>
 				</tr>
-				<% if false %>
 				<tr>
 					<td>電話番号</td><td><%= @item.telephone_1 %></td>
 				</tr>

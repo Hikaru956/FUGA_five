@@ -59,6 +59,7 @@
 						<%= model_name(@shop) %>
 					</td>
 				</tr>
+				<% if false %>
 				<tr>
 					<th>営業時間</th>
 					<td>
@@ -67,6 +68,7 @@
 						<%= @shop.operation_until.strftime("%l:%M %p")%>
 					</td>
 				</tr>
+				<% end %>
 				<tr>
 					<th>郵便番号</th><td><%= @shop.postal %></td>
 				</tr>

@@ -10,6 +10,7 @@
 		<%= text_field 'shop', 'name', :placeholder=>"店舗名を入力", :autocomplete => "off" %>
 	</div>
 </div>
+<% if false %>
 <div class="control-group">
 	<label class="control-label" for="item_reservation_range_from">営業時間</label>
 	<div class="controls form-inline">
@@ -33,7 +34,7 @@
 		</select>
 	</div>
 </div>
-
+<% end %>
 <div class="control-group">
 	<label class="control-label" for="alt_id">郵便番号</label>
 	<div class="controls">
@@ -46,4 +47,3 @@
 		<%= text_field 'shop', 'address_1', :placeholder=>"住所を入力", :autocomplete => "off" %>
 	</div>
 </div>
-
