@@ -3,7 +3,7 @@ class InquiryMailer < ApplicationMailer
         @inquiry = inquiry
         shop = @inquiry.shop
         mail(
-        from: @inquiry.email,
+        from: ENV['TACHIKAWA_EMAIL_ADDRESS'],
         to:   shop.wsite_email,
         subject: '[swifty] お問い合わせ通知'
         )
