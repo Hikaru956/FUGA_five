@@ -1,10 +1,4 @@
-class Inquiry < ApplicationRecord
-    belongs_to :shop
-
-    INQ_OPEN    = 0
-    INQ_WORKING = 1
-    INQ_CLOSE   = 2
-
+class InquiryMailer < ApplicationMailer
     def send_mail(inquiry)
         @inquiry = inquiry
         shop = @inquiry.shop
@@ -14,5 +8,4 @@ class Inquiry < ApplicationRecord
         subject: '[swifty] お問い合わせ通知'
         )
     end
-
 end

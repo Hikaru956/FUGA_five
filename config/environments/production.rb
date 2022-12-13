@@ -44,6 +44,16 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'mail.swifty.jp',
+    port:                  587,
+    domain:               'swifty.jp',
+    user_name:            ENV['TACHIKAWA_EMAIL_ADDRESS'],
+    password:             ENV['TACHIKAWA_PASSWORD'],
+    authentication:       'plain',
+    enable_starttls_auto:  true
+  }
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'

@@ -44,6 +44,16 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'mail.swifty.jp',
+    port:                  587,
+    domain:               'swifty.jp',
+    user_name:            ENV['TACHIKAWA_EMAIL_ADDRESS'],
+    password:             ENV['TACHIKAWA_PASSWORD'],
+    authentication:       'plain',
+    enable_starttls_auto:  true
+  }
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
