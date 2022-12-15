@@ -17,9 +17,15 @@
 	</div>
 </div>
 <div class="control-group">
-	<label class="control-label" for="wsite_email">メールアドレス</label>
+	<label class="control-label" for="wsite_email">ホームページ表示メールアドレス</label>
 	<div class="controls">
-		<%= text_field 'shop', 'wsite_email', :placeholder=>"メールアドレスを入力", :autocomplete => "off" %>
+		<%= text_field 'shop', 'wsite_email', :placeholder=>"サイトに掲示されるメールアドレスを入力", :autocomplete => "off" %>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="inquiry_email">お問い合わせメールアドレス</label>
+	<div class="controls">
+		<%= text_field 'shop', 'inquiry_email', :placeholder=>"お問い合わせメールアドレスを入力", :autocomplete => "off" %>
 	</div>
 </div>
 <div class="control-group">

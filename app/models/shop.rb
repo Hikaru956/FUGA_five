@@ -253,6 +253,10 @@ class Shop < ApplicationRecord
     items
   end
 
+  def return_email(shop)
+    email = shop.wsite_email || shop.inquiry_email
+  end
+
 
   protected 
   def gen_new_wsite_key
