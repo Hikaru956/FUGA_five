@@ -1,17 +1,19 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<div class="pull-right">
-		<p>
-			<div class="btn-toolbar" style="margin: 0;">
-              <div class="btn-group">
-				<a class="btn btn-success btn-small"  data-toggle="modal" href="#modal_new">
-					<i class="icon-plus"></i>&nbsp;
-					ストリーム
-				</a>
-              </div><!-- /btn-group -->
-            </div>
-		</p>
-	</div>
+	<% if current_user.role==User::ROLE_SUPER %>
+		<div class="pull-right">
+			<p>
+				<div class="btn-toolbar" style="margin: 0;">
+				<div class="btn-group">
+					<a class="btn btn-success btn-small"  data-toggle="modal" href="#modal_new">
+						<i class="icon-plus"></i>&nbsp;
+						ストリーム
+					</a>
+				</div><!-- /btn-group -->
+				</div>
+			</p>
+		</div>
+	<% end %>
 	<h3><%=@bag_title %>・ストリーム</h3>
 </header>
 
