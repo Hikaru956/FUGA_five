@@ -53,10 +53,10 @@
 						<% url = url_for(:action=>"company_show_user", :id=>user) %>
 						<a href="<%=url%>">
 							<i class="fa-solid fa-chevron-right"></i>
-							<%= user.email %>
+							<%= user.login %>
 						</a>
 					</td>
-					<td><%= user.email_org %></td>
+					<td><%= user.email %></td>
 				</tr>
 			<% end %>
 		</tbody>
