@@ -10,12 +10,12 @@
 					</a>
 				<%end%>
 				<% if @bag_roots.index(@parent_category).blank? %>
+				<% end %>
 				<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
 				<a class="btn btn-success btn-small" href="<%=url_new%>" data-turbolinks='false'>
 					<i class="icon-plus"></i>&nbsp;
 					項目登録
 				</a>
-				<% end %>
 				<% if @parent_category.category_type==ContentCategory::TYPE_BAG_ROOT %>
 					<% url_edit = url_for(:action=>"content_category_tree", :id=>@parent_category) %>
 					<a class="btn btn-warning btn-small" href="<%=url_edit%>">

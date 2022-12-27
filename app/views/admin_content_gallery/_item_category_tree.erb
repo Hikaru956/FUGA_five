@@ -60,16 +60,18 @@
                             <%= f.text_field :title,  {class: "form-control", placeholder: "カテゴリー名称", :required => false, autofocus: true}  %>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="wsite_keywords" class="col-sm-4 col-form-label">カテゴリー</label>
-                        <div class="col-sm-8">
-                            <%
-                                cat_options = Array.new
-                                cat_options << temp_local.category_path(true)[0]
-                            %>
-                            <%= tree_select(cat_options, 'content_category', 'parent_id', temp_local.parent_id) %>
+                    <% if false %>
+                        <div class="mb-3 row">
+                            <label for="wsite_keywords" class="col-sm-4 col-form-label">カテゴリー</label>
+                            <div class="col-sm-8">
+                                <%
+                                    cat_options = Array.new
+                                    cat_options << temp_local.category_path(true)[0]
+                                %>
+                                <%= tree_select(cat_options, 'content_category', 'parent_id', temp_local.parent_id) %>
+                            </div>
                         </div>
-                    </div>
+                    <% end %>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>

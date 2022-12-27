@@ -66,23 +66,24 @@
 </div>
 
 <% if false %>
-<%= form_tag url_for(:action=>"update_photo", :id=>photo), {:class=>"modal hide fade form-horizontal", :id=>"modal_edit_photo_#{photo.id}"} do -%>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">キャプション編集</h3>
-	</div>
-	<div class="modal-body">
-		<div class="control-group">
-			<label class="control-label" for="job_title">写真の説明</label>
-			<div class="controls">
-				<%= text_area  'photo', 'info', :rows=>"5" %>
+	<%= form_tag url_for(:action=>"update_photo", :id=>photo), {:class=>"modal hide fade form-horizontal", :id=>"modal_edit_photo_#{photo.id}"} do -%>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 id="myModalLabel">キャプション編集</h3>
+		</div>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="job_title">写真の説明</label>
+				<div class="controls">
+					<%= text_area  'photo', 'info', :rows=>"5" %>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-	</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		</div>
+	<% end %>
 <% end %>
 
 <div id="modal_delete_photo_<%=photo.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

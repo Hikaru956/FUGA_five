@@ -52,7 +52,6 @@
 	</div>
 <% end %>
 
-<% if false %>
 <hr/>
 <div class="row-fluid">
 	<h4>
@@ -68,7 +67,7 @@
 	  <small>この項目に関する画像を登録します。先頭の写真が一覧表示の際の代表写真になります。登録された画像は記事にも挿入することが出来ます。</small>
 	</p>	
 	
-	<% array = @item.photos.find(:all, :order=>"position asc").in_groups_of(3, false)%>
+	<% array = @item.photos.order(position: :asc).in_groups_of(3, false)%>
 	<% for i in 0..(array.size-1) %>
 		<% @lines = array[i] %>
 	    <ul class="thumbnails">
@@ -97,7 +96,6 @@
 	</p>
 </div>
 
-<% end %>
 
 <div id="modal_delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">

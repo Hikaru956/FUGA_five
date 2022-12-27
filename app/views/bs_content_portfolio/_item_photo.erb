@@ -8,7 +8,6 @@
 	</div>
 	<%= image_tag photo.clip.url(:thumb) %>
 	<div class="caption">
-		<p><%=File::basename(photo.image)%></p>
 		<p><%=photo.info%></p>
 		<p>
 			<a class="btn btn-success btn-small" data-toggle="modal" href="#modal_edit_photo_<%=photo.id%>">	<i class="icon-info-sign"></i>&nbsp;キャプション</a></a> 

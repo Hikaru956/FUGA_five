@@ -51,16 +51,18 @@
 					<%= text_field 'item', 'title', :value=>temp_local.category_label, :placeholder=>"カテゴリー名称", :autocomplete => "off" %>
 				</div>
 			</div>
-            <div class="control-group">
-                <label class="control-label" for="item_alt_id">カテゴリー</label>
-                <div class="controls">
-                    <%
-                    cat_options = Array.new
-                    cat_options << temp_local.category_path(true)[0]
-                    %>
-                    <%= tree_select(cat_options, 'item', 'parent_id', temp_local.id) %> 
+            <% if false #hikaru %>
+                <div class="control-group">
+                    <label class="control-label" for="item_alt_id">カテゴリー</label>
+                    <div class="controls">
+                        <%
+                        cat_options = Array.new
+                        cat_options << temp_local.category_path(true)[0]
+                        %>
+                        <%= tree_select(cat_options, 'item', 'parent_id', temp_local.id) %> 
+                    </div>
                 </div>
-            </div>
+            <% end %>
 		</div>
 		<div class="modal-footer">
 			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>

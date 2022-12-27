@@ -228,7 +228,7 @@ end
   def content_category_update
       @item = ContentCategory.find(params[:id])
       @item.update_attributes(content_category_params)
-      redirect_to(:action=>'content_category_tree', :id=>@item.id)
+      redirect_to(:action=>'content_category_tree', :id=>@item.parent.id)
   end
 
   def sort_update
