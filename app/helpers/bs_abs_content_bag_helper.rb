@@ -12,7 +12,7 @@ module BsAbsContentBagHelper
 
   def ancestors_for(category)
     return [] if category.category_type==ContentCategory::TYPE_BAG_ROOT
-    ancestors = category.ancestorrs
+    ancestors = category.ancestors
     ret = []
     ancestors.each do |cat|
       ret << cat
