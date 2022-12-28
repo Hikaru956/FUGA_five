@@ -229,6 +229,39 @@ EOF
     return raw html
   end
 
+  def tree_select_with_filter(categories, model, name, selected=0, level=0, init=true, filter_categories=[])
+    html = ""
+    # The "Root" option is added
+    # so the user can choose a parent_id of 0
+    if init
+        # Add "Root" to the options
+        html << "<select name=\"#{model}[#{name}]\" class='form-select' id=\"#{model}_#{name}\">\n"
+#        html << "\t<option value=\"0\""
+#        html << " selected=\"selected\"" if selected.parent_id == 0
+#        html << ">Root</option>\n"
+    end
+
+    if categories.length > 0
+      level += 1 # keep position
+      
+      indent = "- " * (level-1)
+      
+      categories.collect do |cat|
+        html << "\t<option value=\"#{cat.id}\" "
+        unless filter_categories.blank?
+          html << ' disabled="true"' if filter_categories.include?(cat)
+        end
+        unless selected.blank?
+          html << ' selected="selected"' if cat.id == selected
+        end
+        html << ">#{ h(indent)+cat.name}</option>\n"
+        html << tree_select_with_filter(cat.children, model, name, selected, level, false, filter_categories)
+      end
+    end
+    html << "</select>\n" if init
+    return raw html
+  end
+
   def tree_select_tag(categories, name, selected=0, level=0, init=true)
     html = ""
     # The "Root" option is added
