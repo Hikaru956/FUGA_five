@@ -9,6 +9,18 @@
 #
 
 module BsAbsContentBagHelper
+
+  def ancestors_for(category)
+    return [] if category.category_type==ContentCategory::TYPE_BAG_ROOT
+    ancestors = category.ancestorrs
+    ret = []
+    ancestors.each do |cat|
+      ret << cat
+      nreak if cat.category_type==ContentCategory::TYPE_BAG_ROOT
+    end
+    ret.reverse
+  end
+
   def content_category_trees(items)
     if items.size > 0
       # ルート以外は非表示の設定で描画する
