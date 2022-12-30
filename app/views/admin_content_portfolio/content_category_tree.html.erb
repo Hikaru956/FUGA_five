@@ -33,7 +33,7 @@
 			<%
 				@content_category                 = ContentCategory.new
 				@content_category.shop            = @shop
-				@content_category.parent          = @parent_category
+				@content_category.parent          = @current_category#parent_category
 				@content_category.web_page        = @parent_category.web_page 
 				@content_category.category_type   = ContentCategory::TYPE_CATEGORY
 			%>
@@ -62,42 +62,6 @@
         </div>
     </div>
 </div>
-
-<% if false %>
-<!-- Modal -->
-<div id="modalNew" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<%= form_tag({:action => 'content_category_create', :parent_id=>@parent_category}, :class=>"form-horizontal", method: :post)  do %>
-		<%
-		    @item                 = ContentCategory.new
-		    @item.shop            = @shop
-		    @item.parent          = @current_category#@parent_category
-		    @item.web_page        = @parent_category.web_page 
-		    @item.category_type   = ContentCategory::TYPE_CATEGORY
-		%>
-		<%= hidden_field 'item', 'shop_id' %>
-		<%= hidden_field 'item', 'parent_id' %>
-		<%= hidden_field 'item', 'web_page_id' %>
-		<%= hidden_field 'item', 'category_type' %>
-
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">新規カテゴリー登録</h3>
-		</div>
-		<div class="modal-body">
-			<div class="control-group">
-				<label class="control-label" for="item_title">カテゴリー</label>
-				<div class="controls controls-row">
-					<%= text_field 'item', 'title', :placeholder=>"カテゴリー名称", :autocomplete => "off" %>
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-plus"></i>&nbsp;&nbsp;登録</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-		</div>
-	<% end %>
-</div>
-<% end %>
 
 <% unless @current_category.children.blank? %>
 	<h4>サブ・カテゴリー</h4>
