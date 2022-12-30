@@ -41,6 +41,15 @@
 							<i class='icon-chevron-sign-right'></i>
 							<%= model_name(@company) %>
 						</a>
+						<span class='pull-right text-error'>
+							<%
+								e_cat = ContentCategory.where('shop_id IN (?) AND content_categories.id = content_categories.parent_id', @company.shops.map{|s| s.id})
+							%>
+							<% unless e_cat.blank? %>
+								<i class="icon-warning-sign" title='カテゴリーエラー'></i>
+							<% end %>
+						</span>
+					</td>
 					<td style="text-align:right"><%= @company.shops.size %></td>
 
 					<% 

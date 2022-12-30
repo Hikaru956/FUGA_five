@@ -70,7 +70,7 @@
 		<%
 		    @item                 = ContentCategory.new
 		    @item.shop            = @shop
-		    @item.parent          = @parent_category
+		    @item.parent          = @current_category#@parent_category
 		    @item.web_page        = @parent_category.web_page 
 		    @item.category_type   = ContentCategory::TYPE_CATEGORY
 		%>
@@ -116,5 +116,71 @@
 		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
 				</div>
 		<% end %>
+	</div>
+<% end %>
+
+<%
+	e_cats = ContentCategory.where('shop_id IN (?) AND content_categories.id = content_categories.parent_id', @shop)
+%>
+<% if e_cats.size >= 1 %>
+<h4>エラー・カテゴリー</h4>
+<%= e_cats.size %>
+	<table class="table table-hover table-bordered table-striped">
+		<thead>
+			<tr class="table-dark">
+				<th width='40%'>
+					カテゴリー名
+				</th>
+				<th width='25%'>リーフネーム</th>
+				<th width='25%'></th>
+			</tr>
+		<head>
+		<tbody>
+			<% e_cats.each do |e_cat| %>
+				<tr>
+					<td style="vertical-align: middle">
+							<i class="fa-solid fa-chevron-right"></i>
+							<%= model_name(e_cat) %>
+					</td>
+					<%
+						leaf_name = e_cat.content_leafs.map{|l| l.name}.join(', ')
+					%>
+					<td style=" vertical-align: middle; text-align:right">
+						<%= leaf_name %>
+						<%= e_cat.content_leafs.size %>
+					</td>
+					<td style=" vertical-align: middle; text-align:center">
+						<button type="button" class="btn btn-danger btn-mini" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=e_cat.id%>">
+							<%= edit_icon('復活')%>&nbsp;復活
+						</button>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+
+<% e_cats.each do |e_cat| %>
+	<div class="modal fade" id="modal_edit_<%=e_cat.id%>" tabindex="-1" aria-labelledby="modal_edit_<%=e_cat.id%>" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<%= form_for e_cat, url: admin_content_portfolio_content_category_update_path(id: e_cat.id), method: :patch do |f| -%>
+					<%= hidden_field_tag 'content_category[parent_id]', @current_category.id %>
+					<div class="modal-header">
+						<h5 class="modal-title">カテゴリー復活</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>
+							<%= e_cat.category_label %>を復活します。よろしいですか？
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-danger"><%= update_icon('復活') %>&nbsp;復活</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					</div>
+				<% end %>
+			</div>
+		</div>
 	</div>
 <% end %>

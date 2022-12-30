@@ -45,6 +45,15 @@
 							<i class="fa-solid fa-chevron-right"></i>
 							<%= model_name(@company) %>
 						</a>
+						<span class='float-right text-danger'>
+							<%
+								e_cat = ContentCategory.where('shop_id IN (?) AND content_categories.id = content_categories.parent_id', @company.shops.map{|s| s.id})
+							%>
+							<% unless e_cat.blank? %>
+								<i class="fas fa-exclamation-triangle" title='カテゴリーエラー'></i>
+							<% end %>
+						</span>
+					</td>
 					<td style="vertical-align: middle; text-align:right">
 						<%= @company.shops.size %>
 					</td>

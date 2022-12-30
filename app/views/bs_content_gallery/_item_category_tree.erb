@@ -6,7 +6,7 @@
             <%= (temp_local.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	{:action=>"content_category_lower",		:id=>temp_local}, :title=>"表示順を後ろに") %>				
         </p>
     </div>
-    <% if temp_local.children.blank? %>
+    <a href="<%= url_for(:action=>'content_category_tree', :id=>temp_local) %>">
         <div class="caption">
                 <h4>
                     <span class='pull-right'><span class="badge badge-success"><%= temp_local.content_leafs.size %></span></span>
@@ -19,27 +19,12 @@
                 <a class="btn btn-danger btn-mini"		data-toggle="modal" href="#modal_delete_<%=temp_local.id%>"><i class="icon-trash"></i></a>
             </p>
         </div>
-    <% else %>
-        <a href="<%= url_for(:action=>'content_category_tree', :id=>temp_local) %>">
-            <div class="caption">
-                    <h4>
-                        <span class='pull-right'><span class="badge badge-success"><%= temp_local.content_leafs.size %></span></span>
-                        <i class="icon-folder-close"></i>
-                        <%= truncate(temp_local.title, :length=>50) %>
-                    </h4>
-                <p><%= h truncate(strip_tags(temp_local.description), :length=>20) unless temp_local.description.blank?%></p>
-                <p class="text-right">
-                    <a class="btn btn-info btn-mini"  		data-toggle="modal" href="#modal_edit_<%=temp_local.id%>"><i class="icon-wrench"></i></a>
-                    <a class="btn btn-danger btn-mini"		data-toggle="modal" href="#modal_delete_<%=temp_local.id%>"><i class="icon-trash"></i></a>
-                </p>
-            </div>
-        </a>
-    <% end %>
+    </a>
 </div>
 
 <!-- modalEdit -->
 <div class="modal hide fade form-horizontal", id="modal_edit_<%=temp_local.id%>">
-	<%= form_tag({:action => 'content_category_update', :id=>temp_local.id}, :class=>"form-horizontal", method: :patch)  do %>
+    <%= form_for temp_local, url: bs_content_gallery_content_category_update_path(id: temp_local.id), method: :patch do |f| -%>
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
 			<h3 id="myModalLabel">カテゴリー名編集</h3>
@@ -56,13 +41,28 @@
                     <label class="control-label" for="item_alt_id">カテゴリー</label>
                     <div class="controls">
                         <%
-                        cat_options = Array.new
-                        cat_options << temp_local.category_path(true)[0]
+                            ancestors = ancestors_for(temp_local)
+                            options = ancestors.map{ | c | [ c.name, c.id] }
                         %>
-                        <%= tree_select(cat_options, 'item', 'parent_id', temp_local.id) %> 
+                        <%= f.collection_select(:parent_id, options, :last, :first, {prompt: false}, {class: "form-control"})%>
+                            <%
+                            cat_options = Array.new
+                            cat_options << temp_local.category_path(true)[0]
+                            %>
+                            <%= tree_select(cat_options, 'item', 'parent_id', temp_local.parent.id) %>
                     </div>
                 </div>
             <% end %>
+                <div class="control-group">
+                    <label class="control-label" for="item_alt_id">所属カテゴリー</label>
+                    <div class="controls">
+                        <%
+                            ancestors = ancestors_for(temp_local)
+                            options = ancestors.map{ | c | [ c.name, c.id] }
+                        %>
+                        <%= tree_select_with_filter([temp_local.category_path(true)[0]], 'item', 'parent_id', temp_local.parent_id, 0, true, (temp_local.parent.blank?)? []: temp_local.sons<<temp_local)%>
+                    </div>
+                </div>
 		</div>
 		<div class="modal-footer">
 			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>

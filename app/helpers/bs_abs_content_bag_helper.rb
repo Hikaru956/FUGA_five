@@ -16,7 +16,7 @@ module BsAbsContentBagHelper
     ret = []
     ancestors.each do |cat|
       ret << cat
-      nreak if cat.category_type==ContentCategory::TYPE_BAG_ROOT
+      break if cat.category_type==ContentCategory::TYPE_BAG_ROOT
     end
     ret.reverse
   end

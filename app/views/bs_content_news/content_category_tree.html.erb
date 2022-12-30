@@ -33,7 +33,7 @@
 		<%
 		    @item                 = ContentCategory.new
 		    @item.shop            = @shop
-		    @item.parent          = @parent_category
+		    @item.parent          = @current_category#@parent_category
 		    @item.web_page        = @parent_category.web_page 
 		    @item.category_type   = ContentCategory::TYPE_CATEGORY
 		%>
@@ -83,7 +83,68 @@
 <% end %>
 
 
+<%
+	e_cats = ContentCategory.where('shop_id IN (?) AND content_categories.id = content_categories.parent_id', @shop)
+%>
+<% if e_cats.size >= 1 %>
+<h4>エラー・カテゴリー</h4>
+<%= e_cats.size %>
+	<table class="table table-hover table-bordered table-striped">
+		<thead>
+			<tr class="table-dark">
+				<th width='40%'>
+					カテゴリー名
+				</th>
+				<th width='25%'>リーフネーム</th>
+				<th width='25%'></th>
+			</tr>
+		<head>
+		<tbody>
+			<% e_cats.each do |e_cat| %>
+				<tr>
+					<td style="vertical-align: middle">
+							<i class="fa-solid fa-chevron-right"></i>
+							<%= model_name(e_cat) %>
+					</td>
+					<%
+						leaf_name = e_cat.content_leafs.map{|l| l.name}.join(', ')
+					%>
+					<td style=" vertical-align: middle; text-align:right">
+						<%= leaf_name %>
+						<%= e_cat.content_leafs.size %>
+					</td>
+					<td style=" vertical-align: middle; text-align:center">
+						<a class="btn btn-danger btn-mini" data-toggle="modal" href="#modal_edit_<%=e_cat.id%>"><i class="icon-wrench"></i>&nbsp;復活</a>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
 
+<% e_cats.each do |e_cat| %>
+	<div class="modal hide fade form-horizontal", id="modal_edit_<%=e_cat.id%>">
+		<%= form_for e_cat, url: bs_content_news_content_category_update_path(id: e_cat.id), method: :patch do |f| -%>
+			<%= hidden_field_tag 'item[parent_id]', @current_category.id %>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 id="myModalLabel">カテゴリー復活</h3>
+			</div>
+			<div class="modal-body">
+				<p>
+					<%= e_cat.category_label %>を復活します。よろしいですか？
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;復活</button>
+				<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+			</div>
+		<% end %>
+	</div>
+<% end %>
+
+
+<% if false %>
 <script type="text/javascript">
 //<![CDATA[
 function demo_rename() {
@@ -145,3 +206,4 @@ $('#category_trees')  // listen for event
 });
 //]]>
 </script>
+<% end %>

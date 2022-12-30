@@ -165,7 +165,7 @@ end
 #    @parent_category = (category_path[0].blank?)? current_category: category_path[0]
 
     @current_category = @shop.content_categories.find_by_id(params[:id])
-    @parent_category = @current_category.my_bag_root_category
+    @parent_category = @current_category.parent#my_bag_root_category
     
 #    puts "#"*20+@parent_category.id.to_s
     

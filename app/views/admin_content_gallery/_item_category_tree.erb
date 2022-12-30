@@ -6,7 +6,7 @@
             <%= (temp_local.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	{:action=>"content_category_lower",		:id=>temp_local}, :title=>"表示順を後ろに") %>				
         </p>
     </div>
-    <% if temp_local.children.blank? %>
+    <a href="<%= url_for(:action=>'content_category_tree', :id=>temp_local) %>">
         <div class="card-body">
                 <h4>
                     <span class='float-right'><span class="badge badge-success"><%= temp_local.content_leafs.size %></span></span>
@@ -23,26 +23,7 @@
                 </button>
             </p>
         </div>
-    <% else %>
-        <a href="<%= url_for(:action=>'content_category_tree', :id=>temp_local) %>">
-            <div class="card-body">
-                    <h4>
-                        <span class='float-right'><span class="badge badge-success"><%= temp_local.content_leafs.size %></span></span>
-                        <i class="fa-solid fa-folder"></i>
-                        <%= truncate(temp_local.title, :length=>50) %>
-                    </h4>
-                <p><%= h truncate(strip_tags(temp_local.description), :length=>20) unless temp_local.description.blank?%></p>
-                <p class="text-right">
-                    <button type="button" class="btn btn-info btn-mini" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=temp_local.id%>">
-                        <%= edit_icon('編集')%>
-                    </button>
-                    <button type="button" class="btn btn-danger btn-mini" data-bs-toggle="modal" data-bs-target="#modal_delete_<%=temp_local.id%>">
-                        <%= trash_icon('削除')%>
-                    </button>
-                </p>
-            </div>
-        </a>
-    <% end %>
+    </a>
 </div>
 
 <div class="modal fade" id="modal_edit_<%=temp_local.id%>" tabindex="-1" aria-labelledby="modal_edit_<%=temp_local.id%>" aria-hidden="true">
@@ -61,17 +42,34 @@
                         </div>
                     </div>
                     <% if false %>
-                        <div class="mb-3 row">
-                            <label for="wsite_keywords" class="col-sm-4 col-form-label">カテゴリー</label>
-                            <div class="col-sm-8">
+                    <div class="mb-3 row">
+                        <label for="wsite_keywords" class="col-sm-4 col-form-label">カテゴリー</label>
+                        <div class="col-sm-8">
+                            <%
+                                ancestors = ancestors_for(temp_local)
+                                options = ancestors.map{ | c | [ c.name, c.id] }
+                            %>
+                            <%= f.collection_select(:parent_id, options, :last, :first, {prompt: false}, {class: "form-control"})%>
+                            <% if false %>
                                 <%
-                                    cat_options = Array.new
-                                    cat_options << temp_local.category_path(true)[0]
+                                cat_options = Array.new
+                                cat_options << temp_local.category_path(true)[0]
                                 %>
-                                <%= tree_select(cat_options, 'content_category', 'parent_id', temp_local.parent_id) %>
-                            </div>
+                                <%= tree_select(cat_options, 'content_category', 'parent_id', temp_local.parent.id) %>
+                            <% end %>
                         </div>
+                    </div>
                     <% end %>
+                    <div class="mb-3 row">
+                        <label for="wsite_keywords" class="col-sm-4 col-form-label">所属カテゴリー</label>
+                        <div class="col-sm-8">
+                            <%
+                                ancestors = ancestors_for(temp_local)
+                                options = ancestors.map{ | c | [ c.name, c.id] }
+                            %>
+                            <%= tree_select_with_filter([temp_local.category_path(true)[0]], 'content_category', 'parent_id', temp_local.parent_id, 0, true, (temp_local.parent.blank?)? []: temp_local.sons<<temp_local)%>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
