@@ -46,7 +46,7 @@
 
 <% if is_test_shop?(@shop) %>
 	<textarea name="content_leaf[description]" style="display:none" id="contents"></textarea>
-	<div id="div_editor1"><%= item.description.html_safe %></div>
+	<div id="div_editor1"><%= item.description%></div>
 	<%= render :partial=>"layouts/richtext_editor" %>
 	<% if false %>
 		<textarea name="content_leaf[description]" style="display:none" id="contents"></textarea>
