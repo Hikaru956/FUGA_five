@@ -69,9 +69,14 @@ class ContentLeaf < ApplicationRecord
   end
 
   def next_leaf(leaf)
+    today = Time.now.to_date
     category = leaf.content_category
     items = category.content_leafs.where("content_leafs.is_public", true)
     items = items.where('content_leafs.created_at > ?',leaf.created_at)
+    items = items.where('     (content_leafs.publish_from IS NULL AND content_leafs.publish_until IS NULL) 
+                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until IS NULL) 
+                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until >= ?)', \
+                          today, today, today)
 
     item = (items.blank?)? nil: items.to_a.sort{|a,b| a.created_at <=> b.created_at}.first
 
@@ -79,9 +84,14 @@ class ContentLeaf < ApplicationRecord
   end
 
   def prev_leaf(leaf)
+    today = Time.now.to_date
     category = leaf.content_category
     items = category.content_leafs.where("content_leafs.is_public", true)
     items = items.where('content_leafs.created_at < ?',leaf.created_at)
+    items = items.where('     (content_leafs.publish_from IS NULL AND content_leafs.publish_until IS NULL) 
+                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until IS NULL) 
+                          OR  (content_leafs.publish_from <= ? AND content_leafs.publish_until >= ?)', \
+                          today, today, today)
 
     item = (items.blank?)? nil: items.to_a.sort{|a,b| b.created_at <=> a.created_at}.first
 
