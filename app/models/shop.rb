@@ -180,7 +180,7 @@ class Shop < ApplicationRecord
   ###
   ##  Renderer Utility
   #
-  def default_navigation_item
+  def xxx_default_navigation_item
     #hikaruやばい
     root = self.content_categories.find_by_category_type(ContentCategory::TYPE_SHOP_ROOT)
     #root.children.find(:first, :conditions=>["is_public=?", true], :order=>"position asc")
@@ -188,10 +188,18 @@ class Shop < ApplicationRecord
 
     children = root.children.where(is_public: true)
     root_child = (children.blank?)? nil: children.to_a.sort{|a,b| a.position<=>b.position}.first
-    #logger.error ' ■　'*20
-    #logger.error children.to_a.sort{|a,b| a.position<=>b.position}.map{|c| c.name}.join(',')
-    #logger.error children.to_a.sort{|a,b| a.position<=>b.position}.map{|c| c.position}.join(',')
+    logger.error ' ❌　'*20
+    logger.error children.to_a.sort{|a,b| a.position<=>b.position}.map{|c| c.name}.join(',')
+    logger.error children.to_a.sort{|a,b| a.position<=>b.position}.map{|c| c.position}.join(',')
+    logger.error children.to_a.sort{|a,b| a.position<=>b.position}.map{|c| c.id}.join(',')
     root_child
+  end
+
+  def default_navigation_item
+    root = self.web_pages.find_by_page_type(WebPage::TYPE_ROOT)
+    children = root.children.where(is_public: true)
+    root_child = (children.blank?)? nil: children.to_a.sort{|a,b| a.position<=>b.position}.first
+    (root_child.blank?)? nil: root_child.content_category
   end
 
   def public_navigation_items
