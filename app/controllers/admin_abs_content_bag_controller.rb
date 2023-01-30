@@ -302,6 +302,20 @@ class AdminAbsContentBagController < ApplicationController
         redirect_to :action=>'show_leaf', :id=>photo.ref_id, :hash=>Time.now.to_i
     end
 
+    def photo_to_top
+        photo = @shop.photos.find(params[:id])
+        photo.move_to_top
+        photo.save
+        redirect_to :action=>'show_leaf', :id=>photo.ref_id, :hash=>Time.now.to_i
+    end
+
+    def photo_to_bottom
+        photo = @shop.photos.find(params[:id])
+        photo.move_to_bottom
+        photo.save
+        redirect_to :action=>'show_leaf', :id=>photo.ref_id, :hash=>Time.now.to_i
+    end
+
     def update_photo
         photo = @shop.photos.find(params[:id])
         photo.update_attributes(photo_params)

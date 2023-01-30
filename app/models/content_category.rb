@@ -196,6 +196,26 @@ class ContentCategory < ApplicationRecord
     end
   end
   
+  def public_leafs_raw(recurse=false)
+    if recurse
+      items = ContentLeaf.all
+      items = ContentLeaf.eager_load(:content_category).where('content_categories.is_public=TRUE AND content_leafs.is_public=TRUE').filter_latest(items)#.order(publish_from: :desc).order(created_at: :desc)
+      sons = self.sons
+      sons << self
+      items = items.where("content_leafs.content_category_id IN (?)", sons)
+      return items
+      
+      #c = ContentLeaf.public_leafs
+      #c.and "content_leafs.content_category_id", 'IN', sons
+      #return ContentLeaf.find(:all, :conditions=>c.where, :order=>'publish_from desc')
+    else
+      items = ContentLeaf.all
+      items = ContentLeaf.filter_latest(items)#.order(publish_from: :desc).order(created_at: :desc)
+      items = items.where("content_leafs.content_category_id =?", self)
+      return items
+      #return self.content_leafs.find(:all, :conditions=>ContentLeaf.public_leafs.where, :order=>'publish_from desc')
+    end
+  end
   #hikaru
   #def latest_news_article
   #  sons = self.sons

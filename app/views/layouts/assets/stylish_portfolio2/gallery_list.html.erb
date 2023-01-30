@@ -99,7 +99,8 @@
 <%
     sons = @seed.sons
     sons << @seed
-    @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(position: :asc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+    #@leafs = ContentLeaf.where("id IN (?) AND content_leafs.content_category_id IN (?)",@seed.public_leafs.map{|c| c.id}, sons).order(position: :asc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+    @leafs = @seed.public_leafs_raw.where("content_leafs.content_category_id IN (?)", sons).order(position: :asc).paginate(:page => params[:page], :per_page=>PER_PAGE)
     #c = ContentLeaf.public_leafs
     #c.and "content_leafs.content_category_id", 'IN', sons
     #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'position')
@@ -121,7 +122,7 @@
                             <a href="<%= gallery_url %>"><img src="<%= image_url %>"></a>
                         </div></div>
                         <h1>
-                            <a href="<%= gallery_url %>"><%= model_title(leaf) %></a>
+                            <a href="<%= gallery_url %>"><%= model_title(leaf) %><%= leaf.position%></a>
                         </h1>
                     </li>
 <%  end %>

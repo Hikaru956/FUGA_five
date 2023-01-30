@@ -1,9 +1,11 @@
 <div class="thumbnail">
 	<div class="caption">
 		<p class="wewll" style="text-align:center;">
+			<%= (photo.first?)?	top_icon :	link_to(top_icon, :action=>"photo_to_bottom",	:id=>photo) %>
 			<%= (photo.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"photo_higher",	:id=>photo) %>
 			<%= photo.position %>
-			<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"photo_lower",		:id=>photo) %>				
+			<%= (photo.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"photo_lower",		:id=>photo) %>
+			<%= (photo.last?)? bottom_icon : 	link_to(bottom_icon, 	:action=>"photo_to_top",	:id=>photo) %>
 		</p>
 	</div>
 	<%= image_tag photo.clip.url(:thumb) %>
