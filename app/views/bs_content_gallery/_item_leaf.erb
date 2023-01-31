@@ -1,11 +1,11 @@
 <div class="thumbnail">
 	<div class="caption">
 		<p class="wewll" style="text-align:center;">
-			<%= (temp_local.last?)?	top_icon :	link_to(top_icon, :action=>"move_to_bottom",	:id=>temp_local) %>
-			<%= (temp_local.last?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"leaf_lower",	:id=>temp_local) %>
+			<%= (temp_local.first?)?	top_icon :	link_to(top_icon, :action=>"move_to_top",	:id=>temp_local) %>
+			<%= (temp_local.first?)?	raw("<i class='icon-fast-backward icon-large'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"leaf_higher",	:id=>temp_local) %>
 			<%= temp_local.position %>
-			<%= (temp_local.first?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"leaf_higher",	:id=>temp_local) %>
-			<%= (temp_local.first?)? bottom_icon : 	link_to(bottom_icon, 	:action=>"move_to_top",	:id=>temp_local) %>
+			<%= (temp_local.last?)? 	raw("<i class='icon-fast-forward icon-large'></i>"): 	link_to(raw("<i class='icon-forward icon-large'></i>"), 	:action=>"leaf_lower",	:id=>temp_local) %>
+			<%= (temp_local.last?)? bottom_icon : 	link_to(bottom_icon, 	:action=>"move_to_bottom",	:id=>temp_local) %>
 		</p>
 	</div>
 	<div  style="text-align:center;">
