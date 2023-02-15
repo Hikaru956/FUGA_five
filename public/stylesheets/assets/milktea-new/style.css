@@ -2007,27 +2007,27 @@ career-plan
 }
 
 #career-plan .cover:nth-child(1) .hover-stylist{
-	background-image:url(images/yoshii.png);
+	background-image:url(/images/assets/milk-tea-new/yoshii.png);
 }
 
 #career-plan .cover:nth-child(1) .hover-stylist:hover{
-	background-image:url(images/yoshii_m_over.png);
+	background-image:url(/images/assets/milk-tea-new/yoshii_m_over.png);
 }
 
 #career-plan .cover:nth-child(2) .hover-stylist{
-	background-image:url(images/ishii.png);
+	background-image:url(/images/assets/milk-tea-new/ishii.png);
 }
 
 #career-plan .cover:nth-child(2) .hover-stylist:hover{
-	background-image:url(images/ishii_m_over.png);
+	background-image:url(/images/assets/milk-tea-new/ishii_m_over.png);
 }
 
 #career-plan .cover:nth-child(3) .hover-stylist{
-	background-image:url(images/sakai.png);
+	background-image:url(/images/assets/milk-tea-new/sakai.png);
 }
 
 #career-plan .cover:nth-child(3) .hover-stylist:hover{
-	background-image:url(images/sakai_m_over.png);
+	background-image:url(/images/assets/milk-tea-new/sakai_m_over.png);
 }
 
 #career-plan .hover-stylist{
@@ -4095,8 +4095,3 @@ profile 別ページ
 		width: 40%;
 	}
 }
-
-
-
-
-

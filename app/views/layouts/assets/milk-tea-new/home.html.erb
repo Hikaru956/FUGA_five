@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=480">
 	<title>美容室「Milk tea」</title>
 	<meta name="title" content="美容室「Milk tea」">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/assets/milktea-new/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/assets/milktea-new/style.css?hash=0215">
 	<link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 	<script src="/images/assets/milk-tea-new/jquery-3.3.1.js"></script>
 
@@ -146,7 +146,7 @@ $(document).ready(function(){
 												photo = reorder_by_position_photo(staff.photos, true).first
 											end
 										%>
-										<div class="cover pointer1"><a href="<%= staff_url %>"><%= image_tag photo.clip.url(:thumb) %></div>
+										<div class="cover pointer1"><a href="<%= staff_url %>"><%= image_tag photo.clip.url(:thumb) %></a></div>
 									<% end %>
 								</div>
 							</div>
@@ -161,7 +161,6 @@ $(document).ready(function(){
 						</div>
 					</div>
 				<% end %>
-
 				<div id="recruit-together" class="all-center-1280">
 					<div class="recruit-together-in">
 						<div class="caption-img-cover"><img src="/images/assets/milk-tea-new/recruit.png" alt="RECRUIT"></div>
