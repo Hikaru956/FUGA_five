@@ -176,6 +176,12 @@ class BsRendererController < ApplicationController
     end
     render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.renderer_layout}/staff":    "#{@website.layout_pc_specific_basename}/staff")
   end
+
+  def reserve
+    logger.error '❌　'+@website.renderer_layout
+    render :layout=>"#{@website.renderer_layout}/reserve"
+  end
+
   ###
   ## FIXED PAGE
   #
