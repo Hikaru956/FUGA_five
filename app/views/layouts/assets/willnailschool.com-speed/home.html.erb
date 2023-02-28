@@ -74,7 +74,7 @@
     <aside id="experience">
       <a href="https://form.willnailschool.com/index.html" target="_blank"><img src="/images/assets/willnailschool.com/trial_course.jpg" alt="体験コース"></a>
     </aside>
-    <aside id="covid">
+    <aside id="experience">
       <img src="/photo/image/clip/86837/original/2021_covid.png" alt="対策徹底中">
     </aside>
 <%  @fix01 = @website.content_leafs.find_by_id(30162); %>
@@ -85,6 +85,74 @@
     </article>
 <%    end %>
 <%  end %>
+    <article id="article">
+        <h1>NEWS </h1>
+        <div id="staff-list" class="wrapper">
+          <% 
+            top_category = @website.content_categories.find_by('category_type =?', ContentCategory::TYPE_NEWS)
+            leafs = ContentLeaf.where('content_leafs.content_category_id IN (?) AND is_public =?',top_category.children.map{|c| c.id}, true).limit(3)
+            leafs.each do | leaf | @leaf = leaf
+            key_photo = key_photo(leaf)
+              unless key_photo.blank?
+                  image_url = key_photo.clip.url(:panel)
+              else
+                  image_url = '//placehold.jp/327x327.png?text=No Photo'
+              end
+              if true || request.host == 'staffroom.swifty.jp'
+                  content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
+              else
+                  content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page)
+              end
+          %>
+            <div class="col-m2t3p3">
+              <div class="col-inner">
+                <div class="staff-list-out">
+                  <div>
+                    <a href="<%= content_url %>"><img src="<%= image_url %>"></a>
+                  </div>
+                  <div>
+                    <h2><a href="<%= content_url %>"><span><%= leaf.title%></span></a></h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+    </article>
+    <article id="article">
+        <h1>BLOG </h1>
+        <div id="staff-list" class="wrapper">
+          <% 
+            top_category = @website.content_categories.find_by('category_type =?', ContentCategory::TYPE_STREAM)
+            leafs = ContentLeaf.where('content_leafs.content_category_id IN (?) AND is_public =?',top_category.children.map{|c| c.id}, true).limit(3)
+            leafs.each do | leaf | @leaf = leaf
+            key_photo = key_photo(leaf)
+              unless key_photo.blank?
+                  image_url = key_photo.clip.url(:panel)
+              else
+                  image_url = '//placehold.jp/327x327.png?text=No Photo'
+              end
+              if true || request.host == 'staffroom.swifty.jp'
+                  content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
+              else
+                  content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page)
+              end
+          %>
+            <div class="col-m2t3p3">
+              <div class="col-inner">
+                <div class="staff-list-out">
+                  <div>
+                    <a href="<%= content_url %>"><img src="<%= image_url %>"></a>
+                  </div>
+                  <div>
+                    <h2><a href="<%= content_url %>"><span><%= leaf.title%></span></a></h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+    </article>
     <aside id="insta" class="container">
         <h1>Instagram <span>スクールのインスタグラム</span></h1>
         <div id="instafeed" class="wrapper">
