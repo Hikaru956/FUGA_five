@@ -90,7 +90,7 @@
         <div id="staff-list" class="wrapper">
           <% 
             top_category = @website.content_categories.find_by('category_type =?', ContentCategory::TYPE_NEWS)
-            leafs = ContentLeaf.where('content_leafs.content_category_id IN (?) AND is_public =?',top_category.children.map{|c| c.id}, true).limit(3)
+            leafs = ContentLeaf.where('content_leafs.content_category_id IN (?) AND is_public =?',top_category.children.map{|c| c.id}, true).order(publish_from: :desc).order(created_at: :desc).limit(3)
             leafs.each do | leaf | @leaf = leaf
             key_photo = key_photo(leaf)
               unless key_photo.blank?
@@ -124,7 +124,7 @@
         <div id="staff-list" class="wrapper">
           <% 
             top_category = @website.content_categories.find_by('category_type =?', ContentCategory::TYPE_STREAM)
-            leafs = ContentLeaf.where('content_leafs.content_category_id IN (?) AND is_public =?',top_category.children.map{|c| c.id}, true).limit(3)
+            leafs = ContentLeaf.where('content_leafs.content_category_id IN (?) AND is_public =?',top_category.children.map{|c| c.id}, true).order(publish_from: :desc).order(created_at: :desc).limit(3)
             leafs.each do | leaf | @leaf = leaf
             key_photo = key_photo(leaf)
               unless key_photo.blank?
