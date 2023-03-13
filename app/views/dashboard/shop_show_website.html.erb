@@ -252,11 +252,11 @@
 	<tbody>
 		<% @icon = @shop.favicon %>
 		<tr>
-			<td class="span4">favicon.ico</td>
+			<td class="span4">favicon.png</td>
 			<td class="span8">
 				<% if @icon.blank? %>
-					<small>
-						画像のファイル名は'favicon.ico'。画像の種類は「ICO形式」。	
+					<small class='text-danger'>
+						画像のファイル名は'favicon.png'。画像の種類は「PNG形式」。	
 					</small>
 					<span class="pull-right">
 						<a class="btn btn-small btn-success" href="<%= url_for(:action=>'shop_new_favicon', :id=>@shop) %>">
@@ -272,6 +272,9 @@
 						</a>
 					</span>
 					<%= image_tag @icon.clip.url() %>
+					<% unless @icon.clip_file_name == 'favicon.png' %>
+						<small>ファイル名が「favicon.png」ではありません</small>
+					<% end %>
 				<% end %>
 			</td>
 		</tr>

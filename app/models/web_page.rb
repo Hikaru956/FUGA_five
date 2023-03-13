@@ -114,7 +114,9 @@ class WebPage < ApplicationRecord
   end
 
   def self.favicon(target_shop)
-    WebPage.get_root_node(target_shop).photos.find_by_clip_file_name('favicon.ico')
+    old_favicon = WebPage.get_root_node(target_shop).photos.find_by_clip_file_name('favicon.ico')
+    return old_favicon unless old_favicon.blank?
+    WebPage.get_root_node(target_shop).photos.find_by_clip_file_name('favicon.png')
   end
 
   def self.apple_touch_icon(target_shop)
@@ -123,7 +125,7 @@ class WebPage < ApplicationRecord
   
   def self.reset_favicon(target_shop)
     #Photo.destroy_all(["shop_id=? AND ref_id=? AND ref_type=? AND image=?", target_shop.id, WebPage.get_root_node(target_shop), 'WebPage', 'favicon.ico'])    
-    photos = Photo.where("shop_id=? AND ref_id=? AND ref_type=? AND clip_file_name=?", target_shop.id, WebPage.get_root_node(target_shop), 'WebPage', 'favicon.ico')
+    photos = Photo.where("shop_id=? AND ref_id=? AND ref_type=? AND ( clip_file_name=? OR clip_file_name=?)", target_shop.id, WebPage.get_root_node(target_shop), 'WebPage', 'favicon.ico', 'favicon.png')
     photos.destroy_all
   end
 
