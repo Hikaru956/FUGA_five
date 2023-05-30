@@ -62,7 +62,7 @@
 				theme_advanced_toolbar_location: "top",
 				theme_advanced_statusbar_location: "bottom",
 				theme_advanced_buttons3_add: ["tablecontrols"],
-				plugins: "table,image,code,link,forecolor,backcolor,emoticons",
+				plugins: "table,image,code,link,media,forecolor,backcolor,emoticons",
 				<% unless item.blank? %>
 					<% unless item.photos.blank? %>
 					image_list: [ 
@@ -74,7 +74,7 @@
 				convert_urls: false,
 				content_style: 'img { max-width: 100%; height: auto; }' ,
 				resize: 'both',
-				toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
+				toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | media | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
 				language: 'ja'})
 		</script>
 	</div>
@@ -117,3 +117,20 @@
 		<%= f.date_field(:publish_until, class: 'form-control') %>
 	</div>
 </div>
+
+<% if false %>
+<% tag_map = tag_leveling_hash(item.shop) %>
+<% tag_key = tag_map.keys.sort{|a,b| a<=>b } %>
+<div class="mb-3 row">
+    <label for="name" class="col-sm-2 col-form-label"><%= tag_title %></label>
+    <div class="col-sm-9">
+        <% tag_key.each do |key| %>
+            <% tag_map[key].each do |tag| %>
+                <%= f.check_box :tag_list, { multiple: true, id: 'leaf_'+tag.name, checked: (item.tags.include?(tag)? true: false) }, "#{tag.name}", nil %>
+                <%= f.label "#{tag.name}", "#{tag.name}", class: "checkbox03" %>
+            <% end %>
+            <hr/>
+        <% end %>
+    </div>
+</div>
+<% end %>
