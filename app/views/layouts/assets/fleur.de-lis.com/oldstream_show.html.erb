@@ -31,16 +31,17 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="article">
-<meta property="og:url"               content="https://<%= request.host + shopalt + url_for(:action=>'news_show', :id=>@seed) %>">
+<meta property="og:url"               content="https://<%= request.host + url_for(:action=>'stream_show', :id=>@seed) %>">
 <meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"         content="<%= @website.name %>">
 <% key_photo = key_photo(@seed) %>
 <% unless key_photo.blank? %>
-<meta property="og:image"             content="https://<%= request.host + shopalt + key_photo.clip.url() %>">
+<meta property="og:image"             content="<%= key_photo.clip.url() %>">
 <% end %>
 <% unless @website.social_facebook_uri.blank? %>
 <meta property="article:publisher"    content="<%= @website.social_facebook_uri %>">
 <% end %>
+<!-- Twitter card も入れる？ -->
 <% unless @website.custom_metas.blank? %>
 <%= raw @website.custom_metas %>
 <% end %>
@@ -61,7 +62,7 @@
 <% end %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/fleur.de-lis.com/css" %>
 </head>
-<body id="news_show">
+<body id="stream_show">
 <main id="main">
 	<div class="container">
 		<article>
@@ -69,41 +70,61 @@
 <!-- パンくずリスト -->
 			<div id="breadcrumbs">
                 <ol>
-<% if request.host != 'fleur.de-lis.com' %>
+<% if true || request.host == 'sr2.swifty.jp' %>
                     <li><a href="https://sr2.swifty.jp/home?wkey=<%= home %>"><i class="icon-home"></i></a></li>
 <%  else %>
                     <li><a href="https://fleur.de-lis.com/home"><i class="icon-home"></i></a></li>
 <% end %>
 <%  if @website.wsite_hash_key != home %>
-<%      if request.host != 'fleur.de-lis.com' %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
                     <li><a href="https://sr2.swifty.jp/home?wkey=<%= @website.wsite_hash_key %>"><%= @website.name %></a></li>
 <%      else %>
                     <li><a href="https://fleur.de-lis.com<%= shopalt %>/home"><%= @website.name %></a></li>
 <%      end %>
 <%  end %>
 <% unless @seed.content_category.has_only_a_public_bag? %>
-<%      if request.host != 'fleur.de-lis.com' %>
-                    <li><a href="https://sr2.swifty.jp<%= url_for(:action=>'news_index', :id=>@seed.content_category.my_bag_root_category.parent, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
+<%      if true || request.host == 'sr2.swifty.jp' %>
+                            <li><a href="https://sr2.swifty.jp<%= url_for(:action=>'stream_index', :id=>@seed.content_category.my_bag_root_category.parent, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
 <%      else %>
-                    <li><a href="https://fleur.de-lis.com<%= shopalt %><%= url_for(:action=>'news_index', :id=>@seed.content_category.my_bag_root_category.parent) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
+                            <li><a href="https://fleur.de-lis.com<%= shopalt %><%= url_for(:action=>'stream_index', :id=>@seed.content_category.my_bag_root_category.parent) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
 <%      end %>
 <% end %>
 <% @seed.content_category.category_path(true).each do | category | %>
-<%      if request.host != 'fleur.de-lis.com' %>
-                    <li><%= link_to category.category_label, :action=>"news_list", :id=>category, :wkey=>@website.wsite_hash_key %></li>
+<%      if true || request.host == 'sr2.swifty.jp' %>
+                            <li>https://sr2.swifty.jp<%= link_to category.category_label, :action=>"stream_list", :id=>category, :wkey=>@website.wsite_hash_key %></li>
 <%      else %>
-                    <li><%= link_to category.category_label, :action=>"news_list", :id=>category %></li>
+                            <li>https://fleur.de-lis.com<%= shopalt %><%= link_to category.category_label, :action=>"stream_list", :id=>category %></li>
 <%      end %>
 <% end %>
-                    <li class="active">
-                        <%= model_title(@seed) %>
-                    </li>
+                            <li class="active">
+                                <%= model_title(@seed) %>
+                            </li>
                 </ol>
             </div>
 			<h1><%= model_title(@seed) %></h1>
-			<p class="date"><i class="icon-edit"></i> <%= publish_label(@seed) %></p>
+			<p class="date">
+<% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+<%      if true || request.host == 'sr2.swifty.jp' %>
+                <i class="icon-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff, :wkey=>@website.wsite_hash_key) %>"><%= h model_name(@seed.staff) %>
+<%      else %>
+                <i class="icon-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %>
+<%      end %>
+<% end %>
+                <i class="icon-edit"></i> <%= publish_label(@seed) %>
+            </p>
+
 			<div id="contents">
-<% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+ <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+                            <% tag_cloud(@seed.tags.order(name: :asc), %w(css1 css2 css3 css4)) do |tag| %>
+                                <% @seed.content_category.category_path(true).each do | category | %>
+                                <% cat_url = url_for(:action=>'news_list', :id=>category, search_tags: [tag.name])%>
+                                    <a href='<%= cat_url %>'>
+                                        <span class='badge badge-primary '>
+                                            #<%= tag3_icon %>&nbsp;<%= tag_name(tag) %>
+                                        </span>
+                                    </a>
+                                <% end %>
+                            <% end %>
 			</div>
 		</article>
 	</div>

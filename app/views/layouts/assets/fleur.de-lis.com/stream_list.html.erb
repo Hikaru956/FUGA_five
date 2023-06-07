@@ -58,27 +58,27 @@
 <!-- パンくずリスト -->
 			<div id="breadcrumbs">
                 <ol>
-<% if true || request.host == 'sr2.swifty.jp' %>
+<% if request.host != 'fleur.de-lis.com' %>
                     <li><a href="https://sr2.swifty.jp/home?wkey=<%= home %>"><i class="icon-home"></i></a></li>
 <%  else %>
                     <li><a href="https://fleur.de-lis.com/home"><i class="icon-home"></i></a></li>
 <% end %>
 <%  if @website.wsite_hash_key != home %>
-<%      if true || request.host == 'sr2.swifty.jp' %>
+<%      if request.host != 'fleur.de-lis.com' %>
                     <li><a href="https://sr2.swifty.jp/home?wkey=<%= @website.wsite_hash_key %>"><%= @website.name %></a></li>
 <%      else %>
                     <li><a href="https://fleur.de-lis.com<%= shopalt %>/home"><%= @website.name %></a></li>
 <%      end %>
 <%  end %>
 <% unless @seed.my_type_root_category.has_only_a_public_bag? %>
-<% if true || request.host == 'sr2.swifty.jp' %>
+<% if request.host != 'fleur.de-lis.com' %>
                     <li><a href="https://sr2.swifty.jp<%= url_for(:action=>'stream_index', :id=>@seed.my_type_root_category, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
 <% else %>
                     <li><a href="https://fleur.de-lis.com<%= shopalt %><%= url_for(:action=>'stream_index', :id=>@seed.my_type_root_category) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
 <% end %>
 <% end %>
 <% @seed.category_path.each do | category | %>
-<% if true || request.host == 'sr2.swifty.jp' %>
+<% if request.host != 'fleur.de-lis.com' %>
                     <li><a href="https://sr2.swifty.jp<%= url_for(:action=>'stream_list', :id=>category, :wkey=>@website.wsite_hash_key) %>"><%= category.category_label %></a></li>
 <% else %>
                     <li><a href="https://fleur.de-lis.com<%= shopalt %><%= url_for(:action=>'stream_list', :id=>category) %>"><%= category.category_label %></a></li>
@@ -91,8 +91,7 @@
 <%
     sons = @seed.sons
     sons << @seed
-     @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(publish_from: :desc).order(created_at: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
-    @leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
+    @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(publish_from: :desc).order(created_at: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
     #c = ContentLeaf.public_leafs
     #c.and "content_leafs.content_category_id", 'IN', sons
     #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'publish_from desc')
@@ -104,7 +103,7 @@
             else
                 image_url = '//placehold.jp/ffffff/cccccc/358x358.jpg?text='+publish
             end
-            if true || request.host == 'sr2.swifty.jp'
+            if request.host != 'fleur.de-lis.com'
                 content_url = "https://" + request.host + url_for(:action=>'stream_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
             else
                 content_url = "https://" + request.host + shopalt + url_for(:action=>'stream_show', :id=>@leaf, :page=>@page)
