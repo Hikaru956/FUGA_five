@@ -116,7 +116,7 @@ gem "geokit-rails"
 gem 'json'
 #hikatu
 gem "rmagick" #,  :require => 'RMagick'
-gem "acts_as_taggable_on_steroids"
+#gem "acts_as_taggable_on_steroids"
 gem 'mini_racer', '~> 0.4.0' #libv8問題のためのversion指定
 gem 'holidays'
 #gem 'protected_attributes'
@@ -144,3 +144,4 @@ gem 'dotenv-rails'
 gem "sitemap_generator"
 gem 'whenever'
 gem 'rack-cors'
+gem 'acts-as-taggable-on'

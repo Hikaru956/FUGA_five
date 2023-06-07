@@ -18,6 +18,7 @@ class Shop < ApplicationRecord
 
   acts_as_list  :scope => :company
   acts_as_tree  :order => :position
+  acts_as_tagger
 
   belongs_to    :company
   
@@ -89,6 +90,11 @@ class Shop < ApplicationRecord
       self.wsite_hash_key = gen_new_wsite_key
       self.save!
     end
+  end
+
+  def shop_tags(item)
+    tags = item.where("item.shop_id=?", self.id)
+    tags
   end
   
   def gps?
@@ -265,6 +271,10 @@ class Shop < ApplicationRecord
     email = shop.wsite_email || shop.inquiry_email
   end
 
+  def shop_tags
+    tags = ActsAsTaggableOn::Tag.all
+    tags = tags.where("tags.shop_id =?", self.id)
+  end
 
   protected 
   def gen_new_wsite_key

@@ -42,7 +42,8 @@ class BsRendererController < ApplicationController
     render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.renderer_layout}/news_index": "#{@website.layout_pc_specific_basename}/news_index")
   end
   def news_list
-    @seed = @website.content_categories.find_by_id(params[:id]);
+    @seed = @website.content_categories.find_by_id(params[:id])
+    @search_tags = params[:search_tags]
     if @seed.blank?
       render :file=>"public/404.html", :layout=>false, :status => 404
       return

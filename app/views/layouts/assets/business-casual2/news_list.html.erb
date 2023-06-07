@@ -103,6 +103,7 @@
     sons << @seed
     #@leafs = ContentLeaf.where("is_public=TRUE AND content_leafs.content_category_id IN (?)", sons)
     @leafs = @leafs.public_leafs.where("content_leafs.content_category_id IN (?)", sons)
+    @leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
     @leafs = @leafs.order(position: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
     #c = ContentLeaf.public_leafs
     #c.and "content_leafs.content_category_id", 'IN', sons

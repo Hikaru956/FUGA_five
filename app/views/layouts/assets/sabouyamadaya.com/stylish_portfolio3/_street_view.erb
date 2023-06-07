@@ -1,0 +1,8 @@
+<% streetview = VisualWidget.search_widget_bag_for(@website, "94f88276a6e66e2e9984d80bcc974f17") %>
+<% if !streetview.blank? && streetview.is_valid? %>
+<aside class="streetview">
+	<div class="container">
+        <%= raw streetview.data_string %>
+    </div>
+</aside>
+<% end %>

@@ -99,3 +99,18 @@
 		<%= f.date_field(:publish_until, class: 'form-control') %>
 	</div>
 </div>
+
+<% tag_map = tag_leveling_hash(item.shop) %>
+<% tag_key = tag_map.keys.sort{|a,b| a<=>b } %>
+<div class="mb-3 row">
+    <label for="name" class="col-sm-2 col-form-label"><%= tag_title %></label>
+    <div class="col-sm-9">
+        <% tag_key.each do |key| %>
+            <% tag_map[key].each do |tag| %>
+                <%= f.check_box :tag_list, { multiple: true, id: 'leaf_'+tag.name, checked: (item.tags.include?(tag)? true: false) }, "#{tag.name}", nil %>
+                <%= f.label "#{tag_name(tag)}", "#{tag_name(tag)}", class: "checkbox03" %>
+            <% end %>
+            <hr/>
+        <% end %>
+    </div>
+</div>

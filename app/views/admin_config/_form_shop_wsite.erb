@@ -33,11 +33,24 @@
 		<%= f.label :enable_inquiry, 'お問い合わせ機能', {class: 'form-label'} %>
 	</div>
 	<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
-		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio3" value='1' checked>
+		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio3" value='1'>
 		<label class="btn btn-outline-primary" for="btnradio3">有効</label>
 
-		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio4" value='0'>
+		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio4" value='0' checked>
 		<label class="btn btn-outline-primary" for="btnradio4">無効</label>
+
+	</div>
+</div>
+<div class="form-group row">
+	<div class="col-sm-4">
+		<%= f.label :enable_tag, 'タグ機能', {class: 'form-label'} %>
+	</div>
+	<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
+		<input type="radio" class="btn-check" name="shop[enable_tag]" id="btnradio13" value='1'>
+		<label class="btn btn-outline-primary" for="btnradio13">有効</label>
+
+		<input type="radio" class="btn-check" name="shop[enable_tag]" id="btnradio14" value='0' checked>
+		<label class="btn btn-outline-primary" for="btnradio14">無効</label>
 
 	</div>
 </div>

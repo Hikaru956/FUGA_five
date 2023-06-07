@@ -86,6 +86,7 @@ sons << @seed
 @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons)
 @leafs = reorder_by_position(@leafs, true)
 @leafs = reorder_paginate(@leafs)
+@leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
 #@leafs = @leafs.to_a.sort{|a,b| b.position<=>a.position}
 #@leafs = Kaminari.paginate_array(@leafs).page(params[:page]).per(PER_PAGE)
 #c = ContentLeaf.public_leafs

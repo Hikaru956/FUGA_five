@@ -109,6 +109,7 @@ class AdminAbsContentBagController < ApplicationController
 
     def update_leaf
         @item =  @shop.content_leafs.find_by_id(params[:id])
+        @item.tag_list.remove(@item.tag_list)
         @item.update_attributes(content_leafs_params)
         redirect_to :action=>"show_leaf", :id=>@item
     end
@@ -433,7 +434,7 @@ class AdminAbsContentBagController < ApplicationController
     end
 
     def content_leafs_params
-        params.require(:content_leaf).permit(:id, :shop_id, :content_bag_id, :content_category_id, :staff_id, :position, :title, :description, :description_2, :description_3, :is_public, :publish_from, :publish_until)
+        params.require(:content_leaf).permit(:id, :shop_id, :content_bag_id, :content_category_id, :staff_id, :position, :title, :description, :description_2, :description_3, :is_public, :publish_from, :publish_until, tag_list: [])
     end
 
     def content_category_params

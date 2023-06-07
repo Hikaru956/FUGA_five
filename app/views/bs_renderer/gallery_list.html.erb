@@ -68,7 +68,8 @@
 	sons << @seed
 	items = ContentLeaf.public_leafs
 	items = items.where("content_leafs.content_category_id IN (?)", sons).order(position: :desc)
-	@leafs = @seed.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE) 
+	@leafs = @seed.content_leafs.paginate(:page => params[:page], :per_page=>PER_PAGE)
+	@leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
 %>
 
 <% unless @leafs.blank? %>

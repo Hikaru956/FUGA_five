@@ -1,0 +1,25 @@
+<div class="modal fade" id="TagEditModal" tabindex="-1" role="dialog" aria-labelledby="TagEditModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <%= form_for item, url: tag_path(id: item), method: :patch do |f| %>
+      <%= hidden_field_tag 'search_word', search_word %>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <%= edit_icon %>
+            <%= tag_title %>編集
+          </h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'form',     locals: {f: f, item: item} %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+          <button type="submit" class="btn btn-primary"><%= update_icon %>&nbsp;更新</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

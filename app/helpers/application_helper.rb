@@ -105,6 +105,12 @@ module ApplicationHelper
   def model_alt_id(model)
     (model.alt_id.blank?)? "未設定" : model.alt_id
   end
+
+  def tag_name(model)
+    return if model.name.blank?
+    str = model.name
+    model.name = str.gsub(/#.+;/, "")
+  end
   
   def logout_icon(title='ログアウト');    sprintf("<i class='icon-off' title=%s></i>", title).html_safe; end
 
@@ -426,6 +432,29 @@ EOF
     leafs
   end
 
+  def tag_top_level_splitter; return '-'; end
+  def tag_level_splitter; return ':'; end
+
+  def tag_top_level_key(tag_name);    level_key = tag_name.split(tag_top_level_splitter)[0]; end
+  def tag_level_key(tag_name);        level_key = tag_name.split(tag_level_splitter)[0]; end
+  def common_tag_name(tag_name)
+      level_key = tag_level_key(tag_name)+tag_level_splitter
+      common_name = tag_name.gsub(level_key,'')
+      return ((common_name.blank?)? tag_name: common_name)
+  end
+
+  def tag_leveling_hash(shop)
+      hash = Hash.new
+      tags = ActsAsTaggableOn::Tag.all
+      tags = tags.where('tags.shop_id =?', shop).order(name: :asc)
+      tags.each do |tag|
+          level_key = tag_top_level_key(tag.name)
+          hash[level_key] = Array.new  if hash[level_key].blank?
+          hash[level_key] << tag
+      end
+      hash
+  end
+
   def trash_icon(title='削除'); sprintf("<i class='fa-solid fa-trash' title=%s></i>", title).html_safe; end
   def new_icon(title='新規');   sprintf("<i class='fa-solid fa-circle-plus' title=%s></i>", title).html_safe; end
   def edit_icon(title='編集');     sprintf("<i class='fa-solid fa-pen-to-square' title=%s></i>", title).html_safe; end
@@ -442,6 +471,9 @@ EOF
   def top_icon(title='先頭へ'); sprintf('<i class="icon-step-backward" tittle=%s></i>', title).html_safe; end
   def bottom_icon(title='末尾へ'); sprintf('<i class="icon-step-forward" tittle=%s></i>', title).html_safe; end
 
+  def tag3_icon(title=tag_title); sprintf('<i class="icon-tag" tittle=%s></i>', title).html_safe; end
+  def tags3_icon(title=tags_title); sprintf('<i class="icon-tags" tittle=%s></i>', title).html_safe; end
+
 
   def caution_icon(title='警告'); sprintf("<i class='fa-solid fa-diamond-exclamation' title=%s></i>", title).html_safe; end
   def error_icon(title='エラー'); sprintf("<i class='fa-solid fa-triangle-exclamation text-danger' title=%s></i> ", title).html_safe; end
@@ -451,5 +483,10 @@ EOF
   def submit_icon(title='決定'); sprintf("<i class='fa-solid fa-check' title=%s></i>", title).html_safe; end
 
   def staff_icon(title='スタッフ');  sprintf("<i class='fa-solid fa-user-large' title=%s></i>", title).html_safe; end
+
+  def tag_title; 'タグ'; end
+  def tag_icon(title=tag_title, ext_class='');  sprintf("<i class='fas fa-tag fa-fw %s' title='%s'></i>", ext_class, title).html_safe; end
+  def tags_title; 'タグ'; end
+  def tags_icon(title=tags_title, ext_class='');  sprintf("<i class='fas fa-tags fa-fw %s' title='%s'></i>", ext_class, title).html_safe; end
 
 end

@@ -1,0 +1,90 @@
+<%
+    blog_count = VisualWidget.search_widget_bag_for(@website, "a759750b2d3ae88fd86a79e13c0371f5")
+    if blog_count.blank? || !blog_count.is_valid?
+        cmax = 0
+    else
+        cmax = blog_count.data_string.to_i
+    end
+    if cmax != 0 && cmax != 6 && cmax != 12 && cmax != 18
+        cmax = 0
+    end
+    if cmax != 0
+
+        @max = cmax
+        type_root = ContentCategory.type_root(@website, ContentCategory::TYPE_STREAM)
+        navigation = type_root.web_page
+        bag_categories = type_root.children.where("is_public=?", true) #type_root.children.where('is_public=?', true)
+
+        public_categories  = []
+        bag_categories.each do | cat |
+            public_categories.concat(cat.sons)
+            public_categories << cat
+        end
+        latest_leafs = @website.public_leafs
+        latest_leafs = latest_leafs.where("content_category_id IN (?)", public_categories).order(publish_from: :desc).order(created_at: :desc).limit(@max)
+
+        #c = ContentLeaf.public_leafs
+        #c.and "content_category_id", public_categories
+        #latest_leafs =  @website.content_leafs.find(:all, :limit=>@max, :conditions=>c.where, :order=>'publish_from desc')
+        unless latest_leafs.blank?
+%>
+	<aside id="blog-list">
+		<div class="container">
+			<h1><%= link_to model_name(navigation), :action=>navigation.action_name, :id=>navigation.content_category.id %></h1>
+			<ul class="article-list wrapper">
+<%
+            latest_leafs.each do | leaf |
+                if true || request.host == 'sr2.swifty.jp'
+                    page_url  = url_for(:action=>'stream_show', :id=>leaf, :wkey=>@website.wsite_hash_key)
+                else
+                    page_url  = url_for(:action=>'stream_show', :id=>leaf)
+                end
+                publish   = leaf.publish_from.strftime("%Y-%m-%d")
+                key_photo = key_photo(leaf)
+                unless key_photo.blank?
+                    image_url = key_photo.clip.url(:panel)
+                else
+                    image_url = '//placehold.jp/320x320.png?text='+publish
+                end
+%>
+				<li class="m2p3">
+					<div class="imgbox169">
+						<div>
+							<a href="<%= page_url %>">
+								<img src="<%= image_url %>" alt="<%= model_title(leaf) %>">
+								<span class="arrowbutton"></span>
+							</a>
+						</div>
+					</div>
+					<div>
+						<h2>
+							<a href="<%= page_url %>">
+								<%= model_title(leaf) %>
+							</a>
+						</h2>
+						<p class="property">
+							<span>
+								<i class="pico-calendar-alt"></i> <%= publish %>
+							</span>
+<% unless leaf.staff.blank? || leaf.staff.staff_status==Staff::STAFF_BLOCKED %>
+							<span>
+								<i class="pico-quill"></i>
+    <% if true || request.host == 'sr2.swifty.jp' %>
+    							<a href="<%=url_for(:action=>'staff', :id=>leaf.staff, :wkey=>@website.wsite_hash_key) %>"><%= h model_name(leaf.staff) %></a>
+    <% else %>
+								<a href="<%=url_for(:action=>'staff', :id=>leaf.staff) %>"><%= h model_name(leaf.staff) %></a>
+    <% end %>
+							</span>
+<% end %>
+						</p>
+<!--
+                        <p><%= raw truncate(strip_tags(leaf.description), :length=>56) %></p>
+-->
+					</div>
+				</li>
+<%          end %>
+			</ul>
+		</div>
+	</aside>
+<%      end %>
+<%  end %>

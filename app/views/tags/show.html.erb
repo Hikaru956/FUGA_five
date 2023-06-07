@@ -1,0 +1,39 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href='<%= url_for(:controller=>'admin_config', :action=>'shop_show_website',	:id=>@shop) %>'>ホーム</a></li>
+    <li class="breadcrumb-item"><a href="<%= url_for(tags_path(search_word: @search_word, search_tags: @search_tags, page: @page)) %>"><%= tag_title %></a></li>
+    <li class="breadcrumb-item active"><%= tag_name(@item) %></li>
+</ol>
+
+<span class='float-right'>
+    <a class='btn btn-secondary' href='<%= url_for(tags_path(search_word: @search_word, search_tags: @search_tags, page: @page)) %>'>
+        <%= backward_icon %>
+        戻る
+    </a>
+</span>
+<h5 style='margin-bottom: 15px;'><%= tag_icon %> <%= tag_name(@item) %></h5>
+<%= render partial: 'dlg_edit',     locals: { item: @item, search_word: @search_word, search_tags: @search_tags, page: @page }  %>
+<%= render partial: 'dlg_delete',   locals: { item: @item, search_word: @search_word, search_tags: @search_tags, page: @page } %>
+
+<table class='table table-bordered xtable-hover txable-striped'>
+    <tbody>
+        <tr>
+            <th width='30%' class='table-secondary' style='text-align: left; vertical-align: middle'><%= tag_title %>名称</th>
+            <td width='70%' style='text-align: left; vertical-align: middle'><%= tag_name(@item) %></th>
+        </tr>
+        <tr>
+            <th width='30%' class='table-secondary' style='text-align: left; vertical-align: middle'>参照数</th>
+            <td width='70%' style='text-align: right; vertical-align: middle'>
+                    <%= @item.taggings_count %>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class='text-right'>
+    <button type="button" class='btn btn-danger' data-bs-toggle="modal" data-bs-target="#TagDeleteModal">
+        <%= trash_icon %>&nbsp;削除…
+    </button>
+    <button type="button" class='btn btn-success' data-bs-toggle="modal" data-bs-target="#TagEditModal">
+        <%= edit_icon %>&nbsp;編集…
+    </button>
+</div>

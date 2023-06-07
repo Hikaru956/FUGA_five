@@ -74,7 +74,8 @@
                                 <%
                                 sons = @seed.sons
                                 sons << @seed
-                                @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(publish_from: :desc).order(created_at: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+                                 @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(publish_from: :desc).order(created_at: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+    @leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
                                 #c = ContentLeaf.public_leafs
                                 #c.and "content_leafs.content_category_id", 'IN', sons
                                 #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'publish_from desc')

@@ -46,6 +46,11 @@
 	<% unless @item.description.blank? %>
 		<%=  raw @item.description %>
 	<% end %>
+	<% unless @item.tags.blank? %>
+		<% @item.tags.order(name: :asc).each do | tag | %>
+			<span class="badge badge-primary"><%= tag_icon %> <%= tag_name(tag) %></span>
+		<% end %>
+	<% end %>
 </div>
 
 <hr/>

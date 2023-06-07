@@ -126,6 +126,26 @@
 				<%= raw "<a href=#{@shop.web_reservation_uri} target='_blank' title=#{@shop.web_reservation_uri}>#{reservation_icon('WEB予約', 'fa-2x')}</a>"			unless @shop.web_reservation_uri.blank? %>
 			</td>
 		</tr>
+		<tr>
+			<th width="25%">タグ</th>
+			<td width="75%">
+				<% if @shop.enable_tag %>
+					<% @shop.shop_tags.order(name: :asc).each do | tag | %>
+						<span class="badge badge-pill badge-primary"><%= tag_icon %>&nbsp;<%= tag_name(tag) %></span>
+					<% end %>
+					<% if @shop.shop_tags.blank? %>
+						<span class='text-danger'><%= info_icon('タグ設定') %>&nbsp;<%= tag_title %>設定がありません。</span>
+					<% end %>
+					<span class="float-right">
+						<a type="button" class="btn btn-info" href="<%= tags_path%>">
+							<%= setting_icon('設定') %>&nbsp;タグ設定
+						</a>
+					</span>
+				<% else %>
+				 無効
+				<% end %>
+			</td>
+		</tr>
 	</tbody>
 </table>
 

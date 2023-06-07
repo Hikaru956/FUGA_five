@@ -118,7 +118,6 @@
 	</div>
 </div>
 
-<% if false %>
 <% tag_map = tag_leveling_hash(item.shop) %>
 <% tag_key = tag_map.keys.sort{|a,b| a<=>b } %>
 <div class="mb-3 row">
@@ -127,10 +126,9 @@
         <% tag_key.each do |key| %>
             <% tag_map[key].each do |tag| %>
                 <%= f.check_box :tag_list, { multiple: true, id: 'leaf_'+tag.name, checked: (item.tags.include?(tag)? true: false) }, "#{tag.name}", nil %>
-                <%= f.label "#{tag.name}", "#{tag.name}", class: "checkbox03" %>
+                <%= f.label "#{tag_name(tag)}", "#{tag_name(tag)}", class: "checkbox03" %>
             <% end %>
             <hr/>
         <% end %>
     </div>
 </div>
-<% end %>

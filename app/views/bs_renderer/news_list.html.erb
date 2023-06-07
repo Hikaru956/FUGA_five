@@ -46,6 +46,7 @@
 		    items = ContentLeaf.public_leafs
 		    items = items.where("content_leafs.content_category_id IN (?)", sons).order(position: :desc)
 		    @leafs = items.paginate(:page => params[:page], :per_page=>PER_PAGE)
+			@leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
 		%>
 
 		<% @leafs.each do | leaf | @leaf = leaf%>

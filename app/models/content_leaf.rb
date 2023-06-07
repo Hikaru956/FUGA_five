@@ -9,8 +9,9 @@
 #
 
 #hikary#class ContentLeaf < ActiveRecord::Base
-class ContentLeaf < ApplicationRecord 
+class ContentLeaf < ApplicationRecord
   acts_as_list  :scope => :content_category  # For Leaf Of Gallery And Portfolio
+  acts_as_taggable_on :tags
 
   belongs_to    :shop
   belongs_to    :content_bag
@@ -24,7 +25,7 @@ class ContentLeaf < ApplicationRecord
   accepts_nested_attributes_for :photos
 
   before_save   :before_save
-  after_create  :after_create  
+  after_create  :after_create
   
   #attr_accessible  :shop_id, :content_category_id, :content_bag_id, :is_public, :title, :description, :description_2, :description_3, :staff_id, :publish_from, :publish_until, :integer_field
 

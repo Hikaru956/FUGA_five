@@ -1,0 +1,32 @@
+<div class="modal fade" id="TagSearchModal" tabindex="-1" role="dialog" aria-labelledby="TagSearchModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <%= form_tag(tags_path , :method => 'get') do %>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <%= search_icon %>
+            <%= tag_title %>検索
+        </h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="staticName" class="col-sm-3 col-form-label">検索ワード</label>
+            <div class="col-sm-9">
+              <%= text_field_tag :search_word, search_word,{class: "form-control", placeholder: "入力文字含む", autofocus: true} %>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+          <% unless search_word.blank? %>
+            <%= link_to reset_search_icon+' リセット', tags_path, class: 'btn btn-outline-dark' %>
+          <% end %>
+          <button type="submit" class="btn btn-primary"><%= search_icon %>検索</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

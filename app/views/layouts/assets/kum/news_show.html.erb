@@ -67,6 +67,16 @@
 <%  end %>
             <div id="contents">
 <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+                    <% tag_cloud(@seed.tags.order(name: :asc), %w(css1 css2 css3 css4)) do |tag| %>
+                        <% @seed.content_category.category_path(true).each do | category | %>
+                        <% cat_url = url_for(:action=>'news_list', :id=>category, search_tags: [tag.name])%>
+                            <a href='<%= cat_url %>'>
+                                <span class='badge badge-primary '>
+                                    #<%= tag3_icon %>&nbsp;<%= tag_name(tag) %>
+                                </span>
+                            </a>
+                        <% end %>
+                    <% end %>
             </div>
         </div>
     </div>

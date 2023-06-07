@@ -1,0 +1,28 @@
+<div class="modal hide fade form-horizontal" id="TagDeleteModal" tabindex="-1" role="dialog" aria-labelledby="TagDeleteModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <%= form_for item, url: tag_path(id: item), method: :delete do |f| %>
+      <%= hidden_field_tag 'search_word', search_word %>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <%= trash_icon %>
+            <%= tag_title %>削除
+        </h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <%= tag_name(item) %>
+            を削除します。よろしいですか？
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+          <button type="submit" class="btn btn-danger"><%= trash_icon %>&nbsp;削除</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

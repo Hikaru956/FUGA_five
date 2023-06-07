@@ -400,6 +400,9 @@ Fuga326::Application.routes.draw do
   post 'admin_config/shop_update_position', to: 'admin_config#shop_update_position'
   delete 'admin_config/shop_delete_position', to:'admin_config#shop_delete_position'
 
+  resources :tags do
+  end
+
 
 #  match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
 
