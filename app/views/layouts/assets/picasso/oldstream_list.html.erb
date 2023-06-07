@@ -15,9 +15,6 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator"                content="fuga">
 <meta name="author"                   content="<%= model_name(@website.company) %>">
-<% if request.host == 'staffroom.swifty.jp' %>
-<meta name="robots"                   content="noindex,nofollow">
-<% end %>
 <% unless @website.custom_metas.blank? %>
     <%= raw @website.custom_metas %>
 <% end %>
@@ -34,8 +31,7 @@
 <link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <script src="https://use.fontawesome.com/9e789611aa.js"></script>
-<link rel="stylesheet" href="/stylesheets/assets/ever-green.link/style.css">
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/style" %>
+<link rel="stylesheet" href="/stylesheets/assets/picasso/style.css?v=2019073101">
 </head>
 <!-- このサイトはIE9未満では正しく表示されません。 -->
 <!--[if lt IE 9]>
@@ -49,72 +45,96 @@
 <!--<![endif]-->
 <!-- タッチデバイス用ナビゲーション -->
 <aside id="tnav">
-    <ul class="scrooler">
+    <ul id="scrooler">
         <li>- MENU</li>
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso/navigation" %>
     </ul>
 </aside>
 <!-- 主ウインドウ -->
 <div id="body">
     <div class="scrooler">
 <!-- サイトヘッダー -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/header" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso/header" %>
 <!-- グローバルナビゲーション -->
         <nav id="gnav">
             <div class="container">
-                <ul id="gnav_main">
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/navigation" %>
-                </ul>
+                <div>
+                    <i id="gnav_prev" class="fa fa-chevron-circle-left"></i>
+                    <div id="gnav_wrapper">
+                        <ul>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso/navigation" %>
+                        </ul>
+                    </div>
+                    <i id="gnav_next" class="fa fa-chevron-circle-right"></i>
+                </div>
             </div>
         </nav>
-        <div>
-            <div class="container">
-                <div class="content_box">
 <!-- パンくずリスト -->
-                    <aside id="breadcrumbs">
-                        <ol>
-<% if request.host != 'www.ever-green.link' %>
-                            <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+        <aside id="breadcrumbs">
+            <div class="container">
+                <ol>
+<% if true || request.host == 'staffroom.swifty.jp' %>
+                    <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
 <% else %>
-                            <li><a href="/home"><i class="fa fa-home"></i></a></li>
+                    <li><a href="/home"><i class="fa fa-home"></i></a></li>
 <% end %>
 <% unless @seed.my_type_root_category.has_only_a_public_bag? %>
-<% if request.host != 'www.ever-green.link' %>
-                            <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.my_type_root_category, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
-<% else %>
-                            <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.my_type_root_category) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
-<% end %>
+    <% if true || request.host == 'staffroom.swifty.jp' %>
+                    <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.my_type_root_category, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
+    <% else %>
+                    <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.my_type_root_category) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
+    <% end %>
 <% end %>
 <% @seed.category_path.each do | category | %>
-<% if request.host != 'www.ever-green.link' %>
-                            <li><a href="<%= url_for(:action=>'stream_list', :id=>category, :wkey=>@website.wsite_hash_key) %>"><%= category.category_label %></a></li>
-<% else %>
-                            <li><a href="<%= url_for(:action=>'stream_list', :id=>category) %>"><%= category.category_label %></a></li>
+    <% if true || request.host == 'staffroom.swifty.jp' %>
+                    <li><a href="<%= url_for(:action=>'stream_list', :id=>category, :wkey=>@website.wsite_hash_key) %>"><%= category.category_label %></a></li>
+    <% else %>
+                    <li><a href="<%= url_for(:action=>'stream_list', :id=>category) %>"><%= category.category_label %></a></li>
+    <% end %>
 <% end %>
-<% end %>
-                            <li><%= model_name(@seed) %></li>
-                        </ol>
-                    </aside>
+                    <li><%= model_name(@seed) %></li>
+                </ol>
+            </div>
+        </aside>
+<!-- メインコンテナ -->
+        <div id="main_wrap" class="gallery">
+            <div class="container">
+<!-- 主エリア -->
+<!--
+                <main id="main">
+-->
                     <h1><%= model_name(@seed) %></h1>
                     <section id="contents_list">
+<!--
+<% unless @seed.content_leafs.blank? %>
+    <% @bag_roots = [@seed.my_bag_root_category] %>
+    <% unless @bag_roots.blank? %>
+        <%= form_tag({:action=>"stream_list", :id=>nil}, :id=>"category_form")  do %>
+                        <%= tree_select_tag(@bag_roots, 'id', (@seed.blank?)? "": @seed.id) %>
+                        <button type="submit">
+                            <i class="fa fa-check"></i>&nbsp;選択
+                        </button>
+        <% end %>
+    <% end %>
+<% end %>
+-->
                         <ul class="flex-container">
 <%
     sons = @seed.sons
     sons << @seed
-    @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)",sons).order(publish_from: :desc).order(created_at: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
-    @leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
+     @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)",sons).order(publish_from: :desc).order(created_at: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+     @leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
     #c = ContentLeaf.public_leafs_condition
     #c.and "content_leafs.content_category_id", 'IN', sons
     #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'publish_from desc')
     @leafs.each do | leaf | @leaf = leaf
-            publish   = leaf.publish_from.strftime("%Y-%m-%d")
             key_photo = key_photo(leaf)
             unless key_photo.blank?
                 image_url = key_photo.clip.url(:panel)
             else
-                image_url = '//placehold.it/256x256/ffffff/cccccc&amp;text='+publish
+                image_url = '//placehold.it/327x327&amp;text=No Photo'
             end
-            if request.host != 'www.ever-green.link'
+            if true || request.host == 'staffroom.swifty.jp'
                 content_url = url_for(:action=>'stream_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
             else
                 content_url = url_for(:action=>'stream_show', :id=>@leaf, :page=>@page)
@@ -141,23 +161,31 @@
                         </ul>
                     </section>
                     <aside class="pagination text-center">
-<% if request.host != 'www.ever-green.link' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                             <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% else %>
                             <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% end %>
                     </aside>
-                </div>
+<!--
+                </main>
+-->
+<!-- サイドエリア -->
+<%  if false %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso/sidebar" %>
+<%  end %>
             </div>
         </div>
 <!-- サイトフッター -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/footer" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso/footer" %>
     </div>
 </div>
 <!-- common javascript -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/common_js" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso/common_js" %>
 <!-- page specific javascript -->
 <!-- social net javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso/social_js" %>
 <!-- google maps javascript -->
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso/gmaps_js" %>
 </body>
 </html>

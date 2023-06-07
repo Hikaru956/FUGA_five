@@ -18,7 +18,7 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="article">
-<meta property="og:url"               content="https://<%= request.host+shopalt+url_for(:action=>'gallery_show', :id=>@seed) %>">
+<meta property="og:url"               content="https://<%= request.host+shopalt+url_for(:action=>'stream_show', :id=>@seed) %>">
 <meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"         content="<%= @website.name %>">
 <meta property="article:publisher"    content="<%= model_name(@website.company) %>">
@@ -77,23 +77,23 @@
 <!-- パンくずリスト -->
                     <aside id="breadcrumbs">
                         <ol>
-<% if request.host != 'www.hs-picasso.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
 <% else %>
                             <li><a href="<%= shopalt %>/home"><i class="fa fa-home"></i></a></li>
 <% end %>
 <% unless @seed.content_category.has_only_a_public_bag? %>
-<%      if request.host != 'www.hs-picasso.jp' %>
-                            <li><a href="<%= url_for(:action=>'news_index', :id=>@seed.content_category.my_bag_root_category.parent, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
+<%      if true || request.host == 'staffroom.swifty.jp' %>
+                            <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.content_category.my_bag_root_category.parent, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
 <%      else %>
-                            <li><a href="<%= shopalt+url_for(:action=>'news_index', :id=>@seed.content_category.my_bag_root_category.parent) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
+                            <li><a href="<%= shopalt+url_for(:action=>'stream_index', :id=>@seed.content_category.my_bag_root_category.parent) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
 <%      end %>
 <% end %>
 <% @seed.content_category.category_path(true).each do | category | %>
-<%      if request.host != 'www.hs-picasso.jp' %>
-                            <li><%= link_to category.category_label, :action=>"news_list", :id=>category, :wkey=>@website.wsite_hash_key %></li>
+<%      if true || request.host == 'staffroom.swifty.jp' %>
+                            <li><%= link_to category.category_label, :action=>"stream_list", :id=>category, :wkey=>@website.wsite_hash_key %></li>
 <%      else %>
-                            <li><a href="<%= shopalt+url_for(:action=>'news_lest', :id=>category) %>"><%= category.category_label %></a></li>
+                            <li><a href="<%= shopalt+url_for(:action=>'stream_list', :id=>category) %>"><%= category.category_label %></a></li>
 <%      end %>
 <% end %>
                             <li class="active">
@@ -106,27 +106,36 @@
                         <header>
                             <h1><%= model_title(@seed) %></h1>
                             <p class="publish">
-                                <i class="fa fa-calendar"></i> <%= publish_label(@seed) %>
-                            </p>
+<% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+<%      if true || request.host == 'staffroom.swifty.jp' %>
+                                <i class="fa fa-user"></i> <a href="<%=url_for(:action=>'staff', :id=>@seed.staff, :wkey=>@website.wsite_hash_key) %>"><%= h model_name(@seed.staff) %></a>
+<%      else %>
+                                <i class="fa fa-user"></i> <a href="<%=shopalt+url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>
+<%      end %>
+<% end %>
+                                <i class="fa fa-calendar"></i> <%= publish_label(@seed) %></p>
                         </header>
                         <div id="contents">
-                            <% unless @seed.description.blank? %>
-                                <%= raw @seed.description %>
-                                <% tag_cloud(@seed.tags.order(name: :asc), %w(css1 css2 css3 css4)) do |tag| %>
-                                    <% @seed.content_category.category_path(true).each do | category | %>
-                                    <% cat_url = url_for(:action=>'news_list', :id=>category, search_tags: [tag.name])%>
-                                        <a href='<%= cat_url %>'>
-                                            <span class='badge badge-primary '>
-                                                #<%= tag3_icon %>&nbsp;<%= tag_name(tag) %>
-                                            </span>
-                                        </a>
-                                    <% end %>
+ <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+                            <% tag_cloud(@seed.tags.order(name: :asc), %w(css1 css2 css3 css4)) do |tag| %>
+                                <% @seed.content_category.category_path(true).each do | category | %>
+                                <% cat_url = url_for(:action=>'news_list', :id=>category, search_tags: [tag.name])%>
+                                    <a href='<%= cat_url %>'>
+                                        <span class='badge badge-primary '>
+                                            #<%= tag3_icon %>&nbsp;<%= tag_name(tag) %>
+                                        </span>
+                                    </a>
                                 <% end %>
                             <% end %>
                         </div>
                     </article>
                     <%= leaf_navigation(@seed) %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/sns_btn" %>
+<% if @website.disqus? %>
+                    <aside id="comments">
+<%= raw @website.disqus_code %>
+                    </aside>
+<% end %>
                 </div>
             </div>
         </div>

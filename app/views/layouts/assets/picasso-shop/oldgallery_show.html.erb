@@ -18,7 +18,7 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="article">
-<meta property="og:url"               content="https://<%= request.host+shopalt+url_for(:action=>'gallery_show', :id=>@seed) %>">
+<meta property="og:url"               content="https://<%= request.host + url_for(:action=>'gallery_show', :id=>@seed) %>">
 <meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"         content="<%= @website.name %>">
 <meta property="article:publisher"    content="<%= model_name(@website.company) %>">
@@ -77,23 +77,23 @@
 <!-- パンくずリスト -->
                     <aside id="breadcrumbs">
                         <ol>
-<% if request.host != 'www.hs-picasso.jp' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
 <% else %>
                             <li><a href="<%= shopalt %>/home"><i class="fa fa-home"></i></a></li>
 <% end %>
 <% unless @seed.content_category.has_only_a_public_bag? %>
-<%      if request.host != 'www.hs-picasso.jp' %>
-                            <li><a href="<%= url_for(:action=>'news_index', :id=>@seed.content_category.my_bag_root_category.parent, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
+<%      if true || request.host == 'staffroom.swifty.jp' %>
+                            <li><a href="<%= url_for(:action=>'gallery_index', :id=>@seed.content_category.my_bag_root_category.parent, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
 <%      else %>
-                            <li><a href="<%= shopalt+url_for(:action=>'news_index', :id=>@seed.content_category.my_bag_root_category.parent) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
+                            <li><a href="<%= shopalt+url_for(:action=>'gallery_index', :id=>@seed.content_category.my_bag_root_category.parent) %>"><%= model_title(@seed.content_category.my_bag_root_category.parent) %></a></li>
 <%      end %>
 <% end %>
 <% @seed.content_category.category_path(true).each do | category | %>
-<%      if request.host != 'www.hs-picasso.jp' %>
-                            <li><%= link_to category.category_label, :action=>"news_list", :id=>category, :wkey=>@website.wsite_hash_key %></li>
+<%      if true || request.host == 'staffroom.swifty.jp' %>
+                            <li><%= link_to category.category_label, :action=>"gallery_list", :id=>category, :wkey=>@website.wsite_hash_key %></li>
 <%      else %>
-                            <li><a href="<%= shopalt+url_for(:action=>'news_lest', :id=>category) %>"><%= category.category_label %></a></li>
+                            <li><a href="<%= shopalt+url_for(:action=>'gallery_lest', :id=>category) %>"><%= category.category_label %></a></li>
 <%      end %>
 <% end %>
                             <li class="active">
@@ -102,15 +102,38 @@
                         </ol>
                     </aside>
                     <!-- <h1><%= model_title(@seed.content_category.my_bag_root_category.parent) %></h1> -->
-                    <article id="article">
-                        <header>
-                            <h1><%= model_title(@seed) %></h1>
-                            <p class="publish">
-                                <i class="fa fa-calendar"></i> <%= publish_label(@seed) %>
-                            </p>
-                        </header>
-                        <div id="contents">
-                            <% unless @seed.description.blank? %>
+                    <article id="article" class="wrapper">
+                        <div class="col-1p2">
+                            <div id="gallery">
+<% @photos = @seed.photos %>
+<% unless @photos.blank? %>
+                                <ul>
+    <% @photos.each do | photo | %>
+                                    <li>
+                                        <img src="<%= photo.clip.url() %>" alt="">
+        <% unless photo.info.blank? %>
+                                        <div class="caption"><%=h photo.info%></div>
+        <% end %>
+                                    </li>
+    <% end %>
+                                </ul>
+                                <div id="gallery_prev"><i class="fa fa-chevron-circle-left"></i></div>
+                                <div id="gallery_next"><i class="fa fa-chevron-circle-right"></i></div>
+<% end %>
+                            </div>
+                        </div>
+                        <div class="col-1p2">
+                            <header>
+                                <h1><%= model_title(@seed) %></h1>
+<% unless @seed.staff.blank? || @seed.staff.staff_status==Staff::STAFF_BLOCKED %>
+                                <div class="publish">
+                                    <i class="fa fa-user"></i>
+                                    <a href="<%= shopalt+url_for(:action=>'staff', :id=>@seed.staff) %>"><%= h model_name(@seed.staff) %></a>
+                                </div>
+<% end %>
+                            </header>
+<% unless @seed.description.blank? %>
+                            <div id="contents">
                                 <%= raw @seed.description %>
                                 <% tag_cloud(@seed.tags.order(name: :asc), %w(css1 css2 css3 css4)) do |tag| %>
                                     <% @seed.content_category.category_path(true).each do | category | %>
@@ -122,10 +145,10 @@
                                         </a>
                                     <% end %>
                                 <% end %>
-                            <% end %>
+                            </div>
+<% end %>
                         </div>
                     </article>
-                    <%= leaf_navigation(@seed) %>
 <%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/sns_btn" %>
                 </div>
             </div>
@@ -137,9 +160,9 @@
 <!-- common javascript -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/common_js" %>
 <!-- page specific javascript -->
+<script src="/javascripts/assets/picasso-shop/gallery.js"></script>
 <!-- social net javascript -->
 <%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/social_js" %>
 <!-- google maps javascript -->
-<script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>

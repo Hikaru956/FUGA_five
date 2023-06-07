@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible"    content="IE=edge">
+<% shopalt = "/"+@website.alt_id %>
+<% shopalt.slice!(".hs-picasso.jp") %>
 <% unless @seed.my_type_root_category.has_only_a_public_bag? %>
 <title><%= model_title(@seed.my_type_root_category) %> <%= model_name(@seed) %> - <%= @website.name %></title>
 <% else %>
@@ -15,13 +17,9 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator"                content="fuga">
 <meta name="author"                   content="<%= model_name(@website.company) %>">
-<% if request.host == 'staffroom.swifty.jp' %>
-<meta name="robots"                   content="noindex,nofollow">
-<% end %>
 <% unless @website.custom_metas.blank? %>
     <%= raw @website.custom_metas %>
 <% end %>
-<%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
 <%
     @favicon = @website.favicon
     @webclip = @website.apple_touch_icon
@@ -34,8 +32,8 @@
 <link rel="apple-touch-icon" href="<%= @webclip.clip.url() %>">
 <% end %>
 <script src="https://use.fontawesome.com/9e789611aa.js"></script>
-<link rel="stylesheet" href="/stylesheets/assets/ever-green.link/style.css">
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/style" %>
+<link rel="stylesheet" href="/stylesheets/assets/picasso-shop/style.css">
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/style" %>
 </head>
 <!-- このサイトはIE9未満では正しく表示されません。 -->
 <!--[if lt IE 9]>
@@ -49,21 +47,21 @@
 <!--<![endif]-->
 <!-- タッチデバイス用ナビゲーション -->
 <aside id="tnav">
-    <ul class="scrooler">
+    <ul id="scrooler">
         <li>- MENU</li>
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/navigation" %>
     </ul>
 </aside>
 <!-- 主ウインドウ -->
 <div id="body">
     <div class="scrooler">
 <!-- サイトヘッダー -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/header" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/header" %>
 <!-- グローバルナビゲーション -->
         <nav id="gnav">
             <div class="container">
                 <ul id="gnav_main">
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/navigation" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/navigation" %>
                 </ul>
             </div>
         </nav>
@@ -73,23 +71,23 @@
 <!-- パンくずリスト -->
                     <aside id="breadcrumbs">
                         <ol>
-<% if request.host != 'www.ever-green.link' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
 <% else %>
-                            <li><a href="/home"><i class="fa fa-home"></i></a></li>
+                            <li><a href="<%= shopalt %>/home"><i class="fa fa-home"></i></a></li>
 <% end %>
 <% unless @seed.my_type_root_category.has_only_a_public_bag? %>
-<% if request.host != 'www.ever-green.link' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                             <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.my_type_root_category, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
 <% else %>
-                            <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.my_type_root_category) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
+                            <li><a href="<%= shopalt+url_for(:action=>'stream_index', :id=>@seed.my_type_root_category) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
 <% end %>
 <% end %>
 <% @seed.category_path.each do | category | %>
-<% if request.host != 'www.ever-green.link' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                             <li><a href="<%= url_for(:action=>'stream_list', :id=>category, :wkey=>@website.wsite_hash_key) %>"><%= category.category_label %></a></li>
 <% else %>
-                            <li><a href="<%= url_for(:action=>'stream_list', :id=>category) %>"><%= category.category_label %></a></li>
+                            <li><a href="<%= shopalt+url_for(:action=>'stream_list', :id=>category) %>"><%= category.category_label %></a></li>
 <% end %>
 <% end %>
                             <li><%= model_name(@seed) %></li>
@@ -101,8 +99,8 @@
 <%
     sons = @seed.sons
     sons << @seed
-    @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)",sons).order(publish_from: :desc).order(created_at: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
-    @leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
+     @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)",sons).order(publish_from: :desc).order(created_at: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+     @leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
     #c = ContentLeaf.public_leafs_condition
     #c.and "content_leafs.content_category_id", 'IN', sons
     #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'publish_from desc')
@@ -114,10 +112,10 @@
             else
                 image_url = '//placehold.it/256x256/ffffff/cccccc&amp;text='+publish
             end
-            if request.host != 'www.ever-green.link'
+            if true || request.host == 'staffroom.swifty.jp'
                 content_url = url_for(:action=>'stream_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
             else
-                content_url = url_for(:action=>'stream_show', :id=>@leaf, :page=>@page)
+                content_url = shopalt+url_for(:action=>'stream_show', :id=>@leaf, :page=>@page)
             end
 %>
                             <li class="flex-item21">
@@ -141,7 +139,7 @@
                         </ul>
                     </section>
                     <aside class="pagination text-center">
-<% if request.host != 'www.ever-green.link' %>
+<% if true || request.host == 'staffroom.swifty.jp' %>
                             <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% else %>
                             <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
@@ -151,11 +149,11 @@
             </div>
         </div>
 <!-- サイトフッター -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/footer" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/footer" %>
     </div>
 </div>
 <!-- common javascript -->
-<%= render :partial=>"#{LayoutScheme.asset_root}/ever-green.link/common_js" %>
+<%= render :partial=>"#{LayoutScheme.asset_root}/picasso-shop/common_js" %>
 <!-- page specific javascript -->
 <!-- social net javascript -->
 <!-- google maps javascript -->

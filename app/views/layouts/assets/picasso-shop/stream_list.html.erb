@@ -71,20 +71,20 @@
 <!-- パンくずリスト -->
                     <aside id="breadcrumbs">
                         <ol>
-<% if true || request.host == 'staffroom.swifty.jp' %>
+<% if request.host != 'www.hs-picasso.jp' %>
                             <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
 <% else %>
                             <li><a href="<%= shopalt %>/home"><i class="fa fa-home"></i></a></li>
 <% end %>
 <% unless @seed.my_type_root_category.has_only_a_public_bag? %>
-<% if true || request.host == 'staffroom.swifty.jp' %>
+<% if request.host != 'www.hs-picasso.jp' %>
                             <li><a href="<%= url_for(:action=>'stream_index', :id=>@seed.my_type_root_category, :wkey=>@website.wsite_hash_key) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
 <% else %>
                             <li><a href="<%= shopalt+url_for(:action=>'stream_index', :id=>@seed.my_type_root_category) %>"><%= model_title(@seed.my_type_root_category) %></a></li>
 <% end %>
 <% end %>
 <% @seed.category_path.each do | category | %>
-<% if true || request.host == 'staffroom.swifty.jp' %>
+<% if request.host != 'www.hs-picasso.jp' %>
                             <li><a href="<%= url_for(:action=>'stream_list', :id=>category, :wkey=>@website.wsite_hash_key) %>"><%= category.category_label %></a></li>
 <% else %>
                             <li><a href="<%= shopalt+url_for(:action=>'stream_list', :id=>category) %>"><%= category.category_label %></a></li>
@@ -99,8 +99,8 @@
 <%
     sons = @seed.sons
     sons << @seed
-     @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)",sons).order(publish_from: :desc).order(created_at: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
-     @leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
+    @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)",sons).order(publish_from: :desc).order(created_at: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+    @leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
     #c = ContentLeaf.public_leafs_condition
     #c.and "content_leafs.content_category_id", 'IN', sons
     #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'publish_from desc')
@@ -112,7 +112,7 @@
             else
                 image_url = '//placehold.it/256x256/ffffff/cccccc&amp;text='+publish
             end
-            if true || request.host == 'staffroom.swifty.jp'
+            if request.host != 'www.hs-picasso.jp'
                 content_url = url_for(:action=>'stream_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
             else
                 content_url = shopalt+url_for(:action=>'stream_show', :id=>@leaf, :page=>@page)
@@ -139,7 +139,7 @@
                         </ul>
                     </section>
                     <aside class="pagination text-center">
-<% if true || request.host == 'staffroom.swifty.jp' %>
+<% if request.host != 'www.hs-picasso.jp' %>
                             <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
 <% else %>
                             <%= will_paginate(@leafs, :params=> {:action=>'stream_list', :id=>@seed, :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
