@@ -1,5 +1,9 @@
 <script>
-	var editor1 = new RichTextEditor("#div_editor1");
+    var editor1cfg = {}
+	editor1cfg.toolbar = "mytoolbar";
+	editor1cfg.toolbar_mytoolbar = "{fontname,fontsize}|{insertimage,insertemoji}|{forecolor,backcolor}{justifyleft,justifycenter,justifyfull,justifyright}|{insertlink}{insertvideo}|{bold,italic,underline}{paragraphs}{outdent,indent,lineheight}{inserttable}{undo,redo}{insertcode}|{cut,copy,paste}{strike,superscript,subscript,inserthorizontalrule}"
+		+ "#{selectall,newdoc,print,fullscreenenter,fullscreenexit}";
+	var editor1 = new RichTextEditor("#inp_editor1", editor1cfg, { editorResizeMode: "both" });
 	//editor1.setHTMLCode("Use inline HTML or setHTMLCode to init the default content.");
     function clickSubmit(){
     $("#contents").val(editor1.getHTML);

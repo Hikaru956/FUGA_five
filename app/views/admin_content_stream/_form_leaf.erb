@@ -44,15 +44,9 @@
 	</div>
 </div>
 
-<% if is_test_shop?(@shop) %>
-	<textarea name="content_leaf[description]" style="display:none" id="contents"></textarea>
-	<div id="div_editor1"><%= item.description%></div>
+<% if @shop.enable_editor %>
+	<textarea name="content_leaf[description]" style="min-height:800px;max-height:1200px" id="inp_editor1"><%= item.description%></textarea>
 	<%= render :partial=>"layouts/richtext_editor" %>
-	<% if false %>
-		<textarea name="content_leaf[description]" style="display:none" id="contents"></textarea>
-		<div id="editor"><%= item.description.html_safe %></div>
-		<%= render :partial=>"layouts/quill" %>
-	<% end %>
 <% else %>
 	<div class="control-group">
 		<%= f.text_area  :description, value: item.description, :class => "tinymce input-block-level", rows: 20, :placeholder=>"記事の本文を入力します。" %>
@@ -118,17 +112,19 @@
 	</div>
 </div>
 
-<% tag_map = tag_leveling_hash(item.shop) %>
-<% tag_key = tag_map.keys.sort{|a,b| a<=>b } %>
-<div class="mb-3 row">
-    <label for="name" class="col-sm-2 col-form-label"><%= tag_title %></label>
-    <div class="col-sm-9">
-        <% tag_key.each do |key| %>
-            <% tag_map[key].each do |tag| %>
-                <%= f.check_box :tag_list, { multiple: true, id: 'leaf_'+tag.name, checked: (item.tags.include?(tag)? true: false) }, "#{tag.name}", nil %>
-                <%= f.label "#{tag_name(tag)}", "#{tag_name(tag)}", class: "checkbox03" %>
-            <% end %>
-            <hr/>
-        <% end %>
-    </div>
-</div>
+<% if @shop.enable_tag %>
+	<% tag_map = tag_leveling_hash(item.shop) %>
+	<% tag_key = tag_map.keys.sort{|a,b| a<=>b } %>
+	<div class="mb-3 row">
+		<label for="name" class="col-sm-2 col-form-label"><%= tag_title %></label>
+		<div class="col-sm-9">
+			<% tag_key.each do |key| %>
+				<% tag_map[key].each do |tag| %>
+					<%= f.check_box :tag_list, { multiple: true, id: 'leaf_'+tag.name, checked: (item.tags.include?(tag)? true: false) }, "#{tag.name}", nil %>
+					<%= f.label "#{tag_name(tag)}", "#{tag_name(tag)}", class: "checkbox03" %>
+				<% end %>
+				<hr/>
+			<% end %>
+		</div>
+	</div>
+<% end %>

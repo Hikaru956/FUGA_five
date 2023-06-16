@@ -254,6 +254,7 @@ ActiveRecord::Schema.define(version: 2023_06_07_024549) do
     t.string "web_reservation_uri"
     t.string "inquiry_email"
     t.boolean "enable_tag", default: false
+    t.boolean "enable_editor", default: false
     t.index ["wsite_hash_key"], name: "index_shops_on_wsite_hash_key"
   end
 

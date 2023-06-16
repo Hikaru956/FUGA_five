@@ -86,6 +86,16 @@
 			</td>
 		</tr>
 		<tr>
+			<th>新編集機能</th>
+			<td>
+				<% if @shop.enable_editor %>
+					有効
+				<% else %>
+					無効
+				<% end %>
+			</td>
+		</tr>
+		<tr>
 			<th>ブログコメント機能</th>
 			<td>
 				<%= (@shop.use_disqus)? raw("使用する"): "使用しない"%>
