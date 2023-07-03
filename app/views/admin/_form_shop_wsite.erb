@@ -42,12 +42,13 @@
 <div class="form-group row">
 	<div class="col-sm-4">
 		<%= f.label :enable_inquiry, 'お問い合わせ機能', {class: 'form-label'} %>
+		<% is_enable_inquiry = @shop.enable_inquiry %>
 	</div>
 	<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
-		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio3" value='1' checked>
+		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio3" value='1' <%= 'checked' if is_enable_inquiry %>>
 		<label class="btn btn-outline-primary" for="btnradio3">有効</label>
 
-		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio4" value='0'>
+		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio4" value='0' <%= 'checked' unless is_enable_inquiry %>>
 		<label class="btn btn-outline-primary" for="btnradio4">無効</label>
 
 	</div>

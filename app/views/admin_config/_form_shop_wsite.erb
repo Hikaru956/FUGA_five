@@ -31,12 +31,13 @@
 <div class="form-group row">
 	<div class="col-sm-4">
 		<%= f.label :enable_inquiry, 'お問い合わせ機能', {class: 'form-label'} %>
+		<% is_enable_inquiry = @shop.enable_inquiry %>
 	</div>
 	<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
-		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio3" value='1'>
+		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio3" value='1' <%= 'checked' if is_enable_inquiry %>>
 		<label class="btn btn-outline-primary" for="btnradio3">有効</label>
 
-		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio4" value='0' checked>
+		<input type="radio" class="btn-check" name="shop[enable_inquiry]" id="btnradio4" value='0' <%= 'checked' unless is_enable_inquiry %>>
 		<label class="btn btn-outline-primary" for="btnradio4">無効</label>
 
 	</div>
@@ -44,12 +45,13 @@
 <div class="form-group row">
 	<div class="col-sm-4">
 		<%= f.label :enable_editor, '新編集機能', {class: 'form-label'} %>
+		<% is_enable_editor = @shop.enable_editor %>
 	</div>
 	<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
-		<input type="radio" class="btn-check" name="shop[enable_editor]" id="btnradio44" value='1'>
+		<input type="radio" class="btn-check" name="shop[enable_editor]" id="btnradio44" value='1' <%= 'checked' if is_enable_editor %>>
 		<label class="btn btn-outline-primary" for="btnradio44">有効</label>
 
-		<input type="radio" class="btn-check" name="shop[enable_editor]" id="btnradio45" value='0' checked>
+		<input type="radio" class="btn-check" name="shop[enable_editor]" id="btnradio45" value='0' <%= 'checked' unless is_enable_editor %>>
 		<label class="btn btn-outline-primary" for="btnradio45">無効</label>
 
 	</div>
@@ -57,12 +59,13 @@
 <div class="form-group row">
 	<div class="col-sm-4">
 		<%= f.label :enable_tag, 'タグ機能', {class: 'form-label'} %>
+		<% is_enable_tag = @shop.enable_tag %>
 	</div>
 	<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
-		<input type="radio" class="btn-check" name="shop[enable_tag]" id="btnradio13" value='1'>
+		<input type="radio" class="btn-check" name="shop[enable_tag]" id="btnradio13" value='1' <%= 'checked' if is_enable_tag %>>
 		<label class="btn btn-outline-primary" for="btnradio13">有効</label>
 
-		<input type="radio" class="btn-check" name="shop[enable_tag]" id="btnradio14" value='0' checked>
+		<input type="radio" class="btn-check" name="shop[enable_tag]" id="btnradio14" value='0' <%= 'checked' unless is_enable_tag %>>
 		<label class="btn btn-outline-primary" for="btnradio14">無効</label>
 
 	</div>
@@ -70,12 +73,13 @@
 <div class="form-group row">
 	<div class="col-sm-4">
 		<%= f.label :use_disqus, 'ブログコメント', {class: 'form-label'} %>
+		<% is_use_disqus = @shop.use_disqus %>
 	</div>
 	<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
-		<input type="radio" class="btn-check" name="shop[use_disqus]" id="btnradio27" value='1' checked>
+		<input type="radio" class="btn-check" name="shop[use_disqus]" id="btnradio27" value='1' <%= 'checked' if is_use_disqus %>>
 		<label class="btn btn-outline-primary" for="btnradio27">使用する</label>
 
-		<input type="radio" class="btn-check" name="shop[use_disqus]" id="btnradio28" value='0'>
+		<input type="radio" class="btn-check" name="shop[use_disqus]" id="btnradio28" value='0' <%= 'checked' unless is_use_disqus %>>
 		<label class="btn btn-outline-primary" for="btnradio28">使用しない</label>
 
 	</div>
