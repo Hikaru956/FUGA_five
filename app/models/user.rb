@@ -59,6 +59,14 @@ class User < ActiveRecord::Base
   ROLE_BLOGGER    = 5
   ROLE_BLOCKED    = -1
 
+  def active_for_authentication?
+    super && is_proper?
+  end
+
+  def is_proper?
+    self.role != User::ROLE_BLOCKED
+  end
+
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
   # uff.  this is really an authorization, not authentication routine.  
