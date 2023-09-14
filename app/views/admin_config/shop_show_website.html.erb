@@ -30,14 +30,43 @@
 				<%= share_icon('表示') %>
 				店舗サイト表示
 			</a>
-			<a class="btn btn-small btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
-				<%= update_icon('編集') %>
-				デザイン編集
-			</a>
-		</p>				
+			<% if @shop.default_root_child.page_type==WebPage::TYPE_FIX %>
+				<button type="button" class="btn btn-secondary btn-small" data-bs-toggle="modal" data-bs-target="#ErrorTopPageAsFixPage">
+					<%= error_icon %>
+					デザイン編集不可
+				</button>
+			<% else %>
+				<a class="btn btn-small btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
+					<%= update_icon('編集') %>
+					デザイン編集
+				</a>
+			<% end %>
+		</p>
 	<% end %>
 	サイト設定
 </h4>
+
+
+<div class="modal fade" id="ErrorTopPageAsFixPage" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><%= error_icon %> 固定ページ</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>
+					このサイトのトップ・ページは固定ページが設定されています。<br/>
+					固定ページがトップ・ページの場合、デザイン編集はできません。<br/>
+					デザイン編集時は、一時的にトップ・ページを「ホーム」や「ブログ」などのテンプレートページをホームにして下さい。
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+			</div>
+        </div>
+    </div>
+</div>
 
 
 <table class="table table-bordered">
