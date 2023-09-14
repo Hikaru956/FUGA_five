@@ -202,10 +202,14 @@ class Shop < ApplicationRecord
   end
 
   def default_navigation_item
+    root_child = default_root_child
+    (root_child.blank?)? nil: root_child.content_category
+  end
+
+  def default_root_child
     root = self.web_pages.find_by_page_type(WebPage::TYPE_ROOT)
     children = root.children.where(is_public: true)
-    root_child = (children.blank?)? nil: children.to_a.sort{|a,b| a.position<=>b.position}.first
-    (root_child.blank?)? nil: root_child.content_category
+    (children.blank?)? nil: children.to_a.sort{|a,b| a.position<=>b.position}.first
   end
 
   def public_navigation_items

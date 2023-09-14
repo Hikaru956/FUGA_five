@@ -12,12 +12,17 @@ class BsRendererController < ApplicationController
   #before_action :authenticate_user!, except: :home
   before_action :session_operation
   before_action :config_x_xss_protection
-  
+
   def index
     default_navi_item = @website.default_navigation_item
     unless default_navi_item.blank? || default_navi_item.web_page.blank?
       redirect_to :controller=>default_navi_item.web_page.controller_name, :action=>default_navi_item.web_page.action_name, :wkey=>@website.wsite_hash_key, :hash=>Time.now.to_i
     else
+      # hikaru@956.jp : KONIKONI問題
+      root_child   = @website.default_root_child
+      content_leaf = (root_child.blank?)? nil: ContentLeaf.find_by(hash_key: root_child.content_key)
+      return redirect_to  action: 'fix', id: content_leaf.id, wkey: @website.wsite_hash_key if !content_leaf.blank? && root_child.page_type==WebPage::TYPE_FIX
+
       render :file=>"public/404.html", :layout=>false, :status => 404
       return
     end
@@ -179,7 +184,7 @@ class BsRendererController < ApplicationController
   end
 
   def reserve
-    logger.error '❌　'+@website.renderer_layout
+    #logger.error '❌　'+@website.renderer_layout
     render :layout=>"#{@website.renderer_layout}/reserve"
   end
 
