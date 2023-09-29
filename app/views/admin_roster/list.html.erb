@@ -1,0 +1,75 @@
+<header class="subhead" id="overview">
+	<h3>勤務表</h3>
+</header>
+
+<ul class="breadcrumb">
+  <li><a href="<%= url_for(:controller=>'admin_attendance', 	:action=>'index') %>">勤務表</a> <span class="divider">/</span></li>
+  <li><a href="<%= url_for(:controller=>'admin_roster', 		:action=>'index') %>">シフト設定</a> <span class="divider">/</span></li>
+  <li class="active">シフト項目</li>
+</ul>
+
+<p class="lead">
+	<span class="float-right">
+		<button class='btn btn-success btn-sm'  data-bs-toggle="modal" data-bs-target="#modalNew">
+			<%= new_icon('登録') %>&nbsp;
+			項目登録
+		</button>
+	</span>
+	シフト項目
+</p>
+
+<table class="table">
+	<tr>
+		<th>項目名</th>
+		<th>対象店舗</th>
+		<th>始業時刻</th>
+		<th>終業時刻</th>
+		<th></th>
+	</tr>
+	<% @items.each do | item | %>
+		<tr>
+			<td>
+				<span class="float-right">
+					<%= (item.first?)?	"△":	link_to("▲", :action=>"move_higher",	:id=>item) %>
+					<%= (item.last?)? 	"▽": 	link_to("▼", :action=>"move_lower", 	:id=>item) %>
+				</span>
+				
+				<% url = url_for(:action=>"show", :id=>item) %>
+				<a href="<%=url%>">
+					<i class='fas fa-angle-double-right'></i>
+					<%= item.name %>
+				</a>
+			</td>
+			<td><%= item.shop.name %></td>
+			<td><%= item.start_hour %>:00</td>
+			<td><%= item.until_hour %>:00</td>
+		</tr>
+	<% end %>
+</table>
+
+<!-- modalNew -->
+<div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+        <div class="modal-content">
+			<% 
+				@item = RosterLabel.new
+				@item.shop 		 = @shop
+				@item.start_hour = @shop.business_hour_from 
+				@item.until_hour = @shop.business_hour_until
+			%>
+			<%= form_for @item, url: admin_roster_create_path, method: :post do |f| %>
+				<div class="modal-header">
+					<h3 id="myModalLabel">シフト項目登録</h3>
+					<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<%= render :partial=>"form",locals: {f: f, item: @item} %>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;&nbsp;登録</button>
+					<button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</button>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

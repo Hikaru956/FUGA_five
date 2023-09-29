@@ -1,0 +1,88 @@
+<div class="form-horizontal well">
+	<%= form_with(url: admin_attendance_update_business_path, method: :patch) do |f| %>
+		<fieldset>
+			<legend>勤務表編集 : <%=@target_date.strftime("%Y-%m-%d") %>&nbsp;(<%=wday(@target_date)%>)</legend>
+			<%= hidden_field_tag 'id', 			@staff.id %>
+			<%= hidden_field_tag 'shop_id', 	@shop.id %>
+			<%= hidden_field_tag 'target_date', @target_date %>
+
+			<%
+				reservations = @staff.reservations.where("  reservations.shop_id =?
+														AND reservations.reserved_on >=?
+														AND reservations.reserved_on <?", \
+														@shop.id, @target_date, @target_date+1)
+				rosters = @staff.attendances.where("    attendances.shop_id =?
+													AND attendances.attend_on >=?
+													AND attendances.attend_on <?", \
+													@shop.id, @target_date, @target_date+1)
+				status_classes 	= roster_timeline_classes(@shop, @target_date, reservations, rosters, "1","2","3","4")
+			%>
+
+			<div class="control-group">
+				<label class="control-label" for="holiday">勤務時間帯</label>
+				<div class="controls">
+					<% base_time = Time.mktime(@target_date.year, @target_date.month, @target_date.day, 0, 0, 0) %>
+					<% for h in @shop.business_hour_from..(@shop.business_hour_until-1)
+						scope_time = base_time+(h*60*60)
+						duty_arrays = Attendance.whats_going_on(scope_time, @staff, @shop, 60)
+					%>
+					<label class="checkbox">
+							<% if !duty_arrays[Attendance::DUTY_AWAY_RESERATIONS].blank?  %>
+								<input type="checkbox" name="work_hour[]" id="inlineCheckbox1" value="<%=scope_time.hour%>" disabled>
+								<span style="color:gray;">
+									<%= scope_time.strftime("%l:%M %p")%>
+									〜
+									<%= (scope_time+(60*60)).strftime("%l:%M %p") %>
+								</span>
+								<small>【他店舗に予約があります】</small>
+							<% elsif !duty_arrays[Attendance::DUTY_AWAY_ATTENDANCES].blank?  %>
+								<input type="checkbox" name="work_hour[]" id="inlineCheckbox1" value="<%=scope_time.hour%>" disabled>
+								<span style="color:gray;">
+									<%= scope_time.strftime("%l:%M %p")%>
+									〜
+									<%= (scope_time+(60*60)).strftime("%l:%M %p") %>
+								</span>
+								<small>【他店舗で勤務しています】</small>
+							<% else %>
+								<% if		!duty_arrays[Attendance::DUTY_HOME_RESERATIONS].blank? %>
+									<input type="checkbox" name="work_hour[]" id="inlineCheckbox1" value="<%=scope_time.hour%>" checked >
+									<span style="color:red;">
+										<%= scope_time.strftime("%l:%M %p")%>
+										〜
+										<%= (scope_time+(60*60)).strftime("%l:%M %p") %>
+									</span>
+									<small>【この時間帯に担当予約があります】</small>
+								<% elsif  	!duty_arrays[Attendance::DUTY_HOME_ATTENDANCES].blank? %>
+									<input type="checkbox" name="work_hour[]" id="inlineCheckbox1" value="<%=scope_time.hour%>" checked >
+									<span style="color:green;">
+										<%= scope_time.strftime("%l:%M %p")%>
+										〜
+										<%= (scope_time+(60*60)).strftime("%l:%M %p") %>
+									</span>
+								<% else %>
+									<input type="checkbox" name="work_hour[]" id="inlineCheckbox1" value="<%=scope_time.hour%>">
+									<span>
+										<%= scope_time.strftime("%l:%M %p")%>
+										〜
+										<%= (scope_time+(60*60)).strftime("%l:%M %p") %>
+									</span>
+								<% end %>
+							<% end%>												
+					</label>
+					<% end %>
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<p class="help-block">
+					チェックされた時間帯が勤務となります。
+				</p>
+				<br/>
+				<button type="submit" class="btn btn-sm btn-success"><i class="fas fa-cogs"></i>&nbsp;&nbsp;設定</button>
+				<%= link_to("<i class='fas fa-arrow-left'></i>&nbsp;戻る".html_safe,
+					{:action=>"attendances_staff", :id=>@staff, :year=>@target_date.year, :month=>@target_date.month, :shop_id=>@shop}, 
+					:class=>"btn btn-sm btn-secondary") %>
+			</div>
+		</fieldset>
+	<% end %>
+</div>

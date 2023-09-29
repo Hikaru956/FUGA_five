@@ -1,0 +1,39 @@
+<div class="mb-3 row">
+	<label for="name" class="col-sm-3 col-form-label">表示名</label>
+	<div class="col-sm-9">
+		<%= f.text_field :name, {class: "form-control", placeholder: "表示名を入力", :required => true, autofocus: true} %>
+	</div>
+</div>
+
+<%= f.hidden_field 'shop_id' %>
+<% if false %>
+<div class="control-group">
+	<label class="control-label" for="login">対象店舗</label>
+	<div class="controls">
+		<%
+			shops = Shop.find(:all, :order=>"alt_id asc, name asc").map{ | c | [ c.name, c.id] }
+		%>
+		<%= collection_select(:item, :shop_id, shops, :last, :first)%>
+	</div>
+</div>
+<% end %>
+
+<%
+	option_hours = Array @shop.business_hour_from..@shop.business_hour_until
+	h_options = []
+	option_hours.each do  |h|
+	  h_options << [h.to_s+':00', h]
+	end	
+%>
+<div class="mb-3 row">
+	<label for="item_staff_id" class="col-sm-3 col-form-label">始業時刻</label>
+	<div class="col-sm-9">
+		<%= f.collection_select(:start_hour, h_options, :last, :first, {prompt: false}, {class: "form-control"})%>
+	</div>
+</div>
+<div class="mb-3 row">
+	<label for="item_staff_id" class="col-sm-3 col-form-label">投稿ス終業時刻タッフ</label>
+	<div class="col-sm-9">
+		<%= f.collection_select(:until_hour, h_options, :last, :first, {prompt: false}, {class: "form-control"})%>
+	</div>
+</div>

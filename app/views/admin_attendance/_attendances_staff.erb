@@ -1,0 +1,52 @@
+<%= stylesheet_link_tag "timeline" %>
+
+<% base_time = Time.mktime(@target_date.year,@target_date.month,@target_date.day, 0, 0, 0) %>
+<table class="timeline">
+	<tr>
+		<th class="head_space">
+			<% rev = (base_time.to_date)<<1 %>
+			<% fwd = (base_time.to_date)>>1 %>
+			<%= link_to("<i class='fas fa-angle-double-left'></i>".html_safe, 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>rev.year, :month=>rev.month }) %>
+			<%= @target_date.month %>&nbsp;月
+			<%= link_to("<i class='fas fa-angle-double-right'></i>".html_safe, 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>fwd.year, :month=>fwd.month }) %>
+		</th>
+		<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
+			<th colspan="2" class="head_timeline">
+				<%= (base_time+(i*60*60)).strftime("%l:%M %p") %>
+			</th>
+		<% end %>
+	</tr>
+	
+	<% last_day = ((@target_date>>1)-1).day %>
+	<% @probe_date = @target_date %>
+	<% for d in 1..last_day %>
+		<%= render :partial=>"attendances_staff_day" %>
+		<% @probe_date = @target_date+d %>
+
+		<% if @probe_date.to_date.wday==0 && d!=last_day%>
+			<tr>
+				<th class="head_space_middle"></th>
+				<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
+					<th colspan="2" class="head_timeline">
+						<%= (base_time+(i*60*60)).strftime("%l:%M %p") %>
+					</th>
+				<% end %>
+			</tr>
+		<% end %>
+
+	<% end %>
+	<tr>
+		<th class="head_space_lower"></th>
+		<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
+			<th colspan="2" class="head_timeline">
+				<%= (base_time+(i*60*60)).strftime("%l:%M %p") %>
+			</th>
+		<% end %>
+	</tr>
+</table>
+
+
+<% for d in 0..(last_day-1) %>
+	<%= render :partial=>"dlg_day_on", 	locals: {staff: @staff, target_date: @target_date.to_date+d} %>
+	<%= render :partial=>"dlg_day_off", locals: {staff: @staff, target_date: @target_date.to_date+d} %>
+<% end %>

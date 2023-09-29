@@ -120,7 +120,6 @@
 			</p>
 		<% end %>
 
-		<% unless MAKE_SECRET_FUGA_OPTION %>
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
@@ -134,6 +133,10 @@
 						<%= (@shop.option_attendance_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
 					</td>
 				</tr>
+			</tbody>
+		</table>		
+		<div class="pull-right muted"><small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
+		<% unless MAKE_SECRET_FUGA_OPTION %>
 				<tr>
 					<td>簡易予約管理</td>
 					<td>
@@ -156,7 +159,7 @@
 				<% end %>
 			</tbody>
 		</table>		
-		<div class="pull-riｓght muted"><small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
+		<div class="pull-right muted"><small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
 		<% end %>
 
 	</div>

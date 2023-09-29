@@ -133,6 +133,13 @@
                                 <%= raw @seed.description %>
                             </div>
 <% end %>
+                            <% if @website.name = 'pg13' %>
+                                <div id="contents">
+                                    <% if @website.option_attendance_management %>
+                                        <%= render :partial=>'bs_renderer/staff_attendances', locals:{period: 7} %>
+                                    <% end%>
+                                </div>
+                            <% end %>
                             <footer>
                                 <ul class="sns_links">
 <% unless @seed.social_facebook_uri.blank? %>

@@ -1,0 +1,28 @@
+	<!-- === Masthead === -->
+	<header class="subhead" id="overview">
+		<h3>勤怠管理</h3>
+	</header>
+
+	<p class="lead">
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+			<span class="float-right">
+				<% roster_url = url_for(:controller=>"admin_roster", :action=>"index")%>
+				<a href="<%= roster_url %>" class="btn btn-secondary"><i class="fas fa-tasks"></i>&nbsp;シフト設定</a>
+			</span>	
+		<% end %>
+		<%= @target_date.year %>&nbsp;年
+		<span class="btn-group btn-group-sm">
+		    <% 
+		        cur = Time.mktime(@target_date.year, 1,1).to_date
+		        lst = cur<<12
+		        nxt = cur>>12
+		    %>
+			<%= link_to(raw("<i class='fas fa-arrow-left'></i>"), 	{:action=>'index', :year => lst.year}, :class=>"btn btn-secondary") %>
+			<%= link_to("今年", 								{:action=>'index'}, :class=>"btn btn-secondary") %>
+			<%= link_to(raw("<i class='fas fa-arrow-right'></i>"), {:action=>'index', :year => nxt.year}, :class=>"btn btn-secondary") %>
+		</span>
+	</p>
+	
+	<%= render :partial=>"attendances" %>
+
+	

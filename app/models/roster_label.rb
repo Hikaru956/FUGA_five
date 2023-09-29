@@ -16,7 +16,7 @@ class RosterLabel < ApplicationRecord
   before_save :before_save
   
   def before_save
-    if self.start_hour>self.until_hour
+    if self.start_hour > self.until_hour
       buf = self.start_hour
       self.start_hour = self.until_hour
       self.until_hour = buf

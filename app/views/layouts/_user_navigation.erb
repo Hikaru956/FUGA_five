@@ -60,8 +60,8 @@
 					<% unless MAKE_SECRET_FUGA_OPTION %>
 	                    <% if @shop.option_reservation_management %>	<li><a href="/bs_reservation/index"	>予約</a></li><% end %>
 	                    <% if @shop.option_customer_management %>		<li><a href="/bs_customer/index"	>顧客</a></li><% end %>
-						<% if @shop.option_attendance_management %>		<li><a href="/bs_attendance/index"	>勤怠</a></li><% end %>
 					<% end %>
+					<% if @shop.option_attendance_management %>		<li><a href="/bs_attendance/index"	>勤怠</a></li><% end %>
                 </ul>
 				<ul class="nav pull-right">
 					<li class="dropdown">

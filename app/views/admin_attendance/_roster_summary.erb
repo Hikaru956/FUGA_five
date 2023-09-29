@@ -1,0 +1,42 @@
+<% unless @summary_array.blank? %>
+	<% base_time = Time.mktime(@target_date.year,@target_date.month,@target_date.day, 0, 0, 0) %>
+	<h4>
+	<% rev = (base_time.to_date)<<1 %>
+	<% fwd = (base_time.to_date)>>1 %>
+	<%= link_to("<i class='fas fa-angle-double-left'></i>".html_safe, 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>rev.year, :month=>rev.month }) %>
+	<%= @bc_work_from.strftime("%Y-%m-%d")%>
+	〜
+	<%= (@bc_work_until.to_date).strftime("%Y-%m-%d")%>
+	<%= link_to("<i class='fas fa-angle-double-right'></i>".html_safe, 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>fwd.year, :month=>fwd.month }) %>
+	</h4>
+	<table class="table table-condensed table-bordered">
+	<tr>
+		<td style="background-color:#DFD;">当月期日数</td>
+		<td style="background-color:#DFD;">営業時間</td>
+		<td style="background-color:#B69; color:#FFF;">出勤日数</td>
+		<td style="background-color:#B69; color:#FFF;">勤務時間</td>
+		<td style="background-color:#DDD">休暇日数</td>
+		<td style="background-color:#DDD">休暇時間</td>
+	</tr>
+	
+	<% 
+		service_mins = 0
+		@my_reservations.each do |r|
+			service_mins += r.min_period
+		end
+	%>
+	
+	<tr>
+		<td style="text-align:right"><%= @summary_array[0]%>&nbsp;日</td>
+		<td style="text-align:right"><%= @summary_array[1]%>&nbsp;時間</td>
+		<td style="text-align:right"><%= @summary_array[2]%>&nbsp;日</td>
+		<td style="text-align:right"><%= @summary_array[3]%>&nbsp;時間</td>
+		<% if false %>
+			<td style="text-align:right"><%= service_mins/60 %>&nbsp;時間&nbsp;<%= service_mins%60 %>&nbsp;分</td>
+			<td style="text-align:right"><%= (@summary_array[3]*60-service_mins)/60%>&nbsp;時間&nbsp;<%= (@summary_array[3]*60-service_mins)%60 %>&nbsp;分</td>
+		<% end %>
+		<td style="text-align:right"><%= @summary_array[4]%>&nbsp;日</td>
+		<td style="text-align:right"><%= @summary_array[5]%>&nbsp;時間</td>
+	</tr>
+	</table>
+<% end %>

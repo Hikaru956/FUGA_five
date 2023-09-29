@@ -1,0 +1,103 @@
+<header class="subhead" id="overview">
+	<h3>勤務表</h3>
+</header>
+
+<ul class="breadcrumb">
+  <li><a href="<%= url_for(:controller=>'admin_attendance', 	:action=>'index') %>">勤務表</a> <span class="divider">/</span></li>
+  <li><a href="<%= url_for(:controller=>'admin_roster', 		:action=>'index') %>">シフト設定</a> <span class="divider">/</span></li>
+  <li><a href="<%= url_for(:controller=>'admin_roster', 		:action=>'list') %>">シフト項目</a> <span class="divider">/</span></li>
+  <li class="active"><%= @item.name %></li>
+</ul>
+
+<table class="table table-bordered">
+	<tbody>
+		<tr class="info">
+			<td colspan="2">
+				<strong><%= @item.name %></strong>
+				<span class="float-right">
+					<button class='btn btn-success btn-sm'  data-bs-toggle="modal" data-bs-target="#modalEdit">
+						<%= edit_icon('編集') %>&nbsp;
+			  			編集
+					</button>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="span3">表示名</td>
+			<td class="span9"><%= @item.name %></td>
+		</tr>
+		
+		<% if false %>
+		<tr>
+			<td class="span3">対象店舗</td>
+			<td class="span9"><%= @item.shop.name %></td>
+		</tr>
+		<% end %>
+		
+		<tr>
+			<td>始業時刻</td><td><%= @item.start_hour%>:00</td>
+		</tr>
+		<tr>
+			<td>終業時刻</td><td><%= @item.until_hour%>:00</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="well">
+	<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'list') %>">
+	<i class="fas fa-arrow-left"></i>&nbsp;
+		戻る
+	</a>
+	&nbsp;<span class="divider">|</span>&nbsp;
+	<button class='btn btn-danger btn-sm'  data-bs-toggle="modal" data-bs-target="#modalDelete">
+		<%= trash_icon('削除') %>&nbsp;
+		削除確認
+	</button>
+</div>
+				
+
+
+<!-- modalEdit -->
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+        <div class="modal-content">
+			<%= form_for @item, url: admin_roster_update_path(id: @item), method: :patch do |f| -%>
+				<div class="modal-header">
+					<h3 id="myModalLabel">シフト項目編集</h3>
+					<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<%= render :partial=>"form",locals: {f: f, item: @item} %>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
+					<button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</button>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<!-- modalDelete -->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDelete" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+        <div class="modal-content">
+			<%= form_for @item, url: admin_roster_delete_path(id: @item), method: :delete do |f| -%>
+				<div class="modal-header">
+					<h3 id="myModalLabel">シフト項目削除</h3>
+					<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p>
+						「<%= @item.name %>」を削除します。<br/>
+						よろしいですか？
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;&nbsp;削除</button>
+					<button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</button>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

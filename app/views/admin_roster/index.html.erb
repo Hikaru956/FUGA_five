@@ -1,0 +1,58 @@
+<header class="subhead" id="overview">
+	<span class="float-right">
+	  	<% config_url = url_for(:action=>"list")%>
+	    <a href="<%= config_url %>" class="btn  btn-sm btn-warning"><i class="fas fa-cogs"></i>&nbsp;シフト項目編集</a>
+	</span>
+	<h3>勤務表</h3>
+</header>
+
+<ul class="breadcrumb">
+  <li><a href="<%= url_for(:controller=>'admin_attendance', :action=>'index') %>">勤務表</a> <span class="divider">/</span></li>
+  <li class="active">シフト設定</li>
+</ul>
+
+<p class="lead">
+	<span class="float-right">
+		<%
+			this_year = Time.mktime(@target_date.year, @target_date.month, 1).to_date
+			prev_year = this_year << 12
+			next_year = this_year >> 12
+		%>
+		<%= link_to("<i class='fas fa-angle-double-left'></i>".html_safe, 	{:action=>'index', :target_date=>prev_year}, :class=>"btn btn-sm btn-secondary") %>
+		<%= (@target_date.to_date.year) %>
+		<%= link_to("<i class='fas fa-angle-double-right'></i>".html_safe, 	{:action=>'index', :target_date=>next_year}, :class=>"btn btn-sm btn-secondary") %>
+	</span>
+	<%= @target_date.strftime("%Y-%m") %>
+	&nbsp;
+	<span class="btn-group">
+		<span class="btn-toolbar" style="margin: 0;">
+		  <span class="btn-group">
+			<%
+				prev_month = this_year << 1
+				next_month = this_year >> 1
+			%>
+		  	<% prev_url = url_for(:action=>"index", :target_date=>prev_month)%>
+		    <a href="<%= prev_url %>" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i>&nbsp;前月</a>
+		  	<% today_url = url_for(:action=>"index")%>
+		    <a href="<%= today_url %>" class="btn btn-sm btn-info">今月</a>
+		  	<% next_url = url_for(:action=>"index", :target_date=>next_month)%>
+		    <a href="<%= next_url %>" class="btn btn-sm btn-secondary">翌月&nbsp;<i class="fas fa-arrow-right"></i></a>
+		  </span>
+		</span>
+	</span>
+</p>
+
+<div class="form-inline">
+	<%= form_with(url: admin_roster_update_rosters_path, method: :patch) do |f| %>
+		<%= hidden_field_tag 'target_date', @target_date %>
+		<legend>シフト設定</legend>
+		<%= render :partial=>'form_calendar' %>
+
+		<div class="well">
+			<button type="submit" class="btn btn-sm btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
+			<%= link_to("<i class='fas fa-arrow-left'></i>&nbsp;戻る".html_safe,
+				{:controller=>"admin_attendance",:action=>"index"}, 
+				:class=>"btn btn-sm btn-secondary") %>
+		</div>
+	<% end %>
+</div>

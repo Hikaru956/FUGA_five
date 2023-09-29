@@ -1,0 +1,68 @@
+<%
+	require 'holidays'
+%>
+<%
+	###
+	##	Shop Staffs & Freelances
+	#
+	staffs = @shop.valid_staffs
+
+	from_date = @target_date
+	from_date -= @target_date.wday	if @target_date.day==1
+%>
+<% @rosters = RosterLabel.order(position: :asc) %>
+
+<%= stylesheet_link_tag "timeline" %>
+
+<table class="table table-bordered table-hover">
+	<tr>
+		<th class="span2">
+			<%
+				prev_frame = from_date - 7
+				next_frame = from_date + 7
+			%>
+			<span class="float-right">
+				<%= link_to("<i class='fas fa-angle-double-left'></i>".html_safe, 	{:action=>'index', :target_date=>prev_frame}) %>
+			</span>
+		</th>
+		<% 7.times do | i | %>
+			<% @probe_date=from_date+i %>
+			<th class="span2">
+				<% if i==6 %>
+					<span class="float-right">
+						<%= link_to("<i class='fas fa-angle-double-right'></i>".html_safe, 	{:action=>'index', :target_date=>next_frame}) %>
+					</span>
+				<% end %>
+				<%= @probe_date.strftime("%m-%d")%>
+				(<span class="<%=(@probe_date.national_holiday? || @probe_date.wday==0)? 'holiday': 'flat'%>"><%=wday(@probe_date)%></span>)
+				<%= "<i class='fas fa-flag'></i>".html_safe if @probe_date.national_holiday? %>
+			</th>
+		<% end %>
+	</tr>
+	<% staffs.each do | staff | %>
+		<tr>
+			<td><%= truncate(staff.name, :length=>20) %></td>
+			<% 7.times do | i | %>
+				<% @probe_date=from_date+i %>
+				<td class="span2">
+					<% 
+						@attendances = staff.attendances.where("attendances.attend_on =?", @probe_date).order(start_hour: :asc)
+					%>
+					<small><strong>
+						[
+						<% if @attendances.blank? %>
+							OFF
+						<% else %>
+							<%= @attendances[0].start_hour %>
+							〜
+							<%= @attendances[0].until_hour %>
+						<% end %>
+						]
+						<%= '…' if @attendances.size>1 %>
+					</strong></small>
+					<%= render :partial=>"roster_selection", locals: {staff: staff}%>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
