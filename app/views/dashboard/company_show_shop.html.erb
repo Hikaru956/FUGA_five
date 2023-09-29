@@ -91,31 +91,32 @@
 				</tr>
 			</tbody>
 		</table>
-
-		<hr/>
-		<table class="table table-condensed table-bordered">
-			<thead>
-				<tr class="info">
-					<th colspan="2">
-						<span class="pull-right">
-							<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEditOption">
-								<i class="icon-wrench"></i>&nbsp;
-									設定
-							</a>
-						</span>
-						オプション
-					</th>
-				</tr>
-			<thead>
-			<tbody>
-				<tr>
-					<td class="span3">勤怠管理</td>
-					<td class="span9">
-						<%= (@item.option_attendance_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<% if current_user.has_permission?(User::ROLE_OPERATOR) %>
+			<hr/>
+			<table class="table table-condensed table-bordered">
+				<thead>
+					<tr class="info">
+						<th colspan="2">
+							<span class="pull-right">
+								<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEditOption">
+									<i class="icon-wrench"></i>&nbsp;
+										設定
+								</a>
+							</span>
+							オプション
+						</th>
+					</tr>
+				<thead>
+				<tbody>
+					<tr>
+						<td class="span3">勤怠管理</td>
+						<td class="span9">
+							<%= (@item.option_attendance_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		<% end %>
 		<% unless MAKE_SECRET_FUGA_OPTION %>
 		<hr/>
 		<table class="table table-condensed table-bordered">

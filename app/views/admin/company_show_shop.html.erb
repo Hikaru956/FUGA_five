@@ -93,31 +93,31 @@
 				</tr>
 			</tbody>
 		</table>
-
-		<hr/>
-		<table class="table table-condensed table-bordered">
-			<thead>
-				<tr class="info">
-					<th colspan="2">
-						<span class="float-right">
-							<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEditOption">
-								<%= setting_icon('設定') %>&nbsp;設定
-							</button>
-						</span>
-						オプション
-					</th>
-				</tr>
-			<thead>
-			<tbody>
-				<tr>
-					<th width="25%">勤怠管理</th>
-					<td width="75%">
-						<%= (@item.option_attendance_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-
+		<% if current_user.has_permission?(User::ROLE_OPERATOR) %>
+			<hr/>
+			<table class="table table-condensed table-bordered">
+				<thead>
+					<tr class="info">
+						<th colspan="2">
+							<span class="float-right">
+								<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEditOption">
+									<%= setting_icon('設定') %>&nbsp;設定
+								</button>
+							</span>
+							オプション
+						</th>
+					</tr>
+				<thead>
+				<tbody>
+					<tr>
+						<th width="25%">勤怠管理</th>
+						<td width="75%">
+							<%= (@item.option_attendance_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		<% end %>
 		<% unless MAKE_SECRET_FUGA_OPTION %>
 		<hr/>
 		<table class="table table-condensed table-bordered">

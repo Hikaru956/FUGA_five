@@ -45,27 +45,28 @@
 <% @anchor = ContentCategory.type_root(@shop, ContentCategory::TYPE_PORTFOLIO) %>
 <%= render :partial=>'company_show_shop_cms_usage_by_category' %>
 
+<% if current_user.has_permission?(User::ROLE_OPERATOR) %>
+	<hr/>
+	<h5>オプション</h5>
 
-<hr/>
-<h5>オプション</h5>
-
-<table class="table table-bordered">
-	<thead>
-		<tr class="info">
-			<th colspan="2">
-				オプション
-			</th>
-		</tr>
-	<thead>
-	<tbody>
-		<tr>
-			<td class="span3">勤怠管理</td>
-			<td class="span9">
-				<%= (@shop.option_attendance_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
-			</td>
-		</tr>
-	</tbody>
-</table>
+	<table class="table table-bordered">
+		<thead>
+			<tr class="info">
+				<th colspan="2">
+					オプション
+				</th>
+			</tr>
+		<thead>
+		<tbody>
+			<tr>
+				<td class="span3">勤怠管理</td>
+				<td class="span9">
+					<%= (@shop.option_attendance_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<% end %>
 <% if false %>
 		<tr>
 			<td>簡易予約管理</td>
