@@ -41,9 +41,9 @@
 						%>
 						<td style="text-align:center;">
 							<% if roster_staff_map.blank? || roster_staff_map[s.id].blank? %>
-								<%= link_to "<i class='far fa-square'></i>".html_safe, :action=>"attendances_staff", :id=>s, :year=>@target_date.year, :month=>m%>
+								<%= link_to "<i class='far fa-square'></i>".html_safe, :action=>"attendances_staff",data: {"turbolinks" => false}, :id=>s, :year=>@target_date.year, :month=>m%>
 							<% else %>
-								<%= link_to "<i class='fas fa-pen-square'></i>".html_safe, 		:action=>"attendances_staff", :id=>s, :year=>@target_date.year, :month=>m%>
+								<%= link_to "<i class='fas fa-pen-square'></i>".html_safe, :action=>"attendances_staff",data: {"turbolinks" => false}, :id=>s, :year=>@target_date.year, :month=>m%>
 							<% end %>
 						</td>
 					<% end %>
