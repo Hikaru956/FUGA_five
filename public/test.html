@@ -1,0 +1,28 @@
+<html lang="ja">
+<head>
+    <link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />
+    <script type="text/javascript" src="/richtexteditor/rte.js"></script>
+    <script type="text/javascript" src="/richtexteditor/lang/rte-lang-ja.js"></script>
+    <script type="text/javascript" src='/richtexteditor/plugins/all_plugins.js'></script>
+</head>
+<body>
+    <textarea name="content_leaf[description]" style="min-height:800px;max-height:1200px" id="inp_editor1"></textarea>
+    <script>
+        var editor1cfg = {}
+        editor1cfg.svgCode_menu_option = '<svg viewBox="-2 -2 20 20" fill="#5F6368" style="width: 100%; height: 100%;"><path fill-rule="evenodd" d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" clip-rule="evenodd"></path></svg>';
+        editor1cfg.toolbar = "mytoolbar";
+        editor1cfg.toolbarMobile = "mytoolbarmobile";
+        editor1cfg.toolbar_mytoolbar = "{fontname,fontsize}|{insertimage,insertemoji}|{forecolor,backcolor}{justifyleft,justifycenter,justifyfull,justifyright}|{insertlink}{insertvideo}|{bold,italic,underline}{paragraphs}{outdent,indent,lineheight}{inserttable}{undo,redo}|{cut,copy,paste}{strike,superscript,subscript,inserthorizontalrule}"
+            + "#{selectall,print,fullscreenenter,fullscreenexit}";
+        editor1cfg.toolbar_mytoolbarmobile = "{fontname,fontsize,forecolor,backcolor}{justifyleft,justifycenter,justifyfull,justifyright}{insertimage}|{menu_insert}{menu_option}|{paragraphs}{undo,redo}{selectall,print,fullscreenenter,fullscreenexit}"
+        editor1cfg.subtoolbar_insert = 'insertemoji,insertlink,insertvideo,inserttable,inserthorizontalrule';
+        editor1cfg.subtoolbar_option = 'cut,copy,paste,bold,italic,underline,outdent,indent,lineheight,strike,superscript,subscript';
+        var editor1 = new RichTextEditor("#inp_editor1", editor1cfg, { editorResizeMode: "both" });
+        //editor1.setHTMLCode("Use inline HTML or setHTMLCode to init the default content.");
+        function clickSubmit() {
+            $("#contents").val(editor1.getHTML);
+            $('#form')[0].submit();
+        };
+    </script>
+</body>
+</html>
