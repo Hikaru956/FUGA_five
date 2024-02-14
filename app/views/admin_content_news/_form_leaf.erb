@@ -72,14 +72,6 @@
 		options = bag_roots.map{ | s | [ s.content_bag.id, s.content_bag.name] }
 		options.unshift(["-- 指定なし --　", ''])
 	%>
-	<% if false %>
-	<div class="mb-3 row">
-		<label for="in_charge" class="col-sm-3 col-form-label">ストリーム</label>
-		<div class="col-sm-9">
-			<%= f.collection_select(:content_bag_id, options, :first, :last, {prompt: false}, {class: "form-control"})%>
-		</div>
-	</div>
-	<% end %>
 <% end %>
 <div class="mb-3 row">
 	<label for="content_leaf[is_public]" class="col-sm-3 col-form-label">公開設定</label>
