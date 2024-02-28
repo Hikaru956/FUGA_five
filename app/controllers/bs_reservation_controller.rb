@@ -48,18 +48,22 @@ class BsReservationController < ApplicationController
     rescue
       @target_date = Time.now.to_date
     end
-    @item.reserved_on = Time.mktime(@target_date.year, @target_date.month, @target_date.day, 12, 0, 0)
+    @item.reserved_on = Time.local(@target_date.year, @target_date.month, @target_date.day, 9, 0, 0)
     @item.min_period  = 60
   end
 
   def create_reservation
     @item = Reservation.new(reservation_params)
+    @item.reserved_until = (params[:reserved_on].to_i) + (params[:min_period].to_i*60)
 
 
-    @target_date        = (params[:item][:target_date].blank?)? Time.now.to_date: parse_date(params[:item][:target_date])
-    base_time           = Time.mktime(@target_date.year, @target_date.month, @target_date.day, 0, 0, 0)
-    @item.reserved_on   = base_time + (params[:item][:start_hour].to_i*60*60) + (params[:item][:start_min].to_i*60)
-          
+    #@target_date        = (params[:target_date].blank?)? Time.now.to_date: parse_date(params[:target_date])
+    #base_time           = Time.local(@target_date.year, @target_date.month, @target_date.day, 0, 0, 0)
+    #reserved_on   = base_time + (params[:start_hour].to_i*60*60) + (params[:start_min].to_i*60)
+    #logger.error '■ ■ ■ '+base_time.strftime("%y-%m-%d %H:%M")
+    #logger.error '■ ■ ■ '+reserved_on.strftime("%y-%m-%d %H:%M")
+    #@item.reserved_on = reserved_on
+    #logger.error '■ ■ ■ '+@item.reserved_on.strftime("%y-%m-%d %H:%M")
     @item.save!
     redirect_to :action=>"show_reservation", :id=>@item
   end
@@ -77,17 +81,17 @@ class BsReservationController < ApplicationController
   end
 
   def update_reservation
-    if request.post?
-      @shop = current_user.shop
-      @item = @shop.reservations.find_by_id(params[:id])
-      
-      @target_date = @item.reserved_on.to_date 
-      base_time           = Time.mktime(@target_date.year, @target_date.month, @target_date.day, 0, 0, 0)
-      @item.reserved_on   = base_time + (params[:start_hour].to_i*60*60) + (params[:start_min].to_i*60)
+    @shop = current_user.shop
+    @item = @shop.reservations.find_by_id(params[:id])
+    
+    #@target_date = @item.reserved_on.to_date 
+    #base_time           = Time.mktime(@target_date.year, @target_date.month, @target_date.day, 0, 0, 0)
+    #@item.reserved_on   = base_time + (params[:start_hour].to_i*60*60) + (params[:start_min].to_i*60)
 
-      @item.update_attributes(params[:item])
-      redirect_to :action=>"show_reservation", :id=>@item
-    end
+    @item.update_attributes(reservation_params)
+    @item.reserved_until = (params[:reserved_on].to_i) + (params[:min_period].to_i*60)
+    @item.save
+    redirect_to :action=>"show_reservation", :id=>@item
   end
 
   def delete_reservation
@@ -182,6 +186,6 @@ protected
   end
 
   def reservation_params
-    params.require(:item).permit(:id, :customer_id, :shop_id, :staff_id, :reserved_on, :reserved_until, :min_period, :memo_1, :memo_2)
+    params.require(:reservation).permit(:id, :customer_id, :shop_id, :staff_id, :reserved_on, :reserved_until, :min_period, :memo_1, :memo_2)
   end
 end

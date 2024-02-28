@@ -17,7 +17,7 @@
 	<th rowspan=<%= raw_span_count %> class="head_staff_name">
 		<%= model_name(staff) %><br/>
 		<% if @shop.option_attendance_management %>
-		<%= link_to("<i class='icon-tasks'></i>",
+		<%= link_to("<i class='icon-tasks'></i>".html_safe,
 			{:controller=>'bs_attendance', :action=>"attendances_staff", :id=>staff, :shop_id=>@shop, :year=>@target_date.year,  :month=>@target_date.month}, 
 			:class=>"btn btn-mini", :title=>"勤務表") %>
 		<% end %>
@@ -68,10 +68,6 @@
 				<% my_class = reservation_classes[@shop.business_hour_from*4+spanner[0]] %>
 				<% my_class = 'reservation_alt' if (@shop!=reservation.shop) %>
 				<td colspan=<%= spanner[1] %> class="<%=my_class%>">
-					<%= reservation_classes.to_s%>
-					<%= reservation_classes.size%>
-					<%= @shop.business_hour_from*4+spanner[0] %>
-					<%= my_class %>
 					<% unless reservation.customer.blank? %>
 						<% if reservation.customer.is_happy_birthday?(@target_date) %>
 							<span class="pull-right text-success"><i class="icon-gift"></i></span>

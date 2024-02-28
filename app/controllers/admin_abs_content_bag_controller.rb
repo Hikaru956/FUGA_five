@@ -272,6 +272,67 @@ class AdminAbsContentBagController < ApplicationController
         redirect_to :action=>"show_leaf", :id=>@item
     end
 
+    def create_image
+        shop_id = params[:shop_id]
+        photo = params[:photo]
+
+        # デバッグ用ログ
+        Rails.logger.debug("Content Type: #{photo.content_type}")
+
+        # HEIF形式の画像をPNG形式に変換
+        if !photo.content_type == 'image/png' && !photo.content_type == 'image/jpeg'
+            require 'mini_magick'
+
+            # 一時ファイルのパス
+            temp_file = Tempfile.new(['temp', '.png'])
+
+            begin
+            # MiniMagickを使用して変換
+            image = MiniMagick::Image.open(photo.tempfile)
+            image.format('png')
+            image.write(temp_file.path)
+
+            # 変換後の画像をアップロード
+            photo = ActionDispatch::Http::UploadedFile.new(
+                tempfile: temp_file,
+                filename: "#{photo.original_filename.split('.').first}.png",
+                content_type: 'image/png'
+            )
+            # デバッグ用のログ
+            Rails.logger.debug("HEIF画像がPNGに変換されました。")
+            ensure
+            temp_file.close
+            temp_file.unlink
+            end
+        end
+
+        # ファイルをアップロードして写真のインスタンスを作成
+        photo = Photo.new(shop_id: shop_id, clip: photo)
+
+        respond_to do |format|
+            if photo.save
+                format.json { render json: { url: photo.clip.url, id: photo.id } }
+            else
+                format.json { render json: { errors: photo.errors.full_messages }, status: :unprocessable_entity }
+            end
+            #p '❌❌' + photo.clip.url
+        end
+    end
+
+    def delete_image
+        @photo = Photo.find_by(id: params[:id])
+        
+        if @photo
+            if @photo.destroy
+                render json: { status: :ok }
+            else
+                render json: { error: '写真の削除に失敗しました' }, status: :unprocessable_entity
+            end
+        else
+            render json: { error: '写真が見つかりません' }, status: :not_found
+        end
+    end
+
     #def create_photo
     #  if request.post?
     #    @item = @shop.content_leafs.find_by_id(params[:id]) 
@@ -442,7 +503,7 @@ class AdminAbsContentBagController < ApplicationController
     end
 
     def photo_params
-        params.require(:photo).permit(:clip, :info)
+        params.require(:photo).permit(:clip, :info, :shop_id)
         #params.permit(:file)
     end
 

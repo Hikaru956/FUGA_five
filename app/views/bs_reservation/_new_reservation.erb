@@ -1,16 +1,14 @@
-
-<%= form_tag url_for(:action=>"create_reservation"), :class=>"form-horizontal well" do -%>
-<p class="lead"><%= @target_date%>&nbsp;(<%=wday(@target_date)%>)【<%=@item.shop.name%>】</p>
+<%= form_for item, url: bs_reservation_create_reservation_path, method: :post do |f| %>
+<p class="lead"><%= target_date%>&nbsp;(<%=wday(target_date)%>)【<%=item.shop.name%>】</p>
 	<fieldset>
-		<% if @target_date < Time.now.to_date %>
+		<% if target_date < Time.now.to_date %>
 			<div class="alert alert-info">
 				<span class="stext-error"><i class='icon-exclamation-sign'></i>&nbsp;過去の日付に対する予約登録画面です。</span>
 			</div>
 		<% end %>
 
-		<%= render :partial=>"form_reservation" %>
-		<%= hidden_field_tag 'target_date', @target_date %>
-		<%= hidden_field 	"item","shop_id" %>
+		<%= render :partial=>"form_reservation", locals:{f: f, item: item} %>
+		<%= f.hidden_field 	:shop_id %>
 		<div class="form-actions">
 			<% if @shop.option_customer_management %>
 			<p class="help-block">
@@ -19,8 +17,8 @@
 			<br/>
 			<% end %>
         	<button type="submit" class="btn btn-small btn-success"><i class="icon-plus"></i>&nbsp;&nbsp;登録</button>
-			<%= link_to("<i class='icon-arrow-left'></i>&nbsp;閉じる",
-				{:action=>"reservation", :target_date=>@target_date}, :class=>"btn btn-small") %>
+			<%= link_to("<i class='icon-arrow-left'></i>&nbsp;閉じる".html_safe,
+				{:action=>"reservation", :target_date=>target_date}, :class=>"btn btn-small") %>
       	</div>
 	</fieldset>
 <% end -%>

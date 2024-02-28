@@ -1,6 +1,8 @@
+<%
+	require 'date'
+	require 'holidays'
+%>
 <%=
-require 'date'
-require 'date/holiday'
 
 today = Time.now
 calendar({:year => @target_date.year, :month => @target_date.month}) do |d|
@@ -23,7 +25,7 @@ calendar({:year => @target_date.year, :month => @target_date.month}) do |d|
 
 	list_url = url_for(:action=>'reservation', :target_date=>d)
 	cell_text = "<a href='#{list_url}'>"
-	cell_text << "<span class='calendar_day'>#{d.mday}&nbsp</span><br/>"
+	cell_text << "<span class='calendar_day'>#{d.mday}&nbsp;</span><br/>"
 	unless reservations.blank?
 		cell_text << "<span class='badge badge-success'>#{reservations.size}</span>" 
 	end

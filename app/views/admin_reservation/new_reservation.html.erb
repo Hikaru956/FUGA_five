@@ -1,0 +1,20 @@
+<header class="subhead" id="overview">
+	<h3><%= reservation_staff_icon %>&nbsp;予約作成</h3>
+</header>
+
+<% if false %>
+	<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+		<li class="nav-item">
+			<a class="nav-link  active" href="<%= url_for(:controller=>'admin_reservation', :action=>'reservation',:target_date=>@target_date, :id=>@item) %>"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;予約</a>
+		</li>
+		<li  class="nav-item">
+			<a class="nav-link" href="<%= url_for(:controller=>'admin_reservation', :action=>'birthday',:target_date=>@target_date, :id=>@item) %>"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;誕生日</a>
+		</li>
+	</ul>
+<% end %>
+
+<p class="lead">
+	新規予約
+</p>
+
+<%= render :partial=>"new_reservation",locals: {item: @item, target_date: @target_date}  %>

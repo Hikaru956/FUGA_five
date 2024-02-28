@@ -2,23 +2,25 @@
 	<h3>予約管理</h3>
 </header>
 
-<ul id="tab_nav" class="nav nav-tabs">
-	<li class="active">	<a href="<%= url_for(:action=>'reservation', 	:target_date=>@target_date) %>"><i class="icon-list"></i>&nbsp;予約</a></li>
-	<li>				<a href="<%= url_for(:action=>'birthday',		:target_date=>@target_date) %>"><i class="icon-gift"></i>&nbsp;誕生日</a></li>
-</ul>
+<% if false %>
+	<ul id="tab_nav" class="nav nav-tabs">
+		<li class="active">	<a href="<%= url_for(:action=>'reservation', 	:target_date=>@target_date) %>"><i class="icon-list"></i>&nbsp;予約</a></li>
+		<li>				<a href="<%= url_for(:action=>'birthday',		:target_date=>@target_date) %>"><i class="icon-gift"></i>&nbsp;誕生日</a></li>
+	</ul>
+<% end %>
 
 
 <p class="lead">
 	<%= @target_date%>&nbsp;(<%=wday(@target_date)%>)
 </p>
 
-<%= form_tag url_for(:action=>"update_reservation", :id=>@item), :class=>"form-horizontal well" do -%>
+<%= form_for @item, url: bs_reservation_update_reservation_path(id: @item.id), method: :patch do |f| %>
 	<fieldset>
 		<p class="lead">予約編集</p>
-		<%= render :partial=>"form_reservation" %>
+		<%= render :partial=>"form_reservation", locals:{f: f, item: @item}  %>
 		<div class="form-actions">
         	<button type="submit" class="btn btn-small btn-success"><i class="icon-refresh"></i>&nbsp;&nbsp;更新</button>
-			<%= link_to("<i class='icon-arrow-left'></i>&nbsp;キャンセル",
+			<%= link_to("<i class='icon-arrow-left'></i>&nbsp;キャンセル".html_safe,
 				{:action=>"show_reservation", :id=>@item}, 
 				:class=>"btn btn-small") %>
       	</div>

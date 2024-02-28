@@ -17,6 +17,8 @@ module Fuga326
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    config.time_zone = "Tokyo"
+    config.active_record.default_timezone = :local
     config.middleware.insert_before 0, Rack::Cors do
         allow do
             origins "http://localhost:3000", "https://speed.956.jp", "https://queen.956.jp"

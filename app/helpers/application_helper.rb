@@ -316,7 +316,7 @@ EOF
     newer = leaf.next_leaf(leaf)
     return nil if older.blank? && newer.blank?
     
-    html = '<br/><div  style="font-size:medium;">'
+    html = '<br/><div  style="font-size:small;">'
     unless older.blank?
         html += '<span>'
         html += link_to(raw('<<'+ ' ' +(truncate(prev_leaf(leaf).title, :length=>15))), :action=>params[:action], :id=>older, :wkey=>leaf.shop.wsite_hash_key)
@@ -468,11 +468,13 @@ EOF
   def move_to_top_icon(title='先頭へ');    sprintf("<i class='fa-solid fa-backward-step' title=%s></i>", title).html_safe; end
   def move_to_bottom_icon(title='末尾へ');    sprintf("<i class='fa-solid fa-forward-step' title=%s></i>", title).html_safe; end
   def reservation_icon(title='WEB予約',icon_size='');    sprintf("<i class='fa-solid fa-calendar-days %s' title=%s></i>", icon_size, title).html_safe; end
-  def top_icon(title='先頭へ'); sprintf('<i class="icon-step-backward" tittle=%s></i>', title).html_safe; end
-  def bottom_icon(title='末尾へ'); sprintf('<i class="icon-step-forward" tittle=%s></i>', title).html_safe; end
+  def top_icon(title='先頭へ'); sprintf('<i class="icon-step-backward" title=%s></i>', title).html_safe; end
+  def bottom_icon(title='末尾へ'); sprintf('<i class="icon-step-forward" title=%s></i>', title).html_safe; end
 
-  def tag3_icon(title=tag_title); sprintf('<i class="icon-tag" tittle=%s></i>', title).html_safe; end
-  def tags3_icon(title=tags_title); sprintf('<i class="icon-tags" tittle=%s></i>', title).html_safe; end
+  def tag3_icon(title=tag_title); sprintf('<i class="icon-tag" title=%s></i>', title).html_safe; end
+  def tags3_icon(title=tags_title); sprintf('<i class="icon-tags" title=%s></i>', title).html_safe; end
+
+  def reservation_staff_icon(title='予約'); sprintf('<i class="far fa-calendar-check" title=%s></i>', title).html_safe; end
 
 
   def caution_icon(title='警告'); sprintf("<i class='fa-solid fa-diamond-exclamation' title=%s></i>", title).html_safe; end

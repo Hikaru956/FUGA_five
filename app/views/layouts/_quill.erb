@@ -1,22 +1,28 @@
 <script>
-  var quill = new Quill('#editor', {
+var toolbarOptions = [
+  ['image', 'link', 'video'],
+  [{ 'font': [] }],
+  [{ 'color': [] }, { 'background': [] }],
+  [{ 'align': [] }],
+  ['bold', 'italic', 'underline', 'strike'],
+  [{ 'size': ['small', false, 'large', 'huge'] }],
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  ['code-block'],
+
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'indent': '-1'}, { 'indent': '+1' }],
+  [{ 'direction': 'rtl' }],
+
+
+  ['clean']
+];
+
+var quill = new Quill('#editor', {
   modules: {
-    toolbar: [
-        ['image'],
-        ['bold', 'italic', 'underline'],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'indent': '-1'}, { 'indent': '+1' }],
-        ['blockquote', 'code-block'],
-        [{ 'size': ['small', false, 'large', 'huge'] }],
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        ['clean']
-    ]
+    toolbar: toolbarOptions
   },
-  placeholder: 'Compose an epic...',
-  theme: 'snow'  // or 'bubble'
+  placeholder: '記事の本文を入力します。',
+  theme: 'snow'
 });
 function clickSubmit(){
     $("#contents").val(quill.root.innerHTML);

@@ -2,10 +2,12 @@
 	<h3>予約管理</h3>
 </header>
 
-<ul id="tab_nav" class="nav nav-tabs">
-	<li class="active">	<a href="<%= url_for(:action=>'reservation', 	:target_date=>@target_date) %>"><i class="icon-list"></i>&nbsp;予約</a></li>
-	<li>				<a href="<%= url_for(:action=>'birthday',		:target_date=>@target_date) %>"><i class="icon-gift"></i>&nbsp;誕生日</a></li>
-</ul>
+<% if false %>
+	<ul id="tab_nav" class="nav nav-tabs">
+		<li class="active">	<a href="<%= url_for(:action=>'reservation', 	:target_date=>@target_date) %>"><i class="icon-list"></i>&nbsp;予約</a></li>
+		<li>				<a href="<%= url_for(:action=>'birthday',		:target_date=>@target_date) %>"><i class="icon-gift"></i>&nbsp;誕生日</a></li>
+	</ul>
+<% end %>
 
 <div id="sandbox"></div>				
 
@@ -36,5 +38,4 @@
 	</div>
 <% end %>
 
-<%= render :partial=>"timelines_quarter"%>
-
+<%= render :partial=>"timelines_quarter",locals: {target_date: @target_date} %>

@@ -1,0 +1,33 @@
+<header class="subhead" id="overview">
+	<h3><%= reservation_staff_icon %>&nbsp;予約管理</h3>
+</header>
+
+<% if false %>
+	<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+		<li class="nav-item">
+			<a class="nav-link  active" href="<%= url_for(:controller=>'admin_reservation', :action=>'reservation',:target_date=>@target_date, :id=>@item) %>"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;予約</a>
+		</li>
+		<li  class="nav-item">
+			<a class="nav-link" href="<%= url_for(:controller=>'admin_reservation', :action=>'birthday',:target_date=>@target_date, :id=>@item) %>"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;誕生日</a>
+		</li>
+	</ul>
+<% end %>
+
+<p class="lead">
+	<%= @target_date%>&nbsp;(<%=wday(@target_date)%>)
+</p>
+
+<%= form_for @item, url: admin_reservation_update_reservation_path(id: @item.id), method: :patch do |f| %>
+	<fieldset>
+		<p class="lead">予約編集</p>
+		<%= render :partial=>"form_reservation", locals:{f: f, item: @item}   %>
+		<span class="float-right">
+			<div class="form-actions">
+				<%= link_to("<i class='fas fa-arrow-left'></i>&nbsp;キャンセル".html_safe,
+					{:action=>"show_reservation", :id=>@item}, 
+					:class=>"btn btn-sm btn-secondary") %>
+				<button type="submit" class="btn btn-sm btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
+			</div>
+		</span>
+	</fieldset>
+<% end -%>

@@ -13,34 +13,20 @@
 		<%= "<i class='far fa-flag'></i>".html_safe if is_holiday?(@probe_date) %>
 		<br/>
 			<span class="float-right">
-				<% if @shop.option_reservation_management %>
-					<span class="btn-group">
-					<%= link_to("<i class='fas fa-list'></i>".html_safe,
-						{:controller=>"bs_reservation", :action=>"reservation", :target_date=>@probe_date}, 
-						:class=>"btn btn-sm", :title=>"予約表") %>
-					</span>
-				<% end %>
-				<span class="btn-group">
+				<span class="btn-group btn-group-sm">
+					<% if @shop.option_reservation_management %>
+					<span class="btn-group btn-group-sm">
+						<%= link_to("<i class='fas fa-list'></i>".html_safe,
+							{:controller=>"bs_reservation", :action=>"reservation", :target_date=>@probe_date}, 
+							:class=>"btn btn-secondary btn-sm", :title=>"予約表") %>
+						</span>
+					<% end %>
 					<button class='btn btn-info btn-sm'  data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOn_<%= @probe_date%>">
 						<i class='fas fa-circle'></i>
 					</button>
 					<button class='btn btn-light btn-sm'  data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOff_<%= @probe_date%>">
 						<i class='fas fa-times'></i>
 					</button>
-					<% if false %>
-					<%= link_to("<i class='fas fa-circle'></i>".html_safe,
-							{:action=>"day_on", :id=>@staff, :target_date=>@probe_date},
-							:confirm=>"#{@probe_date.strftime('%m-%d')}(#{wday(@probe_date)}) を「#{@shop.name}:全日出勤」とします。よろしいですか?", 
-							:method=>'post',
-							:class=>"btn btn-info btn-sm", :title=>"全日出勤") %>
-					<%= link_to("<i class='fas fa-times'></i>".html_safe,
-							{:action=>"day_off", :id=>@staff, :target_date=>@probe_date},
-							:confirm=>"#{@probe_date.strftime('%m-%d')}(#{wday(@probe_date)}) を「全休」とします。よろしいですか?", 
-							:method=>'post',
-							:class=>"btn btn-error btn-sm", :title=>"全休") %>
-					<% end %>
-				</span>
-				<span class="btn-group">
 					<%= link_to("<i class='fas fa-cogs'></i>".html_safe,
 						{:action=>"edit_business", :id=>@staff, :target_date=>@probe_date}, 
 						:class=>"btn btn-success btn-sm") %>

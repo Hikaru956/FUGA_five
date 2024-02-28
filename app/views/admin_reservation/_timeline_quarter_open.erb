@@ -1,0 +1,84 @@
+<% 
+	all_reservations = Reservation.in_range(@finder_range_from, @finder_range_until, nil, @shop) 
+	@reservations_opened = []
+	all_reservations.each do |reservation| 
+		next unless reservation.staff.blank?
+		@reservations_opened << reservation
+	end
+	raw_span_count = (@reservations_opened.blank?)? 3: @reservations_opened.size+2 
+%>
+
+<tr class="tr_open">
+	<th rowspan=<%= raw_span_count %> class="head_staff_name">
+		担当未設定<br/>
+	</th>
+	<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
+		<td class="spacer"></td>
+		<td class="spacer"></td>
+		<td class="spacer"></td>
+		<td class="spacer"></td>
+	<% end %>
+</tr>
+
+<% if @reservations_opened.blank? %>
+	<tr class="tr_open">
+		<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
+			<td class="spacer"></td>
+			<td class="spacer"></td>
+			<td class="spacer"></td>
+			<td class="spacer"></td>
+		<% end %>
+	</tr>
+<% else%>
+	<% @reservations_opened.each do | reservation | %>
+		<tr class="tr_open">
+			<% formatter = reservation_spanner_quarter(@shop, reservation, @finder_range_from) %>
+			<% if formatter[0] > 0 %>
+				<% for i in 1..formatter[0] %>
+					<td  class="head_spacer_reservation"></td>
+				<% end %>
+			<% end %>
+			
+			<% if formatter[1] > 0 %>
+				<td colspan=<%= formatter[1] %>  class='reservation'>
+					<% unless reservation.customer.blank? %>
+						<% if reservation.customer.is_happy_birthday?(@target_date) %>
+							<span class="float-right text-success"><i class="fa fa-gift" aria-hidden="true"></i></span>
+						<% end %>
+					<% end %>
+
+					<%
+						reservation_label = 	(reservation.customer.blank?)? "": reservation.customer.name+" : "
+						reservation_label += 	(reservation.memo_1.blank?)? "": reservation.memo_1
+
+						unless reservation.customer.blank?
+							if reservation.customer.is_happy_birthday?(@target_date)
+								reservation_label += "【HBD】"
+							end
+						end
+						reservation_label = "予約"	if reservation_label.blank?
+					%>
+					<% tooltips_url = "ajax_showTooltip('/tooltip/reservation/#{reservation.id}', this);return false" %>
+					<%= link_to(truncate(reservation_label,(2*formatter[1])),
+						{:action=>"show_reservation", :id=>reservation},
+						:onmouseover=>"#{tooltips_url}", :onmouseout=>"ajax_hideTooltip()") %>
+				</td>
+			<% end %>
+			
+			<% if formatter[2] > 0 %>
+				<% for i in 1..(formatter[2]-1) %>
+					<td class="tail_spacer_reservation"></td>
+				<% end %>
+			<% end %>
+		</tr>
+	<% end %>
+<% end %>
+
+<tr class="tr_open">
+	<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
+		<td class="spacer_bottom"></td>
+		<td class="spacer_bottom"></td>
+		<td class="spacer_bottom"></td>
+		<td class="spacer_bottom"></td>
+	<% end %>
+</tr>

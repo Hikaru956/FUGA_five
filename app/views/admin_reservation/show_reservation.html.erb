@@ -1,0 +1,64 @@
+<header class="subhead" id="overview">
+	<h3><%= reservation_staff_icon %>&nbsp;予約管理</h3>
+</header>
+
+<% if false %>
+	<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+		<li class="nav-item">
+			<a class="nav-link  active" href="<%= url_for(:controller=>'admin_reservation', :action=>'reservation',:target_date=>@target_date, :id=>@item) %>"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;予約</a>
+		</li>
+		<li  class="nav-item">
+			<a class="nav-link" href="<%= url_for(:controller=>'admin_reservation', :action=>'birthday',:target_date=>@target_date, :id=>@item) %>"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;誕生日</a>
+		</li>
+	</ul>
+<% end %>
+
+
+<%=javascript_include_tag :defaults %>
+<p class="lead">
+	<%= @target_date%>&nbsp;(<%=wday(@target_date)%>)
+</p>
+
+<div class="well">
+	<span class="float-right">
+		<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+			<%= trash_icon('削除確認')%>&nbsp;
+			削除確認
+		</button>
+	</span>
+
+	<fieldset class="form-horizontal">
+		<%= render :partial=>"reservation_view" %>
+		<div class="form-actions">
+			<% back_url = url_for(:action=>"reservation", :target_date=>(@target_date))%>
+		    <a href="<%= back_url %>" class="btn btn-sm btn-secondary"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;戻る</a>
+			<%= link_to('<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;編集'.html_safe, 
+				{:action=>"edit_reservation", :id=>@item}, 
+				{:class=>"btn btn-sm btn-warning"})%>
+		</div>
+	</fieldset>
+</div>
+
+<!-- modaldelete -->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDelete" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for @item, url: admin_reservation_delete_reservation_path(id: @item), method: :delete do |f| %>
+                <div class="modal-header">
+                    <h5 class="modal-title"><%= reservation_staff_icon %>&nbsp;予約削除</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<p>
+						この予約を削除します。<br/>
+						よろしいですか？
+					</p>
+                </div>
+                <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>

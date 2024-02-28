@@ -5,9 +5,9 @@
 	<dl class="dl-horizontal">
 	  <dt>予約時刻</dt>
 	  <dd>
-	  	<%= @item.reserved_on.strftime("%l:%M %p") %>
+	  	<%= @item.reserved_on.strftime("%H:%M") %>
 	  	〜
-	  	<%= @item.reserved_until.strftime("%l:%M %p") %>
+	  	<%= @item.reserved_until.strftime("%H:%M") %>
 		
 		<% unless @item.customer.blank? %>
 			<% if @item.customer.is_happy_birthday?(@item.reserved_on.to_date) %>

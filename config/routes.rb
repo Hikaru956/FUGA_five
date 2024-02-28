@@ -296,7 +296,12 @@ Fuga326::Application.routes.draw do
   delete 'bs_roster/delete', to: 'bs_roster#delete'
 
   post 'bs_reservation/create_reservation', to: 'bs_reservation#create_reservation'
+  patch 'bs_reservation/update_reservation', to: 'bs_reservation#update_reservation'
   delete 'bs_reservation/delete_reservation', to: 'bs_reservation#delete_reservation'
+
+  post 'admin_reservation/create_reservation', to: 'admin_reservation#create_reservation'
+  patch 'admin_reservation/update_reservation', to: 'admin_reservation#update_reservation'
+  delete 'admin_reservation/delete_reservation', to: 'admin_reservation#delete_reservation'
 
   post 'tooltip/reservation/:id', to:'tooltip#reservation'
 
@@ -410,6 +415,9 @@ Fuga326::Application.routes.draw do
   post 'admin_roster/create', to: 'admin_roster#create'
   patch 'admin_roster/update', to: 'admin_roster#update'
   delete 'admin_roster/delete', to: 'admin_roster#delete'
+
+  post 'admin_abs_content_bag/create_image', to: 'admin_abs_content_bag#create_image'
+  delete '/admin_abs_content_bag/delete_image/:id', to: 'admin_abs_content_bag#delete_image', as: 'delete_image'
 
   resources :tags do
   end

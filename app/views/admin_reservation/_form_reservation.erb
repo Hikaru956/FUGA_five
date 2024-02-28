@@ -1,0 +1,46 @@
+	<div class="mb-3 row">
+		<label for="job_title" class="col-sm-3 col-form-label">開始時刻</label>
+		<div class="col-sm-9">
+			<%= f.datetime_field :reserved_on, \
+				{   value: ((item.reserved_on.blank?)? nil: item.reserved_on.strftime('%Y-%m-%dT%H:%M:%S')), \
+					class: "form-control", :required => true, placeholder: "開始時刻を入力", autofocus: true, auto_complete: 'off'} %>
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label for="job_title" class="col-sm-3 col-form-label">時間</label>
+		<div class="col-sm-9">
+			<select name="reservation[min_period]"  class="form-control">
+			  <option value="30"  <% if @item.min_period==30 %>selected<% end %>>30分　　　</option>
+			  <option value="45"  <% if @item.min_period==45 %>selected<% end %>>45分　　　</option>
+			  <option value="60"  <% if @item.min_period==60 %>selected<% end %>>60分　　　</option>
+			  <option value="75"  <% if @item.min_period==75 %>selected<% end %>>1時間30分</option>
+			  <option value="120" <% if @item.min_period==120 %>selected<% end %>>2時間</option>
+			  <option value="150" <% if @item.min_period==150 %>selected<% end %>>2時間30分</option>
+			  <option value="180" <% if @item.min_period==180 %>selected<% end %>>3時間</option>
+			  <option value="240" <% if @item.min_period==240 %>selected<% end %>>4時間</option>
+			  <option value="360" <% if @item.min_period==360 %>selected<% end %>>6時間</option>
+			  <option value="480" <% if @item.min_period==480 %>selected<% end %>>8時間</option>
+			</select>
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label for="job_title" class="col-sm-3 col-form-label">担当</label>
+		<div class="col-sm-9">
+			<% 
+				staffs = @shop.staffs.where("staffs.staff_status >=?", Staff::STAFF_HELPER).order(position: :asc, alt_id: :asc)
+
+			    #c = Condition.new
+			    #c.and("staffs.staff_status", ">=", Staff::STAFF_HELPER)
+				#staffs = @shop.staffs.find(:all, :conditions => c.where, :order=>["position asc, alt_id asc"])
+		 		options = staffs.map{ | s | [ s.name, s.id] }
+				options.unshift(["-- 未設定 --　", '']) 
+			%>
+			<%= f.collection_select(:staff_id, options, :last, :first, {prompt: false}, {class: 'form-control'})%>
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label for="job_title" class="col-sm-3 col-form-label">連絡事項</label>
+		<div class="col-sm-9">
+			<%= f.text_area :memo_1, {value: item.memo_1, class: "form-control", :rows=>"5", placeholder: "連絡事項を入力", autofocus: true} %>
+		</div>
+	</div>

@@ -14,6 +14,7 @@ Rails.application.config.assets.precompile += %w( pagination.css )
 Rails.application.config.assets.precompile += %w( main.css )
 Rails.application.config.assets.precompile += %w( timeline.css )
 Rails.application.config.assets.precompile += %w( timeline_quarter.css )
+Rails.application.config.assets.precompile += %w( calendar_bs.css )
 #js
 Rails.application.config.assets.precompile += %w( main.js )
 Rails.application.config.assets.precompile += %w( jquery.js )

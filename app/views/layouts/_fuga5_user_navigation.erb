@@ -71,6 +71,11 @@
                     <a class="nav-link" href="<%= url_for(:controller=>'admin_attendance', :action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks="false">勤怠</a>
                 </li>
             <% end %>
+            <% if @shop.option_reservation_management %>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= url_for(:controller=>'admin_reservation', :action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks="false">予約</a>
+                </li>
+            <% end %>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item dropdown">

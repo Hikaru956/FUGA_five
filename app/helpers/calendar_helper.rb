@@ -90,5 +90,6 @@ EOF
     end
     last.wday.upto(5) {|d| cal << "			<td class='#{options[:other_month_class]}'></td>"} unless last.wday == 6
     cal << "		</tr>\n	</tbody>\n</table>"
+    raw cal
   end
 end
