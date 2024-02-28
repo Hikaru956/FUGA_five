@@ -14,6 +14,5 @@
 //= require jquery-ui
 //= require rails-ujs
 //= require turbolinks
-//= require summernote
 
 // require_tree .

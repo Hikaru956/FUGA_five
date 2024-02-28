@@ -147,5 +147,5 @@ gem 'rack-cors'
 gem 'acts-as-taggable-on'
 
 #new editor & upload photo
-gem 'summernote-rails', '~> 0.8.10.0'
+#gem 'summernote-rails', '~> 0.8.10.0'
 gem 'mini_magick'
