@@ -38,8 +38,12 @@
 	</div>
 </div>
 <% if @shop.enable_editor %>
-	<textarea name="content_leaf[description]" style="min-height:800px;max-height:1200px" id="inp_editor1"><%= item.description%></textarea>
-	<%= render :partial=>"layouts/richtext_editor" %>
+	<% if false %>
+		<textarea name="content_leaf[description]" style="min-height:800px;max-height:1200px" id="inp_editor1"><%= item.description%></textarea>
+		<%= render :partial=>"layouts/richtext_editor" %>
+	<% end %>
+	<textarea name="content_leaf[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= item.description%></textarea>
+	<%= render :partial=>"layouts/summernote" %>
 <% else %>
 	<div class="control-group">
 		<%= f.text_area  :description, value: item.description, :class => "tinymce input-block-level", rows: 5, :placeholder=>"項目の本文を入力します。" %>
