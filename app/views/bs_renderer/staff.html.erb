@@ -90,5 +90,5 @@
 <% end %>
 
 <% unless MAKE_SECRET_FUGA_OPTION %>
-	<% if @website.option_attendance_management %><%= render :partial=>'bs_renderer/staff_attendances', locals:{period: 7}  %><% end%>
+	<% if @website.option_attendance_management %><%= render :partial=>'bs_renderer/staff_attendances_month', locals:{period: 7}  %><% end%>
 <% end %>

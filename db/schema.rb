@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.index ["staff_id"], name: "index_attendances_on_staff_id"
   end
 
-  create_table "calendar_marks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "calendar_marks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "shop_id"
     t.integer "staff_id"
     t.date "target_date"
@@ -291,11 +291,6 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.string "social_hotpepper_beauty_uri"
     t.string "social_youtube_uri"
     t.string "web_reservation_uri"
-  end
-
-  create_table "t1", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "col1", limit: 10, null: false
-    t.string "col2", limit: 10, null: false
   end
 
   create_table "taggings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
