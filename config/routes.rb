@@ -406,9 +406,11 @@ Fuga326::Application.routes.draw do
   delete 'admin_config/shop_delete_position', to:'admin_config#shop_delete_position'
 
   patch 'admin_attendance/update_business', to: 'admin_attendance#update_business'
-  post 'admin_attendance/init_roster', to: 'admin_attendance#init_roster'
-  post 'admin_attendance/day_on', to: 'admin_attendance#day_on'
-  post 'admin_attendance/day_off', to: 'admin_attendance#day_off'
+  post  'admin_attendance/init_roster',     to: 'admin_attendance#init_roster'
+  post  'admin_attendance/day_on',          to: 'admin_attendance#day_on'
+  post  'admin_attendance/day_off',         to: 'admin_attendance#day_off'
+
+  post  'admin_attendance/set_calendar_mark', to: 'admin_attendance#set_calendar_mark'
 
   get 'admin_roster/index', to: 'admin_roster#index'
   patch 'admin_roster/update_rosters', to: 'admin_roster#update_rosters'

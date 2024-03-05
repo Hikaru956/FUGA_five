@@ -22,6 +22,8 @@ class Staff < ApplicationRecord
 
   has_many      :photos, ->{order('photos.position ASC')},  as: :ref, :dependent => :destroy
 
+  has_many      :calendar_marks, dependent: :destroy
+  
   accepts_nested_attributes_for :photos
 
   STAFF_PROPER    = 100

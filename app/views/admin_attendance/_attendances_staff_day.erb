@@ -13,7 +13,7 @@
 		<%= "<i class='far fa-flag'></i>".html_safe if is_holiday?(@probe_date) %>
 
 		<span class='float-right'>
-			[<%= calendar_mark_on(nil, nil, nil) %>]
+			[<%= calendar_mark_on(@probe_date, @staff) %>]
 		</span>
 
 		<div class="dropdown">
@@ -28,10 +28,10 @@
 				<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOff_<%= @probe_date%>"><i class='fas fa-times fa-fw'></i>&nbsp;全休</a></li>
 				<li><a class="dropdown-item" href="<%= url_for(:action=>"edit_business", :id=>@staff, :target_date=>@probe_date)%>"><i class='fas fa-cogs fa-fw'></i>&nbsp;詳細設定</a></li>
 				<li><hr class="dropdown-divider"></li>
-				<li><li><a class="dropdown-item" href="#"><%= calendar_mark_type(CalendarMark::TYPE_CIRCLE) %> : <%= calendar_mark_title %></a></li>
-				<li><li><a class="dropdown-item" href="#"><%= calendar_mark_type(CalendarMark::TYPE_TRIANGLE) %> : <%= calendar_mark_title %></a></li>
-				<li><li><a class="dropdown-item" href="#"><%= calendar_mark_type(CalendarMark::TYPE_BATSU) %> : <%= calendar_mark_title %></a></li>
-				<li><li><a class="dropdown-item" href="#"><%= calendar_mark_type(CalendarMark::TYPE_NONE) %> : <%= calendar_mark_title %></a></li>
+				<li><li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @target_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_CIRCLE) %>" 	 data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_CIRCLE) %> : <%= calendar_mark_title %></a></li>
+				<li><li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @target_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_TRIANGLE) %>" data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_TRIANGLE) %> : <%= calendar_mark_title %></a></li>
+				<li><li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @target_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_BATSU) %>" 	 data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_BATSU) %> : <%= calendar_mark_title %></a></li>
+				<li><li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @target_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_NONE) %>" 	 data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_NONE) %> : <%= calendar_mark_title %></a></li>
 			</ul>
 		</div>
 

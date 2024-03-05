@@ -49,6 +49,9 @@ class Shop < ApplicationRecord
   
   has_many      :visual_widget_bags,  :dependent=>:destroy
 
+  has_many      :calendar_marks, dependent: :destroy
+  
+
   #googlemap
   #hikaru
   #validates :lat, presence: true

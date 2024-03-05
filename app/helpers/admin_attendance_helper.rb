@@ -17,9 +17,11 @@ module AdminAttendanceHelper
         return ''
     end
 
-    def calendar_mark_on(target_date, shop, staff=nil)
-        marks = [CalendarMark::TYPE_CIRCLE, CalendarMark::TYPE_TRIANGLE, CalendarMark::TYPE_BATSU]
-        calendar_mark_type(marks[rand(0..2)])
+    def calendar_mark_on(target_date, staff)
+        #marks = [CalendarMark::TYPE_CIRCLE, CalendarMark::TYPE_TRIANGLE, CalendarMark::TYPE_BATSU]
+        #calendar_mark_type(marks[rand(0..2)])
+        cm = staff.calendar_marks.find_by(target_date: target_date)
+        (cm.blank?)? '': calendar_mark_type(cm.mark_type)
     end
 
 end

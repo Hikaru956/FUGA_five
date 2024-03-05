@@ -12,6 +12,21 @@ before_action :authenticate_user!
     @target_date = (params[:year].blank?)?  Time.mktime(Time.now.to_date.year, 1,1,0,0,0).to_date: Time.mktime(params[:year], 1,1,0,0,0).to_date
   end
 
+  def set_calendar_mark
+    @target_date = (params[:target_date].blank?)? Time.zone.now.to_date: Date.parse(params[:target_date])
+    @shop = current_user.shop
+    @staff = @shop.staffs.find_by(id: params[:staff_id])
+    unless @staff.blank?
+      # まずはクリア
+      cur_marks = @staff.calendar_marks.where(target_date: @target_date)
+      cur_marks.destroy_all unless cur_marks.blank?
+
+      mark = CalendarMark.new(shop_id: @shop.id, staff_id: @staff.id, target_date: @target_date, mark_type: params[:calendar_mark_type])
+      mark.save!
+    end
+    redirect_to :action=>"attendances_staff", :id=>@staff, :shop_id=>@shop, :year=>@target_date.year, :month=>@target_date.month
+  end
+
   def attendances_staff
     @shop = current_user.shop
     @staff  = Staff.find(params[:id])
