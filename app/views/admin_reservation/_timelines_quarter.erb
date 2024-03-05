@@ -7,8 +7,7 @@
 			cur_hour = now.hour
 		%>
 		<% for i in @shop.business_hour_from...(@shop.business_hour_until) %>
-			<% is_now = (is_today&&i==cur_hour)? true: false %>
-			<th colspan="4" class="head_timeline <%= (is_now)? 'text-danger': ''%>">
+			<th colspan="4" class="head_timeline">
 				<%= (Time.mktime(@target_date.year,@target_date.month,@target_date.day, 0, 0, 0)+(i*60*60)).strftime("%l:%M %p") %>
 			</th>
 		<% end %>
