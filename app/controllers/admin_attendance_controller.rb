@@ -32,7 +32,7 @@ before_action :authenticate_user!
     @staff  = Staff.find(params[:id])
     @target_date = (params[:year].blank?||params[:month].blank?)? Time.now.to_date: Time.mktime(params[:year], params[:month],1,0,0,0).to_date
 
-    @my_reservations = @shop.reservations.where("     reservations.shop_id =?
+    @my_reservations = @staff.reservations.where("     reservations.shop_id =?
                                                   AND reservations.reserved_on >=?
                                                   AND reservations.reserved_on <?", \
                                                   @shop.id, @target_date, @target_date>>1)

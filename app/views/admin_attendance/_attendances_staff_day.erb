@@ -34,30 +34,6 @@
 				<li><li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @probe_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_NONE) %>" 	 data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_NONE) %> : <%= calendar_mark_title %></a></li>
 			</ul>
 		</div>
-
-		<% if false %>
-		<br/>
-			<span class="float-right">
-				<span class="btn-group btn-group-sm">
-					<% if @shop.option_reservation_management %>
-						<span class="btn-group btn-group-sm">
-							<%= link_to("<i class='fas fa-list'></i>".html_safe,
-								{:controller=>"admin_reservation", :action=>"reservation", :target_date=>@probe_date}, 
-								:class=>"btn btn-secondary btn-sm", :title=>"予約表") %>
-							</span>
-					<% end %>
-					<button class='btn btn-info btn-sm'  data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOn_<%= @probe_date%>">
-						<i class='fas fa-circle'></i>
-					</button>
-					<button class='btn btn-light btn-sm'  data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOff_<%= @probe_date%>">
-						<i class='fas fa-times'></i>
-					</button>
-					<%= link_to("<i class='fas fa-cogs'></i>".html_safe,
-						{:action=>"edit_business", :id=>@staff, :target_date=>@probe_date}, 
-						:class=>"btn btn-success btn-sm") %>
-				</span>
-			</span>
-		<% end %>
 	</th>
 	<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
 		<td class="<%=roster_timeline_classes[i*2]%>"></td>
