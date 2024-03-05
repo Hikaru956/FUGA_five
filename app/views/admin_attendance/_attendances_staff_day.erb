@@ -17,7 +17,7 @@
 					<% if @shop.option_reservation_management %>
 					<span class="btn-group btn-group-sm">
 						<%= link_to("<i class='fas fa-list'></i>".html_safe,
-							{:controller=>"bs_reservation", :action=>"reservation", :target_date=>@probe_date}, 
+							{:controller=>"admin_reservation", :action=>"reservation", :target_date=>@probe_date}, 
 							:class=>"btn btn-secondary btn-sm", :title=>"予約表") %>
 						</span>
 					<% end %>
