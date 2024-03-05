@@ -150,7 +150,7 @@ class Attendance < ApplicationRecord
         sum_working_hours += attend_hours
       end
     end
-    [sum_business_days, sum_business_hours, sum_working_days, sum_working_hours, sum_absence_days, sum_absence_hours]    
+    [sum_business_days.to_i, sum_business_hours.to_i, sum_working_days.to_i, sum_working_hours.to_i, sum_absence_days.to_i, sum_absence_hours.to_i]    
   end
 
 end
