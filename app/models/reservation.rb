@@ -12,7 +12,7 @@
 class Reservation < ApplicationRecord
   belongs_to  :customer, optional: true
   belongs_to  :shop
-  belongs_to  :staff
+  belongs_to  :staff, optional: true
 
   validate  :valid_reservation?
 

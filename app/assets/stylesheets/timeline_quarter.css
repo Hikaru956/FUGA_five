@@ -47,7 +47,7 @@ table.timeline th.head_timeline {
 	padding:3px;
 	}
 
-table.timeline th.head_timeline_current {
+table.timeline th.head_timeline_current_box {
 	font-size:smaller;
 	font-weight:normal;
 	border-top:solid #956 1px; 

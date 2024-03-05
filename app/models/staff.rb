@@ -13,17 +13,17 @@ class Staff < ApplicationRecord
   acts_as_list  :scope => :shop
 
   belongs_to    :shop
-  
+
   #hikaru
   has_many      :attendances, ->{order('attendances.attend_on ASC')},   :dependent=>:destroy 
-  has_many      :reservations, ->{order('reservations.reserved_on ASC')},  :dependent=>:destroy
+  has_many      :reservations, ->{order('reservations.reserved_on ASC')},  :dependent=>:nullify
   #has_many      :content_leafs, ->{order('content_leafs.created_at DESC')}, :dependent=>:destroy
   has_many      :content_leafs, ->{order('content_leafs.created_at DESC')}, :dependent=>:nullify
 
   has_many      :photos, ->{order('photos.position ASC')},  as: :ref, :dependent => :destroy
 
   has_many      :calendar_marks, dependent: :destroy
-  
+
   accepts_nested_attributes_for :photos
 
   STAFF_PROPER    = 100

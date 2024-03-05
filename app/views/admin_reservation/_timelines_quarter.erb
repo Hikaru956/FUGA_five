@@ -7,13 +7,14 @@
 			cur_hour = now.hour
 		%>
 		<% for i in @shop.business_hour_from...(@shop.business_hour_until) %>
-			<th colspan="4" class="<%= (is_today&&i==cur_hour)? 'head_timeline_current': 'head_timeline' %>">
+			<% is_now = (is_today&&i==cur_hour)? true: false %>
+			<th colspan="4" class="head_timeline <%= (is_now)? 'text-danger': ''%>">
 				<%= (Time.mktime(@target_date.year,@target_date.month,@target_date.day, 0, 0, 0)+(i*60*60)).strftime("%l:%M %p") %>
 			</th>
 		<% end %>
 	</tr>
-	
-	<% 
+
+	<%
 		staffs = @shop.staffs.where("staffs.staff_status >=?", Staff::STAFF_HELPER).order(position: :asc, alt_id: :asc)
 
 	    #c = Condition.new

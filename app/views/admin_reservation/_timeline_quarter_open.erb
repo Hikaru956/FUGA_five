@@ -1,5 +1,5 @@
 <% 
-	all_reservations = Reservation.in_range(@finder_range_from, @finder_range_until, nil, @shop) 
+	all_reservations = Reservation.in_range(@finder_range_from, @finder_range_until, @shop) 
 	@reservations_opened = []
 	all_reservations.each do |reservation| 
 		next unless reservation.staff.blank?
@@ -10,7 +10,12 @@
 
 <tr class="tr_open">
 	<th rowspan=<%= raw_span_count %> class="head_staff_name">
-		担当未設定<br/>
+		その他
+		<span class="float-right">
+			<%= link_to("<i class='fa fa-list' aria-hidden='true'></i>&nbsp;予約".html_safe,
+				{:action=>"new_reservation", :target_date=>@target_date, :shop_id=>@shop, :staff_id=>nil}, 
+				:class=>"btn btn-sm btn-success btn-mini") %>
+		</span>
 	</th>
 	<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
 		<td class="spacer"></td>
@@ -59,7 +64,7 @@
 						reservation_label = "予約"	if reservation_label.blank?
 					%>
 					<% tooltips_url = "ajax_showTooltip('/tooltip/reservation/#{reservation.id}', this);return false" %>
-					<%= link_to(truncate(reservation_label,(2*formatter[1])),
+					<%= link_to(truncate(reservation_label,length: (2*formatter[1])),
 						{:action=>"show_reservation", :id=>reservation},
 						:onmouseover=>"#{tooltips_url}", :onmouseout=>"ajax_hideTooltip()") %>
 				</td>

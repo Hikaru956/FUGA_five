@@ -19,12 +19,12 @@
 		<% if @shop.option_attendance_management %>
 		<%= link_to("<i class='fa fa-tasks' aria-hidden='true'></i>".html_safe,
 			{:controller=>'admin_attendance', :action=>"attendances_staff", :id=>staff, :shop_id=>@shop, :year=>@target_date.year,  :month=>@target_date.month}, 
-			:class=>"btn btn-mini btn-secondary", :title=>"勤務表") %>
+			:class=>"btn btn-mini btn-sm btn-secondary", :title=>"勤務表") %>
 		<% end %>
 		<span class="float-right">
 			<%= link_to("<i class='fa fa-list' aria-hidden='true'></i>&nbsp;予約".html_safe,
 				{:action=>"new_reservation", :target_date=>@target_date, :shop_id=>@shop, :staff_id=>staff}, 
-				:class=>"btn btn-success btn-mini") %>
+				:class=>"btn btn-sm btn-success btn-mini") %>
 		</span>
 	</th>
 	<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
