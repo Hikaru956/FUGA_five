@@ -11,15 +11,40 @@
 		<%= @probe_date.strftime("%m-%d") %>
 		(<span class="<%=(is_holiday?(@probe_date) || @probe_date.wday==0)? 'holiday': 'flat'%>"><%=wday(@probe_date)%></span>)
 		<%= "<i class='far fa-flag'></i>".html_safe if is_holiday?(@probe_date) %>
+
+		<span class='float-right'>
+			[<%= calendar_mark_on(nil, nil, nil) %>]
+		</span>
+
+		<div class="dropdown">
+			<button class="btn btn-sm btn-outline-primary dropdown-toggle btn-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				設定
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+				<% if @shop.option_reservation_management %>
+					<li><a class="dropdown-item" href="<%= url_for(:controller=>"admin_reservation", :action=>"reservation", :target_date=>@probe_date) %>"><i class='fas fa-list fa-fw'></i>&nbsp;予約表</a></li>
+				<% end %>
+				<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOn_<%= @probe_date%>"><i class='fas fa-circle fa-fw'></i>&nbsp;出勤（終日）</a></li>
+				<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOff_<%= @probe_date%>"><i class='fas fa-times fa-fw'></i>&nbsp;全休</a></li>
+				<li><a class="dropdown-item" href="<%= url_for(:action=>"edit_business", :id=>@staff, :target_date=>@probe_date)%>"><i class='fas fa-cogs fa-fw'></i>&nbsp;詳細設定</a></li>
+				<li><hr class="dropdown-divider"></li>
+				<li><li><a class="dropdown-item" href="#"><%= calendar_mark_type(CalendarMark::TYPE_CIRCLE) %> : <%= calendar_mark_title %></a></li>
+				<li><li><a class="dropdown-item" href="#"><%= calendar_mark_type(CalendarMark::TYPE_TRIANGLE) %> : <%= calendar_mark_title %></a></li>
+				<li><li><a class="dropdown-item" href="#"><%= calendar_mark_type(CalendarMark::TYPE_BATSU) %> : <%= calendar_mark_title %></a></li>
+				<li><li><a class="dropdown-item" href="#"><%= calendar_mark_type(CalendarMark::TYPE_NONE) %> : <%= calendar_mark_title %></a></li>
+			</ul>
+		</div>
+
+		<% if false %>
 		<br/>
 			<span class="float-right">
 				<span class="btn-group btn-group-sm">
 					<% if @shop.option_reservation_management %>
-					<span class="btn-group btn-group-sm">
-						<%= link_to("<i class='fas fa-list'></i>".html_safe,
-							{:controller=>"admin_reservation", :action=>"reservation", :target_date=>@probe_date}, 
-							:class=>"btn btn-secondary btn-sm", :title=>"予約表") %>
-						</span>
+						<span class="btn-group btn-group-sm">
+							<%= link_to("<i class='fas fa-list'></i>".html_safe,
+								{:controller=>"admin_reservation", :action=>"reservation", :target_date=>@probe_date}, 
+								:class=>"btn btn-secondary btn-sm", :title=>"予約表") %>
+							</span>
 					<% end %>
 					<button class='btn btn-info btn-sm'  data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOn_<%= @probe_date%>">
 						<i class='fas fa-circle'></i>
@@ -32,6 +57,7 @@
 						:class=>"btn btn-success btn-sm") %>
 				</span>
 			</span>
+		<% end %>
 	</th>
 	<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
 		<td class="<%=roster_timeline_classes[i*2]%>"></td>
