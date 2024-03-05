@@ -5,11 +5,7 @@
 
 <span class="float-right">
 	<% calendar_url = url_for(:action=>"index", :year => @target_date.year)%>
-	<a href="<%= calendar_url %>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i>&nbsp;スタッフ一覧へ</a>
-	<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalInitRoster">
-		<i class='fas fa-cog'></i>&nbsp;
-			一括設定
-	</button>
+	<a href="<%= calendar_url %>" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;スタッフ一覧へ</a>
 </span>
 
 <p class="lead">
@@ -20,92 +16,20 @@
 </p>
 
 <%= render :partial=>"roster_summary" %>
-<hr/>
+
+<div style='margin-bottom: 10px;'>
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalInitRoster">
+		<i class='fas fa-cog'></i>&nbsp;
+		勤怠一括設定
+	</button>
+	|
+	<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modalInitCalendarMark">
+		<%= calendar_mark_icon %>
+		<%= calendar_mark_title %>一括設定
+	</button>
+</div>
+<%= render partial: 'dlg_init_roster' %>
+<%= render partial: 'dlg_init_calendar_mark' %>
+
 <%= render :partial=>"attendances_staff" %>
 
-<!-- modalInitRoster -->
-<div class="modal fade" id="modalInitRoster" tabindex="-1" aria-labelledby="modalInitRoster" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-        <div class="modal-content">
-			<%= form_for @shop, url: admin_attendance_init_roster_path(id: @staff.id), method: :post do |f| -%>
-				<%= hidden_field_tag "id", @staff.id %>
-				<%= hidden_field_tag "shop_id", @shop.id %>
-				<%= hidden_field_tag "target_date", @target_date %>
-				<div class="modal-header">
-					<h5 class="modal-title"><%= @target_date.strftime("%Y-%m")%> 勤務設定</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<p class="small">
-						<%= @staff.name.truncate(10) %>
-						の
-						<%= @shop.name %>
-						における
-						出勤、休暇を一括設定します
-					</p>
-					<% 
-						day_options = []
-						for d in 1..((@target_date>>1)-1).day
-							day_options << [ (@target_date+(d-1)).strftime("%m-%d")+"("+ wday(@target_date+(d-1)) + ")", (@target_date+(d-1)).strftime("%Y-%m-%d")]
-						end
-					%>
-					<div class="mb-3 row">
-						<label for="shop_alt_id" class="col-sm-4 col-form-label">期間</label>
-						<div class="col-sm-8 form-inline">
-							<%= select_tag("from_date", 	options_for_select(day_options, @target_date.strftime("%Y-%m-%d")), {include_blank:'選択してください', :required => true, class: 'form-control'})%>
-							&nbsp;〜&nbsp;
-							<%= select_tag("until_date", 	options_for_select(day_options, ((@target_date>>1)-1).strftime("%Y-%m-%d")), {include_blank:'選択してください', :required => true, class: 'form-control'})%>
-						</div>
-					</div>
-					<% 
-						base_time = Time.mktime(@target_date.year, @target_date.month, @target_date.day, 0, 0, 0)
-						hour_options = []
-						for h in @shop.business_hour_from..@shop.business_hour_until
-							scope_time = base_time+(h*60*60)
-							hour_options << [ scope_time.strftime("%l:%M %p"), h]
-						end
-					%>
-					<div class="mb-3 row">
-						<label for="name" class="col-sm-4 col-form-label">勤務時間</label>
-						<div class="col-sm-8 form-inline">
-							<%= select_tag("work_from", 	options_for_select(hour_options, @shop.business_hour_from), {include_blank:'選択してください', :required => true, class: 'form-control'})%>
-							&nbsp;〜&nbsp;
-							<%= select_tag("work_until", 	options_for_select(hour_options, @shop.business_hour_until), {include_blank:'選択してください', :required => true, class: 'form-control'})%>
-						</div>
-					</div>
-					<div class="mb-3 row">
-						<label for="holiday" class="col-sm-4 col-form-label">休日</label>
-						<div class="col-sm-8 form-check">
-							<label class="checkbox inline">
-							<input type="checkbox" name="holidays[]" id="inlineCheckbox1" value="0"> 日
-							</label>
-							<label class="checkbox inline">
-							<input type="checkbox" name="holidays[]" id="inlineCheckbox2" value="1"> 月
-							</label>
-							<label class="checkbox inline">
-							<input type="checkbox" name="holidays[]" id="inlineCheckbox3" value="2"> 火
-							</label>
-							<label class="checkbox inline">
-							<input type="checkbox" name="holidays[]" id="inlineCheckbox4" value="3"> 水
-							</label>
-							<label class="checkbox inline">
-							<input type="checkbox" name="holidays[]" id="inlineCheckbox5" value="4"> 木
-							</label>
-							<label class="checkbox inline">
-							<input type="checkbox" name="holidays[]" id="inlineCheckbox6" value="5"> 金
-							</label>
-							<label class="checkbox inline">
-							<input type="checkbox" name="holidays[]" id="inlineCheckbox6" value="6"> 土
-							</label>
-						</div>
-						<p><center><span class="text-info">指定期間の設定は全て上記設定で初期化されます。</span></center></p>
-					</div>
-				</div>
-				<div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-					<button type="submit" class="btn btn-success"><i class="fas fa-cogs"></i>&nbsp;設定</button>
-				</div>
-			<% end %>
-		</div>
-	</div>
-</div>

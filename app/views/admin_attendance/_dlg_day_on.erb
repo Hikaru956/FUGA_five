@@ -3,19 +3,17 @@
     <%= form_for staff, url: admin_attendance_day_on_path(id: staff.id, target_date: target_date), method: :post do |f| %>
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">スタッフ勤怠管理</h5>
+            <h5 class="modal-title" id="exampleModalLabel">終日出勤 : <%= model_name(@staff) %></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class='alert alert-info'>
             <%= target_date %>
-            終日出勤に変更します<br/>
+            を終日出勤に変更します<br/>
             よろしいですか?
-          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-          <button type="submit" class="btn btn-warning"><i class='fas fa-circle'></i>&nbsp;更新</button>
+          <button type="submit" class="btn btn-primary"><i class='fas fa-circle'></i>&nbsp;設定</button>
         </div>
       </div>
     <% end %>

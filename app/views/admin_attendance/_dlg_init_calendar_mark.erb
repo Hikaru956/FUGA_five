@@ -1,0 +1,56 @@
+<!-- modalInitRoster -->
+<div class="modal fade" id="modalInitCalendarMark" tabindex="-1" aria-labelledby="modalInitCalendarMark" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+        <div class="modal-content">
+			<%= form_for @shop, url: admin_attendance_set_calendar_mark_path, method: :post do |f| -%>
+				<%= hidden_field_tag "shop_id", @shop.id %>
+				<%= hidden_field_tag "staff_id", @staff.id %>
+				<%= hidden_field_tag "target_date", @target_date %>
+				<% 
+					from_date  = @target_date.beginning_of_month
+					until_date = @target_date.end_of_month
+				%>
+
+				<div class="modal-header">
+					<h5 class="modal-title"><%= @target_date.strftime("%Y-%m")%> 勤務設定</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p class="small">
+						<%= model_name(@staff) %>
+						の
+						<%= calendar_mark_title %>
+						を一括設定します
+					</p>
+					<div class="mb-3 row">
+						<label for="shop_alt_id" class="col-sm-4 col-form-label">設定期間</label>
+						<div class="col-sm-8 form-inline">
+							<%= date_field_tag :from_date,  from_date.strftime('%Y-%m-%d'), {class: "form-control", min: from_date, max: until_date, :required => true, placeholder: "開始日を入力", autofocus: true, auto_complete: 'off'} %>
+							&nbsp;から&nbsp;
+							<%= date_field_tag :until_date, until_date.strftime('%Y-%m-%d'), {class: "form-control", min: from_date, max: until_date, :required => true, placeholder: "終了日を入力", autofocus: true, auto_complete: 'off'} %>
+							&nbsp;まで
+						</div>
+					</div>
+
+					<%
+						opts = []
+						opts << [calendar_mark_type(CalendarMark::TYPE_CIRCLE), CalendarMark::TYPE_CIRCLE]
+						opts << [calendar_mark_type(CalendarMark::TYPE_TRIANGLE), CalendarMark::TYPE_TRIANGLE]
+						opts << [calendar_mark_type(CalendarMark::TYPE_BATSU), CalendarMark::TYPE_BATSU]
+						opts << [calendar_mark_type(CalendarMark::TYPE_NONE, true), CalendarMark::TYPE_NONE]
+					%>
+					<div class="mb-3 row">
+						<label for="name" class="col-sm-4 col-form-label"><%= calendar_mark_title %></label>
+						<div class="col-sm-8 form-inline">
+			              <%= select_tag :calendar_mark_type, options_for_select(opts), {include_blank:'選択してください', :required => false, class: 'form-control'} %>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					<button type="submit" class="btn btn-info"><i class="fas fa-cogs"></i>&nbsp;設定</button>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
