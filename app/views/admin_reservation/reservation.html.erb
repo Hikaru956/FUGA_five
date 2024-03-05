@@ -37,8 +37,8 @@
 </p>
 
 <% if @target_date < Time.now.to_date %>
-	<div class="alert alert-secondary">
-		<span class="text-danger"><%= info_icon('注意') %>&nbsp;表示情報は過去の日付のものです。</span>
+	<div class="alert alert-danger">
+		<span xxxclass="text-danger"><%= info_icon('注意') %>&nbsp;表示情報は過去の日付のものです。</span>
 	</div>
 <% end %>
 
