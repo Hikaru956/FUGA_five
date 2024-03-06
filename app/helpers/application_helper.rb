@@ -155,7 +155,12 @@ module ApplicationHelper
     return "ブロガー"         if user_role == User::ROLE_BLOGGER    
     return "ブロックユーザー"     if user_role == User::ROLE_BLOCKED    
   end
-  
+
+  def icon_bag_state_title(bag)
+    return raw '公開中' if bag.is_public
+    return raw '非公開'
+  end
+
   def icon_bag_state(bag)
     return raw '<span class="badge badge-info">公開中</span>' if bag.is_public
     return raw '<span class="badge">非公開</span>'

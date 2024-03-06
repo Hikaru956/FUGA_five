@@ -41,10 +41,10 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr class="info">
-				<th class="span2">役割</th>
-				<th class="span3">表示名</th>
-				<th class="span3">ログイン</th>
-				<th class="span4">Email</th>
+				<th class="span2 table-dark">役割</th>
+				<th class="span3 table-dark">表示名</th>
+				<th class="span3 table-dark">ログイン</th>
+				<th class="span4 table-dark">Email</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -57,9 +57,9 @@
 							<span class="float-right"><i class="icon-ban-circle"></i></span>
 						<% end %>
 						<% url = url_for(:action=>"shop_show_user", :id=>user) %>
-						<a href="<%=url%>">
-							<i class="fa-solid fa-chevron-right"></i>
+						<a href="<%=url%>" class='text-primary'>
 							<%= user.login %>
+							<%= link_to_6_icon %>
 						</a>
 					</td>
 					<td><%= user.email %></td>

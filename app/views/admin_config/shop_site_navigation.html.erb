@@ -44,28 +44,27 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th class="span2">ステータス</th>
-			<th class="span10">ナビゲーション項目</th>
+			<th width='25%' class="table-dark">ステータス</th>
+			<th width='75%' class="table-dark">ナビゲーション項目</th>
 		</tr>
 	</thead>
 	<tbody>
 		<% @items.each do | item | @item = item %>
 			<tr class=<%= (@item.is_public)? '': 'warning' %>>
-				<td>
-					<span >
-						<%= icon_bag_state(@item) %>
-					</span>
+				<td style='vertical-align: middle;'>
 					<% if @item.is_public %>
-						<a class="btn btn-sm btn-refresh btn-warning"  href="<%= url_for(:action=>'make_private', :id=>@item) %>" title="非公開にする">
+						<a class="btn btn btn-refresh btn-success"  href="<%= url_for(:action=>'make_private', :id=>@item) %>" title="非公開にする">
 							<i class="fa-solid fa-lock-open"></i>
+							<%= icon_bag_state_title(@item) %>
 						</a>
-					<% else %>					
-						<a class="btn btn-sm btn-refresh btn-info"  href="<%= url_for(:action=>'make_public', :id=>@item) %>" title="公開する">
+					<% else %>
+						<a class="btn btn btn-refresh btn-secondary"  href="<%= url_for(:action=>'make_public', :id=>@item) %>" title="公開する">
 							<i class="fa-solid fa-lock"></i>
+							<%= icon_bag_state_title(@item) %>
 						</a>
 					<% end %>
 				</td>
-				<td>
+				<td style='vertical-align: middle;'>
 					<span class="float-right">
 						<% if @item.page_type==WebPage::TYPE_LINK || @item.page_type==WebPage::TYPE_FIX %>
 							<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDeleteLink_<%=@item.id%>">
