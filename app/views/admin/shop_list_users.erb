@@ -52,7 +52,7 @@
 						<% url = url_for(:action=>"shop_show_user", :id=>user) %>
 						<a href="<%=url%>" class='text-primary'>
 							<%= user.login %>
-							<i class="fa-solid fa-chevron-right"></i>
+							<%= link_to_6_icon %>
 						</a>
 					</td>
 					<td><%= user.email %></td>

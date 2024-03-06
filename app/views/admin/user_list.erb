@@ -38,7 +38,7 @@
 						<% url = url_for(:action=>"user_show", :id=>user) %>
 						<a href="<%=url%>">
 							<%= user.email %>
-							<i class="fa-solid fa-chevron-right"></i>
+							<%= link_to_6_icon %>
 						</a>
 					</td>
 					<td><%= user.email_org %></td>

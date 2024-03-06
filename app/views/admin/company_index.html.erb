@@ -43,7 +43,7 @@
 						<% url = url_for(:action=>"company_show", :id=>@company) %>
 						<a href="<%=url%>" class='text-primary'>
 							<%= model_name(@company) %>
-							<i class="fa-solid fa-chevron-right"></i>
+							<%= link_to_6_icon %>
 						</a>
 						<span class='float-right text-danger'>
 							<%
