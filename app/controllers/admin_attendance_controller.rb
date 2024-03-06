@@ -20,15 +20,12 @@ before_action :authenticate_user!
 
     from_date, until_date = until_date, from_date if until_date < from_date
 
-
     @shop = current_user.shop
     @staff = @shop.staffs.find_by(id: params[:staff_id])
     unless @staff.blank?
       # まずはクリア
-      for d in from_date..until_date
-        cur_marks = @staff.calendar_marks.where(target_date: d)
-        cur_marks.destroy_all unless cur_marks.blank?
-      end
+      cur_marks = @staff.calendar_marks.where('target_date>=? AND target_date <=?', from_date, until_date)
+      cur_marks.destroy_all unless cur_marks.blank?
 
       for d in from_date..until_date
         mark = CalendarMark.new(shop_id: @shop.id, staff_id: @staff.id, target_date: d, mark_type: params[:calendar_mark_type])
