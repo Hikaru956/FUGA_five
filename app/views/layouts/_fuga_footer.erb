@@ -14,7 +14,7 @@
 			]
 			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalUIEdit">
 				<i class="icon-pencil"></i>&nbsp;
-				新インターフェース設定
+				新バージョン…
 			</a>
 			<% if false %>
 				<%= link_to 'Try New I/F', url_for(:controller=>'admin', :action=>'index'), data: {"turbolinks" => false} %>
@@ -27,26 +27,26 @@
 	<%= form_for current_user, url: dashboard_shop_update_user_ui_path(id: current_user.id), method: :patch do |f| -%>
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">新インターフェース設定</h3>
+			<h3 id="myModalLabel">バージョン設定</h3>
 		</div>
 		<div class="modal-body">
 			<div class="control-group">
-				<label class="control-label" for="user[ui_version]">画面構成</label>
+				<label class="control-label" for="user[ui_version]">バージョン選択</label>
 				<div class="controls">
 					<label class="radio inline">
 						<input type="radio" id="user[ui_version]" name="user[ui_version]" value="" <% if current_user.ui_version.blank? %>checked<% end %>>
-						従来画面
+						旧バージョン
 					</label>
 					<label class="radio inline">
 						<input type="radio" id="user[ui_version]" name="user[ui_version]" value="6" <% if !current_user.ui_version.blank? %>checked<% end %>>
-						新画面
+						新バージョン
 					</label>
 				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+			<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">&nbsp;&nbsp;キャンセル</button>
+			<button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
 		</div>
 	<% end %>
 </div>

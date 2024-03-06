@@ -29,7 +29,7 @@
 
 <h4>
 	<span class="float-right">
-		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'shop_show_staff', :id=>@staff) %>" data-turbolinks='false'>
+		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'shop_show_staff', :id=>@staff) %>" data-turbolinks='false'>
 			<%= backward_icon('戻る') %>&nbsp;戻る
 		</a>
 	</span>
@@ -63,8 +63,8 @@
 			</script>
 		</div>
 		<div class="form-actions text-right">
-        	<button type="submit" class="btn btn-small btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
 			<% url_cancel = url_for(:action=>'shop_show_staff', :id=>@staff) %>
-	  		<a class="btn btn-small btn-secondary" href="<%= url_cancel %>" data-turbolinks='false'><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</a>
+	  		<a class="btn btn-sm btn-secondary" href="<%= url_cancel %>" data-turbolinks='false'><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</a>
+        	<button type="submit" class="btn btn-sm btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
       	</div>
 <% end -%>

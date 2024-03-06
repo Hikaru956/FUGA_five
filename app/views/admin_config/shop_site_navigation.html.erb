@@ -25,11 +25,11 @@
 
 <h4>
 	<p class="float-right">
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+		<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon('登録') %>&nbsp;
 			固定リンク登録
 		</button>
-		<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalNewPage">
+		<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewPage">
 			<i class="fa-solid fa-file-lines"></i>&nbsp;
 			固定ページ追加
 		</button>
@@ -56,11 +56,11 @@
 						<%= icon_bag_state(@item) %>
 					</span>
 					<% if @item.is_public %>
-						<a class="btn btn-mini btn-refresh btn-warning"  href="<%= url_for(:action=>'make_private', :id=>@item) %>" title="非公開にする">
+						<a class="btn btn-sm btn-refresh btn-warning"  href="<%= url_for(:action=>'make_private', :id=>@item) %>" title="非公開にする">
 							<i class="fa-solid fa-lock-open"></i>
 						</a>
 					<% else %>					
-						<a class="btn btn-mini btn-refresh btn-info"  href="<%= url_for(:action=>'make_public', :id=>@item) %>" title="公開する">
+						<a class="btn btn-sm btn-refresh btn-info"  href="<%= url_for(:action=>'make_public', :id=>@item) %>" title="公開する">
 							<i class="fa-solid fa-lock"></i>
 						</a>
 					<% end %>
@@ -68,7 +68,7 @@
 				<td>
 					<span class="float-right">
 						<% if @item.page_type==WebPage::TYPE_LINK || @item.page_type==WebPage::TYPE_FIX %>
-							<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteLink_<%=@item.id%>">
+							<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDeleteLink_<%=@item.id%>">
 								<%= trash_icon('削除') %>&nbsp;削除
 							</button>
 							<!-- modalDeleteLink -->
@@ -90,8 +90,8 @@
 												</p>
 											</div>
 											<div class="modal-footer">
-												<button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+												<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+												<button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
 											</div>
 										<% end %>
 									</div>
@@ -101,12 +101,12 @@
 
 						<% if @item.page_type==WebPage::TYPE_FIX %>
 							<% edit_fix_page_url = url_for(:action=>'edit_fix_page', :id=>ContentLeaf.find_by_hash_key(@item.content_key))%>
-							<a class="btn btn-mini btn-success"  href="<%=edit_fix_page_url%>" data-turbolinks='false'>
+							<a class="btn btn-sm btn-success"  href="<%=edit_fix_page_url%>" data-turbolinks='false'>
 								<%= edit_icon('編集') %>&nbsp;
 					  			編集
 							</a>
 						<% else %>
-							<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit_<%=@item.id%>">
+							<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit_<%=@item.id%>">
 								<%= edit_icon('編集') %>&nbsp;
 					  			編集
 							</button>
@@ -160,8 +160,8 @@
 						<% end %>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+						<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+						<button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
 					</div>
 				<% end %>
 			</div>
@@ -185,8 +185,8 @@
 					<%= render :partial=>"form_fixed_link", locals: {f: f, web_page: web_page} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= new_icon('登録') %>&nbsp;登録</button>
                 </div>
 			<% end %>
         </div>
@@ -209,8 +209,8 @@
 					 <%= render :partial=>"form_fixed_page", locals: {f: f, web_page: web_page} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= new_icon('追加') %>&nbsp;追加</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= new_icon('追加') %>&nbsp;追加</button>
                 </div>
 			<% end %>
         </div>
@@ -231,8 +231,8 @@
 			<%= render :partial=>"form_fixed_page", locals: {f: f, web_page: web_page} %>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+			<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">&nbsp;&nbsp;キャンセル</button>
+			<button type="submit" class="btn btn-success btn-sm"><%= new_icon('追加') %>&nbsp;&nbsp;追加</button>
 		</div>
 	<% end %>
 </div>

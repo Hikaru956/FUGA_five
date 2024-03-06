@@ -28,12 +28,12 @@
 
 <h4>
 	<span class="float-right">
-		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
+		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
 		<%= backward_icon('一覧') %>&nbsp;
 			一覧
 		</a>
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
-			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+			<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 				<%= edit_icon('編集')%>&nbsp;
 	  			編集
 			</button>
@@ -66,7 +66,7 @@
 			<td>
 				<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 					<span class="float-right">
-						<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
+						<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
 							<i class="fa-solid fa-pencil"></i>&nbsp;
 				  			ソーシャル設定
 						</button>
@@ -89,7 +89,7 @@
 
 <% if current_user.has_permission?(User::ROLE_MANAGER) %>
 	<div class="well">
-		<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+		<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete">
 			<%= trash_icon('削除確認') %>&nbsp;
 			削除確認
 		</button>
@@ -100,7 +100,7 @@
 
 <h4>
 	<span class="float-right">
-		<a class="btn btn-small btn-success" href="<%= url_for(:action=>'shop_edit_staff', :id=>@staff) %>">
+		<a class="btn btn-sm btn-success" href="<%= url_for(:action=>'shop_edit_staff', :id=>@staff) %>">
 			<i class="fa-solid fa-pencil"></i>&nbsp;編集
 		</a>
 	</span>
@@ -137,7 +137,7 @@
 
 <% if current_user.has_permission?(User::ROLE_MANAGER) %>
 	<p>
-		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
+		<a class="btn btn-info btn-sm" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
 			<i class="fa-solid fa-camera"></i>&nbsp;
 			写真追加
 		</a>
@@ -156,8 +156,8 @@
 					<%= render :partial=>"form_staff_social", locals:{f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -176,8 +176,8 @@
 					<%= render :partial=>"form_staff", locals:{f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -200,81 +200,10 @@
 					</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
         </div>
     </div>
 </div>
-
-<% if false %>
-<!-- modalEditSocial -->
-<div class="modal hide fade form-horizontal", id="modalEditSocial">
-	<%= form_for @staff, url: bs_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">ソーシャル設定</h3>
-		</div>
-		<div class="modal-body">
-			<%= render :partial=>"form_staff_social" %>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-		</div>
-	<% end %>
-</div>
-<!-- modalEdit -->
-<div class="modal hide fade form-horizontal", id="modalEdit">
-	<%= form_for @staff, url: bs_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">スタッフ編集</h3>
-		</div>
-		<div class="modal-body">
-			<%= render :partial=>"form_staff", locals:{f: f} %>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-		</div>
-	<% end %>
-</div>
-<!-- modalEditSocial -->
-<div  class="modal hide fade form-horizontal", id="modalEditPassword">
-	<%= form_for @staff, url: bs_config_shop_update_staff_path(id: @staff), method: :patch do |f| -%>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">パスワード再発行</h3>
-		</div>
-		<div class="modal-body">
-			<%= render :partial=>"form_staff_social" %>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-		</div>
-	<% end %>
-</div>
-<!-- modalDeleteStaff -->
-<div  class="modal hide fade form-horizontal", id="modalDelete">
-	<%= form_for @staff, url: bs_config_shop_delete_staff_path(id: @staff), method: :delete do |f| -%>
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">スタッフ削除</h3>
-		</div>
-		<div class="modal-body">
-			<p>
-			「<%= model_name(@staff) %>」を削除します。<br/>
-			このスタッフに関連する情報も削除されます。<br/>
-			よろしいですか？
-			</p>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;削除</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
-		</div>
-	<% end %>
-</div>
-<% end %>

@@ -402,7 +402,7 @@ Fuga326::Application.routes.draw do
   patch 'admin_config/update_staff_photo', to: 'admin_config#update_staff_photo'
   delete 'admin_config/delete_staff_photo', to:'admin_config#delete_staff_photo'
 
-  post 'admin_config/shop_update_position', to: 'admin_config#shop_update_position'
+  patch 'admin_config/shop_update_position', to: 'admin_config#shop_update_position'
   delete 'admin_config/shop_delete_position', to:'admin_config#shop_delete_position'
 
   patch 'admin_attendance/update_business', to: 'admin_attendance#update_business'

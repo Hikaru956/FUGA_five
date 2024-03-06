@@ -43,7 +43,7 @@
 			<div class="controls">
 				<i class="fa-solid fa-magnifying-glass"></i>
 				<input class="input-large search-query" type="text" id="address">
-				<input class="btn btn-primary" type="button" value="検索" onclick="moveMap();">
+				<input class="btn btn-primary btn-sm" type="button" value="検索" onclick="moveMap();">
 			</div>
 		</div>
 	</fieldset>
@@ -60,18 +60,18 @@
 				<td>
 					<strong><%= model_name(@shop) %></strong>
 					<span class="float-right">
-						<a class="btn btn-middle btn-secondary" href="<%= url_for(:action=>'company_show_shop', :id=>@shop) %>">
+						<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'company_show_shop', :id=>@shop) %>">
 							<%= backward_icon('戻る')%>&nbsp;戻る
 						</a>
 						&nbsp;<span class="divider">|</span>&nbsp;
 						<% if @shop.gps? %>
-							<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDeletePosition">
+							<button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalDeletePosition">
 								<i class="fa-solid fa-eraser"></i>&nbsp;
 								位置をクリア
 							</button>
 						<% end %>
 						&nbsp;<span class="divider">|</span>&nbsp;
-						<button type="submit" class="btn btn-success"><%= submit_icon('設定')%>&nbsp;&nbsp;ピンの位置に設定</button>
+						<button type="submit" class="btn btn-success btn-sm"><%= submit_icon('設定')%>&nbsp;&nbsp;ピンの位置に設定</button>
 					</span>
 				</td>
 			</tr>
@@ -86,52 +86,46 @@
 <script>
   var map;
   var shop_marker;
-	<% if @shop.gps? %>
-	    var latlng = { lat: <%= @shop.lat %>, lng: <%= @shop.lng %> };
-	<% else %>
-	    var latlng = { lat: 35.681382, lng: 139.766084 };
-	<% end %>
-	function initMap() {
-		map = new google.maps.Map(document.getElementById('map'), {
-			center: latlng,
-			zoom: 16
-		});
-		shop_marker = new google.maps.Marker({
-			position: latlng,
-			map: map
-		});
-		google.maps.event.addListener(map, 'click', function(event) {
-				if (shop_marker!=null) { shop_marker.setMap(null); }
-				shop_marker = new google.maps.Marker({
-					position: event.latLng,
-					map: map
-				});
-				document.getElementById('lat').value = event.latLng.lat();	
-				document.getElementById('lng').value = event.latLng.lng();	
-		});
-	}
-	function moveMap() {
-			var geocoder = new google.maps.Geocoder();
-			geocoder.geocode({
-				'address': document.getElementById('address').value
-			}, function(result, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					map.panTo(result[0].geometry.location);
-					/*
-					var marker = new google.maps.Marker({
-						position: result[0].geometry.location,
-						map: map
-					});
-					*/
-				} else {
-					alert("見つかりませんでした。");
-				}
-			});
-		}
-	window.onload = function () {
-		initMap();
-		}
+  <% if @shop.gps? %>
+    var latlng = { lat: <%= @shop.lat %>, lng: <%= @shop.lng %> };
+  <% else %>
+    var latlng = { lat: 35.681382, lng: 139.766084 };
+  <% end %>
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: latlng,
+      zoom: 16
+    });
+    shop_marker = new google.maps.Marker({
+      position: latlng,
+      map: map
+    });
+    map.addListener('click', function(event) {
+      shop_marker.setPosition(event.latLng);
+      document.getElementById('lat').value = event.latLng.lat();  
+      document.getElementById('lng').value = event.latLng.lng();  
+    });
+  }
+  function moveMap() {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({
+      'address': document.getElementById('address').value
+    }, function(result, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.panTo(result[0].geometry.location);
+        shop_marker.setPosition(result[0].geometry.location);
+        document.getElementById('lat').value = result[0].geometry.location.lat();  
+        document.getElementById('lng').value = result[0].geometry.location.lng();  
+      } else {
+        alert("見つかりませんでした。");
+      }
+    });
+  }
+  window.onload = function () {
+    initMap();
+  }
 </script>
+
 
 <!-- modalDeletePosition -->
 <%= form_tag url_for(:action=>"shop_delete_position"), {:class=>"modal hide fade form-horizontal", :id=>"modalDeletePosition", method: :delete} do -%>
@@ -147,8 +141,8 @@
 		</p>
 	</div>
 	<div class="modal-footer">
-    	<button type="submit" class="btn btn-danger"><i class="icon-ok"></i>&nbsp;&nbsp;実行</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+		<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+    	<button type="submit" class="btn btn-danger btn-sm">&nbsp;&nbsp;実行</button>
 	</div>
 <% end %>
 

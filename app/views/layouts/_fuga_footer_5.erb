@@ -12,8 +12,8 @@
 				<%= ('. '+model_name(current_user.company)) %>
 			<% end %>
 			]
-			<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalUIEdit">
-				<%= edit_icon('編集') %>&nbsp;ユーザーインターフェース設定
+			<button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modalUIEdit">
+				<%= edit_icon('編集') %>&nbsp;旧バージョン…
 			</button>
 			<% if false %>
 				<%= link_to 'Back To Original I/F', root_path, data: {"turbolinks" => false} %>
@@ -27,27 +27,27 @@
         <div class="modal-content">
 			<%= form_for current_user, url: admin_shop_update_user_ui_path(id: current_user.id), method: :patch do |f| -%>
                 <div class="modal-header">
-                    <h5 class="modal-title">ユーザーインターフェース設定</h5>
+                    <h5 class="modal-title">バージョン設定</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 					<div class="form-group row">
 						<div class="col-sm-4">
-							<%= f.label :ui_version, '画面構成', {class: 'form-label'} %>
+							<%= f.label :ui_version, 'バージョン選択', {class: 'form-label'} %>
 						</div>
 						<div class="col-sm-8 btn-group btn-group-toggle" data-toggle='buttons' role="group">
 							<input type="radio" class="btn-check" name="user[ui_version]" id="btnradio30" value='' checked>
-							<label class="btn btn-outline-primary" for="btnradio30">従来画面</label>
+							<label class="btn btn-outline-primary" for="btnradio30">旧バージョン</label>
 
 							<input type="radio" class="btn-check" name="user[ui_version]" id="btnradio31" value='6'>
-							<label class="btn btn-outline-primary" for="btnradio31">新画面</label>
+							<label class="btn btn-outline-primary" for="btnradio31">新バージョン</label>
 
 						</div>
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+					<button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>

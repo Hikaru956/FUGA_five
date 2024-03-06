@@ -26,17 +26,17 @@
 <h4>
 	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
 		<p class="float-right">
-			<a class="btn btn-small btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
+			<a class="btn btn-sm btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
 				<%= share_icon('表示') %>
 				店舗サイト表示
 			</a>
 			<% if @shop.default_root_child.page_type==WebPage::TYPE_FIX %>
-				<button type="button" class="btn btn-secondary btn-small" data-bs-toggle="modal" data-bs-target="#ErrorTopPageAsFixPage">
+				<button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ErrorTopPageAsFixPage">
 					<%= error_icon %>
 					デザイン編集不可
 				</button>
 			<% else %>
-				<a class="btn btn-small btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
+				<a class="btn btn-sm btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
 					<%= update_icon('編集') %>
 					デザイン編集
 				</a>
@@ -62,7 +62,7 @@
 				</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+				<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">閉じる</button>
 			</div>
         </div>
     </div>
@@ -76,7 +76,7 @@
 			<th width="25%">サイト・ステータス</th>
 			<td width="75%">
 				<p class="float-right">
-					<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+					<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 						<%= edit_icon('設定編集') %>&nbsp;設定編集
 					</button>
 				</p>
@@ -150,7 +150,7 @@
 			<th width="25%">ソーシャル</th>
 			<td width="75%">
 				<span class="float-right">
-					<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
+					<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
 						<%= setting_icon('設定') %>&nbsp;ソーシャル設定
 					</button>
 				</span>
@@ -176,7 +176,7 @@
 						<span class='text-danger'><%= info_icon('タグ設定') %>&nbsp;<%= tag_title %>設定がありません。</span>
 					<% end %>
 					<span class="float-right">
-						<a type="button" class="btn btn-info" href="<%= tags_path%>">
+						<a type="button" class="btn btn-info btn-sm" href="<%= tags_path%>">
 							<%= setting_icon('設定') %>&nbsp;タグ設定
 						</a>
 					</span>
@@ -200,8 +200,8 @@
 					<%= render :partial=>"form_shop_wsite", locals:{f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -220,8 +220,8 @@
 					<%= render :partial=>"form_shop_social", locals:{f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>

@@ -1,7 +1,7 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<div class="pull-right">
-		<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit">
+	<div class="float-right">
+		<a class="btn btn-sm btn-success"  data-toggle="modal" href="#modalEdit">
 			<i class="icon-pencil"></i>&nbsp;
 			編集
 		</a>
@@ -32,7 +32,7 @@
 		<tr>
 			<td>パスワード</td>
 			<td>
-				<a class="btn btn-small btn-warning"  data-toggle="modal" href="#modalEditPassword">
+				<a class="btn btn-sm btn-warning"  data-toggle="modal" href="#modalEditPassword">
 				<i class="icon-refresh"></i>&nbsp;
 					パスワード再発行
 				</a>
@@ -52,8 +52,8 @@
 		<%= render :partial=>"form_account" %>
 	</div>
 	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">&nbsp;&nbsp;キャンセル</button>
+    	<button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
 	</div>
 <% end %>
 
@@ -67,7 +67,7 @@
 		<%= render :partial=>"form_user_password" %>
 	</div>
 	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+		<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">&nbsp;&nbsp;キャンセル</button>
+    	<button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
 	</div>
 <% end %>
