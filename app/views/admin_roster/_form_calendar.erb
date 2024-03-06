@@ -48,6 +48,7 @@
 					<% 
 						@attendances = staff.attendances.where("attendances.attend_on =?", @probe_date).order(start_hour: :asc)
 					%>
+					<%= attendance_staff_icon('現在の設定') %>
 					<small><strong>
 						[
 						<% if @attendances.blank? %>

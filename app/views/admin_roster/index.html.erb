@@ -1,7 +1,7 @@
 <header class="subhead" id="overview">
 	<span class="float-right">
 	  	<% config_url = url_for(:action=>"list")%>
-	    <a href="<%= config_url %>" class="btn  btn-sm btn-warning"><i class="fas fa-cogs"></i>&nbsp;シフト項目編集</a>
+	    <a href="<%= config_url %>" class="btn btn-sm btn-primary"><i class="fas fa-cogs"></i>&nbsp;シフト項目編集</a>
 	</span>
 	<h3>勤務表</h3>
 </header>
@@ -48,11 +48,15 @@
 		<legend>シフト設定</legend>
 		<%= render :partial=>'form_calendar' %>
 
+		<div class="alert alert-info">
+			<%= info_icon %>&nbsp;上記設定で勤怠情報が自動的に更新されます。
+		</div>
+
 		<div class="well">
-			<button type="submit" class="btn btn-sm btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
 			<%= link_to("<i class='fas fa-arrow-left'></i>&nbsp;戻る".html_safe,
 				{:controller=>"admin_attendance",:action=>"index"}, 
 				:class=>"btn btn-sm btn-secondary") %>
+			<button type="submit" class="btn btn-sm btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
 		</div>
 	<% end %>
 </div>

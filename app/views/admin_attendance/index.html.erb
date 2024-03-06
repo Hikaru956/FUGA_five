@@ -9,7 +9,7 @@
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 			<span class="float-right">
 				<% roster_url = url_for(:controller=>"admin_roster", :action=>"index")%>
-				<a href="<%= roster_url %>" class="btn btn-secondary"><i class="fas fa-tasks"></i>&nbsp;シフト設定</a>
+				<a href="<%= roster_url %>" class="btn btn-primary"><i class="fas fa-tasks"></i>&nbsp;シフト設定</a>
 			</span>	
 		<% end %>
 		<%= @target_date.year %>&nbsp;年
