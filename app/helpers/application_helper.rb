@@ -491,4 +491,7 @@ EOF
   def tags_title; 'タグ'; end
   def tags_icon(title=tags_title, ext_class='');  sprintf("<i class='fas fa-tags fa-fw %s' title='%s'></i>", ext_class, title).html_safe; end
 
+
+  def link_to_6_icon(title='', ext_class='');  sprintf("<i class='fa-solid fa-circle-chevron-right fa-fw %s' title='%s'></i>", ext_class, title).html_safe; end
+
 end
