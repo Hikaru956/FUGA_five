@@ -21,7 +21,7 @@
 
 <h3>
 	<p class="pull-right">
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+		<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon('登録')%>&nbsp;
 			Widget 登録
 		</button>
@@ -48,10 +48,10 @@
 				<td><%= widget_type_string(widget.widget_type) %></td>
 				<td>
 					<span class="float-right">
-						<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+						<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
 							<%= edit_icon('編集') %>&nbsp;編集
 						</button>
-						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+						<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
 							<%= trash_icon('削除') %>&nbsp;削除
 						</button>
 					</span> 
@@ -83,8 +83,8 @@
 					<%= render :partial=>"form_visual_widget", locals:{f: f, item: @item} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
                 </div>
 			<% end %>
         </div>
@@ -108,8 +108,8 @@
 						<%= render :partial=>"form_visual_widget", locals:{f: f, item: @item} %>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+						<button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+						<button type="submit" class="btn btn-sm btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
 					</div>
 				<% end %>
 			</div>
@@ -131,8 +131,8 @@
 						</p>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+						<button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+						<button type="submit" class="btn btn-sm btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
 					</div>
 				<% end %>
 			</div>

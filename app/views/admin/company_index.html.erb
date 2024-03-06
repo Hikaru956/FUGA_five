@@ -8,11 +8,11 @@
 <header class="subhead" id="overview">
 	<% if current_user.role==User::ROLE_SUPER %>
 		<p class="float-right">
-			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+			<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 				<%= new_icon %>&nbsp;登録
 			</button>
 			|
-		    <% seach_btn_class = (@search_word.blank?)? 'btn xbtn-sm btn-info': 'btn xbtn-sm btn-warning' %>
+		    <% seach_btn_class = (@search_word.blank?)? 'btn btn-sm btn-info': 'btn btn-sm btn-warning' %>
 			<button type="button" class="<%= seach_btn_class %>" data-bs-toggle="modal" data-bs-target="#modalSearch">
 				<%= search_icon %>&nbsp;検索
 			</button>
@@ -113,8 +113,8 @@
 					<%= render partial: "form_company", locals: {f: f, item: item } %>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-success"><%= new_icon %>&nbsp;登録</button>
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					<button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					<button type="submit" class="btn btn-sm btn-success"><%= new_icon %>&nbsp;登録</button>
 				</div>
 			<% end %>
 		</div>
@@ -134,8 +134,8 @@
 					<%= render partial: "form_company", locals: {f: f, item: item } %>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-success"><%= new_icon('新規登録') %>&nbsp;登録</button>
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					<button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					<button type="submit" class="btn btn-sm btn-success"><%= new_icon('新規登録') %>&nbsp;登録</button>
 				</div>
 			<% end %>
 		</div>
@@ -158,8 +158,8 @@
 			            <%= link_to reset_search_icon+' リセット', admin_index_path, class: 'btn btn-outline-dark' %>
 						|
 					<% end %>
-					<button type="submit" class="btn btn-info"><%= search_icon %>&nbsp;検索</button>
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					<button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+					<button type="submit" class="btn btn-sm btn-info"><%= search_icon %>&nbsp;検索</button>
 				</div>
 			<% end %>
 		</div>

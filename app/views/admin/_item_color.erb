@@ -24,7 +24,7 @@
 		<%= temp_local.position %>
 		<%= (temp_local.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"color_lower",	:id=>temp_local) %>
 		<span class='float-right'>
-			<a href="<%= url_for(:action=>'color_show', :id=>temp_local) %>" class="btn btn-primary"><%= share_icon('表示')%>&nbsp;表示</a>
+			<a href="<%= url_for(:action=>'color_show', :id=>temp_local) %>" class="btn btn-sm btn-primary"><%= share_icon('表示')%>&nbsp;表示</a>
 		</span>
 	</div>
 </div>

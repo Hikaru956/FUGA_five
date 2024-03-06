@@ -26,7 +26,7 @@
 <h4>
 	<% if current_user.role==User::ROLE_SUPER %>
 		<p class="float-right">
-			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNewShop">
+			<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNewShop">
 				<%= new_icon %>&nbsp;店舗登録
 			</button>
 		</p>
@@ -42,7 +42,7 @@
 		<thead>
 			<tr class="info">
 				<th class='table-dark span6'>
-					<span class="pull-right"><span class="badge badge-success"><%= @item.shops.size %></span></span>
+					<span class="float-right"><span class="badge badge-success"><%= @item.shops.size %></span></span>
 					店舗名
 				</th>
 				<th class='table-dark span2'>ディスク容量</th>
@@ -92,7 +92,7 @@
 						ページ
 					</td>
 					<td style="text-align:center">
-						<a class="btn btn-mini btn-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>shop.wsite_hash_key) %>" target="_blank">
+						<a class="btn btn-sm btn-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>shop.wsite_hash_key) %>" target="_blank">
 							<%= share_icon('サイト表示')%>
 							サイト表示
 						</a>
@@ -116,8 +116,8 @@
 					<%= render partial: "form_shop", locals: {f: f, shop: @shop} %>
 				</div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
                 </div>
 			<% end %>
         </div>

@@ -7,7 +7,7 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
 	<p class="float-right">
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+		<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon %>&nbsp;カラー登録
 		</button>
 	</p>
@@ -46,8 +46,8 @@
 				<%= render :partial=>"form_color", locals: {f: f, item: item } %>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-success"><%= new_icon %>&nbsp;登録</button>
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+				<button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+				<button type="submit" class="btn btn-sm btn-success"><%= new_icon %>&nbsp;登録</button>
 			</div>
 		<% end %>
 		</div>

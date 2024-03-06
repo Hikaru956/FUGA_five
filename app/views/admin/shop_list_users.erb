@@ -25,7 +25,7 @@
 
 <h4>
 	<p class="float-right">
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+		<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon('登録') %>&nbsp;ユーザー登録
 		</button>
 	</p>
@@ -76,8 +76,8 @@
 					<%= render :partial=>"form_user_password", locals: {f: f, item: @user}  %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= new_icon('登録') %>&nbsp;登録</button>
                 </div>
 			<% end %>
         </div>

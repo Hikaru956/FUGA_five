@@ -24,11 +24,11 @@
 
 <h4>
 	<span class="float-right">
-		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
+		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
 		<i class="fa-solid fa-arrow-left"></i>&nbsp;
 			一覧
 		</a>
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+		<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 			<%= edit_icon('編集') %>&nbsp;編集
 		</button>
 	</span>
@@ -57,7 +57,7 @@
 			<th style="vertical-align: middle;">ソーシャル</th>
 			<td style="vertical-align: top;">
 				<span class="float-right">
-					<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
+					<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
 						<%= new_icon('設定')%>&nbsp;
 						ソーシャル設定
 					</button>
@@ -78,7 +78,7 @@
 </table>
 
 <div class="well">
-	<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+	<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete">
 			<%= trash_icon('削除確認') %>&nbsp;削除確認
 	</button>
 </div>
@@ -96,8 +96,8 @@
 					<%= render :partial=>"form_staff", locals:{f: f, staff: @staff} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -116,8 +116,8 @@
 					<%= render :partial=>"form_staff_social", locals:{f: f, staff: @staff} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -140,8 +140,8 @@
 					</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
         </div>

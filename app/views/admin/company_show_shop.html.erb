@@ -35,10 +35,10 @@
 	<div>
 		<h4>
 			<span class="float-right">
-				<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
+				<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
 				<%= backward_icon('戻る')%>&nbsp;戻る
 				</a>
-				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+				<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 					<%= edit_icon('編集') %>&nbsp;編集
 				</button>
 			</span>
@@ -57,13 +57,13 @@
 					<td>
 						<span class='float-right'>
 							  <div class="btn-group">
-									<a class="btn btn-mini btn-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
+									<a class="btn btn-sm btn-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
 										<%= share_icon('サイト表示')%>
 										サイト表示
 									</a>
-									<%= link_to raw("<i class='fa-solid fa-right-to-bracket'></i>&nbsp;&nbsp;店舗管理画面"), {:action=>'delegating', :id=>@item}, :method => :post, :class=>"btn btn-mini btn-primary" %>
+									<%= link_to raw("<i class='fa-solid fa-right-to-bracket'></i>&nbsp;&nbsp;店舗管理画面"), {:action=>'delegating', :id=>@item}, :method => :post, :class=>"btn btn-sm btn-primary" %>
 									<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
-									<a href="<%=url_business%>" class="btn btn-warning btn-mini">
+									<a href="<%=url_business%>" class="btn btn-warning btn-sm">
 										<%= site_status_icon(@shop.wsite_run_mode) %>
 										利用状況表示
 									</a>
@@ -131,7 +131,7 @@
 				<tr class="info">
 					<th colspan="2">
 						<span class="float-right">
-							<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEditOption">
+							<a class="btn btn-sm btn-success"  data-toggle="modal" href="#modalEditOption">
 								<%= setting_icon('設定') %>&nbsp;
 									設定
 							</a>
@@ -173,7 +173,7 @@
 
 		<% if current_user.has_permission?(User::ROLE_SUPER) || @item.wsite_run_mode<Shop::WSITE_PUBLISHED %>
 		<p class="text-right">
-			<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+			<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete">
 				<%= trash_icon('削除確認')%>&nbsp;
 				削除確認
 			</button>
@@ -186,7 +186,7 @@
 		<h4>
 			<span class="float-right">
 				<% url_edit_position = url_for(:action=>"shop_edit_position", :id=>@item) %>							
-		  		<a class="btn btn-mini btn-info" href="<%= url_edit_position %>">
+		  		<a class="btn btn-sm btn-info" href="<%= url_edit_position %>">
 					<i class="fa-solid fa-gears"></i>&nbsp;
 		  			設定
 				</a>
@@ -216,8 +216,8 @@
 					<%= render :partial=>"form_shop", locals: {f: f, shop: @shop} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -239,8 +239,8 @@
 					<%= render :partial=>"form_shop_option", locals:{f: f, shop: @shop} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= setting_icon('設定') %>&nbsp;設定</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= setting_icon('設定') %>&nbsp;設定</button>
                 </div>
 			<% end %>
         </div>
@@ -264,8 +264,8 @@
 					</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
         </div>

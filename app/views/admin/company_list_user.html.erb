@@ -25,7 +25,7 @@
 
 <h4>
 	<p class="float-right">
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+		<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon %>&nbsp;オーナー・ユーザー登録
 		</button>
 	</p>
@@ -38,7 +38,7 @@
 		<thead>
 			<tr class="info">
 				<th class="table-dark span4">表示名</th>
-				<th class="table-dark span4"><span class="pull-right"><span class="badge badge-success"><%= @users.size %></span></span>ログイン</th>
+				<th class="table-dark span4"><span class="float-right"><span class="badge badge-success"><%= @users.size %></span></span>ログイン</th>
 				<th class="table-dark span4">Email</th>
 			</tr>
 		</thead>
@@ -48,7 +48,7 @@
 					<td><%= model_name(user) %></td>
 					<td>
 						<% if user.banned? %>
-							<span class="pull-right"><i class="fa-solid fa-ban"></i></span>
+							<span class="float-right"><i class="fa-solid fa-ban"></i></span>
 						<% end %>
 						<% url = url_for(:action=>"company_show_user", :id=>user) %>
 						<a href="<%=url%>" class='text-primary'>
@@ -81,8 +81,8 @@
 					<%= render partial: "form_user_password", locals: {f: f, item: @user} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
                 </div>
 			<% end %>
         </div>

@@ -23,7 +23,7 @@
 
 <h4>
 	<span class="float-right">
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+		<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 			<%= edit_icon('編集') %>&nbsp;編集
 		</button>
 	</span>
@@ -37,13 +37,13 @@
 			<td width='75%'>
 				<span class='float-right'>
 					  <div class="btn-group">
-							<a class="btn btn-mini btn-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
+							<a class="btn btn-sm btn-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
 								<%= share_icon('サイト表示')%>
 								サイト表示
 							</a>
-							<%= link_to raw("<i class='fa-solid fa-right-to-bracket'></i>&nbsp;&nbsp;店舗管理画面"), {:action=>'delegating', :id=>@shop}, :method => :post, :class=>"btn btn-mini btn-primary" %>
+							<%= link_to raw("<i class='fa-solid fa-right-to-bracket'></i>&nbsp;&nbsp;店舗管理画面"), {:action=>'delegating', :id=>@shop}, :method => :post, :class=>"btn btn-sm btn-primary" %>
 							<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
-							<a href="<%=url_business%>" class="btn btn-warning btn-mini">
+							<a href="<%=url_business%>" class="btn btn-warning btn-sm">
 								<%= site_status_icon(@shop.wsite_run_mode) %>
 								利用状況表示
 							</a>
@@ -95,7 +95,7 @@
 			<th width='25%'><i class="icon-google-plus"></i>&nbsp;店舗カレンダー</th>
 			<td width='75%'>
 				<span class="float-right">
-					<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalGCalendar">
+					<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalGCalendar">
 						<%= new_icon('設定')%>&nbsp;
 			  			設定
 					</button>
@@ -107,7 +107,7 @@
 			<th><i class="icon-google-plus"></i>&nbsp;店舗カレンダー埋込コード</th>
 			<td>
 				<span class="float-right">
-					<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalGCalendarCode">
+					<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalGCalendarCode">
 						<%= new_icon('設定')%>&nbsp;
 			  			設定
 					</button>
@@ -119,7 +119,7 @@
 			<th><i class="icon-google-plus"></i>&nbsp;アクセス解析コード</th>
 			<td>
 				<span class="float-right">
-					<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalGAnalytics">
+					<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalGAnalytics">
 						<%= new_icon('設定')%>&nbsp;
 			  			設定
 					</button>
@@ -131,7 +131,7 @@
 			<th><i class="icon-globe"></i>&nbsp;カスタム・メタタグ</th>
 			<td>
 				<span class="float-right">
-					<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalMetaTags">
+					<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalMetaTags">
 						<%= new_icon('設定')%>&nbsp;
 			  			設定
 					</button>
@@ -148,7 +148,7 @@
 			<th width='25%'>ブログコメント機能</th>
 			<td width='75%'>
 				<span class="float-right">
-					<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDisqusMode">
+					<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalDisqusMode">
 						<%= new_icon('設定')%>&nbsp;
 			  			設定
 					</button>
@@ -161,7 +161,7 @@
 				<th width='25%'>DISQUS CODE</th>
 				<td width='75%'>
 					<span class="float-right">
-						<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDisqusCode">
+						<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalDisqusCode">
 							<%= new_icon('設定')%>&nbsp;
 							設定
 						</button>
@@ -205,8 +205,8 @@
 				</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= setting_icon('設定') %>&nbsp;設定</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= setting_icon('設定') %>&nbsp;設定</button>
                 </div>
 			<% end %>
         </div>
@@ -230,8 +230,8 @@
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -268,14 +268,14 @@
 				<% if @icon.blank? %>
 					<small class='text-danger'>画像のファイル名は'favicon.png'。画像の種類は「PNG形式」。</small>
 					<span class="float-right">
-						<a class="btn btn-small btn-success" href="<%= url_for(:action=>'shop_new_favicon', :id=>@shop) %>">
+						<a class="btn btn-sm btn-success" href="<%= url_for(:action=>'shop_new_favicon', :id=>@shop) %>">
 							<%= share_icon('設定')%>&nbsp;
 				  			設定
 						</a>
 					</span>
 				<% else %>
 					<span class="float-right">
-						<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDeleteFavicon">
+						<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalDeleteFavicon">
 							<i class="fa-solid fa-eraser"></i>&nbsp;
 				  			クリア
 						</button>
@@ -298,14 +298,14 @@
 					画像の種類は「PNG形式」。	
 					</small>
 					<span class="float-right">
-						<a class="btn btn-small btn-success" href="<%= url_for(:action=>'shop_new_apple_touch_icon', :id=>@shop) %>">
+						<a class="btn btn-sm btn-success" href="<%= url_for(:action=>'shop_new_apple_touch_icon', :id=>@shop) %>">
 							<%= share_icon('設定')%>&nbsp;
 				  			設定
 						</a>
 					</span>
 				<% else %>
 					<span class="float-right">
-						<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDeleteAppleTouchIcon">
+						<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalDeleteAppleTouchIcon">
 							<i class="fa-solid fa-eraser"></i>&nbsp;
 				  			クリア
 						</button>
@@ -318,7 +318,7 @@
 			<th style="vertical-align: middle;">ソーシャル</th>
 			<td style="vertical-align: top;">
 				<span class="float-right">
-					<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
+					<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
 						<%= new_icon('設定')%>&nbsp;
 						ソーシャル設定
 					</button>
@@ -350,8 +350,8 @@
                     <%= render partial: "form_shop_wsite", locals: {f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -375,8 +375,8 @@
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -400,8 +400,8 @@
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -425,8 +425,8 @@
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -450,8 +450,8 @@
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -470,8 +470,8 @@
                     <%= render :partial=>"form_shop_social", locals: {f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -493,8 +493,8 @@
 					</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
         </div>
@@ -516,8 +516,8 @@
 					</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
         </div>

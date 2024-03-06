@@ -24,11 +24,11 @@
 
 <h4>
 	<span class="float-right">
-		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'shop_list_users', :id=>@user.shop) %>">
+		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'shop_list_users', :id=>@user.shop) %>">
 		<i class="fa-solid fa-arrow-left"></i>&nbsp;
 			一覧
 		</a>
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+		<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 			<%= edit_icon('編集') %>&nbsp;編集
 		</button>
 	</span>
@@ -59,7 +59,7 @@
 		<tr>
 			<th>パスワード</th>
 			<td>
-				<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditPassword">
+				<button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditPassword">
 						<%= update_icon('編集') %>&nbsp;パスワード再発行
 				</button>
 			</td>
@@ -68,7 +68,7 @@
 </table>
 
 <div class="well">
-	<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+	<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete">
 			<%= trash_icon('削除確認') %>&nbsp;削除確認
 	</button>
 </div>
@@ -86,8 +86,8 @@
 					<%= render :partial=>"form_user", locals:{f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -105,8 +105,8 @@
 					<%= render :partial=>"form_user_password", locals:{f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -127,8 +127,8 @@
 					</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
         </div>

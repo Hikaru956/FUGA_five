@@ -8,7 +8,7 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
 	<p class='float-right'%>
-		<a class="btn btn-small btn-secondary" href="<%= url_for(:action=>'color_list') %>">
+		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'color_list') %>">
 		<%= backward_icon('戻る')%>&nbsp;
 			戻る
 		</a>
@@ -41,7 +41,7 @@
 			<tr>
 				<th class="span3">
 					運用サイト
-					<span class="pull-right">
+					<span class="float-right">
 						<% unless @color.wsite_color_deploys.blank? %>
 							<span class="label label-success">運用中 : <%= @color.wsite_color_deploys.size %></span>
 						<% end %>
@@ -65,11 +65,11 @@
 </table>
 
 <p class='text-right'>
-	<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+	<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
 		<%= trash_icon('削除確認') %>&nbsp;削除確認
 	</button>
 	|
-	<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+	<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
 		<%= edit_icon('編集') %>&nbsp;編集
 	</button>
 </p>
@@ -83,7 +83,7 @@
 		</ul>
 	<% else %>
 		<p>
-			<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_color_photo', :id=>@color) %>">
+			<a class="btn btn-info btn-sm" href="<%= url_for(:action=>'new_color_photo', :id=>@color) %>">
 				<i class="fa-solid fa-camera"></i>&nbsp;
 				写真追加
 			</a>
@@ -103,8 +103,8 @@
 					<%= render :partial=>"form_color", locals: {f: f, item: @color } %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
            <% end %>
         </div>
@@ -127,8 +127,8 @@
 					</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
             <% end %>
         </div>
