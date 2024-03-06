@@ -13,10 +13,10 @@
 
 	<div class="control-group">
 		<div class="controls">
-			<button type="submit" class="btn btn-success"><i class="icon-plus"></i>&nbsp;登録</button>
 			<%= link_to_remote(
 				'<i class="icon-remove"></i>&nbsp;キャンセル', 
-				{ :url => {:action=>'clear_sandbox'}}, :class=>"btn") %>
+				{ :url => {:action=>'clear_sandbox'}}, :class=>"btn btn-secondary btn-sm") %>
+			<button type="submit" class="btn btn-success btn-sm"><i class="icon-plus"></i>&nbsp;登録</button>
 		</div>
 	</div>
 <% end %>

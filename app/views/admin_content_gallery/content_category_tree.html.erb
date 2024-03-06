@@ -15,9 +15,9 @@
 
 <div>
 	<span class='float-right'>
-		<a class="btn btn-small btn-secondary" href="<%=url_for(:action=>"content_category", :id=>@parent_category)%>">
+		<a class="btn btn-sm btn-secondary" href="<%=url_for(:action=>"content_category", :id=>@parent_category)%>">
 		<%= backward_icon('戻る') %>&nbsp;戻る</a>
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+		<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon('登録') %>&nbsp;新規登録
 		</button>
 	</span>
@@ -51,8 +51,8 @@
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-success"><%= new_icon('登録') %>&nbsp;登録</button>
                 </div>
 			<% end %>
         </div>
@@ -109,7 +109,7 @@
 						<%= e_cat.content_leafs.size %>
 					</td>
 					<td style=" vertical-align: middle; text-align:center">
-						<button type="button" class="btn btn-danger btn-mini" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=e_cat.id%>">
+						<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=e_cat.id%>">
 							<%= edit_icon('復活')%>&nbsp;復活
 						</button>
 					</td>
@@ -135,8 +135,8 @@
 						</p>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger"><%= update_icon('復活') %>&nbsp;復活</button>
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+						<button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+						<button type="submit" class="btn btn-sm btn-danger"><%= update_icon('復活') %>&nbsp;復活</button>
 					</div>
 				<% end %>
 			</div>

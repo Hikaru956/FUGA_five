@@ -11,16 +11,16 @@
 	<div class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"content_category", :id=>@item.content_category, :page=>@page) %>
-			<a class="btn btn-small btn-secondary" href="<%=url_back%>">
+			<a class="btn btn-sm btn-secondary" href="<%=url_back%>">
 				<%= backward_icon('戻る') %>&nbsp;
 				戻る
 			</a>
 			<% url_new = url_for(:action=>"edit_leaf", :id=>@item) %>
-			<a class="btn btn-success btn-small" href="<%=url_new%>">
+			<a class="btn btn-primary btn-sm" href="<%=url_new%>">
 				<%= edit_icon('編集')%>&nbsp;
 				編集
 			</a>
-			<button type="button" class="btn btn-danger btn-small" data-bs-toggle="modal" data-bs-target="#modal_delete">
+			<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete">
 				<%= trash_icon('削除')%>&nbsp;
 				削除確認
 			</button>
@@ -53,7 +53,7 @@
 <div class="row-fluid">
 	<h4>
 		<p class="float-right">
-			<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
+			<a class="btn btn-info btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
 				<i class="fa-solid fa-camera"></i>&nbsp;
 				写真追加
 			</a>
@@ -83,7 +83,7 @@
 			</div>
 	<% end %>
 	<p class="float-right">
-		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
+		<a class="btn btn-info btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
 			<i class="fa-solid fa-camera"></i>&nbsp;
 			写真追加
 		</a>
@@ -103,8 +103,8 @@
 					<p>記事を削除します。よろしいですか？</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%=  trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-danger"><%=  trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
         </div>

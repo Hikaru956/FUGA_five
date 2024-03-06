@@ -29,18 +29,18 @@
 		<%= temp_local.position %>
 		<%= (temp_local.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"bag_category_lower",	:id=>temp_local) %>
 		<span class='float-right'>
-			<a href="<%= url_for(:action=>'content_category', :id=>temp_local) %>" class="btn btn-primary"><%= share_icon('表示')%>&nbsp;表示</a>
+			<a href="<%= url_for(:action=>'content_category', :id=>temp_local) %>" class="btn btn-sm btn-outline-primary"><%= share_icon('表示')%>&nbsp;表示</a>
 		</span>
 		<div class="caption">
 			<h4>
 				<%= bag_state_icons(@item) %>
 				<%= truncate(model_name(@item), :length=>50) %>
 			</h4>
-				<button type="button" class="btn btn-info btn-mini" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=@item.id%>">
+				<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=@item.id%>">
 					<%= edit_icon('編集')%>
 				</button>
 				<% unless @item.is_public %>
-				<button type="button" class="btn btn-danger btn-mini" data-bs-toggle="modal" data-bs-target="#modal_delete_<%=@item.id%>">
+				<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete_<%=@item.id%>">
 					<%= trash_icon('削除')%>
 				</button>
 				<% end %>
@@ -89,8 +89,8 @@
 					 <%= render :partial=>"form_bag", locals:{f: f}%>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -109,8 +109,8 @@
 					 <p>ストリームを削除します。ストリーム内のすべてのコンテンツも削除されます。よろしいですか？</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
         </div>

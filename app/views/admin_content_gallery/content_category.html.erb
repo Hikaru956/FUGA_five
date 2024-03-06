@@ -10,18 +10,18 @@
 	<div class="float-right">
 		<% @bag_roots = [@parent_category.my_bag_root_category] %>
 		<% unless @bag_roots.blank? %>
-			<button type="button" class="btn btn-primary btn-small" data-bs-toggle="modal" data-bs-target="#modal_category_select">
+			<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_category_select">
 				<i class="fa-solid fa-folder-open"></i>
 			</button>
 		<%end%>
 		<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
-		<a class="btn btn-success btn-small" href="<%=url_new%>" data-turbolinks='false'>
+		<a class="btn btn-success btn-sm" href="<%=url_new%>" data-turbolinks='false'>
 			<%= new_icon('登録')%>&nbsp;
 			項目登録
 		</a>
 		<% if @parent_category.category_type==ContentCategory::TYPE_BAG_ROOT %>
 			<% url_edit = url_for(:action=>"content_category_tree", :id=>@parent_category) %>
-			<a class="btn btn-warning btn-small" href="<%=url_edit%>">
+			<a class="btn btn-warning btn-sm" href="<%=url_edit%>">
 				<%= setting_icon('カテゴリー')%>&nbsp;
 				カテゴリー
 			</a>
@@ -108,8 +108,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success"><i class="fa-solid fa-share-from-square"></i>&nbsp;移動</button>
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+						<button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+						<button type="submit" class="btn btn-sm btn-success"><i class="fa-solid fa-share-from-square"></i>&nbsp;移動</button>
 					</div>
 				<% end %>
 			</div>

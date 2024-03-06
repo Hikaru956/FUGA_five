@@ -25,10 +25,10 @@
 			 %>
 		</p>
 		<p>
-			<button type="button" class="btn btn-success btn-small" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
+			<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
 				<%= info_icon('キャプション') %>&nbsp;キャプション
 			</button>
-			<button type="button" class="btn btn-danger btn-small" data-bs-toggle="modal" data-bs-target="#modal_delete_photo_<%=photo.id%>">
+			<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete_photo_<%=photo.id%>">
 				<%= trash_icon('削除確認') %>&nbsp;削除確認
 			</button>
 		</p>
@@ -52,8 +52,8 @@
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -72,8 +72,8 @@
 					<p>写真を削除します。よろしいですか？</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
         </div>
@@ -95,8 +95,8 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+			<button type="submit" class="btn btn-sm btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
+			<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
 		</div>
 	<% end %>
 
