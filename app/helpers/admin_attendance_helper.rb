@@ -12,7 +12,7 @@ module AdminAttendanceHelper
         when CalendarMark::TYPE_TRIANGLE
             return "<span style='color: #F00;'>△</span>".html_safe
         when CalendarMark::TYPE_BATSU
-            return "<span style='color: #AAA;'>X Ｘ ✖ ✕</span>".html_safe
+            return "<span style='color: #AAA;'>X</span>".html_safe
         end
         return ''
     end
