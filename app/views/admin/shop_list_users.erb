@@ -37,10 +37,10 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr class="info">
-				<th class="span2">役割</th>
-				<th class="span3"><span class="float-right"><span class="badge badge-success"><%= @users.size %></span></span>表示名</th>
-				<th class="span3"><span class="float-right"><span class="badge badge-success"><%= @users.size %></span></span>ログイン</th>
-				<th class="span4">Email</th>
+				<th class="table-dark span2">役割</th>
+				<th class="table-dark span3"><span class="float-right"><span class="badge badge-success"><%= @users.size %></span></span>表示名</th>
+				<th class="table-dark span3"><span class="float-right"><span class="badge badge-success"><%= @users.size %></span></span>ログイン</th>
+				<th class="table-dark span4">Email</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,9 +50,9 @@
 					<td><%=model_name(user)%></td>
 					<td>
 						<% url = url_for(:action=>"shop_show_user", :id=>user) %>
-						<a href="<%=url%>">
-							<i class="fa-solid fa-chevron-right"></i>
+						<a href="<%=url%>" class='text-primary'>
 							<%= user.login %>
+							<i class="fa-solid fa-chevron-right"></i>
 						</a>
 					</td>
 					<td><%= user.email %></td>

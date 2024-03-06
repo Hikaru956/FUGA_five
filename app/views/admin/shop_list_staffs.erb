@@ -37,9 +37,9 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr>
-				<th ><span class="float-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
-				<th >職位/タイトル</th>
-				<th >ソーシャル</th>
+				<th class='table-dark' ><span class="float-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
+				<th class='table-dark' >職位/タイトル</th>
+				<th class='table-dark' >ソーシャル</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,12 +50,12 @@
 							<%= (staff.first?)?	"△":	link_to("▲", :action=>"staff_higher",	:id=>staff) %>
 							<%= (staff.last?)? 	"▽": 	link_to("▼", :action=>"staff_lower", 	:id=>staff) %>
 						</span>
-						
-						
+
 						<% url = url_for(:action=>"shop_show_staff", :id=>staff) %>
-						<a href="<%=url%>">
+						<a href="<%=url%>" class='text-primary'>
 							<%= icon_staff_status(staff.staff_status) %>
 							<%= model_name(staff) %>
+							<i class="fa-solid fa-chevron-right"></i>
 						</a>
 					</td>
 					<td style="vertical-align: middle;"><%=staff.job_title%></td>

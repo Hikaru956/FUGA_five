@@ -41,14 +41,14 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr class="info">
-				<th class="span6">
+				<th class='table-dark span6'>
 					<span class="pull-right"><span class="badge badge-success"><%= @item.shops.size %></span></span>
 					店舗名
 				</th>
-				<th class="span2">ディスク容量</th>
-				<th class="span2">使用率</th>
-				<th class="span2">固定ページ</th>
-				<th class="span2">サイト表示</th>
+				<th class='table-dark span2'>ディスク容量</th>
+				<th class='table-dark span2'>使用率</th>
+				<th class='table-dark span2'>固定ページ</th>
+				<th class='table-dark span2'>サイト表示</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -62,9 +62,10 @@
 						</span>
 						
 						<% url = url_for(:action=>"company_show_shop", :id=>shop) %>
-						<a href="<%=url%>">
+						<a href="<%=url%>" class='text-primary'>
 							<i class='icon-chevron-sign-right'></i>
 							<%= model_name(shop) %>
+							<i class="fa-solid fa-chevron-right"></i>
 						</a>
 					</td>
 					<td style="text-align:right">

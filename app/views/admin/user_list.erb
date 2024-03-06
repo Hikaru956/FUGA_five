@@ -21,11 +21,11 @@
 <% else %>
 	<table class="table table-hover table-bordered">
 		<tbody>
-			<tr class="table-secondary">
-				<th width='20%'><strong>ロール</strong></th>
-				<th width='25%'><strong>表示名</strong></th>
-				<th width='30%'><strong>ログイン</strong></th>
-				<th width='25%'><strong>連絡先</strong></th>
+			<tr>
+				<th width='20%' class='table-dark'><strong>ロール</strong></th>
+				<th width='25%' class='table-dark'><strong>表示名</strong></th>
+				<th width='30%' class='table-dark'><strong>ログイン</strong></th>
+				<th width='25%' class='table-dark'><strong>連絡先</strong></th>
 			</tr>
 			<% @users.each do | user | %>
 				<tr <% if user.banned? %>class="error"<%end%>>
@@ -37,8 +37,8 @@
 						<% end %>
 						<% url = url_for(:action=>"user_show", :id=>user) %>
 						<a href="<%=url%>">
-							<i class='icon-chevron-sign-right'></i>
 							<%= user.email %>
+							<i class="fa-solid fa-chevron-right"></i>
 						</a>
 					</td>
 					<td><%= user.email_org %></td>
