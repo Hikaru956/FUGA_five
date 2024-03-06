@@ -5,13 +5,28 @@
     border-collapse: collapse;
     }
 
+    /* カレンダーのヘッダー、タイトルセルのスタイル */
+    .weekly-calendar-table th.title {
+    border: 1px solid #000;
+    padding: 6px;
+    background-color: #0A0A0A; /* ヘッダーの背景色 */
+    font-size: 14px; /* ヘッダーのフォントサイズ */
+    text-align: center; /* ヘッダーのテキストを中央揃え */
+    color: #FFF;
+    }
+
+    .weekly-calendar-table th.control a{
+    color: #FFF;
+    }
+
     /* カレンダーの日付セルのスタイル */
     .weekly-calendar-table td {
     border: 1px solid #ccc;
     padding: 6px;
-    text-align: left; /* 日付を中央揃え */
-    font-size: 12px; /* フォントサイズ */
-    background-color: #fff; /* セルの背景色 */
+    text-align: left;           /* 日付を中央揃え */
+    font-size: 12px;            /* フォントサイズ */
+    background-color: #fff;     /* セルの背景色 */
+    width: 14%;
     }
 
     /* カレンダーの日付セルにホバーした際のスタイル */
@@ -27,7 +42,7 @@
     /* カレンダーの日付セルの中のアイコンのスタイル */
     .weekly-calendar-table td i {
     margin-left: 5px;
-    vertical-align: center; /* アイコンの垂直方向の配置 */
+    vertical-align: top; /* アイコンの垂直方向の配置 */
     }
 
     /* カレンダーの日付セルの中のアイコンのスタイル */
@@ -41,11 +56,6 @@
     background-color: #f5b1aa; /* 国民の祝日の背景色を赤色に */
     }
 
-    /* 出勤のセルのスタイル */
-    .weekly-calendar-table td.attendance {
-    background-color: #38b48b; /* 出勤の背景色を緑色に */
-    }
-
     /* カレンダーのヘッダーセルのスタイル */
     .weekly-calendar-table th {
     border: 1px solid #ccc;
@@ -54,21 +64,36 @@
     font-size: 14px; /* ヘッダーのフォントサイズ */
     text-align: center; /* ヘッダーのテキストを中央揃え */
     }
+
+    .weekly-calendar-table td.date_cell {
+    text-align:     left; /* ヘッダーのテキストを中央揃え */
+    vertical-align: top; /* ヘッダーのテキストを中央揃え */
+    }
 </style>
+
+
+<% base_date = (params[:cal_date].blank?)? Time.now.to_date: Date.parse(params[:cal_date]) %>
+
 <div class="row">
 	        <div class="span12">
 				<table class="weekly-calendar-table">
 					<thead>
                         <tr>
-                            <th colspan='7'>
-                                出勤カレンダー
+                            <th class='title'></th>
+                            <th class='title' colspan='5'>
+                                スタッフ・カレンダー
+                            </th>
+                            <th class='title control'>
+                                <a href="<%= url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key, cal_date: base_date.beginning_of_month<<1) %>">◀</a>
+                                <a href="<%= url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key) %>">◎</a>
+                                <a href="<%= url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key, cal_date: base_date.beginning_of_month>>1) %>">▶</a>
                             </th>
                         </tr>
 					</thead>
 					<tbody>
                         <% today = Time.now.to_date %>
                         <% (0..1).each do |month_offset| %>
-                        <% target_month = @target_date + month_offset.months %>
+                        <% target_month = base_date + month_offset.months %>
                             <tr>
                                 <th colspan='7'>
                                     <%= target_month.month %>月
@@ -87,39 +112,22 @@
                             <% last_day_of_month = target_month.end_of_month %>
                             <% 
                                 day_array = []
-                                for i in 1..(first_day_of_month.wday)
-                                    day_array << nil
-                                end
-                                for i in first_day_of_month..last_day_of_month
-                                    day_array << i
-                                end
-                                for i in 1..(6-last_day_of_month.wday)
-                                    day_array << nil
-                                end
+                                for i in 1..(first_day_of_month.wday);          day_array << nil;   end
+                                for i in first_day_of_month..last_day_of_month; day_array << i;     end
+                                for i in 1..(6-last_day_of_month.wday);         day_array << nil;   end
                             %>
                                 <% (day_array).each_slice(7) do |week| %>
                                     <tr>
                                         <% week.each do |day| %>
                                             <% if day.blank? %>
-                                                <td>
-                                                </td>
+                                                <td></td>
                                                 <% next %>
                                             <% end %>
-                                            <%
-                                                my_date = day
-                                                attendances = @seed.attendances.where('attend_on =?', my_date)
-                                                is_today = (day == today)
-                                            %>
-                                            <td>
-                                                <% if is_today %>
-                                                    <strong>
-                                                        <%= day.strftime("%d") %>
-                                                        <div class='mark'><%= calendar_mark_on(day,@seed) %></div>
-                                                    </strong>
-                                                <% else %>
-                                                    <%= day.strftime("%d") %>
-                                                    <div class='mark'><%= calendar_mark_on(day,@seed) %></div>
-                                                <% end %>
+                                            <% is_today = (day == today) %>
+                                            <td class='date_cell'>
+                                                <% if is_today %><strong><%= day.strftime("%d") %></strong>
+                                                <% else %><%= day.strftime("%d") %><% end %>
+                                                <div class='mark'><%= calendar_mark_on(day,@seed) %></div>
                                             </td>
                                         <% end %>
                                     </tr>
