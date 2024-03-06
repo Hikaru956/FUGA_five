@@ -13,10 +13,7 @@
 				<div class="modal-body">
 					<p class="small">
 						<%= @staff.name.truncate(10) %>
-						の
-						<%= @shop.name %>
-						における
-						出勤、休暇を一括設定します
+						の<%= @shop.name %>における勤怠情報を一括設定します
 					</p>
 					<% 
 						day_options = []
@@ -73,7 +70,10 @@
 							<input type="checkbox" name="holidays[]" id="inlineCheckbox6" value="6"> 土
 							</label>
 						</div>
-						<p><center><span class="text-info">指定期間の設定は全て上記設定で初期化されます。</span></center></p>
+						<p class='alert alert-info'>
+							<%= info_icon %>
+							指定期間の勤怠情報は、全て上記設定で初期化されます。
+						</p>
 					</div>
 				</div>
 				<div class="modal-footer">

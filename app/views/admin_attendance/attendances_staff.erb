@@ -1,21 +1,16 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
+	<span class="float-right">
+		<% calendar_url = url_for(:action=>"index", :year => @target_date.year)%>
+		<a href="<%= calendar_url %>" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;スタッフ一覧へ</a>
+	</span>
 	<h3>
-	<%= attendance_staff_icon %>
-	勤怠管理</h3>
+		<%= attendance_staff_icon %>
+		勤怠管理
+		:
+		<%= model_name(@staff) %>
+	</h3>
 </header>
-
-<span class="float-right">
-	<% calendar_url = url_for(:action=>"index", :year => @target_date.year)%>
-	<a href="<%= calendar_url %>" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;スタッフ一覧へ</a>
-</span>
-
-<p class="lead">
-	<%= @target_date.year %>&nbsp;年
-	<%= @target_date.month %>&nbsp;月
-	:
-	<%= model_name(@staff) %>
-</p>
 
 <%= render :partial=>"roster_summary" %>
 

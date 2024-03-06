@@ -480,7 +480,7 @@ EOF
   def tags3_icon(title=tags_title); sprintf('<i class="icon-tags" title=%s></i>', title).html_safe; end
 
   def reservation_staff_icon(title='予約'); sprintf('<i class="far fa-calendar-check" title=%s></i>', title).html_safe; end
-  def attendance_staff_icon(title='勤怠'); sprintf('<i class="fa-solid fa-calendar-days" title=%s></i>', title).html_safe; end
+  def attendance_staff_icon(title='勤怠管理'); sprintf('<i class="fa-solid fa-calendar-days" title=%s></i>', title).html_safe; end
 
 
   def caution_icon(title='警告'); sprintf("<i class='fa-solid fa-diamond-exclamation' title=%s></i>", title).html_safe; end

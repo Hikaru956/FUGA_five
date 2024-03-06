@@ -12,7 +12,7 @@
 	<th rowspan=<%= raw_span_count %> class="head_staff_name">
 		その他
 		<span class="float-right">
-			<%= link_to("<i class='fa fa-list' aria-hidden='true'></i>&nbsp;予約".html_safe,
+			<%= link_to(new_icon+' 予約',
 				{:action=>"new_reservation", :target_date=>@target_date, :shop_id=>@shop, :staff_id=>nil}, 
 				:class=>"btn btn-sm btn-success btn-mini") %>
 		</span>
