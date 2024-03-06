@@ -5,9 +5,9 @@
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th class="span2"><%= @shop.name.truncate(10) %></th>
+				<th class="table-primary"><%= @shop.name.truncate(10) %></th>
 				<% for m in 1..12 %>
-					<th style="text-align:center;"><%=m%>&nbsp;月</th>
+					<th style="text-align:center;" class="table-primary"><%=m%>&nbsp;月</th>
 				<% end %>
 			</tr>
 		<thead>
@@ -41,9 +41,9 @@
 						%>
 						<td style="text-align:center;">
 							<% if roster_staff_map.blank? || roster_staff_map[s.id].blank? %>
-								<%= link_to "<i class='far fa-square'></i>".html_safe, :action=>"attendances_staff",data: {"turbolinks" => false}, :id=>s, :year=>@target_date.year, :month=>m%>
+								<%= link_to "<span class='text-secondary'><i class='far fa-square'></i></span>".html_safe, :action=>"attendances_staff", data: {"turbolinks" => false}, :id=>s, :year=>@target_date.year, :month=>m%>
 							<% else %>
-								<%= link_to "<i class='fas fa-pen-square'></i>".html_safe, :action=>"attendances_staff",data: {"turbolinks" => false}, :id=>s, :year=>@target_date.year, :month=>m%>
+								<%= link_to "<span class='text-primary'><i class='fas fa-pen-square'></i></span>".html_safe, :action=>"attendances_staff", data: {"turbolinks" => false}, :id=>s, :year=>@target_date.year, :month=>m%>
 							<% end %>
 						</td>
 					<% end %>

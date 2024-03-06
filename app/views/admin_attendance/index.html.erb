@@ -1,6 +1,8 @@
 	<!-- === Masthead === -->
 	<header class="subhead" id="overview">
-		<h3>勤怠管理</h3>
+		<h3>
+		<%= attendance_staff_icon %>
+		勤怠管理</h3>
 	</header>
 
 	<p class="lead">
@@ -18,7 +20,7 @@
 		        nxt = cur>>12
 		    %>
 			<%= link_to(raw("<i class='fas fa-arrow-left'></i>"), 	{:action=>'index', :year => lst.year}, :class=>"btn btn-secondary") %>
-			<%= link_to("今年", 								{:action=>'index'}, :class=>"btn btn-secondary") %>
+			<%= link_to("今年", 								{:action=>'index'}, :class=>"btn btn-info") %>
 			<%= link_to(raw("<i class='fas fa-arrow-right'></i>"), {:action=>'index', :year => nxt.year}, :class=>"btn btn-secondary") %>
 		</span>
 	</p>
