@@ -19,7 +19,7 @@
 	<li class="nav-item">
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_list_user', :id=>@item) %>">オーナー・ユーザー</a>
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_list_user', :id=>@item.company) %>">オーナー・ユーザー</a>
 	</li>
 </ul>
 
@@ -36,11 +36,11 @@
 </h4>
 
 <hr/>
-<h5>全体</h5>
+<h5>▶ 全体</h5>
 <%= render :partial=>'company_show_shop_usage' %>
 
 <hr/>
-<h5>CMS</h5>
+<h5>▶ CMS</h5>
 <%= render :partial=>'company_show_shop_cms_usage' %>
 <% @anchor = ContentCategory.type_root(@shop, ContentCategory::TYPE_NEWS) %>
 <%= render :partial=>'company_show_shop_cms_usage_by_category' %>
@@ -51,13 +51,13 @@
 <% @anchor = ContentCategory.type_root(@shop, ContentCategory::TYPE_PORTFOLIO) %>
 <%= render :partial=>'company_show_shop_cms_usage_by_category' %>
 
-<% if current_user.has_permission?(User::ROLE_OPERATOR) %>
+<% if true || current_user.has_permission?(User::ROLE_OPERATOR) %>
 	<hr/>
-	<h5>オプション</h5>
+	<h5>▶ オプション</h5>
 
 	<table class="table table-bordered">
 		<thead>
-			<tr class="info">
+			<tr class="table-info">
 				<th colspan="2">
 					オプション
 				</th>
@@ -65,13 +65,13 @@
 		<thead>
 		<tbody>
 			<tr>
-				<td class="span3">勤怠管理</td>
-				<td class="span9">
+				<th width='50%' class="span3">勤怠管理</th>
+				<td width='50%' class="span9">
 					<%= (@shop.option_attendance_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
 				</td>
 			</tr>
 			<tr>
-				<td>簡易予約管理</td>
+				<th>簡易予約管理</th>
 				<td>
 					<%= (@shop.option_reservation_management)? raw("<i class='icon-check'></i'>&nbsp;利用中"): raw("<i class='icon-check-empty'></i'>&nbsp;未使用") %>
 				</td>

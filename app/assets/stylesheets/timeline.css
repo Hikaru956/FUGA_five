@@ -99,12 +99,22 @@ table.timeline td.reservation {
 	font-size:smaller;
 	text-align:left;
 	height:1.0em; 
-	background-color:#FEF;
+	background-color:#CFC;
 	border:1px solid #956; 
 	width:50px;
 	padding:1px;
 	}	
 
+table.timeline td.reservation_violation {
+		font-size:smaller;
+		text-align:left;
+		height:1.0em; 
+		background-color:#FAA;
+		border:1px solid #956; 
+		width:50px;
+		padding:1px;
+	}
+	
 table.timeline td.reservation_fixed {
 	font-size:smaller;
 	text-align:left;
@@ -191,7 +201,7 @@ table.timeline td.tail_spacer_reservation {
 	border-bottom:1px solid #956; 
 	width:50px;
 	padding:1px;
-	background-color:#FCC;	
+	background-color:#CFC;	
 }				
 
 .roster_reservation_warning {
@@ -201,7 +211,7 @@ table.timeline td.tail_spacer_reservation {
 	border-bottom:1px solid #956; 
 	width:50px;
 	padding:1px;
-	background-color:#F44;	
+	background-color:#FAA;	
 }
 
 table.timeline td.timeline_work {

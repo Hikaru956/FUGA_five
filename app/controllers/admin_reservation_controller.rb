@@ -52,7 +52,8 @@ class AdminReservationController < ApplicationController
         #@item.reserved_on   = base_time + (params[:item][:start_hour].to_i*60*60) + (params[:item][:start_min].to_i*60)
             
         @item.save!
-        redirect_to :action=>"show_reservation", :id=>@item
+        #redirect_to :action=>"show_reservation", :id=>@item
+        redirect_to :action=>"reservation", :target_date=>@item.reserved_on.to_date
     end
 
     def show_reservation

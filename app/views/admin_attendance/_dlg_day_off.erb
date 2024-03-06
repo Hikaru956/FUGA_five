@@ -3,7 +3,7 @@
     <%= form_for staff, url: admin_attendance_day_off_path(id: staff.id,target_date: target_date), method: :post do |f| %>
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">全球 : <%= model_name(@staff) %></h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class='fas fa-times fa-fw'></i>&nbsp;全休 : <%= model_name(@staff) %></h5>
         	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -13,7 +13,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-          <button type="submit" class="btn btn-warning"><i class='fas fa-times'></i>&nbsp;設定</button>
+          <button type="submit" class="btn btn-primary"><i class='fas fa-times fa-fw'></i>&nbsp;設定</button>
         </div>
       </div>
     <% end %>

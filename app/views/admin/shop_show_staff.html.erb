@@ -24,11 +24,11 @@
 
 <h4>
 	<span class="float-right">
-		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
-		<i class="fa-solid fa-arrow-left"></i>&nbsp;
+		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
+			<%= backward_icon('戻る')%>
 			一覧
 		</a>
-		<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
+		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 			<%= edit_icon('編集') %>&nbsp;編集
 		</button>
 	</span>

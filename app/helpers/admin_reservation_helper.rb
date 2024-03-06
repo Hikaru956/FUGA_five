@@ -149,42 +149,29 @@ module AdminReservationHelper
     index_from  = (reservation.reserved_on.hour)*4+(reservation.reserved_on.min/15)
     index_until = (reservation.reserved_until.hour)*4+(reservation.reserved_until.min/15)
     for ah in index_from..(index_until-1)
-
-      logger.debug reservation.reserved_on.hour
-
-
-      logger.debug roster_td_classes[ah]
-      logger.debug roster_td_classes[ah]==work_class
-      logger.debug ah
-      
-
-
-
-
-
-
+      #logger.debug reservation.reserved_on.hour
+      #logger.debug roster_td_classes[ah]
+      #logger.debug roster_td_classes[ah]==work_class
+      #logger.debug ah
       roster_td_classes[ah] = ((roster_td_classes[ah]==work_class)? reservation_class: reservation_warning_class) 
-      logger.debug roster_td_classes[ah]
+      #logger.debug roster_td_classes[ah]
     end
     #puts "$"*12+" : ["+ index_from.to_s + " .. "+index_until.to_s+"] " + (Time.now.instance_eval { self.to_i * 1000 + (usec/1000) }-counter).to_s
-    
     roster_td_classes
   end
-  
-  
+
   def roster_timeline_classes(shop, target_date, reservations, attendances, 
                               work_class="roster_work", 
                               absence_class="roster_absence", 
                               reservation_class="roster_reservation", 
                               reservation_warning_class="roster_reservation_warning")
-                              
-    array_size = ((shop.business_hour_until<24)? 24: shop.business_hour_until)                          
-                              
+
+    array_size = ((shop.business_hour_until<24)? 24: shop.business_hour_until)
     roster_td_classes = []
     for hh in 0..(array_size*2)
       roster_td_classes << absence_class
     end
-    
+
     probe_date = Time.mktime(target_date.year, target_date.month, target_date.day, 0,0,0)
     unless reservations.blank?
       reservations.each do | r |
@@ -205,7 +192,7 @@ module AdminReservationHelper
         #puts "$"*12+" : ["+ index_from.to_s + " .. "+index_until.to_s+"] " + (Time.now.instance_eval { self.to_i * 1000 + (usec/1000) }-counter).to_s
       end
     end
-    
+
     unless attendances.blank?
       attendances.each do | a |
         ###

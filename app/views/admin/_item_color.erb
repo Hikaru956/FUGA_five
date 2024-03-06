@@ -17,14 +17,14 @@
 		<li class="list-group-item">A second item</li>
 	</ul>
 	<div class="card-body">
-		<% if temp_local.position==1 %>
-			<span class="float-right"><i class='fa-solid fa-spinner fa-spin'></i></span>
-		<% end %>
 		<%= (temp_local.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"color_higher", :id=>temp_local) %>
 		<%= temp_local.position %>
 		<%= (temp_local.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"color_lower",	:id=>temp_local) %>
 		<span class='float-right'>
-			<a href="<%= url_for(:action=>'color_show', :id=>temp_local) %>" class="btn btn-sm btn-primary"><%= share_icon('表示')%>&nbsp;表示</a>
+			<% if temp_local.position==1 %>
+				<i class='fa-solid fa-spinner fa-spin'></i>
+			<% end %>
+			<a href="<%= url_for(:action=>'color_show', :id=>temp_local) %>" class="btn btn-sm btn-outline-primary">表示 <%= link_to_6_icon %></a>
 		</span>
 	</div>
 </div>

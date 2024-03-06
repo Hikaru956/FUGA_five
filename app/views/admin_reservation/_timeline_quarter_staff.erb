@@ -3,11 +3,6 @@
 	all = all.where(shop_id: @shop)
 	all = all.where(attend_on: @target_date)
 	@attendances = all
-	
-	#c = Condition.new
-	#c.and "attendances.shop_id", @shop
-	#c.and "attendances.attend_on", @target_date
-	#@attendances = staff.attendances.find(:all, :conditions=>c.where)
 	roster_timeline_classes = (@shop.option_attendance_management)? 
 						timeline_classes(@shop, @target_date, @reservations, @attendances, "timeline_work","timeline_absence",	"timeline_reservation","timeline_reservation"):		
 						timeline_classes(@shop, @target_date, @reservations, @attendances, "timeline_work","timeline_work",		"timeline_reservation","timeline_reservation")		
@@ -17,14 +12,14 @@
 	<th rowspan=<%= raw_span_count %> class="head_staff_name">
 		<%= model_name(staff) %><br/>
 		<% if @shop.option_attendance_management %>
-		<%= link_to(attendance_staff_icon.html_safe,
-			{:controller=>'admin_attendance', :action=>"attendances_staff", :id=>staff, :shop_id=>@shop, :year=>@target_date.year,  :month=>@target_date.month}, 
-			:class=>"btn btn-mini btn-sm btn-secondary", :title=>"勤怠管理") %>
+			<%= link_to(attendance_staff_icon + '勤怠',
+				{:controller=>'admin_attendance', :action=>"attendances_staff", :id=>staff, :shop_id=>@shop, :year=>@target_date.year,  :month=>@target_date.month}, 
+				:class=>"btn btn-mini btn-sm btn-outline-primary", :title=>"勤怠管理") %>
 		<% end %>
 		<span class="float-right">
-			<%= link_to(new_icon+' 予約',
-				{:action=>"new_reservation", :target_date=>@target_date, :shop_id=>@shop, :staff_id=>staff}, 
-				:class=>"btn btn-sm btn-success btn-mini") %>
+			<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#NewReservation_<%=staff.id%>">
+				<%= new_icon%>&nbsp;予約
+			</button>
 		</span>
 	</th>
 	<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
@@ -85,10 +80,11 @@
 						reservation_label = "予約"	if reservation_label.blank?
 					%>
 					<% tooltips_url = "ajax_showTooltip('/tooltip/reservation/#{reservation.id}', this);return false" %>
-					<%= link_to(truncate(reservation_label, length: (2*spanner[1])),
-						{:action=>"show_reservation", :id=>reservation},
-						:onmouseover=>"#{tooltips_url}", :onmouseout=>"ajax_hideTooltip()") %>
-
+					<small>
+						<%= link_to(truncate(reservation_label, length: (3*spanner[1])),
+							{:action=>"show_reservation", :id=>reservation},
+							:onmouseover=>"#{tooltips_url}", :onmouseout=>"ajax_hideTooltip()", class: 'text-primary') %>
+					</small>
 				</td>
 			<% end %>
 			

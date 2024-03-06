@@ -8,7 +8,7 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
 	<p class='float-right'%>
-		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'color_list') %>">
+		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'color_list') %>">
 		<%= backward_icon('戻る')%>&nbsp;
 			戻る
 		</a>
@@ -53,7 +53,17 @@
 					</span>
 				</th>
 				<td class="span9">
-					<%= @color.wsite_color_deploys.map{|s| model_name(s.company)+":"+model_name(s) }.join(', ')%>
+					<ul>
+						<% @color.wsite_color_deploys.each do |s| %>
+							<li>
+								<% url = url_for(:action=>"company_show_shop", :id=>s) %>
+								<a href="<%=url%>" class='text-primary'>
+									<%= model_name(s.company) %>: <%=model_name(s)%>
+									<%= link_to_6_icon %>
+								</a>
+							</li>
+						<% end %>
+					</ul>
 				</td>
 			</tr>
 		<% end %>
@@ -69,7 +79,7 @@
 		<%= trash_icon('削除確認') %>&nbsp;削除確認
 	</button>
 	|
-	<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+	<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdit">
 		<%= edit_icon('編集') %>&nbsp;編集
 	</button>
 </p>

@@ -1,0 +1,21 @@
+<div class="modal fade" id="EditReservation_<%= item.id %>" tabindex="-1" role="dialog" aria-labelledby="EditReservation_<%= item.id %>" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <%= form_for item, url: admin_reservation_update_reservation_path(id: @item.id), method: :patch do |f| %>
+      <div class="modal-content">
+        <div class="modal-header">
+            <h3>
+                <%= reservation_staff_icon %>&nbsp;予約編集
+            </h3>
+        	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <%= render partial: 'form_reservation_new', locals: {f: f, item: item, target_date: target_date} %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+          <button type="submit" class="btn btn-primary"><%= update_icon %>&nbsp;更新</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

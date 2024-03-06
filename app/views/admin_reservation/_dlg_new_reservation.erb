@@ -1,0 +1,28 @@
+<div class="modal fade" id="NewReservation_<%= (staff.blank?)? 'open': staff.id %>" tabindex="-1" role="dialog" aria-labelledby="NewReservation_<%= (staff.blank?)? 'open': staff.id %>" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <% 
+        item = Reservation.new(shop: shop, staff: staff)
+        item.reserved_on = Time.local(target_date.year, target_date.month, target_date.day, shop.business_hour_from, 0, 0)
+    %>
+
+    <%= form_for item, url: admin_reservation_create_reservation_path, method: :post do |f| %>
+      <div class="modal-content">
+        <div class="modal-header">
+            <h3>
+                <%= reservation_staff_icon %>&nbsp;新規予約
+                :
+                <%= target_date%>&nbsp;(<%=wday(target_date)%>)
+            </h3>
+        	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <%= render partial: 'form_reservation_new', locals: {f: f, item: item, target_date: target_date} %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+          <button type="submit" class="btn btn-success"><%= new_icon %>&nbsp;登録</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

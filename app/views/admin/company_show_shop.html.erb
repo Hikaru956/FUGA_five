@@ -35,10 +35,10 @@
 	<div>
 		<h4>
 			<span class="float-right">
-				<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
+				<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
 				<%= backward_icon('戻る')%>&nbsp;戻る
 				</a>
-				<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
+				<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 					<%= edit_icon('編集') %>&nbsp;編集
 				</button>
 			</span>
@@ -57,13 +57,13 @@
 					<td>
 						<span class='float-right'>
 							  <div class="btn-group">
-									<a class="btn btn-sm btn-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
+									<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
 										<%= share_icon('サイト表示')%>
 										サイト表示
 									</a>
-									<%= link_to raw("<i class='fa-solid fa-right-to-bracket'></i>&nbsp;&nbsp;店舗管理画面"), {:action=>'delegating', :id=>@item}, :method => :post, :class=>"btn btn-sm btn-primary" %>
+									<%= link_to raw('店舗管理画面' + ' ') + link_to_6_icon, {:action=>'delegating', :id=>@item}, :method => :post, :class=>"btn btn-sm btn-outline-primary" %>
 									<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
-									<a href="<%=url_business%>" class="btn btn-warning btn-sm">
+									<a href="<%=url_business%>" class="btn btn-outline-warning btn-sm">
 										<%= site_status_icon(@shop.wsite_run_mode) %>
 										利用状況表示
 									</a>
@@ -97,10 +97,10 @@
 			<hr/>
 			<table class="table table-condensed table-bordered">
 				<thead>
-					<tr class="info">
-						<th colspan="2">
+					<tr>
+						<th class='table-info' colspan="2">
 							<span class="float-right">
-								<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEditOption">
+								<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditOption">
 									<%= setting_icon('設定') %>&nbsp;設定
 								</button>
 							</span>
@@ -128,10 +128,10 @@
 		<hr/>
 		<table class="table table-condensed table-bordered">
 			<thead>
-				<tr class="info">
+				<tr class='table-info'>
 					<th colspan="2">
 						<span class="float-right">
-							<a class="btn btn-sm btn-success"  data-toggle="modal" href="#modalEditOption">
+							<a class="btn btn-sm btn-primary"  data-toggle="modal" href="#modalEditOption">
 								<%= setting_icon('設定') %>&nbsp;
 									設定
 							</a>
@@ -197,8 +197,8 @@
 		<% if @shop.gps? %>
 			<div id="map" style='height: 400px;'></div>
 		<% else %>
-			<div class="alert alert-warning">
-			  <%= info_icon('注意')%>&nbsp;Warning!位置情報が未設定です。
+			<div class="alert alert-secondary">
+			  <%= info_icon('注意')%>&nbsp;位置情報が未設定です。
 			</div>
 		<% end%>
 	</div>

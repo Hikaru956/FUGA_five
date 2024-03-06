@@ -2,42 +2,72 @@
 	<h3><%= reservation_staff_icon %>&nbsp;予約管理</h3>
 </header>
 
-<% if false %>
-	<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-		<li class="nav-item">
-			<a class="nav-link  active" href="<%= url_for(:controller=>'admin_reservation', :action=>'reservation',:target_date=>@target_date, :id=>@item) %>"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;予約</a>
-		</li>
-		<li  class="nav-item">
-			<a class="nav-link" href="<%= url_for(:controller=>'admin_reservation', :action=>'birthday',:target_date=>@target_date, :id=>@item) %>"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;誕生日</a>
-		</li>
-	</ul>
-<% end %>
-
-
-<%=javascript_include_tag :defaults %>
 <p class="lead">
+	<span class='float-right'>
+		<% back_url = url_for(:action=>"reservation", :target_date=>(@target_date))%>
+		<a href="<%= back_url %>" class="btn btn-sm btn-outline-dark"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;戻る</a>
+	</span>
 	<%= @target_date%>&nbsp;(<%=wday(@target_date)%>)
 </p>
 
-<div class="well">
+
+<table class='table table-bordered'>
+	<tr>
+		<th class='table-info' width='25%'>担当</td>
+		<td width='75%'><%= (@item.staff.blank?)? "-- 指定無し --": model_name(@item.staff) %></td>
+	</tr>
+	<tr>
+		<th class='table-info'>予約時間</td>
+		<td>
+			<%= @item.reserved_on.strftime("%l:%M %p") %>
+			〜
+			<%= @item.reserved_until.strftime("%l:%M %p") %>
+		</td>
+	</tr>
+	<tr>
+		<th class='table-info'>予約受付メモ</td>
+		<td><% unless @item.memo_1.blank? %><pre><%=@item.memo_1%></pre><% end %></td>
+	</tr>
+</table>
+
+
+<div>
+	<button type="button" class="btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+		<%= trash_icon('削除確認')%>&nbsp;
+		削除確認…
+	</button>
+
 	<span class="float-right">
-		<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
-			<%= trash_icon('削除確認')%>&nbsp;
-			削除確認
+		<button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditReservation_<%= @item.id %>">
+			<%= edit_icon %>&nbsp;編集…
 		</button>
 	</span>
 
-	<fieldset class="form-horizontal">
-		<%= render :partial=>"reservation_view" %>
-		<div class="form-actions">
-			<% back_url = url_for(:action=>"reservation", :target_date=>(@target_date))%>
-		    <a href="<%= back_url %>" class="btn btn-sm btn-secondary"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;戻る</a>
-			<%= link_to('<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;編集'.html_safe, 
-				{:action=>"edit_reservation", :id=>@item}, 
-				{:class=>"btn btn-sm btn-warning"})%>
-		</div>
-	</fieldset>
 </div>
+
+<%= render partial: 'dlg_edit_reservation', locals: {item: @item, target_date: @target_date} %>
+
+<% if false %>
+	<div class="well">
+		<span class="float-right">
+			<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+				<%= trash_icon('削除確認')%>&nbsp;
+				削除確認
+			</button>
+		</span>
+
+		<fieldset class="form-horizontal">
+			<%= render :partial=>"reservation_view" %>
+			<div class="form-actions">
+				<% back_url = url_for(:action=>"reservation", :target_date=>(@target_date))%>
+				<a href="<%= back_url %>" class="btn btn-sm btn-secondary"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;戻る</a>
+				<%= link_to('<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;編集'.html_safe, 
+					{:action=>"edit_reservation", :id=>@item}, 
+					{:class=>"btn btn-sm btn-warning"})%>
+			</div>
+		</fieldset>
+	</div>
+<% end %>
 
 <!-- modaldelete -->
 <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDelete" aria-hidden="true">

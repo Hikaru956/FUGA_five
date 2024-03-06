@@ -1,16 +1,16 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<h3>勤怠管理</h3>
+	<span class="float-right">
+		<% calendar_url = url_for(:action=>"attendances_staff", :id=>@staff, :year=>@target_date.year, :month=>@target_date.month, :shop_id=>@shop)%>
+		<a href="<%= calendar_url %>" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;戻る</a>
+	</span>
+	<h3>
+		<%= attendance_staff_icon %>
+		勤怠管理
+		:
+		<%= model_name(@staff) %>
+	</h3>
 </header>
-
-<p class="lead">
-	<%= @target_date.year %>&nbsp;年
-	<%= @target_date.month %>&nbsp;月
-	【
-	<%= truncate(@staff.name, :length=>100) %>
-	】
-</p>
-
-<%= render :partial=>"roster_summary" %>
+<h5><%=@target_date.strftime("%Y-%m-%d") %>&nbsp;(<%=wday(@target_date)%>)</h5>
 
 <%= render :partial=>"edit_business" %>

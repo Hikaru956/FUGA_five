@@ -17,23 +17,26 @@
 			<% unless cm.blank? %>[ <%= cm %> ]<% end %>
 		</span>
 
-		<div class="dropdown">
-			<button class="btn btn-sm btn-outline-primary dropdown-toggle btn-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-				日別設定
-			</button>
-			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-				<% if @shop.option_reservation_management %>
-					<li><a class="dropdown-item" href="<%= url_for(:controller=>"admin_reservation", :action=>"reservation", :target_date=>@probe_date) %>"><%= reservation_staff_icon %>&nbsp;予約表</a></li>
-				<% end %>
-				<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOn_<%= @probe_date%>"><i class='fa-regular fa-circle fa-fw'></i>&nbsp;出勤（終日）</a></li>
-				<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOff_<%= @probe_date%>"><i class='fas fa-times fa-fw'></i>&nbsp;全休</a></li>
-				<li><a class="dropdown-item" href="<%= url_for(:action=>"edit_business", :id=>@staff, :target_date=>@probe_date)%>"><i class='fas fa-cogs fa-fw'></i>&nbsp;詳細設定</a></li>
-				<li><hr class="dropdown-divider"></li>
-				<li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @probe_date, from_date: @probe_date, until_date: @probe_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_CIRCLE) %>" 	 data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_CIRCLE) %> : <%= calendar_mark_title %></a></li>
-				<li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @probe_date, from_date: @probe_date, until_date: @probe_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_TRIANGLE) %>" data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_TRIANGLE) %> : <%= calendar_mark_title %></a></li>
-				<li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @probe_date, from_date: @probe_date, until_date: @probe_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_BATSU) %>" 	 data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_BATSU) %> : <%= calendar_mark_title %></a></li>
-				<li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @probe_date, from_date: @probe_date, until_date: @probe_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_NONE) %>" 	 data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_NONE, true) %> : <%= calendar_mark_title %></a></li>
-			</ul>
+		<div class='text-center'>
+			<div class="dropdown">
+				<button class="btn btn-sm btn-outline-primary dropdown-toggle xbtn-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+					日別設定
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<% if @shop.option_reservation_management %>
+						<li><a class="dropdown-item" href="<%= url_for(:controller=>"admin_reservation", :action=>"reservation", :target_date=>@probe_date) %>"><%= reservation_staff_icon %>&nbsp;予約表</a></li>
+						<li><hr class="dropdown-divider"></li>
+					<% end %>
+					<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOn_<%= @probe_date%>"><i class='fa-regular fa-circle fa-fw'></i>&nbsp;出勤（終日）に変更</a></li>
+					<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AttendancesStaffDayOff_<%= @probe_date%>"><i class='fas fa-times fa-fw'></i>&nbsp;全休に変更</a></li>
+					<li><a class="dropdown-item" href="<%= url_for(:action=>"edit_business", :id=>@staff, :target_date=>@probe_date)%>"><i class='fas fa-cogs fa-fw'></i>&nbsp;詳細設定</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @probe_date, from_date: @probe_date, until_date: @probe_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_CIRCLE) %>" 	 data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_CIRCLE) %> : <%= calendar_mark_title %></a></li>
+					<li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @probe_date, from_date: @probe_date, until_date: @probe_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_TRIANGLE) %>" data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_TRIANGLE) %> : <%= calendar_mark_title %></a></li>
+					<li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @probe_date, from_date: @probe_date, until_date: @probe_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_BATSU) %>" 	 data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_BATSU) %> : <%= calendar_mark_title %></a></li>
+					<li><a class="dropdown-item" href="<%= admin_attendance_set_calendar_mark_path(target_date: @probe_date, from_date: @probe_date, until_date: @probe_date, staff_id: @staff, calendar_mark_type: CalendarMark::TYPE_NONE) %>" 	 data-method="post"><%= calendar_mark_type(CalendarMark::TYPE_NONE, true) %> : <%= calendar_mark_title %></a></li>
+				</ul>
+			</div>
 		</div>
 	</th>
 	<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>

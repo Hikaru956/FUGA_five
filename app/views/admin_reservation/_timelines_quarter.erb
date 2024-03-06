@@ -25,3 +25,8 @@
 	<% end %>
 	<%= render :partial=>"timeline_quarter_open" %>
 </table>
+
+<% staffs.each do | staff | %>
+	<%= render partial: 'dlg_new_reservation', locals: {shop: @shop, staff: staff, target_date: @target_date}%>
+<% end %>
+<%= render partial: 'dlg_new_reservation', locals: {shop: @shop, staff: nil, target_date: @target_date}%>

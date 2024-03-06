@@ -20,7 +20,7 @@ class Staff < ApplicationRecord
   #has_many      :content_leafs, ->{order('content_leafs.created_at DESC')}, :dependent=>:destroy
   has_many      :content_leafs, ->{order('content_leafs.created_at DESC')}, :dependent=>:nullify
 
-  has_many      :photos, ->{order('photos.position ASC')},  as: :ref, :dependent => :destroy
+  has_many      :photos, ->{order('photos.position ASC')},  as: :ref, :dependent => :nullify
 
   has_many      :calendar_marks, dependent: :destroy
 

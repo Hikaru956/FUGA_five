@@ -49,7 +49,7 @@ class AdminController < ApplicationController
         @items = (@search_word.blank?)? Company.all:
                 Company.where('companies.alt_id LIKE ? OR companies.name LIKE ? OR companies.postal LIKE ? OR companies.address_1 LIKE ? OR companies.address_2 LIKE ? OR companies.telephone_1 LIKE ? OR companies.telephone_2 LIKE ?', "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%", "%#{@search_word}%")
         @items = @items.order(name: :asc)
-        @items = @items.paginate(page: params[:page], per_page: PER_PAGE).order(name: :asc)
+        @items = @items.paginate(page: params[:page], per_page: 30).order(name: :asc)
     end
 
     def company_create

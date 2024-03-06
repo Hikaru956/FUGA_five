@@ -15,6 +15,10 @@
 <%= render :partial=>"roster_summary" %>
 
 <div style='margin-bottom: 10px;'>
+	<span class='float-right'>
+		<%= render partial: 'legend_timeline'%>
+	</span>
+
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalInitRoster">
 		<i class='fas fa-cog'></i>&nbsp;
 		勤怠一括設定
