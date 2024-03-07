@@ -12,10 +12,12 @@
 				<%= ('. '+model_name(current_user.company)) %>
 			<% end %>
 			]
+			<% unless params[:controller]=='bs_authoring' %>
 			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalUIEdit">
 				<i class="icon-pencil"></i>&nbsp;
 				新バージョン…
 			</a>
+			<% end %>
 			<% if false %>
 				<%= link_to 'Try New I/F', url_for(:controller=>'admin', :action=>'index'), data: {"turbolinks" => false} %>
 			<% end %>

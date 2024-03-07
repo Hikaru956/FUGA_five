@@ -2,7 +2,7 @@
 <% unless @widget_bag.blank? %>
 	<h4>
 		<div class="pull-right">
-			<a class="btn btn-small btn-success"  data-toggle="modal" href="#modalEdit_<%=@widget_bag.id%>">
+			<a class="btn btn-small btn-primary"  data-toggle="modal" href="#modalEdit_<%=@widget_bag.id%>">
 				<i class="icon-pencil"></i>&nbsp;
 	  			編集
 			</a>
@@ -23,11 +23,11 @@
 	<%= form_tag url_for(:action=>"update_widget_bag", :id=>@widget_bag, method: :post), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit_#{@widget_bag.id}"} do -%>
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">表示設定 : <%= @visual_widget.position %></h3>
+			<h3 id="myModalLabel">表示設定 : <%= @visual_widget.position %>  <%= model_title(@visual_widget) %></h3>
 		</div>
 		<div class="modal-body">
 			<div class="control-group">
-				<label class="control-label" for="item_data_string"><%= model_title(@visual_widget) %></label>
+				<label class="control-label" for="item_data_string"><%= widget_type_string(@visual_widget.widget_type) %></label>
 				<div class="controls">
 					<%= text_field 'widget_bag', 'data_string', :autocomplete => "off", :placeholder=>"リンクタイトルを入力"  %>
 				</div>
@@ -38,6 +38,7 @@
 					<%= text_field 'widget_bag', 'data_url', :autocomplete => "off", :placeholder=>"リンク先のアドレスを入力"  %>
 				</div>
 			</div>
+			<% if false %>
 			<div class="control-group">
 				<label class="control-label" for="widget_bag_data_boolean">ターゲット</label>
 				<div class="controls">
@@ -51,10 +52,11 @@
 					</label>
 				</div>
 			</div>
+			<% end %>
 		</div>
 		<div class="modal-footer">
-	    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
 			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	    	<button type="submit" class="btn btn-primary"><%= update_icon %>&nbsp;更新</button>
 		</div>
 	<% end %>
 <% end %>

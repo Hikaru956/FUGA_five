@@ -19,19 +19,19 @@
 	<%= form_tag url_for(:action=>"update_widget_bag", :id=>@widget_bag, method: :post), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit_#{@widget_bag.id}"} do -%>
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 id="myModalLabel">表示設定 : <%= @visual_widget.position %></h3>
+			<h3 id="myModalLabel">表示設定 : <%= @visual_widget.position %> <%= model_title(@visual_widget) %></h3>
 		</div>
 		<div class="modal-body">
 			<div class="control-group">
-				<label class="control-label" for="item_data_string"><%= model_title(@visual_widget) %></label>
+				<label class="control-label" for="item_data_string"><%= widget_type_string(@visual_widget.widget_type) %></label>
 				<div class="controls">
 					<%= text_area  'widget_bag', 'data_text', :rows=>"12", :class=>"span12", :placeholder=>"テキストを入力" %>
 				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-	    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;更新</button>
 			<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
+	    	<button type="submit" class="btn btn-primary"><%= update_icon %>&nbsp;更新</button>
 		</div>
 	<% end %>
 <% end %>
