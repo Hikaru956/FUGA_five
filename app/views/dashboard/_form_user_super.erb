@@ -33,7 +33,7 @@
 	<label class="control-label" for="user[ui_version]">バージョン</label>
 	<div class="controls">
 		<label class="radio inline">
-			<input type="radio" id="user[ui_version]" name="user[ui_version]" value="0" <% if @user.ui_version.blank? %>checked<% end %>>
+			<input type="radio" id="user[ui_version]" name="user[ui_version]" value="" <% if @user.ui_version.blank? %>checked<% end %>>
 			従来画面
 		</label>
 		<label class="radio inline">

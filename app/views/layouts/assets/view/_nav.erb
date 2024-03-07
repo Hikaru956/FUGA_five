@@ -45,5 +45,9 @@
             </li>
 <% if @author_mode %>
             <li><a href="<%= url_for(:controller=>'bs_authoring', :action=>'manage_widget')%>">表示設定</a></li>
-            <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>">サイト編集終了</a></li>
+            <% if current_user.ui_version.blank? %>
+                <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>"><i class="icon-off"></i>&nbsp;サイト編集終了</a></li>
+            <% else %>
+                <li><a href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website')%>"><i class="icon-off"></i>&nbsp;サイト編集終了</a></li>
+            <% end %>
 <% end %>
