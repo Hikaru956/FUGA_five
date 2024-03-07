@@ -30,11 +30,11 @@
 		<span class="btn-toolbar" style="margin: 0;">
 		  <span class="btn-group">
 		  	<% prev_url = url_for(:action=>"reservation", :target_date=>(@target_date-1))%>
-		    <a href="<%= prev_url %>" class="btn btn-sm btn-outline-primary"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;前日</a>
+		    <a href="<%= prev_url %>" class="btn btn-sm btn-outline-primary"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;前日</a>
 		  	<% today_url = url_for(:action=>"reservation")%>
 		    <a href="<%= today_url %>" class="btn btn-sm btn-info">今日</a>
 		  	<% next_url = url_for(:action=>"reservation", :target_date=>(@target_date+1))%>
-		    <a href="<%= next_url %>" class="btn btn-sm btn-outline-primary">翌日&nbsp;<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+		    <a href="<%= next_url %>" class="btn btn-sm btn-outline-primary">翌日&nbsp;<i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 		  </span>
 		</span>
 	</span>

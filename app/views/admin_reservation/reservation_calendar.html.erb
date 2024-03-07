@@ -16,7 +16,7 @@
 <div class="row">
 	<div class="span3">
 		<%= stylesheet_link_tag "calendar_bs" %>
-		
+
 		<div class="letterMonth"><%= (@target_date.to_date.month) %></div>
 		<div class="letterYear">
 			<%= link_to('<i class="fa fa-angle-double-left" aria-hidden="true"></i>'.html_safe, 	{:action=>'reservation_calendar', :target_date=>(@target_date.to_date)<<12, :shop_id=>@shop}) %>
@@ -24,13 +24,14 @@
 			<%= link_to('<i class="fa fa-angle-double-right" aria-hidden="true"></i>'.html_safe, 	{:action=>'reservation_calendar', :target_date=>(@target_date.to_date)>>12, :shop_id=>@shop}) %>
 		</div>
 		<br/>
+
 		<div style="text-align:center;">
 			<div class="btn-group">
-					<%= link_to('<i class="fa fa-arrow-left" aria-hidden="true"></i>'.html_safe, 	{:action=>'reservation_calendar', :shop_id=>@shop, :target_date=>(@target_date.to_date)<<1}, :class=>"btn btn-sm btn-outline-primary") %>
+					<%= link_to("<i class='fas fa-arrow-left'></i> 前月".html_safe, 	{:action=>'reservation_calendar', :shop_id=>@shop, :target_date=>(@target_date.to_date)<<1}, :class=>"btn btn-sm btn-outline-primary") %>
 					<%= link_to("今月", 								{:action=>'reservation_calendar', :shop_id=>@shop}, :class=>"btn btn-sm btn-info") %>
-					<%= link_to('<i class="fa fa-arrow-right" aria-hidden="true"></i>'.html_safe, {:action=>'reservation_calendar', :shop_id=>@shop, :target_date=>(@target_date.to_date)>>1}, :class=>"btn btn-sm  btn-outline-primary") %>
-			</div>		
-		</div>		
+					<%= link_to("次月 <i class='fas fa-arrow-right'></i>".html_safe, {:action=>'reservation_calendar', :shop_id=>@shop, :target_date=>(@target_date.to_date)>>1}, :class=>"btn btn-sm  btn-outline-primary") %>
+			</div>
+		</div>
 
 		<hr/>
 	</div>

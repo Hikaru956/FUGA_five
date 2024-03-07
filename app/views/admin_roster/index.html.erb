@@ -34,7 +34,7 @@
 		  	<% today_url = url_for(:action=>"index", target_date: Time.zone.now.to_date.beginning_of_month)%>
 		    <a href="<%= today_url %>" class="btn btn-sm btn-info">今月</a>
 		  	<% next_url = url_for(:action=>"index", :target_date=>next_month)%>
-		    <a href="<%= next_url %>" class="btn btn-sm btn-outline-primary">翌月&nbsp;<i class="fas fa-arrow-right"></i></a>
+		    <a href="<%= next_url %>" class="btn btn-sm btn-outline-primary">次月&nbsp;<i class="fas fa-arrow-right"></i></a>
 		  </span>
 		|
 	    <a href="<%= url_for(:action=>"list") %>" class="btn btn-sm btn-primary"><i class="fas fa-cogs"></i>&nbsp;シフト項目編集</a>
