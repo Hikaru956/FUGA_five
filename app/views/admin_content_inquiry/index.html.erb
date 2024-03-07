@@ -33,7 +33,7 @@
                             <%= truncate(item.body, :length=>20) %>
                         </td>
                         <td style='text-align: center;'>
-                            <%= link_to share_icon+"&nbsp;表示".html_safe, admin_content_inquiry_show_path(id: @shop.id, inquiry_id: item.id), class: 'btn btn-info' %>
+                            <%= link_to share_icon+"&nbsp;表示".html_safe, admin_content_inquiry_show_path(id: @shop.id, inquiry_id: item.id), class: 'btn btn-outlone-info btn-sm' %>
                         </td>
                     </tr>
                 <% end %>
@@ -50,7 +50,7 @@
     <% end %>
 <% else %>
     <div class='alert alert-info'>
-        <h4><%= info_icon('情報') %>&nbsp;お問い合わせ機能が有効になっていません。</h4>
+        <h5><%= info_icon('情報') %>&nbsp;お問い合わせ機能が有効になっていません。</h5>
         <div>お問い合わせ機能を有効にするにはサービス管理者にご連絡ください。</div>
     </div>
 <% end %>

@@ -49,20 +49,20 @@
 </table>
 <div class='text-right'>
     <% if current_user.has_permission?(User::ROLE_MANAGER)%>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete">
+        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete">
             <%= trash_icon('削除') %>&nbsp;削除確認
         </button>
     <% else %>
-        <a class="btn btn-danger" disabled='disabled'>
+        <a class="btn btn-danger btn-sm" disabled='disabled'>
             <%= trash_icon('削除') %>&nbsp;
             削除確認
         </a>
     <% end %>
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">
+    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
         <%= edit_icon('編集') %>&nbsp;ステータス
     </button>
-    <a class='btn btn-info' href="mailto:<%= @inquiry.email%>"><i class="fa-solid fa-envelope"></i>&nbsp;返信</a>
-    <a class='btn btn-default btn-secondary' href="<%= url_for(:controller=>'admin_content_inquiry', :action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>"><%= backward_icon('戻る') %>&nbsp;戻る</a>
+    <a class='btn btn-outline-info btn-sm' href="mailto:<%= @inquiry.email%>"><i class="fa-solid fa-envelope"></i>&nbsp;返信</a>
+    <a class='btn btn-default btn-outline-secondary btn-sm' href="<%= url_for(:controller=>'admin_content_inquiry', :action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>"><%= backward_icon('戻る') %>&nbsp;戻る</a>
 </div>
 
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
@@ -77,8 +77,8 @@
                     <%= render :partial=>"form_update", locals: {inquiry: @inquiry} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-success"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
             <% end %>
         </div>
@@ -97,8 +97,8 @@
                     <p>お問い合わせを削除します。よろしいですか？</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
             <% end %>
         </div>

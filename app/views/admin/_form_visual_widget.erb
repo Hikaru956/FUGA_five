@@ -16,7 +16,7 @@
 <div class="mb-3 row">
 	<label for="item_title" class="col-sm-4 col-form-label">ウィジットのタイトル</label>
 	<div class="col-sm-8">
-		<%= f.text_field  :title, {class: "form-control", placeholder: "ヘッドテキスト、ロゴ画像等", :required => true, autofocus: true}  %>
+		<%= f.text_field  :title, {value: @item.title, class: "form-control", placeholder: "ヘッドテキスト、ロゴ画像等", :required => true, autofocus: true}  %>
 	</div>
 </div>
 <div class="mb-3 row">
