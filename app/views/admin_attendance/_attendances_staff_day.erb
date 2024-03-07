@@ -14,7 +14,7 @@
 
 		<span class='float-right'>
 			<% cm = calendar_mark_on(@probe_date, @staff) %>
-			<% unless cm.blank? %>[ <%= cm %> ]<% end %>
+			<% unless cm.blank? %>[ <%= calendar_mark_icon %> : <%= cm %> ]<% end %>
 		</span>
 
 		<div class='text-center'>

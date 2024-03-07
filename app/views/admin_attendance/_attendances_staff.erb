@@ -38,7 +38,7 @@
 	<tr>
 		<th class="head_space_lower"></th>
 		<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
-			<th colspan="2" class="head_timeline">
+			<th colspan="2" class="head_timeline  table-info">
 				<%= (base_time+(i*60*60)).strftime("%l:%M %p") %>
 			</th>
 		<% end %>
