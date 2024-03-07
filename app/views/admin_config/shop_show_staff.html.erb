@@ -34,12 +34,12 @@
 
 <h4>
 	<span class="float-right">
-		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
+		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
 		<%= backward_icon('一覧') %>&nbsp;
-			一覧
+			スタッフ一覧
 		</a>
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
-			<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
+			<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 				<%= edit_icon('編集')%>&nbsp;
 	  			編集
 			</button>
@@ -72,7 +72,7 @@
 			<td>
 				<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 					<span class="float-right">
-						<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
+						<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditSocial">
 							<i class="fa-solid fa-pencil"></i>&nbsp;
 				  			ソーシャル設定
 						</button>
@@ -106,7 +106,7 @@
 
 <h4>
 	<span class="float-right">
-		<a class="btn btn-sm btn-success" href="<%= url_for(:action=>'shop_edit_staff', :id=>@staff) %>">
+		<a class="btn btn-sm btn-primary" href="<%= url_for(:action=>'shop_edit_staff', :id=>@staff) %>">
 			<i class="fa-solid fa-pencil"></i>&nbsp;編集
 		</a>
 	</span>
@@ -143,7 +143,7 @@
 
 <% if current_user.has_permission?(User::ROLE_MANAGER) %>
 	<p>
-		<a class="btn btn-info btn-sm" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
+		<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
 			<i class="fa-solid fa-camera"></i>&nbsp;
 			写真追加
 		</a>
@@ -163,7 +163,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
-                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="submit" class="btn btn-primary btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>
@@ -183,7 +183,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
-                    <button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
+                    <button type="submit" class="btn btn-primary btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
         </div>

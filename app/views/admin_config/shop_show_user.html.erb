@@ -34,12 +34,12 @@
 
 <h4>
 	<span class="float-right">
-		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'shop_list_users', :id=>@user.shop) %>">
+		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'shop_list_users', :id=>@user.shop) %>">
 		<i class="fa-solid fa-arrow-left"></i>&nbsp;
-			一覧
+			店舗ユーザー・一覧
 		</a>
 		<% if current_user==@user || current_user.has_permission?(User::ROLE_MANAGER) %>	
-		<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
+		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 			<%= edit_icon('編集') %>&nbsp;編集
 		</button>
 		<% end %>

@@ -26,7 +26,7 @@ class AdminRosterController < ApplicationController
         roster_sets.each_pair do | date_string, roster_id |
           probe_date = parse_date(date_string) 
           next if roster_id.blank?
-          
+
           # Destroy all current attendances
           #c = Condition.new
           ##  Caution : Need to adapt the target id User Or Staff
@@ -36,12 +36,14 @@ class AdminRosterController < ApplicationController
           item = Attendance.where("    attendances.staff_id =?
                             AND attendances.attend_on =?", \
                             staff, probe_date)
-          item.destroy_all unless item.blank?
-          
+          #item.destroy_all unless item.blank?
+
           roster_label = (roster_id.blank?)? nil: RosterLabel.find_by_id(roster_id)
-          logger.debug 'roster_id ='+roster_id
           next if roster_label.blank?
-          
+
+          cur_rosters = staff.attendances.where(attend_on: probe_date, shop: roster_label.shop)
+          cur_rosters.destroy_all unless cur_rosters.blank?
+
           new_roster = Attendance.new
           new_roster.attend_on  = probe_date
           new_roster.staff      = staff
@@ -52,7 +54,7 @@ class AdminRosterController < ApplicationController
         end
       end
     end
-    redirect_to :action=>"index"
+    redirect_to :controller=>'admin_attendance', :action=>"index", year: params[:year]
   end
 
   def list

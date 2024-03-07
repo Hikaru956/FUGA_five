@@ -11,6 +11,13 @@
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
+	<span class="float-right">
+		<% if current_user.has_permission?(User::ROLE_REGISTRAR) %>
+			<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@shop) %>">
+				<%= backward_icon('戻る')%>&nbsp;店舗登録情報
+			</a>
+		<% end %>
+	</span>
 	<h3>店舗設定</h3>
 </header>
 	
@@ -42,9 +49,9 @@
 		<h4>
 			<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
 				<span class="float-right">
-					<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
+					<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 						<%= edit_icon('編集') %>&nbsp;
-							編集
+							店舗情報編集
 					</button>
 				</span>
 			<% end %>
@@ -56,6 +63,21 @@
 				<tr>
 					<th width="25%">名称</th>
 					<td width="75%">
+						<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
+							<span class='float-right'>
+								<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+									<a class="btn btn-sm btn-primary" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
+										<%= edit_icon('編集') %>&nbsp;
+										サイト編集
+									</a>
+								<% end %>
+								|
+								<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
+									<%= share_icon('表示') %>&nbsp;
+									サイト表示
+								</a>
+							</span>
+						<% end %>
 						<%= model_name(@shop) %>
 					</td>
 				</tr>
@@ -85,10 +107,11 @@
 				<% end %>
 			</tbody>
 		</table>
+		<hr/>
 
 		<h4>
 			<span class="float-right">
-				<a class="btn btn-sm btn-success" href="<%= url_for(:action=>'company_edit_shop') %>" data-turbolinks='false'>
+				<a class="btn btn-sm btn-primary" href="<%= url_for(:action=>'company_edit_shop') %>" data-turbolinks='false'>
 					<%= edit_icon('編集') %>&nbsp;編集
 				</a>
 			</span>
@@ -122,18 +145,23 @@
 
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 			<p class='text-right'>
-				<a class="btn btn-info btn-sm" href="<%= url_for(:action=>'new_shop_photo', :id=>@shop) %>" data-turbolinks='false'>
+				<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_shop_photo', :id=>@shop) %>" data-turbolinks='false'>
 					<i class="fa-solid fa-camera"></i>&nbsp;
 					写真追加
 				</a>
 			</p>
 		<% end %>
+		<hr/>
+
 		<% if current_user.has_permission?(User::ROLE_OPERATOR) %>
+			<h4>
+				オプション
+			</h4>
 			<table class="table table-bordered">
 				<tbody>
-					<tr>
+					<tr class='table-info'>
 						<th colspan="2">
-							オプション
+							オプション機能
 						</th>
 					</tr>
 					<tr>
@@ -151,8 +179,10 @@
 					</tbody>
 			</table>		
 			<div class="float-right muted"><small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
+			<hr/>
 		<% end %>
-		<% unless MAKE_SECRET_FUGA_OPTION %>
+
+		<% unless true || MAKE_SECRET_FUGA_OPTION %>
 				<tr>
 					<th>簡易予約管理</th>
 					<td>
@@ -177,44 +207,44 @@
 		</table>		
 		<div class="float-right muted"><small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
 		<% end %>
-
 	</div>
 	<div class="span4">
-		<h5>
-			<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
 			<span class="float-right">
 				<% url_edit_position = url_for(:action=>"shop_edit_position") %>							
-		  		<a class="btn btn-sm btn-info" href="<%= url_edit_position %>" data-turbolinks='false'>
+				<a class="btn btn-sm btn-info" href="<%= url_edit_position %>" data-turbolinks='false'>
 					<%= setting_icon('マップ設定') %>&nbsp;
-		  			設定
+					設定
 				</a>
 			</span>
-			<% end %>
+		<% end %>
+		<h4>
 			位置情報
-		</h5>
+		</h4>
 		
 		<% if @shop.gps? %>
 			<div id="map"></div>
 		<% else %>
-			<div class="alert alert-warning">
-			  Warning!<small>位置情報が未設定です。</small>
+			<div class="alert alert-secondary">
+				<%= info_icon %>
+				位置情報が未設定です。
 			</div>
 		<% end%>
-		
+		<hr/>
+
 		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
-			<div class="btn-toolbar text-center">
-			  <div class="btn-group">
-					<a class="btn btn-sm btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
-						<%= share_icon('表示') %>&nbsp;
-						サイト表示
+			<div>
+				<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+					<a class="btn btn-sm btn-primary" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
+						<%= edit_icon('編集') %>&nbsp;
+						サイト編集
 					</a>
-					<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
-						<a class="btn btn-sm btn-success" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
-							<%= edit_icon('編集') %>&nbsp;
-							サイト編集
-						</a>
-					<% end %>
-			  </div>
+				<% end %>
+				|
+				<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
+					<%= share_icon('表示') %>&nbsp;
+					サイト表示
+				</a>
 			</div>
 		<% end%>
 

@@ -95,6 +95,10 @@
 							<%= share_icon('サイト表示')%>
 							サイト表示
 						</a>
+						|
+															<%= link_to raw('店舗管理画面' + ' ') + link_to_6_icon, {:action=>'delegating', :id=>@item}, :method => :post, :class=>"btn btn-sm btn-outline-primary" %>
+									<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
+
 					</td>
 				</tr>
 			<% end %>

@@ -12,8 +12,9 @@
 %>
 <% @rosters = RosterLabel.order(position: :asc) %>
 
-<%= stylesheet_link_tag "timeline" %>
+<%= hidden_field_tag 'year', from_date.year %>
 
+<%= stylesheet_link_tag "timeline" %>
 <table class="table table-bordered table-hover">
 	<tr>
 		<th class="span2">
@@ -45,22 +46,27 @@
 			<% 7.times do | i | %>
 				<% @probe_date=from_date+i %>
 				<td class="span2">
-					<% 
-						@attendances = staff.attendances.where("attendances.attend_on =?", @probe_date).order(start_hour: :asc)
-					%>
-					<%= attendance_staff_icon('現在の設定') %>
-					<small><strong>
-						[
+					<small>
+						<% 
+							@attendances = staff.attendances.where("attendances.attend_on =?", @probe_date).order(start_hour: :asc)
+						%>
+						<%= attendance_staff_icon('現在の設定') %>
+						現設定
 						<% if @attendances.blank? %>
-							OFF
+							[<span class='text-secondary'> - </span>]
 						<% else %>
-							<%= @attendances[0].start_hour %>
-							〜
-							<%= @attendances[0].until_hour %>
+							<big>
+							[
+								<span class='text-info'>
+								<%= @attendances[0].start_hour %>
+								〜
+								<%= @attendances[0].until_hour %>
+								</span>
+								<%= '…' if @attendances.size>1 %>
+							]
+							</big>
 						<% end %>
-						]
-						<%= '…' if @attendances.size>1 %>
-					</strong></small>
+					</small>
 					<%= render :partial=>"roster_selection", locals: {staff: staff}%>
 				</td>
 			<% end %>
