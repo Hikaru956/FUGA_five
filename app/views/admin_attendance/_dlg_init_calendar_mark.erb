@@ -12,15 +12,19 @@
 				%>
 
 				<div class="modal-header">
-					<h5 class="modal-title"><%= @target_date.strftime("%Y-%m")%> <%= calendar_mark_title %>一括設定</h5>
+					<h5 class="modal-title">
+						<%= calendar_mark_icon %>
+						<%= calendar_mark_title %>
+						一括設定
+						:
+						<%= model_name(@staff) %>
+					</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p class="small">
-						<%= model_name(@staff) %>
-						の
+					<p>
 						<%= calendar_mark_title %>
-						を一括設定します
+						を一括設定します。ホームページ上のスタッフ・カレンダーに反映されます。
 					</p>
 					<div class="mb-3 row">
 						<label for="shop_alt_id" class="col-sm-4 col-form-label">設定期間</label>
@@ -42,7 +46,7 @@
 					<div class="mb-3 row">
 						<label for="name" class="col-sm-4 col-form-label"><%= calendar_mark_title %></label>
 						<div class="col-sm-8 form-inline">
-			              <%= select_tag :calendar_mark_type, options_for_select(opts), {include_blank:'選択してください', :required => false, class: 'form-control'} %>
+			              <%= select_tag :calendar_mark_type, options_for_select(opts), {include_blank:'-- 選択してください --', :required => true, class: 'form-control'} %>
 						</div>
 					</div>
 				</div>

@@ -7,13 +7,18 @@
 				<%= hidden_field_tag "shop_id", @shop.id %>
 				<%= hidden_field_tag "target_date", @target_date %>
 				<div class="modal-header">
-					<h5 class="modal-title"><%= @target_date.strftime("%Y-%m")%> 勤怠一括設定</h5>
+					<h5 class="modal-title">
+						<%= attendance_staff_icon %>
+						勤怠一括設定
+						:
+						<%= model_name(@staff) %>
+					</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p class="small">
-						<%= @staff.name.truncate(10) %>
-						の<%= @shop.name %>における勤怠情報を一括設定します
+					<p>
+						勤怠情報を一括設定します。
+						設定期間の勤怠情報は、全て上記設定で初期化されます。
 					</p>
 					<% 
 						day_options = []
@@ -22,7 +27,7 @@
 						end
 					%>
 					<div class="mb-3 row">
-						<label for="shop_alt_id" class="col-sm-4 col-form-label">期間</label>
+						<label for="shop_alt_id" class="col-sm-4 col-form-label">設定期間</label>
 						<div class="col-sm-8 form-inline">
 							<%= select_tag("from_date", 	options_for_select(day_options, @target_date.strftime("%Y-%m-%d")), {include_blank:'選択してください', :required => true, class: 'form-control'})%>
 							&nbsp;〜&nbsp;
@@ -51,29 +56,31 @@
 							<label class="checkbox inline">
 							<input type="checkbox" name="holidays[]" id="inlineCheckbox1" value="0"> 日
 							</label>
+							&nbsp;
 							<label class="checkbox inline">
 							<input type="checkbox" name="holidays[]" id="inlineCheckbox2" value="1"> 月
 							</label>
+							&nbsp;
 							<label class="checkbox inline">
 							<input type="checkbox" name="holidays[]" id="inlineCheckbox3" value="2"> 火
 							</label>
+							&nbsp;
 							<label class="checkbox inline">
 							<input type="checkbox" name="holidays[]" id="inlineCheckbox4" value="3"> 水
 							</label>
+							&nbsp;
 							<label class="checkbox inline">
 							<input type="checkbox" name="holidays[]" id="inlineCheckbox5" value="4"> 木
 							</label>
+							&nbsp;
 							<label class="checkbox inline">
 							<input type="checkbox" name="holidays[]" id="inlineCheckbox6" value="5"> 金
 							</label>
+							&nbsp;
 							<label class="checkbox inline">
 							<input type="checkbox" name="holidays[]" id="inlineCheckbox6" value="6"> 土
 							</label>
 						</div>
-						<p class='alert alert-info'>
-							<%= info_icon %>
-							指定期間の勤怠情報は、全て上記設定で初期化されます。
-						</p>
 					</div>
 				</div>
 				<div class="modal-footer">

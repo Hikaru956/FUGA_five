@@ -24,7 +24,7 @@ calendar({:year => @target_date.year, :month => @target_date.month}) do |d|
 	cell_text = "<a href='#{list_url}'>"
 	cell_text << "<span class='calendar_day'>#{d.mday}&nbsp</span><br/>"
 	unless reservations.blank?
-		cell_text << "<div class='alert alert-info' style='font-size:larger;'><b>#{reservations.size}件の予約</b></div>" 
+		cell_text << "<div class='alert alert-info text-left' style='font-size:larger;'><b>#{reservations.size}件<div class='d-none d-md-inline'> の予約</div></b></div>" 
 	end
 	cell_text << "</a>" 
 

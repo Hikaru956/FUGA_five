@@ -1,55 +1,57 @@
-<header class="subhead" id="overview">
-	<span class="float-right">
-	  	<% config_url = url_for(:action=>"list")%>
-	    <a href="<%= config_url %>" class="btn btn-sm btn-primary"><i class="fas fa-cogs"></i>&nbsp;シフト項目編集</a>
-	</span>
-	<h3>勤務表</h3>
-</header>
-
+<% if false %>
 <ul class="breadcrumb">
-  <li><a href="<%= url_for(:controller=>'admin_attendance', :action=>'index') %>">勤務表</a> <span class="divider">/</span></li>
+  <li><a href="<%= url_for(:controller=>'admin_attendance', :action=>'index') %>">勤怠管理</a> <span class="divider">/</span></li>
   <li class="active">シフト設定</li>
 </ul>
+<% end %>
 
-<% this_year = Time.mktime(@target_date.year, @target_date.month, 1).to_date %>
-<p class="lead">
+<header class="subhead" id="overview">
 	<span class="float-right">
 		<%= link_to("<i class='fas fa-arrow-left'></i>&nbsp;戻る".html_safe,
 			{:controller=>"admin_attendance",:action=>"index"}, 
 			:class=>"btn btn-sm btn-outline-dark") %>
 	</span>
-
+	<h3>
+	<%= attendance_staff_icon %>
+	シフト設定
+	:
 	<%= @target_date.strftime("%Y-%m") %>
-	&nbsp;
+	</h3>
+</header>
+
+<% this_year = Time.mktime(@target_date.year, @target_date.month, 1).to_date %>
+<p class="lead">
+	<span class="float-right">
+	</span>
+
 	<span class="btn-group">
-		<span class="btn-toolbar" style="margin: 0;">
-		  <span class="btn-group">
 			<%
 				prev_month = this_year << 1
 				next_month = this_year >> 1
 			%>
 		  	<% prev_url = url_for(:action=>"index", :target_date=>prev_month)%>
-		    <a href="<%= prev_url %>" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i>&nbsp;前月</a>
-		  	<% today_url = url_for(:action=>"index")%>
+		    <a href="<%= prev_url %>" class="btn btn-sm btn-outline-primary"><i class="fas fa-arrow-left"></i>&nbsp;前月</a>
+		  	<% today_url = url_for(:action=>"index", target_date: Time.zone.now.to_date.beginning_of_month)%>
 		    <a href="<%= today_url %>" class="btn btn-sm btn-info">今月</a>
 		  	<% next_url = url_for(:action=>"index", :target_date=>next_month)%>
-		    <a href="<%= next_url %>" class="btn btn-sm btn-secondary">翌月&nbsp;<i class="fas fa-arrow-right"></i></a>
+		    <a href="<%= next_url %>" class="btn btn-sm btn-outline-primary">翌月&nbsp;<i class="fas fa-arrow-right"></i></a>
 		  </span>
-		</span>
+		|
+	    <a href="<%= url_for(:action=>"list") %>" class="btn btn-sm btn-primary"><i class="fas fa-cogs"></i>&nbsp;シフト項目編集</a>
 	</span>
 </p>
 
-<div class="form-inline">
+<div zclass="form-inline">
 	<%= form_with(url: admin_roster_update_rosters_path, method: :patch) do |f| %>
 		<%= hidden_field_tag 'target_date', @target_date %>
-		<legend>シフト設定</legend>
+
 		<%= render :partial=>'form_calendar' %>
 
 		<div class="alert alert-info">
-			<%= info_icon %>&nbsp;上記設定で勤怠情報が自動的に更新されます。
+			<%= info_icon %>&nbsp;週単位で勤怠情報が更新されます。
 		</div>
 
-		<div>
+		<div class='text-right'>
 			<%= link_to("<i class='fas fa-arrow-left'></i>&nbsp;戻る".html_safe,
 				{:controller=>"admin_attendance",:action=>"index"}, 
 				:class=>"btn btn-sm btn-outline-dark") %>

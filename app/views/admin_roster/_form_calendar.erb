@@ -8,7 +8,7 @@
 	staffs = @shop.valid_staffs
 
 	from_date = @target_date
-	from_date -= @target_date.wday	if @target_date.day==1
+	from_date -= @target_date.wday	#if @target_date.day==1
 %>
 <% @rosters = RosterLabel.order(position: :asc) %>
 
@@ -23,7 +23,7 @@
 				next_frame = from_date + 7
 			%>
 			<span class="float-right">
-				<%= link_to("<i class='fas fa-angle-double-left'></i>".html_safe, 	{:action=>'index', :target_date=>prev_frame}) %>
+				<%= link_to("<i class='fas fa-angle-double-left'></i> 前週".html_safe, 	{:action=>'index', :target_date=>prev_frame}) %>
 			</span>
 		</th>
 		<% 7.times do | i | %>
@@ -31,7 +31,7 @@
 			<th class="span2">
 				<% if i==6 %>
 					<span class="float-right">
-						<%= link_to("<i class='fas fa-angle-double-right'></i>".html_safe, 	{:action=>'index', :target_date=>next_frame}) %>
+						<%= link_to("次週 <i class='fas fa-angle-double-right'></i>".html_safe, 	{:action=>'index', :target_date=>next_frame}) %>
 					</span>
 				<% end %>
 				<%= @probe_date.strftime("%m-%d")%>
@@ -42,7 +42,7 @@
 	</tr>
 	<% staffs.each do | staff | %>
 		<tr>
-			<td><%= truncate(staff.name, :length=>20) %></td>
+			<th><%= truncate(staff.name, :length=>20) %></th>
 			<% 7.times do | i | %>
 				<% @probe_date=from_date+i %>
 				<td class="span2">
@@ -55,16 +55,16 @@
 						<% if @attendances.blank? %>
 							[<span class='text-secondary'> - </span>]
 						<% else %>
-							<big>
 							[
-								<span class='text-info'>
+								<b>
+								<span style='color: #EAE3E7; background-color: #4C312F;'>
 								<%= @attendances[0].start_hour %>
 								〜
 								<%= @attendances[0].until_hour %>
 								</span>
 								<%= '…' if @attendances.size>1 %>
+								</b>
 							]
-							</big>
 						<% end %>
 					</small>
 					<%= render :partial=>"roster_selection", locals: {staff: staff}%>

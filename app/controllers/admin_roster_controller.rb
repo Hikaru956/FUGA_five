@@ -8,10 +8,7 @@ class AdminRosterController < ApplicationController
 
   def index
     @target_date = parse_date(params[:target_date]) unless params[:target_date].blank?
-    if @target_date.blank?
-      now = Time.now
-      @target_date = Time.mktime(now.year, now.month, 1).to_date
-    end
+    @target_date = Time.zone.now.to_date  if @target_date.blank?
   end
 
   def update_rosters

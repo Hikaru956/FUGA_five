@@ -31,7 +31,7 @@ table.calendar td.today {
     vertical-align: top;
     border:  double #808 2px;
 	color:#000;
-    background-color: #FFF;
+    background-color: #CFC;
     }
     
 table.calendar td.future_day {

@@ -1,6 +1,6 @@
 <% 
 	options = []
-	options << ['--- ', '']
+	options << ['- 現設定 -', '']
 	option_rosters = @rosters.map{ | r | [ r.name, r.id.to_s] }
 	options.concat(option_rosters)
 	options << ['OFF', '-1']

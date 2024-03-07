@@ -1,6 +1,11 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
 	<span class="float-right">
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+			<% roster_url = url_for(:controller=>"admin_roster", :action=>"index", target_date: @target_date)%>
+			<a href="<%= roster_url %>" class="btn btn-outline-primary"><i class="fas fa-tasks"></i>&nbsp;シフト設定</a>
+			|
+		<% end %>
 		<% calendar_url = url_for(:action=>"index", :year => @target_date.year)%>
 		<a href="<%= calendar_url %>" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;スタッフ一覧へ</a>
 	</span>
