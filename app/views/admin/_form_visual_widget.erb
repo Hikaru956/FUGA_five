@@ -1,8 +1,8 @@
-<% if @item.id.blank? %>
+
 <div class="mb-3 row">
-	<label for="item_widget_type" class="col-sm-4 col-form-label">サイト・ステータス</label>
+	<label for="item_widget_type" class="col-sm-4 col-form-label">タイプ</label>
 	<div class="col-sm-8">
-		<select class="form-select" aria-label="Default select example" name="item[widget_type]" id="item_widget_type">
+		<select class="form-select" aria-label="Default select example" name="visual_widget[widget_type]" id="item_widget_type">
 			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_STRING %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_STRING%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_STRING)%></option>
 			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_TEXT %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_TEXT%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_TEXT)%></option>
 			<option <% if @item.widget_type==VisualWidget::WIDGET_TYPE_CODE %>selected<% end %> 	value="<%=VisualWidget::WIDGET_TYPE_CODE%>">	<%=widget_type_string(VisualWidget::WIDGET_TYPE_CODE)%></option>
@@ -12,7 +12,7 @@
 		</select>
 	</div>
 </div>
-<% end %>
+
 <div class="mb-3 row">
 	<label for="item_title" class="col-sm-4 col-form-label">ウィジットのタイトル</label>
 	<div class="col-sm-8">
