@@ -90,6 +90,9 @@
     <%= raw @seed.description %>
   </p>
 <% end %>
+<% if @website.option_attendance_management %>
+    <%= render inline: v_w(@website, 'FUGA-STC') %>
+<% end %>
 <% unless @seed.social_line_uri.blank? %>
   <p class="line-reserve">
     <a href="<%= @seed.social_line_uri %>" target='_blank' class="infoButton">LINE 予約</a>

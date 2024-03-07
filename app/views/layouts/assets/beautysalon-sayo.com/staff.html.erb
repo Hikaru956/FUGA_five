@@ -99,6 +99,9 @@
                                 <%= raw @seed.description %>
                             </div>
 <% end %>
+                            <% if @website.option_attendance_management %>
+                                <%= render inline: v_w(@website, 'FUGA-STC') %>
+                            <% end %>
                             <footer>
                                 <ul class="sns_links">
 <% unless @seed.social_facebook_uri.blank? %>

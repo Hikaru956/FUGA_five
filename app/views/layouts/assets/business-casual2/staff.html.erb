@@ -134,10 +134,6 @@
                             </div>
 <% end %>
                             <% if @website.option_attendance_management %>
-                                <% if false %>
-                                    <%= render :partial=>'bs_renderer/cal_staff_base'%>
-                                    <br/>
-                                <% end %>
                                 <%= render inline: v_w(@website, 'FUGA-STC') %>
                             <% end %>
                             <footer>

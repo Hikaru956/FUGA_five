@@ -129,6 +129,10 @@
 					<% if @website.option_attendance_management %><%= render :partial=>'#{LayoutScheme.asset_root}/monster-silver/staff_attendances' %><% end%>
 				<% end %>
 
+                <% if @website.option_attendance_management %>
+                    <%= render inline: v_w(@website, 'FUGA-STC') %>
+                <% end %>
+
             </div>
         </div>
         <!--============================== footer =================================-->

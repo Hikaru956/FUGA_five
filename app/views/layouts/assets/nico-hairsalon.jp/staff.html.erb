@@ -55,8 +55,11 @@
     <h1><%= model_name(@seed) %></h1>
 <% unless @seed.description.blank? %>
     <div class="contents">
-<%= raw @seed.description %>
+        <%= raw @seed.description %>
     </div>
+<% end %>
+<% if @website.option_attendance_management %>
+    <%= render inline: v_w(@website, 'FUGA-STC') %>
 <% end %>
 </article>
 <!-- Header -->

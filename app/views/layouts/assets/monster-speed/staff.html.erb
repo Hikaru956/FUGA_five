@@ -132,6 +132,9 @@
 				<% unless MAKE_SECRET_FUGA_OPTION %>
 					<% if @website.option_attendance_management %><%= render :partial=>'#{LayoutScheme.asset_root}/monster-speed/staff_attendances' %><% end%>
 				<% end %>
+                <% if @website.option_attendance_management %>
+                    <%= render inline: v_w(@website, 'FUGA-STC') %>
+                <% end %>
             </div>
         </div>
         <!--============================== footer =================================-->

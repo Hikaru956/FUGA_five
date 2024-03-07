@@ -80,6 +80,9 @@
         <%= raw @seed.description %>
 <% end %>
     </div>
+    <% if @website.option_attendance_management %>
+        <%= render inline: v_w(@website, 'FUGA-STC') %>
+    <% end %>
 </article>
 <%= render :partial=>"#{LayoutScheme.asset_root}/sabouyamadaya.com/footer" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
