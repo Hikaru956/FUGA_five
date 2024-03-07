@@ -134,7 +134,9 @@
                             </div>
 <% end %>
                             <% if @website.option_attendance_management %>
-                                <%= render :partial=>'bs_renderer/cal_staff_base'%>
+                                <%= render :partial=>'bs_renderer/cal_staff_base' %>
+                                <br/>
+                                <%= render inline: v_w(@website, 'FUGA-STC') %>
                             <% end %>
                             <footer>
                                 <ul class="sns_links">

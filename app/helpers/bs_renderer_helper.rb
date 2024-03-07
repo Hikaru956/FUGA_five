@@ -21,5 +21,25 @@ module BsRendererHelper
     raw ( (shop.copyright_notice.blank?)? 'Copyright&nbsp;&copy;&nbsp;'+Time.now.year.to_s+'&nbsp;'+model_name(shop.company): shop.copyright_notice )
   end
 
+  def v_w(website, widget_title)
+    widget = VisualWidget.find_by(title: widget_title)
+    return nil if widget.blank?
+
+    widget_bag = VisualWidget.search_widget_bag_for(website, widget.hash_key)
+
+    return '' if widget_bag.blank?
+    case widget_bag.visual_widget.widget_type
+    when VisualWidget::WIDGET_TYPE_STRING
+      return widget_bag.data_string
+    when VisualWidget::WIDGET_TYPE_TEXT
+      return widget_bag.data_text
+    when VisualWidget::WIDGET_TYPE_CODE
+      return raw widget_bag.data_code
+    when VisualWidget::WIDGET_TYPE_LINK
+      return raw widget_bag.data_url
+    end
+    return ''
+  end
+
 
 end
