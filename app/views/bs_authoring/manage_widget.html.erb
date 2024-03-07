@@ -14,7 +14,8 @@
 </header>
 
 <div class="row-fluid">
-	<% @layout.visual_widgets.each do | visual_widget | @visual_widget = visual_widget %>
+	<% @layout.visual_widgets.each do | visual_widget | %>
+		<% @visual_widget = visual_widget %>
 		<%= render :partial=>"bs_authoring/manage_visual_widget_item" %>
 	<% end %>
 </div>
