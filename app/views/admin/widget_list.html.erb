@@ -48,10 +48,10 @@
 				<td><%= widget_type_string(widget.widget_type) %></td>
 				<td>
 					<span class="float-right">
-						<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdit">
+						<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdit_<%= widget.id %>">
 							<%= edit_icon('編集') %>&nbsp;編集
 						</button>
-						<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+						<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete_<%= widget.id %>">
 							<%= trash_icon('削除') %>&nbsp;削除
 						</button>
 					</span> 
@@ -91,13 +91,9 @@
     </div>
 </div>
 <% @layout.visual_widgets.each do | item | @item = item %>
-	<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
+	<div class="modal fade" id="modalEdit_<%= @item.id %>" tabindex="-1" aria-labelledby="modalEdit_<%= @item.id %>" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<% 
-					@item = VisualWidget.new
-					@item.layout_scheme = @layout 
-				%>
 				<%= hidden_field 'item', 'layout_scheme_id' %>
 				<%= form_for @item, url: admin_widget_update_path(id: @item.id), method: :patch do |f| -%>
 					<div class="modal-header">
@@ -115,7 +111,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDelete" aria-hidden="true">
+	<div class="modal fade" id="modalDelete_<%= @item.id %>" tabindex="-1" aria-labelledby="modalDelete_<%= @item.id %>" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<%= form_for @item, url: admin_widget_delete_path(id: @item.id), method: :delete do |f| -%>
