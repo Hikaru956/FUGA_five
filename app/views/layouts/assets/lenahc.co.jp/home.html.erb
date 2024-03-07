@@ -91,14 +91,16 @@
 <script src="/assets/lenahc.co.jp/js/carousel.js"></script>
 <%  if @author_mode %>
 <script>
-$(function()
-{
-    new function() {
-        var li  = '<li><a href="/bs_authoring/list_layout_schemes">デザイン</a></li>';
-            li += '<li><a href="/bs_authoring/manage_widget">表示設定</a></li>';
-            li += '<li><a href="/bs_config/shop_show_website">サイト編集終了</a></li>';
-        $('ul.nav').append(li);
-    };
+$(function() {
+    var li = '';
+    <% if (current_user.ui_version.blank?) { %>
+        li += '<li><a href="/bs_authoring/list_layout_schemes">デザイン</a></li>';
+        li += '<li><a href="/bs_authoring/manage_widget">表示設定</a></li>';
+        li += '<li><a href="/bs_config/shop_show_website">サイト編集終了</a></li>';
+    <% } else { %>
+        li += '<li><a href="/admin_config/shop_show_website">サイト編集終了</a></li>';
+    <% } %>
+    $('ul.nav').append(li);
 });
 </script>
 <%  end %>
