@@ -65,6 +65,6 @@
 		<div class="form-actions text-right">
 			<% url_cancel = url_for(:action=>'shop_show_staff', :id=>@staff) %>
 	  		<a class="btn btn-sm btn-secondary" href="<%= url_cancel %>" data-turbolinks='false'><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</a>
-        	<button type="submit" class="btn btn-sm btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
+        	<button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
       	</div>
 <% end -%>
