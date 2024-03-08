@@ -107,14 +107,14 @@
 
 						<% if @item.page_type==WebPage::TYPE_FIX %>
 							<% edit_fix_page_url = url_for(:action=>'edit_fix_page', :id=>ContentLeaf.find_by_hash_key(@item.content_key))%>
-							<a class="btn btn-sm btn-success"  href="<%=edit_fix_page_url%>" data-turbolinks='false'>
+							<a class="btn btn-sm btn-primary"  href="<%=edit_fix_page_url%>" data-turbolinks='false'>
 								<%= edit_icon('編集') %>&nbsp;
-					  			編集
+					  			編集…
 							</a>
 						<% else %>
-							<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit_<%=@item.id%>">
+							<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit_<%=@item.id%>">
 								<%= edit_icon('編集') %>&nbsp;
-					  			編集
+					  			編集…
 							</button>
 						<% end %>
 
@@ -167,7 +167,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
-						<button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
+						<button type="submit" class="btn btn-primary btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
 					</div>
 				<% end %>
 			</div>
