@@ -500,4 +500,11 @@ EOF
 
   def link_to_6_icon(title='', ext_class='');  sprintf("<i class='fa-solid fa-circle-chevron-right fa-fw %s' title='%s'></i>", ext_class, title).html_safe; end
 
+  def caret_up_icon(title='上へ', ext_class='');    sprintf("<i class='fa-solid fa-angle-up fa-fw %s' title='%s'></i>", ext_class, title).html_safe; end
+  def caret_down_icon(title='下へ', ext_class='');  sprintf("<i class='fa-solid fa-angle-down fa-fw %s' title='%s'></i>", ext_class, title).html_safe; end
+  def caret_top_icon(title='最上位へ', ext_class='');     sprintf("<i class='fa-solid fa-angles-up fa-fw %s' title='%s'></i>", ext_class, title).html_safe; end
+  def caret_bottom_icon(title='最下位へ', ext_class='');  sprintf("<i class='fa-solid fa-angles-down fa-fw %s' title='%s'></i>", ext_class, title).html_safe; end
+    
+
+
 end

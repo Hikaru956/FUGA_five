@@ -48,12 +48,12 @@
 <% if @staffs.blank? %>
 	<p class="text-error">店舗スタッフが登録されていません</p>
 <% else %>
-	<table class="table table-hover table-bordered">
+	<table class="table table-hover table-xbordered">
 		<thead>
 			<tr>
-				<th class="span4 table-dark"><span class="float-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
-				<th class="span4 table-dark">職位/タイトル</th>
-				<th class="span4 table-dark">ソーシャル</th>
+				<th class="span4 xtable-dark"><span class="float-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
+				<th class="span4 xtable-dark">職位/タイトル</th>
+				<th class="span4 xtable-dark">ソーシャル</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -62,8 +62,10 @@
 					<td>
 						<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 							<span class="float-right">
-								<%= (staff.first?)?	"△":	link_to("▲", :action=>"staff_higher",	:id=>staff) %>
-								<%= (staff.last?)? 	"▽": 	link_to("▼", :action=>"staff_lower", 	:id=>staff) %>
+								<%= (staff.first?)?	caret_top_icon:		link_to(caret_top_icon, :action=>"staff_top",	:id=>staff) %>
+								<%= (staff.first?)?	caret_up_icon:		link_to(caret_up_icon, :action=>"staff_higher",	:id=>staff) %>
+								<%= (staff.last?)? 	caret_down_icon: 	link_to(caret_down_icon, :action=>"staff_lower", 	:id=>staff) %>
+								<%= (staff.last?)? 	caret_bottom_icon: 	link_to(caret_bottom_icon, :action=>"staff_bottom", 	:id=>staff) %>
 							</span>
 						<% end %>						
 						

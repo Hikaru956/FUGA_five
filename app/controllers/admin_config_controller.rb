@@ -99,6 +99,24 @@ class AdminConfigController < ApplicationController
     render :action=>'shop_list_staffs'
   end
 
+  def staff_top
+    staff = @shop.staffs.find(params[:id])
+    staff.move_to_top
+    staff.save
+
+    @staffs = @shop.staffs
+    render :action=>'shop_list_staffs'
+  end
+
+  def staff_bottom
+    staff = @shop.staffs.find(params[:id])
+    staff.move_to_bottom
+    staff.save
+
+    @staffs = @shop.staffs
+    render :action=>'shop_list_staffs'
+  end
+
   ###
   ##  Actions For Photos
   #
@@ -300,6 +318,28 @@ class AdminConfigController < ApplicationController
     web_page.save!
     unless web_page.content_category.blank?
       web_page.content_category.move_lower
+      web_page.content_category.save!
+    end
+    redirect_to :action=>'shop_site_navigation'
+  end
+
+  def web_page_top
+    web_page = @shop.web_pages.find_by_id(params[:id])
+    web_page.move_to_top
+    web_page.save!
+    unless web_page.content_category.blank?
+      web_page.content_category.move_to_top
+      web_page.content_category.save!
+    end
+    redirect_to :action=>'shop_site_navigation'
+  end
+
+  def web_page_bottom
+    web_page = @shop.web_pages.find_by_id(params[:id])
+    web_page.move_to_bottom
+    web_page.save!
+    unless web_page.content_category.blank?
+      web_page.content_category.move_to_bottom
       web_page.content_category.save!
     end
     redirect_to :action=>'shop_site_navigation'
