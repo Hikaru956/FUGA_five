@@ -18,7 +18,9 @@
 			</button>
 		</p>
 	<% end %>
-	<h3>レジストリー</h3>
+	<h3>
+		レジストリー
+	</h3>
 </header>
 
 <% if @items.blank? %>
@@ -28,11 +30,21 @@
 		<thead>
 			<tr>
 				<th class='table-dark' width='40%'>
-					<span class="float-right"><span class="badge badge-success"><%= Company.count %></span></span>
 					レジストリー名
 				</th>
-				<th class='table-dark' width='10%'><strong><span class="float-right"><span class="badge badge-success"><%= Shop.count %></span></span>店舗数</th>
-				<th class='table-dark' width='25%'>ストレージ</th>
+				<th class='table-dark' width='10%'>
+					店舗数
+				</th>
+				<th class='table-dark' width='25%'>
+					ストレージ
+					<span class='float-right'>
+						<small>
+							使用量
+							/
+							設定量
+						</small>
+					</span>
+				</th>
 				<th class='table-dark' width='25%'>固定ページ</th>
 			</tr>
 		<head>
@@ -45,14 +57,16 @@
 							<%= model_name(@company) %>
 							<%= link_to_6_icon %>
 						</a>
-						<span class='float-right text-danger'>
-							<%
-								e_cat = ContentCategory.where('shop_id IN (?) AND content_categories.id = content_categories.parent_id', @company.shops.map{|s| s.id})
-							%>
-							<% unless e_cat.blank? %>
-								<i class="fas fa-exclamation-triangle" title='カテゴリーエラー'></i>
-							<% end %>
-						</span>
+						<% if false %>
+							<span class='float-right text-danger'>
+								<%
+									e_cat = ContentCategory.where('shop_id IN (?) AND content_categories.id = content_categories.parent_id', @company.shops.map{|s| s.id})
+								%>
+								<% unless e_cat.blank? %>
+									<i class="fas fa-exclamation-triangle" title='カテゴリー設定エラー'></i>
+								<% end %>
+							</span>
+						<% end %>
 					</td>
 					<td style="vertical-align: middle; text-align:right">
 						<%= @company.shops.size %>
@@ -64,21 +78,31 @@
 						rate = (company_room_size_mb.blank?||company_room_size_mb==0)? 0 : (company_photo_size*100)/(company_room_size_mb*1024*1024)
 
 						pbar_class = "bg-success"
-						pbar_class = "bg-warning"	if rate>60
-						pbar_class = "bg-danger"	if rate>80
+						pbar_class = "bg-warning"	if rate>80
+						pbar_class = "bg-danger"	if rate>100
+
+						pbar_tx_class = "text-dark"
+						pbar_tx_class = "text-light"	if rate>80
+						pbar_tx_class = "text-light"	if rate>100
 					%>
 					<td style=" vertical-align: middle; text-align:right">
 						<% url = url_for(:action=>"company_list_shop", :id=>@company) %>
 						<a href="<%=url%>">
-							<%= number_to_human_size(company_photo_size)  %>
+							<span class='text-primary'>
+								<%= number_to_human_size(company_photo_size)  %>
+							</span>
 							/
-							<%= (company_room_size_mb.blank?)? "無制限": number_to_human_size(company_room_size_mb*1024*1024) %>
+							<span class='text-info'>
+								<%= (company_room_size_mb.blank?)? "無制限": number_to_human_size(company_room_size_mb*1024*1024) %>
+							</span>
 						</a>
-						<span class="label"><%= rate.to_i%>%</span>
+						<span class="label">(<%= rate.to_i%>%)</span>
 						</span>
-						<div class="progress">
-							<div class="progress-bar <%= pbar_class %>" role="progressbar" style="width: <%= rate %>%;" aria-valuenow="<%= rate %>" aria-valuemin="0" aria-valuemax="100"><%= rate %>%</div>
+
+						<div class="progress" style="height: 30px;">
+							<div class="progress-bar progress-bar-striped progress-bar-animated <%= pbar_tx_class %> <%= pbar_class %>" role="progressbar" style="width: <%= rate %>%;" aria-valuenow="<%= rate %>" aria-valuemin="0" aria-valuemax="100"><%= rate %>%</div>
 						</div>
+
 					</td>
 					<td style=" vertical-align: middle; text-align:right">
 						<%
@@ -95,9 +119,45 @@
 			<% end %>
 		</tbody>
 	</table>
-	
 	<%= paginate @items, theme: 'bootstrap-5' %>
 <% end %>
+
+<hr/>
+<dl class="row">
+  <dt class="col-sm-3">登録レジストリー</dt>
+  <dd class="col-sm-9"><%= Company.count %> <small>件</small></dd>
+
+  <dt class="col-sm-3">登録店舗</dt>
+  <dd class="col-sm-9"><%= Shop.count %> <small>店舗</small></dd>
+
+  <%
+	valid_shops = Shop.where(wsite_run_mode: Shop::WSITE_PUBLISHED)
+  %>
+
+  <dt class="col-sm-3">swifty運用店舗 (WSITE_PUBLISHED)</dt>
+  <dd class="col-sm-9"><b><span class='text-success'><%= valid_shops.count %></span></b> <small>店舗</small></dd>
+
+  <dt class="col-sm-3">リッチ・テキスト・エディター</dt>
+  <dd class="col-sm-9"><b><span class='text-primary'><%= Shop.where(enable_editor: true).count %></span></b> <small>店舗</small></dd>
+
+  <dt class="col-sm-3">予約管理機能</dt>
+  <dd class="col-sm-9"><b><span class='text-primary'><%= Shop.where(option_reservation_management: true).count %></span></b> <small>店舗</small></dd>
+
+  <dt class="col-sm-3">勤怠管理機能</dt>
+  <dd class="col-sm-9"><b><span class='text-primary'><%= Shop.where(option_attendance_management: true).count %></span></b> <small>店舗</small></dd>
+
+  <dt class="col-sm-3">ディスク使用量</dt>
+  <%
+	sum = 0
+	valid_shops.each do |s|
+		sum += s.photo_size
+	end
+	sum = sum/(1024*1024*1024)
+  %>
+  <dd class="col-sm-9"><b><span class='text-primary'><%= sum %></span></b> <small>GB</small></dd>
+
+
+</dl>
 
 <!-- modalNewShop -->
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
