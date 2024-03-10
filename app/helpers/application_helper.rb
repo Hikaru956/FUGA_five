@@ -133,6 +133,12 @@ module ApplicationHelper
     return raw "停止中"    if site_status == Shop::WSITE_BLOCKED    
   end
 
+  def icon_staff_status_6(staff_status)
+    return raw "<i class='fa-solid fa-user-check'></i>"        if staff_status == Staff::STAFF_PROPER    
+    return raw "<i class='fa-solid fa-square-h text-info'></i>"   if staff_status == Staff::STAFF_HELPER
+    return raw "<i class='fa-solid fa-ban text-danger'></i>"        if staff_status == Staff::STAFF_BLOCKED    
+  end
+
   def icon_staff_status(staff_status)
     return raw "<i class='icon-star'></i>"        if staff_status == Staff::STAFF_PROPER    
     return raw "<i class='icon-star-half'></i>"   if staff_status == Staff::STAFF_HELPER

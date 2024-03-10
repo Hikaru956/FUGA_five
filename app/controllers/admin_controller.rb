@@ -243,6 +243,23 @@ class AdminController < ApplicationController
         redirect_to :action=>'shop_list_staffs', :id=>@item
     end
 
+    def staff_top
+        staff = Staff.find(params[:id])
+        staff.move_to_top
+        staff.save
+
+        @item = staff.shop
+        redirect_to :action=>'shop_list_staffs', :id=>@item
+    end
+
+    def staff_bottom
+        staff = Staff.find(params[:id])
+        staff.move_to_bottom
+        staff.save
+
+        @item = staff.shop
+        redirect_to :action=>'shop_list_staffs', :id=>@item
+    end
 
     ###
     ##  Controllers For Shop Users

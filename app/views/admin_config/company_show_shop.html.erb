@@ -154,6 +154,9 @@
 		<hr/>
 
 		<% if current_user.has_permission?(User::ROLE_OPERATOR) %>
+			<span class='float-right'>
+				<small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small>
+			</span>
 			<h4>
 				オプション
 			</h4>
@@ -177,8 +180,7 @@
 						</td>
 					</tr>
 					</tbody>
-			</table>		
-			<div class="float-right muted"><small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
+			</table>
 			<hr/>
 		<% end %>
 

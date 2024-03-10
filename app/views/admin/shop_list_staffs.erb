@@ -34,29 +34,36 @@
 <% if @staffs.blank? %>
 	<p class="text-error">店舗スタッフが登録されていません</p>
 <% else %>
-	<table class="table table-hover table-bordered">
+	<table class="table table-hover table-xxbordered">
 		<thead>
 			<tr>
-				<th class='table-dark' ><span class="float-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
-				<th class='table-dark' >職位/タイトル</th>
-				<th class='table-dark' >ソーシャル</th>
+				<th width='30%' xclass='table-dark' ><span class="float-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
+				<th width='20%'></th>
+				<th width='25%' xclass='table-dark' >職位/タイトル</th>
+				<th width='15%' xclass='table-dark' >ソーシャル</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @staffs.each do | staff | %>
 				<tr>
 					<td style="vertical-align: middle;">
-						<span class="float-right">
-							<%= (staff.first?)?	"△":	link_to("▲", :action=>"staff_higher",	:id=>staff) %>
-							<%= (staff.last?)? 	"▽": 	link_to("▼", :action=>"staff_lower", 	:id=>staff) %>
-						</span>
-
 						<% url = url_for(:action=>"shop_show_staff", :id=>staff) %>
 						<a href="<%=url%>" class='text-primary'>
-							<%= icon_staff_status(staff.staff_status) %>
+							<%= icon_staff_status_6(staff.staff_status) %>
 							<%= model_name(staff) %>
 							<%= link_to_6_icon %>
 						</a>
+						<span class='float-right'>
+							<small>
+								<%= label_staff_status(staff.staff_status)%>
+							</small>
+						</span>
+					</td>
+					<td class='text-center' style="vertical-align: middle;">
+						<%= (staff.first?)?	caret_top_icon:		link_to(caret_top_icon, 	:action=>"staff_top",	:id=>staff) %>
+						<%= (staff.first?)?	caret_up_icon:		link_to(caret_up_icon, 		:action=>"staff_higher",	:id=>staff) %>
+						<%= (staff.last?)? 	caret_down_icon: 	link_to(caret_down_icon, 	:action=>"staff_lower", 	:id=>staff) %>
+						<%= (staff.last?)? 	caret_bottom_icon: 	link_to(caret_bottom_icon, 	:action=>"staff_bottom", 	:id=>staff) %>
 					</td>
 					<td style="vertical-align: middle;"><%=staff.job_title%></td>
 					<td style="vertical-align: top;">
