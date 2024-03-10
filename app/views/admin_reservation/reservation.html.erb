@@ -49,6 +49,6 @@
 <%= render :partial=>"timelines_quarter"%>
 
 <div class='text-right'>
-	<%= render partial: 'admin_attendance/legend_timeline'%>
+	<%= render partial: 'admin_attendance/legend_timeline', locals: {shop: @shop} %>
 </div>
 
