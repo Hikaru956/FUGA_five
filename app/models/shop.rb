@@ -283,6 +283,18 @@ class Shop < ApplicationRecord
     tags = tags.where("tags.shop_id =?", self.id)
   end
 
+  def is_new_editor_available?
+    self.enable_editor
+  end
+
+  def is_reservation_available?
+    self.option_reservation_management
+  end
+
+  def is_attendance_available?
+    self.option_attendance_management
+  end
+
   protected 
   def gen_new_wsite_key
     string = Time.now.to_s+":"

@@ -62,6 +62,13 @@
 							<%= model_name(@company) %>
 							<%= link_to_6_icon %>
 						</a>
+
+						<span class='float-right'>
+							<%= editor_six_icon if company.is_new_editor_available? %>
+							<%= attendance_six_icon if company.is_attendance_available? %>
+							<%= reservation_six_icon if company.is_reservation_available? %>
+						</span>
+
 						<% if false %>
 							<span class='float-right text-danger'>
 								<%

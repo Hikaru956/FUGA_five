@@ -35,4 +35,28 @@ class Company < ApplicationRecord
     sum
   end
   
+  def is_new_editor_available?
+    return false if self.shops.blank?
+    shops.each do |s|
+      return true if s.is_new_editor_available?
+    end
+    false
+  end
+
+  def is_attendance_available?
+    return false if self.shops.blank?
+    shops.each do |s|
+      return true if s.is_attendance_available?
+    end
+    false
+  end
+
+  def is_reservation_available?
+    return false if self.shops.blank?
+    shops.each do |s|
+      return true if s.is_reservation_available?
+    end
+    false
+  end
+
 end
