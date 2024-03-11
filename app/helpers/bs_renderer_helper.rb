@@ -23,10 +23,10 @@ module BsRendererHelper
 
   def v_w(website, widget_title)
     shop_layout = website.wsite_layout_deploy
-    return nil if shop_layout.blank?
+    return '' if shop_layout.blank?
 
     widget = shop_layout.visual_widgets.find_by(title: widget_title)
-    return nil if widget.blank?
+    return '' if widget.blank?
 
     widget_bag = VisualWidget.search_widget_bag_for(website, widget.hash_key)
 
@@ -41,7 +41,7 @@ module BsRendererHelper
     when VisualWidget::WIDGET_TYPE_LINK
       return raw widget_bag.data_url
     end
-    return nil
+    return ''
   end
 
 end
