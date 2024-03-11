@@ -30,7 +30,7 @@ module BsRendererHelper
 
     widget_bag = VisualWidget.search_widget_bag_for(website, widget.hash_key)
 
-    return nil if widget_bag.blank?
+    return '' if widget_bag.blank?
     case widget_bag.visual_widget.widget_type
     when VisualWidget::WIDGET_TYPE_STRING
       return widget_bag.data_string
