@@ -92,21 +92,19 @@
 							<%= info_icon('情報')%>
 						</a>
 					</td>
-					<td style="vertical-align: middle;">
-						<%= form_tag dashboard_delegating_path(id: shop), method: :post, class: '' do %>
-							<div style='align: center;'>
-								<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>shop.wsite_hash_key) %>" target="_blank">
-									<%= share_icon('サイト表示')%>
-									<div class='d-none d-md-inline'>サイト</div>表示
-								</a>
-								|
-								<button type='submit' class='btn btn-sm btn-outline-primary'>
-									<div class='d-none d-md-inline'>店舗</div>管理
-									<%= link_to_6_icon %>
-								</button>
-							</div>
-						<% end %>
+					<%= form_tag dashboard_delegating_path(id: shop), method: :post, class: '' do %>
+					<td class='text-center'style="vertical-align: middle;">
+						<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>shop.wsite_hash_key) %>" target="_blank">
+							<%= share_icon('サイト表示')%>
+							<div class='d-none d-md-inline'>サイト</div>表示
+						</a>
+						|
+						<button type='submit' class='btn btn-sm btn-outline-primary'>
+							<div class='d-none d-md-inline'>店舗</div>管理
+							<%= link_to_6_icon %>
+						</button>
 					</td>
+					<% end %>
 				</tr>
 			<% end %>
 		</tbody>
