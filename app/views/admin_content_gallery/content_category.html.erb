@@ -27,12 +27,12 @@
 			</a>
 		<% end %>
 	</div>
-	<h3><%= @parent_category.category_label %></h3>
+	<h3><%= @parent_category.category_label %>項目一覧</h3>
 </header>
 
 <% if @parent_category.my_bag_root_category.content_bag.is_public==false  %>
 	<div class="alert alert-warning">
-		 <strong>Warning!</strong> 非公開ストリームです。
+		 <%= info_icon %> 非公開ストリームです。
 	</div>
 <% end %>
 
@@ -55,12 +55,10 @@
 	</div>
 <% end %>
 
-
-<h4>項目一覧</h4>
 <% if @leafs.blank? %>
 	<% if @parent_category.children.blank? %>
 		<div class="alert alert-info">
-			 <strong>Warning!</strong> 項目がありません。
+			 <%= info_icon %> 項目がありません。
 		</div>
 	<% end %>
 <% else %>

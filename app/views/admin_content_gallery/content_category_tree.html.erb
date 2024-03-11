@@ -59,8 +59,8 @@
     </div>
 </div>
 
+<h4>サブ・カテゴリー</h4>
 <% unless @current_category.children.blank? %>
-	<h4>サブ・カテゴリー</h4>
 	<% array = @current_category.children.in_groups_of(3, false)%>
 	<div class="row">
 		<% for i in 0..(array.size-1) %>
@@ -75,6 +75,11 @@
 		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
 				</div>
 		<% end %>
+	</div>
+<% else %>
+	<div class='alert alert-info'>
+		<%= info_icon %>
+		サブ・カテゴリーが登録されていません。
 	</div>
 <% end %>
 

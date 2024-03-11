@@ -195,6 +195,7 @@ Fuga326::Application.routes.draw do
   patch 'bs_content_portfolio/content_category_update', to: 'bs_content_portfolio#content_category_update'
   delete 'bs_content_portfolio/content_category_delete', to: 'bs_content_portfolio#content_category_delete'
 
+  post 'admin/delegating', to: 'admin#delegating'
   get 'admin_content_portfolio/content_root', to: 'admin_content_portfolio#content_root'
   patch 'admin_content_portfolio/content_category', to: 'admin_content_portfolio#content_category'
   post 'admin_content_portfolio/create_bag', to: 'admin_content_portfolio#create_bag'

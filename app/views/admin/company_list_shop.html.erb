@@ -92,7 +92,7 @@
 							<%= info_icon('情報')%>
 						</a>
 					</td>
-					<%= form_tag dashboard_delegating_path(id: shop), method: :post, class: '' do %>
+					<%= form_tag admin_delegating_path(id: shop), method: :post, class: '' do %>
 					<td class='text-center'style="vertical-align: middle;">
 						<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>shop.wsite_hash_key) %>" target="_blank">
 							<%= share_icon('サイト表示')%>
