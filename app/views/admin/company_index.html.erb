@@ -6,15 +6,19 @@
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<% if current_user.role==User::ROLE_SUPER %>
+	<% if current_user.role >= User::ROLE_OPERATOR %>
 		<p class="float-right">
 			<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
-				<%= new_icon %>&nbsp;登録
+				<%= new_icon %>&nbsp;登録…
 			</button>
+			|
+			<a class="btn btn-sm btn-outline-primary" href='<%= url_for(action: 'info') %>'>
+				<%= info_icon %>&nbsp;システム情報
+			</a>
 			|
 		    <% seach_btn_class = (@search_word.blank?)? 'btn btn-sm btn-info': 'btn btn-sm btn-warning' %>
 			<button type="button" class="<%= seach_btn_class %>" data-bs-toggle="modal" data-bs-target="#modalSearch">
-				<%= search_icon %>&nbsp;検索
+				<%= search_icon %>&nbsp;検索…
 			</button>
 		</p>
 	<% end %>
@@ -29,23 +33,24 @@
 	<table class="table table-hover table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class='table-dark' width='40%'>
+				<th xclass='table-dark' width='40%'>
 					レジストリー名
 				</th>
-				<th class='table-dark' width='10%'>
+				<th xclass='table-dark' width='10%'>
 					店舗数
 				</th>
-				<th class='table-dark' width='25%'>
-					ストレージ
+				<th xclass='table-dark' width='25%'>
+					ディスク
 					<span class='float-right'>
 						<small>
 							使用量
 							/
 							設定量
+							(使用率)
 						</small>
 					</span>
 				</th>
-				<th class='table-dark' width='25%'>固定ページ</th>
+				<th xclass='table-dark' width='25%'>固定ページ</th>
 			</tr>
 		<head>
 		<tbody>
@@ -121,43 +126,6 @@
 	</table>
 	<%= paginate @items, theme: 'bootstrap-5' %>
 <% end %>
-
-<hr/>
-<dl class="row">
-  <dt class="col-sm-3">登録レジストリー</dt>
-  <dd class="col-sm-9"><%= Company.count %> <small>件</small></dd>
-
-  <dt class="col-sm-3">登録店舗</dt>
-  <dd class="col-sm-9"><%= Shop.count %> <small>店舗</small></dd>
-
-  <%
-	valid_shops = Shop.where(wsite_run_mode: Shop::WSITE_PUBLISHED)
-  %>
-
-  <dt class="col-sm-3">swifty運用店舗 (WSITE_PUBLISHED)</dt>
-  <dd class="col-sm-9"><b><span class='text-success'><%= valid_shops.count %></span></b> <small>店舗</small></dd>
-
-  <dt class="col-sm-3">リッチ・テキスト・エディター</dt>
-  <dd class="col-sm-9"><b><span class='text-primary'><%= Shop.where(enable_editor: true).count %></span></b> <small>店舗</small></dd>
-
-  <dt class="col-sm-3">予約管理機能</dt>
-  <dd class="col-sm-9"><b><span class='text-primary'><%= Shop.where(option_reservation_management: true).count %></span></b> <small>店舗</small></dd>
-
-  <dt class="col-sm-3">勤怠管理機能</dt>
-  <dd class="col-sm-9"><b><span class='text-primary'><%= Shop.where(option_attendance_management: true).count %></span></b> <small>店舗</small></dd>
-
-  <dt class="col-sm-3">ディスク使用量</dt>
-  <%
-	sum = 0
-	valid_shops.each do |s|
-		sum += s.photo_size
-	end
-	sum = sum/(1024*1024*1024)
-  %>
-  <dd class="col-sm-9"><b><span class='text-primary'><%= sum %></span></b> <small>GB</small></dd>
-
-
-</dl>
 
 <!-- modalNewShop -->
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">

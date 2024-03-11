@@ -44,7 +44,7 @@
 							<%= link_to raw('店舗管理画面' + ' ') + link_to_6_icon, {:action=>'delegating', :id=>@shop}, :method => :post, :class=>"btn btn-sm btn-outline-primary" %>
 							<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
 							<a href="<%=url_business%>" class="btn btn-outline-warning btn-sm">
-								<%= site_status_icon(@shop.wsite_run_mode) %>
+								<%= info_icon %>
 								利用状況表示
 							</a>
 					  </div>

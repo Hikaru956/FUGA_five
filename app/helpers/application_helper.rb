@@ -115,9 +115,10 @@ module ApplicationHelper
   def logout_icon(title='ログアウト');    sprintf("<i class='icon-off' title=%s></i>", title).html_safe; end
 
   def site_status_icon(site_status)
-    return raw("<i class='fa-solid fa-spinner fa-spin'></i>")  if site_status == Shop::WSITE_PUBLISHED    
-    return raw("<i class='fa-solid fa-flask-round-potion'></i>")             if site_status == Shop::WSITE_TRIAL
-    return raw("<i class='fa-solid fa-ban'></i>")             if site_status == Shop::WSITE_BLOCKED    
+    title = icon_site_status(site_status)
+    return raw("<i class='fa-solid fa-spinner fa-spin' title='運用中'></i>")     if site_status == Shop::WSITE_PUBLISHED    
+    return raw("<i class='fa-solid fa-flask-round-potion' title='試用中'></i>")  if site_status == Shop::WSITE_TRIAL
+    return raw("<i class='fa-solid fa-ban' title='停止中'></i>")                 if site_status == Shop::WSITE_BLOCKED    
   end
 
 

@@ -25,14 +25,17 @@
 
 <h4>
 	<span class="float-right">
-		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
+		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
 		<%= backward_icon('戻る')%>&nbsp;
 			戻る
 		</a>
 	</span>
-	<%= site_status_icon(@shop.wsite_run_mode) %>
+	<%= info_icon %>
 	<%=model_name(@item)%>
 	利用状況
+	<small>
+		[<%= label_site_status(@shop.wsite_run_mode) %>]
+	</small>
 </h4>
 
 <hr/>

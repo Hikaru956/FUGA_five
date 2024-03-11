@@ -1,0 +1,46 @@
+<ul class="breadcrumb">
+  <li><%= link_to "レジストリー", 					:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
+  <li class="active">システム情報</li>
+</ul>
+
+
+<header class="subhead" id="overview">
+	<h3>
+		システム情報
+	</h3>
+</header>
+
+
+<dl class="row">
+  <dt class="col-sm-3">登録レジストリー</dt>
+  <dd class="col-sm-9"><%= Company.count %> <small>件</small></dd>
+
+  <dt class="col-sm-3">登録店舗</dt>
+  <dd class="col-sm-9"><%= Shop.count %> <small>店舗</small></dd>
+
+  <%
+	valid_shops = Shop.where(wsite_run_mode: Shop::WSITE_PUBLISHED)
+  %>
+
+  <dt class="col-sm-3">swifty運用店舗 (WSITE_PUBLISHED)</dt>
+  <dd class="col-sm-9"><b><span class='text-success'><%= valid_shops.count %></span></b> <small>店舗</small></dd>
+
+  <dt class="col-sm-3">リッチ・テキスト・エディター</dt>
+  <dd class="col-sm-9"><b><span class='text-primary'><%= Shop.where(enable_editor: true).count %></span></b> <small>店舗</small></dd>
+
+  <dt class="col-sm-3">予約管理機能</dt>
+  <dd class="col-sm-9"><b><span class='text-primary'><%= Shop.where(option_reservation_management: true).count %></span></b> <small>店舗</small></dd>
+
+  <dt class="col-sm-3">勤怠管理機能</dt>
+  <dd class="col-sm-9"><b><span class='text-primary'><%= Shop.where(option_attendance_management: true).count %></span></b> <small>店舗</small></dd>
+
+  <dt class="col-sm-3">ディスク使用量</dt>
+  <%
+	sum = 0
+	valid_shops.each do |s|
+		sum += s.photo_size
+	end
+	sum = sum/(1024*1024*1024)
+  %>
+  <dd class="col-sm-9"><b><span class='text-primary'><%= sum %></span></b> <small>GB</small></dd>
+</dl>
