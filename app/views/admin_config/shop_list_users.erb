@@ -51,7 +51,7 @@
 				<th class="span2 xtable-dark">役割</th>
 				<th class="span3 xtable-dark">表示名</th>
 				<th class="span3 xtable-dark">ログイン</th>
-				<th class="span4 xtable-dark">Email</th>
+				<th class="span4 d-none d-md-table-cell">Email</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -69,7 +69,7 @@
 							<%= link_to_6_icon %>
 						</a>
 					</td>
-					<td><%= user.email %></td>
+					<td class='d-none d-md-table-cell'><%= user.email %></td>
 				</tr>
 			<% end %>
 		</tbody>

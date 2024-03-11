@@ -45,9 +45,9 @@
 					<span class="float-right"><span class="badge badge-success"><%= @item.shops.size %></span></span>
 					店舗名
 				</th>
-				<th class='xtable-dark span2'>ディスク容量</th>
-				<th class='xtable-dark span2'>ディスク使用率</th>
-				<th class='xtable-dark span2'>固定ページ</th>
+				<th class='d-none d-md-table-cell'>ディスク容量</th>
+				<th class='d-none d-md-table-cell'>ディスク使用率</th>
+				<th class='d-none d-md-table-cell'>固定ページ</th>
 				<th class='xtable-dark span2'>サイト表示</th>
 			</tr>
 		</thead>
@@ -62,20 +62,20 @@
 						<span class="float-right">
 							<% url = url_for(:action=>"company_show_shop", :id=>shop) %>
 							<a href="<%=url%>" class='text-primary'>
-								<%= setting_icon %> 設定
+								<%= setting_icon %><div class='d-none d-md-inline'> 設定</div>
 							</a>
 							|
 							<%= (shop.first?)?	"△":	link_to("▲", :action=>"shop_higher",	:id=>shop) %>
 							<%= (shop.last?)? 	"▽": 	link_to("▼", :action=>"shop_lower", 	:id=>shop) %>
 						</span>
 					</td>
-					<td style="text-align:right; vertical-align: middle;">
+					<td class='d-none d-md-table-cell' style="text-align:right; vertical-align: middle;">
 						<%= (shop.room_size_mb.blank?)? "無制限": number_to_human_size(shop.room_size_mb*1024*1024, :locale=>I18n.locale) %>
 						<a href="<%= url_for(:action=>"company_show_shop_usage", :id=>shop) %>" class="btn btn-outline-info btn-sm">
 							<%= info_icon('情報')%>
 						</a>
 					</td>
-					<td style="text-align:right; vertical-align: middle;">
+					<td class='d-none d-md-table-cell' style="text-align:right; vertical-align: middle;">
 						<% 
 							total_photos = shop.photos
 							photo_sum_size = Photo.total_file_size(total_photos)
@@ -84,7 +84,7 @@
 						%>
 						利用率 : <%= (rate.blank?)? "-": rate.to_i %>%
 					</td>
-					<td style="text-align:right; vertical-align: middle;">
+					<td class='d-none d-md-table-cell' style="text-align:right; vertical-align: middle;">
 						<% fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop) %>
 						<%= fix_pages_bag.content_leafs.size %>
 						ページ
@@ -92,13 +92,20 @@
 							<%= info_icon('情報')%>
 						</a>
 					</td>
-					<td style="text-align:center; vertical-align: middle;">
-						<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>shop.wsite_hash_key) %>" target="_blank">
-							<%= share_icon('サイト表示')%>
-							サイト表示
-						</a>
-						|
-						<%= link_to raw('店舗管理画面' + ' ') + link_to_6_icon, {:action=>'delegating', :id=>shop}, :method => :post, :class=>"btn btn-sm btn-outline-primary" %>
+					<td style="vertical-align: middle;">
+						<%= form_tag dashboard_delegating_path(id: shop), method: :post, class: '' do %>
+							<div style='align: center;'>
+								<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>shop.wsite_hash_key) %>" target="_blank">
+									<%= share_icon('サイト表示')%>
+									<div class='d-none d-md-inline'>サイト</div>表示
+								</a>
+								|
+								<button type='submit' class='btn btn-sm btn-outline-primary'>
+									<div class='d-none d-md-inline'>店舗</div>管理
+									<%= link_to_6_icon %>
+								</button>
+							</div>
+						<% end %>
 					</td>
 				</tr>
 			<% end %>

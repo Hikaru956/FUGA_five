@@ -34,11 +34,11 @@
 	<p class="float-right">
 		<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon('登録') %>&nbsp;
-			固定リンク登録
+			固定リンク<div class='d-none d-md-inline'>登録</div>…
 		</button>
 		<button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewPage">
 			<i class="fa-solid fa-file-lines"></i>&nbsp;
-			固定ページ追加
+			固定ページ<div class='d-none d-md-inline'>追加</div>…
 		</button>
 	</p>
 	ナビゲーション
@@ -51,16 +51,16 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th width='15%' xclass="table-dark">ステータス</th>
-			<th width='45%' xclass="table-dark">ナビゲーション項目</th>
-			<th width='20%' xclass="table-dark">表示順</th>
+			<th width='15%' class='d-none d-md-table-cell'>ステータス</th>
+			<th width='45%' xclass="table-dark"><div class='d-none d-md-inline'>ナビゲーション</div>項目</th>
+			<th width='20%' xclass="table-dark"><div class='d-none d-md-inline'>表示順</div></th>
 			<th width='20%' xclass="table-dark"></th>
 		</tr>
 	</thead>
 	<tbody>
 		<% @items.each do | item | @item = item %>
 			<tr class=<%= (@item.is_public)? '': 'warning' %>>
-				<td style='vertical-align: middle;'>
+				<td class='d-none d-md-table-cell' style='vertical-align: middle;'>
 					<% if @item.is_public %>
 						<a class="btn btn btn-sm btn-success"  href="<%= url_for(:action=>'make_private', :id=>@item) %>" title="非公開にする">
 							<i class="fa-solid fa-lock-open"></i>
@@ -82,54 +82,27 @@
 					<small><%= "【"+h(@item.external_url)+"】" unless @item.external_url.blank? %></small>
 				</td>
 				<td class='text-center' style='vertical-align: middle;'>
-					<%= (@item.first?)?	caret_top_icon:		link_to(caret_top_icon, 	:action=>"web_page_top",	:id=>@item) %>
+					<div class='d-none d-md-inline'><%= (@item.first?)?	caret_top_icon:		link_to(caret_top_icon, 	:action=>"web_page_top",	:id=>@item) %></div>
 					<%= (@item.first?)?	caret_up_icon:		link_to(caret_up_icon, 	 	:action=>"web_page_higher",	:id=>@item) %>
 					<%= (@item.last?)? 	caret_down_icon: 	link_to(caret_down_icon, 	:action=>"web_page_lower", 	:id=>@item) %>
-					<%= (@item.last?)? 	caret_bottom_icon: 	link_to(caret_bottom_icon,  :action=>"web_page_bottom", 	:id=>@item) %>
+					<div class='d-none d-md-inline'><%= (@item.last?)? 	caret_bottom_icon: 	link_to(caret_bottom_icon,  :action=>"web_page_bottom", :id=>@item) %></div>
 				</td>
-				<td class='text-right' style='vertical-align: middle;'>
+				<td nowrap class='text-right' style='vertical-align: middle;'>
 					<% if @item.page_type==WebPage::TYPE_LINK || @item.page_type==WebPage::TYPE_FIX %>
 						<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDeleteLink_<%=@item.id%>">
-							<%= trash_icon('削除') %>&nbsp;削除
+							<%= trash_icon('削除') %>
+							<div class='d-none d-md-inline'>削除</div>
 						</button>
-						<!-- modalDeleteLink -->
-						<div class="modal fade" id="modalDeleteLink_<%= @item.id %>" tabindex="-1" aria-labelledby="modalDeleteLink_<%= @item.id %>" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<%= form_for @item, url: admin_config_shop_delete_fixed_link_path(id: @item), method: :delete do |f| -%>
-										<div class="modal-header">
-											<h5 class="modal-title">固定リンク削除</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<p>
-												<% if @item.page_type==WebPage::TYPE_FIX %>
-													固定ページの内容と、
-												<% end %>
-												リンクを削除します。<br/>
-												よろしいですか？
-											</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
-											<button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
-										</div>
-									<% end %>
-								</div>
-							</div>
-						</div>
 					<% end %>
 
 					<% if @item.page_type==WebPage::TYPE_FIX %>
 						<% edit_fix_page_url = url_for(:action=>'edit_fix_page', :id=>ContentLeaf.find_by_hash_key(@item.content_key))%>
 						<a class="btn btn-sm btn-primary"  href="<%=edit_fix_page_url%>" data-turbolinks='false'>
-							<%= edit_icon('編集') %>&nbsp;
-							編集…
+							<%= edit_icon('編集') %><div class='d-none d-md-inline'>編集…</div>
 						</a>
 					<% else %>
 						<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit_<%=@item.id%>">
-							<%= edit_icon('編集') %>&nbsp;
-							編集…
+							<%= edit_icon('編集') %><div class='d-none d-md-inline'>編集…</div>
 						</button>
 					<% end %>
 				<td>
@@ -173,6 +146,33 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
 						<button type="submit" class="btn btn-primary btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<!-- modalDeleteLink -->
+	<div class="modal fade" id="modalDeleteLink_<%= @item.id %>" tabindex="-1" aria-labelledby="modalDeleteLink_<%= @item.id %>" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<%= form_for @item, url: admin_config_shop_delete_fixed_link_path(id: @item), method: :delete do |f| -%>
+					<div class="modal-header">
+						<h5 class="modal-title">固定リンク削除</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>
+							<% if @item.page_type==WebPage::TYPE_FIX %>
+								固定ページの内容と、
+							<% end %>
+							リンクを削除します。<br/>
+							よろしいですか？
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+						<button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
 					</div>
 				<% end %>
 			</div>

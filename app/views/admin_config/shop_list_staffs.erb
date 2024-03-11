@@ -52,8 +52,8 @@
 		<thead>
 			<tr>
 				<th class="span4 xtable-dark"><span class="float-right"><span class="badge badge-success"><%= @staffs.size %></span></span>スタッフ名</th>
-				<th class="span4 xtable-dark">職位/タイトル</th>
-				<th class="span4 xtable-dark">ソーシャル</th>
+				<th class="span4 d-none d-md-table-cell">職位/タイトル</th>
+				<th class="span4 d-none d-md-table-cell">ソーシャル</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -76,8 +76,8 @@
 							<%= link_to_6_icon %>
 						</a>
 					</td>
-					<td><%=staff.job_title%></td>
-					<td>
+					<td class='d-none d-md-table-cell'><%=staff.job_title%></td>
+					<td class='d-none d-md-table-cell'>
 						<%= raw "<i class='fa-brands fa-facebook fa-2x'></i>"		unless staff.social_facebook_uri.blank? %>
 						<%= raw "<i class='fa-brands fa-twitter fa-2x'></i></a>"		unless staff.social_twitter_uri.blank? %>
 						<%= raw "<i class='fa-brands fa-instagram fa-2x'></i>"			unless staff.social_instagram_uri.blank? %>
