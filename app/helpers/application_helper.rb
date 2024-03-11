@@ -121,7 +121,6 @@ module ApplicationHelper
     return raw("<i class='fa-solid fa-ban' title='停止中'></i>")                 if site_status == Shop::WSITE_BLOCKED    
   end
 
-
   def icon_site_status(site_status)
     return raw("<i class='icon-spinner icon-spin'></i>")  if site_status == Shop::WSITE_PUBLISHED    
     return raw("<i class='icon-beaker'></i>")             if site_status == Shop::WSITE_TRIAL
@@ -135,9 +134,9 @@ module ApplicationHelper
   end
 
   def icon_staff_status_6(staff_status)
-    return raw "<i class='fa-solid fa-user-check'></i>"        if staff_status == Staff::STAFF_PROPER    
-    return raw "<i class='fa-solid fa-square-h text-info'></i>"   if staff_status == Staff::STAFF_HELPER
-    return raw "<i class='fa-solid fa-ban text-danger'></i>"        if staff_status == Staff::STAFF_BLOCKED    
+    return raw "<i class='fa-solid fa-user-check' title='#{label_staff_status(staff_status)}'></i>"        if staff_status == Staff::STAFF_PROPER    
+    return raw "<i class='fa-solid fa-square-h text-info' title='#{label_staff_status(staff_status)}'></i>"   if staff_status == Staff::STAFF_HELPER
+    return raw "<i class='fa-solid fa-ban text-danger' title='#{label_staff_status(staff_status)}'></i>"        if staff_status == Staff::STAFF_BLOCKED    
   end
 
   def icon_staff_status(staff_status)
