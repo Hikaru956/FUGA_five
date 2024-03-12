@@ -12,7 +12,8 @@
 		</th>
 		<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
 			<th colspan="2" class="head_timeline table-info">
-				<%= (base_time+(i*60*60)).strftime("%l:%M %p") %>
+				<%= (base_time+(i*60*60)).strftime("%l:%M %p") if false %>
+				<%= (base_time+(i*60*60)).strftime("%H:%M") %>
 			</th>
 		<% end %>
 	</tr>
@@ -28,7 +29,8 @@
 				<th class="head_space_middle"></th>
 				<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
 					<th colspan="2" class="head_timeline table-info">
-						<%= (base_time+(i*60*60)).strftime("%l:%M %p") %>
+						<%= (base_time+(i*60*60)).strftime("%l:%M %p") if false %>
+						<%= (base_time+(i*60*60)).strftime("%H:%M") %>
 					</th>
 				<% end %>
 			</tr>
@@ -38,13 +40,10 @@
 		<th class="head_space_lower"></th>
 		<% for i in @shop.business_hour_from..(@shop.business_hour_until-1) %>
 			<th colspan="2" class="head_timeline  table-info">
-				<%= (base_time+(i*60*60)).strftime("%l:%M %p") %>
+				<%= (base_time+(i*60*60)).strftime("%l:%M %p") if false %>
+				<%= (base_time+(i*60*60)).strftime("%H:%M") %>
 			</th>
 		<% end %>
 	</tr>
 </table>
 
-<% for d in 0..(last_day-1) %>
-	<%= render :partial=>"dlg_day_on", 	locals: {staff: @staff, target_date: @target_date.to_date+d} %>
-	<%= render :partial=>"dlg_day_off", locals: {staff: @staff, target_date: @target_date.to_date+d} %>
-<% end %>

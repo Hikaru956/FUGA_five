@@ -8,12 +8,38 @@
 		(<span class="<%=(is_holiday?(@probe_date) || @probe_date.wday==0)? 'holiday': 'flat'%>"><%=wday(@probe_date)%></span>)
 		<%= "<i class='far fa-flag'></i>".html_safe if is_holiday?(@probe_date) %>
 
+	</th>
+	<td>
 		<span class='float-right'>
 			<% cm = calendar_mark_on(@probe_date, @staff) %>
 			<% unless cm.blank? %>[ <%= calendar_mark_icon %> : <%= cm %> ]<% end %>
 		</span>
 
-		<div class='text-center'>
+		<% attends = @roster_map[@probe_date] %>
+		<% if attends.blank? %>
+			<span class='text-secondary'><i class='fas fa-times fa-fw'></i>&nbsp;全休</span>
+		<% else %>
+			<span class='text-primary'>
+				<%= attends.map{ |a| a.start_hour.to_s+':00'+'〜'+a.until_hour.to_s+':00'}.join(", ")%>
+			</span>
+		<% end %>
+
+		<% reservations = @reservation_map[@probe_date] %>
+		<% unless reservations.blank? %>
+			<span class='text-info'>
+				<ul>
+					<% reservations.each do |r| %>
+					<li>
+						<%= reservation_staff_icon %>
+						<%= r.reserved_until.strftime('%H:%M') %>
+						(<%= r.min_period %>分)
+					</li>
+					<% end %>
+				</ul>
+			</span>
+		<% end %>
+
+		<div class='text-right'>
 			<div class="dropdown">
 				<button class="btn btn-sm btn-outline-primary dropdown-toggle xbtn-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 					日別設定
@@ -34,10 +60,5 @@
 				</ul>
 			</div>
 		</div>
-	</th>
-	<td>
 	</td>
 </tr>
-
-<%= render partial: 'dlg_day_off', locals: {target_date: @probe_date, staff: @staff} %>
-<%= render partial: 'dlg_day_on', locals: { target_date: @probe_date, staff: @staff} %>

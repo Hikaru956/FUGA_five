@@ -9,12 +9,12 @@
 		<% calendar_url = url_for(:action=>"index", :year => @target_date.year)%>
 		<a href="<%= calendar_url %>" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;戻る</a>
 	</span>
-	<h3>
+	<h4>
 		<%= attendance_staff_icon %>
 		勤怠<div class='d-none d-md-inline'>管理</div>
 		:
 		<%= model_name(@staff) %>
-	</h3>
+	</h4>
 </header>
 
 <%= render :partial=>"roster_summary" %>
@@ -44,4 +44,9 @@
 <div class='d-lg-none'>
 	<%= render :partial=>"attendances_staff_sm" %>
 </div>
+
+<% for d in @target_date.beginning_of_month..@target_date.end_of_month %>
+	<%= render :partial=>"dlg_day_on", 	locals: {staff: @staff, target_date: d} %>
+	<%= render :partial=>"dlg_day_off", locals: {staff: @staff, target_date: d} %>
+<% end %>
 

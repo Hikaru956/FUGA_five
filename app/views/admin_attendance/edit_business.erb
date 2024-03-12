@@ -4,12 +4,12 @@
 		<% calendar_url = url_for(:action=>"attendances_staff", :id=>@staff, :year=>@target_date.year, :month=>@target_date.month, :shop_id=>@shop)%>
 		<a href="<%= calendar_url %>" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;戻る</a>
 	</span>
-	<h3>
+	<h4>
 		<%= attendance_staff_icon %>
 		勤怠<div class='d-none d-md-inline'>管理</div>
 		:
 		<%= model_name(@staff) %>
-	</h3>
+	</h4>
 </header>
 <h5><%=@target_date.strftime("%Y-%m-%d") %>&nbsp;(<%=wday(@target_date)%>)</h5>
 

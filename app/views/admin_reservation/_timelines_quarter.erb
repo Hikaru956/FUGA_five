@@ -8,7 +8,8 @@
 		%>
 		<% for i in @shop.business_hour_from...(@shop.business_hour_until) %>
 			<th colspan="4" class="head_timeline table-info">
-				<%= (Time.mktime(@target_date.year,@target_date.month,@target_date.day, 0, 0, 0)+(i*60*60)).strftime("%l:%M %p") %>
+				<%= (Time.mktime(@target_date.year,@target_date.month,@target_date.day, 0, 0, 0)+(i*60*60)).strftime("%l:%M %p") if false %>
+				<%= (Time.mktime(@target_date.year,@target_date.month,@target_date.day, 0, 0, 0)+(i*60*60)).strftime("%H:%M") %>
 			</th>
 		<% end %>
 	</tr>

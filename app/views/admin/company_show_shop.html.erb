@@ -95,7 +95,7 @@
 		</table>
 		<% if current_user.has_permission?(User::ROLE_OPERATOR) %>
 			<hr/>
-			<table class="table table-condensed table-bordered">
+			<table class="table table-sm table-bordered">
 				<thead>
 					<tr>
 						<th class='table-info' colspan="2">
@@ -126,7 +126,7 @@
 		<% end %>
 		<% unless MAKE_SECRET_FUGA_OPTION %>
 		<hr/>
-		<table class="table table-condensed table-bordered">
+		<table class="table table-sm table-bordered">
 			<thead>
 				<tr class='table-info'>
 					<th colspan="2">
