@@ -1,14 +1,14 @@
 <% base_time = Time.mktime(@target_date.year,@target_date.month,@target_date.day, 0, 0, 0) %>
-<table class="table table-sm xtable-bordered">
+<table class="table table-sm table-hover">
 	<tr>
-		<th width='40%'>
+		<th width='35%'>
 			<% rev = (base_time.to_date)<<1 %>
 			<% fwd = (base_time.to_date)>>1 %>
 			<%= link_to("<i class='fas fa-angle-double-left'></i>".html_safe, 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>rev.year, :month=>rev.month }) %>
 			<%= @target_date.month %>&nbsp;月
 			<%= link_to("<i class='fas fa-angle-double-right'></i>".html_safe, 	{:action=>'attendances_staff', :id=>@staff, :shop_id=>@shop, :year=>fwd.year, :month=>fwd.month }) %>
 		</th>
-		<th width='60%'>
+		<th width='65%'>
 		</th>
 	</tr>
 
