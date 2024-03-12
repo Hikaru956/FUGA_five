@@ -274,7 +274,11 @@ class AdminAbsContentBagController < ApplicationController
 
     def create_image
         shop_id = params[:shop_id]
+        ref_id = params[:ref_id]
         photo = params[:photo]
+
+        content_leaf = ContentLeaf.find(ref_id)
+        p '❌❌'+content_leaf.id.to_s
 
         # デバッグ用ログ
         Rails.logger.debug("Content Type: #{photo.content_type}")
@@ -307,7 +311,7 @@ class AdminAbsContentBagController < ApplicationController
         end
 
         # ファイルをアップロードして写真のインスタンスを作成
-        photo = Photo.new(shop_id: shop_id, clip: photo)
+        photo = Photo.new(shop_id: shop_id, ref: content_leaf, clip: photo)
 
         respond_to do |format|
             if photo.save
