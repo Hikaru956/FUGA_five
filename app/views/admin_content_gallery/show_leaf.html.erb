@@ -15,7 +15,7 @@
 	<div class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"content_category", :id=>@item.content_category, :page=>@page) %>
-			<a class="btn btn-sm btn-secondary" href="<%=url_back%>">
+			<a class="btn btn-sm btn-outline-dark" href="<%=url_back%>">
 				<%= backward_icon('戻る') %>&nbsp;
 				戻る
 			</a>
@@ -58,18 +58,23 @@
 <hr/>
 
 <div class="row-fluid">
-	<h4>
-		<p class="float-right">
-			<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
-				<i class="fa-solid fa-camera"></i>&nbsp;
-				写真追加
-			</a>
+	<% unless @shop.enable_editor %>
+		<h4>
+			<p class="float-right">
+				<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
+					<i class="fa-solid fa-camera"></i>&nbsp;
+					写真追加
+				</a>
+			</p>
+			画像集
+		</h4>
+		<p>
+		<small>この項目に関する画像を登録します。先頭の写真が一覧表示の際の代表写真になります。登録された画像は記事にも挿入することが出来ます。</small>
 		</p>
-		画像集
-	</h4>
-	<p>
-	  <small>この項目に関する画像を登録します。先頭の写真が一覧表示の際の代表写真になります。登録された画像は記事にも挿入することが出来ます。</small>
-	</p>	
+	<% else %>
+		<small>先頭の写真が一覧表示の際の代表写真になります。</small>
+	<% end %>
+	
 	<% array = @item.photos.order(position: :asc).in_groups_of(3, false)%>
 	<% for i in 0..(array.size-1) %>
 		<% @lines = array[i] %>
@@ -89,12 +94,15 @@
 				<% end %>
 			</div>
 	<% end %>
-	<p class="float-right">
-		<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
-			<i class="fa-solid fa-camera"></i>&nbsp;
-			写真追加
-		</a>
-	</p>
+
+	<% unless @shop.enable_editor %>
+		<p class="float-right">
+			<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
+				<i class="fa-solid fa-camera"></i>&nbsp;
+				写真追加
+			</a>
+		</p>
+	<% end %>
 </div>
 
 <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="modal_delete" aria-hidden="true">

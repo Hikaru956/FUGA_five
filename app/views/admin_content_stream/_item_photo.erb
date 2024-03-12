@@ -9,30 +9,32 @@
 		</p>
 	</div>
 	<%= image_tag photo.clip.url(:thumb) %>
-	<div class="card-body">
-		<p>
-			<%=
-				unless photo.image.blank?
-					photo.image
-				else
-					photo.clip_file_name
-				end
-			 %>
-		</p>
-		<p>
-			<%=
-				photo.info unless photo.info.blank?
-			 %>
-		</p>
-		<p>
-			<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
-				<%= info_icon('キャプション') %>&nbsp;キャプション
-			</button>
-			<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete_photo_<%=photo.id%>">
-				<%= trash_icon('削除確認') %>&nbsp;削除確認
-			</button>
-		</p>
-	</div>
+	<% unless @shop.enable_editor %>
+		<div class="card-body">
+			<p>
+				<%=
+					unless photo.image.blank?
+						photo.image
+					else
+						photo.clip_file_name
+					end
+				%>
+			</p>
+			<p>
+				<%=
+					photo.info unless photo.info.blank?
+				%>
+			</p>
+			<p>
+				<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
+					<%= info_icon('キャプション') %>&nbsp;キャプション
+				</button>
+				<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete_photo_<%=photo.id%>">
+					<%= trash_icon('削除確認') %>&nbsp;削除確認
+				</button>
+			</p>
+		</div>
+	<% end %>
 </div>
 
 <div class="modal fade" id="modal_edit_photo_<%=photo.id%>" tabindex="-1" aria-labelledby="modal_edit_photo_<%=photo.id%>" aria-hidden="true">
