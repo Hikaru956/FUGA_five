@@ -43,7 +43,7 @@
 		<%= render :partial=>"layouts/richtext_editor" %>
 	<% end %>
 	<textarea name="content_leaf[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= item.description%></textarea>
-	<%= render :partial=>"layouts/summernote" %>
+	<%= render :partial=>"layouts/summernote", locals: {ref_id: item.id} %>
 <% else %>
 	<div class="control-group">
 		<%= f.text_area  :description, value: item.description, :class => "tinymce input-block-level", rows: 5, :placeholder=>"項目の本文を入力します。" %>

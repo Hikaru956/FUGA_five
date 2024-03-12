@@ -40,7 +40,7 @@
     $.ajax({
         data: data,
         type: 'POST',
-        url: '/admin_abs_content_bag/create_image?shop_id=<%= @shop.id %>',
+        url: '/admin_abs_content_bag/create_image?shop_id=<%= @shop.id %>&ref_id=<%= ref_id %>',
         cache: false,
         contentType: false,
         processData: false,
