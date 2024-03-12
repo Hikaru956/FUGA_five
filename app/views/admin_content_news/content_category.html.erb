@@ -32,7 +32,7 @@
 
 <% if @parent_category.my_bag_root_category.content_bag.is_public==false  %>
 	<div class="alert alert-warning">
-		 <strong>Warning!</strong> 非公開ストリームです。
+		 <%= info_icon('情報')%>&nbsp;非公開ストリームです。
 	</div>
 <% end %>
 
@@ -43,25 +43,12 @@
 		</div>
 <% else %>
 	<% @total_size = @parent_category.content_leafs.size %>
-	<div class="row">
-		<% array = @leafs.in_groups_of(3, false)%>
-		<% for i in 0..(array.size-1) %>
-			<% @lines = array[i] %>
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_leaf", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
-				</div>
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_leaf", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
-				</div>
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_leaf", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
-				</div>
-		<% end %>
+	<div class='d-none d-sm-block'>
+		<%= render partial: "category_box_leaf", locals: {leafs: @leafs } %>
 	</div>
-	<%= paginate @leafs, theme: 'bootstrap-5' %>
-	<% if false %>
-	<%= will_paginate(@leafs, :params=> {:action=>'content_category', :id=>@parent_category, :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
-	<% end %>
+	<div class='d-sm-none'>
+		<%= render partial: "category_list_leaf", locals: {leafs: @leafs } %>
+	</div>
 <% end %>
 
 <% unless @bag_roots.blank? %>
@@ -89,26 +76,4 @@
 			</div>
 		</div>
 	</div>
-	<% if false %>
-		<%= form_tag({:action=>"content_category", :id=>nil}, :class=>"form-horizontal", method: :patch)  do %>
-			<div id="modal_category_select" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h3 id="myModalLabel">カテゴリー選択</h3>
-				</div>
-				<div class="modal-body">
-					<div class="control-group">
-						<label class="control-label" for="wsite_keywords">カテゴリー</label>
-						<div class="controls">
-							<%= tree_select_tag(@bag_roots, 'id', (@parent_category.blank?)? "": @parent_category.id)   %> 
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;移動</button>
-					<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-				</div>
-			</div>
-		<%end%>
-	<% end %>
 <%end%>  	

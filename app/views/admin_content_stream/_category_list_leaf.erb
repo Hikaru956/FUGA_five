@@ -1,0 +1,27 @@
+<style>
+    .image-container img {
+        width: 100px;
+        height: 100px;
+    }
+</style>
+<% @leafs.each do |leaf | %>
+    <hr/>
+        <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+                <a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>">
+                    <% key_photo = key_photo(leaf) %>
+                    <% unless key_photo.blank? %>
+                        <div class="image-container">
+                            <%= image_tag key_photo.clip.url(:thumb) %>
+                        </div>
+                    <% else %>
+                        <img src="https://placehold.jp/22/cfcfcf/ffffff/100x100.png?text=No%20Photo%0A">
+                    <% end %>
+                </a>
+            </div>
+            <div class="flex-grow-1 ms-3">
+                <%= leaf_state_icons(leaf) %>
+                <%= truncate(leaf.title, :length=> 10) %>
+            </div>
+        </div>
+<% end %>
