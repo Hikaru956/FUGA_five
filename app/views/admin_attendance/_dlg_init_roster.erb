@@ -27,8 +27,8 @@
 						end
 					%>
 					<div class="mb-3 row">
-						<label for="shop_alt_id" class="col-sm-4 col-form-label">設定期間</label>
-						<div class="col-sm-8 form-inline">
+						<label for="shop_alt_id" class="col-sm-3 col-form-label">設定期間</label>
+						<div class="col-sm-9 form-inline">
 							<%= select_tag("from_date", 	options_for_select(day_options, @target_date.strftime("%Y-%m-%d")), {include_blank:'選択してください', :required => true, class: 'form-control'})%>
 							&nbsp;〜&nbsp;
 							<%= select_tag("until_date", 	options_for_select(day_options, ((@target_date>>1)-1).strftime("%Y-%m-%d")), {include_blank:'選択してください', :required => true, class: 'form-control'})%>
@@ -43,16 +43,16 @@
 						end
 					%>
 					<div class="mb-3 row">
-						<label for="name" class="col-sm-4 col-form-label">勤務時間</label>
-						<div class="col-sm-8 form-inline">
+						<label for="name" class="col-sm-3 col-form-label">勤務時間</label>
+						<div class="col-sm-9 form-inline">
 							<%= select_tag("work_from", 	options_for_select(hour_options, @shop.business_hour_from), {include_blank:'選択してください', :required => true, class: 'form-control'})%>
 							&nbsp;〜&nbsp;
 							<%= select_tag("work_until", 	options_for_select(hour_options, @shop.business_hour_until), {include_blank:'選択してください', :required => true, class: 'form-control'})%>
 						</div>
 					</div>
 					<div class="mb-3 row">
-						<label for="holiday" class="col-sm-4 col-form-label">休日</label>
-						<div class="col-sm-8 form-check">
+						<label for="holiday" class="col-sm-3 col-form-label">休日</label>
+						<div class="col-sm-9 form-check">
 							<label class="checkbox inline">
 							<input type="checkbox" name="holidays[]" id="inlineCheckbox1" value="0"> 日
 							</label>

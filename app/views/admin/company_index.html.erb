@@ -203,3 +203,24 @@
 		</div>
 	</div>
 </div>
+
+<% if current_user.has_permission?(User::ROLE_SUPER) %>
+<hr/>
+<h4>DISPLAY Break Point</h4>
+<div class='d-sm-none'>
+	<p class='text-info'>'d-sm-none'  ... Detecting xs or less smaller</p>
+</div>
+
+<div class='d-none d-sm-block d-md-none'>
+	<p class='text-primary'>'d-none d-sm-block d-md-none'  ... Detecting sm</p>
+</div>
+
+<div class='d-none d-md-block d-lg-none'>
+	<p class='text-warning'>'d-none d-md-block d-lg-none'  ... Detecting md</p>
+</div>
+
+<div class='d-none d-lg-block'>
+	<p class='text-danger'>'d-none d-lg-block'  ... Detecting lg or more bigger</p>
+</div>
+
+<% end %>

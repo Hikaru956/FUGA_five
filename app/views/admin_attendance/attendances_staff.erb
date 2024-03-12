@@ -7,11 +7,11 @@
 			|
 		<% end %>
 		<% calendar_url = url_for(:action=>"index", :year => @target_date.year)%>
-		<a href="<%= calendar_url %>" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;スタッフ一覧へ</a>
+		<a href="<%= calendar_url %>" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;戻る</a>
 	</span>
 	<h3>
 		<%= attendance_staff_icon %>
-		勤怠管理
+		勤怠<div class='d-none d-md-inline'>管理</div>
 		:
 		<%= model_name(@staff) %>
 	</h3>
@@ -33,9 +33,15 @@
 <%= render partial: 'dlg_init_roster' %>
 <%= render partial: 'dlg_init_calendar_mark' %>
 
-<%= render :partial=>"attendances_staff" %>
 
-<div class='text-right'>
-	<%= render partial: 'legend_timeline', locals: {shop: @shop}%>
+<div class='d-none d-md-block'>
+	<%= render :partial=>"attendances_staff" %>
+	<div class='text-right'>
+		<%= render partial: 'legend_timeline', locals: {shop: @shop}%>
+	</div>
+</div>
+
+<div class='d-lg-none'>
+	<%= render :partial=>"attendances_staff_sm" %>
 </div>
 
