@@ -1,6 +1,6 @@
 <table class="timeline">
 	<tr>
-		<th class="head_space"><%= @shop.name unless @shop.blank? %></th>
+		<th class="head_space"></th>
 		<%
 			now = Time.now 
 			is_today = (now.to_date==@target_date)?	true: false 
@@ -26,8 +26,3 @@
 	<% end %>
 	<%= render :partial=>"timeline_quarter_open" %>
 </table>
-
-<% staffs.each do | staff | %>
-	<%= render partial: 'dlg_new_reservation', locals: {shop: @shop, staff: staff, target_date: @target_date}%>
-<% end %>
-<%= render partial: 'dlg_new_reservation', locals: {shop: @shop, staff: nil, target_date: @target_date}%>

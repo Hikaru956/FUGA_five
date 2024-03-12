@@ -5,23 +5,13 @@
 		<a href="<%= calendar_url %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;カレンダー</a>
 	</span>
 
-	<h3>
+	<h4>
 		<%= reservation_staff_icon %>
-		予約管理
+		予約<div class='d-none d-md-inline'>管理</div>
 		:
 		<%= @target_date%>&nbsp;(<%=wday(@target_date)%>)
-	</h3>
+	</h4>
 </header>
-<% if false %>
-	<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-		<li class="nav-item">
-			<a class="nav-link  active" href="<%= url_for(:controller=>'admin_reservation', :action=>'reservation', :id=>@item) %>"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;予約</a>
-		</li>
-		<li  class="nav-item">
-			<a class="nav-link" href="<%= url_for(:controller=>'admin_reservation', :action=>'birthday', :id=>@item) %>"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;誕生日</a>
-		</li>
-	</ul>
-<% end %>
 
 <div id="sandbox"></div>
 
@@ -46,9 +36,22 @@
 	</div>
 <% end %>
 
-<%= render :partial=>"timelines_quarter"%>
 
-<div class='text-right'>
-	<%= render partial: 'admin_attendance/legend_timeline', locals: {shop: @shop} %>
+<div class='d-none d-md-block'>
+	<%= render :partial=>"timelines_quarter"%>
+	<div class='text-right'>
+		<%= render partial: 'admin_attendance/legend_timeline', locals: {shop: @shop} %>
+	</div>
 </div>
+
+<div class='d-lg-none'>
+	<%= render :partial=>"timelines_sm"%>
+</div>
+
+
+<% staffs = @shop.staffs.where("staffs.staff_status >=?", Staff::STAFF_HELPER).order(position: :asc, alt_id: :asc) %>
+<% staffs.each do | staff | %>
+	<%= render partial: 'dlg_new_reservation', locals: {shop: @shop, staff: staff, target_date: @target_date}%>
+<% end %>
+<%= render partial: 'dlg_new_reservation', locals: {shop: @shop, staff: nil, target_date: @target_date}%>
 

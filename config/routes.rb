@@ -300,6 +300,7 @@ Fuga326::Application.routes.draw do
   patch 'bs_reservation/update_reservation', to: 'bs_reservation#update_reservation'
   delete 'bs_reservation/delete_reservation', to: 'bs_reservation#delete_reservation'
 
+  get 'admin_reservation/show_reservation', to: 'admin_reservation#show_reservation'
   post 'admin_reservation/create_reservation', to: 'admin_reservation#create_reservation'
   patch 'admin_reservation/update_reservation', to: 'admin_reservation#update_reservation'
   delete 'admin_reservation/delete_reservation', to: 'admin_reservation#delete_reservation'

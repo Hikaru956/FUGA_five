@@ -10,6 +10,10 @@
 <% raw_span_count = (@reservations.blank?)? 3: @reservations.size+2 %>
 <tr>
 	<th rowspan=<%= raw_span_count %> class="head_staff_name">
+		<span class='float-right'>
+			<% cm = calendar_mark_on(@target_date, staff) %>
+			<% unless cm.blank? %>[ <%= calendar_mark_icon %> : <%= cm %> ]<% end %>
+		</span>
 		<%= model_name(staff) %><br/>
 		<% if @shop.option_attendance_management %>
 			<%= link_to(attendance_staff_icon + '勤怠',

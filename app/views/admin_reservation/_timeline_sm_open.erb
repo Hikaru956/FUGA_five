@@ -1,0 +1,34 @@
+<% 
+	all_reservations = Reservation.in_range(@finder_range_from, @finder_range_until, @shop) 
+	@reservations_opened = []
+	all_reservations.each do |reservation| 
+		next unless reservation.staff.blank?
+		@reservations_opened << reservation
+	end
+%>
+
+<tr class="tr_open">
+	<th>
+		その他
+		<span class="float-right">
+			<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#NewReservation_open">
+				<%= new_icon%>&nbsp;予約
+			</button>
+		</span>
+	</th>
+	<td>
+		<% unless @reservations_opened.blank? %>
+			<% @reservations_opened.each do |r| %>
+				<div>
+					<a href='<%= admin_reservation_show_reservation_path(id: r) %>' class='text-info'>
+						<%= reservation_staff_icon %>
+						<%= r.reserved_until.strftime('%H:%M') %>
+						(<%= r.min_period %>分)
+						<%= link_to_6_icon %>
+					</a>
+				</div>
+			<% end %>
+		<% end %>
+	</td>
+</tr>
+

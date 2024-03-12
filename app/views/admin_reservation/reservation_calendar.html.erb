@@ -1,5 +1,5 @@
 <header class="subhead" id="overview">
-	<h3><%= reservation_staff_icon %>&nbsp;予約管理</h3>
+	<h4><%= reservation_staff_icon %>&nbsp;予約<div class='d-none d-md-inline'>管理</div></h4>
 </header>
 
 <% if false %>
@@ -35,10 +35,8 @@
 
 		<hr/>
 	</div>
-	<div class="span9">
-		<%= render :partial=>"reservation_calendar"%>
-	</div>
 
+	<%= render :partial=>"reservation_calendar"%>
 	<div class='text-right'>
 		<span class='text-info'>■</span> : 予約件数
 		,
@@ -46,7 +44,6 @@
 		,
 		<span style='color: #CCC'>■</span> : 過去の日付
 		,
-		<span style='color: #FEE'>■</span> : 日曜日、祝祭日
+		<span style='color: #FEE'>■</span> : 日曜,祝祭日
 	</div>
-
 </div>

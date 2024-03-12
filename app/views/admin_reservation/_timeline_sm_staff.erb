@@ -1,0 +1,42 @@
+<%
+	all = staff.attendances
+	all = all.where(shop_id: @shop)
+	all = all.where(attend_on: @target_date)
+	@attendances = all
+	roster_timeline_classes = (@shop.option_attendance_management)? 
+						timeline_classes(@shop, @target_date, @reservations, @attendances, "timeline_work","timeline_absence",	"timeline_reservation","timeline_reservation"):		
+						timeline_classes(@shop, @target_date, @reservations, @attendances, "timeline_work","timeline_work",		"timeline_reservation","timeline_reservation")		
+%>
+<tr>
+	<th width='40%' style='vartical-align: middle'>
+		<%= model_name(staff) %>
+		<div class="text-right">
+			<% if @shop.option_attendance_management %>
+				<%= link_to(attendance_staff_icon + '勤怠',
+					{:controller=>'admin_attendance', :action=>"attendances_staff", :id=>staff, :shop_id=>@shop, :year=>@target_date.year,  :month=>@target_date.month}, 
+					:class=>"btn btn-mini btn-sm btn-outline-primary", :title=>"勤怠管理") %>
+			<% end %>
+			<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#NewReservation_<%=staff.id%>">
+				<%= new_icon%>&nbsp;予約
+			</button>
+		</div>
+	</th>
+	<td width='60%'>
+		<span class='float-right'>
+			<% cm = calendar_mark_on(@target_date, staff) %>
+			<% unless cm.blank? %>[ <%= calendar_mark_icon %> : <%= cm %> ]<% end %>
+		</span>
+		<% unless @reservations.blank? %>
+			<% @reservations.each do |r| %>
+				<div>
+					<a href='<%= admin_reservation_show_reservation_path(id: r) %>' class='text-info'>
+					<%= reservation_staff_icon %>
+					<%= r.reserved_until.strftime('%H:%M') %>
+					(<%= r.min_period %>分)
+					<%= link_to_6_icon %>
+					</a>
+				</div>
+			<% end %>
+		<% end %>
+	</td>
+</tr>

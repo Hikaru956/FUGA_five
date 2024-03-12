@@ -1,0 +1,8 @@
+<table class="table table-bordered table-hover">
+	<% staffs = @shop.staffs.where("staffs.staff_status >=?", Staff::STAFF_HELPER).order(position: :asc, alt_id: :asc) %>
+	<% staffs.each do | staff | %>
+		<% @reservations = Reservation.in_range(@finder_range_from, @finder_range_until, @shop, staff) %> 
+		<%= render :partial=>"timeline_sm_staff", locals: {staff: staff} %>
+	<% end %>
+	<%= render :partial=>"timeline_sm_open" %>
+</table>
