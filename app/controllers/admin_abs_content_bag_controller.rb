@@ -94,6 +94,8 @@ class AdminAbsContentBagController < ApplicationController
         @item.content_category  = @shop.content_categories.find_by_id(params[:content_category])
         @item.content_bag       = @item.content_category.content_bag
         @item.publish_from      = Time.now.to_date
+        @item.save
+        redirect_to :action=>"edit_leaf", :id=>@item.id
     end
 
     def create_leaf
@@ -277,14 +279,12 @@ class AdminAbsContentBagController < ApplicationController
         ref_id = params[:ref_id]
         photo = params[:photo]
 
-        content_leaf = ContentLeaf.find(ref_id)
-        p '❌❌'+content_leaf.id.to_s
+        content_leaf = ContentLeaf.find(ref_id) unless ref_id.blank?
 
         # デバッグ用ログ
         Rails.logger.debug("Content Type: #{photo.content_type}")
-
         # HEIF形式の画像をPNG形式に変換
-        if !photo.content_type == 'image/png' && !photo.content_type == 'image/jpeg'
+        if photo.content_type != 'image/png' && photo.content_type != 'image/jpeg'
             require 'mini_magick'
 
             # 一時ファイルのパス
