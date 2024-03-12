@@ -40,6 +40,12 @@ class AdminController < ApplicationController
     ##  Controllers For Company
     #
     def company_index
+
+        current_user.shop = nil if current_user.has_permission?(User::ROLE_REGISTRAR)
+
+
+
+
         unless current_user.has_permission?(User::ROLE_OPERATOR)
             return redirect_to(:action=>"company_show", :id=>current_user.company) if current_user.has_permission?(User::ROLE_OWNER)
             return redirect_to(:controller=>'bs_config', :action=>"company_show_shop", :id=>current_user.shop)
