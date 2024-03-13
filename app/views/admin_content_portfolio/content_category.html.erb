@@ -107,7 +107,7 @@
 			<tr>
 				<td>
 					<%= (leaf.first?)?	raw("<i class='fa-solid fa-chevron-up'></i>"):		link_to(raw("<i class='fa-solid fa-angles-up'></i>"), :action=>"leaf_higher",	:id=>leaf) %>
-		        	<%= leaf_state_icons(leaf) %>
+		        	<%= leaf_state_6_icons(leaf) %>
 					<%= (leaf.last?)? 	raw("<i class='fa-solid fa-chevron-down'></i>"): 	link_to(raw("<i class='fa-solid fa-angles-down'></i>"), 	:action=>"leaf_lower",	:id=>leaf) %>				
 				</td>
 				<td>

@@ -36,17 +36,17 @@
 	</div>
 <% end %>
 
-<h4>項目一覧</h4>
+<h4><%= @parent_category.category_label %>項目一覧</h4>
 <% if @leafs.blank? %>
 		<div class="alert alert-info">
 			 <%= info_icon('情報')%>&nbsp;項目がありません。
 		</div>
 <% else %>
 	<% @total_size = @parent_category.content_leafs.size %>
-	<div class='d-none d-sm-block'>
+	<div class='d-none d-md-block'>
 		<%= render partial: "category_box_leaf", locals: {leafs: @leafs } %>
 	</div>
-	<div class='d-sm-none'>
+	<div class='d-md-none'>
 		<%= render partial: "category_list_leaf", locals: {leafs: @leafs } %>
 	</div>
 <% end %>

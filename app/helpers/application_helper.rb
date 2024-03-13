@@ -189,7 +189,7 @@ module ApplicationHelper
 EOF
   end
 
-  def leaf_state_icons(leaf)
+  def leaf_state_6_icons(leaf)
     return raw '<span class="label">非公開</span>' unless leaf.is_public
     today = Time.now.to_date
     return raw '<span class="label label-inverse">公開終了</span>'  if !leaf.publish_until.blank? && leaf.publish_until<today
@@ -197,6 +197,14 @@ EOF
     return raw '<span class="label label-info">公開中</span>'
   end
   
+  def leaf_state_6_icons(leaf)
+    return raw '<span class="badge badge-secondary">非公開</span>' unless leaf.is_public
+    today = Time.now.to_date
+    return raw '<span class="badge badge-secondary">公開終了</span>'  if !leaf.publish_until.blank? && leaf.publish_until<today
+    return raw '<span class="badge badge-primary">公開待ち</span>'  if !leaf.publish_from.blank? && today < leaf.publish_from
+    return raw '<span class="badge badge-info">公開中</span>'
+  end
+
   def scheme_state_icons(leaf)
     return raw '<span class="label">非公開</span>' unless leaf.is_public
     return raw '<span class="label label-info">公開中</span>'

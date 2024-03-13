@@ -20,7 +20,7 @@
 	<% end %>
     <div class="card-body">
         <h4>
-        	<%= leaf_state_icons(temp_local) %>
+        	<%= leaf_state_6_icons(temp_local) %>
         	<%= truncate(model_title(temp_local), :length=>30) %>
 		</h4>
 		<p><%= h truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>50) unless temp_local.description.blank? %></p>

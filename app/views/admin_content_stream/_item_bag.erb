@@ -19,32 +19,25 @@
         	<%= icon_scheme_state(temp_local) %>
         	<%= truncate(model_name(temp_local), :length=>50) %>
 		</h5>
-		<p class="card-text"><%= h truncate(temp_local.description, :length=>20) %></p>
-	</div>
-	<ul class="list-group list-group-flush">
-		<li class="list-group-item">An item</li>
-		<li class="list-group-item">A second item</li>
-	</ul>
-	<div class="card-body">
+
 		<%= (temp_local.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"bag_category_higher", :id=>temp_local) %>
 		<%= temp_local.position %>
 		<%= (temp_local.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"bag_category_lower",	:id=>temp_local) %>
 		<span class='float-right'>
-			<a href="<%= url_for(:action=>'content_category', :id=>temp_local) %>" class="btn btn-sm btn-outline-primary"><%= share_icon('表示')%>&nbsp;表示</a>
-		</span>
-		<div class="caption">
-			<h4>
-				<%= bag_state_icons(@item) %>
-				<%= truncate(model_name(@item), :length=>50) %>
-			</h4>
-				<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=@item.id%>">
-					<%= edit_icon('編集')%>
-				</button>
-				<% unless @item.is_public %>
+			<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=@item.id%>">
+				<%= edit_icon('編集')%>
+			</button>
+			<% unless @item.is_public %>
 				<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete_<%=@item.id%>">
 					<%= trash_icon('削除')%>
 				</button>
-				<% end %>
+			<% else %>
+				<button type='button' class='btn btn-secondary btn-sm' disabled><%= trash_icon('削除')%></button>
+			<% end %>
+			|
+			<a href="<%= url_for(:action=>'content_category', :id=>temp_local) %>" class="btn btn-sm btn-outline-primary"><%= share_icon('表示')%>&nbsp;表示</a>
+		</span>
+		<div class="caption">
 		</div>
 	</div>
 </div>

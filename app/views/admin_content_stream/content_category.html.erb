@@ -35,7 +35,7 @@
 	</div>
 <% end %>
 
-<h4>ブログ記事一覧</h4>
+<h4><%= @parent_category.category_label %>記事一覧</h4>
 <% if @leafs.blank? %>
 		<div class="alert alert-info">
 			 <%= info_icon %> 記事が登録されていない。
