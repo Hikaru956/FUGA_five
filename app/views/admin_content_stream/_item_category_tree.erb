@@ -3,7 +3,7 @@
         <p style="text-align:center;">
             <%= (temp_local.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), {:action=>"content_category_higher",	:id=>temp_local}, :title=>"表示順を前に") %>
             <%= temp_local.position %>
-            <%= (temp_local.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	{:action=>"content_category_lower",		:id=>temp_local}, :title=>"表示順を後ろに") %>				
+            <%= (temp_local.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	{:action=>"content_category_lower",	:id=>temp_local}, :title=>"表示順を後ろに") %>				
         </p>
     </div>
     <div class="card-body">

@@ -40,9 +40,9 @@
 <% end %>
 
 <% if @leafs.blank? %>
-		<div class="alert alert-info">
-			 <%= info_icon('情報')%>&nbsp;記事がありません。
-		</div>
+	<div class="alert alert-info">
+			<%= info_icon('情報')%>&nbsp;記事がありません。
+	</div>
 <% else %>
 	<% @total_size = @parent_category.content_leafs.size %>
 	<div class='d-none d-md-block'>

@@ -22,12 +22,44 @@
 	</span>
 </div>
 
-<% if false %>
-<div id="event_result"><br/></div>
+<h4>サブ・カテゴリー</h4>
+<% unless @current_category.children.blank? %>
+	<% if false %>
+	<% array = @current_category.children.in_groups_of(3, false)%>
+	<div class="row">
+		<% for i in 0..(array.size-1) %>
+			<% @lines = array[i] %>
+		        <div class="col-sm-4">
+		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
+				</div>		
+		        <div class="col-sm-4">
+		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
+				</div>		
+		        <div class="col-sm-4">
+		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
+				</div>
+		<% end %>
+	</div>
+	<% end %>
 
-<div id="category_trees"></div>
+	<br/>
+	<div class="row row-cols-1 row-cols-md-3 g-4">
+		<% @current_category.children.each do |cat| %>
+			<%= render partial: 'item_cat_card', locals: {cat: cat} %>
+		<% end %>
+	</div>
+	<% @current_category.children.each do |cat| %>
+		<%= render partial: 'dlg_cat_edit', 	locals: {cat: cat} %>
+		<%= render partial: 'dlg_cat_delete', 	locals: {cat: cat} %>
+	<% end %>
+
+
+<% else %>
+	<div class='alert alert-info'>
+		<%= info_icon %>
+		サブ・カテゴリーが登録されていません。
+	</div>
 <% end %>
-
 
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
     <div class="modal-dialog">
@@ -64,30 +96,6 @@
         </div>
     </div>
 </div>
-
-<h4>サブ・カテゴリー</h4>
-<% unless @current_category.children.blank? %>
-	<% array = @current_category.children.in_groups_of(3, false)%>
-	<div class="row">
-		<% for i in 0..(array.size-1) %>
-			<% @lines = array[i] %>
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
-				</div>		
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
-				</div>		
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
-				</div>
-		<% end %>
-	</div>
-<% else %>
-	<div class='alert alert-info'>
-		<%= info_icon %>
-		サブ・カテゴリーが登録されていません。
-	</div>
-<% end %>
 
 <%
 	e_cats = ContentCategory.where('shop_id IN (?) AND content_categories.id = content_categories.parent_id', @shop)

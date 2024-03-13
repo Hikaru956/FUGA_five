@@ -12,22 +12,52 @@
   <li class="active"><%= @current_category.category_label%></li>
 </ul>
 
-<div>
-	<span class='float-right'>
-		<a class="btn btn-sm btn-secondary" href="<%=url_for(:action=>"content_category", :id=>@parent_category)%>">
-			<%= backward_icon('戻る') %>&nbsp;戻る</a>
-		<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
-			<%= new_icon('登録') %>&nbsp;新規登録
-		</button>
-	</span>
-</div>
+<span class='float-right'>
+	<a class="btn btn-sm btn-outline-dark" href="<%=url_for(:action=>"content_category", :id=>@parent_category)%>">
+		<%= backward_icon('戻る') %>&nbsp;戻る</a>
+	<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+		<%= new_icon('登録') %>&nbsp;新規登録
+	</button>
+</span>
+<h4>サブ・カテゴリー</h4>
 
-<% if false %>
-<div id="event_result"><br/></div>
+<% if @current_category.children.blank? %>
+	<div class="alert alert-info">
+			<%= info_icon('情報')%>&nbsp;サブ・カテゴリーがありません。
+	</div>
+<% else %>
+	<% if false %>
+	<% array = @current_category.children.in_groups_of(3, false)%>
+	<div class="row">
+		<% for i in 0..(array.size-1) %>
+			<% @lines = array[i] %>
+		        <div class="col-sm-4">
+		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
+				</div>		
+		        <div class="col-sm-4">
+		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
+				</div>		
+		        <div class="col-sm-4">
+		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
+				</div>
+		<% end %>
+	</div>
+	<% end %>
 
-<div id="category_trees"></div>
+	<br/>
+	<div class="row row-cols-1 row-cols-md-3 g-4">
+		<% @current_category.children.each do |cat| %>
+			<%= render partial: 'item_cat_card', locals: {cat: cat} %>
+		<% end %>
+	</div>
+	<% @current_category.children.each do |cat| %>
+		<%= render partial: 'dlg_cat_edit', 	locals: {cat: cat} %>
+		<%= render partial: 'dlg_cat_delete', 	locals: {cat: cat} %>
+	<% end %>
+
 <% end %>
 
+<!-- Modal -->
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -64,26 +94,8 @@
     </div>
 </div>
 
-<!-- Modal -->
 
-<% unless @current_category.children.blank? %>
-	<h4>サブ・カテゴリー</h4>
-	<% array = @current_category.children.in_groups_of(3, false)%>
-	<div class="row">
-		<% for i in 0..(array.size-1) %>
-			<% @lines = array[i] %>
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
-				</div>		
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
-				</div>		
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_category_tree", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
-				</div>
-		<% end %>
-	</div>
-<% end %>
+
 
 <%
 	e_cats = ContentCategory.where('shop_id IN (?) AND content_categories.id = content_categories.parent_id', @shop)

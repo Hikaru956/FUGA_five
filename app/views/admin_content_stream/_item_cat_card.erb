@@ -1,0 +1,31 @@
+<div class="col">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="<%= url_for(:action=>'content_category_tree', :id=>cat) %>">
+                    <i class="fa-solid fa-folder"></i>
+                    <%= truncate(cat.title, :length=>50) %>
+                </a>
+            </h5>
+
+            <p class="card-text">
+                <%= cat.content_leafs.size %>
+                件の記事
+            </p>
+        </div>
+        <div class="card-footer">
+            <%= (cat.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), {:action=>"content_category_higher",	:id=>cat}, :title=>"表示順を前に") %>
+            <%= cat.position %>
+            <%= (cat.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	{:action=>"content_category_lower",		:id=>cat}, :title=>"表示順を後ろに") %>				
+
+            <span class="float-right">
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=cat.id%>">
+                    <%= edit_icon('編集')%>
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete_<%=cat.id%>">
+                    <%= trash_icon('削除')%>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>

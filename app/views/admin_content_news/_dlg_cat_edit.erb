@@ -1,0 +1,53 @@
+<div class="modal fade" id="modal_edit_<%=cat.id%>" tabindex="-1" aria-labelledby="modal_edit_<%=cat.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <%= form_for cat, url: admin_content_news_content_category_update_path(id: cat.id), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">カテゴリー編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <label for="name" class="col-sm-4 col-form-label">カテゴリー名</label>
+                        <div class="col-sm-8">
+                            <%= f.text_field :title,  {class: "form-control", placeholder: "カテゴリー名称", :required => false, autofocus: true}  %>
+                        </div>
+                    </div>
+                    <% if false %>
+                    <div class="mb-3 row">
+                        <label for="wsite_keywords" class="col-sm-4 col-form-label">カテゴリー</label>
+                        <div class="col-sm-8">
+                            <%
+                                ancestors = ancestors_for(cat)
+                                options = ancestors.map{ | c | [ c.name, c.id] }
+                            %>
+                            <%= f.collection_select(:parent_id, options, :last, :first, {prompt: false}, {class: "form-control"})%>
+                            <% if false %>
+                                <%
+                                cat_options = Array.new
+                                cat_options << cat.category_path(true)[0]
+                                %>
+                                <%= tree_select(cat_options, 'content_category', 'parent_id', cat.parent.id) %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <% end %>
+                    <div class="mb-3 row">
+                        <label for="wsite_keywords" class="col-sm-4 col-form-label">所属カテゴリー</label>
+                        <div class="col-sm-8">
+                            <%
+                                ancestors = ancestors_for(cat)
+                                options = ancestors.map{ | c | [ c.name, c.id] }
+                            %>
+                            <%= tree_select_with_filter([cat.category_path(true)[0]], 'content_category', 'parent_id', cat.parent_id, 0, true, (cat.parent.blank?)? []: cat.sons<<cat)%>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新') %>&nbsp;更新</button>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
