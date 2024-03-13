@@ -53,48 +53,50 @@
 <% end %>
 
 <hr/>
-<div class="row-fluid">
-	<h4>
-		<p class="pull-right">
+<% if false %>
+	<div class="row-fluid">
+		<h4>
+			<p class="pull-right">
+				<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
+					<i class="icon-camera"></i>&nbsp;
+					写真追加
+				</a>
+			</p>
+			項目で使用する画像
+		</h4>
+		<p>
+		<small>この項目に関する画像を登録します。先頭の写真が一覧表示の際の代表写真になります。登録された画像は記事にも挿入することが出来ます。</small>
+		</p>	
+		
+		<% array = @item.photos.order(position: :asc).in_groups_of(3, false)%>
+		<% for i in 0..(array.size-1) %>
+			<% @lines = array[i] %>
+			<ul class="thumbnails">
+				<li class="span4">
+					<% if @lines.size>=1 %>
+						<%= render :partial=>"item_photo", :locals => {:photo => @lines[0]} %>
+					<% end %>
+				</li>		
+				<li class="span4">
+					<% if @lines.size>=2 %>
+						<%= render :partial=>"item_photo", :locals => {:photo => @lines[1]} %>
+					<% end %>
+				</li>		
+				<li class="span4">
+					<% if @lines.size>=3 %>
+						<%= render :partial=>"item_photo", :locals => {:photo => @lines[2]} %>
+					<% end %>
+				</li>		
+			</ul>
+		<% end %>
+		<p>
 			<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
 				<i class="icon-camera"></i>&nbsp;
 				写真追加
 			</a>
 		</p>
-		項目で使用する画像
-	</h4>
-	<p>
-	  <small>この項目に関する画像を登録します。先頭の写真が一覧表示の際の代表写真になります。登録された画像は記事にも挿入することが出来ます。</small>
-	</p>	
-	
-	<% array = @item.photos.order(position: :asc).in_groups_of(3, false)%>
-	<% for i in 0..(array.size-1) %>
-		<% @lines = array[i] %>
-	    <ul class="thumbnails">
-	        <li class="span4">
-	        	<% if @lines.size>=1 %>
-					<%= render :partial=>"item_photo", :locals => {:photo => @lines[0]} %>
-				<% end %>
-			</li>		
-	        <li class="span4">
-	        	<% if @lines.size>=2 %>
-					<%= render :partial=>"item_photo", :locals => {:photo => @lines[1]} %>
-				<% end %>
-			</li>		
-	        <li class="span4">
-	        	<% if @lines.size>=3 %>
-					<%= render :partial=>"item_photo", :locals => {:photo => @lines[2]} %>
-				<% end %>
-			</li>		
-        </ul>
-	<% end %>
-	<p>
-		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
-			<i class="icon-camera"></i>&nbsp;
-			写真追加
-		</a>
-	</p>
-</div>
+	</div>
+<% end %>
 
 
 <div id="modal_delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
