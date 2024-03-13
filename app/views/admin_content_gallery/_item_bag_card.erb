@@ -1,17 +1,26 @@
 <div class="col">
-    <div class="card h-100">
+    <div class="card">
 
         <a href="<%= url_for(:action=>'content_category', :id=>stream) %>">
-            <% leaf = stream.latest_news_article %>
-            <% unless leaf.blank? %>
-                <% key_photo = key_photo(leaf) %>
-                <% unless key_photo.blank? %>
-                    <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
-                <% else %>
-                    <img class="card-img-top" src="https://placehold.jp/20/cfcfcf/ffffff/320x180.png?text=<%=leaf.publish_from.strftime('%Y-%m-%d')%>">
-                <% end %>
+            <% 
+                key_photo = nil
+                latest = stream.latest_news_article
+                parent_category = @shop.content_categories.find_by_id(stream.id)
+                unless parent_category.blank?
+                    key_photo = parent_category.photos.order(position: :asc).first
+                end
+                if key_photo.blank?
+                    key_photo = (latest.blank?)? nil: key_photo(latest)
+                end
+            %>
+            <% unless key_photo.blank? %>
+                <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
             <% else %>
-                <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Public%20Article%0A">
+                <% unless latest.blank? %>
+                    <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=<%=latest.publish_from.strftime('%Y-%m-%d')%>">
+                <% else %>
+                    <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Article%0A">
+                <% end %>
             <% end %>
         </a>
 
@@ -27,6 +36,7 @@
             <%= stream.position %>
             <%= (stream.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"bag_category_lower",	:id=>stream) %>
             <span class='float-right'>
+                <a class="btn btn-outline-success btn-sm"  	data-toggle="modal" href="<%=url_for(:action=>'edit_face', :id=>stream)%>" title="表紙設定" data-turbolinks='false'><i class="fa-solid fa-camera-retro"></i></a>
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=stream.content_bag.id%>">
                     <%= edit_icon('編集')%>
                 </button>
@@ -41,5 +51,7 @@
                 <a href="<%= url_for(:action=>'content_category', :id=>stream) %>" class="btn btn-sm btn-outline-primary"><%= share_icon('表示')%>&nbsp;表示</a>
             </span>
         </div>
+
     </div>
 </div>
+

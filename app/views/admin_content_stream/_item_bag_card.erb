@@ -1,19 +1,17 @@
 <div class="col">
-    <div class="card h-100">
-
-        <a href="<%= url_for(:action=>'content_category', :id=>stream) %>">
-            <% leaf = stream.latest_news_article %>
-            <% unless leaf.blank? %>
-                <% key_photo = key_photo(leaf) %>
-                <% unless key_photo.blank? %>
-                    <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
-                <% else %>
-                    <img class="card-img-top" src="https://placehold.jp/20/cfcfcf/ffffff/320x180.png?text=<%=leaf.publish_from.strftime('%Y-%m-%d')%>">
-                <% end %>
+    <div class="card">
+        <% leaves = stream.public_leafs(true) %>
+        <% unless leaves.blank? %>
+            <% latest = leaves[0] %>
+            <% key_photo = key_photo(@latest) %>
+            <% unless key_photo.blank? %>
+                <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
             <% else %>
-                <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Public%20Article%0A">
+                <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=<%=latest.publish_from.strftime('%Y-%m-%d')%>">
             <% end %>
-        </a>
+        <% else %>
+            <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Article%0A">
+        <% end %>
 
         <div class="card-body">
             <h5 class="card-title">
@@ -41,5 +39,6 @@
                 <a href="<%= url_for(:action=>'content_category', :id=>stream) %>" class="btn btn-sm btn-outline-primary"><%= share_icon('表示')%>&nbsp;表示</a>
             </span>
         </div>
+
     </div>
 </div>

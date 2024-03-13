@@ -43,6 +43,7 @@
 <% else %>
 	<% @total_size = @parent_category.content_leafs.size %>
 	<div class='d-none d-md-block'>
+		<br/>
 		<%= render partial: "category_box_leaf", locals: {leafs: @leafs } %>
 	</div>
 	<div class='d-md-none'>

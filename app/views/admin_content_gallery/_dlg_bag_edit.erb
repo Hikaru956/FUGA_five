@@ -1,0 +1,19 @@
+<div class="modal fade" id="modal_edit_<%=stream.content_bag.id%>" tabindex="-1" aria-labelledby="modal_edit_<%=stream.content_bag.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for stream.content_bag, url: admin_content_gallery_update_bag_path(id: stream.content_bag), method: :patch do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">ストリーム編集</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					 <%= render :partial=>"form_bag", locals:{f: f, item: stream.content_bag}%>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新') %>&nbsp;更新</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>

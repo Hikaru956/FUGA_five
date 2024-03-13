@@ -1,0 +1,19 @@
+<div class="modal fade" id="modal_delete_<%=stream.content_bag.id%>" tabindex="-1" aria-labelledby="modal_delete_<%=stream.content_bag.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for stream.content_bag, url: admin_content_news_delete_bag_path(id: stream.content_bag.id), method: :delete do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">削除確認</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					 <p>ストリームを削除します。ストリーム内のすべてのコンテンツも削除されます。よろしいですか？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>

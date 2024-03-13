@@ -19,7 +19,7 @@ class AdminContentGalleryController < AdminAbsContentBagController
     #@leafs = @leafs.paginate(:page => params[:page], :per_page=>PER_PAGE)
 
     @leafs = @shop.content_leafs.where("content_leafs.content_category_id =?", @parent_category.id)
-    @leafs = @leafs.to_a.sort{|a,b| b.position<=>a.position}
+    @leafs = @leafs.to_a.sort{|a,b| a.position<=>b.position}
     @leafs = Kaminari.paginate_array(@leafs).page(params[:page]).per(PER_PAGE)
   end
 
