@@ -54,23 +54,19 @@
 <hr/>
 
 <div class="row-fluid">
-	<% unless @shop.enable_editor %>
-		<h4>
-			<p class="float-right">
-				<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
-					<i class="fa-solid fa-camera"></i>&nbsp;
-					写真追加
-				</a>
-			</p>
-			画像集
-		</h4>
-		<p>
-		<small>この項目に関する画像を登録します。先頭の写真が一覧表示の際の代表写真になります。登録された画像は記事にも挿入することが出来ます。</small>
+	<h4>
+		<p class="float-right">
+			<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
+				<i class="fa-solid fa-camera"></i>&nbsp;
+				写真追加
+			</a>
 		</p>
-	<% else %>
-		<small>先頭の写真が一覧表示の際の代表写真になります。</small>
-	<% end %>
-	
+		画像集
+	</h4>
+	<p>
+	<small>この項目に関する画像を登録します。先頭の写真が一覧表示の際の代表写真になります。</small>
+	</p>
+
 	<% array = @item.photos.order(position: :asc).in_groups_of(3, false)%>
 	<% for i in 0..(array.size-1) %>
 		<% @lines = array[i] %>
@@ -89,15 +85,6 @@
 					<%= render :partial=>"item_photo", :locals => {:photo => @lines[2]} %>
 				<% end %>
 			</div>
-	<% end %>
-
-	<% unless @shop.enable_editor %>
-		<p class="float-right">
-			<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
-				<i class="fa-solid fa-camera"></i>&nbsp;
-				写真追加
-			</a>
-		</p>
 	<% end %>
 </div>
 
