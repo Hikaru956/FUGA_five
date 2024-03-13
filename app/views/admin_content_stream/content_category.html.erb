@@ -42,10 +42,10 @@
 		</div>
 <% else %>
 	<% @total_size = @parent_category.content_leafs.size %>
-	<div class='d-none d-sm-block'>
+	<div class='d-none d-md-block'>
 		<%= render partial: "category_box_leaf", locals: {leafs: @leafs } %>
 	</div>
-	<div class='d-sm-none'>
+	<div class='d-md-none'>
 		<%= render partial: "category_list_leaf", locals: {leafs: @leafs } %>
 	</div>
 <% end %>
