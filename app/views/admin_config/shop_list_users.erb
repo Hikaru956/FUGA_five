@@ -12,17 +12,17 @@
 
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
 	<li class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop', :id=>@shop) %>">店舗情報</a>
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop', :id=>@shop) %>"><div class='d-none d-md-inline'>店舗</div>情報</a>
 	</li>
 	<li  class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_staffs', :id=>@shop) %>">店舗スタッフ</a>
+		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_staffs', :id=>@shop) %>"><div class='d-none d-md-inline'>店舗</div>スタッフ</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link active" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_users', :id=>@shop) %>">店舗ユーザー</a>
+		<a class="nav-link active" href="<%= url_for(:controller=>'admin_config', :action=>'shop_list_users', :id=>@shop) %>"><div class='d-none d-md-inline'>店舗</div>ユーザー</a>
 	</li>
 	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
 		<li class="nav-item">
-			<a class="nav-link " href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;サイト設定</a>
+			<a class="nav-link " href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website',	:id=>@shop) %>"><%= icon_site_status(@shop.wsite_run_mode) %>&nbsp;<div class='d-none d-md-inline'>サイト</div>設定</a>
 		</li>
 			<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>	
 				<li class="nav-item">
