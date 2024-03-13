@@ -12,20 +12,22 @@
 		<% unless @bag_roots.blank? %>
 			<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_category_select">
 				<i class="fa-solid fa-folder-open"></i>
+				切替
 			</button>
 		<%end%>
+		<% if @parent_category.category_type==ContentCategory::TYPE_BAG_ROOT %>
+			<% url_edit = url_for(:action=>"content_category_tree", :id=>@parent_category) %>
+			<a class="btn btn-warning btn-sm" href="<%=url_edit%>">
+				<%= setting_icon('カテゴリー')%>&nbsp;
+				設定
+			</a>
+		<% end %>
+		|
 		<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
 		<a class="btn btn-success btn-sm" href="<%=url_new%>" data-turbolinks='false'>
 			<%= new_icon('登録')%>&nbsp;
 			項目登録
 		</a>
-		<% if @parent_category.category_type==ContentCategory::TYPE_BAG_ROOT %>
-			<% url_edit = url_for(:action=>"content_category_tree", :id=>@parent_category) %>
-			<a class="btn btn-warning btn-sm" href="<%=url_edit%>">
-				<%= setting_icon('カテゴリー')%>&nbsp;
-				カテゴリー
-			</a>
-		<% end %>
 	</div>
 	<h3><%= @parent_category.category_label %>項目一覧</h3>
 </header>

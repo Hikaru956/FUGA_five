@@ -12,32 +12,32 @@
 	<% unless @bag_roots.blank? %>
 		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_category_select">
 			<i class="fa-solid fa-folder-open"></i>
+			切替
 		</button>
 	<%end%>
+	<% if @parent_category.category_type==ContentCategory::TYPE_BAG_ROOT %>
+		<% url_edit = url_for(:action=>"content_category_tree", :id=>@parent_category) %>
+		<a class="btn btn-warning btn-sm" href="<%=url_edit%>">
+			<i class="fa-solid fa-folder-open"></i>
+			設定
+		</a>
+	<% end %>
+	|
 	<% bag = ContentBag.type_root(@shop, ContentBag::TYPE_NEWS) %>
 	<% url_new = url_for(:action=>"new_leaf", content_category: @parent_category, content_bag: bag) %>
 	<a class="btn btn-success btn-sm" href="<%=url_new%>" data-turbolinks='false'>
 		<%= new_icon('登録')%>&nbsp;
 		記事登録
 	</a>
-	<% if @parent_category.category_type==ContentCategory::TYPE_BAG_ROOT %>
-		<% url_edit = url_for(:action=>"content_category_tree", :id=>@parent_category) %>
-		<a class="btn btn-warning btn-sm" href="<%=url_edit%>">
-			<%= setting_icon('カテゴリー')%>&nbsp;
-			カテゴリー
-		</a>
-	<% end %>
 </div>
 
-
+<h4><%= @parent_category.category_label %>記事一覧</h4>
 
 <% if @parent_category.my_bag_root_category.content_bag.is_public==false  %>
 	<div class="alert alert-warning">
 		 <%= info_icon('情報')%>&nbsp;非公開ストリームです。
 	</div>
 <% end %>
-
-<h4><%= @parent_category.category_label %>記事一覧</h4>
 
 <% if @leafs.blank? %>
 		<div class="alert alert-info">

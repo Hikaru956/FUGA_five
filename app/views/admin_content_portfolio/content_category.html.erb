@@ -6,7 +6,8 @@
   <% end %>
   <li class="active"><%= @parent_category.category_label %></li>
 </ul>
-<div class="float-right">
+
+<span class="float-right">
 	<% @bag_roots = [@parent_category.my_bag_root_category] %>
 	<% if @bag_roots.index(@parent_category).blank? %>
 		<% url_edit = url_for(:action=>"content_category_edit_description", :id=>@parent_category) %>
@@ -18,37 +19,33 @@
 	<% unless @bag_roots.blank? %>
 		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_category_select">
 			<i class="fa-solid fa-folder-open"></i>
+			切替
 		</button>
 	<%end%>
-
-	<% if true %>
-		<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
-		<a class="btn btn-success btn-sm" href="<%=url_new%>" data-turbolinks='false'>
-			<%= new_icon('登録')%>&nbsp;
-			項目登録
-		</a>
-	<% end %>
-
-
 	<% if @parent_category.category_type==ContentCategory::TYPE_BAG_ROOT %>
 		<% url_edit = url_for(:action=>"content_category_tree", :id=>@parent_category) %>
 		<a class="btn btn-warning btn-sm" href="<%=url_edit%>">
-			<%= setting_icon('カテゴリー')%>&nbsp;
-			カテゴリー
+			<i class="fa-solid fa-folder-open"></i>
+			設定
 		</a>
 	<% end %>
-</div>
+	|
+	<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
+	<a class="btn btn-success btn-sm" href="<%=url_new%>" data-turbolinks='false'>
+		<%= new_icon('登録')%>&nbsp;
+		項目登録
+	</a>
+</span>
+<h4><%= @parent_category.category_label %>・カテゴリー</h4>
 
 <% if @parent_category.my_bag_root_category.content_bag.is_public==false  %>
 	<div class="alert alert-warning">
-		 <strong>Warning!</strong> 非公開ストリームです。
+		 <%= info_icon %> 非公開ストリームです。
 	</div>
 <% end %>
 
 
 <% unless @items.blank? %>
-	<h4>カテゴリー</h4>
-	<br/>
 	<% array = @items.in_groups_of(3, false)%>
 	<div class="row">
 		<% for i in 0..(array.size-1) %>
