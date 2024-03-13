@@ -1,5 +1,10 @@
 module AdminAbsContentBagHelper
 
+  def html_content_text(leaf)
+    doc = Nokogiri::HTML(leaf.description)
+    doc.text
+  end
+
  def ancestors_for(category)
     return [] if category.category_type==ContentCategory::TYPE_BAG_ROOT
     ancestors = category.ancestors

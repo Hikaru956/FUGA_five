@@ -44,11 +44,7 @@
 
 <div class="row-fluid">
 	<% unless @item.description.blank? %>
-		<div class="ql-snow">
-    		<div class="ql-editor">
-				<%=  raw @item.description %>
-			</div>
-		</div>
+		<%=  html_content_text(@item.description) %>
 	<% end %>
 	<% unless @item.tags.blank? %>
 		<% @item.tags.order(name: :asc).each do | tag | %>

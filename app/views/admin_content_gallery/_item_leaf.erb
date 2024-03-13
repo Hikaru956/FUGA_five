@@ -18,7 +18,7 @@
 			<% unless temp_local.description_3.blank? %>
  	           <%= h temp_local.description_3 %>
         	<% else %>
- 	           <%= (temp_local.description.blank?)? '': h(truncate(strip_tags(temp_local.description).gsub('&nbsp;', ' '), :length=>50)) %>
+ 	           <%= (temp_local.description.blank?)? '': h(html_content_text(temp_local).gsub('&nbsp;', ' '), :length=>50)) %>
            	<% end %>
 		</p>
 
