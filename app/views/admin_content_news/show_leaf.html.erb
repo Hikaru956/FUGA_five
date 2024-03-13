@@ -44,7 +44,7 @@
 
 <div class="row-fluid">
 	<% unless @item.description.blank? %>
-		<%=  html_content_text(@item.description) %>
+		<%=  html_content_text(@item) %>
 	<% end %>
 	<% unless @item.tags.blank? %>
 		<% @item.tags.order(name: :asc).each do | tag | %>

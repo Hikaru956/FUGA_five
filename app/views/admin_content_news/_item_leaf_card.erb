@@ -1,0 +1,43 @@
+<div class="col">
+    <div class="card h-100">
+        <a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>">
+            <% key_photo = key_photo(leaf) %>
+            <% unless key_photo.blank? %>
+                <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
+            <% else %>
+                <img src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Photo%0A" class="card-img-top">
+            <% end %>
+        </a>
+
+        <div class="card-body">
+            <h5 class="card-title">
+                <%= leaf_state_6_icons(leaf) %>
+                <%= truncate(model_title(leaf), :length=>30) %>
+            </h5>
+            <p class="card-text">
+                <% unless leaf.description_3.blank? %>
+                    <%= h leaf.description_3 %>
+                <% else %>
+                    <%= (leaf.description.blank?)? '': h(truncate(html_content_text(leaf).gsub('&nbsp;', ' '), :length=>40)) %>
+                <% end %>
+                <div>
+                    <small class="text-muted">
+                        <% unless leaf.staff.blank? %>
+                            <%= model_name(leaf.staff) %>
+                        <% end %>
+                        @
+                        <%= leaf.publish_from.strftime("%Y-%m-%d") %>
+                    </small>
+                </div>
+            </p>
+        </div>
+        <div class="card-footer">
+            <%= (leaf.last?)?		raw("<i class='fa-solid fa-backward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), 	:action=>"leaf_lower",	:id=>leaf) %>
+            <%= @total_size-leaf.position+1 %>
+            <%= (leaf.first?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"leaf_higher",	:id=>leaf) %>
+            <span class='float-right'>
+                <a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>" class="btn btn-sm btn-outline-primary"><%= share_icon('表示')%>&nbsp;表示</a>
+            </span>
+        </div>
+    </div>
+</div>
