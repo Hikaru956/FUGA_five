@@ -1,11 +1,10 @@
 <% @item = temp_local.content_bag %>
 <div class="card" xstyle="width: 18rem;">
-	<% if false %>
 	<a href="<%= url_for(:action=>'content_category', :id=>temp_local) %>">
 		<% leaves = temp_local.public_leafs(true) %>
 		<% unless leaves.blank? %>
 			<% @latest = leaves[0] %>
-			<% key_photo = key_photo(@latest) %>
+			<% key_photo = key_photo(temp_local) %>
 			<% unless key_photo.blank? %>
 				<%= image_tag key_photo.clip.url(:thumb) %>
 			<% else %>
@@ -15,6 +14,7 @@
 			<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Article%0A">
 		<% end %>
 	</a>
+	<% if false %>
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item">An item</li>
 		<li class="list-group-item">A second item</li>
