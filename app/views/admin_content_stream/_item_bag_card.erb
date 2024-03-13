@@ -1,18 +1,19 @@
 <div class="col">
     <div class="card">
-        <% leaves = stream.public_leafs(true) %>
-        <% unless leaves.blank? %>
-            <% latest = leaves[0] %>
-            <% key_photo = key_photo(@latest) %>
-            <% unless key_photo.blank? %>
-                <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
+        <a href="<%= url_for(:action=>'content_category', :id=>stream) %>">
+            <% leaves = stream.public_leafs(true) %>
+            <% unless leaves.blank? %>
+                <% latest = leaves[0] %>
+                <% key_photo = key_photo(@latest) %>
+                <% unless key_photo.blank? %>
+                    <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
+                <% else %>
+                    <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=<%=latest.publish_from.strftime('%Y-%m-%d')%>">
+                <% end %>
             <% else %>
-                <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=<%=latest.publish_from.strftime('%Y-%m-%d')%>">
+                <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Article%0A">
             <% end %>
-        <% else %>
-            <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Article%0A">
-        <% end %>
-
+        </a>
         <div class="card-body">
             <h5 class="card-title">
                 <%= icon_scheme_state(stream) %>
