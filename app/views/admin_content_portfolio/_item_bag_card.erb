@@ -1,0 +1,46 @@
+<div class="col">
+    <div class="card">
+        <a href="<%= url_for(:action=>'content_category', :id=>stream) %>">
+            <% leaves = stream.public_leafs(true) %>
+            <% unless leaves.blank? %>
+                <% latest = leaves[0] %>
+                <% key_photo = key_photo(stream) %>
+                <% unless key_photo.blank? %>
+                    <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
+                <% else %>
+                    <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=<%= latest.publish_from.strftime('%Y-%m-%d') %>">
+                <% end %>
+            <% else %>
+                <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Article%0A">
+            <% end %>
+        </a>
+
+        <div class="card-body">
+            <h5 class="card-title">
+                <%= icon_scheme_state(stream) %>
+                <%= truncate(model_name(stream), :length=>50) %>
+            </h5>
+        </div>
+
+        <div class="card-footer">
+            <%= (stream.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"bag_category_higher", :id=>stream) %>
+            <%= stream.position %>
+            <%= (stream.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"bag_category_lower",	:id=>stream) %>
+            <span class='float-right'>
+                <a class="btn btn-outline-success btn-sm"  	data-toggle="modal" href="<%=url_for(:action=>'edit_face', :id=>stream)%>" title="表紙設定" data-turbolinks='false'><i class="fa-solid fa-camera-retro"></i></a>
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%= stream.content_bag.id %>">
+                    <%= edit_icon('編集')%>
+                </button>
+                <% unless stream.content_bag.is_public %>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete_<%= stream.content_bag.id %>">
+                        <%= trash_icon('削除')%>
+                    </button>
+                <% else %>
+                    <button type='button' class='btn btn-secondary btn-sm' disabled><%= trash_icon('削除')%></button>
+                <% end %>
+                |
+                <a href="<%= url_for(:action=>'content_category', :id=>stream) %>" class="btn btn-sm btn-outline-primary"><%= share_icon('表示')%>&nbsp;表示</a>
+            </span>
+        </div>
+    </div>
+</div>

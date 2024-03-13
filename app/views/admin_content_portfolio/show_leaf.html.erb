@@ -11,7 +11,7 @@
 	<div class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"content_category", :id=>@item.content_category, :page=>@page) %>
-			<a class="btn btn-sm btn-secondary" href="<%=url_back%>">
+			<a class="btn btn-sm btn-outline-secondary" href="<%=url_back%>">
 				<%= backward_icon('戻る') %>&nbsp;
 				戻る
 			</a>
@@ -49,6 +49,7 @@
 	</div>
 <% end %>
 
+<% if false %>
 <hr/>
 <div class="row-fluid">
 	<h4>
@@ -89,7 +90,7 @@
 		</a>
 	</p>
 </div>
-
+<% end %>
 
 <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="modal_delete" aria-hidden="true">
     <div class="modal-dialog">
