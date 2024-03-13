@@ -92,9 +92,9 @@ class AdminAbsContentBagController < ApplicationController
         @item                   = ContentLeaf.new
         @item.shop              = @shop
         @item.content_category  = @shop.content_categories.find_by_id(params[:content_category])
-        @item.content_bag       = @item.content_category.content_bag
+        @item.content_bag       = @item.content_category.content_bag || ContentBag.find_by(id: params[:content_bag])
         @item.publish_from      = Time.now.to_date
-        @item.save
+        @item.save!
         redirect_to :action=>"edit_leaf", :id=>@item.id
     end
 

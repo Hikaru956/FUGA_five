@@ -51,6 +51,10 @@ class ContentBag < ApplicationRecord
     self.content_category.save!
   end
 
+  def self.type_root(shop, content_type)
+    shop.content_bags.find_by(content_type: content_type)
+  end
+
   ###
   ## FIXED PAGE FEATURE
   #

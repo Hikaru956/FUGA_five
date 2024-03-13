@@ -20,11 +20,16 @@
 			<i class="fa-solid fa-folder-open"></i>
 		</button>
 	<%end%>
-	<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
-	<a class="btn btn-success btn-sm" href="<%=url_new%>" data-turbolinks='false'>
-		<%= new_icon('登録')%>&nbsp;
-		項目登録
-	</a>
+
+	<% if true %>
+		<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
+		<a class="btn btn-success btn-sm" href="<%=url_new%>" data-turbolinks='false'>
+			<%= new_icon('登録')%>&nbsp;
+			項目登録
+		</a>
+	<% end %>
+
+
 	<% if @parent_category.category_type==ContentCategory::TYPE_BAG_ROOT %>
 		<% url_edit = url_for(:action=>"content_category_tree", :id=>@parent_category) %>
 		<a class="btn btn-warning btn-sm" href="<%=url_edit%>">
@@ -63,9 +68,6 @@
 <% end %>
 
 
-<hr/>
-<h4>項目一覧</h4>
-
 <% unless @parent_category.description.blank? %>
 	<pre><%= raw @parent_category.description %></pre>
 <% end %>
@@ -78,6 +80,9 @@
 		</div>
 	<% end %>
 <% else %>
+	<hr/>
+	<h4>項目一覧</h4>
+
 	<% if false %>
 	<% array = @leafs.in_groups_of(3, false)%>
 	<div class="row">
