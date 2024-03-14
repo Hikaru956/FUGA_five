@@ -115,15 +115,14 @@
 				</td>
 				<td>
 					<a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>">
-						<i class="fa-solid fa-circle-arrow-right"></i>
 						<%= truncate(model_title(leaf), :length=>30) %>
+						<%= link_to_6_icon %>
 					</a>
 					<% unless leaf.description.blank? %>
 						<p><small><%= truncate(strip_tags(leaf.description), :length=>30) %></small>
 					<% end %>
 				</td>
 				<td>
-				  	¥
 					<% if false %>
 					<%= (leaf.integer_field.blank?)? "設定なし": commify(leaf.integer_field.to_s) %>			
 					<% end %>

@@ -36,7 +36,7 @@
             <%= @total_size-leaf.position+1 %>
             <%= (leaf.first?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"leaf_higher",	:id=>leaf) %>
             <span class='float-right'>
-                <a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>" class="btn btn-sm btn-outline-primary"><%= share_icon('表示')%>&nbsp;表示</a>
+                <a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>" class="btn btn-sm btn-outline-primary">表示&nbsp;<%= link_to_6_icon %></a>
             </span>
         </div>
     </div>
