@@ -1,0 +1,25 @@
+<style>
+    .image-container img {
+        width: 100px;
+        height: 100px;
+    }
+</style>
+<% categories.each do |cat| %>
+    <hr/>
+        <a href="<%= url_for(:action=>'content_category', :id=>cat, :page=>@page) %>">
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    <h5 class="card-title">
+                        <span class='float-right'><span class="badge badge-info"><%= cat.content_leafs.size %> 件</span></span>
+                        <i class="fa-solid fa-folder"></i>
+                        <%= truncate(cat.title, :length=>40) %>
+                    </h5>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <p class="card-text">
+                        <%= (cat.description.blank?)? '': h(truncate(html_content_text(cat).gsub('&nbsp;', ' '), :length=>40)) %>
+                    </p>
+                </div>
+            </div>
+        </a>
+<% end %>
