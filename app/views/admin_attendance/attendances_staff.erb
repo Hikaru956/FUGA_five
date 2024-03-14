@@ -3,11 +3,11 @@
 	<span class="float-right">
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 			<% roster_url = url_for(:controller=>"admin_roster", :action=>"index", target_date: @target_date)%>
-			<a href="<%= roster_url %>" class="btn btn-outline-primary"><i class="fas fa-tasks"></i>&nbsp;シフト設定</a>
+			<a href="<%= roster_url %>" class="btn btn-sm btn-outline-primary"><i class="fas fa-tasks"></i>&nbsp;シフト設定</a>
 			|
 		<% end %>
 		<% calendar_url = url_for(:action=>"index", :year => @target_date.year)%>
-		<a href="<%= calendar_url %>" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;戻る</a>
+		<a href="<%= calendar_url %>" class="btn btn-sm btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;戻る</a>
 	</span>
 	<h4>
 		<%= attendance_staff_icon %>
@@ -20,12 +20,14 @@
 <%= render :partial=>"roster_summary" %>
 
 <div style='margin-bottom: 10px;'>
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalInitRoster">
-		<i class='fas fa-cog'></i>&nbsp;
-		勤怠一括設定
-	</button>
-	|
-	<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modalInitCalendarMark">
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+		<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalInitRoster">
+			<i class='fas fa-cog'></i>&nbsp;
+			勤怠一括設定
+		</button>
+		|
+	<% end %>
+	<button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#modalInitCalendarMark">
 		<%= calendar_mark_icon %>
 		<%= calendar_mark_title %>一括設定
 	</button>
@@ -49,4 +51,3 @@
 	<%= render :partial=>"dlg_day_on", 	locals: {staff: @staff, target_date: d} %>
 	<%= render :partial=>"dlg_day_off", locals: {staff: @staff, target_date: d} %>
 <% end %>
-
