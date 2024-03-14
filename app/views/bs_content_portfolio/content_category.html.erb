@@ -39,7 +39,7 @@
 
 <% if @parent_category.my_bag_root_category.content_bag.is_public==false  %>
 	<div class="alert alert-block">
-		 <strong>Warning!</strong> 非公開ストリームです。
+		 非公開ストリームです。
 	</div>
 <% end %>
   	
@@ -86,7 +86,7 @@
 <% if @leafs.blank? %>
 	<% if @bag_roots.index(@parent_category).blank? %>
 		<div class="alert alert-block">
-			 <strong>Warning!</strong> 項目がありません。
+			 項目がありません。
 		</div>
 	<% end %>
 <% else %>

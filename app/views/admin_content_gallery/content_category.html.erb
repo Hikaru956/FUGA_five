@@ -23,7 +23,8 @@
 			</a>
 		<% end %>
 		|
-		<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
+		<% bag = ContentBag.type_root(@shop, ContentBag::TYPE_GALLERY) %>
+		<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category, content_bag: bag) %>
 		<a class="btn btn-success btn-sm" href="<%=url_new%>" data-turbolinks='false'>
 			<%= new_icon('登録')%>&nbsp;
 			項目登録

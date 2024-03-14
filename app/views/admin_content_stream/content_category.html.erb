@@ -24,7 +24,8 @@
 		</a>
 	<% end %>
 	|
-	<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category) %>
+	<% bag = ContentBag.type_root(@shop, ContentBag::TYPE_GALLERY) %>
+	<% url_new = url_for(:action=>"new_leaf", :content_category=>@parent_category, content_bag: bag) %>
 	<a class="btn btn-success btn-sm" href="<%=url_new%>" data-turbolinks='false'>
 		<%= new_icon('登録')%>&nbsp;
 		記事登録
@@ -34,14 +35,14 @@
 
 <% if @parent_category.my_bag_root_category.content_bag.is_public==false  %>
 	<div class="alert alert-warning">
-		 <strong>Warning!</strong> 非公開ストリームです。
+		 <%= info_icon %> 非公開ストリームです。
 	</div>
 <% end %>
 
 
 <% if @leafs.blank? %>
 		<div class="alert alert-info">
-			 <%= info_icon %> 記事が登録されていない。
+			 <%= info_icon %> 記事が登録されていません。
 		</div>
 <% else %>
 	<% @total_size = @parent_category.content_leafs.size %>
