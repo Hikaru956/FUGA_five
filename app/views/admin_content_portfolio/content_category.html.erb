@@ -49,6 +49,8 @@
 <% unless @items.blank? %>
 	<% array = @items.in_groups_of(3, false)%>
 	<div class="row">
+
+		<% if false %>
 		<% for i in 0..(array.size-1) %>
 			<% @lines = array[i] %>
 		        <div class="col-sm-4">
@@ -62,6 +64,16 @@
 				</div>
 		<% end %>
 		<br/>
+		<% end %>
+
+		<div class='d-none d-md-block'>
+			<br/>
+			<%= render partial: "category_box",		locals: { categories: @items } %>
+		</div>
+		<div class='d-md-none'>
+			<%= render partial: "category_list", 	locals: { categories: @items } %>
+		</div>
+
 	</div>
 <% end %>
 

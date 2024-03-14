@@ -1,0 +1,5 @@
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    <% categories.each do |cat| %>
+        <%= render partial: 'item_cat_card_box', locals: {category: cat} %>
+    <% end %>
+</div>

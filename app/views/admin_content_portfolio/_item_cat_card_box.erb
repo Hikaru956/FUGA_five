@@ -1,0 +1,19 @@
+<div class="col">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">
+				<span class='float-right'><span class="badge badge-info"><%= category.content_leafs.size %> 件</span></span>
+				<i class="fa-solid fa-folder"></i>
+				<%= truncate(category.title, :length=>50) %>
+            </h5>
+            <p class="card-text">
+                <%= (category.description.blank?)? '': h(truncate(html_content_text(category).gsub('&nbsp;', ' '), :length=>50)) %>
+            </p>
+        </div>
+        <div class="card-footer">
+            <span class='float-right'>
+                <a href="<%= url_for(:action=>'content_category', :id=>category) %>" class="btn btn-sm btn-outline-primary">表示&nbsp;<%= link_to_6_icon %></a>
+            </span>
+        </div>
+    </div>
+</div>
