@@ -1,9 +1,9 @@
 <!-- === Masthead === -->
 
 <ul class="breadcrumb">
-  <li><%= link_to "トップ", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to @bag_title, :action=>"content_root" %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <% @parent_category.category_path.each do | category | %>
-	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <% end %>
   <li class="active"><%= @parent_category.category_label %></li>
 </ul>
@@ -42,7 +42,7 @@
 
 <% if @leafs.blank? %>
 		<div class="alert alert-info">
-			 <%= info_icon %> 記事が登録されていません。
+			 <%= info_icon %> <%= @bag_title %>には記事が登録されていません。
 		</div>
 <% else %>
 	<% @total_size = @parent_category.content_leafs.size %>

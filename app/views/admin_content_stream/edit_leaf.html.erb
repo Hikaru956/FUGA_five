@@ -1,8 +1,8 @@
 <!-- === Masthead === -->
 <ul class="breadcrumb">
-  <li><%= link_to "トップ", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to @bag_title, :action=>"content_root" %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <% @item.content_category.category_path(true).each do |category | %>
-	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <% end %>
   <li class="active"><%= @item.title%></li>
 </ul>
@@ -13,13 +13,13 @@
 		<legend>記事編集</legend>
 		<%= render :partial=>"form_leaf", locals:{f: f, item: @item} %>
 		<div class="form-actions text-right">
-		<% if is_test_shop?(@shop) %>
-        	<button type="submit" onclick="clickSubmit();" class="btn btn-sm btn-primary"><%= update_icon('更新')%>&nbsp;&nbsp;更新</button>
-		<% else %>
-			<button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新')%>&nbsp;&nbsp;更新</button>
-		<% end %>
 			<% url_cancel = url_for(:action=>"show_leaf", :id=>@item) %>							
 	  		<a class="btn btn-sm btn-secondary" href="<%= url_cancel %>" data-turbolinks='false'><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
+			<% if is_test_shop?(@shop) %>
+				<button type="submit" onclick="clickSubmit();" class="btn btn-sm btn-primary"><%= update_icon('更新')%>&nbsp;&nbsp;更新</button>
+			<% else %>
+				<button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新')%>&nbsp;&nbsp;更新</button>
+			<% end %>
       	</div>
 	</fieldset>
 <% end -%>

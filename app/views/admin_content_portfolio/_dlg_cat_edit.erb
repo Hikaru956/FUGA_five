@@ -1,7 +1,7 @@
 <div class="modal fade" id="modal_edit_<%=cat.id%>" tabindex="-1" aria-labelledby="modal_edit_<%=cat.id%>" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <%= form_for cat, url: admin_content_stream_content_category_update_path(id: cat.id), method: :patch do |f| -%>
+            <%= form_for cat, url: admin_content_portfolio_content_category_update_path(id: cat.id), method: :patch do |f| -%>
                 <div class="modal-header">
                     <h5 class="modal-title">カテゴリー編集</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

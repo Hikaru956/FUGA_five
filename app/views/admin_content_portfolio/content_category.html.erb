@@ -1,8 +1,8 @@
 <!-- === Masthead === -->
 <ul class="breadcrumb">
-  <li><%= link_to "トップ", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to @bag_title, :action=>"content_root" %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <% @parent_category.category_path.each do | category | %>
-	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <% end %>
   <li class="active"><%= @parent_category.category_label %></li>
 </ul>
@@ -11,8 +11,8 @@
 	<% @bag_roots = [@parent_category.my_bag_root_category] %>
 	<% if @bag_roots.index(@parent_category).blank? %>
 		<% url_edit = url_for(:action=>"content_category_edit_description", :id=>@parent_category) %>
-		<a class="btn btn-info btn-sm" href="<%=url_edit%>">
-			<i class="icon-info"></i>&nbsp;
+		<a class="btn btn-outline-info btn-sm" href="<%=url_edit%>">
+			<%= edit_icon %>
 			カテゴリー説明文
 		</a>
 	<% end %>

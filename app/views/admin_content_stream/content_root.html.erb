@@ -1,6 +1,6 @@
 <!-- === Masthead === -->
 <ul class="breadcrumb">
-  <li>トップ&nbsp;<span class="divider">/</span></li>
+  <li><%=@bag_title %>&nbsp;<span class="divider">/</span></li>
 
 </ul>
 
@@ -17,7 +17,7 @@
 			</div>
 		</div>
 	<% end %>
-	<h3><%=@bag_title %>・ストリーム</h3>
+	<h4><%=@bag_title %>・ストリーム</h4>
 </header>
 
 <% if @items.blank?  %>
