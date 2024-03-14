@@ -106,6 +106,12 @@
 
 <h4>
 	<span class="float-right">
+		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+				<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
+					<i class="fa-solid fa-camera"></i>&nbsp;
+					写真追加
+				</a>
+		<% end %>
 		<a class="btn btn-sm btn-primary" href="<%= url_for(:action=>'shop_edit_staff', :id=>@staff) %>">
 			<i class="fa-solid fa-pencil"></i>&nbsp;編集
 		</a>
@@ -117,6 +123,7 @@
 </div>
 
 
+<% if false %>
 <div class="row">
 	<% array = @staff.photos.order(position: :asc).in_groups_of(3, false)%>
 	<% for i in 0..(array.size-1) %>
@@ -138,17 +145,19 @@
 			</div>
 	<% end %>
 </div>
+<% end %>
 
 <br/>
-
-<% if current_user.has_permission?(User::ROLE_MANAGER) %>
-	<p>
-		<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
-			<i class="fa-solid fa-camera"></i>&nbsp;
-			写真追加
-		</a>
-	</p>
+<div class="row row-cols-1 row-cols-md-3 g-2">
+	<% @staff.photos.order(position: :asc).each do |photo| %>
+		<%= render partial: 'item_photo_card', locals: {photo: photo} %>
+	<% end %>
+</div>
+<% @staff.photos.order(position: :asc).each do |photo| %>
+	<%= render partial: 'dlg_photo_edit',	locals: {photo: photo} %>
+	<%= render partial: 'dlg_photo_delete', locals: {photo: photo} %>
 <% end %>
+
 
 <div class="modal fade" id="modalEditSocial" tabindex="-1" aria-labelledby="modalEditSocial" aria-hidden="true">
     <div class="modal-dialog modal-lg">

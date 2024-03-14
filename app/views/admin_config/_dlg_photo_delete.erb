@@ -1,0 +1,21 @@
+<div class="modal fade" id="modal_delete_photo_<%=photo.id%>" tabindex="-1" aria-labelledby="modal_delete_photo_<%=photo.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<%= form_for photo, url: admin_config_delete_staff_photo_path(id: photo), method: :delete do |f| -%>
+                <div class="modal-header">
+                    <h5 class="modal-title">削除確認</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+					<div class="mb-3 row">
+						<p>写真を削除します。よろしいですか？</p>
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
+                </div>
+			<% end %>
+        </div>
+    </div>
+</div>
