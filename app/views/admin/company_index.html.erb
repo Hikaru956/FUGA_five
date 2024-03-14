@@ -223,4 +223,29 @@
 	<p class='text-danger'>'d-none d-lg-block'  ... Detecting lg or more bigger</p>
 </div>
 
+<hr/>
+<h4>Missing Shop Info Categories</h4>
+<% missing_cats = ContentCategory.where('shop_id IS NULL') %>
+<table class='table table-sm - table-bordered'>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+			<th>ParentShop</th>
+			<th>Fix</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% missing_cats.each do |cat| %>
+			<tr>
+				<td><%= cat.id %></td>
+				<td><%= cat.title %></td>
+				<td><%= cat.parent.shop.name %></td>
+				<td></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+
 <% end %>
