@@ -34,7 +34,7 @@
 <h4><%= @parent_category.category_label %>記事一覧</h4>
 
 <% if @parent_category.my_bag_root_category.content_bag.is_public==false  %>
-	<div class="alert alert-warning">
+	<div class="alert alert-secondary">
 		 <%= info_icon('情報')%>&nbsp;非公開ストリームです。
 	</div>
 <% end %>
