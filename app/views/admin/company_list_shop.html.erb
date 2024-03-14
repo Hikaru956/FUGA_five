@@ -88,9 +88,6 @@
 						<% fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop) %>
 						<%= fix_pages_bag.content_leafs.size %>
 						ページ
-						<a href="<%= url_for(:action=>"company_show_shop_usage", :id=>shop) %>" class="btn btn-outline-info btn-sm">
-							<%= info_icon('情報')%>
-						</a>
 					</td>
 					<%= form_tag admin_delegating_path(id: shop), method: :post, class: '' do %>
 					<td class='text-center'style="vertical-align: middle;">
