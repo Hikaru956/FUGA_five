@@ -43,9 +43,6 @@
 				<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
 				<%= backward_icon('戻る')%>&nbsp;戻る
 				</a>
-				<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
-					<%= edit_icon('編集') %>&nbsp;編集
-				</button>
 			</span>
 			<h4>店舗情報</h4>
 		</header>
@@ -99,6 +96,20 @@
 				</tr>
 			</tbody>
 		</table>
+
+		<p class="text-right">
+			<% if current_user.has_permission?(User::ROLE_REGISTRAR) || @item.wsite_run_mode<Shop::WSITE_PUBLISHED %>
+				<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete">
+					<%= trash_icon('削除確認')%>&nbsp;
+					削除…
+				</button>
+				|
+				<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
+					<%= edit_icon('編集') %>&nbsp;編集
+				</button>
+			<% end %>
+		</p>
+
 		<% if current_user.has_permission?(User::ROLE_OPERATOR) %>
 			<hr/>
 			<table class="table table-sm table-bordered">
@@ -175,15 +186,6 @@
 				<% end %>
 			</tbody>
 		</table>		
-		<% end %>
-
-		<% if current_user.has_permission?(User::ROLE_SUPER) || @item.wsite_run_mode<Shop::WSITE_PUBLISHED %>
-		<p class="text-right">
-			<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete">
-				<%= trash_icon('削除確認')%>&nbsp;
-				削除確認
-			</button>
-		</p>
 		<% end %>
 	</div>
 	<hr/>

@@ -62,11 +62,11 @@
 <p class='text-right'>
 	<% if false && current_user==@user %>
 		<button type='button' class='btn btn-sm btn-secondary' disabled>
-			<%= trash_icon('削除') %>&nbsp;削除確認
+			<%= trash_icon('削除') %>&nbsp;削除…
 		</button>
 	<% else %>
 		<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
-			<%= trash_icon('削除') %>&nbsp;削除確認
+			<%= trash_icon('削除') %>&nbsp;削除…
 		</button>
 	<% end %>
 	<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdit">

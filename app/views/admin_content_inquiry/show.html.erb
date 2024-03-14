@@ -50,12 +50,12 @@
 <div class='text-right'>
     <% if current_user.has_permission?(User::ROLE_MANAGER)%>
         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete">
-            <%= trash_icon('削除') %>&nbsp;削除確認
+            <%= trash_icon('削除') %>&nbsp;削除…
         </button>
     <% else %>
         <a class="btn btn-danger btn-sm" disabled='disabled'>
             <%= trash_icon('削除') %>&nbsp;
-            削除確認
+            削除…
         </a>
     <% end %>
     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">

@@ -14,10 +14,10 @@
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 			<p class="text-center">
 				<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
-					<%= info_icon('キャプション')%>&nbsp;キャプション
+					<%= edit_icon('キャプション')%>&nbsp;キャプション
 				</button>
 				<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete_photo_<%=photo.id%>">
-					<%= trash_icon('削除確認')%>&nbsp;削除確認
+					<%= trash_icon('削除確認')%>&nbsp;削除…
 				</button>
 			</p>
 		<% end %>
@@ -40,8 +40,8 @@
 		<p><%=photo.info%></p>
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 			<p class="text-center">
-				<a class="btn btn-success btn-small" data-toggle="modal" href="#modal_edit_photo_<%=photo.id%>">	<i class="icon-info-sign"></i>&nbsp;キャプション</a>
-				<a class="btn btn-danger btn-small"  data-toggle="modal" href="#modal_delete_photo_<%=photo.id%>">	<i class="icon-trash"></i>&nbsp;削除確認</a>
+				<a class="btn btn-success btn-small" data-toggle="modal" href="#modal_edit_photo_<%=photo.id%>">	<%= edit_icon %>&nbsp;キャプション</a>
+				<a class="btn btn-danger btn-small"  data-toggle="modal" href="#modal_delete_photo_<%=photo.id%>">	<%= trash_icon %>&nbsp;削除…</a>
 			</p>
 		<% end %>
 	</div>
