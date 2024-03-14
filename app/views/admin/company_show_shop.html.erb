@@ -12,8 +12,8 @@
 <!-- === Masthead === -->
 
 <ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 					:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@item.company), 	:controller=>"admin", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "レジストリー", 				:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
+  <li><%= link_to model_name(@item.company),  :controller=>"admin", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <li class="active"><%= model_name(@item) %></li>
 </ul>
 
@@ -31,9 +31,10 @@
 		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'shop_show_website',	:id=>@item) %>"><%= icon_site_status(@item.wsite_run_mode) %>&nbsp;サイト属性</a>
 	</li>
 </ul>
+
 <div class="row">
 	<div>
-		<h4>
+		<header class="subhead" id="overview">
 			<span class="float-right">
 				<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
 				<%= backward_icon('戻る')%>&nbsp;戻る
@@ -42,8 +43,9 @@
 					<%= edit_icon('編集') %>&nbsp;編集
 				</button>
 			</span>
-			店舗情報
-		</h4>
+			<h4>店舗情報</h4>
+		</header>
+
 		<table class="table table-bordered">
 			<tbody>
 				<tr>

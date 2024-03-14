@@ -2,8 +2,8 @@
 
 
 <ul class="breadcrumb">
-  <li><%= link_to "レジストリー", 					:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">/</span></li>
-  <li><%= link_to model_name(@item.company), 	:controller=>"admin", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to "レジストリー", 			 	:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
+  <li><%= link_to model_name(@item.company),  :controller=>"admin", :action=>"company_show", :id=>@item.company %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <li class="active"><%= model_name(@item) %></li>
 </ul>
 
@@ -23,14 +23,15 @@
 	</li>
 </ul>
 
-<h4>
-	<p class="float-right">
+<header class="subhead" id="overview">
+	<span class="float-right">
 		<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon('登録') %>&nbsp;ユーザー登録
 		</button>
-	</p>
-	店舗ユーザー一覧
-</h4>
+	</span>
+	<h4>店舗ユーザー一覧</h4>
+</header>
+
 <% if @users.blank? %>
 	<p class="text-error">ユーザーが登録されていません</p>
 <% else %>

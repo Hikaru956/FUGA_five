@@ -12,7 +12,7 @@
 
 <ul class="nav nav-tabs"  style="margin-bottom: 15px;">
 	<li class="nav-item">
-		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_show',:id=>@item) %>">レジストリー</a>
+		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_show',:id=>@item.company) %>">レジストリー</a>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link active" href="<%= url_for(:controller=>'admin', :action=>'company_list_shop',:id=>@item) %>">登録店舗</a>
@@ -23,23 +23,23 @@
 	</li>
 </ul>
 
-<h4>
+<header class="subhead" id="overview">
 	<span class="float-right">
 		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
 		<%= backward_icon('戻る')%>&nbsp;
 			戻る
 		</a>
 	</span>
-	<%= info_icon %>
+	<h4>
 	<%=model_name(@item)%>
 	利用状況
 	<small>
 		[<%= label_site_status(@shop.wsite_run_mode) %>]
 	</small>
-</h4>
+	</h4>
+</header>
 
-<hr/>
-<h5>▶ 全体</h5>
+<h5><%= info_icon %> 全体</h5>
 <%= render :partial=>'company_show_shop_usage' %>
 
 <hr/>
