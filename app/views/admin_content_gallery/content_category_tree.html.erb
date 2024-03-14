@@ -1,13 +1,13 @@
 <!-- === Masthead === -->
 
 <ul class="breadcrumb">
-  <li><%= link_to "トップ", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to @bag_title, :action=>"content_root" %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
 
 
   <% ancs = @current_category.ancestors.reverse %>
   <% ancs.each do |cat| %>
     <% next if cat.category_type < 100 %>
-    <li><%= link_to cat.category_label, :action=>"content_category_tree", :id=>cat %>&nbsp;<span class="divider">/</span></li>
+    <li><%= link_to cat.category_label, :action=>"content_category_tree", :id=>cat %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <% end %>
   <li class="active"><%= @current_category.category_label%></li>
 </ul>

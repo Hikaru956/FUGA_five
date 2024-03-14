@@ -1,8 +1,8 @@
 <!-- === Masthead === -->
 <ul class="breadcrumb">
-  <li><%= link_to "トップ", :action=>"content_root" %>&nbsp;<span class="divider">/</span></li>
+  <li><%= link_to @bag_title, :action=>"content_root" %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <% @item.category_path(true).each do | category | %>
-	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">/</span></li>
+	  <li><%= link_to category.category_label, :action=>"content_category", :id=>category %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
   <% end %>
   <li class="active">説明文編集</li>
 </ul>
@@ -34,6 +34,7 @@
 					language: 'ja'})
 			</script>
 		</div>
+		<br/>
 		<div class="form-actions text-right">
 			<% url_cancel = url_for(:action=>"content_category", :id=>@item) %>							
 	  		<a class="btn btn-sm btn-secondary" href="<%= url_cancel %>"><%= cancel_icon('キャンセル')%>&nbsp;&nbsp;キャンセル</a>
