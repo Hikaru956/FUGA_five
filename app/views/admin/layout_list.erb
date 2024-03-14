@@ -1,5 +1,6 @@
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
+	<li><%= link_to "レジストリー",	:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
     <li class="breadcrumb-item active" aria-current="page">レイアウト</li>
   </ol>
 </nav>
@@ -13,21 +14,28 @@
 	</p>
 	<h3>レイアウト・スキーム管理</h3>
 </header>
-<br/>
-
 <% if @layouts.blank? %>
 	<div class="alert alert-block">
 		 <%= info_icon %> 項目がありません。
 	</div>
 <% else %>
-	<div class="row">
-		<% array = @layouts.in_groups_of(3, false)%>
-		<% for i in 0..(array.size-1) %>
-			<% @lines = array[i] %>
-			<div class="col-sm-4"><%= render :partial=>"item_layout", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %></div>
-			<div class="col-sm-4"><%= render :partial=>"item_layout", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %></div>
-			<div class="col-sm-4"><%= render :partial=>"item_layout", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %></div>
-			<hr/>
+	<% if false %>
+		<div class="row">
+			<% array = @layouts.in_groups_of(3, false)%>
+			<% for i in 0..(array.size-1) %>
+				<% @lines = array[i] %>
+				<div class="col-sm-4"><%= render :partial=>"item_layout", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %></div>
+				<div class="col-sm-4"><%= render :partial=>"item_layout", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %></div>
+				<div class="col-sm-4"><%= render :partial=>"item_layout", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %></div>
+				<hr/>
+			<% end %>
+		</div>
+	<% end %>
+
+	<br/>
+	<div class="row row-cols-1 row-cols-md-4 g-2">
+		<% @layouts.each do |layout| %>
+			<%= render partial: 'box_layout', locals: {layout: layout} %>
 		<% end %>
 	</div>
 <% end %>

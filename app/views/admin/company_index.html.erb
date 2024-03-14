@@ -7,7 +7,7 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
 	<% if current_user.role >= User::ROLE_OPERATOR %>
-		<p class="float-right">
+		<span class="float-right">
 			<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 				<%= new_icon %>&nbsp;登録…
 			</button>
@@ -20,11 +20,20 @@
 			<button type="button" class="<%= seach_btn_class %>" data-bs-toggle="modal" data-bs-target="#modalSearch">
 				<%= search_icon %>&nbsp;検索…
 			</button>
-		</p>
+		</span>
 	<% end %>
 	<h4>
 		レジストリー
 	</h4>
+	<div>
+		<%= current_user.id %>
+		,
+		<%= current_user.shop %>
+		<%= current_user.shop.name unless current_user.shop.blank? %>
+		|
+		<%= @shop %>
+		<%= @shop.name unless @shop.blank? %>
+	</div>
 </header>
 
 <% if @items.blank? %>

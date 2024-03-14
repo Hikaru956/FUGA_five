@@ -1,5 +1,6 @@
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
+	<li><%= link_to "レジストリー",	:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
     <li class="breadcrumb-item"><%= link_to('レイアウト', layout_list_path) %></li>
     <li class="breadcrumb-item active" aria-current="page"><%= model_name(@layout) %></li>
   </ol>

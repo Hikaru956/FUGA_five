@@ -5,6 +5,10 @@
   <li class="active"><%= model_name(@shop) %></li>
 </ul>
 
+<header class="subhead" id="overview">
+	<h4>店舗登録情報</h4>
+</header>
+
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
 	<li class="nav-item">
 		<a class="nav-link" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@shop) %>">店舗情報</a>

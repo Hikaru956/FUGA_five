@@ -1,25 +1,36 @@
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
+	<li><%= link_to "レジストリー",	:controller=>"admin", :action=>"company_index" %>&nbsp;<span class="divider">&nbsp;/&nbsp;</span></li>
     <li class="breadcrumb-item active" aria-current="page">カラー</li>
   </ol>
 </nav>
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<p class="float-right">
+	<span class="float-right">
 		<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon %>&nbsp;カラー登録
 		</button>
-	</p>
-	<h3>カラー・スキーム管理</h3>
+	</span>
+	<h4>カラー・スキーム管理</h4>
+
+	<div>
+		<%= current_user.id %>
+		,
+		<%= current_user.shop %>
+		<%= current_user.shop.name unless current_user.shop.blank? %>
+		|
+		<%= @shop %>
+		<%= @shop.name unless @shop.blank? %>
+	</div>
 </header>
-<br/>
 
 <% if @colors.blank? %>
 	<div class="alert alert-block">
 		 <%= info_icon %> 項目がありません。
 	</div>
 <% else %>
+	<% if false %>
 	<div class="row">
 		<% array = @colors.in_groups_of(3, false)%>
 		<% for i in 0..(array.size-1) %>
@@ -28,6 +39,14 @@
 			<div class="col-sm-4"><%= render :partial=>"item_color", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %></div>
 			<div class="col-sm-4"><%= render :partial=>"item_color", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %></div>
 			<hr/>
+		<% end %>
+	</div>
+	<% end %>
+
+	<br/>
+	<div class="row row-cols-1 row-cols-md-4 g-2">
+		<% @colors.each do |color| %>
+			<%= render partial: 'box_color', locals: {color: color} %>
 		<% end %>
 	</div>
 <% end %>

@@ -40,11 +40,10 @@ class AdminController < ApplicationController
     ##  Controllers For Company
     #
     def company_index
-
-        current_user.shop = nil if current_user.has_permission?(User::ROLE_REGISTRAR)
-
-
-
+        if current_user.has_permission?(User::ROLE_REGISTRAR)
+            current_user.shop = nil
+            current_user.save!
+        end
 
         unless current_user.has_permission?(User::ROLE_OPERATOR)
             return redirect_to(:action=>"company_show", :id=>current_user.company) if current_user.has_permission?(User::ROLE_OWNER)
@@ -430,6 +429,10 @@ class AdminController < ApplicationController
     ##  Controllers For ColorSchemes
     #
     def color_list
+
+        p '❌ ❌ ❌ ❌ ❌ @ color_list ' + ((current_user.shop.blank?)? 'NILL SHOP': current_user.shop.name)
+
+
         @colors = ColorScheme.all
         @colors = @colors.order(position: :asc)
     end

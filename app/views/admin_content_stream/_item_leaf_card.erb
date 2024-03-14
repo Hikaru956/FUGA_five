@@ -10,23 +10,23 @@
         </a>
         <div class="card-body">
             <h5 class="card-title">
-                <%= leaf_state_6_icons(leaf) %>
                 <%= truncate(model_title(leaf), :length=>30) %>
             </h5>
             <p class="card-text">
+                <%= leaf_state_6_icons(leaf) %>
                 <% unless leaf.description_3.blank? %>
                     <%= h leaf.description_3 %>
+                    <br/>
                 <% else %>
                     <%= (leaf.description.blank?)? '': h(truncate(html_content_text(leaf).gsub('&nbsp;', ' '), :length=>50)) %>
+                    <br/>
                 <% end %>
-                <div>
-                    <small>
+                <small>
                     <% unless leaf.staff.blank? %>
                         <%= model_name(leaf.staff) %>
                     <% end %>
                     @ <%= leaf.publish_from.strftime("%Y-%m-%d") %>
-                    </small>
-                </div>
+                </small>
             </p>
         </div>
         <div class="card-footer">

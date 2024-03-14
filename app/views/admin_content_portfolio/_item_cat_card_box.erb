@@ -7,7 +7,9 @@
 				<%= truncate(category.title, :length=>50) %>
             </h5>
             <p class="card-text">
+                <small>
                 <%= (category.description.blank?)? '': h(truncate(html_content_text(category).gsub('&nbsp;', ' '), :length=>50)) %>
+                </small>
             </p>
         </div>
         <div class="card-footer">

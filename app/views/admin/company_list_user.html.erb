@@ -24,15 +24,15 @@
 </ul>
 
 <h4>
-	<p class="float-right">
+	<span class="float-right">
 		<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon %>&nbsp;オーナー・ユーザー登録
 		</button>
-	</p>
+	</span>
 	オーナー・ユーザー一覧
 </h4>
 <% if @users.blank? %>
-	<p class="text-error">ユーザーが登録されていません</p>
+	<div class='alert alert-info'><%= info_icon %> オーナー・ユーザーが登録されていません</div>
 <% else %>
 	<table class="table table-hover table-bordered">
 		<thead>

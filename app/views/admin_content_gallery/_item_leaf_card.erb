@@ -11,18 +11,24 @@
 
         <div class="card-body">
             <h5 class="card-title">
-                <%= leaf_state_6_icons(leaf) %>
                 <%= truncate(model_title(leaf), :length=>30) %>
             </h5>
             <p class="card-text">
                 <% unless leaf.description_3.blank? %>
-                <%= h leaf.description_3 %>
+                    <%= h leaf.description_3 %>
+                    <br/>
                 <% else %>
-                <%= (leaf.description.blank?)? '': h(truncate(html_content_text(leaf).gsub('&nbsp;', ' '), :length=>50)) %>
+                    <%= (leaf.description.blank?)? '': h(truncate(html_content_text(leaf).gsub('&nbsp;', ' '), :length=>50)) %>
+                    <br/>
                 <% end %>
-                <% unless leaf.staff.blank? %>
-                    <div><strong><%= model_name(leaf.staff) %></strong></div>
-                <% end %>
+
+                <%= leaf_state_6_icons(leaf) %>
+                <small>
+                    <% unless leaf.staff.blank? %>
+                        <br/>
+                        <strong><%= model_name(leaf.staff) %></strong>
+                    <% end %>
+                </small>
             </p>
         </div>
         <div class="card-footer">

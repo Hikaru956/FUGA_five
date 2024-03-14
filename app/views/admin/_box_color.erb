@@ -1,0 +1,35 @@
+<div class="col">
+    <div class="card h-100">
+
+        <% key_photo = color.photo %>
+        <% unless key_photo.blank? %>
+            <%= image_tag key_photo.clip.url(:thumb) %>
+        <% else %>
+            <img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Photo%0A">
+        <% end %>
+
+        <div class="card-body">
+            <h5 class="card-title">
+                <%= truncate(model_name(color), :length=>50) %>
+            </h5>
+            <p class="card-text">
+                <small>
+                    <%= icon_scheme_state(color) %>
+                    <%= h truncate(color.description, :length=>20) %>
+                </small>
+            </p>
+        </div>
+
+        <div class="card-footer">
+            <%= (color.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"color_higher", :id=>color) %>
+            <%= color.position %>
+            <%= (color.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"color_lower",	:id=>color) %>
+            <span class='float-right'>
+                <% if color.position==1 %>
+                    <i class='fa-solid fa-spinner fa-spin'></i>
+                <% end %>
+                <a href="<%= url_for(:action=>'color_show', :id=>color) %>" class="btn btn-sm  btn-outline-primary">表示 <%= link_to_6_icon %></a>
+            </span>
+        </div>
+    </div>
+</div>

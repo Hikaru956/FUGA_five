@@ -12,11 +12,7 @@
 		</h5>
 		<p class="card-text"><%= h truncate(temp_local.description, :length=>20) %></p>
 	</div>
-	<ul class="list-group list-group-flush">
-		<li class="list-group-item">An item</li>
-		<li class="list-group-item">A second item</li>
-	</ul>
-	<div class="card-body">
+	<div class="card-footer">
 		<%= (temp_local.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"layout_higher", :id=>temp_local) %>
 		<%= temp_local.position %>
 		<%= (temp_local.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"layout_lower",	:id=>temp_local) %>

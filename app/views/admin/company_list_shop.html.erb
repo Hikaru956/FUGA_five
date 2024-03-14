@@ -25,11 +25,11 @@
 
 <h4>
 	<% if current_user.role==User::ROLE_SUPER %>
-		<p class="float-right">
+		<span class="float-right">
 			<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNewShop">
 				<%= new_icon %>&nbsp;店舗登録
 			</button>
-		</p>
+		</span>
 	<% end %>
 	登録店舗一覧
 </h4>
@@ -56,7 +56,6 @@
 				<tr>
 					<td style='vertical-align: middle;'>
 
-					<%= site_status_icon(shop.wsite_run_mode) %>
 
 						<%= model_name(shop) %>
 						<span class="float-right">
@@ -66,6 +65,7 @@
 							</a>
 							|
 							<%= (shop.first?)?	"△":	link_to("▲", :action=>"shop_higher",	:id=>shop) %>
+							<%= site_status_icon(shop.wsite_run_mode) %>
 							<%= (shop.last?)? 	"▽": 	link_to("▼", :action=>"shop_lower", 	:id=>shop) %>
 						</span>
 					</td>
