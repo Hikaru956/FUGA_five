@@ -105,6 +105,10 @@
 			<%= render partial: 'item_photo_card', locals: {photo: photo} %>
 		<% end %>
 	</div>
+	<% @item.photos.order(position: :asc).each do | photo | %>
+		<%= render partial: 'edit_photo', 	locals: {photo: photo} %>
+		<%= render partial: 'delete_photo', locals: {photo: photo} %>
+	<% end %>
 
 	<% unless @shop.enable_editor %>
 		<p class="float-right">

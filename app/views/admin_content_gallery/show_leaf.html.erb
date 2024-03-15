@@ -95,6 +95,11 @@
 		<% end %>
 	</div>
 
+	<% @item.photos.order(position: :asc).each do | photo | %>
+		<%= render partial: 'edit_photo', 	locals: {photo: photo} %>
+		<%= render partial: 'delete_photo', locals: {photo: photo} %>
+	<% end %>
+
 </div>
 
 <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="modal_delete" aria-hidden="true">
