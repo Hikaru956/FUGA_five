@@ -3,7 +3,7 @@
   <li><%= link_to "一覧", url_for(:action=>'shop_site_navigation', :id=>@shop)  %>&nbsp;<span class="divider">/</span></li>
   <li class="active">固定ページ編集</li>
 </ul>
-	
+
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
 	<li class="nav-item">
 		<a class="nav-link" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop', :id=>@shop) %>"><div class='d-none d-md-inline'>店舗</div>情報</a>
@@ -40,7 +40,7 @@
 	</h4>
 </header>
 
-<%= form_tag url_for(:action=>"update_fix_page", :id=>@item, method: :patch), :class=>"xform-horizontal " do |f| %>
+<%= form_tag admin_config_update_fix_page_path(:id=>@item), method: 'patch', :class=>"xform-horizontal" do |f| %>
 	<legend></legend>
 	<%= render :partial=>"form_fixed_page_content", locals: {f: f} %>
 	<div class="form-actions text-right">
