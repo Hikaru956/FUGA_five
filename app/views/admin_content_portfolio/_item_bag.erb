@@ -8,10 +8,10 @@
 			<% unless key_photo.blank? %>
 				<%= image_tag key_photo.clip.url(:thumb) %>
 			<% else %>
-				<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=<%=@latest.publish_from.strftime('%Y-%m-%d')%>">
+				<img src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=<%=@latest.publish_from.strftime('%Y-%m-%d')%>">
 			<% end %>
 		<% else %>
-			<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Article%0A">
+			<img src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Article%0A">
 		<% end %>
 	</a>
 	<% if false %>
@@ -64,10 +64,10 @@
 				<% unless key_photo.blank? %>
 					<%= image_tag key_photo.clip.url(:thumb) %>
 				<% else %>
-					<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Photo%0A">
+					<img src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Photo%0A">
 				<% end %>
 			<% else %>
-				<img src="https://placehold.jp/22/cfcfcf/ffffff/320x240.png?text=No%20Face%20Photo%0A">
+				<img src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Face%20Photo%0A">
 			<% end %>
 		</a>
 	</div>

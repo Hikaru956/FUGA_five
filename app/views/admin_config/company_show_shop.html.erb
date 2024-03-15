@@ -131,13 +131,22 @@
 						<% if @lines.size>=2 %>
 							<%= render :partial=>"item_shop_photo", locals: {photo: @lines[1], shop: @shop} %>
 						<% end %>
-					</div>		
+					</div>
 					<div class="col-sm-4">
 						<% if @lines.size>=3 %>
 							<%= render :partial=>"item_shop_photo", locals: {photo: @lines[2], shop: @shop} %>
 						<% end %>
 					</div>
 			<% end %>
+
+			<% if false %>
+			<div class="row row-cols-1 row-cols-md-3 g-2">
+				<% @shop.photos.where(ref_type: 'Shop').order(position: :asc).each do |photo| %>
+					<%= render partial: 'item_shop_photo_card', locals: {photo: photo} %>
+				<% end %>
+			</div>
+			<% end %>
+
 		</div>
 		<br/>
 
