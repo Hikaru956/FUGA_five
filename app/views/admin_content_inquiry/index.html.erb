@@ -1,39 +1,43 @@
+<ul class="breadcrumb">
+    <li>お問い合わせ&nbsp;<span class="divider">/</span></li>
+</ul>
+
+<header class="subhead" id="overview">
+	<h4>お問い合わせ</h4>
+</header>
+
 <% if @shop.enable_inquiry %>
-    <ul class="breadcrumb">
-        <li>お問い合わせ&nbsp;<span class="divider">/</span></li>
-    </ul>
     <% unless @items.blank? %>
         <table class='table table-bordered table-hover' >
             <thead>
                 <tr>
-                    <th>日時</th>
-                    <th>ステータス</th>
-                    <th>お名前</th>
-                    <th>メールアドレス</th>
-                    <th>お問い合わせ内容</th>
-                    <th></th>
+                    <th style='vertical-align: middle;'>ステータス</th>
+                    <th style='vertical-align: middle;'>日時</th>
+                    <th style='vertical-align: middle;'>お名前</th>
+                    <th style='vertical-align: middle;' class='d-none d-md-table-cell'>メールアドレス</th>
+                    <th style='vertical-align: middle;' class='d-none d-md-table-cell'>お問い合わせ内容</th>
                 </tr>
             </thead>
             <tbody>
                 <% @items.each do |item| %>
                     <tr>
+                        <td class='table-<%= inquiry_status_color(item.status)%>' style='text-align: center;'>
+                            <a href='<%= admin_content_inquiry_show_path(id: @shop.id, inquiry_id: item.id) %>'>
+                                <span class='text-dark'><b><%= inquiry_status_label(item.status) %></b></span>
+                                <%= link_to_6_icon %>
+                            </a>
+                        </td>
                         <td>
                             <%= item.created_at.strftime("%Y-%m-%d")%>(<%= (wday(item.created_at))%>)
-                        </td>
-                        <td class='table-<%= inquiry_status_color(item.status)%>' style='text-align: center;'>
-                            <span class='text-dark'><b><%= inquiry_status_label(item.status) %></b></span>
                         </td>
                         <td>
                             <%= item.name %>
                         </td>
-                        <td>
+                        <td class='d-none d-md-table-cell'>
                             <%= item.email %>
                         </td>
-                        <td>
+                        <td class='d-none d-md-table-cell'>
                             <%= truncate(item.body, :length=>20) %>
-                        </td>
-                        <td style='text-align: center;'>
-                            <%= link_to share_icon+"&nbsp;表示".html_safe, admin_content_inquiry_show_path(id: @shop.id, inquiry_id: item.id), class: 'btn btn-outlone-info btn-sm' %>
                         </td>
                     </tr>
                 <% end %>
@@ -44,12 +48,12 @@
         <%= will_paginate(@items, :params=> {:action=>'index', :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
         <% end %>
     <% else %>
-        <div class='alert alert-info'>
+        <div class='alert alert-secondary'>
             <div><%= info_icon('情報') %>&nbsp;お問い合わせが見つかりませんでした。</div>
         </div>
     <% end %>
 <% else %>
-    <div class='alert alert-info'>
+    <div class='alert alert-secondary'>
         <h5><%= info_icon('情報') %>&nbsp;お問い合わせ機能が有効になっていません。</h5>
         <div>お問い合わせ機能を有効にするにはサービス管理者にご連絡ください。</div>
     </div>
