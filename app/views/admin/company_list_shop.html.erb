@@ -45,9 +45,11 @@
 					<span class="float-right"><span class="badge badge-success"><%= @item.shops.size %></span></span>
 					店舗名
 				</th>
-				<th class='d-none d-md-table-cell'>ディスク容量</th>
-				<th class='d-none d-md-table-cell'>ディスク使用率</th>
-				<th class='d-none d-md-table-cell'>固定ページ</th>
+				<th class='d-none d-md-table-cell'>利用状況</small></th>
+				<% if false %>
+					<th class='d-none d-md-table-cell'>使用量<small> (店舗)</small></th>
+					<th class='d-none d-md-table-cell'>固定ページ</th>
+				<% end %>
 				<th class='xtable-dark span2'>サイト表示</th>
 			</tr>
 		</thead>
@@ -55,8 +57,6 @@
 			<% @shops.each do | shop | %>
 				<tr>
 					<td style='vertical-align: middle;'>
-
-
 						<%= model_name(shop) %>
 						<span class="float-right">
 							<% url = url_for(:action=>"company_show_shop", :id=>shop) %>
@@ -70,25 +70,40 @@
 						</span>
 					</td>
 					<td class='d-none d-md-table-cell' style="text-align:right; vertical-align: middle;">
-						<%= (shop.room_size_mb.blank?)? "無制限": number_to_human_size(shop.room_size_mb*1024*1024, :locale=>I18n.locale) %>
-						<a href="<%= url_for(:action=>"company_show_shop_usage", :id=>shop) %>" class="btn btn-outline-info btn-sm">
-							<%= info_icon('情報')%>
+						<%
+							room_size = (shop.room_size_mb.blank?||shop.room_size_mb==0)? nil: shop.room_size_mb*1024*1024
+							total_photos = shop.photos
+							used_size = Photo.total_file_size(total_photos)
+							rate = (room_size.blank?)? nil : (used_size*100)/(room_size)
+						%>
+						<a href='<%= url_for(:action=>"company_show_shop_usage", :id=>shop) %>'>
+						<%= number_to_human_size(used_size, :locale=>I18n.locale) %>
+						/
+						<%= (room_size.blank?)? '∞': number_to_human_size(room_size, :locale=>I18n.locale) %>
+						<small>
+							(
+							<%= (rate.blank?)? "-": rate.to_i %>%
+							)
+						</small>
+						<%= link_to_6_icon %>
 						</a>
 					</td>
-					<td class='d-none d-md-table-cell' style="text-align:right; vertical-align: middle;">
-						<% 
-							total_photos = shop.photos
-							photo_sum_size = Photo.total_file_size(total_photos)
-							#total_photos.each{ |photo|  photo_sum_size+=photo.my_size }	unless total_photos.blank?
-							rate = (shop.room_size_mb.blank?||shop.room_size_mb==0)? nil : (photo_sum_size*100)/(shop.room_size_mb*1024*1024) 
-						%>
-						利用率 : <%= (rate.blank?)? "-": rate.to_i %>%
-					</td>
-					<td class='d-none d-md-table-cell' style="text-align:right; vertical-align: middle;">
-						<% fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop) %>
-						<%= fix_pages_bag.content_leafs.size %>
-						ページ
-					</td>
+					<% if false %>
+						<td class='d-none d-md-table-cell' style="text-align:right; vertical-align: middle;">
+							<% 
+								total_photos = shop.photos
+								photo_sum_size = Photo.total_file_size(total_photos)
+								#total_photos.each{ |photo|  photo_sum_size+=photo.my_size }	unless total_photos.blank?
+								rate = (shop.room_size_mb.blank?||shop.room_size_mb==0)? nil : (photo_sum_size*100)/(shop.room_size_mb*1024*1024) 
+							%>
+							利用率 : <%= (rate.blank?)? "-": rate.to_i %>%
+						</td>
+						<td class='d-none d-md-table-cell' style="text-align:right; vertical-align: middle;">
+							<% fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop) %>
+							<%= fix_pages_bag.content_leafs.size %>
+							ページ
+						</td>
+					<% end %>
 					<%= form_tag admin_delegating_path(id: shop), method: :post, class: '' do %>
 					<td class='text-center'style="vertical-align: middle;">
 						<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>shop.wsite_hash_key) %>" target="_blank">

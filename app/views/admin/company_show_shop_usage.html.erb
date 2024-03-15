@@ -34,7 +34,10 @@
 	<%=model_name(@item)%>
 	利用状況
 	<small>
-		[<%= label_site_status(@shop.wsite_run_mode) %>]
+		[
+			<%= site_status_icon(@shop.wsite_run_mode) %>
+			<div class='d-none d-md-inline'><%= label_site_status(@shop.wsite_run_mode) %></div>
+		]
 	</small>
 	</h4>
 </header>
