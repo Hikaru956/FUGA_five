@@ -1,6 +1,6 @@
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<h3>レジストリー</h3>
+	<h4>レジストリー</h4>
 </header>
 	
 <ul class="breadcrumb">
@@ -22,7 +22,7 @@
 </ul>
 <br/>
 
-<h4>
+<header class="subhead" id="overview">
 	<span class="float-right">
 		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'company_list_user', :id=>@user.company) %>">
 		<i class="fa-solid fa-arrow-left"></i>&nbsp;
@@ -32,8 +32,10 @@
 				<%= edit_icon('編集') %>&nbsp;編集
 		</button>
 	</span>
+	<h4>
 	ユーザー情報	
-</h4>
+	</h4>
+</header>
 
 <table class="table table-bordered">
 	<tbody>

@@ -23,14 +23,17 @@
 	</li>
 </ul>
 
-<h4>
+<header class="subhead" id="overview">
 	<span class="float-right">
 		<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon %>&nbsp;オーナー・ユーザー登録
 		</button>
 	</span>
+	<h4>
 	オーナー・ユーザー一覧
-</h4>
+	</h4>
+</header>
+
 <% if @users.blank? %>
 	<div class='alert alert-info'><%= info_icon %> オーナー・ユーザーが登録されていません</div>
 <% else %>

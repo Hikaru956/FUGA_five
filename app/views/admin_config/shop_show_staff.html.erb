@@ -6,7 +6,7 @@
 </ul>
 <% end %>
 <header class="subhead" id="overview">
-	<h3>店舗設定</h3>
+	<h4>店舗設定</h4>
 </header>
 	
 
@@ -32,7 +32,7 @@
 	<% end %>
 </ul>
 
-<h4>
+<header class="subhead" id="overview">
 	<span class="float-right">
 		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
 		<%= backward_icon('一覧') %>&nbsp;
@@ -45,8 +45,10 @@
 			</button>
 		<% end %>
 	</span>
-	スタッフ情報
-</h4>
+	<h4>
+		スタッフ情報
+	</h4>
+</header>
 
 <table class="table table-bordered">
 	<tbody>

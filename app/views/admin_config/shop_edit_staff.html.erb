@@ -27,14 +27,16 @@
 </ul>
 
 
-<h4>
+<header class="subhead" id="overview">
 	<span class="float-right">
 		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'shop_show_staff', :id=>@staff) %>" data-turbolinks='false'>
 			<%= backward_icon('戻る') %>&nbsp;戻る
 		</a>
 	</span>
+	<h4>
 	自己紹介
-</h4>
+	</h4>
+</header>
 
 <%= form_tag url_for(:action=>"shop_update_staff", :id=>@staff), :class=>"xform-horizontal", method: :patch do -%>
 	<%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>nil} if false %>

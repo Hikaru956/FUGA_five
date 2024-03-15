@@ -30,9 +30,9 @@
 	<% end %>
 </ul>
 
-<h4>
+<header class="subhead" id="overview">
 	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
-		<p class="float-right">
+		<span class="float-right">
 			<a class="btn btn-sm btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
 				<%= share_icon('表示') %>
 				店舗サイト表示
@@ -48,11 +48,12 @@
 					デザイン編集
 				</a>
 			<% end %>
-		</p>
+		</span>
 	<% end %>
+	<h4>
 	サイト設定
-</h4>
-
+	</h4>
+</header>
 
 <div class="modal fade" id="ErrorTopPageAsFixPage" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
     <div class="modal-dialog modal-lg">

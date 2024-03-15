@@ -12,14 +12,16 @@
   <li class="active"><%= @current_category.category_label%></li>
 </ul>
 
-<span class='float-right'>
-	<a class="btn btn-sm btn-outline-dark" href="<%=url_for(:action=>"content_category", :id=>@parent_category)%>">
-		<%= backward_icon('戻る') %>&nbsp;戻る</a>
-	<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
-		<%= new_icon('登録') %>&nbsp;新規登録
-	</button>
-</span>
-<h4>サブ・カテゴリー</h4>
+<header class="subhead" id="overview">
+	<span class='float-right'>
+		<a class="btn btn-sm btn-outline-dark" href="<%=url_for(:action=>"content_category", :id=>@parent_category)%>">
+			<%= backward_icon('戻る') %>&nbsp;戻る</a>
+		<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+			<%= new_icon('登録') %>&nbsp;新規登録
+		</button>
+	</span>
+	<h4>サブ・カテゴリー</h4>
+</header>
 
 <% if @current_category.children.blank? %>
 	<div class="alert alert-info">

@@ -12,7 +12,7 @@
 </ul>
 
 
-<div>
+<header class="subhead" id="overview">
 	<span class='float-right'>
 		<a class="btn btn-sm btn-outline-dark" href="<%=url_for(:action=>"content_category", :id=>@parent_category)%>">
 			<%= backward_icon('戻る') %>&nbsp;戻る</a>
@@ -20,9 +20,9 @@
 			<%= new_icon('登録') %>&nbsp;新規登録
 		</button>
 	</span>
-</div>
+	<h4>サブ・カテゴリー</h4>
+</header>
 
-<h4>サブ・カテゴリー</h4>
 <% unless @current_category.children.blank? %>
 	<% if false %>
 	<% array = @current_category.children.in_groups_of(3, false)%>

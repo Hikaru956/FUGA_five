@@ -22,16 +22,17 @@
 	</li>
 </ul>
 
-
-<h4>
+<header class="subhead" id="overview">
 	<span class="float-right">
 		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'shop_show_website', :id=>@shop) %>">
 		<%= backward_icon('戻る')%>&nbsp;
 			戻る
 		</a>
 	</span>
-	FAVICON.PNG
-</h4>
+	<h4>
+		FAVICON.PNG
+	</h4>
+</header>
 
 <% if true %>
 	<% item = Photo.new %>

@@ -8,7 +8,7 @@
 </ul>
 
   	
-<h4>
+<header class="subhead" id="overview">
 	<div class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"content_root") %>
@@ -18,8 +18,10 @@
 			</a>
 		</p>
 	</div>
-	表紙写真
-</h4>
+	<h4>
+		表紙写真
+	</h4>
+</header>
 
 <div class="row">
 	<% array = @parent_category.photos.order(position: :asc).in_groups_of(3, false)%>

@@ -32,16 +32,19 @@
 	<% end %>
 </ul>
 
-<h4>
+<header class="subhead" id="overview">
 	<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
-		<p class="float-right">
+		<span class="float-right">
 			<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalNew">
 				<%= new_icon('登録') %>&nbsp;ユーザー登録
 			</button>
-		</p>
+		</span>
 	<% end %>
+	</h4>
 	店舗ユーザー一覧
-</h4>
+	</h4>
+</header>
+
 <% if @users.blank? %>
 	<p class="text-error">ユーザーが登録されていません</p>
 <% else %>

@@ -7,8 +7,8 @@
   <li class="active"><%= model_title(@item) %></li>
 </ul>
 
-<h4>
-	<div class="float-right">
+<header class="subhead" id="overview">
+	<span class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"content_category", :id=>@item.content_category, :page=>@page) %>
 			<a class="btn btn-sm btn-outline-secondary" href="<%=url_back%>">
@@ -25,10 +25,12 @@
 				削除…
 			</button>
 		</p>
-	</div>
-	<%= leaf_state_6_icons(@item) %>
-	<%= model_title(@item) %>
-</h4>
+	</span>
+	<h4>
+		<%= leaf_state_6_icons(@item) %>
+		<%= model_title(@item) %>
+	</h4>
+</header>
 
 <blockquote>
   <p>

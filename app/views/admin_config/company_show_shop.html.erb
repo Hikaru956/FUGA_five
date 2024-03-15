@@ -8,19 +8,17 @@
 	 #map img { max-width: none; }
 </style>
 
-
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<span class="float-right">
-		<% if current_user.has_permission?(User::ROLE_REGISTRAR) %>
+	<% if current_user.has_permission?(User::ROLE_REGISTRAR) %>
+		<span class="float-right">
 			<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:controller=>'admin', :action=>'company_show_shop', :id=>@shop) %>">
 				<%= backward_icon('戻る')%>&nbsp;ダッシュボード
 			</a>
-		<% end %>
-	</span>
+		</span>
+	<% end %>
 	<h3>店舗設定</h3>
 </header>
-	
 
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
 	<li class="nav-item">

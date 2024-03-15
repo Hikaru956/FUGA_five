@@ -24,8 +24,8 @@
 	<% end %>
 </ul>
 
-<h4>
-	<p class="float-right">
+<header class="subhead" id="overview">
+	<span class="float-right">
 		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'shop_site_navigation') %>" data-turbolinks='false'>
 			<%= cancel_icon('キャンセル')%>&nbsp;
 			キャンセル
@@ -34,10 +34,11 @@
 			<i class="fa-solid fa-camera"></i>&nbsp;
 			素材一覧
 		</a>
-	</p>
-	固定ページ編集
-</h4>
-
+	</span>
+	<h4>
+		固定ページ編集
+	</h4>
+</header>
 
 <%= form_tag url_for(:action=>"update_fix_page", :id=>@item, method: :patch), :class=>"xform-horizontal " do |f| %>
 	<legend></legend>

@@ -9,8 +9,8 @@
   <li class="active">写真追加</li>
 </ul>
 
-<h4>
-	<div class="float-right">
+<header class="subhead" id="overview">
+	<span class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"show_leaf", :id=>@item) %>
 			<a class="btn btn-sm btn-secondary" href="<%=url_back%>">
@@ -18,10 +18,13 @@
 				戻る
 			</a>
 		</p>
-	</div>
-	<%= leaf_state_6_icons(@item) %>
-	<%= @item.title %>
-</h4>
+	</span>
+	<h4>
+		<%= leaf_state_6_icons(@item) %>
+		<%= @item.title %>
+	</h4>
+</header>
+
 <blockquote>
   <p>
   	on

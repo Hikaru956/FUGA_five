@@ -23,7 +23,7 @@
 	</li>
 </ul>
 
-<h4>
+<header class="subhead" id="overview">
 	<% if current_user.role==User::ROLE_SUPER %>
 		<span class="float-right">
 			<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNewShop">
@@ -31,8 +31,10 @@
 			</button>
 		</span>
 	<% end %>
+	<h4>
 	登録店舗一覧
-</h4>
+	</h4>
+</header>
 
 <% @shops = @item.shops %>
 <% if @shops.blank? %>

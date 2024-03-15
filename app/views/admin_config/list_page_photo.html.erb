@@ -27,8 +27,8 @@
 	<% end %>
 </ul>
 
-<h4>
-	<p class="float-right">
+<header class="subhead" id="overview">
+	<span class="float-right">
 		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'edit_fix_page', :id=>@item) %>" data-turbolinks='false'>
 			<%= backward_icon('戻る')%>&nbsp;
 			戻る
@@ -37,9 +37,11 @@
 			<i class="fa-solid fa-camera"></i>&nbsp;
 			素材追加
 		</a>
-	</p>
-	画像素材
-</h4>
+	</span>
+	<h4>
+		画像素材
+	</h4>
+</header>
 
 <div class="row">
 	<% array = @item.photos.order(position: :asc).in_groups_of(3, false)%>

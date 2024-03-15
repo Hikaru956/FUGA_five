@@ -7,12 +7,12 @@
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<p class='float-right'%>
+	<span class='float-right'%>
 		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'user_list') %>">
 			<%= backward_icon('戻る')%>&nbsp;戻る
 		</a>
-	</p>
-	<h3><%= model_name(@user) %></h3>
+	</span>
+	<h4><%= model_name(@user) %></h4>
 </header>
 
 <table class="table table-bordered">

@@ -30,8 +30,8 @@
 	<% end %>
 </ul>
 
-<h4>
-	<p class="float-right">
+<header class="subhead" id="overview">
+	<span class="float-right">
 		<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalNew">
 			<%= new_icon('登録') %>&nbsp;
 			固定リンク<div class='d-none d-md-inline'>登録</div>…
@@ -40,9 +40,12 @@
 			<i class="fa-solid fa-file-lines"></i>&nbsp;
 			固定ページ<div class='d-none d-md-inline'>追加</div>…
 		</button>
-	</p>
-	ナビゲーション
-</h4>
+	</span>
+	<h4>
+		ナビゲーション
+	</h4>
+</header>
+
 <% if @shop.default_navigation_item.blank? %>
 	<div class="alert alert-block">
 	  <strong><i class="icon-exclamation-sign"></i>&nbsp;Warning</strong>&nbsp;公開されたナビゲーション項目がありません。

@@ -18,13 +18,8 @@
 			<%= new_icon('登録') %>&nbsp;新規登録
 		</button>
 	</span>
-	<h3><%= @current_category.category_label %> : カテゴリー編集</h3>
+	<h4><%= @current_category.category_label %> : カテゴリー編集</h4>
 </header>
-
-<hr/>
-
-<div>
-</div>
 
 <% unless @current_category.children.blank? %>
 	<% if false %>
@@ -55,9 +50,6 @@
 		<%= render partial: 'dlg_cat_edit', 	locals: {cat: cat} %>
 		<%= render partial: 'dlg_cat_delete', 	locals: {cat: cat} %>
 	<% end %>
-
-
-
 <% end %>
 
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">

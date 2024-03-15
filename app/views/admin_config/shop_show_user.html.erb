@@ -8,7 +8,6 @@
 <header class="subhead" id="overview">
 	<h3>店舗設定</h3>
 </header>
-	
 
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
 	<li class="nav-item">
@@ -32,7 +31,7 @@
 	<% end %>
 </ul>
 
-<h4>
+<header class="subhead" id="overview">
 	<span class="float-right">
 		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'shop_list_users', :id=>@user.shop) %>">
 		<%= backward_icon('一覧') %>&nbsp;
@@ -44,8 +43,10 @@
 		</button>
 		<% end %>
 	</span>
-	店舗ユーザー情報
-</h4>
+	<h4>
+		店舗ユーザー情報
+	</h4>
+</header>
 
 <table class="table table-bordered">
 	<tbody>

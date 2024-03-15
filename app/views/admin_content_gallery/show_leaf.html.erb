@@ -8,7 +8,7 @@
 </ul>
 
 <header class="subhead" id="overview">
-	<div class="float-right">
+	<span class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"content_category", :id=>@item.content_category, :page=>@page) %>
 			<a class="btn btn-sm btn-outline-dark" href="<%=url_back%>">
@@ -25,12 +25,13 @@
 				削除…
 			</button>
 		</p>
-	</div>
+	</span>
 	<h4>
 		<%= leaf_state_6_icons(@item) %>
 		<%= model_title(@item) %>
 	</h4>
 </header>
+
 <blockquote>
   <p>
   	on
