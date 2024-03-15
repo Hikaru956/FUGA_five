@@ -13,16 +13,6 @@
 		</button>
 	</span>
 	<h4>カラー・スキーム管理</h4>
-
-	<div>
-		<%= current_user.id %>
-		,
-		<%= current_user.shop %>
-		<%= current_user.shop.name unless current_user.shop.blank? %>
-		|
-		<%= @shop %>
-		<%= @shop.name unless @shop.blank? %>
-	</div>
 </header>
 
 <% if @colors.blank? %>
