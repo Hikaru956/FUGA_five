@@ -12,10 +12,10 @@
 				<%= ('. '+model_name(current_user.company)) %>
 			<% end %>
 			]
-			<button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modalUIEdit">
-				<%= edit_icon('編集') %>&nbsp;旧バージョン…
-			</button>
 			<% if false %>
+				<button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modalUIEdit">
+					<%= edit_icon('編集') %>&nbsp;旧バージョン…
+				</button>
 				<%= link_to 'Back To Original I/F', root_path, data: {"turbolinks" => false} %>
 			<% end %>
 		</small>
