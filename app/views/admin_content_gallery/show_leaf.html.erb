@@ -7,7 +7,7 @@
   <li class="active"><%= model_title(@item) %></li>
 </ul>
 
-<h4>
+<header class="subhead" id="overview">
 	<div class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"content_category", :id=>@item.content_category, :page=>@page) %>
@@ -26,9 +26,11 @@
 			</button>
 		</p>
 	</div>
-	<%= leaf_state_6_icons(@item) %>
-	<%= model_title(@item) %>
-</h4>
+	<h4>
+		<%= leaf_state_6_icons(@item) %>
+		<%= model_title(@item) %>
+	</h4>
+</header>
 <blockquote>
   <p>
   	on
