@@ -9,7 +9,7 @@
 </ul>
 
 
-<h4>
+<header class="subhead" id="overview">
 	<div class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"content_category", :id=>@item.content_category, :page=>@page) %>
@@ -28,9 +28,12 @@
 			</button>
 		</p>
 	</div>
-	<%= leaf_state_6_icons(@item) %>
-	<%= model_title(@item) %>
-</h4>
+	<h4>
+		<%= leaf_state_6_icons(@item) %>
+		<%= model_title(@item) %>
+	</h4>
+</header>
+
 <blockquote>
   <p>
   	on
@@ -74,25 +77,34 @@
 		<small>先頭の写真が一覧表示の際の代表写真になります。</small>
 		</p>
 	<% end %>
-	<% array = @item.photos.order(position: :asc).in_groups_of(3, false) %>
-	<% for i in 0..(array.size-1) %>
-		<% @lines = array[i] %>
-	        <div class="col-sm-4">
-	        	<% if @lines.size>=1 %>
-					<%= render :partial=>"item_photo", :locals => {:photo => @lines[0]} %>
-				<% end %>
-			</div>		
-	        <div class="col-sm-4">
-	        	<% if @lines.size>=2 %>
-					<%= render :partial=>"item_photo", :locals => {:photo => @lines[1]} %>
-				<% end %>
-			</div>		
-	        <div class="col-sm-4">
-	        	<% if @lines.size>=3 %>
-					<%= render :partial=>"item_photo", :locals => {:photo => @lines[2]} %>
-				<% end %>
-			</div>
+	<% if false %>
+		<% array = @item.photos.order(position: :asc).in_groups_of(3, false) %>
+		<% for i in 0..(array.size-1) %>
+			<% @lines = array[i] %>
+				<div class="col-sm-4">
+					<% if @lines.size>=1 %>
+						<%= render :partial=>"item_photo", :locals => {:photo => @lines[0]} %>
+					<% end %>
+				</div>		
+				<div class="col-sm-4">
+					<% if @lines.size>=2 %>
+						<%= render :partial=>"item_photo", :locals => {:photo => @lines[1]} %>
+					<% end %>
+				</div>		
+				<div class="col-sm-4">
+					<% if @lines.size>=3 %>
+						<%= render :partial=>"item_photo", :locals => {:photo => @lines[2]} %>
+					<% end %>
+				</div>
+		<% end %>
 	<% end %>
+
+	<div class="row row-cols-1 row-cols-md-4 g-4">
+		<% @item.photos.order(position: :asc).each do | photo | %>
+			<%= render partial: 'item_photo_card', locals: {photo: photo} %>
+		<% end %>
+	</div>
+
 	<% unless @shop.enable_editor %>
 		<p class="float-right">
 			<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
