@@ -80,9 +80,11 @@
                 <% @shop = current_user.shop %>
                 <% if !@shop.blank? %>
                     <%= render :partial=>"layouts/fuga5_user_navigation" %>
+                <% elsif !current_user.company.blank? %>
+					<%= render :partial=>"layouts/fuga5_owner_navigation" %>
                 <% elsif 		current_user.role==User::ROLE_SALES %>
                     <%= render :partial=>"layouts/fuga5_sales_navigation" %>
-                <% elsif 		current_user.role>=User::ROLE_OPERATOR %>
+                <% elsif 		current_user.role>=User::ROLE_REGISTRAR %>
                     <%= render :partial=>"layouts/fuga5_navigation" %>
                 <% end %>
             <% end %>

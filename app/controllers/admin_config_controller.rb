@@ -495,6 +495,7 @@ class AdminConfigController < ApplicationController
 protected
   def session_operation
     @shop = current_user.shop
+    return redirect_to root_path if @shop.blank?
   end
 
   def shop_params

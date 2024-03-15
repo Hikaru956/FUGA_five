@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="<%= root_path %>" data-turbolinks='false'><%=BRAND_NAME%></a>
+    <a class="navbar-brand" href="<%= url_for(:controller=>'admin_config', :action=>'company_show_shop') %>" data-turbolinks='false'><%=BRAND_NAME%></a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
