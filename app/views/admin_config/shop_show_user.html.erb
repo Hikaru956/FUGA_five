@@ -35,8 +35,8 @@
 <h4>
 	<span class="float-right">
 		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'shop_list_users', :id=>@user.shop) %>">
-		<i class="fa-solid fa-arrow-left"></i>&nbsp;
-			店舗ユーザー・一覧
+		<%= backward_icon('一覧') %>&nbsp;
+			一覧
 		</a>
 		<% if current_user==@user || current_user.has_permission?(User::ROLE_MANAGER) %>	
 		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">

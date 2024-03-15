@@ -36,7 +36,7 @@
 	<span class="float-right">
 		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'shop_list_staffs', :id=>@staff.shop) %>">
 		<%= backward_icon('一覧') %>&nbsp;
-			スタッフ一覧
+			一覧
 		</a>
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 			<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
