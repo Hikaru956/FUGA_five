@@ -25,8 +25,12 @@ class DashboardController < ApplicationController
       return redirect_to :controller=>"bs_renderer", :action=>"home", :wkey=>params[:wkey]
     end
     return redirect_to sign_in_path if current_user.blank?
-    return redirect_to(:controller=>'admin', :action=>'company_index', search_word: @search_word) unless current_user.ui_version.blank?
-    return redirect_to :action=>"company_index", search_word: @search_word
+
+    p '❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ '
+    p current_user.ui_version
+
+    return redirect_to(:controller=>'admin', :action=>'company_index', search_word: @search_word) if current_user.ui_version==1
+    return redirect_to(:controller=>'dashboard', :action=>"company_index", search_word: @search_word)
   end
   
   def delegating

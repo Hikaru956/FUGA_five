@@ -422,9 +422,9 @@ EOF
 
   def user_ui_version_label(user)
     if user.ui_version.blank? || user.ui_version == 0
-      return "従来画面"
+      return "旧バージョン"
     else
-      return "新画面"
+      return "新バージョン"
     end
   end
 
