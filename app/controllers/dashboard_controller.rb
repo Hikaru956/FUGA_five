@@ -26,13 +26,12 @@ class DashboardController < ApplicationController
     end
     return redirect_to sign_in_path if current_user.blank?
 
-    p '❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ '
-    p current_user.ui_version
-
-    return redirect_to(:controller=>'admin', :action=>'company_index', search_word: @search_word) if current_user.ui_version==1
-    return redirect_to(:controller=>'dashboard', :action=>"company_index", search_word: @search_word)
+    if current_user.ui_version.blank? || current_user.ui_version==0
+      return redirect_to(:controller=>'dashboard', :action=>"company_index", search_word: @search_word)
+    end
+    redirect_to(:controller=>'admin', :action=>'company_index', search_word: @search_word)
   end
-  
+
   def delegating
 #    if request.post?
       current_user.shop = Shop.find(params[:id])
