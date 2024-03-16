@@ -22,6 +22,7 @@
 	</h4>
 </header>
 
+<% if false %>
 <div class="row">
 	<% 
 		array = @parent_category.photos.all.order(position: :asc).in_groups_of(3, false)
@@ -45,6 +46,24 @@
 			</div>
 	<% end %>
 </div>
+<% end %>
+
+<br/>
+<div class="row row-cols-2 row-cols-md-4 g-2">
+	<% @parent_category.photos.order(position: :asc).each do |photo| %>
+		<%= render partial: 'item_face_photo_card', locals: {photo: photo} %>
+	<% end %>
+</div>
+<% @parent_category.photos.order(position: :asc).each do |photo| %>
+	<%= render partial: 'dlg_shop_face_edit',	 locals: {photo: photo} %>
+	<%= render partial: 'dlg_shop_face_delete', locals: {photo: photo} %>
+<% end %>
+<br/>
+
+
+
+
+
 <hr/>
 <% if true %>
 	<% item = Photo.new %>

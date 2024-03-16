@@ -27,8 +27,9 @@
             <span class='float-right'>
                 <% if color.position==1 %>
                     <i class='fa-solid fa-spinner fa-spin'></i>
+                    &nbsp;
                 <% end %>
-                <a href="<%= url_for(:action=>'color_show', :id=>color) %>" class="btn btn-sm  btn-outline-primary">表示 <%= link_to_6_icon %></a>
+                <a href="<%= url_for(:action=>'color_show', :id=>color) %>" class="btn btn-sm  btn-outline-primary"><%= link_to_6_icon %></a>
             </span>
         </div>
     </div>

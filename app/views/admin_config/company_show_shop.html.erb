@@ -115,39 +115,45 @@
 			</span>
 			店舗説明文
 		</h4>
-		<div class="well">
-			<%= raw(@shop.wsite_description_business) %>
-		</div>
-		<div class="row">
-			<% array = @shop.photos.where(ref_type: 'Shop').order(position: :asc).limit(15).in_groups_of(3, false)%>
-			<% for i in 0..(array.size-1) %>
-				<% @lines = array[i] %>
-					<div class="col-sm-4">
-						<% if @lines.size>=1 %>
-							<%= render :partial=>"item_shop_photo", locals: {photo: @lines[0], shop: @shop} %>
-						<% end %>
-					</div>		
-					<div class="col-sm-4">
-						<% if @lines.size>=2 %>
-							<%= render :partial=>"item_shop_photo", locals: {photo: @lines[1], shop: @shop} %>
-						<% end %>
-					</div>
-					<div class="col-sm-4">
-						<% if @lines.size>=3 %>
-							<%= render :partial=>"item_shop_photo", locals: {photo: @lines[2], shop: @shop} %>
-						<% end %>
-					</div>
-			<% end %>
 
-			<% if false %>
-			<div class="row row-cols-1 row-cols-md-3 g-2">
-				<% @shop.photos.where(ref_type: 'Shop').order(position: :asc).each do |photo| %>
-					<%= render partial: 'item_shop_photo_card', locals: {photo: photo} %>
+		<p>
+			<%= raw(@shop.wsite_description_business) %>
+		</p>
+
+		<% if false %>
+			<div class="row">
+				<% array = @shop.photos.where(ref_type: 'Shop').order(position: :asc).limit(15).in_groups_of(3, false)%>
+				<% for i in 0..(array.size-1) %>
+					<% @lines = array[i] %>
+						<div class="col-sm-4">
+							<% if @lines.size>=1 %>
+								<%= render :partial=>"item_shop_photo", locals: {photo: @lines[0], shop: @shop} %>
+							<% end %>
+						</div>		
+						<div class="col-sm-4">
+							<% if @lines.size>=2 %>
+								<%= render :partial=>"item_shop_photo", locals: {photo: @lines[1], shop: @shop} %>
+							<% end %>
+						</div>
+						<div class="col-sm-4">
+							<% if @lines.size>=3 %>
+								<%= render :partial=>"item_shop_photo", locals: {photo: @lines[2], shop: @shop} %>
+							<% end %>
+						</div>
 				<% end %>
 			</div>
-			<% end %>
+		<% end %>
 
+		<br/>
+		<div class="row row-cols-2 row-cols-md-4 g-2">
+			<% @shop.photos.where(ref_type: 'Shop').order(position: :asc).each do |photo| %>
+				<%= render partial: 'item_shop_photo_card', locals: {photo: photo} %>
+			<% end %>
 		</div>
+		<% @shop.photos.where(ref_type: 'Shop').order(position: :asc).each do |photo| %>
+			<%= render partial: 'dlg_shop_photo_edit',	 locals: {photo: photo} %>
+			<%= render partial: 'dlg_shop_photo_delete', locals: {photo: photo} %>
+		<% end %>
 		<br/>
 
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
@@ -160,34 +166,36 @@
 		<% end %>
 		<hr/>
 
-		<% if current_user.has_permission?(User::ROLE_OPERATOR) %>
-			<h4>
-				オプション
-			</h4>
-			<table class="table table-sm table-bordered">
-				<tbody>
-					<tr class='table-info'>
-						<th colspan="2">
-							オプション機能
-						</th>
-					</tr>
-					<tr>
-						<th width="25%">勤怠管理</th>
-						<td width="75%">
-							<%= (@shop.option_attendance_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
-						</td>
-					</tr>
-					<tr>
-						<th>予約管理</th>
-						<td>
-							<%= (@shop.option_reservation_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
-						</td>
-					</tr>
-					</tbody>
-			</table>
-			<div class='text-right'><small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
-			<hr/>
-		<% end %>
+		<div class='span'>
+			<% if current_user.has_permission?(User::ROLE_OPERATOR) %>
+				<h4>
+					オプション
+				</h4>
+				<table class="table table-sm table-bordered">
+					<tbody>
+						<tr class='table-info'>
+							<th colspan="2">
+								オプション機能
+							</th>
+						</tr>
+						<tr>
+							<th width="25%">勤怠管理</th>
+							<td width="75%">
+								<%= (@shop.option_attendance_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
+							</td>
+						</tr>
+						<tr>
+							<th>予約管理</th>
+							<td>
+								<%= (@shop.option_reservation_management)? raw("<i class='fa-solid fa-check' ></i>&nbsp;利用中"): raw("<i class='fa-solid fa-empty-set'></i>&nbsp;未使用") %>
+							</td>
+						</tr>
+						</tbody>
+				</table>
+				<div class='text-right'><small>利用オプションの変更は、<%=BRAND_NAME%>担当営業までご連絡下さい。</small></div>
+				<hr/>
+			<% end %>
+		</div>
 
 		<% unless true || MAKE_SECRET_FUGA_OPTION %>
 				<tr>

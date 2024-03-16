@@ -27,8 +27,9 @@
             <span class='float-right'>
                 <% if layout.position==1 %>
                     <i class='fa-solid fa-spinner fa-spin'></i>
+                    &nbsp;
                 <% end %>
-                <a href="<%= url_for(:action=>'layout_show', :id=>layout) %>" class="btn btn-sm  btn-outline-primary">表示 <%= link_to_6_icon %></a>
+                <a href="<%= url_for(:action=>'layout_show', :id=>layout) %>" class="btn btn-sm  btn-outline-primary"><%= link_to_6_icon %></a>
             </span>
         </div>
     </div>

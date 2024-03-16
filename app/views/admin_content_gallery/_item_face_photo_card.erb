@@ -9,10 +9,9 @@
       <p class="card-text"><%= h truncate(photo.info, :length=>20) %></p>
     </div>
     <div class="card-footer">
-        <%= (photo.first?)?	raw("<i class='fa-solid fa-backward-fast'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"photo_shop_higher",	:id=>photo) %>
+        <%= (photo.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), 	:action=>"photo_face_higher",	:id=>photo) %>
         <%= photo.position %>
-        <%= (photo.last?)? 	raw("<i class='fa-solid fa-forward-fast'></i>"): 	link_to(raw("<i class='fa-solid fa-forward-fast'></i>"), 	:action=>"photo_shop_lower",		:id=>photo) %>
-
+        <%= (photo.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"),	:action=>"photo_face_lower",	:id=>photo) %>				
         <span class="float-right">
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
             <%= edit_icon('キャプション')%>
