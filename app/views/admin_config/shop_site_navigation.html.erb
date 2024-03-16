@@ -77,6 +77,14 @@
 					<% end %>
 				</td>
 				<td tyle='vertical-align: middle;'>
+					<span class='d-md-none'>
+						<% if @item.is_public %>
+							<span class='text-success'><i class="fa-solid fa-lock-open"></i></span>
+						<% else %>
+							<span class='text-secondary'><i class="fa-solid fa-lock"></i></span>
+						<% end %>
+					</span>
+
 					<% if @item.page_type==WebPage::TYPE_FIX %>
 						<%= model_title(ContentLeaf.find_by(hash_key: @item.content_key)) %>
 					<% else %>
