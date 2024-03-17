@@ -9,21 +9,21 @@
             </small>
         </div>
 
-        <a href="<%= url_for(:action=>'content_category', :id=>stream) %>">
-            <% leaf = stream.latest_news_article %>
-            <% unless leaf.blank? %>
-                <% key_photo = key_photo(leaf) %>
-                <% unless key_photo.blank? %>
-                    <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
-                <% else %>
-                    <img class="card-img-top" src="https://placehold.jp/20/cfcfcf/ffffff/320x180.png?text=<%=leaf.publish_from.strftime('%Y-%m-%d')%>">
-                <% end %>
-            <% else %>
-                <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Public%20Article%0A">
-            <% end %>
-        </a>
-
         <div class="card-body">
+            <a href="<%= url_for(:action=>'content_category', :id=>stream) %>">
+                <% leaf = stream.latest_news_article %>
+                <% unless leaf.blank? %>
+                    <% key_photo = key_photo(leaf) %>
+                    <% unless key_photo.blank? %>
+                        <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
+                    <% else %>
+                        <img class="card-img-top" src="https://placehold.jp/20/cfcfcf/ffffff/320x180.png?text=<%=leaf.publish_from.strftime('%Y-%m-%d')%>">
+                    <% end %>
+                <% else %>
+                    <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Public%20Article%0A">
+                <% end %>
+            </a>
+
             <h5 class="card-title">
                 <%= truncate(model_name(stream), :length=>50) %>
             </h5>

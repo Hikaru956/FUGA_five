@@ -11,30 +11,30 @@
             </small>
         </div>
 
-        <a href="<%= url_for(:action=>'content_category', :id=>stream) %>">
-            <% 
-                key_photo = nil
-                latest = stream.latest_news_article
-                parent_category = @shop.content_categories.find_by_id(stream.id)
-                unless parent_category.blank?
-                    key_photo = parent_category.photos.order(position: :asc).first
-                end
-                if key_photo.blank?
-                    key_photo = (latest.blank?)? nil: key_photo(latest)
-                end
-            %>
-            <% unless key_photo.blank? %>
-                <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
-            <% else %>
-                <% unless latest.blank? %>
-                    <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=<%=latest.publish_from.strftime('%Y-%m-%d')%>">
-                <% else %>
-                    <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Article%0A">
-                <% end %>
-            <% end %>
-        </a>
-
         <div class="card-body">
+            <a href="<%= url_for(:action=>'content_category', :id=>stream) %>">
+                <% 
+                    key_photo = nil
+                    latest = stream.latest_news_article
+                    parent_category = @shop.content_categories.find_by_id(stream.id)
+                    unless parent_category.blank?
+                        key_photo = parent_category.photos.order(position: :asc).first
+                    end
+                    if key_photo.blank?
+                        key_photo = (latest.blank?)? nil: key_photo(latest)
+                    end
+                %>
+                <% unless key_photo.blank? %>
+                    <%= image_tag key_photo.clip.url(:thumb), class: "card-img-top" %>
+                <% else %>
+                    <% unless latest.blank? %>
+                        <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=<%=latest.publish_from.strftime('%Y-%m-%d')%>">
+                    <% else %>
+                        <img class="card-img-top" src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Article%0A">
+                    <% end %>
+                <% end %>
+            </a>
+
             <h5 class="card-title">
                 <%= truncate(model_name(stream), :length=>50) %>
             </h5>
