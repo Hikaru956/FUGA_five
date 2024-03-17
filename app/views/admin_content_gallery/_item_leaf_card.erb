@@ -1,5 +1,15 @@
 <div class="col">
     <div class="card h-100">
+        <div class="card-header text-center">
+            <small>
+                <%= (leaf.first?)?	move_to_top_icon :	link_to(move_to_top_icon, :action=>"move_to_top",	:id=>leaf) %>
+                <%= (leaf.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), :action=>"leaf_higher",	:id=>leaf) %>
+                <%= leaf.position %>
+                <%= (leaf.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"leaf_lower",	:id=>leaf) %>
+                <%= (leaf.last?)? 	move_to_bottom_icon : 	link_to(move_to_bottom_icon, 	:action=>"move_to_bottom",	:id=>leaf) %>
+            </small>
+        </div>
+
 		<a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>">
 			<% key_photo = key_photo(leaf) %>
 			<% unless key_photo.blank? %>
@@ -32,11 +42,6 @@
             </p>
         </div>
         <div class="card-footer">
-			<%= (leaf.first?)?	move_to_top_icon :	link_to(move_to_top_icon, :action=>"move_to_top",	:id=>leaf) %>
-			<%= (leaf.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), :action=>"leaf_higher",	:id=>leaf) %>
-			<%= leaf.position %>
-			<%= (leaf.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"leaf_lower",	:id=>leaf) %>
-			<%= (leaf.last?)? 	move_to_bottom_icon : 	link_to(move_to_bottom_icon, 	:action=>"move_to_bottom",	:id=>leaf) %>
 			<span class='float-right'>
 				<a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>" class="btn btn-sm btn-outline-primary"><%= link_to_6_icon %></a>
 			</span>

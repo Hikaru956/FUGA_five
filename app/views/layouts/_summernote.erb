@@ -6,6 +6,36 @@
     height: 600,
     fontNames: ["YuGothic","Yu Gothic","Hiragino Kaku Gothic Pro","Meiryo","sans-serif", "Arial","Arial Black","Comic Sans MS","Courier New","Helvetica Neue","Helvetica","Impact","Lucida Grande","Tahoma","Times New Roman","Verdana"],
     lang: "ja-JP",
+    popover: {
+        image: [
+            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']],
+            ['custom', ['altString']],
+        ],
+    },
+    buttons: {
+        // imgタグのalt属性をセットするボタン'altString'の定義と実装
+        altString: function (context){
+            // ボタンの定義
+            var ui = $.summernote.ui;
+            var button = ui.button({
+                contents: '<i class="fa fa-info-circle"></>',
+                tooltip: 'Set Alt Attribute',   // 何故かこれが出ない...
+                // ボタンの実装
+                click: function () {
+                    // 対象の画像のノードを取得（こんなの知るか！）
+                    var img = $(context.invoke('editor.restoreTarget'));
+                    // プロンプトを表示（既存の値は、img.attr('alt')で取得
+                    var altText = prompt('alt属性', img.attr('alt'));
+                    // imgタグのalt属性をセット（引数2つ目）
+                    img.attr('alt', altText);
+                    return
+                }
+            });
+            return button.render();   // return button as jquery object
+        }
+    },
     toolbar: [
         ['style', ['style']],
         ['insert', ['picture', 'link', 'video']],
@@ -34,23 +64,23 @@
     }
     });
     function uploadImage(file) {
-    var data = new FormData();
-    data.append('photo', file);
+        var data = new FormData();
+        data.append('photo', file);
 
-    $.ajax({
-        data: data,
-        type: 'POST',
-        url: '/admin_abs_content_bag/create_image?shop_id=<%= @shop.id %>&ref_id=<%= ref_id %>',
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(data) {
-            var img = document.createElement('img');
-            img.src = data.url;
-            img.setAttribute('id', data.id);
-            $('#summernote').summernote('insertNode', img);
-        }
-    });
+        $.ajax({
+            data: data,
+            type: 'POST',
+            url: '/admin_abs_content_bag/create_image?shop_id=<%= @shop.id %>&ref_id=<%= ref_id %>',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                var img = document.createElement('img');
+                img.src = data.url;
+                img.setAttribute('id', data.id);
+                $('#summernote').summernote('insertNode', img);
+            }
+        });
     }
     function deleteImage(photoId) {
         $.ajax({

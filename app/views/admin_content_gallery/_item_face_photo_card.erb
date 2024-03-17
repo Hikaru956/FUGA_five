@@ -1,17 +1,21 @@
 <div class="col">
   <div class="card h-100">
-    <% unless photo.blank? %>
-      <%= image_tag photo.clip.url(:thumb), class: "card-img-top" %>
-    <% else %>
-      <img src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Photo%0A" class="card-img-top">
-    <% end %>
-    <div class="card-body">
-      <p class="card-text"><%= h truncate(photo.info, :length=>20) %></p>
-    </div>
-    <div class="card-footer">
+    <div class="card-header text-center">
+      <small>
         <%= (photo.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), 	:action=>"photo_face_higher",	:id=>photo) %>
         <%= photo.position %>
         <%= (photo.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"),	:action=>"photo_face_lower",	:id=>photo) %>				
+      </small>
+    </div>
+    <div class="card-body">
+      <% unless photo.blank? %>
+        <%= image_tag photo.clip.url(:thumb), class: "card-img-top" %>
+      <% else %>
+        <img src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Photo%0A" class="card-img-top">
+      <% end %>
+      <p class="card-text"><%= h truncate(photo.info, :length=>20) %></p>
+    </div>
+    <div class="card-footer">
         <span class="float-right">
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
             <%= edit_icon('キャプション')%>

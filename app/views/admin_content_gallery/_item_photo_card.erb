@@ -1,10 +1,6 @@
 <div class="col">
     <div class="card h-100">
-        <%= image_tag photo.clip.url(:thumb), class: 'card-img-top' %>
-        <div class="card-body">
-            <small><%= photo.info unless photo.info.blank? %></small>
-        </div>
-        <div class="card-footer">
+        <div class="card-header text-center">
             <small>
                 <%= (photo.first?)?	move_to_top_icon :	link_to(move_to_top_icon, :action=>"photo_to_bottom",	:id=>photo) %>
                 <%= (photo.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), :action=>"photo_higher",	:id=>photo) %>
@@ -12,6 +8,12 @@
                 <%= (photo.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"photo_lower",		:id=>photo) %>
                 <%= (photo.last?)? 	move_to_bottom_icon : 	link_to(move_to_bottom_icon, 	:action=>"photo_to_top",	:id=>photo) %>
             </small>
+        </div>
+        <div class="card-body">
+            <%= image_tag photo.clip.url(:thumb), class: 'card-img-top' %>
+            <small><%= photo.info unless photo.info.blank? %></small>
+        </div>
+        <div class="card-footer">
             <span class='float-right'>
                 <% if false %>
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">

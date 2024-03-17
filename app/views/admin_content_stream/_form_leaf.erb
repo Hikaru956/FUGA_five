@@ -77,6 +77,8 @@
 		</script>
 	</div>
 <% end %>
+<br/>
+
 <% if true || bag_roots.size==1 %>
 	<% item.content_bag 		= bag_roots[0].content_bag %>
 	<%= f.hidden_field :content_bag_id, value: bag_roots[0].content_bag.id %>

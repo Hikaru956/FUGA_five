@@ -1,5 +1,15 @@
 <div class="col">
     <div class="card h-100">
+        <div class="card-header text-center">
+            <span class='float-right'>
+                <a class="btn btn-outline-success btn-sm"  	data-toggle="modal" href="<%=url_for(:action=>'edit_face', :id=>stream)%>" title="表紙設定" data-turbolinks='false'><i class="fa-solid fa-camera-retro"></i></a>
+            </span>
+            <small>
+                <%= (stream.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"bag_category_higher", :id=>stream) %>
+                <%= stream.position %>
+                <%= (stream.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"bag_category_lower",	:id=>stream) %>
+            </small>
+        </div>
 
         <a href="<%= url_for(:action=>'content_category', :id=>stream) %>">
             <% 
@@ -32,26 +42,20 @@
         </div>
 
         <div class="card-footer">
-            <small>
-                <%= (stream.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"bag_category_higher", :id=>stream) %>
-                <%= stream.position %>
-                <%= (stream.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"bag_category_lower",	:id=>stream) %>
-                <span class='float-right'>
-                    <a class="btn btn-outline-success btn-sm"  	data-toggle="modal" href="<%=url_for(:action=>'edit_face', :id=>stream)%>" title="表紙設定" data-turbolinks='false'><i class="fa-solid fa-camera-retro"></i></a>
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=stream.content_bag.id%>">
-                        <%= edit_icon('編集')%>
+            <span class='float-right'>
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=stream.content_bag.id%>">
+                    <%= edit_icon('編集')%>
+                </button>
+                <% unless stream.is_public %>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete_<%=stream.content_bag.id%>">
+                        <%= trash_icon('削除')%>
                     </button>
-                    <% unless stream.is_public %>
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_delete_<%=stream.content_bag.id%>">
-                            <%= trash_icon('削除')%>
-                        </button>
-                    <% else %>
-                        <button type='button' class='btn btn-secondary btn-sm' disabled><%= trash_icon('削除')%></button>
-                    <% end %>
-                    |
-                    <a href="<%= url_for(:action=>'content_category', :id=>stream) %>" class="btn btn-sm btn-outline-primary"><%= link_to_6_icon('表示')%></a>
-                </span>
-            </small>
+                <% else %>
+                    <button type='button' class='btn btn-secondary btn-sm' disabled><%= trash_icon('削除')%></button>
+                <% end %>
+                |
+                <a href="<%= url_for(:action=>'content_category', :id=>stream) %>" class="btn btn-sm btn-outline-primary"><%= link_to_6_icon('表示')%></a>
+            </span>
         </div>
 
     </div>
