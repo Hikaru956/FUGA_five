@@ -1,18 +1,22 @@
 <div class="col">
   <div class="card h-100">
-    <% unless photo.blank? %>
-      <%= image_tag photo.clip.url(:thumb), class: "card-img-top" %>
-    <% else %>
-      <img src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Photo%0A" class="card-img-top">
-    <% end %>
+    <div class="card-header text-center">
+      <small>
+        <%= (photo.first?)?	move_to_higher_icon(false):	link_to(move_to_higher_icon, :action=>"photo_shop_higher",	:id=>photo) %>
+        <%= photo.position %>
+        <%= (photo.last?)? 	move_to_lower_icon(false): 	link_to(move_to_lower_icon, 	:action=>"photo_shop_lower",		:id=>photo) %>
+      </small>
+    </div>
+
     <div class="card-body">
+      <% unless photo.blank? %>
+        <%= image_tag photo.clip.url(:thumb), class: "card-img-top" %>
+      <% else %>
+        <img src="https://placehold.jp/22/cfcfcf/ffffff/320x180.png?text=No%20Photo%0A" class="card-img-top">
+      <% end %>
       <p class="card-text"><%= h truncate(photo.info, :length=>20) %></p>
     </div>
     <div class="card-footer">
-        <%= (photo.first?)?	raw("<i class='fa-solid fa-backward-fast'></i>"):	link_to(raw("<i class='icon-backward icon-large'></i>"), :action=>"photo_shop_higher",	:id=>photo) %>
-        <%= photo.position %>
-        <%= (photo.last?)? 	raw("<i class='fa-solid fa-forward-fast'></i>"): 	link_to(raw("<i class='fa-solid fa-forward-fast'></i>"), 	:action=>"photo_shop_lower",		:id=>photo) %>
-
         <span class="float-right">
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
             <%= edit_icon('キャプション')%>

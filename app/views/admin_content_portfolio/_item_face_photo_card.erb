@@ -1,5 +1,13 @@
 <div class="col">
   <div class="card h-100">
+    <div class="card-body text-center">
+      <small>
+        <%= (photo.first?)?	move_to_higher_icon(false):	link_to(move_to_higher_icon, 	:action=>"photo_face_higher",	:id=>photo) %>
+        <%= photo.position %>
+        <%= (photo.last?)? 	move_to_lower_icon(false): 	link_to(move_to_lower_icon,	:action=>"photo_face_lower",	:id=>photo) %>				
+      </small>
+    </div>
+
     <% unless photo.blank? %>
       <%= image_tag photo.clip.url(:thumb), class: "card-img-top" %>
     <% else %>
@@ -9,9 +17,6 @@
       <p class="card-text"><%= h truncate(photo.info, :length=>20) %></p>
     </div>
     <div class="card-footer">
-        <%= (photo.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), 	:action=>"photo_face_higher",	:id=>photo) %>
-        <%= photo.position %>
-        <%= (photo.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"),	:action=>"photo_face_lower",	:id=>photo) %>				
         <span class="float-right">
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_photo_<%=photo.id%>">
             <%= edit_icon('キャプション')%>

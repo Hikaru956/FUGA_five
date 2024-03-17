@@ -2,9 +2,9 @@
     <div class="card h-100">
         <div class="card-header text-center">
             <small>
-                <%= (cat.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), {:action=>"content_category_higher",	:id=>cat}, :title=>"表示順を前に") %>
+                <%= (cat.first?)?	move_to_higher_icon(false):	link_to(move_to_higher_icon, {:action=>"content_category_higher",	:id=>cat}, :title=>"表示順を前に") %>
                 <%= cat.position %>
-                <%= (cat.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	{:action=>"content_category_lower",		:id=>cat}, :title=>"表示順を後ろに") %>				
+                <%= (cat.last?)? 	move_to_lower_icon(false): 	link_to(move_to_lower_icon,  {:action=>"content_category_lower",		:id=>cat}, :title=>"表示順を後ろに") %>				
             </small>
         </div>
         <div class="card-body">

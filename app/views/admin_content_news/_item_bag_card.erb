@@ -1,6 +1,14 @@
 <div class="col">
     <div class="card h-100">
 
+        <div class="card-header text-center">
+            <small>
+                <%= (stream.first?)?	move_to_higher_icon(false):	link_to(move_to_higher_icon, 	:action=>"bag_category_higher", :id=>stream) %>
+                <%= stream.position %>
+                <%= (stream.last?)? 	move_to_lower_icon(false): 	link_to(move_to_lower_icon, 	:action=>"bag_category_lower",	:id=>stream) %>
+            </small>
+        </div>
+
         <a href="<%= url_for(:action=>'content_category', :id=>stream) %>">
             <% leaf = stream.latest_news_article %>
             <% unless leaf.blank? %>
@@ -23,9 +31,6 @@
         </div>
 
         <div class="card-footer">
-            <%= (stream.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"bag_category_higher", :id=>stream) %>
-            <%= stream.position %>
-            <%= (stream.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"bag_category_lower",	:id=>stream) %>
             <span class='float-right'>
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=stream.content_bag.id%>">
                     <%= edit_icon('編集')%>

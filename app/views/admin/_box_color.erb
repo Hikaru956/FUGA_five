@@ -1,5 +1,12 @@
 <div class="col">
     <div class="card h-100">
+        <div class="card-body text-center">
+            <small>
+                <%= (color.first?)?	move_to_higher_icon(false):	link_to(move_to_higher_icon, 	:action=>"color_higher", :id=>color) %>
+                <%= color.position %>
+                <%= (color.last?)? 	move_to_lower_icon(false): 	link_to(move_to_lower_icon, 	:action=>"color_lower",	:id=>color) %>
+            </small>
+        </div>
 
         <% key_photo = color.photo %>
         <% unless key_photo.blank? %>
@@ -21,9 +28,6 @@
         </div>
 
         <div class="card-footer">
-            <%= (color.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"color_higher", :id=>color) %>
-            <%= color.position %>
-            <%= (color.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"color_lower",	:id=>color) %>
             <span class='float-right'>
                 <% if color.position==1 %>
                     <i class='fa-solid fa-spinner fa-spin'></i>

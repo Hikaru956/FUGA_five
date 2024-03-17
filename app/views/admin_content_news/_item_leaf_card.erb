@@ -1,5 +1,12 @@
 <div class="col">
     <div class="card h-100">
+        <div class="card-header text-center">
+            <small>
+                <%= (leaf.last?)?	move_to_higher_icon(false): link_to(move_to_higher_icon, 	:action=>"leaf_lower",	:id=>leaf) %>
+                <%= @total_size-leaf.position+1 %>
+                <%= (leaf.first?)? 	move_to_lower_icon(false): 	link_to(move_to_lower_icon, 	:action=>"leaf_higher",	:id=>leaf) %>
+            </small>
+        </div>
         <a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>">
             <% key_photo = key_photo(leaf) %>
             <% unless key_photo.blank? %>
@@ -33,11 +40,8 @@
             </p>
         </div>
         <div class="card-footer">
-            <%= (leaf.last?)?		raw("<i class='fa-solid fa-backward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), 	:action=>"leaf_lower",	:id=>leaf) %>
-            <%= @total_size-leaf.position+1 %>
-            <%= (leaf.first?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	:action=>"leaf_higher",	:id=>leaf) %>
             <span class='float-right'>
-                <a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>" class="btn btn-sm btn-outline-primary">表示&nbsp;<%= link_to_6_icon %></a>
+                <a href="<%= url_for(:action=>'show_leaf', :id=>leaf, :page=>@page) %>" class="btn btn-sm btn-outline-primary"><%= link_to_6_icon %></a>
             </span>
         </div>
     </div>

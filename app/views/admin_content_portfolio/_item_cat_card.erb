@@ -1,5 +1,14 @@
 <div class="col">
     <div class="card h-100">
+
+        <div class="card-header text-center">
+            <small>
+                <%= (cat.first?)?	move_to_higher_icon(false):	link_to(move_to_higher_icon, {:action=>"content_category_higher",	:id=>cat}, :title=>"表示順を前に") %>
+                <%= cat.position %>
+                <%= (cat.last?)? 	move_to_lower_icon(false): 	link_to(move_to_lower_icon,  {:action=>"content_category_lower",	:id=>cat}, :title=>"表示順を後ろに") %>				
+            </small>
+        </div>
+
         <div class="card-body">
             <h5 class="card-title">
                 <a href="<%= url_for(:action=>'content_category_tree', :id=>cat) %>">
@@ -8,16 +17,12 @@
                 </a>
             </h5>
 
-            <p class="card-text">
+            <div class="card-text">
                 <%= cat.content_leafs.size %>
                 件の項目
-            </p>
+            </div>
         </div>
         <div class="card-footer">
-            <%= (cat.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), {:action=>"content_category_higher",	:id=>cat}, :title=>"表示順を前に") %>
-            <%= cat.position %>
-            <%= (cat.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"), 	{:action=>"content_category_lower",		:id=>cat}, :title=>"表示順を後ろに") %>				
-
             <span class="float-right">
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_<%=cat.id%>">
                     <%= edit_icon('編集')%>

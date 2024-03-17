@@ -2,9 +2,9 @@
   <div class="card h-100">
     <div class="card-header text-center">
       <small>
-        <%= (photo.first?)?	raw("<i class='fa-solid fa-backward fa-lg'></i>"):	link_to(raw("<i class='fa-solid fa-backward fa-lg'></i>"), 	:action=>"photo_face_higher",	:id=>photo) %>
+        <%= (photo.first?)?	move_to_higher_icon(false):	link_to(move_to_higher_icon, 	:action=>"photo_face_higher",	:id=>photo) %>
         <%= photo.position %>
-        <%= (photo.last?)? 	raw("<i class='fa-solid fa-forward fa-lg'></i>"): 	link_to(raw("<i class='fa-solid fa-forward fa-lg'></i>"),	:action=>"photo_face_lower",	:id=>photo) %>				
+        <%= (photo.last?)? 	move_to_lower_icon(false): 	link_to(move_to_lower_icon,	:action=>"photo_face_lower",	:id=>photo) %>				
       </small>
     </div>
     <div class="card-body">

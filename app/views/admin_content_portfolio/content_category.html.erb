@@ -52,19 +52,19 @@
 	<% array = @items.in_groups_of(3, false)%>
 	<div class="row">
 		<% if false %>
-		<% for i in 0..(array.size-1) %>
-			<% @lines = array[i] %>
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_category", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
-				</div>		
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_category", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
-				</div>		
-		        <div class="col-sm-4">
-		        	<%= render :partial=>"item_category", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
-				</div>
-		<% end %>
-		<br/>
+			<% for i in 0..(array.size-1) %>
+				<% @lines = array[i] %>
+					<div class="col-sm-4">
+						<%= render :partial=>"item_category", :locals => {:temp_local => @lines[0]}  if @lines.size>=1 %>
+					</div>		
+					<div class="col-sm-4">
+						<%= render :partial=>"item_category", :locals => {:temp_local => @lines[1]}  if @lines.size>=2 %>
+					</div>		
+					<div class="col-sm-4">
+						<%= render :partial=>"item_category", :locals => {:temp_local => @lines[2]}  if @lines.size>=3 %>
+					</div>
+			<% end %>
+			<br/>
 		<% end %>
 
 		<div class='d-none d-md-block'>
@@ -111,6 +111,7 @@
 		<% end %>
 	</div>
 	<% end %>
+
 	<table class="table table-hover">
 		<tr>
 			<thead>

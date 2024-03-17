@@ -1,5 +1,12 @@
 <div class="col">
     <div class="card h-100">
+        <div class="card-header text-center">
+            <small>
+                <%= (layout.first?)?	move_to_higher_icon(false):	link_to(move_to_higher_icon, 	:action=>"layout_higher", :id=>layout) %>
+                <%= layout.position %>
+                <%= (layout.last?)? 	move_to_lower_icon(false): 	link_to(move_to_lower_icon, 	:action=>"layout_lower",	:id=>layout) %>
+            </small>
+        </div>
 
         <% key_photo = layout.photo %>
         <% unless key_photo.blank? %>
@@ -21,9 +28,6 @@
         </div>
 
         <div class="card-footer">
-            <%= (layout.first?)?	raw("◁"):	link_to(raw("◀"), 	:action=>"layout_higher", :id=>layout) %>
-            <%= layout.position %>
-            <%= (layout.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"layout_lower",	:id=>layout) %>
             <span class='float-right'>
                 <% if layout.position==1 %>
                     <i class='fa-solid fa-spinner fa-spin'></i>
