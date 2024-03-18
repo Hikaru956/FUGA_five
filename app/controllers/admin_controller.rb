@@ -22,7 +22,7 @@ class AdminController < ApplicationController
     #    if request.post?
         current_user.shop = Shop.find(params[:id])
         current_user.save
-        return redirect_to(:controller=>'admin_config', :action=>'company_show_shop') unless current_user.ui_version.blank?
+        return redirect_to(:controller=>'admin_config', :action=>'company_show_shop') if current_user.is_fuga_5?
         redirect_to :controller=>'bs', :action=>'index'
     #    end
     end
