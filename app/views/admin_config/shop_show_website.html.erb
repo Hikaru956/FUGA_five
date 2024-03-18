@@ -33,19 +33,19 @@
 <header class="subhead" id="overview">
 	<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
 		<span class="float-right">
-			<a class="btn btn-sm btn-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
+			<a class="btn btn-sm btn-outline-primary" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
 				<%= share_icon('表示') %>
-				店舗サイト表示
+				サイト表示
 			</a>
 			<% if @shop.default_root_child.page_type==WebPage::TYPE_FIX %>
 				<button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ErrorTopPageAsFixPage">
 					<%= error_icon %>
-					デザイン編集不可
+					サイト編集不可
 				</button>
 			<% else %>
-				<a class="btn btn-sm btn-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
-					<%= update_icon('編集') %>
-					デザイン編集
+				<a class="btn btn-sm btn-outline-warning" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
+					<%= edit_icon('編集') %>
+					サイト編集
 				</a>
 			<% end %>
 		</span>

@@ -6,7 +6,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="<%= url_for(:controller=>'bs_config', :action=>'company_show_shop') %>" data-turbolinks='false'><%=BRAND_NAME%></a>
+
+			<% if params[:controller]=='bs_authoring' %>
+				<% # もし不用意にロゴをクリックして編集途中の内容が無駄にならないよう、ロゴは表示のみとする %>
+				<span class='brand'><%= BRAND_NAME %></span>
+			<% else %>
+				<% if current_user.is_fuga_5? %>
+					<%= link_to BRAND_NAME, {:controller=>'bs_config', :action=>'shop_show_website'}, class: 'brand' %>
+				<% else %>
+					<%= link_to BRAND_NAME, {:controller=>'admin_config', :action=>'shop_show_website'}, class: 'brand' %>
+				<% end %>
+			<% end %>
+
 			<% unless current_user.blank? %>
             <div class="nav-collapse collapse">
                 <ul class="nav">
@@ -22,48 +33,52 @@
 						
 						navs = @shop.content_categories.where('content_categories.category_type >= ? AND content_categories.category_type <= ?', ContentCategory::TYPE_NEWS ,ContentCategory::TYPE_PORTFOLIO).order(position: :asc)
 					%>
-					<% navs.each do | nav | %>
-						<li>
-							<% if nav.category_type==ContentCategory::TYPE_NEWS %>
-								<% unless nav.is_public? %>
-									<a href="<%= url_for(:controller=>'bs_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="icon-lock"></i>&nbsp;<%= category_title(nav) %></a>
-								<% else %>
-									<a href="<%= url_for(:controller=>'bs_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+					<% unless params[:controller]=='bs_authoring' %>
+						<% navs.each do | nav | %>
+							<li>
+								<% if nav.category_type==ContentCategory::TYPE_NEWS %>
+									<% unless nav.is_public? %>
+										<a href="<%= url_for(:controller=>'bs_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="icon-lock"></i>&nbsp;<%= category_title(nav) %></a>
+									<% else %>
+										<a href="<%= url_for(:controller=>'bs_content_news', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+									<% end %>
 								<% end %>
-							<% end %>
-							<% if nav.category_type==ContentCategory::TYPE_STREAM %>
-								<% unless nav.is_public? %>
-									<a href="<%= url_for(:controller=>'bs_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="icon-lock"></i>&nbsp;<%= category_title(nav) %></a>
-								<% else  %>
-									<a href="<%= url_for(:controller=>'bs_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+								<% if nav.category_type==ContentCategory::TYPE_STREAM %>
+									<% unless nav.is_public? %>
+										<a href="<%= url_for(:controller=>'bs_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="icon-lock"></i>&nbsp;<%= category_title(nav) %></a>
+									<% else  %>
+										<a href="<%= url_for(:controller=>'bs_content_stream', 		:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+									<% end %>
 								<% end %>
-							<% end %>
-							<% if nav.category_type==ContentCategory::TYPE_GALLERY %>
-								<% unless nav.is_public? %>
-									<a href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="icon-lock"></i>&nbsp;<%= category_title(nav) %></a>
-								<% else %>
-									<a href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+								<% if nav.category_type==ContentCategory::TYPE_GALLERY %>
+									<% unless nav.is_public? %>
+										<a href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="icon-lock"></i>&nbsp;<%= category_title(nav) %></a>
+									<% else %>
+										<a href="<%= url_for(:controller=>'bs_content_gallery', 	:action=>'content_root', :id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+									<% end %>
 								<% end %>
-							<% end %>
-							<% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %>
-								<% unless nav.is_public? %>
-									<a href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="icon-lock"></i>&nbsp;<%= category_title(nav) %></a>
-								<% else %>
-									<a href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+								<% if nav.category_type==ContentCategory::TYPE_PORTFOLIO %>
+									<% unless nav.is_public? %>
+										<a href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><i class="icon-lock"></i>&nbsp;<%= category_title(nav) %></a>
+									<% else %>
+										<a href="<%= url_for(:controller=>'bs_content_portfolio', 	:action=>'content_root',:id=>@shop, :hash=>Time.now.to_i) %>" data-turbolinks='false'><%= category_title(nav) %></a>
+									<% end %>
 								<% end %>
-							<% end %>
-						</li>
+							</li>
+						<% end %>
+							<li>
+								<a href="<%= url_for(:controller=>'bs_content_inquiry', 	:action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>">お問い合わせ</a>
+							</li>
+						<% unless MAKE_SECRET_FUGA_OPTION %>
+							<% if @shop.option_reservation_management %>	<li><a href="/bs_reservation/index"	>予約</a></li><% end %>
+							<% if @shop.option_customer_management %>		<li><a href="/bs_customer/index"	>顧客</a></li><% end %>
+						<% end %>
+						<% if @shop.option_attendance_management %>		<li><a href="/bs_attendance/index"	>勤怠</a></li><% end %>
+						<% if @shop.option_reservation_management %>	<li><a href="/bs_reservation/index"	>予約</a></li><% end %>
 					<% end %>
-						<li>
-							<a href="<%= url_for(:controller=>'bs_content_inquiry', 	:action=>'index',:id=>@shop, :hash=>Time.now.to_i) %>">お問い合わせ</a>
-						</li>
-					<% unless MAKE_SECRET_FUGA_OPTION %>
-	                    <% if @shop.option_reservation_management %>	<li><a href="/bs_reservation/index"	>予約</a></li><% end %>
-	                    <% if @shop.option_customer_management %>		<li><a href="/bs_customer/index"	>顧客</a></li><% end %>
-					<% end %>
-					<% if @shop.option_attendance_management %>		<li><a href="/bs_attendance/index"	>勤怠</a></li><% end %>
-					<% if @shop.option_reservation_management %>	<li><a href="/bs_reservation/index"	>予約</a></li><% end %>
-                </ul>
+				</ul>
+
+
 				<ul class="nav pull-right">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -72,24 +87,27 @@
 						</a>
 						<ul class="dropdown-menu">
 							<% if current_user.has_permission?(User::ROLE_BLOGGER) %>
-								<li><a href="<%= url_for(:controller=>'bs_config', :action=>'index') %>"><i class="icon-wrench"></i>&nbsp;店舗設定</a></li>
 								<% if false %>
+									<li><a href="<%= url_for(:controller=>'bs_config', :action=>'index') %>"><i class="icon-wrench"></i>&nbsp;店舗設定</a></li>
 									<li class="divider"></li>
 									<li><a href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>"><i class="icon-sitemap"></i>&nbsp;ナビゲーション</a></li>
 									<li><a href="<%= url_for(:action=>'shop_site_navigation') %>"><i class="icon-globe"></i>&nbsp;デザイン</a></li>
 								<% end %>
 								<li class="divider"></li>
 							<% end %>
-							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %>
-							</li>
 							<% if current_user.role>=User::ROLE_SALES %>
-								<li class="divider"></li>
-								<li><%= link_to raw("<i class='icon-signout'></i>&nbsp;&nbsp;ダッシュボードに戻る"), {:controller=>'dashboard', :action=>'roll_back', :id=>current_user.shop}, :method=>:post %></li>
+								<% if current_user.is_fuga_5? %>
+									<li><%= link_to raw("<i class='icon-signout'></i>&nbsp;&nbsp;サイト設定に戻る"), {:controller=>'admin_config', :action=>'shop_show_website', :id=>current_user.shop} %></li>
+								<% else %>
+									<li><%= link_to raw("<i class='icon-signout'></i>&nbsp;&nbsp;サイト設定に戻る"), {:controller=>'bs_config', :action=>'shop_show_website', :id=>current_user.shop} %></li>
+								<% end %>
 							<% end %>
 							<% if current_user.role==User::ROLE_OWNER %>
 								<li class="divider"></li>
 								<li><%= link_to raw("<i class='icon-signout'></i>&nbsp;&nbsp;店舗選択"), {:controller=>'owner', :action=>'switch_shop'}, :method=>:post %></li>
 							<% end %>
+							<li class="divider"></li>
+							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %></li>
 						</ul>
 					</li>						
 				</ul>						

@@ -63,13 +63,6 @@
 					<td width="75%">
 						<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
 							<span class='float-right'>
-								<% if current_user.has_permission?(User::ROLE_MANAGER) %>
-									<a class="btn btn-sm btn-primary" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
-										<%= edit_icon('編集') %>&nbsp;
-										サイト編集
-									</a>
-								<% end %>
-								|
 								<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>current_user.shop.wsite_hash_key) %>" target="_blank" data-turbolinks='false'>
 									<%= share_icon('表示') %>&nbsp;
 									サイト表示

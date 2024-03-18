@@ -97,8 +97,9 @@ class User < ActiveRecord::Base
     req_role <= self.role
   end
 
-
-  
+  def is_fuga_5?
+    (self.ui_version.blank? || self.ui_version==0)? false: true
+  end
 
   def banned?
     self.try_count>=USER_AUTH_FAIL_COUNT

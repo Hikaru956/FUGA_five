@@ -27,6 +27,12 @@
 
 <header class="subhead" id="overview">
 	<span class="float-right">
+		<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
+		<a href="<%=url_business%>" class="btn btn-outline-warning btn-sm">
+			<%= info_icon %>
+			利用状況表示
+		</a>
+		|
 		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
 			<%= edit_icon('編集') %>&nbsp;編集
 		</button>
@@ -41,18 +47,12 @@
 			<th width='25%'>サイト・ステータス</th>
 			<td width='75%'>
 				<span class='float-right'>
-					  <div class="btn-group">
-							<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
-								<%= share_icon('サイト表示')%>
-								サイト表示
-							</a>
-							<%= link_to raw('店舗管理画面' + ' ') + link_to_6_icon, {:action=>'delegating', :id=>@shop}, :method => :post, :class=>"btn btn-sm btn-outline-primary" %>
-							<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
-							<a href="<%=url_business%>" class="btn btn-outline-warning btn-sm">
-								<%= info_icon %>
-								利用状況表示
-							</a>
-					  </div>
+						<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
+							<%= share_icon('サイト表示')%>
+							サイト表示
+						</a>
+						|
+						<%= link_to raw('店舗管理画面' + ' ') + link_to_6_icon, {:action=>'delegating', :id=>@shop}, :method => :post, :class=>"btn btn-sm btn-outline-primary" %>
 				</span>
 				<%= site_status_icon(@shop.wsite_run_mode) %>&nbsp;<%= label_site_status(@shop.wsite_run_mode) %>
 			</td>

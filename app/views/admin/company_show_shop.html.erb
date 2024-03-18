@@ -40,6 +40,12 @@
 	<div>
 		<header class="subhead" id="overview">
 			<span class="float-right">
+				<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
+				<a href="<%=url_business%>" class="btn btn-outline-warning btn-sm">
+					<%= site_status_icon(@shop.wsite_run_mode) %>
+					利用状況表示
+				</a>
+				|
 				<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'company_list_shop', :id=>@item.company) %>">
 				<%= backward_icon('戻る')%>&nbsp;戻る
 				</a>
@@ -59,18 +65,12 @@
 					<th>名称</th>
 					<td>
 						<span class='float-right'>
-							  <div class="btn-group">
-									<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
-										<%= share_icon('サイト表示')%>
-										サイト表示
-									</a>
-									<%= link_to raw('店舗管理画面' + ' ') + link_to_6_icon, {:action=>'delegating', :id=>@item}, :method => :post, :class=>"btn btn-sm btn-outline-primary" %>
-									<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
-									<a href="<%=url_business%>" class="btn btn-outline-warning btn-sm">
-										<%= site_status_icon(@shop.wsite_run_mode) %>
-										利用状況表示
-									</a>
-							  </div>
+							<a class="btn btn-sm btn-outline-info" href="<%= url_for(:controller=>'bs_renderer', :wkey=>@shop.wsite_hash_key) %>" target="_blank">
+								<%= share_icon('サイト表示')%>
+								サイト表示
+							</a>
+							|
+							<%= link_to raw('店舗管理画面' + ' ') + link_to_6_icon, {:action=>'delegating', :id=>@item}, :method => :post, :class=>"btn btn-sm btn-outline-primary" %>
 						</span>
 						<%= model_name(@item) %>
 					</td>
