@@ -92,8 +92,8 @@
 									<li class="divider"></li>
 									<li><a href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>"><i class="icon-sitemap"></i>&nbsp;ナビゲーション</a></li>
 									<li><a href="<%= url_for(:action=>'shop_site_navigation') %>"><i class="icon-globe"></i>&nbsp;デザイン</a></li>
+									<li class="divider"></li>
 								<% end %>
-								<li class="divider"></li>
 							<% end %>
 							<% if current_user.role>=User::ROLE_SALES %>
 								<% if current_user.is_fuga_5? %>
@@ -101,12 +101,12 @@
 								<% else %>
 									<li><%= link_to raw("<i class='icon-signout'></i>&nbsp;&nbsp;サイト設定に戻る"), {:controller=>'bs_config', :action=>'shop_show_website', :id=>current_user.shop} %></li>
 								<% end %>
+								<li class="divider"></li>
 							<% end %>
 							<% if current_user.role==User::ROLE_OWNER %>
-								<li class="divider"></li>
 								<li><%= link_to raw("<i class='icon-signout'></i>&nbsp;&nbsp;店舗選択"), {:controller=>'owner', :action=>'switch_shop'}, :method=>:post %></li>
+								<li class="divider"></li>
 							<% end %>
-							<li class="divider"></li>
 							<li><%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %></li>
 						</ul>
 					</li>						

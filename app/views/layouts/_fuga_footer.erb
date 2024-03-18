@@ -36,11 +36,11 @@
 				<label class="control-label" for="user[ui_version]">バージョン選択</label>
 				<div class="controls">
 					<label class="radio inline">
-						<input type="radio" id="user[ui_version]" name="user[ui_version]" value="" <% if current_user.ui_version.blank? %>checked<% end %>>
+						<input type="radio" id="user[ui_version]" name="user[ui_version]" value="" <% if current_user.is_fuga_3? %>checked<% end %>>
 						旧バージョン
 					</label>
 					<label class="radio inline">
-						<input type="radio" id="user[ui_version]" name="user[ui_version]" value="1" <% if !current_user.ui_version.blank? %>checked<% end %>>
+						<input type="radio" id="user[ui_version]" name="user[ui_version]" value="1" <% if !current_user.is_fuga_5? %>checked<% end %>>
 						新バージョン
 					</label>
 				</div>

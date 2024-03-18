@@ -26,7 +26,7 @@ class DashboardController < ApplicationController
     end
     return redirect_to sign_in_path if current_user.blank?
 
-    if current_user.ui_version.blank? || current_user.ui_version==0
+    if current_user.is_fuga_3?
       return redirect_to(:controller=>'dashboard', :action=>"company_index", search_word: @search_word)
     end
     redirect_to(:controller=>'admin', :action=>'company_index', search_word: @search_word)
@@ -46,7 +46,7 @@ class DashboardController < ApplicationController
       current_user.save
       target_shop = Shop.find_by_id(params[:id])
       return redirect_to(:action=>'index') if target_shop.blank? 
-      return redirect_to(:action=>'company_show_shop', :id=>target_shop) if current_user.ui_version.blank?
+      return redirect_to(:action=>'company_show_shop', :id=>target_shop) if current_user.is_fuga_3?
       redirect_to(:controller=>'admin', :action=>'company_show_shop', :id=>target_shop)
 #    end
   end
@@ -431,8 +431,8 @@ class DashboardController < ApplicationController
           flash[:alert] = 'ユーザーの更新に失敗しました(ログインIDの重複など)'
         end
       end
-      redirect_to(:controller=>'admin', :action=>"user_show", :id=>@item) unless @item.ui_version.blank?
-      redirect_to(:action=>"user_show", :id=>@item) if @item.ui_version.blank?
+      redirect_to(:controller=>'admin', :action=>"user_show", :id=>@item) unless @item.is_fuga_3?
+      redirect_to(:action=>"user_show", :id=>@item) if @item.is_fuga_3?
   end
 
   def user_delete

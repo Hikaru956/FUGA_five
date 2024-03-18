@@ -61,7 +61,7 @@
         <li><a href="<%= url_for(:action=>'list_color_schemes') %>">カラー</a></li>
     <% end %>
         <li><a href="<%= url_for(:action=>'manage_widget')%>">表示設定</a></li>
-        <% if current_user.ui_version.blank? %>
+        <% if current_user.is_fuga_3? %>
             <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>"><i class="icon-off"></i>&nbsp;サイト編集終了</a></li>
         <% else %>
             <li><a href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website')%>"><i class="icon-off"></i>&nbsp;サイト編集終了</a></li>

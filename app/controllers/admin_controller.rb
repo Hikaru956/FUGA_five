@@ -415,8 +415,8 @@ class AdminController < ApplicationController
                 flash[:alert] = 'ユーザーの更新に失敗しました(ログインIDの重複など)'
             end
         end
-        redirect_to(:controller=>'dashboard', :action=>"user_show", :id=>@item) if @item.ui_version.blank?
-        redirect_to(:action=>"user_show", :id=>@item) unless @item.ui_version.blank?
+        redirect_to(:controller=>'dashboard', :action=>"user_show", :id=>@item) if @item.is_fuga_3?.blank?
+        redirect_to(:action=>"user_show", :id=>@item) unless @item.is_fuga_3?
     end
 
     def user_delete

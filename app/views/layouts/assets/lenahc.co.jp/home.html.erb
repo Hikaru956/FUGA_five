@@ -93,7 +93,7 @@
 <script>
 $(function() {
     var li = '';
-    <% if (current_user.ui_version.blank?) { %>
+    <% if (current_user.is_fuga_3?) { %>
         li += '<li><a href="/bs_authoring/list_layout_schemes">デザイン</a></li>';
         li += '<li><a href="/bs_authoring/manage_widget">表示設定</a></li>';
         li += '<li><a href="/bs_config/shop_show_website">サイト編集終了</a></li>';

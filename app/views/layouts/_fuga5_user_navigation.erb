@@ -92,13 +92,13 @@
                             <a class="dropdown-item" href="<%= url_for(:action=>'shop_site_navigation') %>"><i class="icon-globe"></i>&nbsp;デザイン</a>
                         <% end %>
                     <% end %>
-                    <%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %>
                     <% if current_user.role>=User::ROLE_SALES %>
                         <%= link_to raw("<i class='icon-signout'></i>&nbsp;ダッシュボードに戻る"), {:controller=>'dashboard', :action=>'roll_back', :id=>current_user.shop}, :method=>:post, :class =>'dropdown-item' %>
                     <% end %>
                     <% if current_user.role==User::ROLE_OWNER %>
                         <%= link_to raw("<i class='icon-signout'></i>&nbsp;店舗選択"), {:controller=>'owner', :action=>'switch_shop'}, :method=>:post, :class =>'dropdown-item' %>
                     <% end %>
+                    <%= link_to logout_icon+' ログアウト', sign_out_path, method: :get, :class =>'dropdown-item' %>
                 </div>
             </li>
         </ul>
