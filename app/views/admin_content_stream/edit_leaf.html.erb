@@ -14,7 +14,7 @@
 		<%= render :partial=>"form_leaf", locals:{f: f, item: @item} %>
 		<div class="form-actions text-right">
 			<% url_cancel = url_for(:action=>"show_leaf", :id=>@item) %>
-	  		<a class="btn btn-sm btn-outline-dark" href="<%= url_cancel %>" data-turbolinks='false'><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</a>
+	  		<a class="btn btn-sm btn-outline-dark" href="<%= url_cancel %>" data-turbolinks='false'><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</a>
 			<% if is_test_shop?(@shop) %>
 				<button type="submit" onclick="clickSubmit();" class="btn btn-sm btn-primary"><%= update_icon('更新')%>&nbsp;&nbsp;更新</button>
 			<% else %>

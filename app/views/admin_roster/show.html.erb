@@ -69,8 +69,8 @@
 					<%= render :partial=>"form",locals: {f: f, item: @item} %>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-success"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
-					<button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</button>
+					<button class="btn btn-outline-dark" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</button>
+					<button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
 				</div>
 			<% end %>
 		</div>
@@ -93,8 +93,8 @@
 					</p>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;&nbsp;削除</button>
-					<button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</button>
+					<button class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
+					<button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;&nbsp;削除</button>
 				</div>
 			<% end %>
 		</div>

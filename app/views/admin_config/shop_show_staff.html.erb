@@ -173,7 +173,7 @@
 					<%= render :partial=>"form_staff_social", locals:{f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
                     <button type="submit" class="btn btn-primary btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
@@ -193,7 +193,7 @@
 					<%= render :partial=>"form_staff", locals:{f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
                     <button type="submit" class="btn btn-primary btn-sm"><%= update_icon('更新') %>&nbsp;更新</button>
                 </div>
 			<% end %>
@@ -217,7 +217,7 @@
 					</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
                     <button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>

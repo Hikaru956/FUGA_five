@@ -80,31 +80,10 @@
 					<%= render :partial=>"form_user_password", locals: {f: f, item: @user}  %>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
                     <button type="submit" class="btn btn-success btn-sm"><%= new_icon('登録') %>&nbsp;登録</button>
                 </div>
 			<% end %>
         </div>
     </div>
 </div>
-
-<% if false %>
-<!-- modalNew -->
-<div class="modal hide fade form-horizontal", id="modalNew">
-<%= form_for @item, url: dashboard_shop_create_user_path(shop_id: @item), method: :post do |f| -%>
-	<% @user = User.new %>
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h3 id="myModalLabel">新規ユーザー登録</h3>
-	</div>
-	<div class="modal-header">
-		<%= render :partial=>"form_user", locals: {f: f, item: @user}  %>
-		<%= render :partial=>"form_user_password", locals: {f: f, item: @user}  %>
-	</div>
-	<div class="modal-footer">
-    	<button type="submit" class="btn btn-success"><i class="icon-ok"></i>&nbsp;&nbsp;登録</button>
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>&nbsp;&nbsp;キャンセル</button>
-	</div>
-<% end %>
-</div>
-<% end %>

@@ -66,8 +66,8 @@
 					<%= render :partial=>"form",locals: {f: f, item: @item} %>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-success"><%= new_icon('登録') %>&nbsp;&nbsp;登録</button>
-					<button class="btn btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</button>
+					<button class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
+					<button type="submit" class="btn btn-success btn-sm"><%= new_icon('登録') %>&nbsp;&nbsp;登録</button>
 				</div>
 			<% end %>
 		</div>

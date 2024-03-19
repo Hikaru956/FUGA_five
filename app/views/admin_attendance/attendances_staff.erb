@@ -7,7 +7,7 @@
 			|
 		<% end %>
 		<% calendar_url = url_for(:action=>"index", :year => @target_date.year)%>
-		<a href="<%= calendar_url %>" class="btn btn-sm btn-outline-dark"><i class="fas fa-arrow-left"></i>&nbsp;戻る</a>
+		<a href="<%= calendar_url %>" class="btn btn-sm btn-outline-dark"><%= backward_icon('戻る') %>&nbsp;戻る</a>
 	</span>
 	<h4>
 		<%= attendance_staff_icon %>

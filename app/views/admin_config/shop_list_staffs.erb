@@ -108,7 +108,7 @@
 					<%= render :partial=>"form_staff", locals:{f: f} %>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
                     <button type="submit" class="btn btn-success btn-sm"><%= new_icon('登録') %>&nbsp;登録</button>
                 </div>
 			<% end %>

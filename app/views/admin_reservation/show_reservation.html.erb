@@ -32,12 +32,12 @@
 
 
 <div>
-	<button type="button" class="btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+	<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
 		<%= trash_icon('削除確認')%>&nbsp;削除…
 	</button>
 
 	<span class="float-right">
-		<button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditReservation_<%= @item.id %>">
+		<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#EditReservation_<%= @item.id %>">
 			<%= edit_icon %>&nbsp;編集…
 		</button>
 	</span>
@@ -83,8 +83,8 @@
 					</p>
                 </div>
                 <div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                    <button type="submit" class="btn btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
+					<button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
+                    <button type="submit" class="btn btn-sm btn-danger"><%= trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
         </div>

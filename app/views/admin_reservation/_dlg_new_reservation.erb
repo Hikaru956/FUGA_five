@@ -19,8 +19,8 @@
             <%= render partial: 'form_reservation_new', locals: {f: f, item: item, target_date: target_date} %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-          <button type="submit" class="btn btn-success"><%= new_icon %>&nbsp;登録</button>
+          <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
+          <button type="submit" class="btn btn-success btn-sm"><%= new_icon %>&nbsp;登録</button>
         </div>
       </div>
     <% end %>

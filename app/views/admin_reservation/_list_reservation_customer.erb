@@ -60,10 +60,10 @@
 	<div class="form-actions">
 		<%= link_to_remote("<i class='icon-search'></i>&nbsp;再検索",
 			{:url=>{:action=>"search_reservation_customer", :id=>@reservation, :search_string=>@search_string}}, 
-			:class=>"btn btn-small btn-success") %>
+			:class=>"btn btn-sm btn-success") %>
 		<%= link_to_remote("<i class='icon-arrow-left'></i>&nbsp;キャンセル",
 			{:url=>{:action=>"clear_sandbox", :id=>@reservation}}, 
-			:class=>"btn btn-small") %>
+			:class=>"btn btn-sm btn-outline-dark") %>
   	</div>
 </div>
 <hr/>
