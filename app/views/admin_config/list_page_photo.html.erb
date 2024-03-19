@@ -29,13 +29,13 @@
 
 <header class="subhead" id="overview">
 	<span class="float-right">
-		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'edit_fix_page', :id=>@item) %>" data-turbolinks='false'>
+		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'edit_fix_page', :id=>@item) %>" data-turbolinks='false'>
 			<%= backward_icon('戻る')%>&nbsp;
 			戻る
 		</a>
-		<a class="btn btn-info btn-sm" href="<%= url_for(:action=>'new_page_photo', :id=>@item) %>" data-turbolinks='false'>
+		<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_page_photo', :id=>@item) %>" data-turbolinks='false'>
 			<i class="fa-solid fa-camera"></i>&nbsp;
-			素材追加
+			写真追加
 		</a>
 	</span>
 	<h4>
@@ -77,6 +77,3 @@
 	<%= render partial: 'dlg_fixed_page_photo_edit',	 locals: {photo: photo} %>
 	<%= render partial: 'dlg_fixed_page_photo_delete', locals: {photo: photo} %>
 <% end %>
-
-
-

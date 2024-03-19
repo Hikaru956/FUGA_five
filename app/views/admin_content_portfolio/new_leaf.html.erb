@@ -12,9 +12,9 @@
 	<fieldset>
 		<legend>新規登録</legend>
 		<%= render :partial=>"form_leaf", locals:{f: f, item: @item} %>
-		<div class="form-actions text-right">
+		<div style='margin-top: 10px;' class="form-actions text-right">
 			<% url_cancel = url_for(:action=>"content_category", :id=>@item.content_category) %>
-	  		<a class="btn btn-sm btn-secondary" href="<%= url_cancel %>" data-turbolinks='false'><%= cancel_icon('キャンセル')%>&nbsp;&nbsp;キャンセル</a>
+	  		<a class="btn btn-sm btn-outline-dark" href="<%= url_cancel %>" data-turbolinks='false'><%= cancel_icon('キャンセル')%>&nbsp;&nbsp;キャンセル</a>
 			<button type="submit" class="btn btn-sm btn-success"><%= new_icon('登録')%>&nbsp;&nbsp;登録</button>
       	</div>
 	</fieldset>

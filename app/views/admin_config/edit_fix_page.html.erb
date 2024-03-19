@@ -26,11 +26,11 @@
 
 <header class="subhead" id="overview">
 	<span class="float-right">
-		<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'shop_site_navigation') %>" data-turbolinks='false'>
+		<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'shop_site_navigation') %>" data-turbolinks='false'>
 			<%= cancel_icon('キャンセル')%>&nbsp;
 			キャンセル
 		</a>
-		<a class="btn btn-info btn-sm" href="<%= url_for(:action=>'list_page_photo', :id=>@item) %>">
+		<a class="btn btn-outline-success btn-sm" href="<%= url_for(:action=>'list_page_photo', :id=>@item) %>">
 			<i class="fa-solid fa-camera"></i>&nbsp;
 			素材一覧
 		</a>
@@ -43,9 +43,9 @@
 <%= form_tag admin_config_update_fix_page_path(:id=>@item), method: 'patch', :class=>"xform-horizontal" do |f| %>
 	<legend></legend>
 	<%= render :partial=>"form_fixed_page_content", locals: {f: f} %>
-	<div class="form-actions text-right">
+	<div style='margin-top: 10px;' class="form-actions text-right">
 		<% url_cancel = url_for(:action=>"shop_site_navigation") %>
-		<a class="btn btn-sm btn-secondary" href="<%= url_cancel %>"><%= cancel_icon('キャンセル')%>&nbsp;&nbsp;キャンセル</a>
+		<a class="btn btn-sm btn-outline-dark" href="<%= url_cancel %>"><%= cancel_icon('キャンセル')%>&nbsp;&nbsp;キャンセル</a>
 		<button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
 	</div>
 <% end %>

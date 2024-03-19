@@ -1,29 +1,30 @@
-<%= render :partial=>"layouts/tiny_mce", :locals=>{:target=>nil} if false%>
-
-<div class="control-group">
-    <%= text_area  'shop', 'wsite_description_business', {:class=>"tinymce input-block-level" , :rows => 40, :placeholder=>"記事の本文を入力します。"}  %>
-    <script type="text/javascript">
-        tinyMCE.init({
-            selector: 'textarea.tinymce',
-            theme_advanced_toolbar_location: "top",
-            theme_advanced_statusbar_location: "bottom",
-            theme_advanced_buttons3_add: ["tablecontrols"],
-            plugins: "table,image,code,link,forecolor,backcolor,emoticons",
-            <% unless @shop.blank? %>
-                <% shop_photos = @shop.photos.where(:ref_type=>'shop')%>
-                    <% unless shop_photos.blank? %>
-                    image_list: [ 
-                        <%= photo_array(shop_photos).html_safe %>
-                        ],
-                    <% end %>
-            <% end %>
-            relative_urls : false,
-            convert_urls: false,
-            content_style: 'img { max-width: 100%; height: auto; }' ,
-			resize: 'both',
-            toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
-            language: 'ja'})
-    </script>
-</div>
-<br/>
-
+<% if shop.enable_editor %>
+    <textarea name="shop[wsite_description_business]" style="min-height:800px;max-height:1200px" id="summernote"><%= shop.wsite_description_business%></textarea>
+	<%= render :partial=>"layouts/summernote", locals: {ref_id: shop.id} %>
+<% else %>
+    <div class="control-group">
+        <%= text_area  'shop', 'wsite_description_business', {:class=>"tinymce input-block-level" , :rows => 40, :placeholder=>"記事の本文を入力します。"}  %>
+        <script type="text/javascript">
+            tinyMCE.init({
+                selector: 'textarea.tinymce',
+                theme_advanced_toolbar_location: "top",
+                theme_advanced_statusbar_location: "bottom",
+                theme_advanced_buttons3_add: ["tablecontrols"],
+                plugins: "table,image,code,link,forecolor,backcolor,emoticons",
+                <% unless shop.blank? %>
+                    <% shop_photos = shop.photos.where(:ref_type=>'shop')%>
+                        <% unless shop_photos.blank? %>
+                        image_list: [ 
+                            <%= photo_array(shop_photos).html_safe %>
+                            ],
+                        <% end %>
+                <% end %>
+                relative_urls : false,
+                convert_urls: false,
+                content_style: 'img { max-width: 100%; height: auto; }' ,
+                resize: 'both',
+                toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
+                language: 'ja'})
+        </script>
+    </div>
+<% end %>

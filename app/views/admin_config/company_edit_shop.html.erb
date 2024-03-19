@@ -52,9 +52,9 @@
 <br/>
 <%= form_tag url_for(:action=>"company_update_shop", :id=>@shop), :class=>"xxform-horizontal", method: :patch do -%>
 		<%= render :partial=>"form_shop_description", locals:{shop: @shop} %>
-		<div class="form-actions text-right">
+		<div style='margin-top: 10px;' class="form-actions text-right">
 			<% url_cancel = url_for(:action=>"company_show_shop", :id=>@item) %>
-			<a class="btn btn-secondary btn-sm" href="<%= url_cancel %>" data-turbolinks='false'>
+			<a class="btn btn-outline-dark btn-sm" href="<%= url_cancel %>" data-turbolinks='false'>
 				<%= cancel_icon('キャンセル')%>&nbsp;&nbsp;キャンセル
 			</a>
 			<button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新')%>&nbsp;&nbsp;更新</button>

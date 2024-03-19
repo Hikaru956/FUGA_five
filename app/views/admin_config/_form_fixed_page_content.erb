@@ -15,27 +15,31 @@
 </div>
 
 <div class="control-group">
-	<%= text_area  'item', 'description', :class => "tinymce input-block-level", rows: 40, :placeholder=>"ページコンテンツを入力します。" %>
-	<script type="text/javascript">
-		tinyMCE.init({
-			selector: 'textarea.tinymce',
-			theme_advanced_toolbar_location: "top",
-			theme_advanced_statusbar_location: "bottom",
-			theme_advanced_buttons3_add: ["tablecontrols"],
-			plugins: "table,image,code,link,forecolor,backcolor,emoticons",
-			<% unless @item.blank? %>
-				<% unless @item.photos.blank? %>
-				image_list: [ 
-					<%= photo_array(@item.photos).html_safe %>
-					],
+	<% if @shop.enable_editor %>
+		<textarea name="item[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= @item.description%></textarea>
+		<%= render :partial=>"layouts/summernote", locals: {ref_id: @item.id} %>
+	<% else %>
+		<%= text_area  'item', 'description', :class => "tinymce input-block-level", rows: 40, :placeholder=>"ページコンテンツを入力します。" %>
+		<script type="text/javascript">
+			tinyMCE.init({
+				selector: 'textarea.tinymce',
+				theme_advanced_toolbar_location: "top",
+				theme_advanced_statusbar_location: "bottom",
+				theme_advanced_buttons3_add: ["tablecontrols"],
+				plugins: "table,image,code,link,forecolor,backcolor,emoticons",
+				<% unless @item.blank? %>
+					<% unless @item.photos.blank? %>
+					image_list: [ 
+						<%= photo_array(@item.photos).html_safe %>
+						],
+					<% end %>
 				<% end %>
-    		<% end %>
-			relative_urls : false,
-    		convert_urls: false,
-			content_style: 'img { max-width: 100%; height: auto; }' ,
-			resize: 'both',
-			toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
-			language: 'ja'})
-	</script>
+				relative_urls : false,
+				convert_urls: false,
+				content_style: 'img { max-width: 100%; height: auto; }' ,
+				resize: 'both',
+				toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
+				language: 'ja'})
+		</script>
+	<% end %>
 </div>
-<br/>
