@@ -16,7 +16,7 @@
 
 <div class="control-group">
 	<% if @shop.enable_editor %>
-		<textarea name="item[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= item.description%></textarea>
+		<textarea name="content_leaf[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= item.description%></textarea>
 		<%= render :partial=>"layouts/summernote", locals: {ref_id: item.id} %>
 	<% else %>
 		<%= text_area  'item', 'description', :class => "tinymce input-block-level", rows: 40, :placeholder=>"ページコンテンツを入力します。" %>
