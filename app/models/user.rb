@@ -97,7 +97,10 @@ class User < ActiveRecord::Base
     req_role <= self.role
   end
 
-  def is_fuga_3?; !is_fuga_5?; end
+  def is_fuga_3?
+    (is_fuga_5?)? false: true
+  end
+
   def is_fuga_5?
     (self.ui_version.blank? || self.ui_version==0)? false: true
   end
