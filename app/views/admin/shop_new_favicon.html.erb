@@ -36,7 +36,7 @@
 
 <% if true %>
 	<% item = Photo.new %>
-	<%= form_tag(dashboard_shop_create_favicon_path(id: @shop),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<%= form_tag(admin_shop_create_favicon_path(id: @shop),method: :post, class: "dropzone",id: 'dropzone') do %>
 	<div class="fallback">
 		<%= file_field_tag('photo[clip]') %>
 	</div>

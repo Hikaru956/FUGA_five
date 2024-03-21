@@ -45,7 +45,7 @@
 
 <% if true %>
 	<% item = Photo.new %>
-	<%= form_tag(bs_config_create_page_photo_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<%= form_tag(admin_config_create_page_photo_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
 	<div class="fallback">
 		<%= file_field_tag('photo[clip]') %>
 	</div>

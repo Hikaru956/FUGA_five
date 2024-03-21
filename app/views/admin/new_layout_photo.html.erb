@@ -62,7 +62,7 @@ $(function() {
 
 <% if true %>
 	<% item = Photo.new %>
-	<%= form_tag(dashboard_create_layout_photo_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
+	<%= form_tag(admin_create_layout_photo_path(id: @item),method: :post, class: "dropzone",id: 'dropzone') do %>
 	<div class="fallback">
 		<%= file_field_tag('photo[clip]') %>
 	</div>
