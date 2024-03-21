@@ -367,6 +367,8 @@ Fuga326::Application.routes.draw do
   post    'admin_shop_create_favicon' => 'admin#shop_create_favicon'
   delete  'admin_shop_reset_favicon' => 'admin#shop_reset_favicon'
   patch   'admin_set_disqus_code'  => 'admin#set_disqus_code'
+  post    'create_layout_photo' => 'admin#create_layout_photo'
+  post    'create_color_photo'  => 'admin#create_color_photo'
   delete  'delete_layout_photo' => 'admin#delete_layout_photo'
   delete  'delete_color_photo'  => 'admin#delete_color_photo'
   get     'color_list'      => 'admin#color_list'

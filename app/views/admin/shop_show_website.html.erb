@@ -29,7 +29,7 @@
 	<span class="float-right">
 		<% url_business = url_for(:action=>"company_show_shop_usage", :id=>@shop) %>
 		<a href="<%=url_business%>" class="btn btn-outline-warning btn-sm">
-			<%= info_icon %>
+			<%= site_status_icon(@shop.wsite_run_mode) %>
 			利用状況表示
 		</a>
 		|
