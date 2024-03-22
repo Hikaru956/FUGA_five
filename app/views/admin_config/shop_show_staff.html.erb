@@ -96,10 +96,10 @@
 </table>
 
 <% if current_user.has_permission?(User::ROLE_MANAGER) %>
-	<div class="well">
+	<div class="text-right">
 		<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete">
 			<%= trash_icon('削除確認') %>&nbsp;
-			削除確認
+			削除…
 		</button>
 	</div>
 <% end %>

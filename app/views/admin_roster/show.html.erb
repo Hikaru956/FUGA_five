@@ -15,7 +15,7 @@
 			<td colspan="2">
 				<strong><%= @item.name %></strong>
 				<span class="float-right">
-					<button class='btn btn-success btn-sm'  data-bs-toggle="modal" data-bs-target="#modalEdit">
+					<button class='btn btn-primary btn-sm'  data-bs-toggle="modal" data-bs-target="#modalEdit">
 						<%= edit_icon('編集') %>&nbsp;
 			  			編集
 					</button>
@@ -43,9 +43,9 @@
 	</tbody>
 </table>
 
-<div class="well">
-	<a class="btn btn-sm btn-secondary" href="<%= url_for(:action=>'list') %>">
-	<i class="fas fa-arrow-left"></i>&nbsp;
+<div class="text-right">
+	<a class="btn btn-sm btn-outline-dark" href="<%= url_for(:action=>'list') %>">
+	<%= backward_icon('戻る') %>&nbsp;
 		戻る
 	</a>
 	&nbsp;<span class="divider">|</span>&nbsp;
@@ -69,8 +69,8 @@
 					<%= render :partial=>"form",locals: {f: f, item: @item} %>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-outline-dark" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</button>
-					<button type="submit" class="btn btn-success btn-sm"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
+					<button class="btn btn-sm btn-outline-dark" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
+					<button type="submit" class="btn btn-primary btn-sm"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
 				</div>
 			<% end %>
 		</div>
@@ -93,8 +93,8 @@
 					</p>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-hidden="true"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
-					<button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;&nbsp;削除</button>
+					<button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
+					<button type="submit" class="btn btn-danger btn-sm"><%= trash_icon('削除') %>&nbsp;削除</button>
 				</div>
 			<% end %>
 		</div>

@@ -17,8 +17,8 @@
           <%= render partial: 'form',       locals: {f: f, item: item} %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-          <button type="submit" class="btn btn-success"><%= new_icon %>追加</button>
+          <button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
+          <button type="submit" class="btn btn-sm btn-success"><%= new_icon %>&nbsp;追加</button>
         </div>
       </div>
     <% end %>

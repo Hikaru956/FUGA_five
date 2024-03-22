@@ -241,7 +241,7 @@
 		<hr/>
 
 		<% unless @shop.wsite_run_mode==Shop::WSITE_BLOCKED %>
-			<div>
+			<div class='text-right'>
 				<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 					<a class="btn btn-sm btn-primary" href="<%= url_for(:controller=>'bs_authoring', :action=>'index', :wkey=>current_user.shop.wsite_hash_key) %>" data-turbolinks='false'>
 						<%= edit_icon('編集') %>&nbsp;

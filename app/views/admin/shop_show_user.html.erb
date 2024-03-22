@@ -64,15 +64,17 @@
 		<tr>
 			<th>パスワード</th>
 			<td>
-				<button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditPassword">
-						<%= update_icon('編集') %>&nbsp;パスワード再発行
-				</button>
+				<span class="float-right">
+					<button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditPassword">
+							<%= update_icon('編集') %>&nbsp;パスワード再発行
+					</button>
+				</span>
 			</td>
 		</tr>
 	</tbody>
 </table>
 
-<div class="well">
+<div class="text-right">
 	<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete">
 			<%= trash_icon('削除確認') %>&nbsp;削除…
 	</button>

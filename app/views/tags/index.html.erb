@@ -5,13 +5,13 @@
 
 <span class='float-right'>
     <% if current_user.has_permission?(User::ROLE_MANAGER) %>
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#TagNewModal">
-			<%= new_icon %>&nbsp;追加…
+        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#TagNewModal">
+			<%= new_icon('追加') %>&nbsp;追加…
         </button>
     <% end %>
-    <% seach_btn_class = (@search_word.blank? && @search_tags.blank?)? 'btn btn-primary': 'btn btn-warning' %>
+    <% seach_btn_class = (@search_word.blank? && @search_tags.blank?)? 'btn btn-sm btn-primary': 'btn btn-sm btn-warning' %>
     <button type="button" class='<%= seach_btn_class %>' data-bs-toggle="modal" data-bs-target="#TagSearchModal">
-        <%= search_icon %>&nbsp;検索…
+        <%= search_icon('検索') %>&nbsp;検索…
     </button>
 </span>
 
@@ -19,9 +19,9 @@
 <%= render partial: 'dlg_new', locals: {category: @category, shop: @shop} %>
 <%= render partial: 'dlg_search', locals: { category: @category, search_word: @search_word} %>
 
-<table class='table table-bordered table-hover table-striped'>
+<table class='table table-bordered table-sm'>
     <thead>
-        <tr class='table-primary'>
+        <tr xclass='table-primary'>
             <th width='70%' xclass='table-dark' style='text-align: left; vertical-align: middle'><%= tag_title %></th>
             <th width='20%' xclass='table-dark' style='text-align: left; vertical-align: middle'>参照数</th>
             <th width='10%' xclass='table-dark' style='text-align: center; vertical-align: middle'></th>
@@ -37,7 +37,7 @@
                     <%= item.taggings_count %>
                 </td>
                 <td style='text-align: center; vertical-align: middle'>
-                    <a class='btn btn-info' href='<%= tag_path(id: item.id, search_word: @search_word, search_tags: @search_tags, page: @page) %>'>詳細</a>
+                    <a class='btn btn-sm btn-outline-primary' href='<%= tag_path(id: item.id, search_word: @search_word, search_tags: @search_tags, page: @page) %>'><%= link_to_6_icon('詳細')%>&nbsp;詳細</a>
                 </td>
             </tr>
         <% end %>

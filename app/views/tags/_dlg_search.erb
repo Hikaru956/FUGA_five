@@ -20,11 +20,11 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+          <button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
           <% unless search_word.blank? %>
             <%= link_to reset_search_icon+' リセット', tags_path, class: 'btn btn-outline-dark' %>
           <% end %>
-          <button type="submit" class="btn btn-primary"><%= search_icon %>検索</button>
+          <button type="submit" class="btn btn-sm btn-primary"><%= search_icon %>&nbsp;検索</button>
         </div>
       </div>
     <% end %>

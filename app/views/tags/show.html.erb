@@ -5,9 +5,8 @@
 </ol>
 
 <span class='float-right'>
-    <a class='btn btn-secondary' href='<%= url_for(tags_path(search_word: @search_word, search_tags: @search_tags, page: @page)) %>'>
-        <%= backward_icon %>
-        戻る
+    <a class='btn btn-sm btn-outline-dark' href='<%= url_for(tags_path(search_word: @search_word, search_tags: @search_tags, page: @page)) %>'>
+        <%= backward_icon('戻る') %>&nbsp;戻る
     </a>
 </span>
 <h5 style='margin-bottom: 15px;'><%= tag_icon %> <%= tag_name(@item) %></h5>
@@ -30,10 +29,10 @@
 </table>
 
 <div class='text-right'>
-    <button type="button" class='btn btn-danger' data-bs-toggle="modal" data-bs-target="#TagDeleteModal">
-        <%= trash_icon %>&nbsp;削除…
+    <button type="button" class='btn btn-sm btn-danger' data-bs-toggle="modal" data-bs-target="#TagDeleteModal">
+        <%= trash_icon('削除') %>&nbsp;削除…
     </button>
-    <button type="button" class='btn btn-success' data-bs-toggle="modal" data-bs-target="#TagEditModal">
-        <%= edit_icon %>&nbsp;編集…
+    <button type="button" class='btn btn-sm btn-success' data-bs-toggle="modal" data-bs-target="#TagEditModal">
+        <%= edit_icon('編集') %>&nbsp;編集…
     </button>
 </div>

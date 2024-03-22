@@ -102,7 +102,7 @@
 					<% if @item.page_type==WebPage::TYPE_LINK || @item.page_type==WebPage::TYPE_FIX %>
 						<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDeleteLink_<%=@item.id%>">
 							<%= trash_icon('削除') %>
-							<div class='d-none d-md-inline'>削除</div>
+							<div class='d-none d-md-inline'>削除…</div>
 						</button>
 					<% end %>
 

@@ -11,12 +11,12 @@
 	<span class="float-right">
 		<p>
 			<% url_back = url_for(:action=>"content_category", :id=>@item.content_category, :page=>@page) %>
-			<a class="btn btn-sm btn-outline-secondary" href="<%=url_back%>">
+			<a class="btn btn-sm btn-outline-dark" href="<%=url_back%>">
 				<%= backward_icon('戻る') %>&nbsp;
 				戻る
 			</a>
 			<% url_new = url_for(:action=>"edit_leaf", :id=>@item) %>
-			<a class="btn btn-outline-primary btn-sm" href="<%=url_new%>">
+			<a class="btn btn-primary btn-sm" href="<%=url_new%>">
 				<%= edit_icon('編集')%>&nbsp;
 				編集
 			</a>
@@ -106,7 +106,7 @@
 					<p>記事を削除します。よろしいですか？</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>キャンセル</button>
                     <button type="submit" class="btn btn-sm btn-danger"><%=  trash_icon('削除') %>&nbsp;削除</button>
                 </div>
 			<% end %>
