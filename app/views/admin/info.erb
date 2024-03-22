@@ -40,10 +40,11 @@
   <dt class="col-sm-3">ディスク使用量</dt>
   <%
 	sum = 0
-	valid_shops.each do |s|
-		sum += s.photo_size
-	end
-	sum = sum/(1024*1024*1024)
+	#valid_shops.each do |s|
+	#	sum += s.photo_size
+	#end
+  photos = Photo.where('shop_id in (?)', valid_shops.map{|s| s.id})
+  photos.each { |p| sum += p.file_size }
   %>
-  <dd class="col-sm-9"><b><span class='text-primary'><%= sum %></span></b> <small>GB</small></dd>
+  <dd class="col-sm-9"><b><span class='text-primary'><%= number_to_human_size(sum)  %></span></b></dd>
 </dl>
