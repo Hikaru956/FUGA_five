@@ -19,7 +19,7 @@
 		<textarea name="content_leaf[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= item.description%></textarea>
 		<%= render :partial=>"layouts/summernote", locals: {ref_id: item.id} %>
 	<% else %>
-		<%= text_area  'item', 'description', :class => "tinymce input-block-level", rows: 40, :placeholder=>"ページコンテンツを入力します。" %>
+		<%= f.text_area  :description, value: item.description, :class => "tinymce input-block-level", rows: 40, :placeholder=>"記事の本文を入力します。" %>
 		<script type="text/javascript">
 			tinyMCE.init({
 				selector: 'textarea.tinymce',
