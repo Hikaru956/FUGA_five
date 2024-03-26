@@ -108,12 +108,6 @@
 
 <h4>
 	<span class="float-right">
-		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
-				<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
-					<i class="fa-solid fa-camera"></i>&nbsp;
-					写真追加
-				</a>
-		<% end %>
 		<a class="btn btn-sm btn-primary" href="<%= url_for(:action=>'shop_edit_staff', :id=>@staff) %>">
 			<i class="fa-solid fa-pencil"></i>&nbsp;編集
 		</a>
@@ -123,7 +117,14 @@
 <div class="well">
 	<%= raw(@staff.description) %>
 </div>
-
+<span class="float-right">
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+			<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
+				<i class="fa-solid fa-camera"></i>&nbsp;
+				写真追加
+			</a>
+	<% end %>
+</span>
 
 <% if false %>
 <div class="row">

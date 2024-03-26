@@ -38,39 +38,41 @@
 	</h4>
 </header>
 
-<%= form_tag url_for(:action=>"shop_update_staff", :id=>@staff), :class=>"xform-horizontal", method: :patch do -%>
-	<div class="control-group">
-		<% if @shop.enable_editor %>
-			<textarea name="staff[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= @staff.description%></textarea>
-			<%= render :partial=>"layouts/summernote", locals: {ref_id: @staff.id} %>
-		<% else %>
-			<%= text_area 'staff', 'description', :class=>"tinymce input-block-level", :rows => 40, :autocomplete=>false, :placeholder=>"記事の本文を入力します。" %>
-			<script type="text/javascript">
-				tinyMCE.init({
-					selector: 'textarea.tinymce',
-					theme_advanced_toolbar_location: "top",
-					theme_advanced_statusbar_location: "bottom",
-					theme_advanced_buttons3_add: ["tablecontrols"],
-					plugins: "table,image,code,link,forecolor,backcolor,emoticons",
-					<% unless @staff.blank? %>
-						<% unless @staff.photos.blank? %>
-						image_list: [
-							<%= photo_array(@staff.photos).html_safe %>
-							],
+<%= form_for @staff, url: admin_config_shop_update_staff_path(id: @staff.id), method: :patch do |f|  %>
+	<fieldset>
+		<div class='control-group'>
+			<% if @shop.enable_editor %>
+				<textarea name="staff[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= @staff.description%></textarea>
+				<%= render :partial=>"layouts/summernote", locals: {ref_id: @staff.id} %>
+			<% else %>
+				<%= f.text_area  :description, value: @staff.description, :class => "tinymce input-block-level", rows: 40, :placeholder=>"記事の本文を入力します。" %>
+				<script type="text/javascript">
+					tinyMCE.init({
+						selector: 'textarea.tinymce',
+						theme_advanced_toolbar_location: "top",
+						theme_advanced_statusbar_location: "bottom",
+						theme_advanced_buttons3_add: ["tablecontrols"],
+						plugins: "table,image,code,link,forecolor,backcolor,emoticons",
+						<% unless @staff.blank? %>
+							<% unless @staff.photos.blank? %>
+							image_list: [
+								<%= photo_array(@staff.photos).html_safe %>
+								],
+							<% end %>
 						<% end %>
-					<% end %>
-					relative_urls : false,
-					convert_urls: false,
-					content_style: 'img { max-width: 100%; height: auto; }' ,
-			resize: 'both',
-					toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
-					language: 'ja'})
-			</script>
-		<% end %>
-	</div>
-	<div style='margin-top: 10px;' class="form-actions text-right">
-		<% url_cancel = url_for(:action=>'shop_show_staff', :id=>@staff) %>
-		<a class="btn btn-sm btn-outline-dark" href="<%= url_cancel %>" data-turbolinks='false'><%= cancel_icon('キャンセル') %>&nbsp;&nbsp;キャンセル</a>
-		<button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新') %>&nbsp;&nbsp;更新</button>
-	</div>
-<% end -%>
+						relative_urls : false,
+						convert_urls: false,
+						content_style: 'img { max-width: 100%; height: auto; }' ,
+						resize: 'both',
+						toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
+						language: 'ja'})
+				</script>
+			<% end %>
+		</div>
+		<div style='margin-top: 10px;' class="form-actions text-right">
+			<% url_cancel = url_for(:action=>'shop_show_staff', :id=>@staff) %>
+	  		<a class="btn btn-sm btn-outline-dark" href="<%= url_cancel %>" data-turbolinks='false'><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</a>
+        	<button type="submit" class="btn btn-sm btn-primary"><%= update_icon('更新')%>&nbsp;更新</button>
+      	</div>
+	</fieldset>
+<% end %>

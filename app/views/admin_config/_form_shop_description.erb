@@ -3,8 +3,8 @@
 	<%= render :partial=>"layouts/summernote", locals: {ref_id: shop.id} %>
 <% else %>
     <div class="control-group">
-        <%= text_area  'shop', 'wsite_description_business', {:class=>"tinymce input-block-level" , :rows => 40, :placeholder=>"記事の本文を入力します。"}  %>
-        <script type="text/javascript">
+        <%= f.text_area  :wsite_description_business, value: shop.wsite_description_business, :class => "tinymce input-block-level", rows: 40, :placeholder=>"記事の本文を入力します。" %>
+		<script type="text/javascript">
             tinyMCE.init({
                 selector: 'textarea.tinymce',
                 theme_advanced_toolbar_location: "top",
