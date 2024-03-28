@@ -84,6 +84,11 @@
 			%>
 			<th>カラー</th>
 			<td>
+				<span class="float-right">
+					<a href='<%= url_for(controller: 'bs_authoring', action: 'color_layout_schemes') %>' class="btn btn-primary btn-sm">
+						<%= edit_icon('設定編集') %>&nbsp;設定編集
+					</a>
+				</span>
 				<b>
 				<%= (tmp_color.blank?)? '未設定': model_name(tmp_color) %>
 				</b>
@@ -97,6 +102,11 @@
 		<tr>
 			<th>レイアウト</th>
 			<td>
+				<span class="float-right">
+					<a href='<%= url_for(controller: 'bs_authoring', action: 'list_layout_schemes') %>' class="btn btn-primary btn-sm">
+						<%= edit_icon('設定編集') %>&nbsp;設定編集
+					</a>
+				</span>
 				<b>
 				<%= (tmp_layout.blank?)? '未設定': model_name(tmp_layout) %>
 				</b>

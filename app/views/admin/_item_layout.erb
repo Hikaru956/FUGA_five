@@ -17,9 +17,6 @@
 		<%= temp_local.position %>
 		<%= (temp_local.last?)? 	raw("▷"): 	link_to(raw("▶"), 	:action=>"layout_lower",	:id=>temp_local) %>
 		<span class='float-right'>
-			<% if temp_local.position==1 %>
-				<i class='fa-solid fa-spinner fa-spin'></i>
-			<% end %>
 			<a href="<%= url_for(:action=>'layout_show', :id=>temp_local) %>" class="btn btn-sm  btn-outline-primary">表示 <%= link_to_6_icon %></a>
 		</span>
 	</div>

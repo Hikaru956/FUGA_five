@@ -5,7 +5,7 @@
         <nav id="nav-main">
             <ul>
                 <li>
-                    <a href="/home?wkey=<%= @website.wsite_hash_key %>">
+                    <a href="<%= url_for(action: 'kick', name: 'home', wkey: @website.wsite_hash_key)%>">
                         <span class="sup">
                             ホーム
                         </span>
@@ -97,8 +97,8 @@
                 <% if @author_mode %>
                     <li id="item-webreserve">
                         <% 
-                            back_2_url = (current_user.is_fuga_3?)? url_for(:controller=>'bs_config', :action=>'shop_show_website'): \
-                                                                    url_for(:controller=>'admin_config', :action=>'shop_show_website')
+                            back_2_url = (current_user.is_fuga_3?)? url_for(:controller=>'dashboard', :action=>'shop_show_website', id:  @website.id): \
+                                                                    url_for(:controller=>'admin', :action=>'company_show_shop', id:  @website.id)
                         %>
                         <a href='<%= back_2_url %>'>
                             <span class="up">

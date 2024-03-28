@@ -6,7 +6,6 @@
     <a id="page-top"></a>
     <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/navigation" %>
     <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/btn_menu" %>
-    <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/nav" %>
     <main id="page-main">
         <article id="pageArticle">
             <div id="mv">
@@ -50,124 +49,7 @@
             <section id="sect-news">
                 <div class="container">
                     <h2 class="inview-fadeUp">NEWS</h2>
-                    <div class="post-list container-news-list">
-                        <ul>
-                            <li class="inview-fadeIn">
-                                <div class="img-box">
-                                    <figure>
-                                        <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-aria.png" width="521" height="200"
-                                            alt="レナーク　アリア">
-                                    </figure>
-                                </div>
-                                <%
-                                    stream = @website.content_bags.find_by(name: 'ブログ')
-                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
-                                %>
-                                <div class="txt">
-                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                                    <h3>
-                                        <%= (latest.blank?)? '': model_title(latest) %>
-                                    </h3>
-                                </div>
-                                <a href="./Psalon=aria_news-list.html">READ MORE</a>
-                            </li>
-                            <li class="inview-fadeIn">
-                                <div class="img-box">
-                                    <figure>
-                                        <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-ist.png" width="521" height="200"
-                                            alt="レナーク イスト">
-                                    </figure>
-                                </div>
-                                <%
-                                    stream = @website.content_bags.find_by(name: 'ブログ')
-                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
-                                %>
-                                <div class="txt">
-                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                                    <h3>
-                                        <%= (latest.blank?)? '': model_title(latest) %>
-                                    </h3>
-                                </div>
-                                <a href="./Psalon=ist_news-list.html">READ MORE</a>
-                            </li>
-                            <li class="inview-fadeIn">
-                                <div class="img-box">
-                                    <figure>
-                                        <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-soin.png" width="521" height="200"
-                                            alt="レナーク ソワン">
-                                    </figure>
-                                </div>
-                                <%
-                                    stream = @website.content_bags.find_by(name: 'ブログ')
-                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
-                                %>
-                                <div class="txt">
-                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                                    <h3>
-                                        <%= (latest.blank?)? '': model_title(latest) %>
-                                    </h3>
-                                </div>
-                                <a href="./Psalon=soin_news-list.html">READ MORE</a>
-                            </li>
-                            <li class="inview-fadeIn">
-                                <div class="img-box">
-                                    <figure>
-                                        <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-legrand.png" width="521" height="200"
-                                            alt="レナーク ルグラン">
-                                    </figure>
-                                </div>
-                                <%
-                                    stream = @website.content_bags.find_by(name: 'ブログ')
-                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
-                                %>
-                                <div class="txt">
-                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                                    <h3>
-                                        <%= (latest.blank?)? '': model_title(latest) %>
-                                    </h3>
-                                </div>
-                                <a href="./Psalon=legrand_news-list.html">READ MORE</a>
-                            </li>
-                            <li class="inview-fadeIn">
-                                <div class="img-box">
-                                    <figure>
-                                        <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-with.png" width="521" height="200"
-                                            alt="レナーク ウィズ">
-                                    </figure>
-                                </div>
-                                <%
-                                    stream = @website.content_bags.find_by(name: 'ブログ')
-                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
-                                %>
-                                <div class="txt">
-                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                                    <h3>
-                                        <%= (latest.blank?)? '': model_title(latest) %>
-                                    </h3>
-                                </div>
-                                <a href="./Psalon=with_news-list.html">READ MORE</a>
-                            </li>
-                            <li class="inview-fadeIn">
-                                <div class="img-box">
-                                    <figure>
-                                        <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-cofflet.png" width="521" height="200"
-                                            alt="レナーク コフレ">
-                                    </figure>
-                                </div>
-                                <%
-                                    stream = @website.content_bags.find_by(name: 'ブログ')
-                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
-                                %>
-                                <div class="txt">
-                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                                    <h3>
-                                        <%= (latest.blank?)? '': model_title(latest) %>
-                                    </h3>
-                                </div>
-                                <a href="./Psalon=coffret_news-list.html">READ MORE</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/streams" %>
                 </div>
             </section>
             <section id="sect-salon">

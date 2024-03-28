@@ -74,7 +74,17 @@ class BsAuthoringController < ApplicationController
     @seed = @website.content_leafs.find_by_id(params[:id]);
     render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.authoring_layout}/fix":  "#{@website.layout_pc_specific_basename}/fix")
   end
-  
+
+  ###
+  ##   固定ページを伴わない、指定されたViewを表示する
+  # 指定したaction名のview(erb)が存在する場合、
+  # params[:name]で指定されたアクション名のViewをレンダリング
+  #
+  def kick
+    @page_view = @website.renderer_layout+'/'+params[:name]
+    render layout: @page_view
+  end
+
   ###
   ##  Layout Control
   #

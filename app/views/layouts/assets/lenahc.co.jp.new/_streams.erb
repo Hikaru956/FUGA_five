@@ -1,0 +1,118 @@
+<div class="post-list container-news-list">
+    <ul>
+        <li class="inview-fadeIn">
+            <div class="img-box">
+                <figure>
+                    <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-aria.png" width="521" height="200"
+                        alt="レナーク　アリア">
+                </figure>
+            </div>
+            <%
+                stream = @website.content_bags.find_by(name: 'ブログ')
+                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+            %>
+            <div class="txt">
+                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
+                <h3>
+                    <%= (latest.blank?)? '': model_title(latest) %>
+                </h3>
+            </div>
+            <a href="<%= url_for(action: 'kick', name: 'aria_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+        </li>
+        <li class="inview-fadeIn">
+            <div class="img-box">
+                <figure>
+                    <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-ist.png" width="521" height="200"
+                        alt="レナーク イスト">
+                </figure>
+            </div>
+            <%
+                stream = @website.content_bags.find_by(name: 'ブログ')
+                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+            %>
+            <div class="txt">
+                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
+                <h3>
+                    <%= (latest.blank?)? '': model_title(latest) %>
+                </h3>
+            </div>
+            <a href="<%= url_for(action: 'kick', name: 'ist_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+        </li>
+        <li class="inview-fadeIn">
+            <div class="img-box">
+                <figure>
+                    <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-soin.png" width="521" height="200"
+                        alt="レナーク ソワン">
+                </figure>
+            </div>
+            <%
+                stream = @website.content_bags.find_by(name: 'ブログ')
+                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+            %>
+            <div class="txt">
+                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
+                <h3>
+                    <%= (latest.blank?)? '': model_title(latest) %>
+                </h3>
+            </div>
+            <a href="<%= url_for(action: 'kick', name: 'soin_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+        </li>
+        <li class="inview-fadeIn">
+            <div class="img-box">
+                <figure>
+                    <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-legrand.png" width="521" height="200"
+                        alt="レナーク ルグラン">
+                </figure>
+            </div>
+            <%
+                stream = @website.content_bags.find_by(name: 'ブログ')
+                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+            %>
+            <div class="txt">
+                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
+                <h3>
+                    <%= (latest.blank?)? '': model_title(latest) %>
+                </h3>
+            </div>
+            <a href="<%= url_for(action: 'kick', name: 'legrand_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+        </li>
+        <li class="inview-fadeIn">
+            <div class="img-box">
+                <figure>
+                    <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-with.png" width="521" height="200"
+                        alt="レナーク ウィズ">
+                </figure>
+            </div>
+            <%
+                stream = @website.content_bags.find_by(name: 'ブログ')
+                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+            %>
+            <div class="txt">
+                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
+                <h3>
+                    <%= (latest.blank?)? '': model_title(latest) %>
+                </h3>
+            </div>
+            <a href="<%= url_for(action: 'kick', name: 'with_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+        </li>
+        <li class="inview-fadeIn">
+            <div class="img-box">
+                <figure>
+                    <img src="/assets/lenahc.co.jp.new/images/common/news-bnr-cofflet.png" width="521" height="200"
+                        alt="レナーク コフレ">
+                </figure>
+            </div>
+            <%
+                stream = @website.content_bags.find_by(name: 'ブログ')
+                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+            %>
+            <div class="txt">
+                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
+                <h3>
+                    <%= (latest.blank?)? '': model_title(latest) %>
+                </h3>
+            </div>
+            <a href="<%= url_for(action: 'kick', name: 'coffret_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+        </li>
+    </ul>
+</div>

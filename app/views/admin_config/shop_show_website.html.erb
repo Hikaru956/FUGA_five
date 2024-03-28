@@ -152,6 +152,42 @@
 	</tbody>
 </table>
 
+<%
+	tmp_color  = @shop.wsite_color_deploy
+	tmp_layout = @shop.wsite_layout_deploy
+%>
+<table class="table table-bordered">
+	<tbody>
+		<tr class="<%=site_status_class%>">
+			<th width="25%">カラー</th>
+			<td width="75%">
+				<b>
+				<%= (tmp_color.blank?)? '未設定': model_name(tmp_color) %>
+				</b>
+				<% unless tmp_color.blank? %>
+				(
+					<%= tmp_color.repository_path %>
+				)
+				<% end %>
+			</td>
+		</tr>
+		<tr class="<%=site_status_class%>">
+			<th width="25%">レイアウト</th>
+			<td width="75%">
+				<b>
+					<%= (tmp_layout.blank?)? '未設定': model_name(tmp_layout) %>
+				</b>
+				<% unless tmp_layout.blank? %>
+					(
+						<%= tmp_layout.repository_path %>
+					)
+				<% end %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
 <table class="table table-bordered">
 	<tbody>
 		<tr>
