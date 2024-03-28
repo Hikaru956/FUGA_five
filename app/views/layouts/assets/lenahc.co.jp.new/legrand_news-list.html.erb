@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/header" %>
+
+<body class="news-list legrand">
+    <div id="body-cover"></div>
+    <a id="page-top"></a>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/navigation" %>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/btn_menu" %>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/nav" %>
+    <main id="page-main">
+        <article id="pageArticle">
+            <header id="pageTitle">
+                <h1>
+                    NEWS </h1>
+            </header> <!--各店NEWS一覧共通フォーマット-->
+            <section>
+                <div class="container container-news-list">
+                    <ul>
+                        <li class="inview-fadeIn">
+                            <div class="img-box">
+                                <figure>
+                                    <img src="/assets/lenahc.co.jp.new/images/common/dummy-news.gif" width="1240" height="1754"
+                                        alt="サムネイル画像があった場合のダミー">
+                                </figure>
+                            </div>
+                            <div class="txt">
+                                <h3>
+                                    記事タイトル
+                                </h3>
+                                <time>2023.10.16 thu</time>
+                            </div>
+                            <a href="<%= url_for(action: 'kick', name: 'news-single-legrand', wkey: @website.wsite_hash_key)%>">READ MORE</a>
+                        </li>
+                        <li class="inview-fadeIn">
+                            <div class="img-box">
+                                <figure>
+                                    <!--サムネイル画像がないときは出力しない-->
+                                </figure>
+                            </div>
+                            <div class="txt">
+                                <h3>
+                                    記事タイトル記事タイトル記事タイトル記事タイトル記事タイトル
+                                </h3>
+                                <time>2023.10.16 thu</time>
+                            </div>
+                            <a href="<%= url_for(action: 'kick', name: 'news-single-legrand', wkey: @website.wsite_hash_key)%>">READ MORE</a>
+                        </li>
+                        <li class="inview-fadeIn">
+                            <div class="img-box">
+                                <figure>
+                                    <!--サムネイル画像がないときは出力しない-->
+                                </figure>
+                            </div>
+                            <div class="txt">
+                                <h3>
+                                    記事タイトル
+                                </h3>
+                                <time>2023.10.16 thu</time>
+                            </div>
+                            <a href="<%= url_for(action: 'kick', name: 'news-single-legrand', wkey: @website.wsite_hash_key)%>">READ MORE</a>
+                        </li>
+                        <li class="inview-fadeIn">
+                            <div class="img-box">
+                                <figure>
+                                    <!--サムネイル画像がないときは出力しない-->
+                                </figure>
+                            </div>
+                            <div class="txt">
+                                <h3>
+                                    記事タイトル
+                                </h3>
+                                <time>2023.10.16 thu</time>
+                            </div>
+                            <a href="<%= url_for(action: 'kick', name: 'news-single-legrand', wkey: @website.wsite_hash_key)%>">READ MORE</a>
+                        </li>
+                        <li class="inview-fadeIn">
+                            <div class="img-box">
+                                <figure>
+                                    <!--サムネイル画像がないときは出力しない-->
+                                </figure>
+                            </div>
+                            <div class="txt">
+                                <h3>
+                                    記事タイトル
+                                </h3>
+                                <time>2023.10.16 thu</time>
+                            </div>
+                            <a href="<%= url_for(action: 'kick', name: 'news-single-legrand', wkey: @website.wsite_hash_key)%>">READ MORE</a>
+                        </li>
+                        <li class="inview-fadeIn">
+                            <div class="img-box">
+                                <figure>
+                                    <!--サムネイル画像がないときは出力しない-->
+                                </figure>
+                            </div>
+                            <div class="txt">
+                                <h3>
+                                    記事タイトル
+                                </h3>
+                                <time>2023.10.16 thu</time>
+                            </div>
+                            <a href="<%= url_for(action: 'kick', name: 'news-single-legrand', wkey: @website.wsite_hash_key)%>">READ MORE</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </article>
+    </main>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/footer" %>
+    <div id="gotop"><a href="#page-top"></a></div>
+    <div id="body-cover"></div>
+</body>
+
+</html>
