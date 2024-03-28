@@ -206,8 +206,8 @@ class BsRendererController < ApplicationController
   # params[:name]で指定されたアクション名のViewをレンダリング
   #
   def kick
-    page_view = @website.renderer_layout+'/'+params[:name]
-    render action: page_view, layout: false
+    @page_view = @website.renderer_layout+'/'+params[:name]
+    render layout: @page_view
   end
 
   ###
