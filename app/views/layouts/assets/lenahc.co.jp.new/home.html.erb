@@ -25,19 +25,26 @@
                             width="311" height="392" alt="求人情報"></a>
                 </div>
             </div>
+
+            <%
+                stream = @website.content_bags.find_by(name: 'ブログ')
+                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+            %>
             <section id="sect-information">
                 <div class="container">
                     <h2 class="inview-fadeUp">INFORMATION</h2>
-                    <div class="post-list information-list container-s">
-                        <ul class="inview-fadeIn">
-                            <li>
-                                <a href="./information-single.html">
-                                    <span>2023.10.10</span>
-                                    <span>今後の非通知電話への対応について</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    <% unless latest.blank? %>
+                        <div class="post-list information-list container-s">
+                            <ul class="inview-fadeIn">
+                                <li>
+                                    <a href="./information-single.html">
+                                        <span><%= latest.publish_from.strftime('%Y.%m.%d') %></span>
+                                        <span><%= model_title(latest) %></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    <% end %>
                 </div>
             </section>
             <section id="sect-news">
@@ -52,10 +59,14 @@
                                             alt="レナーク　アリア">
                                     </figure>
                                 </div>
+                                <%
+                                    stream = @website.content_bags.find_by(name: 'ブログ')
+                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                                %>
                                 <div class="txt">
-                                    <time>2023.10.16</time>
+                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
                                     <h3>
-                                        冬のキャンペーンのお知らせ
+                                        <%= (latest.blank?)? '': model_title(latest) %>
                                     </h3>
                                 </div>
                                 <a href="./Psalon=aria_news-list.html">READ MORE</a>
@@ -67,10 +78,14 @@
                                             alt="レナーク イスト">
                                     </figure>
                                 </div>
+                                <%
+                                    stream = @website.content_bags.find_by(name: 'ブログ')
+                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                                %>
                                 <div class="txt">
-                                    <time>2023.10.16</time>
+                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
                                     <h3>
-                                        新商品のお知らせ
+                                        <%= (latest.blank?)? '': model_title(latest) %>
                                     </h3>
                                 </div>
                                 <a href="./Psalon=ist_news-list.html">READ MORE</a>
@@ -82,10 +97,14 @@
                                             alt="レナーク ソワン">
                                     </figure>
                                 </div>
+                                <%
+                                    stream = @website.content_bags.find_by(name: 'ブログ')
+                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                                %>
                                 <div class="txt">
-                                    <time>2023.10.16</time>
+                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
                                     <h3>
-                                        受付時間の変更についてのお知らせ
+                                        <%= (latest.blank?)? '': model_title(latest) %>
                                     </h3>
                                 </div>
                                 <a href="./Psalon=soin_news-list.html">READ MORE</a>
@@ -97,10 +116,14 @@
                                             alt="レナーク ルグラン">
                                     </figure>
                                 </div>
+                                <%
+                                    stream = @website.content_bags.find_by(name: 'ブログ')
+                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                                %>
                                 <div class="txt">
-                                    <time>2023.10.16</time>
+                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
                                     <h3>
-                                        受付時間の変更についてのお知らせ
+                                        <%= (latest.blank?)? '': model_title(latest) %>
                                     </h3>
                                 </div>
                                 <a href="./Psalon=legrand_news-list.html">READ MORE</a>
@@ -112,10 +135,14 @@
                                             alt="レナーク ウィズ">
                                     </figure>
                                 </div>
+                                <%
+                                    stream = @website.content_bags.find_by(name: 'ブログ')
+                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                                %>
                                 <div class="txt">
-                                    <time>2023.10.16</time>
+                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
                                     <h3>
-                                        受付時間の変更についてのお知らせ
+                                        <%= (latest.blank?)? '': model_title(latest) %>
                                     </h3>
                                 </div>
                                 <a href="./Psalon=with_news-list.html">READ MORE</a>
@@ -127,10 +154,14 @@
                                             alt="レナーク コフレ">
                                     </figure>
                                 </div>
+                                <%
+                                    stream = @website.content_bags.find_by(name: 'ブログ')
+                                    latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                                %>
                                 <div class="txt">
-                                    <time>2023.10.16</time>
+                                    <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
                                     <h3>
-                                        受付時間の変更についてのお知らせ
+                                        <%= (latest.blank?)? '': model_title(latest) %>
                                     </h3>
                                 </div>
                                 <a href="./Psalon=coffret_news-list.html">READ MORE</a>
