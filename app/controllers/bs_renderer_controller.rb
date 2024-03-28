@@ -192,12 +192,22 @@ class BsRendererController < ApplicationController
   ## FIXED PAGE
   #
   def fix
-    @seed = @website.content_leafs.find_by_id(params[:id]);
+    @seed = (@website.content_leafs.find_by(id: params[:id]) || @website.content_leafs.find_by(title: params[:id]));
     if @seed.blank?
       render :file=>"public/404.html", :layout=>false, :status => 404
       return
     end
     render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.renderer_layout}/fix":  "#{@website.layout_pc_specific_basename}/fix")
+  end
+
+  ###
+  ##   固定ページを伴わない、指定されたViewを表示する
+  # 指定したaction名のview(erb)が存在する場合、
+  # params[:name]で指定されたアクション名のViewをレンダリング
+  #
+  def kick
+    page_view = params[:name]
+    render action: page_view, layout: false
   end
 
   ###
