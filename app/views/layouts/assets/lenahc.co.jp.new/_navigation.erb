@@ -94,6 +94,22 @@
                         </span>
                     </div>
                 </li>
+                <% if @author_mode %>
+                    <li id="item-webreserve">
+                        <% 
+                            back_2_url = (current_user.is_fuga_3?)? url_for(:controller=>'bs_config', :action=>'shop_show_website'): \
+                                                                    url_for(:controller=>'admin_config', :action=>'shop_show_website')
+                        %>
+                        <a href='<%= back_2_url %>'>
+                            <span class="up">
+                                swifty
+                            </span>
+                            <span class="under">
+                                サイト編集終了
+                            </span>
+                        </a>
+                    </li>
+                <% end %>
             </ul>
         </nav>
     </div>
