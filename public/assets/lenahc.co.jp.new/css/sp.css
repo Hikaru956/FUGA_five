@@ -1,0 +1,490 @@
+body {
+  font-size: 14px;
+}
+
+a[href*="tel:"] {
+  pointer-events: auto;
+}
+
+table.sp-block {
+  display: block;
+  width: 100%;
+}
+
+table.sp-block>tbody,
+table.sp-block>tbody,
+table.sp-block>tbody>tr,
+table.sp-block>tbody>tr>* {
+  display: block;
+  width: 100%;
+}
+
+#btn-menu {
+  top: 10px;
+}
+
+#nav-main {
+  display: none;
+}
+
+#page-header {
+  z-index: 2;
+  padding: 8px 8px 0;
+}
+
+#page-header h1 {
+  max-width: 50%;
+  font-size: 10px;
+}
+
+#page-header h1 img {
+  margin-bottom: 1em;
+}
+
+#page-header #nav-main ul {
+  margin-bottom: 0;
+}
+
+#page-header #nav-main li {
+  border-top: 1px solid #ddd;
+}
+
+#page-header #nav-main li#item-webreserve {
+  padding-top: 16px;
+}
+
+#page-header #nav-main li#item-webreserve .btn-reserve {
+  padding: 12px;
+  background-image: none;
+}
+
+#mv .btn-recruit a {
+  width: 40%;
+}
+
+#btn-menu-container #btn-menu {
+  height: 52px;
+}
+
+.scroll {
+  overflow: scroll;
+}
+
+.scroll table th,
+.scroll table td {
+  width: auto;
+  white-space: nowrap;
+}
+
+#contact th {
+  padding-bottom: 0;
+}
+
+#contact td {
+  padding-top: 0;
+}
+
+#contact select {
+  height: 3em;
+}
+
+input[type=radio],
+input[type=checkbox] {
+  width: 1.5em;
+  transform: scale(1.5);
+}
+
+#page-footer address {
+  margin-bottom: 48px;
+}
+
+#page-footer address img {
+  width: 222px;
+}
+
+#page-footer #sitemap {
+  margin-bottom: 48px;
+}
+
+#page-footer #sitemap li {
+  padding-left: 1.7em;
+  background-position: 0 0.3em;
+}
+
+#page-main {
+  padding-top: 77px;
+}
+
+#slick-mv li {
+  padding-top: 66%;
+}
+
+section {
+  padding: 32px 0;
+}
+
+section h2 {
+  font-size: 32px;
+}
+
+#sect-salon {
+  background-size: contain;
+}
+
+.salon-list li {
+  margin-bottom: 32px;
+}
+
+.salon-list li h3 {
+  position: relative;
+  padding-right: 48px;
+}
+
+.salon-list li h3>img {
+  margin-bottom: 8px;
+}
+
+.salon-list li h3 a {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+.box-style-1 {
+  background-color: #f2f2f2;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  padding: 32px 0;
+}
+
+.box-style-1 .container-s .txt {
+  position: relative;
+  padding: 16px;
+  width: 90%;
+  margin: -96px auto 0;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.box-style-1 .container-s .txt h3,
+.box-style-1 .container-s .txt p,
+.box-style-1 .container-s .txt ul {
+  text-align: left;
+}
+
+.box-style-1 .container-s .txt ul {
+  display: inline-block;
+}
+
+.box-style-1 .container-s .txt li {
+  margin-bottom: 0.5em;
+}
+
+#sect-staff #slick-staff .slick-dots li {
+  margin-right: 8px;
+}
+
+#sect-staff #slick-staff .slick-dots li button {
+  width: 1em;
+  border-radius: 1em;
+  border: none;
+  transition: width 0.3s;
+}
+
+#sect-staff #slick-staff .slick-dots li::after {
+  width: 0;
+  transition: width 0.3s;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#sect-staff #slick-staff .slick-dots li.slick-active button {
+  width: 10em;
+}
+
+#sect-staff #slick-staff .slick-dots li.slick-active::after {
+  width: 100%;
+}
+
+.staff-salon .staff-staff {
+  width: 40%;
+  min-width: 40%;
+  padding: 8px;
+  margin-right: 16px;
+}
+
+#sect-menu ul {
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+#sect-menu li {
+  width: 45%;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+#sect-menu li a {
+  padding: 0.3em;
+  border-bottom: 3px solid black;
+  margin: 0 auto;
+}
+
+#sect-recruit p:nth-of-type(1) {
+  padding: 0.5em;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#page-footer nav ul {
+  width: 50%;
+  margin-bottom: 32px;
+}
+
+#page-footer nav a {
+  font-size: 16px;
+}
+
+.btn-reserve-2 {
+  position: fixed;
+  top: 0;
+  right: 72px;
+  z-index: 2;
+  background-color: black;
+  color: white;
+  padding: 6px 12px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.btn-reserve-2 p {
+  margin-bottom: 0;
+}
+
+.btn-reserve-2 span {
+  display: block;
+  font-size: 10px;
+}
+
+.btn-reserve-2 img {
+  margin-bottom: 8px;
+}
+
+#nav-reserve ul {
+  max-width: 90%;
+}
+
+#nav-reserve ul::before {
+  top: -32px;
+  background-position: center;
+}
+
+#nav-reserve li p {
+  width: 60%;
+}
+
+#nav-reserve li figure {
+  width: 35%;
+}
+
+#pageTitle {
+  padding-top: 10%;
+  margin-bottom: 48px;
+}
+
+#pageTitle h1 {
+  font-size: 36px;
+}
+
+.aboutus section h3 {
+  font-size: 20px;
+}
+
+.aboutus section ol li {
+  margin-bottom: 48px;
+}
+
+.container-news-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+
+.container-news-list li .img-box {
+  width: 30%;
+  padding-top: 30%;
+}
+
+.container-news-list li .txt {
+  width: 67%;
+}
+
+.index .container-news-list li,
+.news .container-news-list li {
+  display: block;
+}
+
+.index .container-news-list li .img-box,
+.index .container-news-list li .txt,
+.news .container-news-list li .img-box,
+.news .container-news-list li .txt {
+  width: 100%;
+}
+
+.aboutus #pageTitle {
+  margin-bottom: 0;
+  background-image: none;
+  background-color: white;
+  padding-top: 20%;
+}
+
+.news-list #pageTitle,
+.news-single #pageTitle {
+  background-size: contain;
+  padding-top: 8%;
+}
+
+.news-list #pageTitle h1,
+.news-single #pageTitle h1 {
+  top: calc(100% + 1em);
+}
+
+.salon-detail .container-slick-salon::after {
+  width: 150px;
+  height: 120px;
+}
+
+.salon-detail .container-address address {
+  margin-bottom: 24px;
+  padding-top: 24px;
+  border-top: 3px solid #666;
+}
+
+.salon-detail .container-address address h3 {
+  text-align: center;
+  font-size: 16px;
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+.salon-detail .container-address address h3 img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 8px;
+}
+
+.salon-detail .container-address address h3 a img {
+  margin-top: 16px;
+}
+
+.slick-salon img {
+  width: auto;
+  max-width: none;
+  height: 240px;
+  transform: translateX(-50%);
+}
+
+#sect-map {
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.staff section h2 img {
+  height: 36px;
+}
+
+.staff-detail section h2 img {
+  height: 24px;
+}
+
+.staff-detail section {
+  padding-top: 8px;
+}
+
+.staff-detail section h2 {
+  padding: 4px;
+}
+
+.staff-detail-container .photo {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.staff-detail-container .txt {
+  margin-top: -48px;
+  padding-top: 8px;
+}
+
+.staff-detail-container .txt h3 {
+  margin-bottom: 1em;
+  font-size: 18px;
+}
+
+.staff-detail-container .txt table {
+  display: block;
+}
+
+.staff-detail-container .txt table tbody,
+.staff-detail-container .txt table tr,
+.staff-detail-container .txt table th,
+.staff-detail-container .txt table td {
+  display: block;
+  width: 100%;
+}
+
+.staff-detail-container .txt table tr {
+  padding-bottom: 16px;
+  border-bottom: none;
+}
+
+.staff-detail-container .txt table td {
+  border: none;
+}
+
+.staff-detail-container .txt table th {
+  border-radius: 0 1.5em 1.5em 0;
+}
+
+.btnsRsrv ul li {
+  margin-bottom: 16px;
+}
+
+.company section#sect-intro {
+  padding-top: 64px;
+}
+
+.company section#sect-branches table,
+.company section#sect-branches tbody,
+.company section#sect-branches tr,
+.company section#sect-branches th,
+.company section#sect-branches td {
+  display: block;
+}
+
+.company section#sect-branches th {
+  background-color: #666;
+  color: white;
+}
+
+.company section#sect-branches td:first-of-type {
+  padding-top: 0.5em;
+  padding-bottom: 0;
+}
+
+.company section h2 {
+  font-size: 20px;
+}
+
+.menu section th {
+  padding-right: 0.5em;
+}
+
+.menu section td {
+  padding-left: 0.5em;
+}
+
+/*# sourceMappingURL=sp.css.map */

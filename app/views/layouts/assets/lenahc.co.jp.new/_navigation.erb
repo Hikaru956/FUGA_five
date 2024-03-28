@@ -1,0 +1,100 @@
+<header id="page-header">
+    <div class="inner-page-header container-l">
+        <h1><a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="/assets/lenahc.co.jp.new/images/common/logo_black.svg" width="283" height="36"
+                    alt="宮城・仙台市のレナークグループ" class="d-block">宮城・仙台市のレナークグループ</a></h1>
+        <nav id="nav-main">
+            <ul>
+                <li>
+                    <a href="/home?wkey=<%= @website.wsite_hash_key %>">
+                        <span class="sup">
+                            ホーム
+                        </span>
+                        <span class="txt">
+                            HOME
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'information-single', wkey: @website.wsite_hash_key)%>">
+                        <span class="sup">
+                            レナークからのお知らせ
+                        </span>
+                        <span class="txt">
+                            INFORMATION
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'salon', wkey: @website.wsite_hash_key)%>">
+                        <span class="sup">
+                            サロン紹介
+                        </span>
+                        <span class="txt">
+                            SALON
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'staff', wkey: @website.wsite_hash_key)%>">
+                        <span class="sup">
+                            スタッフ紹介
+                        </span>
+                        <span class="txt">
+                            STAFF
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'aboutus', wkey: @website.wsite_hash_key)%>">
+                        <span class="sup">
+                            コンセプト
+                        </span>
+                        <span class="txt">
+                            ABOUT US
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'menu', wkey: @website.wsite_hash_key)%>">
+                        <span class="sup">
+                            メニュー
+                        </span>
+                        <span class="txt">
+                            MENU
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'news', wkey: @website.wsite_hash_key)%>">
+                        <span class="sup">
+                            各店舗からのお知らせ
+                        </span>
+                        <span class="txt">
+                            NEWS
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://recruit.lenahc.co.jp/" target="_blank">
+                        <span class="sup">
+                            求人情報
+                        </span>
+                        <span class="txt">
+                            RECRUIT
+                        </span>
+                    </a>
+                </li>
+                <li id="item-webreserve">
+                    <div class="btn-reserve btn-reserve-1">
+                        <span class="up">
+                            WEB&nbsp;RESERVE
+                        </span>
+                        <span class="under">
+                            ネット予約はこちらから
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2024_03_05_003120) do
 
-  create_table "attendances", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "attendances", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "shop_id"
     t.integer "staff_id"
     t.date "attend_on"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.index ["staff_id"], name: "index_attendances_on_staff_id"
   end
 
-  create_table "calendar_marks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "calendar_marks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "shop_id"
     t.integer "staff_id"
     t.date "target_date"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.index ["target_date"], name: "index_calendar_marks_on_target_date"
   end
 
-  create_table "color_schemes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "color_schemes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "position"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "companies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "companies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "alt_id"
     t.string "name"
     t.string "postal"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "content_bags", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "content_bags", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "shop_id"
     t.integer "parent_id"
     t.integer "position"
@@ -69,21 +69,21 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.integer "content_type"
     t.integer "content_category_id"
     t.integer "web_page_id"
-    t.string "name", collation: "utf8mb4_general_ci"
+    t.string "name"
     t.text "description"
     t.boolean "is_public", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "content_categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "content_categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "shop_id"
     t.integer "parent_id"
     t.integer "position"
     t.integer "category_type"
     t.integer "web_page_id"
-    t.string "title", collation: "utf8mb4_general_ci"
-    t.text "description", collation: "utf8mb4_general_ci"
+    t.string "title"
+    t.text "description"
     t.text "description_2"
     t.text "description_3"
     t.integer "integer_field"
@@ -94,28 +94,28 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "content_leafs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "content_leafs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "shop_id"
     t.integer "content_bag_id"
     t.integer "content_category_id"
     t.integer "staff_id"
     t.string "hash_key"
     t.integer "position"
-    t.string "title", collation: "utf8mb4_general_ci"
-    t.text "description", collation: "utf8mb4_general_ci"
-    t.text "description_2", collation: "utf8mb4_general_ci"
-    t.text "description_3", collation: "utf8mb4_general_ci"
+    t.string "title"
+    t.text "description", limit: 4294967295
+    t.text "description_2", limit: 16777215
+    t.text "description_3"
     t.integer "integer_field"
     t.integer "integer_field_2"
     t.integer "integer_field_3"
     t.string "link_title"
-    t.text "link_url"
+    t.text "link_url", limit: 16777215
     t.boolean "is_open_new", default: false
     t.string "link_title_2"
-    t.text "link_url_2"
+    t.text "link_url_2", limit: 16777215
     t.boolean "is_open_new_2", default: false
     t.string "link_title_3"
-    t.text "link_url_3"
+    t.text "link_url_3", limit: 16777215
     t.boolean "is_open_new_3", default: false
     t.boolean "is_public", default: false
     t.date "publish_from"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "customers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "customers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "company_id"
     t.integer "shop_id"
     t.string "alt_id"
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "layout_schemes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "layout_schemes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "position"
@@ -166,10 +166,10 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "photos", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "photos", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "shop_id"
-    t.text "image"
-    t.text "info"
+    t.text "image", limit: 4294967295
+    t.text "info", limit: 4294967295
     t.integer "position"
     t.integer "ref_id"
     t.string "ref_type"
@@ -184,7 +184,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.index ["shop_id"], name: "index_photos_on_shop_id"
   end
 
-  create_table "reservations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "reservations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "shop_id"
     t.integer "staff_id"
@@ -199,7 +199,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.index ["shop_id"], name: "index_reservations_on_shop_id"
   end
 
-  create_table "roster_labels", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "roster_labels", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "shop_id"
     t.string "name"
     t.integer "start_hour"
@@ -209,7 +209,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "shops", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "shops", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "company_id"
     t.integer "position"
     t.integer "parent_id"
@@ -239,7 +239,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.string "wsite_layout_pc_specific_basename"
     t.string "wsite_keywords"
     t.string "wsite_description_shop"
-    t.text "wsite_description_business", collation: "utf8mb4_general_ci"
+    t.text "wsite_description_business"
     t.string "wsite_telephone"
     t.string "wsite_email"
     t.string "social_facebook_uri"
@@ -260,8 +260,8 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.string "copyright_notice"
     t.string "social_instagram_uri"
     t.string "social_line_uri"
-    t.string "social_hotpepper_beauty_uri"
     t.string "social_youtube_uri"
+    t.string "social_hotpepper_beauty_uri"
     t.boolean "enable_inquiry", default: false
     t.string "web_reservation_uri"
     t.string "inquiry_email"
@@ -270,13 +270,13 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.index ["wsite_hash_key"], name: "index_shops_on_wsite_hash_key"
   end
 
-  create_table "staffs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "staffs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "shop_id"
     t.integer "position"
     t.string "alt_id"
-    t.string "name", collation: "utf8mb4_general_ci"
-    t.string "job_title", collation: "utf8mb4_general_ci"
-    t.text "description", collation: "utf8mb4_general_ci"
+    t.string "name"
+    t.string "job_title"
+    t.text "description"
     t.integer "staff_status", default: 100
     t.string "social_facebook_uri"
     t.string "social_gplus_uri"
@@ -323,7 +323,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.index ["name"], name: "index_tags_on_name"
   end
 
-  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "login", limit: 40
     t.string "name", limit: 100, default: ""
     t.string "email", limit: 100
@@ -346,7 +346,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.index ["login"], name: "index_users_on_login", unique: true
   end
 
-  create_table "visual_widget_bags", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "visual_widget_bags", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "shop_id"
     t.integer "visual_widget_id"
     t.string "data_string", limit: 511
@@ -360,7 +360,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.index ["visual_widget_id"], name: "index_visual_widget_bags_on_visual_widget_id"
   end
 
-  create_table "visual_widgets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "visual_widgets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "layout_scheme_id"
     t.string "hash_key"
     t.integer "position"
@@ -373,7 +373,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.index ["layout_scheme_id"], name: "index_visual_widgets_on_layout_scheme_id"
   end
 
-  create_table "web_pages", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "web_pages", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "shop_id"
     t.integer "parent_id"
     t.integer "position"
@@ -383,7 +383,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_003120) do
     t.string "controller_name", default: "bs_renderer"
     t.string "action_name"
     t.string "content_key"
-    t.string "name", collation: "utf8mb4_general_ci"
+    t.string "name"
     t.boolean "is_public", default: true
     t.string "external_url"
     t.boolean "is_open_new", default: false
