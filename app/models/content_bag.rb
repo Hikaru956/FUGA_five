@@ -55,6 +55,14 @@ class ContentBag < ApplicationRecord
     shop.content_bags.find_by(content_type: content_type)
   end
 
+
+  def public_leafs(content_category=nil)
+    today = Time.now.to_date
+    leaves = ContentLeaf.eager_load(:content_category).where('content_bag_id = ? AND content_categories.is_public=TRUE AND content_leafs.is_public=TRUE', self.id)
+    leaves = leaves.where('content_categories_id = ?', content_category.id) unless content_category.blank?
+    ContentLeaf.filter_latest(leaves)
+  end
+
   ###
   ## FIXED PAGE FEATURE
   #
