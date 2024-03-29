@@ -39,13 +39,13 @@
                                     </h3>
                                     <time><%= leaf.publish_from.strftime('%Y.%m.%d %a') %></time>
                                 </div>
-                                <a href="<%= url_for(action: 'kick', name: 'news-single-aria', wkey: @website.wsite_hash_key)%>">READ MORE</a>
+                                <a href="<%= url_for(action: 'kick', name: 'news-single-aria', leaf_id: leaf.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
                             </li>
                         <% end %>
                     </ul>
                 </div>
 
-                <%= paginate leaves %>
+                <%= paginate leaves, theme: 'bootstrap-5' %>
 
             </section>
         </article>
