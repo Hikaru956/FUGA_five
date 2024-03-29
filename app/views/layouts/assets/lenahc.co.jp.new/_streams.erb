@@ -8,8 +8,8 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'ブログ')
-                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.find_by(name: 'ARIA')
+                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
             %>
             <div class="txt">
                 <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
@@ -27,8 +27,8 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'ブログ')
-                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.find_by(name: 'ist')
+                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
             %>
             <div class="txt">
                 <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
@@ -46,8 +46,8 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'ブログ')
-                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.find_by(name: 'SOIN')
+                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
             %>
             <div class="txt">
                 <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
@@ -65,8 +65,8 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'ブログ')
-                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.find_by(name: 'Le grand')
+                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
             %>
             <div class="txt">
                 <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
@@ -84,8 +84,8 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'ブログ')
-                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.find_by(name: 'With')
+                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
             %>
             <div class="txt">
                 <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
@@ -103,8 +103,8 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'ブログ')
-                latest = (stream.blank?)? nil: ContentLeaf.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.find_by(name: 'Coffret')
+                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
             %>
             <div class="txt">
                 <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
