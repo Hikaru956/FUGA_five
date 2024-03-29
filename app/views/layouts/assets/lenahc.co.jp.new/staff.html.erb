@@ -80,7 +80,7 @@
                     <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-coffret-white.svg" alt="coffret"></h2>
                     <div class="staff-salon">
                         <%
-                            stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_STREAM, 'Cofflet').first
+                            stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_STREAM, 'Coffret').first
                             staffs = (stream.blank?)? []: stream.content_category.public_leafs.order(publish_from: :desc)
                         %>
                         <%= render partial: "#{LayoutScheme.asset_root}/lenahc.co.jp.new/staff_cards", locals: {staffs: staffs} %>
