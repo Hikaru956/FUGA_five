@@ -36,7 +36,7 @@
                         <div class="post-list information-list container-s">
                             <ul class="inview-fadeIn">
                                 <li>
-                                    <a href="<%= url_for(action: 'kick', name: 'information-single', stream_id: (stream.blank?)? nil: stream.id, wkey: @website.wsite_hash_key)%>">
+                                    <a href="<%= url_for(action: 'kick', name: 'information-single', leaf_id: (latest.blank?)? nil: latest.id, wkey: @website.wsite_hash_key)%>">
                                         <span><%= latest.publish_from.strftime('%Y.%m.%d') %></span>
                                         <span><%= model_title(latest) %></span>
                                     </a>
@@ -211,10 +211,10 @@
                             長く通っていただくためのレナークのこだわりはこちらです。
                         </p>
                         <ul>
-                            <li><a href="./aboutus.html#color">カラー</a></li>
-                            <li><a href="./aboutus.html#care">頭皮ケア</a></li>
-                            <li><a href="./aboutus.html#cut">カット</a></li>
-                            <li><a href="./aboutus.html#benefits">会員特典</a></li>
+                            <li><a href="<%= url_for(action: 'kick', name: 'aboutus', anchor: 'color', wkey: @website.wsite_hash_key)%>">カラー</a></li>
+                            <li><a href="<%= url_for(action: 'kick', name: 'aboutus', anchor: 'care', wkey: @website.wsite_hash_key)%>">頭皮ケア</a></li>
+                            <li><a href="<%= url_for(action: 'kick', name: 'aboutus', anchor: 'cut', wkey: @website.wsite_hash_key)%>">カット</a></li>
+                            <li><a href="<%= url_for(action: 'kick', name: 'aboutus', anchor: 'benefits', wkey: @website.wsite_hash_key)%>">会員特典</a></li>
                         </ul>
                     </div>
                 </div>
@@ -758,7 +758,7 @@
                 </div>
                 <div class="text-center inview-fadeIn">
                     <p class="d-inline-block">
-                        <a class="btn-style-1" href="./staff.html">VIEW ALL</a>
+                        <a class="btn-style-1" href="<%= url_for(action: 'kick', name: 'staff', wkey: @website.wsite_hash_key)%>">VIEW ALL</a>
                     </p>
                 </div>
             </section>
@@ -768,33 +768,33 @@
                 </div>
                 <ul class="inview-fadeC">
                     <li>
-                        <a href="./menu.html#cut">CUT</a>
+                        <a href="<%= url_for(action: 'kick', name: 'menu', anchor: 'cut', wkey: @website.wsite_hash_key)%>">CUT</a>
                     </li>
                     <li>
-                        <a href="./menu.html#color">COLOR</a>
+                        <a href="<%= url_for(action: 'kick', name: 'menu', anchor: 'color', wkey: @website.wsite_hash_key)%>">COLOR</a>
                     </li>
                     <li>
-                        <a href="./menu.html#perm">PERM</a>
+                        <a href="<%= url_for(action: 'kick', name: 'menu', anchor: 'perm', wkey: @website.wsite_hash_key)%>">PERM</a>
                     </li>
                     <li>
-                        <a href="./menu.html#hair-esthe">HAIR ESTHE</a>
+                        <a href="<%= url_for(action: 'kick', name: 'menu', anchor: 'hair-esthe', wkey: @website.wsite_hash_key)%>">HAIR ESTHE</a>
                     </li>
                     <li>
-                        <a href="./menu.html#spa">SPA</a>
+                        <a href="<%= url_for(action: 'kick', name: 'menu', anchor: 'spa', wkey: @website.wsite_hash_key)%>">SPA</a>
                     </li>
                     <li>
-                        <a href="./menu.html#beauty-musts">BEAUTY MUSTS</a>
+                        <a href="<%= url_for(action: 'kick', name: 'menu', anchor: 'beauty-musts', wkey: @website.wsite_hash_key)%>">BEAUTY MUSTS</a>
                     </li>
                     <li>
-                        <a href="./menu.html#nail">NAIL</a>
+                        <a href="<%= url_for(action: 'kick', name: 'menu', anchor: 'nail', wkey: @website.wsite_hash_key)%>">NAIL</a>
                     </li>
                     <li>
-                        <a href="./menu.html#extra">EXTRA</a>
+                        <a href="<%= url_for(action: 'kick', name: 'menu', anchor: 'extra', wkey: @website.wsite_hash_key)%>">EXTRA</a>
                     </li>
                 </ul>
                 <div class="text-center inview-fadeIn">
                     <p class="d-inline-block">
-                        <a class="btn-style-1" href="./menu.html">VIEW</a>
+                        <a class="btn-style-1" href="<%= url_for(action: 'kick', name: 'menu', wkey: @website.wsite_hash_key)%>">VIEW</a>
                     </p>
                 </div>
             </section>

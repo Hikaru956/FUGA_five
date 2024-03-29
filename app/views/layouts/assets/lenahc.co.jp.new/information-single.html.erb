@@ -15,21 +15,21 @@
 				<h1>
 					INFORMATION </h1>
 			</header>
-			<section>
-				<div class="container-ss">
-					<header>
-						<h1>LENAHCからのお知らせ</h1>
-						<h2>INFORMATION記事タイトル</h2>
-						<time>2023.10.10</time>
-					</header>
-					<main>
-						<p>記事本文が入ります。これはサンプル文章です。<br>CMSによって出力される記事本文をこちらに表示します。</p>
-						<p>記事本文が入ります。これはサンプル文章です。<br>CMSによって出力される記事本文をこちらに表示します。</p>
-						<p>記事本文が入ります。これはサンプル文章です。<br>CMSによって出力される記事本文をこちらに表示します。</p>
-					</main>
-				</div>
-			</section>
-
+            <% leaf = @website.content_leafs.find_by(id: params[:leaf_id] ) %>
+            <% unless leaf.blank? %>
+				<section>
+					<div class="container-ss">
+						<header>
+							<h1>LENAHCからのお知らせ</h1>
+							<h2><%= model_title(leaf) %></h2>
+							<time><%= leaf.publish_from.strftime('%Y.%m.%d') %></time>
+						</header>
+						<main>
+							<%= raw leaf.description %>
+						</main>
+					</div>
+				</section>
+			<% end %>
 		</article>
 	</main>
 	<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/footer" %>

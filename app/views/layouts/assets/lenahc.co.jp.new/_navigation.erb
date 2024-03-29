@@ -14,8 +14,10 @@
                         </span>
                     </a>
                 </li>
+
+                <% stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_NEWS, 'INFORMATION').first %>
                 <li>
-                    <a href="<%= url_for(action: 'kick', name: 'information-single', wkey: @website.wsite_hash_key)%>">
+                    <a href="<%= url_for(action: 'kick', name: 'information-list', stream_id: (stream.blank?)? nil: stream.id, wkey: @website.wsite_hash_key)%>">
                         <span class="sup">
                             レナークからのお知らせ
                         </span>
