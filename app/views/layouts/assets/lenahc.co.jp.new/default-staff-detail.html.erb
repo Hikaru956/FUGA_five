@@ -1,223 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-<head>
-    <meta charset="UTF-8">
-    <title>レナークグループ｜宮城県仙台市</title>
-    <link rel="icon" href="./favicon.ico">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href="./css/bootstrap-reboot.css" rel="stylesheet" type="text/css">
-    <link href="./css/style.css" rel="stylesheet" type="text/css">
-    <link href="./css/pctb.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)">
-    <link href="./css/sp.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)">
-    <script src="./js/jquery-3.7.1.min.js"></script>
-    <script src="./js/main.js"></script>
-    <script src="./jquery.inview/jquery.inview.min.js"></script>
-    <script src="./jquery.inview/jquery.inview.custom.js"></script>
-    <link href="./jquery.inview/jquery.inview.custom.css" rel="stylesheet" type="text/css">
-    <script src="./slick/slick.js"></script>
-    <link href="./slick/slick.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#slick-mv').slick({
-                autoplay: true,
-                arrows: false,
-                fade: true,
-                speed: 3000,
-                pauseOnHover: false,
-                pauseOnFocus: false,
-                touchMove: false,
-                draggable: false,
-            });
-            $('#slick-staff').slick({
-                dots: true,
-                swipe: false,
-                draggable: false,
-            });
-            $('.slick-salon').slick({
-                autoplay: true,
-                arrows: false,
-                fade: true,
-                pauseOnHover: false,
-                pauseOnFocus: false,
-                speed: 3000,
-            });
-        });
-    </script>
-</head>
+<%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/header" %>
 
 <body class="staff-detail default">
     <div id="body-cover"></div>
     <a id="page-top"></a>
-    <header id="page-header">
-        <div class="inner-page-header container-l">
-            <h1><a href="./index.html"><img src="./images/common/logo_black.svg" width="283" height="36"
-                        alt="宮城・仙台市のレナークグループ" class="d-block">宮城・仙台市のレナークグループ</a></h1>
-            <nav id="nav-main">
-                <ul>
-                    <li>
-                        <a href="./index.html">
-                            <span class="sup">
-                                ホーム
-                            </span>
-                            <span class="txt">
-                                HOME
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./information-single.html">
-                            <span class="sup">
-                                レナークからのお知らせ
-                            </span>
-                            <span class="txt">
-                                INFORMATION
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./salon.html">
-                            <span class="sup">
-                                サロン紹介
-                            </span>
-                            <span class="txt">
-                                SALON
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./staff.html">
-                            <span class="sup">
-                                スタッフ紹介
-                            </span>
-                            <span class="txt">
-                                STAFF
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./aboutus.html">
-                            <span class="sup">
-                                コンセプト
-                            </span>
-                            <span class="txt">
-                                ABOUT US
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./menu.html">
-                            <span class="sup">
-                                メニュー
-                            </span>
-                            <span class="txt">
-                                MENU
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./news.html">
-                            <span class="sup">
-                                各店舗からのお知らせ
-                            </span>
-                            <span class="txt">
-                                NEWS
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://recruit.lenahc.co.jp/" target="_blank">
-                            <span class="sup">
-                                求人情報
-                            </span>
-                            <span class="txt">
-                                RECRUIT
-                            </span>
-                        </a>
-                    </li>
-                    <li id="item-webreserve">
-                        <div class="btn-reserve btn-reserve-1">
-                            <span class="up">
-                                WEB&nbsp;RESERVE
-                            </span>
-                            <span class="under">
-                                ネット予約はこちらから
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <div id="btn-menu-container" class="sp">
-        <div id="btn-menu">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    <div class="btn-reserve btn-reserve-2">
-        <p>
-            <img src="./images/common/icon-calendar.svg" width="26" heighT="25" alt="予約">
-            <span class="txt">予約する</span>
-        </p>
-    </div>
-    <nav id="nav-reserve">
-        <ul>
-            <li>
-                <figure>
-                    <img src="./images/common/logo-aria-white.svg" alt="レナーク アリア" width="110" height="38">
-                </figure>
-                <p>
-                    <a href="https://direct.salondenet.jp/udtM9d17mbSy5UBf7" target="_blank">WEB予約</a>
-                    <a href="tel:0120135098">電話予約 0120-135-098</a>
-                </p>
-            </li>
-            <li>
-                <figure>
-                    <img src="./images/common/logo-ist-white.svg" width="57" height="38" alt="レナーク イスト">
-                </figure>
-                <p>
-                    <a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000039762" target="_blank">WEB予約</a>
-                    <a href="tel:0120979431">電話予約 0120-979-431</a>
-                </p>
-            </li>
-            <li>
-                <figure>
-                    <img src="./images/common/logo-soin-white.svg" alt="レナーク ソワン" width="110" height="38">
-                </figure>
-                <p>
-                    <a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000039792" target="_blank">WEB予約</a>
-                    <a href="tel:0120079041">電話予約 0120-079-041</a>
-                </p>
-            </li>
-            <li>
-                <figure>
-                    <img src="./images/common/logo-legrand-white.svg" alt="レナーク ルグラン" width="126" height="38">
-                </figure>
-                <p>
-                    <a href="https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000302877" target="_blank">WEB予約</a>
-                    <a href="tel:0120079041">電話予約 0120-079-041</a>
-                </p>
-            </li>
-            <li>
-                <figure>
-                    <img src="./images/common/logo-with-white.svg" alt="レナーク ウィズ" width="57" height="38">
-                </figure>
-                <p>
-                    <a href="tel:0120979698">電話予約 0120-979-698</a>
-                </p>
-            </li>
-            <li>
-                <figure>
-                    <img src="./images/common/logo-coffret-white.svg" alt="レナーク コフレ" width="85" height="38">
-                </figure>
-                <p>
-                    <a href="tel:0120074843">電話予約 0120-074-843</a>
-                </p>
-            </li>
-        </ul>
-    </nav>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/navigation" %>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/btn_menu" %>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/nav" %>
     <main id="page-main">
         <article id="pageArticle">
             <header id="pageTitle">
@@ -229,7 +20,7 @@
                     <div class="staff-detail-container">
                         <div class="photo staff-salon">
                             <figure>
-                                <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                                <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             </figure>
                         </div>
                         <div class="txt">
@@ -282,12 +73,12 @@
             </section>
             <section>
                 <div class="container-s">
-                    <h2><img src="./images/common/logo-aria-white.svg" alt="aria"></h2>
+                    <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-aria-white.svg" alt="aria"></h2>
                     <div class="staff-salon">
                         <!--サンプルとしてARIAの内容の一部を記載します-->
                         <!--表示サンプル-->
                         <div class="staff-staff">
-                            <img src="./images/staff/yuta-ikeda.jpg" width="600" height="600">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/yuta-ikeda.jpg" width="600" height="600">
                             <dl>
                                 <dt><span class="dept">レナーク</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 裕太</dd>
@@ -296,7 +87,7 @@
                         </div>
                         <!--ダミー用-->
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -304,7 +95,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -312,7 +103,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -320,7 +111,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -328,7 +119,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -336,7 +127,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -344,7 +135,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -352,7 +143,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -360,7 +151,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -368,97 +159,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <!--ダミー用ここまで-->
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div class="container-s">
-                    <h2><img src="./images/common/logo-ist-white.svg" alt="ist"></h2>
-                    <div class="staff-salon">
-                        <!--サンプルとしてARIAの内容の一部を記載します-->
-                        <!--ダミー用-->
-                        <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -471,12 +172,12 @@
             </section>
             <section>
                 <div class="container-s">
-                    <h2><img src="./images/common/logo-soin-white.svg" alt="soin"></h2>
+                    <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-ist-white.svg" alt="ist"></h2>
                     <div class="staff-salon">
                         <!--サンプルとしてARIAの内容の一部を記載します-->
                         <!--ダミー用-->
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -484,7 +185,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -492,7 +193,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -500,7 +201,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -508,7 +209,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -516,7 +217,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -524,7 +225,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -532,7 +233,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -540,7 +241,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -548,7 +249,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -561,12 +262,12 @@
             </section>
             <section>
                 <div class="container-s">
-                    <h2><img src="./images/common/logo-legrand-white.svg" alt="legrand"></h2>
+                    <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-soin-white.svg" alt="soin"></h2>
                     <div class="staff-salon">
                         <!--サンプルとしてARIAの内容の一部を記載します-->
                         <!--ダミー用-->
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -574,7 +275,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -582,7 +283,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -590,7 +291,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -598,7 +299,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -606,7 +307,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -614,7 +315,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -622,7 +323,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -630,7 +331,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -638,7 +339,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -651,12 +352,12 @@
             </section>
             <section>
                 <div class="container-s">
-                    <h2><img src="./images/common/logo-with-white.svg" alt="with"></h2>
+                    <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-legrand-white.svg" alt="legrand"></h2>
                     <div class="staff-salon">
                         <!--サンプルとしてARIAの内容の一部を記載します-->
                         <!--ダミー用-->
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -664,7 +365,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -672,7 +373,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -680,7 +381,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -688,7 +389,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -696,7 +397,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -704,7 +405,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -712,7 +413,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -720,7 +421,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -728,7 +429,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -741,12 +442,12 @@
             </section>
             <section>
                 <div class="container-s">
-                    <h2><img src="./images/common/logo-coffret-white.svg" alt="coffret"></h2>
+                    <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-with-white.svg" alt="with"></h2>
                     <div class="staff-salon">
                         <!--サンプルとしてARIAの内容の一部を記載します-->
                         <!--ダミー用-->
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -754,7 +455,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -762,7 +463,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -770,7 +471,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -778,7 +479,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -786,7 +487,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -794,7 +495,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -802,7 +503,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -810,7 +511,7 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -818,7 +519,97 @@
                             <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
                         </div>
                         <div class="staff-staff">
-                            <img src="./images/staff/staff-default.jpg" alt="staff-default">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
+                            <dl>
+                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
+                                <dd>池田 祐太</dd>
+                            </dl>
+                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
+                        </div>
+                        <!--ダミー用ここまで-->
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="container-s">
+                    <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-coffret-white.svg" alt="coffret"></h2>
+                    <div class="staff-salon">
+                        <!--サンプルとしてARIAの内容の一部を記載します-->
+                        <!--ダミー用-->
+                        <div class="staff-staff">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
+                            <dl>
+                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
+                                <dd>池田 祐太</dd>
+                            </dl>
+                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
+                        </div>
+                        <div class="staff-staff">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
+                            <dl>
+                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
+                                <dd>池田 祐太</dd>
+                            </dl>
+                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
+                        </div>
+                        <div class="staff-staff">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
+                            <dl>
+                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
+                                <dd>池田 祐太</dd>
+                            </dl>
+                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
+                        </div>
+                        <div class="staff-staff">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
+                            <dl>
+                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
+                                <dd>池田 祐太</dd>
+                            </dl>
+                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
+                        </div>
+                        <div class="staff-staff">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
+                            <dl>
+                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
+                                <dd>池田 祐太</dd>
+                            </dl>
+                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
+                        </div>
+                        <div class="staff-staff">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
+                            <dl>
+                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
+                                <dd>池田 祐太</dd>
+                            </dl>
+                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
+                        </div>
+                        <div class="staff-staff">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
+                            <dl>
+                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
+                                <dd>池田 祐太</dd>
+                            </dl>
+                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
+                        </div>
+                        <div class="staff-staff">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
+                            <dl>
+                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
+                                <dd>池田 祐太</dd>
+                            </dl>
+                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
+                        </div>
+                        <div class="staff-staff">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
+                            <dl>
+                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
+                                <dd>池田 祐太</dd>
+                            </dl>
+                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
+                        </div>
+                        <div class="staff-staff">
+                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
                             <dl>
                                 <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
                                 <dd>池田 祐太</dd>
@@ -833,74 +624,7 @@
 
         </article>
     </main>
-    <footer id="page-footer">
-        <div class="container">
-            <address>
-                <img src="./images/common/logo_white.svg" width="305" height="39" alt="LENAHC">
-                <p class=company_name>株式会社　和田商</p>
-                <p class="jusho">
-                    宮城県仙台市青葉区旭ヶ丘四丁目30-15
-                </p>
-                <p class="d-inline-block">
-                    <a class="btn-style-1" href="https://queen.swifty.jp/lenahc.co.jp/contact/"
-                        target="_blank">お問い合わせ</a>
-                </p>
-                <ul id="footer-nav-2">
-                    <li><a href="./company.html">会社概要</a></li>
-                    <li><a href="./privacy-policy.html">プライバシーポリシー</a></li>
-                </ul>
-            </address>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="./index.html">
-                            HOME
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./information-single.html">
-                            INFORMATION
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./news.html">
-                            NEWS
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./aboutus.html">
-                            CONCEPT
-                        </a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="./staff.html">
-                            STAFF
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./menu.html">
-                            MENU
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./salon.html">
-                            SALON
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://recruit.lenahc.co.jp/" target="_blank">
-                            RECRUIT
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div class="copyContainer container">
-            <p class="copy">Copyright&copy;2023 LENAHC All Rights Reserved.</p>
-        </div>
-    </footer>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/footer" %>
     <div id="gotop"><a href="#page-top"></a></div>
     <div id="body-cover"></div>
 </body>
