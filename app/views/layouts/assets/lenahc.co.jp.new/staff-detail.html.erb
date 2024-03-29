@@ -3,7 +3,7 @@
 
 <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/header" %>
 
-<body class="staff default">
+<body class="staff-detail default">
     <div id="body-cover"></div>
     <a id="page-top"></a>
     <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/navigation" %>
@@ -15,8 +15,68 @@
                 <h1>
                     STAFF </h1>
             </header>
+            <% leaf = @website.content_leafs.find_by(id: params[:leaf_id] ) %>
+            <% unless leaf.blank? %>
+                <section id="sect-profile">
+                    <div class="container">
+                        <div class="staff-detail-container">
+                            <div class="photo staff-salon">
+                                <% key_photo = (key_photo(leaf).blank?)? '/assets/lenahc.co.jp.new/images/staff/staff-default.jpg': key_photo(leaf).clip.url %>
+                                <figure>
+                                    <img src="<%= key_photo %>" alt="<%= model_title(leaf) %>">
+                                </figure>
+                            </div>
+                            <div class="txt">
+                                <h2>
+                                    <span class="staffNameJa"><%= model_title(leaf) %></span>
+                                    <span class="staffNameEn">Yuta Ikeda</span>
+                                </h2>
+                                <h3>カット・カラーが大好きです！あなたにぴったりなスタイルを一緒に探しましょう！</h3>
+                                <table>
+                                    <tr>
+                                        <th>職種</th>
+                                        <td>カットの講師</td>
+                                    </tr>
+                                    <tr>
+                                        <th>出身地</th>
+                                        <td>秋田県</td>
+                                    </tr>
+                                    <tr>
+                                        <th>得意技術</th>
+                                        <td>カット+カラー+髪質改善</td>
+                                    </tr>
+                                    <tr>
+                                        <th>趣味・マイブーム</th>
+                                        <td>ドライブ・温泉巡り・サウナ</td>
+                                    </tr>
+                                    <tr>
+                                        <th>自店について</th>
+                                        <td>レナークアリア へぜひいらして下さい。<br>
+                                            個性豊かなスタッフがご来店おお待ちいたしております。</td>
+                                    </tr>
+                                </table>
+                                <div class="message">
+                                    <h4>Message</h4>
+                                    <p>レナークアリアは一人ひとりの髪の悩みを解決、よりよくしていくサロンです。<br>
+                                        皆様のご来店をお待ちしています。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btnsRsrv container">
+                        <ul>
+                            <li>
+                                <a class="btn-style-1" href="https://beauty.hotpepper.jp/">指名してWEB予約</a>
+                            </li>
+                            <li>
+                                <a class="btn-style-1" href="tel:0120000000">Tel.0120-000-000</a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            <% end %>
             <section>
-                <div class="container">
+                <div class="container-s">
                     <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-aria-white.svg" alt="aria"></h2>
                     <div class="staff-salon">
                         <%
@@ -28,7 +88,7 @@
                 </div>
             </section>
             <section>
-                <div class="container">
+                <div class="container-s">
                     <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-ist-white.svg" alt="ist"></h2>
                     <div class="staff-salon">
                         <%
@@ -40,11 +100,11 @@
                 </div>
             </section>
             <section>
-                <div class="container">
+                <div class="container-s">
                     <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-soin-white.svg" alt="soin"></h2>
                     <div class="staff-salon">
                         <%
-                            stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_STREAM, 'soin').first
+                            stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_STREAM, 'SOIN').first
                             staffs = (stream.blank?)? []: stream.content_category.public_leafs.order(publish_from: :desc)
                         %>
                         <%= render partial: "#{LayoutScheme.asset_root}/lenahc.co.jp.new/staff_cards", locals: {staffs: staffs} %>
@@ -52,7 +112,7 @@
                 </div>
             </section>
             <section>
-                <div class="container">
+                <div class="container-s">
                     <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-legrand-white.svg" alt="legrand"></h2>
                     <div class="staff-salon">
                         <%
@@ -64,7 +124,7 @@
                 </div>
             </section>
             <section>
-                <div class="container">
+                <div class="container-s">
                     <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-with-white.svg" alt="with"></h2>
                     <div class="staff-salon">
                         <%
@@ -76,11 +136,11 @@
                 </div>
             </section>
             <section>
-                <div class="container">
+                <div class="container-s">
                     <h2><img src="/assets/lenahc.co.jp.new/images/common/logo-coffret-white.svg" alt="coffret"></h2>
                     <div class="staff-salon">
                         <%
-                            stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_STREAM, 'Cofflet').first
+                            stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_STREAM, 'Coffret').first
                             staffs = (stream.blank?)? []: stream.content_category.public_leafs.order(publish_from: :desc)
                         %>
                         <%= render partial: "#{LayoutScheme.asset_root}/lenahc.co.jp.new/staff_cards", locals: {staffs: staffs} %>

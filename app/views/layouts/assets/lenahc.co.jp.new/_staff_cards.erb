@@ -1,0 +1,12 @@
+<% staffs.each do |staff| %>
+    <% key_photo = (key_photo(staff).blank?)? '/assets/lenahc.co.jp.new/images/staff/staff-default.jpg': key_photo(staff).clip.url %>
+
+    <div class="staff-staff">
+        <img src="<%= key_photo %>" width="600" height="600">
+        <dl>
+            <dt><span class="dept">#{dept}</span><span class="position">#{position}</span></dt>
+            <dd><%= model_title(staff) %></dd>
+        </dl>
+        <a href="<%= url_for(action: 'kick', name: 'staff-detail', leaf_id: staff.id, wkey: @website.wsite_hash_key)%>">&nbsp;</a>
+    </div>
+<% end %>
