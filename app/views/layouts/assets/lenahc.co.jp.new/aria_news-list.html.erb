@@ -9,11 +9,17 @@
     <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/navigation" %>
     <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/btn_menu" %>
     <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/nav" %>
+
+    <%
+        stream = @website.content_bags.find_by(id: params[:stream_id])
+        leafs  = (stream.blank?)? []: stream.public_leafs
+    %>
+
     <main id="page-main">
         <article id="pageArticle">
             <header id="pageTitle">
                 <h1>
-                    NEWS </h1>
+                    NEWS</h1>
             </header> <!--各店NEWS一覧共通フォーマット-->
             <section>
                 <div class="container container-news-list">

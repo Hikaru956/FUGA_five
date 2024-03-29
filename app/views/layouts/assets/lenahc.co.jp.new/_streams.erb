@@ -8,16 +8,18 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'ARIA')
-                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_NEWS, 'ARIA').first
+                latest = (stream.blank?)? nil: stream.content_category.public_leafs.first
             %>
-            <div class="txt">
-                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                <h3>
-                    <%= (latest.blank?)? '': model_title(latest) %>
-                </h3>
-            </div>
-            <a href="<%= url_for(action: 'kick', name: 'aria_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% unless latest.blank? %>
+                <div class="txt">
+                    <time><%= latest.publish_from.strftime('%Y.%m.%d') %></time>
+                    <h3>
+                        <%= model_title(latest) %>
+                    </h3>
+                </div>
+                <a href="<%= url_for(action: 'kick', name: 'coffret_news-list', stream_id: (stream.blank?)? nil: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% end %>
         </li>
         <li class="inview-fadeIn">
             <div class="img-box">
@@ -27,16 +29,18 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'ist')
-                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_NEWS, 'ist').first
+                latest = (stream.blank?)? nil: stream.content_category.public_leafs.first
             %>
-            <div class="txt">
-                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                <h3>
-                    <%= (latest.blank?)? '': model_title(latest) %>
-                </h3>
-            </div>
-            <a href="<%= url_for(action: 'kick', name: 'ist_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% unless latest.blank? %>
+                <div class="txt">
+                    <time><%= latest.publish_from.strftime('%Y.%m.%d') %></time>
+                    <h3>
+                        <%= model_title(latest) %>
+                    </h3>
+                </div>
+                <a href="<%= url_for(action: 'kick', name: 'coffret_news-list', stream_id: (stream.blank?)? nil: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% end %>
         </li>
         <li class="inview-fadeIn">
             <div class="img-box">
@@ -46,16 +50,18 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'SOIN')
-                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_NEWS, 'SOIN').first
+                latest = (stream.blank?)? nil: stream.content_category.public_leafs.first
             %>
-            <div class="txt">
-                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                <h3>
-                    <%= (latest.blank?)? '': model_title(latest) %>
-                </h3>
-            </div>
-            <a href="<%= url_for(action: 'kick', name: 'soin_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% unless latest.blank? %>
+                <div class="txt">
+                    <time><%= latest.publish_from.strftime('%Y.%m.%d') %></time>
+                    <h3>
+                        <%= model_title(latest) %>
+                    </h3>
+                </div>
+                <a href="<%= url_for(action: 'kick', name: 'coffret_news-list', stream_id: (stream.blank?)? nil: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% end %>
         </li>
         <li class="inview-fadeIn">
             <div class="img-box">
@@ -65,16 +71,18 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'Le grand')
-                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_NEWS, 'Le grand').first
+                latest = (stream.blank?)? nil: stream.content_category.public_leafs.first
             %>
-            <div class="txt">
-                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                <h3>
-                    <%= (latest.blank?)? '': model_title(latest) %>
-                </h3>
-            </div>
-            <a href="<%= url_for(action: 'kick', name: 'legrand_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% unless latest.blank? %>
+                <div class="txt">
+                    <time><%= latest.publish_from.strftime('%Y.%m.%d') %></time>
+                    <h3>
+                        <%= model_title(latest) %>
+                    </h3>
+                </div>
+                <a href="<%= url_for(action: 'kick', name: 'coffret_news-list', stream_id: (stream.blank?)? nil: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% end %>
         </li>
         <li class="inview-fadeIn">
             <div class="img-box">
@@ -84,16 +92,18 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'With')
-                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_NEWS, 'With').first
+                latest = (stream.blank?)? nil: stream.content_category.public_leafs.first
             %>
-            <div class="txt">
-                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                <h3>
-                    <%= (latest.blank?)? '': model_title(latest) %>
-                </h3>
-            </div>
-            <a href="<%= url_for(action: 'kick', name: 'with_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% unless latest.blank? %>
+                <div class="txt">
+                    <time><%= latest.publish_from.strftime('%Y.%m.%d') %></time>
+                    <h3>
+                        <%= model_title(latest) %>
+                    </h3>
+                </div>
+                <a href="<%= url_for(action: 'kick', name: 'coffret_news-list', stream_id: (stream.blank?)? nil: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% end %>
         </li>
         <li class="inview-fadeIn">
             <div class="img-box">
@@ -103,16 +113,18 @@
                 </figure>
             </div>
             <%
-                stream = @website.content_bags.find_by(name: 'Coffret')
-                latest = (stream.blank?)? nil: stream.public_leafs.order(publish_from: :desc).first
+                stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_NEWS, 'Coffret').first
+                latest = (stream.blank?)? nil: stream.content_category.public_leafs.first
             %>
-            <div class="txt">
-                <time><%= (latest.blank?)? '-.-.-': latest.publish_from.strftime('%Y.%m.%d') %></time>
-                <h3>
-                    <%= (latest.blank?)? '': model_title(latest) %>
-                </h3>
-            </div>
-            <a href="<%= url_for(action: 'kick', name: 'coffret_news-list', stream_id: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% unless latest.blank? %>
+                <div class="txt">
+                    <time><%= latest.publish_from.strftime('%Y.%m.%d') %></time>
+                    <h3>
+                        <%= model_title(latest) %>
+                    </h3>
+                </div>
+                <a href="<%= url_for(action: 'kick', name: 'coffret_news-list', stream_id: (stream.blank?)? nil: stream.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+            <% end %>
         </li>
     </ul>
 </div>
