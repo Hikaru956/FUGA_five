@@ -31,98 +31,11 @@
             <section id="sect-staff">
                 <div class="container">
                     <div class="staff-salon">
-                        <!--サンプルとしてARIAの内容の一部を記載します-->
-                        <!--表示サンプル-->
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/yuta-ikeda.jpg" width="600" height="600">
-                            <dl>
-                                <dt><span class="dept">レナーク</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 裕太</dd>
-                            </dl>
-                            <a href="./Pstaff=yuta-ikeda_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <!--ダミー用-->
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <div class="staff-staff">
-                            <img src="/assets/lenahc.co.jp.new/images/staff/staff-default.jpg" alt="staff-default">
-                            <dl>
-                                <dt><span class="dept">レナーク アリア</span><span class="position">カットの講師</span></dt>
-                                <dd>池田 祐太</dd>
-                            </dl>
-                            <a href="./Pstaff=staff-default_staff-detail.html">&nbsp;</a>
-                        </div>
-                        <!--ダミー用ここまで-->
+                        <%
+                            stream = @website.content_bags.where('content_type=? AND name = ?', ContentBag::TYPE_STREAM, 'ARIA').first
+                            staffs = (stream.blank?)? []: stream.content_category.public_leafs.order(publish_from: :desc)
+                        %>
+                        <%= render partial: "#{LayoutScheme.asset_root}/lenahc.co.jp.new/staff_cards", locals: {staffs: staffs} %>
                     </div>
                 </div>
             </section>
