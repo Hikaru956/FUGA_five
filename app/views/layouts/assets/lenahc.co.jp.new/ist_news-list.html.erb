@@ -12,7 +12,7 @@
 
     <%
         stream = ContentBag.find_by(id: params[:stream_id])
-        leaves = (stream.blank?)? nil: stream.content_category.public_leafs.order(publish_from: :desc).paginate(:page => params[:page], :per_page=>2)
+        leaves = (stream.blank?)? nil: stream.content_category.public_leafs.order(publish_from: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
     %>
 
     <main id="page-main">
@@ -39,7 +39,7 @@
                                     </h3>
                                     <time><%= leaf.publish_from.strftime('%Y.%m.%d %a') %></time>
                                 </div>
-                                <a href="<%= url_for(action: 'kick', name: 'news-single-ist', wkey: @website.wsite_hash_key)%>">READ MORE</a>
+                                <a href="<%= url_for(action: 'kick', name: 'news-single-ist', leaf_id: leaf.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
                             </li>
                         <% end %>
                     </ul>

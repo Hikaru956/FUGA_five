@@ -15,29 +15,36 @@
                 <h1>
                     NEWS </h1>
             </header> <!--各店NEWS個別記事共通フォーマット-->
-            <section>
-                <div class="container-ss">
-                    <header>
-                        <h2>NEWS記事タイトル</h2>
-                        <time>2023.10.10</time>
-                    </header>
-                    <main>
-                        <p>記事本文が入ります。これはサンプル文章です。<br>CMSによって出力される記事本文をこちらに表示します。</p>
-                        <p>記事本文が入ります。これはサンプル文章です。<br>CMSによって出力される記事本文をこちらに表示します。</p>
-                        <p>記事本文が入ります。これはサンプル文章です。<br>CMSによって出力される記事本文をこちらに表示します。</p>
-                    </main>
-                    <footer>
-                        <ul>
-                            <li>
-                                <a href="#">前の記事タイトル前の記事タイトル前の記事タイトル</a>
-                            </li>
-                            <li>
-                                <a href="#">後の記事タイトル後の記事タイトル後の記事タイトル後の記事タイトル後の記事タイトル</a>
-                            </li>
-                        </ul>
-                    </footer>
-                </div>
-            </section>
+            <% leaf = @website.content_leafs.find_by(id: params[:leaf_id] ) %>
+            <% unless leaf.blank? %>
+                <section>
+                    <div class="container-ss">
+                        <header>
+                            <h2><%= model_title(leaf) %></h2>
+                            <time><%= leaf.publish_from.strftime('%Y.%m.%d') %></time>
+                        </header>
+                        <main>
+                            <%= raw leaf.description %>
+                        </main>
+                        <% prev_leaf = leaf.prev_leaf(leaf) %>
+                        <% next_leaf = leaf.next_leaf(leaf) %>
+                        <footer>
+                            <ul>
+                                <% unless prev_leaf.blank? %>
+                                    <li>
+                                        <a href="<%= url_for(action: 'kick', name: 'news-single-soin', leaf_id: prev_leaf.id, wkey: @website.wsite_hash_key) %>"><%= model_title(prev_leaf) %></a>
+                                    </li>
+                                <% end %>
+                                <% unless next_leaf.blank? %>
+                                    <li>
+                                        <a href="<%= url_for(action: 'kick', name: 'news-single-soin', leaf_id: next_leaf.id, wkey: @website.wsite_hash_key) %>"><%= model_title(next_leaf) %></a>
+                                    </li>
+                                <% end %>
+                            </ul>
+                        </footer>
+                    </div>
+                </section>
+            <% end %>
         </article>
     </main>
     <%= render :partial=>"#{LayoutScheme.asset_root}/lenahc.co.jp.new/footer" %>

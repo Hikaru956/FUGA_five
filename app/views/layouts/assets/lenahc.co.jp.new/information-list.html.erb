@@ -18,7 +18,7 @@
 
 			<%
 				stream = ContentBag.find_by(id: params[:stream_id])
-				leaves = (stream.blank?)? nil: stream.content_category.public_leafs.order(publish_from: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+				leaves = (stream.blank?)? []: stream.content_category.public_leafs.order(publish_from: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
 			%>
 
             <section>
@@ -39,13 +39,15 @@
                                     </h3>
                                     <time><%= leaf.publish_from.strftime('%Y.%m.%d %a') %></time>
                                 </div>
-                                <a href="<%= url_for(action: 'kick', name: 'news-single-aria', leaf_id: leaf.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
+                                <a href="<%= url_for(action: 'kick', name: 'information-single', leaf_id: leaf.id, wkey: @website.wsite_hash_key)%>">READ MORE</a>
                             </li>
                         <% end %>
                     </ul>
                 </div>
 
-                <%= paginate leaves, theme: 'bootstrap-5' %>
+                <div class="pagination-container">
+                    <%= will_paginate(leaves, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') unless leaves.blank? %>
+                </div>
 
             </section>
 		</article>

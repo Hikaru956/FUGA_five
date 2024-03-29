@@ -45,7 +45,9 @@
                     </ul>
                 </div>
 
-                <%= paginate leaves, theme: 'bootstrap-5' %>
+                <div class="pagination-container">
+                    <%= will_paginate(leaves, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+                </div>
 
             </section>
         </article>
