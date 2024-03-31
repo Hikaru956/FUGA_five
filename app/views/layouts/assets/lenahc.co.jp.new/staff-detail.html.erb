@@ -26,51 +26,54 @@
                                     <img src="<%= key_photo %>" alt="<%= model_title(leaf) %>">
                                 </figure>
                             </div>
+                            <% hash = (leaf.description_3.blank?)? Hash.new: JSON.parse(leaf.description_3) %>
                             <div class="txt">
                                 <h2>
                                     <span class="staffNameJa"><%= model_title(leaf) %></span>
-                                    <span class="staffNameEn">Yuta Ikeda</span>
+                                    <span class="staffNameEn"><%= hash['signature']%></span>
                                 </h2>
-                                <h3>カット・カラーが大好きです！あなたにぴったりなスタイルを一緒に探しましょう！</h3>
+                                <h3><%= hash['catch']%></h3>
                                 <table>
                                     <tr>
                                         <th>職種</th>
-                                        <td>カットの講師</td>
+                                        <td><%= hash['position']%></td>
                                     </tr>
                                     <tr>
                                         <th>出身地</th>
-                                        <td>秋田県</td>
+                                        <td><%= hash['born']%></td>
                                     </tr>
                                     <tr>
                                         <th>得意技術</th>
-                                        <td>カット+カラー+髪質改善</td>
+                                        <td><%= hash['speciality']%></td>
                                     </tr>
                                     <tr>
                                         <th>趣味・マイブーム</th>
-                                        <td>ドライブ・温泉巡り・サウナ</td>
+                                        <td><%= hash['hobby']%></td>
                                     </tr>
                                     <tr>
                                         <th>自店について</th>
-                                        <td>レナークアリア へぜひいらして下さい。<br>
-                                            個性豊かなスタッフがご来店おお待ちいたしております。</td>
+                                        <td><%= raw hash['aboutus'] %></td>
                                     </tr>
                                 </table>
                                 <div class="message">
                                     <h4>Message</h4>
-                                    <p>レナークアリアは一人ひとりの髪の悩みを解決、よりよくしていくサロンです。<br>
-                                        皆様のご来店をお待ちしています。</p>
+                                    <p><%= raw hash['message'] %></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="btnsRsrv container">
                         <ul>
-                            <li>
-                                <a class="btn-style-1" href="https://beauty.hotpepper.jp/">指名してWEB予約</a>
-                            </li>
-                            <li>
-                                <a class="btn-style-1" href="tel:0120000000">Tel.0120-000-000</a>
-                            </li>
+                            <% unless hash["url"].blank? %>
+                                <li>
+                                    <a class="btn-style-1" href="<%= hash["url"] %>">指名してWEB予約</a>
+                                </li>
+                            <% end %>
+                            <% unless hash["telephone"].blank? %>
+                                <li>
+                                    <a class="btn-style-1" href="tel:<%= hash["telephone"] %>">Tel.<%= hash["telephone"] %></a>
+                                </li>
+                            <% end %>
                         </ul>
                     </div>
                 </section>

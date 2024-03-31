@@ -27,10 +27,12 @@
                         <% leaves.each do |leaf| %>
                             <li class="inview-fadeIn">
                                 <div class="img-box">
-                                    <% key_photo = (key_photo(leaf).blank?)? '/assets/lenahc.co.jp.new/images/common/dummy-news.gif': key_photo(leaf).clip.url(:thumb) %>
+                                    <% key_photo = (key_photo(leaf).blank?)? nil: key_photo(leaf).clip.url(:thumb) %>
                                     <figure>
-                                        <img src="<%= key_photo %>" width="1240" height="1754"
-                                            alt="<%= model_title(leaf) %>">
+                                        <% unless key_photo.blank? %>
+                                            <img src="<%= key_photo %>" width="1240" height="1754"
+                                                alt="<%= model_title(leaf) %>">
+                                        <% end %>
                                     </figure>
                                 </div>
                                 <div class="txt">

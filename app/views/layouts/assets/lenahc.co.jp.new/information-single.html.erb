@@ -27,6 +27,24 @@
 						<main>
 							<%= raw leaf.description %>
 						</main>
+                        <% prev_leaf = leaf.prev_leaf(leaf) %>
+                        <% next_leaf = leaf.next_leaf(leaf) %>
+						<% if false %>
+                        <footer>
+                            <ul>
+                                <li>
+                                    <% unless prev_leaf.blank? %>
+                                        <a href="<%= url_for(action: 'kick', name: 'news-single-aria', leaf_id: prev_leaf.id, wkey: @website.wsite_hash_key) %>"><%= model_title(prev_leaf) %></a>
+                                    <% end %>
+                                </li>
+                                <li>
+                                    <% unless next_leaf.blank? %>
+                                        <a href="<%= url_for(action: 'kick', name: 'news-single-aria', leaf_id: next_leaf.id, wkey: @website.wsite_hash_key) %>"><%= model_title(next_leaf) %></a>
+                                    <% end %>
+                                </li>
+                            </ul>
+                        </footer>
+						<% end %>
 					</div>
 				</section>
 			<% end %>

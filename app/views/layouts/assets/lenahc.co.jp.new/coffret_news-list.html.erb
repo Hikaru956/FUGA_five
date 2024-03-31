@@ -12,7 +12,7 @@
 
     <%
         stream = ContentBag.find_by(id: params[:stream_id])
-        leaves = (stream.blank?)? nil: stream.content_category.public_leafs.order(publish_from: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+        leaves = (stream.blank?)? []: stream.content_category.public_leafs.order(publish_from: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
     %>
 
     <main id="page-main">
@@ -27,10 +27,12 @@
                         <% leaves.each do |leaf| %>
                             <li class="inview-fadeIn">
                                 <div class="img-box">
-                                    <% key_photo = (key_photo(leaf).blank?)? '/assets/lenahc.co.jp.new/images/common/dummy-news.gif': key_photo(leaf).clip.url(:thumb) %>
+                                    <% key_photo = (key_photo(leaf).blank?)? nil: key_photo(leaf).clip.url(:thumb) %>
                                     <figure>
-                                        <img src="<%= key_photo %>" width="1240" height="1754"
-                                            alt="<%= model_title(leaf) %>">
+                                        <% unless key_photo.blank? %>
+                                            <img src="<%= key_photo %>" width="1240" height="1754"
+                                                alt="<%= model_title(leaf) %>">
+                                        <% end %>
                                     </figure>
                                 </div>
                                 <div class="txt">
@@ -45,7 +47,7 @@
                     </ul>
                 </div>
                 <div class="pagination-container">
-                    <%= will_paginate(leaves, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+                    <%= will_paginate(leaves, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') unless leaves.blank? %>
                 </div>
             </section>
         </article>

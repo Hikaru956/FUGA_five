@@ -3,8 +3,9 @@
 
     <div class="staff-staff">
         <img src="<%= key_photo %>" width="600" height="600">
+        <% hash = (staff.description_3.blank?)? Hash.new: JSON.parse(staff.description_3) %>
         <dl>
-            <dt><span class="dept">#{dept}</span><span class="position">#{position}</span></dt>
+            <dt><span class="dept"><%= hash['dept']%></span><span class="position"><%= hash['position']%></span></dt>
             <dd><%= model_title(staff) %></dd>
         </dl>
         <a href="<%= url_for(action: 'kick', name: 'staff-detail', leaf_id: staff.id, wkey: @website.wsite_hash_key)%>">&nbsp;</a>

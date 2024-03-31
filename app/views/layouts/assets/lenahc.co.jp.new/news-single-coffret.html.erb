@@ -30,16 +30,16 @@
                         <% next_leaf = leaf.next_leaf(leaf) %>
                         <footer>
                             <ul>
-                                <% unless prev_leaf.blank? %>
-                                    <li>
+                                <li>
+                                    <% unless prev_leaf.blank? %>
                                         <a href="<%= url_for(action: 'kick', name: 'news-single-coffret', leaf_id: prev_leaf.id, wkey: @website.wsite_hash_key) %>"><%= model_title(prev_leaf) %></a>
-                                    </li>
-                                <% end %>
-                                <% unless next_leaf.blank? %>
-                                    <li>
+                                    <% end %>
+                                </li>
+                                <li>
+                                    <% unless next_leaf.blank? %>
                                         <a href="<%= url_for(action: 'kick', name: 'news-single-coffret', leaf_id: next_leaf.id, wkey: @website.wsite_hash_key) %>"><%= model_title(next_leaf) %></a>
-                                    </li>
-                                <% end %>
+                                    <% end %>
+                                </li>
                             </ul>
                         </footer>
                     </div>

@@ -9,7 +9,7 @@
 <div class="mb-3 row">
 	<label for="job_title" class="col-sm-3 col-form-label">記事のヘッドライン</label>
 	<div class="col-sm-9">
-		<%= f.text_area :description_3, {value: item.description_3, rows: 3, class: "form-control", placeholder: "記事のヘッドラインを入力します。", :required => false, autofocus: true}  %>
+		<%= f.text_area :description_3, {value: item.description_3, rows: 5, class: "form-control", placeholder: "記事のヘッドラインを入力します。", :required => false, autofocus: true}  %>
 	</div>
 </div>
 <% 
@@ -29,7 +29,7 @@
 		<%= tree_select(cat_options, 'content_leaf', 'content_category_id', item.content_category.id) %> 
 	</div>
 </div>
-<% 
+<%
 	#c = Condition.new
 	#c.and "staffs.staff_status",'!=', Staff::STAFF_BLOCKED
 	#@staffs = @shop.staffs.find(:all, :conditions => c.where)
