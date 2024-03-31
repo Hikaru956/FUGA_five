@@ -30,6 +30,8 @@
 <% if @items.blank? %>
 	<p class="text-error">レジストリーが見つかりません。</p>
 <% else %>
+	<%= paginate @items, theme: 'bootstrap-5' %>
+
 	<table class="table table-hover table-sm table-bordered xtable-striped">
 		<thead>
 			<tr>
@@ -214,7 +216,7 @@
 	</div>
 </div>
 
-<% if current_user.has_permission?(User::ROLE_SUPER) %>
+<% if false && current_user.has_permission?(User::ROLE_SUPER) %>
 <hr/>
 <h4>DISPLAY Break Point</h4>
 <div class='d-sm-none'>
