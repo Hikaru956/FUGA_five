@@ -1,68 +1,78 @@
 <footer id="page-footer">
-        <div class="container">
-            <address>
-                <img src="/assets/lenahc.co.jp.new/images/common/logo_white.svg" width="305" height="39" alt="LENAHC">
-                <p class=company_name>株式会社　和田商</p>
-                <p class="jusho">
-                    宮城県仙台市青葉区旭ヶ丘四丁目30-15
-                </p>
-                <p class="d-inline-block">
-                    <a class="btn-style-1" href="https://queen.swifty.jp/lenahc.co.jp/contact/"
-                        target="_blank">お問い合わせ</a>
-                </p>
-                <ul id="footer-nav-2">
-                    <li><a href="<%= url_for(action: 'kick', name: 'company', wkey: @website.wsite_hash_key)%>">会社概要</a></li>
-                    <li><a href="<%= url_for(action: 'kick', name: 'privacy-policy', wkey: @website.wsite_hash_key)%>">プライバシーポリシー</a></li>
-                </ul>
-            </address>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="/home?wkey=<%= @website.wsite_hash_key %>">
-                            HOME
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<%= url_for(action: 'kick', name: 'information-single', wkey: @website.wsite_hash_key)%>">
-                            INFORMATION
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<%= url_for(action: 'kick', name: 'news', wkey: @website.wsite_hash_key)%>">
-                            NEWS
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<%= url_for(action: 'kick', name: 'aboutus', wkey: @website.wsite_hash_key)%>">
-                            CONCEPT
-                        </a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="<%= url_for(action: 'kick', name: 'staff', wkey: @website.wsite_hash_key)%>">
-                            STAFF
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<%= url_for(action: 'kick', name: 'menu', wkey: @website.wsite_hash_key)%>">
-                            MENU
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<%= url_for(action: 'kick', name: 'salon', wkey: @website.wsite_hash_key)%>">
-                            SALON
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://recruit.lenahc.co.jp/" target="_blank">
-                            RECRUIT
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div class="copyContainer container">
-            <p class="copy">Copyright&copy;2023 LENAHC All Rights Reserved.</p>
-        </div>
-    </footer>
+    <div class="container">
+        <address>
+            <img src="/assets/lenahc.co.jp.new/images/common/logo_white.svg" width="305" height="39" alt="LENAHC">
+            <p class=company_name>株式会社　和田商</p>
+            <p class="jusho">
+                宮城県仙台市青葉区旭ヶ丘四丁目30-15
+            </p>
+            <p class="d-inline-block">
+                <a class="btn-style-1" href="https://queen.swifty.jp/lenahc.co.jp/contact/"
+                    target="_blank">お問い合わせ</a>
+            </p>
+            <ul id="footer-nav-2">
+                <li><a href="<%= url_for(action: 'kick', name: 'company', wkey: @website.wsite_hash_key)%>">会社概要</a></li>
+                <li><a href="<%= url_for(action: 'kick', name: 'privacy-policy', wkey: @website.wsite_hash_key)%>">プライバシーポリシー</a></li>
+            </ul>
+        </address>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/home?wkey=<%= @website.wsite_hash_key %>">
+                        HOME
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'information-single', wkey: @website.wsite_hash_key)%>">
+                        INFORMATION
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'news', wkey: @website.wsite_hash_key)%>">
+                        NEWS
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'aboutus', wkey: @website.wsite_hash_key)%>">
+                        CONCEPT
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'staff', wkey: @website.wsite_hash_key)%>">
+                        STAFF
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'menu', wkey: @website.wsite_hash_key)%>">
+                        MENU
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= url_for(action: 'kick', name: 'salon', wkey: @website.wsite_hash_key)%>">
+                        SALON
+                    </a>
+                </li>
+                <li>
+                    <a href="https://recruit.lenahc.co.jp/" target="_blank">
+                        RECRUIT
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="copyContainer container">
+        <p class="copy">Copyright&copy;2023 LENAHC All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MSYBML4HQH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MSYBML4HQH');
+</script>
