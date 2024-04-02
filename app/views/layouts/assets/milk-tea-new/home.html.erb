@@ -3,6 +3,11 @@
 	
 	<meta http-equiv="Content-Language" content="ja">
 	<meta name="viewport" content="width=480">
+
+	<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+		<meta name="robots"                   content="noindex,nofollow">
+	<% end %>
+
 	<title>美容室「Milk tea」</title>
 	<meta name="title" content="美容室「Milk tea」">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/assets/milktea-new/style.css?hash=0216">

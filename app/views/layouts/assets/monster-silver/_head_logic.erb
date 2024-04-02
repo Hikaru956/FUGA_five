@@ -2,6 +2,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="keywords" content="<%= @website.wsite_keywords %>">
+
+	<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+		<meta name="robots"                   content="noindex,nofollow">
+	<% end %>
+
     <%
     	description = @website.wsite_description_shop
     	if @seed.instance_of?(ContentLeaf)

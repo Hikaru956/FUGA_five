@@ -11,6 +11,10 @@
     <meta name="description" content="<%= description %>">
     <meta name="author" content="<%= model_name(@website) %>">
 
+	<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+		<meta name="robots"                   content="noindex,nofollow">
+	<% end %>
+
 	<% unless @website.custom_metas.blank? %>
 		<%= raw @website.custom_metas %>
 	<% end %>
