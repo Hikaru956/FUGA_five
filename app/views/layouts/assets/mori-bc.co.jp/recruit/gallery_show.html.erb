@@ -10,15 +10,17 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator"                content="fuga">
 <meta name="author"                   content="<%= model_name(@website.company) %>">
-<% if request.host == 'sr2.swifty.jp' %>
-<meta name="robots"                   content="noindex,nofollow">
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
 <% end %>
 <% fbappid = VisualWidget.search_widget_bag_for(@website, "b11f9ea223e31f26d5d98ed2e8437da1") %>
 <% unless fbappid.blank? || fbappid.data_string.blank? %>
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="article">
-<meta property="og:url"               content="//<%= request.host + url_for(:action=>'gallery_show', :id=>@seed) %>">
+<% if false %>
+    <meta property="og:url"               content="//<%= request.host + url_for(:action=>'gallery_show', :id=>@seed) %>">
+<% end %>
 <meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"         content="<%= @website.name %>">
 <% unless @website.social_facebook_uri.blank? %>
