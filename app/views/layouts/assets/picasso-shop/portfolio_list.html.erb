@@ -11,6 +11,9 @@
 <title><%= model_name(@seed) %> - <%= @website.name %></title>
 <% end %>
 <meta name="viewport"                 content="initial-scale=1">
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
+<% end %>
 <meta name="format-detection"         content="telephone=no">
 <meta name="format-detection"         content="address=no">
 <meta name="application-name"         content="swifty2">

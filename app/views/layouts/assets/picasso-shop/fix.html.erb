@@ -14,6 +14,9 @@
 %>
 <title><%= model_title(@seed) %> - <%= @website.name %></title>
 <meta name="viewport"                 content="initial-scale=1">
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
+<% end %>
 <meta name="format-detection"         content="telephone=no">
 <meta name="format-detection"         content="address=no">
 <meta name="application-name"         content="swifty2">
@@ -25,7 +28,9 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="article">
-<meta property="og:url"               content="https://<%= request.host + fix_url %>">
+<% if false %>
+    <meta property="og:url"               content="https://<%= request.host + fix_url %>">
+<% end %>
 <meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"         content="<%= @website.name %>">
 <meta property="article:publisher"    content="<%= model_name(@website.company) %>">

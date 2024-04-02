@@ -16,6 +16,9 @@
 <meta name="keywords"                 content="<%= @website.wsite_keywords %>">
 <% end %>
 <meta name="viewport"                 content="initial-scale=1">
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
+<% end %>
 <meta name="format-detection"         content="telephone=no">
 <meta name="format-detection"         content="address=no">
 <meta name="application-name"         content="swifty2">
@@ -27,10 +30,12 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="website">
-<% if true || request.host == 'staffroom.swifty.jp' %>
-<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
-<% else %>
-<meta property="og:url"               content="https://<%= request.host %>/home">
+<% if false %>
+    <% if true || request.host == 'staffroom.swifty.jp' %>
+    <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+    <% else %>
+    <meta property="og:url"               content="https://<%= request.host %>/home">
+    <% end %>
 <% end %>
 <meta property="og:title"             content="<%= @website.name %>">
 <% og_img = VisualWidget.search_widget_bag_for(@website, "b87adfbb2733462f9cdb00fc4b55cfd6") %>
