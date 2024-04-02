@@ -11,8 +11,17 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator" content="fuga">
 <meta name="author" content="ENCHANT holistic beauty">
+
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
+<% end %>
+
 <meta property="og:type"   content="article">
-<meta property="og:url"    content="https://<%= request.host %>/news_show?id=<%= @seed.id %>&wkey=<%= @website.wsite_hash_key %>">
+
+<% if false %>
+     <meta property="og:url"    content="https://<%= request.host %>/news_show?id=<%= @seed.id %>&wkey=<%= @website.wsite_hash_key %>">
+<% end %>
+
 <meta property="og:title"  content="<%= model_title(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"   content="<%= @website.name %> - 長岡市美容室アンシャンテ">
 <meta property="article:publisher" content="ENCHANT holistic beauty">

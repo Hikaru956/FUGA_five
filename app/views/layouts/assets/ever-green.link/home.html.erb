@@ -22,19 +22,25 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator"                content="fuga">
 <meta name="author"                   content="<%= model_name(@website.company) %>">
-<% if request.host == 'staffroom.swifty.jp' %>
-<meta name="robots"                   content="noindex,nofollow">
+
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
 <% end %>
+
 <% fbappid = VisualWidget.search_widget_bag_for(@website, "eb9fcf2779c41d3498b51a82161ca05a") %>
 <% if !fbappid.blank? && fbappid.is_valid? %>
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="website">
-<% if true || request.host == 'staffroom.swifty.jp' %>
-<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
-<% else %>
-<meta property="og:url"               content="https://<%= request.host %>/home">
+
+<% if false %>
+    <% if true || request.host == 'staffroom.swifty.jp' %>
+     <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+    <% else %>
+     <meta property="og:url"               content="https://<%= request.host %>/home">
+    <% end %>
 <% end %>
+
 <% if hptitle.blank? || !hptitle.is_valid? %>
 <meta property="og:title"             content="<%= @website.name %>">
 <% else %>
