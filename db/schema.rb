@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_31_021036) do
+ActiveRecord::Schema.define(version: 2024_04_01_222927) do
 
   create_table "attendances", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "shop_id"
@@ -274,6 +274,7 @@ ActiveRecord::Schema.define(version: 2024_03_31_021036) do
     t.string "inquiry_email"
     t.boolean "enable_tag", default: false
     t.boolean "enable_editor", default: false
+    t.string "wsite_url"
     t.index ["company_id"], name: "index_shops_on_company_id"
     t.index ["wsite_hash_key"], name: "index_shops_on_wsite_hash_key"
   end

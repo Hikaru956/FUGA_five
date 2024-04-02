@@ -1,4 +1,11 @@
 <div class="control-group">
+	<label class="control-label" for="wsite_url">サイトURL</label>
+	<div class="controls">
+		<%= text_field 'shop', 'wsite_url', :placeholder=>"サイトURLを入力", :autocomplete => "off" %>
+	</div>
+</div>
+
+<div class="control-group">
 	<label class="control-label" for="wsite_keywords">サイト・キーワード</label>
 	<div class="controls">
 		<%= text_field 'shop', 'wsite_keywords', :placeholder=>"サイト・キーワードを入力", :autocomplete => "off" %>

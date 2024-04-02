@@ -10,6 +10,13 @@
 </div>
 
 <div class="mb-3 row">
+	<label for="wsite_url" class="col-sm-4 col-form-label">サイトURL</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :wsite_url,  {class: "form-control", placeholder: "サイトのURLを入力", autofocus: true}  %>
+	</div>
+</div>
+
+<div class="mb-3 row">
 	<label for="login" class="col-sm-4 col-form-label">サイト・キーワード</label>
 	<div class="col-sm-8">
 		<%= f.text_field  :wsite_keywords, {class: "form-control", placeholder: "サイト・キーワードを入力", autofocus: true}  %>

@@ -14,9 +14,11 @@
 <% if request.host == 'sr2.swifty.jp' %>
 <meta name="robots"                   content="noindex,nofollow">
 <% end %>
-<% unless @website.custom_metas.blank? %>
-<%= raw @website.custom_metas %>
+
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
 <% end %>
+
 <%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
 <%= auto_discovery_link_tag :rss, "/stream_feed.rss", :title => @website.name %>
 <%

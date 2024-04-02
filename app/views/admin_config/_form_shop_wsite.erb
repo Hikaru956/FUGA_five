@@ -5,6 +5,12 @@
 	</div>
 </div>
 <div class="mb-3 row">
+	<label for="wsite_url" class="col-sm-4 col-form-label">サイトURL</label>
+	<div class="col-sm-8">
+		<%= f.text_field  :wsite_url,  {class: "form-control", placeholder: "サイトのURLを入力", autofocus: true}  %>
+	</div>
+</div>
+<div class="mb-3 row">
 	<label for="job_title" class="col-sm-4 col-form-label">サイトの説明</label>
 	<div class="col-sm-8">
 		<%= f.text_field  :wsite_description_shop,  {class: "form-control", placeholder: "サイトの説明を入力", autofocus: true}  %>
