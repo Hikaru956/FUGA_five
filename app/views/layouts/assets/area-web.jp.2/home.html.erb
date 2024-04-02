@@ -9,6 +9,11 @@
 <% else %>
 <title><%= hptitle.data_string %></title>
 <% end %>
+
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
+<% end %>
+
 <% unless @website.wsite_description_shop.blank? %>
 <meta name="description"              content="<%= @website.wsite_description_shop %>">
 <% end %>
@@ -27,11 +32,15 @@
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="website">
-<% if true || request.host == 'staffroom.swifty.jp' %>
-<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
-<% else %>
-<meta property="og:url"               content="https://<%= request.host %>/home">
+
+<% if false %>
+    <% if true || request.host == 'staffroom.swifty.jp' %>
+     <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+    <% else %>
+     <meta property="og:url"               content="https://<%= request.host %>/home">
+    <% end %>
 <% end %>
+
 <meta property="og:title"             content="<%= @website.name %>">
 <% og_img = VisualWidget.search_widget_bag_for(@website, "01ec7c406071c81a1bffb28cdcdfc86e") %>
 <% if !og_img.blank? && og_img.is_valid? %>
