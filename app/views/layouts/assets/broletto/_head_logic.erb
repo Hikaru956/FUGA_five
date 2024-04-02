@@ -1,6 +1,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+		<meta name="robots"                   content="noindex,nofollow">
+	<% end %>
+
     <meta name="keywords" content="<%= @website.wsite_keywords %>">
     <%
     	description = @website.wsite_description_shop

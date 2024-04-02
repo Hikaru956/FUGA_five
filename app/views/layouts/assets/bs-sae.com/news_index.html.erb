@@ -11,9 +11,11 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator"                content="fuga">
 <meta name="author"                   content="<%= model_name(@website.company) %>">
-<% unless @website.custom_metas.blank? %>
-    <%= raw @website.custom_metas %>
+
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
 <% end %>
+
 <%= auto_discovery_link_tag :rss, "/news_feed.rss", :title => @website.name %>
 <%
     @favicon = @website.favicon
