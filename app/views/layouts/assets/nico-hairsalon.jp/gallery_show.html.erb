@@ -11,11 +11,13 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator"                content="fuga">
 <meta name="copyright"                content="<%= model_name(@website.company) %>">
-<% if request.host == 'staffroom.swifty.jp' %>
-<meta name="robots"                   content="noindex,nofollow">
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
 <% end %>
 <meta property="og:type"              content="article">
-<meta property="og:url"               content="https://<%= request.host + url_for(:action=>'gallery_show', :id=>@seed) %>">
+<% if false %>
+    <meta property="og:url"               content="https://<%= request.host + url_for(:action=>'gallery_show', :id=>@seed) %>">
+<% end %>
 <meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"         content="<%= @website.name %>">
 <% unless @website.social_facebook_uri.blank? %>
