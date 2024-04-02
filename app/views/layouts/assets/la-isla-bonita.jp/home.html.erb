@@ -24,15 +24,24 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator"                content="fuga">
 <meta name="author"                   content="<%= model_name(@website.company) %>">
+
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
+<% end %>
+
 <% unless fbappid.blank? || fbappid.data_string.blank? %>
 <meta property="fb:app_id"            content="<%= fbappid.data_string %>">
 <% end %>
 <meta property="og:type"              content="website">
-<% if true || request.host == 'staffroom.swifty.jp' %>
-<meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
-<% else %>
-<meta property="og:url"               content="https://<%= request.host %>/home">
+
+<% if false %>
+    <% if true || request.host == 'staffroom.swifty.jp' %>
+     <meta property="og:url"               content="https://<%= request.host %>/home?wkey=<%= @website.wsite_hash_key %>">
+    <% else %>
+     <meta property="og:url"               content="https://<%= request.host %>/home">
+    <% end %>
 <% end %>
+
 <% if hptitle.blank? || !hptitle.is_valid? %>
 <meta property="og:title"             content="<%= @website.name %>">
 <% else %>
