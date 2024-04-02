@@ -5,6 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title><%= model_title(@seed) %> - <%= @website.name %></title>
 <meta name="viewport" content="initial-scale=1">
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
+<% end %>
 <meta name="format-detection" content="telephone=no">
 <meta name="format-detection" content="address=no">
 <meta name="application-name" content="swifty2">
@@ -12,7 +15,9 @@
 <meta name="generator" content="fuga">
 <meta name="author" content="<%= model_name(@website.company) %>">
 <meta property="og:type"   content="article">
-<meta property="og:url"    content="https://<%= request.host %>/news_show?id=<%= @seed.id %>&wkey=<%= @website.wsite_hash_key %>">
+<% if false %>
+    <meta property="og:url"    content="https://<%= request.host %>/news_show?id=<%= @seed.id %>&wkey=<%= @website.wsite_hash_key %>">
+<% end %>
 <meta property="og:title"  content="<%= model_title(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"   content="<%= @website.name %>">
 <meta property="article:publisher" content="<%= model_name(@website.company) %>">
