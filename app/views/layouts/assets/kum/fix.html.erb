@@ -18,11 +18,17 @@
 <meta name="Targeted Geographic Area" content="Japan">
 <meta name="generator"                content="fuga">
 <meta name="author"                   content="<%= model_name(@website.company) %>">
-<% if request.host == 'staffroom.swifty.jp' %>
-<meta name="robots"                   content="noindex,nofollow">
+
+<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+    <meta name="robots"                   content="noindex,nofollow">
 <% end %>
+
 <meta property="og:type"              content="article">
-<meta property="og:url"               content="//<%= request.host + fix_url %>">
+
+<% if false %>
+    <meta property="og:url"               content="//<%= request.host + fix_url %>">
+<% end %>
+
 <meta property="og:title"             content="<%= model_title(@seed) %> - <%= @website.name %>">
 <meta property="og:site_name"         content="<%= @website.name %>">
 <% unless @website.social_facebook_uri.blank? %>
