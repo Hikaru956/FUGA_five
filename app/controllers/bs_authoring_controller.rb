@@ -81,8 +81,9 @@ class BsAuthoringController < ApplicationController
   # params[:name]で指定されたアクション名のViewをレンダリング
   #
   def kick
-    @page_view = @website.renderer_layout+'/'+params[:name]
-    render layout: @page_view
+    #@page_view = @website.renderer_layout+'/'+params[:name]
+    #render layout: @page_view
+    render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.authoring_layout}/#{params[:name]}":  "#{@website.layout_pc_specific_basename}/#{params[:name]}")
   end
 
   ###
