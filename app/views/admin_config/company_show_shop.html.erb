@@ -220,7 +220,7 @@
 		<% if current_user.has_permission?(User::ROLE_MANAGER) %>	
 			<span class="float-right">
 				<% url_edit_position = url_for(:action=>"shop_edit_position") %>							
-				<a class="btn btn-sm btn-info" href="<%= url_edit_position %>" data-turbolinks='false'>
+				<a class="btn btn-sm btn-outline-info" href="<%= url_edit_position %>" data-turbolinks='false'>
 					<%= setting_icon('マップ設定') %>&nbsp;
 					設定
 				</a>
