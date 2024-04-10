@@ -89,7 +89,7 @@
 			<th>カラー</th>
 			<td>
 				<span class="float-right">
-					<a href='<%= url_for(controller: 'bs_authoring', action: 'list_color_schemes') %>' class="btn btn-outline-primary btn-sm">
+					<a href="<%= url_for(controller: 'bs_authoring', action: 'list_color_schemes', wkey: @shop.wsite_hash_key) %>" class="btn btn-outline-primary btn-sm">
 						<%= edit_icon('設定編集') %>&nbsp;設定編集
 					</a>
 				</span>
@@ -107,7 +107,7 @@
 			<th>レイアウト</th>
 			<td>
 				<span class="float-right">
-					<a href='<%= url_for(controller: 'bs_authoring', action: 'list_layout_schemes') %>' class="btn btn-outline-primary btn-sm">
+					<a href="<%= url_for(controller: 'bs_authoring', action: 'list_layout_schemes', wkey: @shop.wsite_hash_key) %>" class="btn btn-outline-primary btn-sm">
 						<%= edit_icon('設定編集') %>&nbsp;設定編集
 					</a>
 				</span>

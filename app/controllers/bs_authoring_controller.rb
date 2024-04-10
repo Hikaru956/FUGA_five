@@ -91,6 +91,7 @@ class BsAuthoringController < ApplicationController
   #
   def list_layout_schemes
     @items = LayoutScheme.all
+    p '❌❌'*100
     unless current_user.has_permission?(User::ROLE_SUPER)
       @items = @items.where(is_public: true)
     end

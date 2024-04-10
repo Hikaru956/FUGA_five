@@ -80,6 +80,8 @@ Fuga326::Application.routes.draw do
   delete 'bs_config/shop_delete_position', to:'bs_config#shop_delete_position'
 
   get 'bs_authoring/index', to: 'bs_authoring#index'
+  get 'bs_authoring/list_layout_schemes', to: 'bs_authoring#list_layout_schemes'
+  get 'bs_authoring/list_color_schemes', to: 'bs_authoring#list_color_schemes'
   post 'bs_authoring/create_widget_bag_photo', to: 'bs_authoring#create_widget_bag_photo'
   delete 'bs_authoring/delete_widget_bag_photo', to: 'bs_authoring#delete_widget_bag_photo'
   post 'bs_authoring/update_widget_bag', to: 'bs_authoring#update_widget_bag'
