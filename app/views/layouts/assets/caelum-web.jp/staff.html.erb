@@ -129,37 +129,24 @@
                         <% end %>
                         <footer>
                             <ul class="sns_links">
-<% unless @seed.social_facebook_uri.blank? %>
-                                <li>
-                                    <a href="<%= @seed.social_facebook_uri%>" target='_blank'><i class="fa fa-facebook-official"></i></a>
-                                </li>
-<% end %>
-<% unless @seed.social_twitter_uri.blank? %>
-                                <li>
-                                    <a href="<%= @seed.social_twitter_uri %>" target='_blank'><i class="fa fa-twitter-square"></i></a>
-                                </li>
-<% end %>
-
-<% unless @seed.social_instagram_uri.blank? %>
-                                <li>
-                                    <a href="<%= @seed.social_instagram_uri %>" target='_blank'><i class="fa fa-instagram"></i></a>
-                                </li>
-<% end %>
-<% unless @seed.social_line_uri.blank? %>
-                                <li>
-                                    <a href="<%= @seed.social_line_uri %>" target='_blank'><img src="/images/assets/line_icon.png" alt="LINE" /></a>
-                                </li>
-<% end %>
-<% unless @seed.social_pinterest_uri.blank? %>
-                                <li>
-                                    <a href="<%= @seed.social_pinterest_uri %>" target='_blank'><i class="fa fa-pinterest-square"></i></a>
-                                </li>
-<% end %>
-<% unless @seed.social_tumblr_uri.blank? %>
-                                <li>
-                                    <a href="<%= @seed.social_tumblr_uri %>" target='_blank'><i class="fa fa-tumblr-square"></i></a>
-                                </li>
-<% end %>
+                                <% unless @seed.social_facebook_uri.blank? %>
+                                        <a href="<%= @seed.social_facebook_uri %>" target="_blank"><i class="fab fa-facebook"></i></a>
+                                <% end %>
+                                <% unless @seed.social_twitter_uri.blank? %>
+                                        <a href="<%= @seed.social_twitter_uri %>" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <% end %>
+                                <% unless @seed.social_instagram_uri.blank? %>
+                                        <a href="<%= @seed.social_instagram_uri %>" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <% end %>
+                                <% unless @seed.social_line_uri.blank? %>
+                                        <a href="<%= @seed.social_line_uri %>" target="_blank"><i class="fab fa-line"></i></a>
+                                <% end %>
+                                <% unless @seed.social_pinterest_uri.blank? %>
+                                        <a href="<%= @seed.social_pinterest_uri %>" target="_blank"><i class="fab fa-pinterest"></i></a>
+                                <% end %>
+                                <% unless @seed.social_tumblr_uri.blank? %>
+                                        <a href="<%= @seed.social_tumblr_uri %>" target="_blank"><i class="fab fa-tumblr"></i></a>
+                                <% end %>
                                 <%= hotpepper_staff_banner(@seed, false, 'vertical-align: top; padding-top: 1px;') %>
                                 <%= youtube_staff_banner(@seed, false) %>
                             </ul>
