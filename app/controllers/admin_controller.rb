@@ -396,7 +396,7 @@ class AdminController < ApplicationController
     def user_create
         new_user = User.new(user_params)
         new_user = new_user.save
-        unless new_user.valid?
+        unless new_user
             flash[:alert] = '新規ユーザーの作成に失敗しました (ログインIDの重複など)。'
         end
         redirect_to :action=>"user_list"
