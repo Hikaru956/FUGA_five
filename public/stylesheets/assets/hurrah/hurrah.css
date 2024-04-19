@@ -645,12 +645,14 @@ li.latest_li {
 }
 .staff_imgbox img {
     position: relative;
-    top: 50%;
+    top: 0;
     max-width: 100%;
     height: auto;
+/*
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+*/
 }
 a:hover > h2.latest_h2 {
     text-decoration: underline;

@@ -1,0 +1,513 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Noto+Serif+JP&display=swap');
+@import url("../../fontawesome-free-6.1.1-web/css/all.min.css");
+/*
+    reset
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    color: #383838;
+    min-height: 100vh;
+    min-height: 100dvh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+img {
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: middle;
+}
+iframe {
+    max-width: 100%;
+}
+ul[class],
+ol[class] {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+video:focus {
+    outline: none;
+}
+@media(prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important
+    }
+}
+/*
+    common
+*/
+:root {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic", "Yu Gothic", "Meiryo", sans-serif;
+    font-family: 'Cormorant Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "Noto Serif JP", "MS PMincho", serif;
+    font-family: "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "Noto Serif JP", "MS PMincho", serif;
+    font-size: 14px;
+}
+article, aside {
+    margin-bottom: 2rem;
+}
+@media screen and (min-width:600px){
+    article, aside {
+        margin-bottom: 3rem;
+    }
+}
+@media screen and (min-width:800px){
+    article, aside {
+        margin-bottom: 4rem;
+    }
+}
+/*
+    util
+*/
+a {
+    color: inherit;
+    text-decoration: none;
+}
+.imgbox {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 46.875%;
+}
+.imgbox > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.tc,
+.text-center {
+    text-align: center;
+}
+.tr,
+.text-right {
+    text-align: right;
+}
+.ib,
+.inline-block {
+    display: inline-block;
+}
+.el,
+.ellipsis {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*
+*   snslinks
+*/
+ul.snslinks {
+    text-align: center;
+    margin: 16px 0;
+}
+ul.snslinks li {
+    display: inline-block;
+    height: 36px;
+    margin: 0 10px;
+}
+ul.snslinks a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+    font-size: 1.4rem;
+}
+i.fa-twitter:before {
+    color: #22A3F2;
+}
+i.fa-facebook:before {
+    color: #1E7BF2;
+}
+i.fa-pinterest:before {
+    color: #C32025;
+}
+i.fa-youtube:before {
+    color: #FF2826;
+}
+i.fa-instagram:before {
+    color: #614DC5;
+    background: -webkit-linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;
+    background: linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+}
+i.fa-tumblr:before {
+    color: #000000;
+}
+i.fa-line:before {
+    color: #01B303;
+}
+/*
+*   header
+*/
+#header {
+    text-align: center;
+    width: 100%;
+    padding: 32px 0;
+    transition: width 0.6s;
+}
+#header.show {
+    width: 50%;
+}
+#header img {
+    width: 100px;
+}
+#navopner {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 8px auto 0;
+}
+#navopner::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-top: 2px solid #000000;
+}
+#navopner::after {
+    content: "";
+    position: absolute;
+    top: 19px;
+    left: 0;
+    width: 100%;
+    height: 17px;
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+}
+@media screen and (min-width:640px){
+    #header.show {
+        width: 100%;
+    }
+}
+/*
+*   nav
+*/
+ul.nav {
+    margin: 16px 0 32px;
+}
+ul.nav li {
+    margin: 8px 0;
+}
+ul.nav a {
+    display: block;
+    height: 100%;
+}
+/*
+*   gnav
+*/
+#gnav {
+    position: fixed;
+    top: 0;
+    right: -50vw;
+    width: 50%;
+    height: 100vh;
+    height: 100dvh;
+    background-color: rgba(255,255,255,0.85);
+    transition: transform 0.6s;
+    font-size: 1.4rem;
+    line-height: 2;
+    padding: 24px;
+}
+#gnav.show {
+    transform: translateX(-100%);
+}
+#navcloser {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+}
+#navcloser::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 141.421356%;
+    height: 0;
+    border-top: 2px solid #585858;
+    transform-origin: 1px 0;
+    transform: rotate(45deg);
+}
+#navcloser::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: "";
+    width: 141.421356%;
+    height: 0;
+    border-top: 2px solid #585858;
+    transform-origin: calc(100% - 1px) 0;
+    transform: rotate(-45deg);
+}
+@media screen and (min-width:640px){
+    #gnav {
+        right: -320px;
+        width: 320px;
+    }
+}
+/*
+*   footer
+*/
+#footer {
+    text-align: center;
+    color: #ffffff;
+    background-color: #212121;
+    padding: 24px 0;
+    font-size: 0.857rem;
+}
+#footer ul.nav {
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+#footer ul.nav li {
+    display: inline-block;
+    margin: 0 8px;
+}
+p.copy {
+    margin-top: 24px;
+    font-size: 11px;
+}
+/*
+*   contents
+*/
+h1 {
+    text-align: center;
+    font-size: 1.875rem;
+    font-family: 'Cormorant Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "Noto Serif JP", "MS PMincho", serif;
+    font-weight: normal;
+}
+.contents {
+    text-align: center;
+}
+.contents h1,
+.contents h2,
+.contents h3,
+.contents h4,
+.contents p,
+.contents ul,
+.contents ol,
+.contents dl {
+    margin: 1em 0.5em;
+}
+/*
+*   access
+*/
+#access ul {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+/*
+*   menu / price
+*/
+section.menu {
+    max-width: 512px;
+    padding: 0 .5em;
+    margin: 36px auto 52px;
+}
+section.menu h2 {
+    text-align: center;
+    font-size: 1.625rem;
+    font-family: 'Cormorant Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "Noto Serif JP", "MS PMincho", serif;
+    font-weight: normal;
+}
+section.menu h2 + p {
+    text-align: center;
+    font-size: 0.8rem;
+}
+section.menu ul {
+    padding: 0;
+    list-style: none;
+}
+section.menu li {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 24px 2em 8px;
+    border-bottom: 1px dotted #616161;
+}
+.menu_name {
+    flex: 1 1 auto;
+    font-size: 1.125rem;
+}
+.price {
+    flex: 1 1 auto;
+    text-align: right;
+    font-size: 1rem;
+}
+.menu_note {
+    flex: 0 0 100%;
+    clear: right;
+    font-size: 0.8rem;
+}
+/*
+*   content lists
+*/
+#content_lists {
+    list-style: none;
+    padding: 0 .5em;
+    margin: 0 auto;
+    max-width: 640px;
+}
+#content_lists li {
+    margin: 2em 0 4em;
+}
+#content_lists h2 {
+    font-size: 1.375rem;
+    font-weight: normal;
+    margin: 0.5rem 0 1rem;
+}
+#content_lists h2 span {
+    font-size: smaller;
+}
+#content_lists p {
+    margin: 1em 0;
+}
+ul.pagination {
+    text-align: center;
+    margin: 2em 0;
+    font-family: 'Cormorant Garamond', "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", "Noto Serif JP", "MS PMincho", serif;
+}
+ul.pagination li {
+    display: inline-block;
+    border: 1px solid #484848;
+    margin: 0 .3em;
+}
+ul.pagination a {
+    display: block;
+    padding: 0 1.5em;
+}
+/*
+*   carousel
+*/
+#carousel {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+}
+#carouselback {
+    position: relative;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#carouselback li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s;
+}
+#carouselback li:nth-child(1) {
+    opacity: 1;
+}
+#carouselback img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#carousel > #header {
+    position: absolute;
+    text-align: left;
+    top: 0;
+    padding: 8px 16px 0 8px;
+}
+#carousel > #header #navopner {
+    float: right;
+}
+#homefooter {
+    text-align: center;
+    padding: 0 0 24px;
+    font-size: 0.875rem;
+}
+/*
+ *      pagination
+ */
+.pagination {
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
+}
+.pagination > li {
+  display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+  padding: 6px 16px;
+  line-height: 2;
+  text-decoration: none;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  background-color: #F7F8F8;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  border-bottom: 1px solid #C9CACA;
+  cursor: default;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #bbbdb6;
+  cursor: not-allowed;
+}
