@@ -32,6 +32,7 @@
     <script src="/assets/lenahc.co.jp.new/js/main.js?1"></script>
     <script src="/assets/lenahc.co.jp.new/jquery.inview/jquery.inview.min.js"></script>
     <script src="/assets/lenahc.co.jp.new/jquery.inview/jquery.inview.custom.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
     <link href="/assets/lenahc.co.jp.new/jquery.inview/jquery.inview.custom.css" rel="stylesheet" type="text/css">
     <script src="/assets/lenahc.co.jp.new/slick/slick.js"></script>
     <link href="/assets/lenahc.co.jp.new/slick/slick.css" rel="stylesheet" type="text/css">
@@ -59,6 +60,9 @@
                 pauseOnHover: false,
                 pauseOnFocus: false,
                 speed: 3000,
+            });
+            $(function(){
+                $('img[ImageMap]').rwdImageMaps();
             });
         });
     </script>
