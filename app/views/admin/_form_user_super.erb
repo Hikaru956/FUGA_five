@@ -1,6 +1,7 @@
 <%
 	opts = []
 	opts << [label_user_role(User::ROLE_SUPER),		User::ROLE_SUPER]	if current_user.has_permission?(User::ROLE_SUPER)
+	opts << [label_user_role(User::ROLE_OPERATOR),	User::ROLE_OPERATOR]
 	opts << [label_user_role(User::ROLE_REGISTRAR),	User::ROLE_REGISTRAR]
 	opts << [label_user_role(User::ROLE_SALES),		User::ROLE_SALES]
 %>
