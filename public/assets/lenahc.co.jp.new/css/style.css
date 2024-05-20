@@ -1112,6 +1112,26 @@ section h2 {
   margin-top: 24px;
 }
 
+#sect-rental-collection {
+  background-image: url(../images/top/bk_sect_rentalc.jpg);
+  background-size: cover;
+  background-position: right top;
+  margin-top: 32px;
+}
+
+#sect-rental-collection h2 {
+  text-align: left;
+  padding-bottom: 0.5em;
+  background-image: url(../images/common/dots-3.svg);
+  background-size: 1.75em;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}
+
+#sect-rental-collection .btn-style-1 {
+  margin-top: 24px;
+}
+
 #page-footer {
   margin-top: 128px;
 }

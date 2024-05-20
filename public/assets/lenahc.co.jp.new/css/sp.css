@@ -236,6 +236,11 @@ section h2 {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+#sect-rental-collection p:nth-of-type(1) {
+  padding: 0.5em;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 #page-footer nav ul {
   width: 50%;
   margin-bottom: 32px;
