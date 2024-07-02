@@ -15,7 +15,7 @@
             <ul>
 <%      @leafs.each do | leaf | %>
                 <li>
-                    <div class="menu_name"><%= model_title(leaf) %><% leaf.position %></div>
+                    <div class="menu_name"><%= model_title(leaf) %><%= @website.id %></div>
                     <div class="price"><%= raw leaf.description_2 %></div>
 <%          unless leaf.description.blank? %>
                     <div class="menu_note"><%= raw leaf.description %></div>
