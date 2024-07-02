@@ -5,9 +5,10 @@
     #c = ContentLeaf.public_leafs_condition
     #@leafs = seed.content_leafs.find(:all, :conditions=>c.where, :order=>'position asc')
     unless @leafs.blank?
+        @leafs = ContentLeaf.where("id IN (?)", @leafs.map{|l| l.id}).order(position: :desc)
 %>
         <section>
-            <h1><%= model_name(seed) %>xxx</h1>
+            <h1><%= model_name(seed) %></h1>
 <%      unless seed.description.blank? %>
             <p><%= raw seed.description %></p>
 <%      end %>
