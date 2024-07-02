@@ -3,7 +3,6 @@
 	sons = seed.sons
 	sons << seed
 	@leafs = seed.public_leafs.where("content_leafs.content_category_id IN (?)", sons).order(position: :asc)
-	@leafs = reorder_by_position(@leafs, true)
 #	c.and "content_leafs.content_category_id", 'IN', sons
 #	@leafs = seed.content_leafs.find(:all, :conditions=>c.where, :order=>'position asc') 
 	#@leafs = seed.content_leafs.where("content_leafs.content_category_id IN (?)", sons).order(position: :asc)

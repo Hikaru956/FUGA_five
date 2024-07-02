@@ -2,7 +2,6 @@
     sons = seed.sons
     sons << seed
     @leafs = seed.public_leafs.order(position: :asc)
-    @leafs = reorder_by_position(@leafs, true)
     #c = ContentLeaf.public_leafs_condition
     #@leafs = seed.content_leafs.find(:all, :conditions=>c.where, :order=>'position asc')
     unless @leafs.blank?
