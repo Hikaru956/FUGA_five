@@ -2,7 +2,8 @@
     sons = seed.sons
     sons << seed
     if @website.id == 170
-        @leafs = seed.public_leafs.order(position: :desc)
+        @leafs = seed.public_leafs
+        @leafs = reorder_by_position(@leafs, true)
     else
         @leafs = seed.public_leafs.order(position: :asc)
     end
