@@ -6,7 +6,7 @@
     #@leafs = seed.content_leafs.find(:all, :conditions=>c.where, :order=>'position asc')
     unless @leafs.blank?
         #♠ head spa salon teateの価格表の並べ替え
-        @leafs = ContentLeaf.where("id IN (?)", @leafs.map{|l| l.id}).order(position: :asc) if @website.id == 170
+        @leafs = ContentLeaf.where("id IN (?)", @leafs.map{|l| l.id}).order(position: :asc) #if @website.id == 170
 %>
         <section>
             <h1><%= model_name(seed) %></h1>
