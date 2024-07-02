@@ -1,12 +1,7 @@
 <%
     sons = seed.sons
     sons << seed
-    if @website.id == 170
-        @leafs = seed.public_leafs
-        @leafs = reorder_by_position(@leafs, true)
-    else
-        @leafs = seed.public_leafs.order(position: :asc)
-    end
+    @leafs = seed.public_leafs.order(position: :asc)
     #c = ContentLeaf.public_leafs_condition
     #@leafs = seed.content_leafs.find(:all, :conditions=>c.where, :order=>'position asc')
     unless @leafs.blank?
