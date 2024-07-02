@@ -1,7 +1,11 @@
 <%
     sons = seed.sons
     sons << seed
-    @leafs = seed.public_leafs.order(position: :asc)
+    if @website.id == 170
+        @leafs = seed.public_leafs
+    else
+        @leafs = seed.public_leafs.order(position: :asc)
+    end
     #c = ContentLeaf.public_leafs_condition
     #@leafs = seed.content_leafs.find(:all, :conditions=>c.where, :order=>'position asc')
     unless @leafs.blank?
