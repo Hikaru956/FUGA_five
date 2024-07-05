@@ -65,23 +65,26 @@
 
 <div class="row-fluid">
 
-	<% unless @shop.enable_editor %>
-		<h4>
-			<p class="float-right">
-				<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
-					<i class="fa-solid fa-camera"></i>&nbsp;
-					写真追加
-				</a>
-			</p>
-			記事で使用する画像
-		</h4>
-		<p>
-			<small>記事で使用する画像は予め追加してください。先頭の写真が一覧表示の際の代表写真になります。</small>
-		</p>	
-	<% else %>
-		<small>先頭の写真が一覧表示の際の代表写真になります。</small>
+	<% if false %>
+		<% unless @shop.enable_editor %>
+			<h4>
+				<p class="float-right">
+					<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
+						<i class="fa-solid fa-camera"></i>&nbsp;
+						写真追加
+					</a>
+				</p>
+				記事で使用する画像
+			</h4>
+			<p>
+				<small>記事で使用する画像は予め追加してください。先頭の写真が一覧表示の際の代表写真になります。</small>
+			</p>	
+		<% else %>
+			
+		<% end %>
 	<% end %>
 
+	<small>先頭の写真が一覧表示の際の代表写真になります。</small>
 	<% if false %>
 		<% array = @item.photos.order(position: :asc).in_groups_of(3, false)%>
 		<% for i in 0..(array.size-1) %>
@@ -114,13 +117,15 @@
 		<%= render partial: 'delete_photo', locals: {photo: photo} %>
 	<% end %>
 
-	<% unless @shop.enable_editor %>
-		<p class="float-right">
-			<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
-				<i class="fa-solid fa-camera"></i>&nbsp;
-				写真追加
-			</a>
-		</p>
+	<% if false %>
+		<% unless @shop.enable_editor %>
+			<p class="float-right">
+				<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_photo', :id=>@item) %>" data-turbolinks='false'>
+					<i class="fa-solid fa-camera"></i>&nbsp;
+					写真追加
+				</a>
+			</p>
+		<% end %>
 	<% end %>
 </div>
 

@@ -126,16 +126,18 @@
 				<% end %>
 			</td>
 		</tr>
+		<% if false %>
 		<tr>
 			<th>新編集機能</th>
 			<td>
-				<% if @shop.enable_editor %>
+				<% if true || @shop.enable_editor %>
 					有効
 				<% else %>
 					無効
 				<% end %>
 			</td>
 		</tr>
+		<% end %>
 		<tr>
 			<th>ブログコメント機能</th>
 			<td>

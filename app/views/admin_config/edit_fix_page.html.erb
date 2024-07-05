@@ -30,11 +30,13 @@
 			<%= cancel_icon('キャンセル')%>&nbsp;
 			キャンセル
 		</a>
-		<% unless @shop.enable_editor %>
-			<a class="btn btn-outline-success btn-sm" href="<%= url_for(:action=>'list_page_photo', :id=>@item) %>">
-				<i class="fa-solid fa-camera"></i>&nbsp;
-				素材一覧
-			</a>
+		<% if false %>
+			<% unless @shop.enable_editor %>
+				<a class="btn btn-outline-success btn-sm" href="<%= url_for(:action=>'list_page_photo', :id=>@item) %>">
+					<i class="fa-solid fa-camera"></i>&nbsp;
+					素材一覧
+				</a>
+			<% end %>
 		<% end %>
 	</span>
 	<h4>

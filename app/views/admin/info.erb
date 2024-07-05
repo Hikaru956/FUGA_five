@@ -28,8 +28,10 @@
   <dt class="col-sm-3">お問い合わせ機能</dt>
   <dd class="col-sm-9"><b><span class='text-primary'><%= valid_shops.where(enable_inquiry: true).count %></span></b> <small>店舗</small></dd>
 
-  <dt class="col-sm-3">リッチ・テキスト・エディター</dt>
-  <dd class="col-sm-9"><b><span class='text-primary'><%= valid_shops.where(enable_editor: true).count %></span></b> <small>店舗</small></dd>
+  <% if false %>
+    <dt class="col-sm-3">リッチ・テキスト・エディター</dt>
+    <dd class="col-sm-9"><b><span class='text-primary'><%= valid_shops.where(enable_editor: true).count %></span></b> <small>店舗</small></dd>
+  <% end %>
 
   <dt class="col-sm-3">予約管理機能</dt>
   <dd class="col-sm-9"><b><span class='text-primary'><%= valid_shops.where(option_reservation_management: true).count %></span></b> <small>店舗</small></dd>

@@ -128,7 +128,7 @@
 	<% end %>
 </div>
 
-<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+<% if false #current_user.has_permission?(User::ROLE_MANAGER) %>
 	<p>
 		<a class="btn btn-info btn-small" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
 			<i class="icon-camera"></i>&nbsp;

@@ -118,7 +118,7 @@
 	<%= raw(@staff.description) %>
 </div>
 <span class="float-right">
-	<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+	<% if false #current_user.has_permission?(User::ROLE_MANAGER) %>
 			<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
 				<i class="fa-solid fa-camera"></i>&nbsp;
 				写真追加

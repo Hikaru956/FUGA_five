@@ -149,7 +149,7 @@
 		<% end %>
 		<br/>
 
-		<% if current_user.has_permission?(User::ROLE_MANAGER) %>
+		<% if false #current_user.has_permission?(User::ROLE_MANAGER) %>
 			<p class='text-right'>
 				<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_shop_photo', :id=>@shop) %>" data-turbolinks='false'>
 					<i class="fa-solid fa-camera"></i>&nbsp;

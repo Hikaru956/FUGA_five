@@ -44,7 +44,7 @@
 		<%= f.collection_select(:staff_id, options, :last, :first, {prompt: false}, {class: "form-control"})%>
 	</div>
 </div>
-<% if @shop.enable_editor %>
+<% if true || @shop.enable_editor %>
 	<textarea name="content_leaf[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= item.description%></textarea>
 	<%= render :partial=>"layouts/summernote", locals: {ref_id: item.id} %>
 <% else %>

@@ -35,7 +35,7 @@
 		<%= f.collection_select(:staff_id, options, :last, :first, {prompt: false}, {class: "form-control"})%>
 	</div>
 </div>
-<% if @shop.enable_editor %>
+<% if true || @shop.enable_editor %>
 	<% if false %>
 		<textarea name="content_leaf[description]" style="min-height:800px;max-height:1200px" id="inp_editor1"><%= @item.description%></textarea>
 		<%= render :partial=>"layouts/richtext_editor" %>

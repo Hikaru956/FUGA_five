@@ -41,7 +41,7 @@
 <%= form_for @staff, url: admin_config_shop_update_staff_path(id: @staff.id), method: :patch do |f|  %>
 	<fieldset>
 		<div class='control-group'>
-			<% if @shop.enable_editor %>
+			<% if true || @shop.enable_editor %>
 				<textarea name="staff[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= @staff.description%></textarea>
 				<%= render :partial=>"layouts/summernote", locals: {ref_id: @staff.id} %>
 			<% else %>

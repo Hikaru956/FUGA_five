@@ -1,4 +1,4 @@
-<% if shop.enable_editor %>
+<% if true || shop.enable_editor %>
     <textarea name="shop[wsite_description_business]" style="min-height:800px;max-height:1200px" id="summernote"><%= shop.wsite_description_business%></textarea>
 	<%= render :partial=>"layouts/summernote", locals: {ref_id: shop.id} %>
 <% else %>
