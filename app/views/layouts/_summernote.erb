@@ -1,76 +1,136 @@
-<script type="text/javascript" src="/javascripts/summernote//bootstrap5/summernote-image-attributes.js"></script>
+<script type="text/javascript" src="/javascripts/summernote/bootstrap5/summernote-image-attributes.js"></script>
 <script src="/lang/ja-JP.js"></script>
 <script>
     $('#summernote').summernote({
-    placeholder: '記事の本文を入力します。',
-    tabsize: 2,
-    height: 600,
-    fontNames: ["YuGothic","Yu Gothic","Hiragino Kaku Gothic Pro","Meiryo","sans-serif", "Arial","Arial Black","Comic Sans MS","Courier New","Helvetica Neue","Helvetica","Impact","Lucida Grande","Tahoma","Times New Roman","Verdana"],
-    lang: "ja-JP",
-    popover: {
-        image: [
-            ['custom', ['imageAttributes']],
-            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']],
-            ['custom', ['altString']],
-        ],
-    },
-    imageAttributes:{
-        lang: 'ja-JP',
-        icon:'<i class="fa-solid fa-pen-to-square"></i>',
-        removeEmpty:false, 
-        disableUpload: true
-    },
-    buttons: {
-        // imgタグのalt属性をセットするボタン'altString'の定義と実装
-        altString: function (context){
-            // ボタンの定義
-            var ui = $.summernote.ui;
-            var button = ui.button({
-                contents: '<i class="fa fa-info-circle"></>',
-                tooltip: 'Set Alt Attribute',   // 何故かこれが出ない...
-                // ボタンの実装
-                click: function () {
-                    // 対象の画像のノードを取得（こんなの知るか！）
-                    var img = $(context.invoke('editor.restoreTarget'));
-                    // プロンプトを表示（既存の値は、img.attr('alt')で取得
-                    var altText = prompt('alt属性', img.attr('alt'));
-                    // imgタグのalt属性をセット（引数2つ目）
-                    img.attr('alt', altText);
-                    return
-                }
-            });
-            return button.render();   // return button as jquery object
-        }
-    },
-    toolbar: [
-        ['style', ['style']],
-        ['insert', ['picture', 'link', 'video']],
-        ['font', ['bold', 'italic', 'underline', 'clear']],
-        ['fontname', ['fontname']],      // フォントファミリー
-        ['fontsize', ['fontsize']],      // フォントサイズ
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']],          // 高さ
-        ['table', ['table']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-    ],
-    callbacks: {
-        onImageUpload: function(files) {
-            console.log('ひかる')
-            uploadImage(files[0]);
+        placeholder: '記事の本文を入力します。',
+        tabsize: 2,
+        height: 600,
+        fontNames: ["YuGothic","Yu Gothic","Hiragino Kaku Gothic Pro","Meiryo","sans-serif", "Arial","Arial Black","Comic Sans MS","Courier New","Helvetica Neue","Helvetica","Impact","Lucida Grande","Tahoma","Times New Roman","Verdana"],
+        lang: "ja-JP",
+        popover: {
+            image: [
+                ['custom', ['rotateLeft', 'rotateRight', 'imageAttributes']],
+                ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+                ['float', ['floatLeft', 'floatRight', 'floatNone']],
+                ['remove', ['removeMedia']],
+                ['custom', ['altString']],
+            ],
         },
-        onMediaDelete: function(target) {
-            console.log('メディアが削除されました。');
-            var image_id = target[0].id;
-            if (!!image_id) {
-                deleteImage(image_id);
+        imageAttributes:{
+            lang: 'ja-JP',
+            icon:'<i class="fa-solid fa-pen-to-square"></i>',
+            removeEmpty:false, 
+            disableUpload: true
+        },
+        buttons: {
+            rotateLeft: function(context) {
+                var ui = $.summernote.ui;
+                var button = ui.button({
+                    contents: '<i class="fa fa-rotate-left"></i> 左に回転',
+                    tooltip: '左に回転',
+                    click: function () {
+                        var img = $(context.invoke('editor.restoreTarget'));
+                        var currentRotation = img.data('rotation') || 0;
+                        var newRotation = (currentRotation - 90) % 360;
+                        img.css('transform', 'rotate(' + newRotation + 'deg)');
+                        img.data('rotation', newRotation);
+                        //model更新をマーク
+                        note = context.layoutInfo.note;
+                        note.val(context.invoke('code'));
+                        note.change();
+
+                        // 回転情報を保存する
+                        saveImageRotation(img.attr('id'), newRotation);
+                    }
+                });
+                return button.render(); 
+            },
+            rotateRight: function(context) {
+                var ui = $.summernote.ui;
+                var button = ui.button({
+                    contents: '<i class="fa fa-rotate-right"></i> 右に回転',
+                    tooltip: '右に回転',
+                    click: function () {
+                        var img = $(context.invoke('editor.restoreTarget'));
+                        var currentRotation = img.data('rotation') || 0;
+                        var newRotation = (currentRotation + 90) % 360;
+                        img.css('transform', 'rotate(' + newRotation + 'deg)');
+                        img.data('rotation', newRotation);
+                        //model更新をマーク
+                        note = context.layoutInfo.note;
+                        note.val(context.invoke('code'));
+                        note.change();
+
+                        // 回転情報を保存する
+                        saveImageRotation(img.attr('id'), newRotation);
+                    }
+                });
+                return button.render(); 
+            },
+            // imgタグのalt属性をセットするボタン'altString'の定義と実装
+            altString: function (context){
+                // ボタンの定義
+                var ui = $.summernote.ui;
+                var button = ui.button({
+                    contents: '<i class="fa fa-info-circle"></i>',
+                    tooltip: 'Set Alt Attribute',   // 何故かこれが出ない...
+                    // ボタンの実装
+                    click: function () {
+                        // 対象の画像のノードを取得（こんなの知るか！）
+                        var img = $(context.invoke('editor.restoreTarget'));
+                        // プロンプトを表示（既存の値は、img.attr('alt')で取得
+                        var altText = prompt('alt属性', img.attr('alt'));
+                        // imgタグのalt属性をセット（引数2つ目）
+                        img.attr('alt', altText);
+                        return;
+                    }
+                });
+                return button.render();   // return button as jquery object
             }
-            target.remove();
+        },
+        toolbar: [
+            ['style', ['style']],
+            ['insert', ['picture', 'link', 'video']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],      // フォントファミリー
+            ['fontsize', ['fontsize']],      // フォントサイズ
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],          // 高さ
+            ['table', ['table']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+        callbacks: {
+            onImageUpload: function(files) {
+                console.log('ひかる')
+                uploadImage(files[0]);
+            },
+            onMediaDelete: function(target) {
+                console.log('メディアが削除されました。');
+                var image_id = target[0].id;
+                if (!!image_id) {
+                    deleteImage(image_id);
+                }
+                target.remove();
+            }
         }
-    }
     });
+    function saveImageRotation(imageId, rotation) {
+    }
+    function xxxsaveImageRotation(imageId, rotation) {
+        $.ajax({
+            type: 'POST',
+            url: '/save_image_rotation',
+            data: { id: imageId, rotation: rotation },
+            success: function(response) {
+                console.log('回転情報が保存されました。');
+            },
+            error: function(xhr, status, error) {
+                console.error('回転情報の保存中にエラーが発生しました:', error);
+            }
+        });
+    }
+
     function uploadImage(file) {
         var data = new FormData();
         data.append('photo', file);
@@ -90,6 +150,7 @@
             }
         });
     }
+
     function deleteImage(photoId) {
         $.ajax({
             type: 'DELETE',
