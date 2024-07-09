@@ -98,7 +98,8 @@ class User < ActiveRecord::Base
   end
 
   def ui_version
-    true
+    return true unless self.has_permission?(User::ROLE_REGISTRAR)
+    self[:ui_version]
   end
 
   def is_fuga_3?
