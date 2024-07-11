@@ -10,28 +10,33 @@
 <%= form_for @item , url: admin_content_portfolio_content_category_update_description_path(id: @item.id), method: :patch do |f|  %>
 	<fieldset>
 		<legend>カテゴリー説明文</legend>
-		<%= f.text_area  :description, value: @item.description, :class => "tinymce input-block-level", rows: 20, :placeholder=>"説明文を入力します。" %>
-		<script type="text/javascript">
-			tinyMCE.init({
-				selector: 'textarea.tinymce',
-				theme_advanced_toolbar_location: "top",
-				theme_advanced_statusbar_location: "bottom",
-				theme_advanced_buttons3_add: ["tablecontrols"],
-				plugins: "table,image,code,link,forecolor,backcolor,emoticons",
-				<% unless @item.blank? %>
-					<% unless @item.photos.blank? %>
-					image_list: [ 
-						<%= photo_array(@item.photos).html_safe %>
-						],
+		<% if true || @shop.enable_editor %>
+			<textarea name="content_category[description]" style="min-height:800px;max-height:1200px" id="summernote"><%= @item.description%></textarea>
+			<%= render :partial=>"layouts/summernote", locals: {ref_id: @item.id} %>
+		<% else %>
+			<%= f.text_area  :description, value: @item.description, :class => "tinymce input-block-level", rows: 20, :placeholder=>"説明文を入力します。" %>
+			<script type="text/javascript">
+				tinyMCE.init({
+					selector: 'textarea.tinymce',
+					theme_advanced_toolbar_location: "top",
+					theme_advanced_statusbar_location: "bottom",
+					theme_advanced_buttons3_add: ["tablecontrols"],
+					plugins: "table,image,code,link,forecolor,backcolor,emoticons",
+					<% unless @item.blank? %>
+						<% unless @item.photos.blank? %>
+						image_list: [ 
+							<%= photo_array(@item.photos).html_safe %>
+							],
+						<% end %>
 					<% end %>
-				<% end %>
-				relative_urls : false,
-				convert_urls: false,
-				content_style: 'img { max-width: 100%; height: auto; }' ,
-				resize: 'both',
-				toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
-				language: 'ja'})
-		</script>
+					relative_urls : false,
+					convert_urls: false,
+					content_style: 'img { max-width: 100%; height: auto; }' ,
+					resize: 'both',
+					toolbar: [" image emoticons | alignleft aligncenter alignjustify  alignright | forecolor backcolor | link | formatselect | fontselect | fontsizeselect | bold italic underline| blocks | outdent indent | table | undo redo | code |"],
+					language: 'ja'})
+			</script>
+		<% end %>
 		<div class="form-actions text-right">
 			<% url_cancel = url_for(:action=>"content_category", :id=>@item) %>
 	  		<a class="btn btn-sm btn-outline-dark" href="<%= url_cancel %>"><%= cancel_icon('キャンセル')%>&nbsp;キャンセル</a>
