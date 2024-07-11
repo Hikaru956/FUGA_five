@@ -126,6 +126,7 @@
 	<% end %>
 </span>
 
+<% if false %>
 <div class="row">
 	<% array = @staff.photos.order(position: :asc).in_groups_of(3, false)%>
 	<% for i in 0..(array.size-1) %>
@@ -147,6 +148,7 @@
 			</div>
 	<% end %>
 </div>
+<% end %>
 <br/>
 <div class="row row-cols-2 row-cols-md-4 g-2">
 	<% @staff.photos.order(position: :asc).each do |photo| %>
