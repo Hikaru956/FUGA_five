@@ -118,7 +118,7 @@
 	<%= raw(@staff.description) %>
 </div>
 <span class="float-right">
-	<% if false #current_user.has_permission?(User::ROLE_MANAGER) %>
+	<% if current_user.has_permission?(User::ROLE_MANAGER) %>
 			<a class="btn btn-success btn-sm" href="<%= url_for(:action=>'new_staff_photo', :id=>@staff) %>" data-turbolinks='false'>
 				<i class="fa-solid fa-camera"></i>&nbsp;
 				写真追加
@@ -126,7 +126,6 @@
 	<% end %>
 </span>
 
-<% if false %>
 <div class="row">
 	<% array = @staff.photos.order(position: :asc).in_groups_of(3, false)%>
 	<% for i in 0..(array.size-1) %>
@@ -148,8 +147,6 @@
 			</div>
 	<% end %>
 </div>
-<% end %>
-
 <br/>
 <div class="row row-cols-2 row-cols-md-4 g-2">
 	<% @staff.photos.order(position: :asc).each do |photo| %>
