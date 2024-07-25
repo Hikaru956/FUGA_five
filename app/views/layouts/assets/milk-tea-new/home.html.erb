@@ -1213,7 +1213,7 @@ $(document).ready(function(){
 					<div id="footer-under">
 						<div class="wrapper-mini">
 							<div class="cover-mini">
-								<div class="contents-mini">c 2022 Milk tea LLC All rights Reserved.</div>
+								<div class="contents-mini">c 2022 Milk tea LLC All rights Reserved<a href="<%= url_for(action: 'kick', name: 'home_new', wkey: @website.wsite_hash_key)%>">.</a></div>
 							</div>
 						</div>
 					</div>
@@ -1224,9 +1224,6 @@ $(document).ready(function(){
 	<div id="return-cover">
 		<a href="<%= url_for :action=>'home', :anchor=>'pagetop', :wkey=>@website.wsite_hash_key %>" class="return">∧</a>
 	</div>
-	<% if current_user.has_permission?(User::ROLE_SUPER) %>
-		<a href="<%= url_for(action: 'kick', name: 'home_new', wkey: @website.wsite_hash_key)%>">.</a>
-	<% end %>
 
 </div>
 </body></html>
