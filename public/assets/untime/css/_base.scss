@@ -1,0 +1,163 @@
+/*ResetCSS*/
+
+//@import url('bootstrap-reboot.css');
+
+/*Fonts*/
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+/*基本設定*/
+
+html {
+  font-size: $base-text-size;
+}
+
+body {
+  font-family: $sans-serif;
+  color: $base-text-color;
+  letter-spacing: .01em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: .14em;
+  line-height: 1.4;
+}
+
+p {
+  line-height: $base-line-height;
+  letter-spacing: .05em;
+}
+
+figure {
+  margin-bottom: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+iframe {
+  max-width: 100%;
+}
+
+//コンテナのサイズ設定
+.container-l {
+  max-width: $container-l-width;
+  width: 92%;
+  @include mx-auto;
+}
+
+.container {
+  width: 92%;
+  max-width: $container-width;
+  @include mx-auto;
+}
+
+.container-s {
+  width: 92%;
+  max-width: $container-s-width;
+  @include mx-auto;
+}
+
+.container-ss {
+  width: 92%;
+  max-width: $container-ss-width;
+  @include mx-auto;
+}
+
+.mx-auto {
+  @include mx-auto;
+}
+
+.linkbox {
+  position: relative;
+  cursor: pointer;
+
+  // &:hover {
+  //   background-color: $ex-light-theme-color;
+  // }
+
+  a.more {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-indent: -9999px;
+  }
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/*ボタン*/
+.btn {
+  a {
+    display: inline-block;
+    padding: .5em 1em;
+    line-height: 1.2;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+      filter: brightness(1.1);
+      text-decoration: none;
+    }
+  }
+}
+
+/*表組み*/
+
+table {
+
+  th,
+  td {
+    padding: .5em 1em;
+    border: 1px solid #ccc;
+  }
+
+  th {
+    font-weight: 600;
+  }
+
+  td {
+    font-weight: normal;
+  }
+}
+
+#page-header {
+  h1 {
+    margin: 0;
+  }
+}
+
+#nav-main a {
+  display: block;
+}
+.iframe-container {
+	position: relative;
+	iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+.ls-none {
+	list-style: none;
+	padding-left: 0;
+	margin-bottom: 0;
+}

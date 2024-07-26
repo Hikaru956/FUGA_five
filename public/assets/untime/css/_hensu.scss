@@ -1,0 +1,20 @@
+//containerサイズ
+$container-l-width: 1500px;
+$container-width: 1200px;
+$container-s-width: 1000px;
+$container-ss-width: 640px;
+
+//文字
+$sans-serif: "Yu Gothic UI", 'Noto Sans JP', "Meiryo UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "MS PGothic", sans-serif;
+$serif: "Yu Mincho", "Times New Roman", "Hiragino Mincho ProN", "YuMincho", "MS PMincho", serif;
+$base-text-size: 16px;
+$small: .9375em;
+$base-line-height: 1.73;
+
+//カラー変数
+$base-text-color: black;
+
+@mixin mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}

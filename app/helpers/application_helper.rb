@@ -350,6 +350,26 @@ EOF
     html.html_safe
   end
 
+  def leaf_navigation_untime(leaf)
+    older = leaf.prev_leaf(leaf)
+    newer = leaf.next_leaf(leaf)
+    return nil if older.blank? && newer.blank?
+    
+    html = '<br/>'
+    unless older.blank?
+        html += '<li>'
+        html += link_to(raw('◀'+ ' ' +(truncate(prev_leaf(leaf).title, :length=>15))), :action=>params[:action], :id=>older, :wkey=>leaf.shop.wsite_hash_key)
+        html += '</li>'
+    end
+    unless newer.blank?
+        html += '<li>'
+        html += link_to(raw((truncate(next_leaf(leaf).title, :length=>15))+ ' ' +'▶'), :action=>params[:action], :id=>newer, :wkey=>leaf.shop.wsite_hash_key)
+        html += '</li>'
+    end
+    html += '<br/>'
+    html.html_safe
+  end
+
   def hotpepper_shop_banner(shop, small=false, style_code)
     html = ''
     unless shop.social_hotpepper_beauty_uri.blank?

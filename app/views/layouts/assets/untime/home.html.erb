@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<% dev_slider = VisualWidget.search_widget_bag_for(@website, "1c62e46ea2320d6a956ae2ee2d7e07da") %>
+<% bg_slider = VisualWidget.search_widget_bag_for(@website, "8ffe52b5db9240a5b740e3ffb499d52b") %>
+<head>
+	<meta charset="utf-8">
+	<title>untime / みずとそらの美容室</title>
+	<link rel="icon" href="favicon.ico">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="/assets/untime/css/bootstrap-reboot.css" rel="stylesheet" type="text/css">
+	<link href="/assets/untime/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/assets/untime/css/pctb.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)">
+	<link href="/assets/untime/css/sp.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)">
+	<script src="/assets/untime/js/jquery-3.7.1.min.js"></script>
+	<script src="/assets/untime/js/main.js"></script>
+</head>
+
+<body>
+	<div id="body-cover"></div>
+	<div class="body-slide">
+		<% if !bg_slider.blank? && bg_slider.is_valid? %>
+			<% bg_slider.photos.each do | photo | %>
+				<div style="background-image"><img src="<%= photo.clip.url() %>" alt=""></div>
+			<% end %>
+		<% else %>
+			<div style="background-image:url('/assets/untime/images/sl1.webp')"></div>
+			<div style="background-image:url('/assets/untime/images/sl2.webp')"></div>
+			<div style="background-image:url('/assets/untime/images/sl3.webp')"></div>
+			<div style="background-image:url('/assets/untime/images/sl4.webp')"></div>
+		<% end %>
+	</div>
+	<a id="page-top"></a>
+	<%= render :partial=>"#{LayoutScheme.asset_root}/untime/header" %>
+	<div id="btn-menu-container">
+		<div id="btn-menu">
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+	<main id="page-main">
+		<article>
+			<section id="first-visual">
+				<nav id="nav-first-visual">
+					<ul>
+						<li>
+							<a href="#item-untime">
+								<img src="/assets/untime/images/logo_untime.svg" width="300" height="104" alt="untime beloved be hair">
+							</a>
+						</li>
+						<li>
+							<a href="#item-mizusora">
+								<img src="/assets/untime/images/logo_mizusora.svg" width="159" height="150" alt="みずとそらの美容室">
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</section>
+			<section id="sect-list-salon" class="bk-cl-wh">
+				<div class="container">
+					<ul class="list-salon">
+						<li id="item-untime" class="item-salon">
+							<div class="txt">
+								<div class="inner-txt">
+									<h3>[untime]</h3>
+									<p class="address">〒950-0872 新潟市東区牡丹山5丁目12-3</p>
+									<p class="tel"><a href="tel:0252787652">PHONE. 0252787652</a></p>
+									<ul class="list-links">
+										<li> <a href="https://beauty.hotpepper.jp/slnH000263980/"> <img
+													src="/assets/untime/images/logo_hp_bk.svg" width="150" height="75"
+													alt="ホットペッパービューティー"> </a> </li>
+										<li> <a href="https://www.instagram.com/untime.0303/"> <img
+													src="/assets/untime/images/icon_insta_bk.svg" width="48" height="48"
+													alt="untime 公式インスタグラム"> </a> </li>
+										<li> <a href=""> <img src="/assets/untime/images/icon_line_bk.svg" width="48" height="48"
+													alt="untime 公式LINE"> </a> </li>
+									</ul>
+								</div>
+							</div>
+							<div class="map">
+								<div class="iframe-container">
+									<iframe
+										src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3147.4801904120254!2d139.0944240759847!3d37.919211003826575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5ff4cbcb54d53d8b%3A0xb822554c6523d6ca!2suntime!5e0!3m2!1sja!2sjp!4v1718003328597!5m2!1sja!2sjp"
+										width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+										referrerpolicy="no-referrer-when-downgrade"></iframe>
+								</div>
+							</div>
+						</li>
+						<li id="item-mizusora" class="item-salon">
+							<div class="txt">
+								<div class="inner-txt">
+									<h3>みずとそらの美容室</h3>
+									<p class="address">〒950-0618 新潟市江南区早通3丁目4-26</p>
+									<p class="tel"><a href="tel:07013680118">PHONE. 07013680118</a></p>
+									<ul class="list-links">
+										<li> <a href="https://www.instagram.com/_mizusora_/"> <img
+													src="/assets/untime/images/icon_insta_bk.svg" width="48" height="48"
+													alt="みずとそらの美容室 公式インスタグラム"> </a> </li>
+										<li> <a href=""> <img src="/assets/untime/images/icon_line_bk.svg" width="48" height="48"
+													alt="みずとそらの美容室 公式LINE"> </a> </li>
+									</ul>
+								</div>
+							</div>
+							<div class="map">
+								<div class="iframe-container">
+									<iframe
+										src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.264346412507!2d139.08528717598213!3d37.85410470758626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5ff4cfa36b2366e3%3A0x898b95a272ade48e!2z44G_44Ga44Go44Gd44KJ44Gu576O5a655a6k!5e0!3m2!1sja!2sjp!4v1718003453166!5m2!1sja!2sjp"
+										width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+										referrerpolicy="no-referrer-when-downgrade"></iframe>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</article>
+	</main>
+	<footer id="page-footer" class="bk-cl-wh">
+		<div class="copyContainer container">
+			<p class="copy">Copyright&copy;untime All Rights Reserved.</p>
+		</div>
+	</footer>
+</body>
+
+</html>

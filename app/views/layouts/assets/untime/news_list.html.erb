@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>untime / みずとそらの美容室</title>
+  <link rel="icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="/assets/untime/css/bootstrap-reboot.css" rel="stylesheet" type="text/css">
+  <link href="/assets/untime/css/style.css" rel="stylesheet" type="text/css">
+  <link href="/assets/untime/css/pctb.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)">
+  <link href="/assets/untime/css/sp.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)">
+  <script src="/assets/untime/js/jquery-3.7.1.min.js"></script>
+  <script src="/assets/untime/js/main.js"></script>
+</head>
+
+<body class="page">
+  <div id="body-cover"></div>
+  <a id="page-top"></a>
+  <%= render :partial=>"#{LayoutScheme.asset_root}/untime/header" %>
+  <div id="btn-menu-container">
+    <div id="btn-menu">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <main id="page-main">
+    <article>
+      <header class="header-article">
+        <h2><a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="/assets/untime/images/logo_all_salons_bk_gray.png" width="1200" height="450" alt="ロゴ"></a>お知らせ</h2>
+      </header>
+      <section id="sect-list-archive">
+        <div class="container">
+          <main id="main">
+            <section id="contents_list">
+              <ul class="list-archive ls-none">
+                <%
+                  sons = @seed.sons
+                  sons << @seed
+                  @leafs = @seed.public_leafs.where("content_leafs.content_category_id IN (?)",sons).order(position: :desc).paginate(:page => params[:page], :per_page=>PER_PAGE)
+                  @leafs = (@search_tags.blank?)? @leafs.all: @leafs.tagged_with(@search_tags)
+                  #c = ContentLeaf.public_leafs_condition
+                  #c.and "content_leafs.content_category_id", 'IN', sons
+                  #@leafs = ContentLeaf.paginate(:page => params[:page], :per_page=>PER_PAGE, :conditions=>c.where, :order=>'position desc')
+                  @leafs.each do | leaf | @leaf = leaf
+                  key_photo = key_photo(leaf)
+                  unless key_photo.blank?
+                      image_url = key_photo.clip.url(:panel)
+                  else
+                      image_url = '//placehold.it/327x327&amp;text=No Photo'
+                  end
+                  if true || request.host == 'sr2.swifty.jp'
+                      content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page, :wkey=>@website.wsite_hash_key)
+                  else
+                      content_url = url_for(:action=>'news_show', :id=>@leaf, :page=>@page)
+                  end
+                %>
+                  <li>
+                    <figure style="background-image:url('<%= image_url %>');"></figure>
+                    <h3><%= h model_title(@leaf) %></h3>
+                    <a class="more" href="<%= content_url %>">more</a>
+                  </li>
+                <% end %>
+              </ul>
+            </section>
+            <aside class="pagination text-center">
+              <% if true || request.host == 'staffroom.swifty.jp' %>
+                <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page, :wkey=>@website.wsite_hash_key }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+              <% else %>
+                <%= will_paginate(@leafs, :params=> {:action=>'news_list', :id=>@seed, :page=>@page }, class: 'pagination', :previous_label=>'&#171;前', :next_label=>'次&#187;') %>
+              <% end %>
+            </aside>
+          </main>
+        </div>
+      </section>
+    </article>
+  </main>
+  <footer id="page-footer" class="bk-cl-wh">
+    <div class="copyContainer container">
+      <p class="copy">Copyright&copy;untime All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<header id="page-header">
+    <div class="inner-page-header container-l">
+      <nav id="nav-main">
+        <div class="item-salon">
+          <h3><a href="/home?wkey=<%= @website.wsite_hash_key %>"><img src="/assets/untime/images/iconHome.svg" width="8" height="8" alt="最初のページ"></a></h3>
+        </div>
+        <div class="item-salon">
+          <h3>[untime]</h3>
+          <ul>
+            <li> <a href="https://beauty.hotpepper.jp/slnH000263980/"> <img src="/assets/untime/images/logo_hp_wh.svg" width="150"
+                  height="75" alt="ホットペッパービューティー"> </a> </li>
+            <li> <a href="https://www.instagram.com/untime.0303/"> <img src="/assets/untime/images/icon_insta_wh.svg" width="48"
+                  height="48" alt="untime 公式インスタグラム"> </a> </li>
+            <li> <a href=""> <img src="/assets/untime/images/icon_line_wh.svg" width="48" height="48" alt="untime 公式LINE"> </a> </li>
+          </ul>
+        </div>
+        <div class="item-salon">
+          <h3>[みずとそらの美容室]</h3>
+          <ul>
+            <li> <a href="https://www.instagram.com/_mizusora_/"> <img src="/assets/untime/images/icon_insta_wh.svg" width="48"
+                  height="48" alt="みずとそらの美容室 公式インスタグラム"> </a> </li>
+            <li> <a href=""> <img src="/assets/untime/images/icon_line_wh.svg" width="48" height="48" alt="みずとそらの美容室 公式LINE"> </a>
+            </li>
+          </ul>
+        </div>
+        <div class="item-salon">
+          <ul>
+            <li>
+              <h3> <a href="/news_list?wkey=<%= @website.wsite_hash_key %>"> [お知らせ] </a> </h3>
+            </li>
+          </ul>
+        </div>
+        <div class="item-salon">
+          <h3><a href="https://www.bibe.work/shop/untime/">[リクルート]</a></h3>
+          <ul>
+            <li> <a href="https://www.bibe.work/shop/untime/">求人ページ</a> </li>
+          </ul>
+        </div>
+        <% if @author_mode %>
+            <div class="item-salon">
+                <li><a href="<%= url_for(:controller=>'bs_authoring', :action=>'manage_widget')%>">表示設定</a></li>
+                <% if current_user.is_fuga_3? %>
+                    <li><a href="<%= url_for(:controller=>'bs_config', :action=>'shop_show_website')%>"><i class="icon-off"></i>&nbsp;サイト編集終了</a></li>
+                <% else %>
+                    <li><a href="<%= url_for(:controller=>'admin_config', :action=>'shop_show_website')%>"><i class="icon-off"></i>&nbsp;サイト編集終了</a></li>
+                <% end %>
+            </div>
+        <% end %>
+      </nav>
+    </div>
+  </header>
