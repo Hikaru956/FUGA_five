@@ -18,9 +18,9 @@
 <body>
 	<div id="body-cover"></div>
 	<div class="body-slide">
-		<% if !bg_slider.blank? && bg_slider.is_valid? %>
-			<% bg_slider.photos.each do | photo | %>
-				<div style="background-image"><img src="<%= photo.clip.url() %>" alt=""></div>
+		<% if !dev_slider.blank? && dev_slider.is_valid? %>
+			<% dev_slider.photos.each do | photo | %>
+				<div style="background-image:url('<%= photo.clip.url() %>')"></div>
 			<% end %>
 		<% else %>
 			<div style="background-image:url('/assets/untime/images/sl1.webp')"></div>
