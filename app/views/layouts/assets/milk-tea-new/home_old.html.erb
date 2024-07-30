@@ -4,6 +4,9 @@
 	<meta http-equiv="Content-Language" content="ja">
 	<meta name="viewport" content="width=480">
 
+	<% if request.host.include?('swifty.jp') || request.host.include?('956.jp') %>
+		<meta name="robots"                   content="noindex,nofollow">
+	<% end %>
 
 	<title>美容室「Milk tea」</title>
 	<meta name="title" content="美容室「Milk tea」">
@@ -23,133 +26,7 @@ $(document).ready(function(){
 <div id="pagetop"></div>
 
 	<header>
-		<div class="header-in bg-color1">
-    <div class="cover-waku all-center-1280">
-        <div class="waku">
-            <div id="line-three" class="line-three-class">
-                <input type="checkbox" id="navigation">
-                <div class="line-three-in">
-                    <div class="nav-wrapper">
-                        <label class="cross" for="navigation">✖️</label>
-                        <div class="header-logo-cover">
-                            <div class="header-logo">
-                                <a href="https://www.milktea-hair.com/#pagetop"><img src="/images/assets/milk-tea-new/header_mainlogo.png" alt="Milk tea"></a>
-                            </div>
-                        </div>
-                        <div id="nav" class="nav-cover all-center-1280">
-                            <ul class="ul-nav">
-                                <li class="li-nav">
-                                    <div class="width-nav">
-                                        <a href="https://www.milktea-hair.com/#concept-jump">
-                                            <div class="nav-anchor-flex-wrapper">
-                                                <div class="nav-anchor-flex-cover">
-                                                    <div class="nav-anchor-flex">
-                                                        <div class="nav-design">CONCEPT</div>
-                                                        <div class="nav-katakana-cover">
-                                                            <div class="nav-katakana">コンセプト</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="li-nav">
-                                    <div class="width-nav">
-                                        <a href="https://www.milktea-hair.com/#stylist-jump">
-                                            <div class="li-nav-in">
-                                                <div class="nav-anchor-flex-cover">
-                                                    <div class="nav-anchor-flex">
-                                                        <div class="nav-design">STYLIST</div>
-                                                        <div class="nav-katakana-cover">
-                                                            <div class="nav-katakana">スタイリスト</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="li-nav">
-                                    <div class="width-nav">
-                                        <div class="li-nav-in">
-                                            <div class="nav-anchor-flex-cover">
-                                                <div class="nav-anchor-flex">
-                                                    <a class="display-in" href="https://form.milktea-hair.com/contact.php">
-                                                        <div class="nav-design">CONTACT</div>
-                                                        <div class="nav-katakana-cover">
-                                                            <div class="nav-katakana">お問い合わせ</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div id="footer-jump-nav">
-                                <div class="reserve-recruit-flex-cover all-center-1280">
-                                    <div class="reserve-recruit-flex">
-                                        <div class="wrapper">
-                                            <div class="cover">
-                                                <a href="/bs_renderer/reserve?wkey=b578efc18880499bcf58893f6cbf74cd">
-                                                    <div class="web-reserve pointer1">
-                                                        <div class="web-reserve-in">
-                                                            <img src="/images/assets/milk-tea-new/header_hpb_logo.png" alt="hotpepper logo">
-                                                            <span class="web-reserve-text">WEB RESERVE</span>
-                                                        </div>
-                                                    </div>		
-                                                </a>
-                                            </div>
-                                            <div class="cover pointer1">
-                                                <a href="https://www.milktea-hair.com/#recruit-together"><div class="recruit-jump">RECRUIT</div></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="footer-under-nav"></div>
-                        </div>
-                    </div>
-                </div>
-                <label for="navigation">
-                    <div class="three-image-cover">
-                        <img src="/images/assets/milk-tea-new/menu_icon_80_80.png" alt="メニュー　ロゴ">
-                    </div>
-                </label>
-            </div>
-            <div class="header-logo-flex-cover">
-                <div class="header-logo-flex">
-                    <div class="header-logo">							
-                        <a href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#pagetop"><img src="/images/assets/milk-tea-new/header_mainlogo.png" alt="Milk tea ロゴ"></a>
-                    </div>
-                </div>
-            </div>
-            <div id="reserve-recruit" class="reserve-recruit-class">
-                <div class="reserve-recruit-flex-cover no-display-sp">
-                    <div class="reserve-recruit-flex">
-                        <div class="wrapper">
-                            <div class="cover">
-                                <a href="/bs_renderer/reserve?wkey=b578efc18880499bcf58893f6cbf74cd">
-                                    <div class="web-reserve pointer1">
-                                        <div class="web-reserve-in">
-                                            <img src="/images/assets/milk-tea-new/header_hpb_logo.png" alt="hotpepper logo">
-                                            <span class="web-reserve-text">WEB RESERVE</span>
-                                        </div>
-                                    </div>		
-                                </a>
-                            </div>
-                            <div class="cover pointer1">
-                                <a href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#recruit-together"><div class="recruit-jump">RECRUIT</div></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+		<%= render :partial=>"#{LayoutScheme.asset_root}/milk-tea-new/header" %>
 	</header>
 
 	<main>
@@ -228,28 +105,6 @@ $(document).ready(function(){
 											<div class="icon"><a href="https://goo.gl/maps/fQ5wsM8Af5f9yRUt6"><img src="/images/assets/milk-tea-new/pin_icon.png" alt="地図　アイコン"></a></div>
 											<div class="icon"><a href="https://www.instagram.com/milkteagroup/"><img src="/images/assets/milk-tea-new/insta_icon.png" alt="インスタグラム　アイコン"></a></div>
 											<div class="icon"><a href="https://beauty.hotpepper.jp/slnH000526228/coupon/"><img src="/images/assets/milk-tea-new/hpb_logo.png" alt="ホットペッパービューティー　アイコン"></a></div>
-											</div>
-									</div>
-								</div>
-								<div class="reserve-contents">
-									<div class="shop-logo"><img src="/images/assets/milk-tea-new/milktea_chill_logo.png" alt="Milk tea Hair Garden"></div>
-									<div class="icon-many-flex-cover">
-										<div class="icon-many-flex">
-											<div class="icon"><a href="tel:025-364-1145"><img src="/images/assets/milk-tea-new/phone_icon.png" alt="tel アイコン"></a></div>
-											<div class="icon"><a href="https://maps.app.goo.gl/n5QgXe5C1YmNAQP1A"><img src="/images/assets/milk-tea-new/pin_icon.png" alt="地図　アイコン"></a></div>
-											<div class="icon"><a href="https://www.instagram.com/milkteagroup/"><img src="/images/assets/milk-tea-new/insta_icon.png" alt="インスタグラム　アイコン"></a></div>
-											<div class="icon"><a href="https://beauty.hotpepper.jp/slnH000693161/"><img src="/images/assets/milk-tea-new/hpb_logo.png" alt="ホットペッパービューティー　アイコン"></a></div>
-										</div>
-									</div>
-								</div>
-								<div class="reserve-contents">
-									<div class="shop-logo"><img src="/images/assets/milk-tea-new/milktea_ukari_logo.png" alt="Milk tea Hair Garden"></div>
-									<div class="icon-many-flex-cover">
-										<div class="icon-many-flex">
-											<div class="icon"><a href="tel:025-369-5370"><img src="/images/assets/milk-tea-new/phone_icon.png" alt="tel アイコン"></a></div>
-											<div class="icon"><a href="https://maps.app.goo.gl/8sEECvnAf3SUfJQz6"><img src="/images/assets/milk-tea-new/pin_icon.png" alt="地図　アイコン"></a></div>
-											<div class="icon"><a href="https://www.instagram.com/u_kari0601/"><img src="/images/assets/milk-tea-new/insta_icon.png" alt="インスタグラム　アイコン"></a></div>
-											<div class="icon"><a href="https://beauty.hotpepper.jp/slnH000705022/"><img src="/images/assets/milk-tea-new/hpb_logo.png" alt="ホットペッパービューティー　アイコン"></a></div>
 										</div>
 									</div>
 								</div>
@@ -280,34 +135,37 @@ $(document).ready(function(){
 						<div class="caption-img-cover"><img src="/images/assets/milk-tea-new/stylist.png" alt="stylist">
 							<div class="outer">
 								<div class="wrapper-flex">
-										<div class="cover pointer1"><a href="/staff?id=92&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41848/thumb/horii.jpg?1681765077" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=99&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41849/thumb/sakaimayuko.jpg?1681765166" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=453&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41869/thumb/endoshiho.jpg?1681765724" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=569&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41851/thumb/abe_natsuki.jpg?1681765296" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=660&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41852/thumb/uchiyamaharuho.jpg?1681765314" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=248&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41853/thumb/yoko.jpg?1681765342" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=512&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41854/thumb/sato.jpg?1681765356" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=247&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41855/thumb/araikazuma.jpg?1681765373" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=619&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41856/thumb/yamaguchi.jpg?1681765387" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=620&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41857/thumb/ito.jpg?1681765402" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=103&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41858/thumb/abekasumi.jpg?1681765433" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=96&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41859/thumb/kobayashi.jpg?1681765458" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=334&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41860/thumb/asai.jpg?1681765499" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=572&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41879/thumb/sugiyama.jpg?1681844041" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=335&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/40018/thumb/sugiyama_prof.jpg?1668114205" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=571&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41861/thumb/yamazaki.jpg?1681765513" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=657&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41862/thumb/abekana.jpg?1681765533" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=97&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41864/thumb/yokota.jpg?1681765573" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=454&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41865/thumb/yoshii.jpg?1681765590" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=621&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41866/thumb/masu.jpg?1681765619" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=658&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41867/thumb/ono.jpg?1681765635" /></a></div>
-										<div class="cover pointer1"><a href="/staff?id=659&amp;wkey=b578efc18880499bcf58893f6cbf74cd"><img src="/photo/image/clip/41868/thumb/yamagishi.jpg?1681765647" /></a></div>
+									<% 
+										staffs = @website.staffs 
+										staffs = staffs.where('staffs.staff_status!=?', Staff::STAFF_BLOCKED).order(position: :asc)
+									%>
+									<% staffs.each do |staff| %>
+										<% 
+											if true || request.host == 'sr2.swifty.jp'
+												staff_url = url_for(:action=>'staff', :id=>staff, :wkey=>@website.wsite_hash_key)
+											else
+												staff_url = url_for(:action=>'staff', :id=>staff)
+											end
+											photo = '//placehold.it/327x327&amp;text=No Photo'
+											unless staff.photos.blank?
+												photo = reorder_by_position_photo(staff.photos, true).first
+											end
+										%>
+										<div class="cover pointer1"><a href="<%= staff_url %>"><%= image_tag photo.clip.url(:thumb) %></a></div>
+									<% end %>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				
+				<% unless @website.wsite_description_business.blank? %>
+					<div class="all-center-1280">
+						<div class="sp-LR15">
+							<%= @website.wsite_description_business %>
+						</div>
+					</div>
+				<% end %>
 				<div id="recruit-together" class="all-center-1280">
 					<div class="recruit-together-in">
 						<div class="caption-img-cover"><img src="/images/assets/milk-tea-new/recruit.png" alt="RECRUIT"></div>
@@ -344,7 +202,7 @@ $(document).ready(function(){
 							<div class="wrapper">
 								<div class="cover">
 									<div class="contents">
-										<a href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#concept-jumptop">
+										<a href="<%= url_for :action=>'home', :anchor=>'concept-jumptop', :wkey=>@website.wsite_hash_key %>">
 											<div class="contents-flex pointer1">
 												<div class="image-cover"><img class="object" src="/images/assets/milk-tea-new/contents_message.jpg"></div>
 												<div class="caption-cover">
@@ -366,7 +224,7 @@ $(document).ready(function(){
 								</div>
 								<div class="cover">
 									<div class="contents">
-										<a href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#career-plan-jump">
+										<a href="<%= url_for :action=>'home', :anchor=>'career-plan-jump', :wkey=>@website.wsite_hash_key %>">
 											<div class="contents-flex pointer1">
 												<div class="image-cover"><img class="object" src="/images/assets/milk-tea-new/contents_career.jpg"></div>
 												<div class="caption-cover">
@@ -388,7 +246,7 @@ $(document).ready(function(){
 								</div>
 								<div class="cover">
 									<div class="contents">
-										<a href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#benefit-jump">
+										<a href="<%= url_for :action=>'home', :anchor=>'benefit-jump', :wkey=>@website.wsite_hash_key %>">
 											<div class="contents-flex pointer1">
 												<div class="image-cover"><img class="object" src="/images/assets/milk-tea-new/benefit.jpg"></div>
 												<div class="caption-cover">
@@ -425,7 +283,7 @@ $(document).ready(function(){
 										<img src="/images/assets/milk-tea-new/see_numbers_smartphone.jpg" alt="スタッフ集合写真">
 									</div>
 									<div class="text-cover-abso">
-										<a href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#math-show-jump">
+										<a href="<%= url_for :action=>'home', :anchor=>'math-show-jump', :wkey=>@website.wsite_hash_key %>">
 											<div class="detail-arrow pointer3"> 
 												<div></div>
 												<div class="detail">詳細を見る</div>
@@ -1217,7 +1075,6 @@ $(document).ready(function(){
 														<p class="td-p-top">・交通費（7,000 円） ・産休制度</p>
 														<p class="td-p-top">・育児休暇　・独立支援制度</p>
 														<span class="under color-training">・奨学金補助制度</span>
-														<span class="under color-training">・住宅手当有</span>
 													</div>
 												</div>
 												<div class="td-text-wrapper">
@@ -1239,8 +1096,6 @@ $(document).ready(function(){
 													<div class="td-text-cover">
 														<p class="td-p-top">・完全週休 2 日制 ( 月・他 1 日 ) 年間休日108日　<br class="no-display-pc">・有給休暇あり　・夏季冬季休暇あり</p>
 														<p class="td-p-top">・慰安旅行　<br class="no-display-pc">・結婚式休暇　・忌引きあり</p>
-													</div>
-														<p class="td-p-top">・年2回シフトから日曜日休み可（2025年4月より）<br class="no-display-pc">・半休有</p>
 													</div>
 												</div>
 											</td></tr>
@@ -1325,28 +1180,28 @@ $(document).ready(function(){
 						<div class="wrapper sp-LR15">
 							<div class="cover">
 								<div class="contents-cover">
-										<a class="contact pointer3" href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#pagetop">
+										<a class="contact pointer3" href="<%= url_for :action=>'home', :anchor=>'pagetop', :wkey=>@website.wsite_hash_key %>">
 											<div class="contents">
 												<div class="text">TOP</div>
 											</div>
 										</a>
 								</div>
 								<div class="contents-cover">
-										<a class="contact pointer3" href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#message-jump">
+										<a class="contact pointer3" href="<%= url_for :action=>'home', :anchor=>'message-jump', :wkey=>@website.wsite_hash_key %>">
 											<div class="contents">
 												<div class="text">理念・代表挨拶</div>
 											</div>
 										</a>
 								</div>
 								<div class="contents-cover">
-										<a class="contact pointer3" href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#career-plan-jump">
+										<a class="contact pointer3" href="<%= url_for :action=>'home', :anchor=>'career-plan-jump', :wkey=>@website.wsite_hash_key %>">
 											<div class="contents">
 												<div class="text">キャリアプラン</div>
 											</div>
 										</a>
 								</div>
 								<div class="contents-cover">
-										<a class="contact pointer3 l-height" href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#benefit-jump">
+										<a class="contact pointer3 l-height" href="<%= url_for :action=>'home', :anchor=>'benefit-jump', :wkey=>@website.wsite_hash_key %>">
 											<div class="contents">
 												<div class="text">福利厚生　給与案内</div>
 											</div>
@@ -1358,7 +1213,7 @@ $(document).ready(function(){
 					<div id="footer-under">
 						<div class="wrapper-mini">
 							<div class="cover-mini">
-								<div class="contents-mini">c 2022 Milk tea LLC All rights Reserved.</div>
+								<div class="contents-mini">c 2022 Milk tea LLC All rights Reserved<a href="<%= url_for(action: 'kick', name: 'home_new', wkey: @website.wsite_hash_key)%>">.</a></div>
 							</div>
 						</div>
 					</div>
@@ -1367,7 +1222,7 @@ $(document).ready(function(){
 		</div>
 	</footer>
 	<div id="return-cover">
-		<a href="/bs_renderer/home?wkey=b578efc18880499bcf58893f6cbf74cd#pagetop" class="return">∧</a>
+		<a href="<%= url_for :action=>'home', :anchor=>'pagetop', :wkey=>@website.wsite_hash_key %>" class="return">∧</a>
 	</div>
 
 </div>
