@@ -25,7 +25,7 @@
 		Dropzone.options.dropzone = {
 			paramName: "photo[clip]",
 			maxFilesize: 20,
-			acceptedFiles: "image/*",
+			acceptedFiles: 'image/*,.webp',
 			init: function() {
 				this.on('complete', function (file) {
 					//location.reload();
