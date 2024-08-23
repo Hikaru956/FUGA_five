@@ -233,20 +233,12 @@ section h2 {
 
 #sect-recruit p:nth-of-type(1) {
   padding: 0.5em;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-#sect-rental-collection {
-	background-position: -192px top;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 #sect-rental-collection p:nth-of-type(1) {
   padding: 0.5em;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-#sect-aboutus p {
-	font-size: 12px;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 #page-footer nav ul {
