@@ -22,7 +22,7 @@ class Photo < ApplicationRecord
                     styles: { large: "4096x4096>", thumb: "320x180>", panel: "640x480" },
                     url: "/photo/image/clip/:id/:style/:filename",
                     path: "#{Rails.root}/public/photo/image/clip/:id/:style/:filename"
-  validates_attachment_content_type :clip, content_type: [/\Aimage\/.*\z/, "image/x-icon", "image/jpeg", "image/gif", "image/png", "image/webp"]
+  validates_attachment_content_type :clip, content_type: [/\Aimage\/.*\z/, "image/x-icon", "image/jpeg", "image/gif", "image/png", "image/webp", "application/octet-stream"]
 
   #has_attached_file :clip,
   #                  styles: { large: "4096x4096>", thumb: "320x180>", panel: "640x480" },
