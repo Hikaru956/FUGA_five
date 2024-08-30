@@ -178,7 +178,7 @@ body.fixed {
 				& img {
 					display: block;
 					width: 100%;
-					filter: drop-shadow(0 0 3px #999);
+					filter: drop-shadow(0 0 3px #000);
 				}
 			}
 		}
@@ -219,7 +219,7 @@ li p {
 		transition: transform .5s;
 		transform-origin: center center;
 		background-color: white;
-		box-shadow: 0 0 5px #333;
+		box-shadow: 0 0 3px #000;
 		&:nth-child(1) {
 			top: 20%;
 		}
