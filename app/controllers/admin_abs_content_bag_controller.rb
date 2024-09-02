@@ -282,46 +282,65 @@ class AdminAbsContentBagController < ApplicationController
         content_leaf = ContentLeaf.find(ref_id) unless ref_id.blank?
 
         # デバッグ用ログ
+        Rails.logger.debug("Received Photo: #{photo.inspect}")
+        Rails.logger.debug("Original Filename: #{photo.original_filename}")
         Rails.logger.debug("Content Type: #{photo.content_type}")
-        # HEIF形式の画像をPNG形式に変換
+
+        # HEIFやWebP形式の画像をPNG形式に変換
         if photo.content_type != 'image/png' && photo.content_type != 'image/jpeg'
             require 'mini_magick'
 
             # 一時ファイルのパス
             temp_file = Tempfile.new(['temp', '.png'])
+            temp_file.binmode # Ensure binary mode for image processing
 
             begin
-            # MiniMagickを使用して変換
-            image = MiniMagick::Image.open(photo.tempfile)
-            image.format('png')
-            image.write(temp_file.path)
+                # MiniMagickを使用して変換
+                image = MiniMagick::Image.read(photo.read)
 
-            # 変換後の画像をアップロード
-            photo = ActionDispatch::Http::UploadedFile.new(
-                tempfile: temp_file,
-                filename: "#{photo.original_filename.split('.').first}.png",
-                content_type: 'image/png'
-            )
-            # デバッグ用のログ
-            Rails.logger.debug("HEIF画像がPNGに変換されました。")
-            ensure
-            temp_file.close
-            temp_file.unlink
+                # デバッグ用ログ
+                Rails.logger.debug("Temp File Path Before Format: #{temp_file.path}")
+
+                image.format('png')
+                image.write(temp_file.path)
+
+                # デバッグ用ログ
+                Rails.logger.debug("Temp File Path After Format: #{temp_file.path}")
+
+                # 変換後の画像をアップロード
+                photo = ActionDispatch::Http::UploadedFile.new(
+                    tempfile: temp_file,
+                    filename: "#{File.basename(photo.original_filename, '.*')}.png",
+                    content_type: 'image/png',
+                    headers: {
+                        "Content-Disposition" => "form-data; name=\"photo\"; filename=\"#{File.basename(photo.original_filename, '.*')}.png\"",
+                        "Content-Type" => 'image/png'
+                    }
+                )
+
+                # デバッグ用のログ
+                Rails.logger.debug("Image successfully converted to PNG.")
+            rescue => e
+                Rails.logger.error("Image conversion failed: #{e.message}")
+                raise
             end
         end
+
+        # ここでphotoオブジェクトをログに出力して確認する
+        Rails.logger.debug("Photo Object Before Saving: #{photo.inspect}")
 
         # ファイルをアップロードして写真のインスタンスを作成
-        photo = Photo.new(shop_id: shop_id, ref: content_leaf, clip: photo)
+        photo_record = Photo.new(shop_id: shop_id, ref: content_leaf, clip: photo)
 
         respond_to do |format|
-            if photo.save
-                format.json { render json: { url: photo.clip.url, id: photo.id } }
+            if photo_record.save
+                format.json { render json: { url: photo_record.clip.url, id: photo_record.id } }
             else
-                format.json { render json: { errors: photo.errors.full_messages }, status: :unprocessable_entity }
+                format.json { render json: { errors: photo_record.errors.full_messages }, status: :unprocessable_entity }
             end
-            #p '❌❌' + photo.clip.url
         end
     end
+
 
     def delete_image
         @photo = Photo.find_by(id: params[:id])
