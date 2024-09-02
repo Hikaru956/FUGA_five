@@ -90,18 +90,11 @@ class Photo < ApplicationRecord
   private
 
   def override_mime_type
-    Rails.logger.debug "override_mime_type called"
-    Rails.logger.debug "Current clip content_type: #{clip_content_type}"
-    Rails.logger.debug "Current clip file_name: #{clip_file_name}"
-
     if clip_content_type == 'application/octet-stream' || (clip_content_type == 'image/webp' && clip_file_name =~ /\.webp\z/)
-      Rails.logger.debug "Overriding content_type to image/webp"
       self.clip.instance_write(:content_type, 'image/webp')
     else
       Rails.logger.debug "Content type not overridden"
     end
-
-    Rails.logger.debug "Final clip content_type: #{clip_content_type}"
   end
 
 end
