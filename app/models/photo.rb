@@ -22,9 +22,9 @@ class Photo < ApplicationRecord
                     styles: { large: "4096x4096>", thumb: "320x180>", panel: "640x480" },
                     url: "/photo/image/clip/:id/:style/:filename",
                     path: "#{Rails.root}/public/photo/image/clip/:id/:style/:filename"
-  validates_attachment_content_type :clip, content_type: [/\Aimage\/.*\z/, "image/x-icon", "image/jpeg", "image/gif", "image/png", "image/webp", "application/octet-stream"]
+  validates_attachment_content_type :clip, content_type: [/\Aimage\/.*\z/, "image/x-icon", "image/jpeg", "image/gif", "image/png", "image/webp"]
 
-  before_post_process :override_mime_type
+  before_validation :override_mime_type
 
   #has_attached_file :clip,
   #                  styles: { large: "4096x4096>", thumb: "320x180>", panel: "640x480" },
@@ -91,7 +91,7 @@ class Photo < ApplicationRecord
 
   def override_mime_type
     if clip_content_type == 'application/octet-stream' && clip_file_name =~ /\.webp\z/
-      self.clip_content_type = 'image/webp'
+      self.clip.instance_write(:content_type, 'image/webp')
     end
   end
 
