@@ -207,6 +207,7 @@ class BsRendererController < ApplicationController
   #
   def kick
     @page_view = @website.renderer_layout+'/'+params[:name]
+    #@magic_id = (params[:magic_id].blank?)? nil: params[:magic_id]
     render layout: @page_view
   end
 

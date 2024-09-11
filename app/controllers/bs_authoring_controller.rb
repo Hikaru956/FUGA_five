@@ -83,6 +83,7 @@ class BsAuthoringController < ApplicationController
   def kick
     #@page_view = @website.renderer_layout+'/'+params[:name]
     #render layout: @page_view
+    #@magic_id = (params[:magic_id].blank?)? nil: params[:magic_id]
     render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.authoring_layout}/#{params[:name]}":  "#{@website.layout_pc_specific_basename}/#{params[:name]}")
   end
 
