@@ -1,0 +1,54 @@
+<header id="header">
+    <h1 id="logo"><a href="<%= url_for(action: 'kick', name: 'home', wkey: @website.wsite_hash_key)%>"><%= @website.name %></a></h1>
+    <nav id="nav">
+        <ul>
+            <li><a href="<%= url_for(action: 'kick', name: 'home', wkey: @website.wsite_hash_key)%>">Home</a></li>
+            <li>
+                <a href="#" class="button fit">メニュー▼</a>
+                <% 
+                    navs = @website.content_categories.where('content_categories.category_type >= ? AND content_categories.category_type <= ?', ContentCategory::TYPE_NEWS ,ContentCategory::TYPE_PORTFOLIO).where(is_public: true).order(position: :asc)
+                %>
+                <ul>
+                    <% @website.public_navigation_items.each do | nav_item | %>
+                            <li>
+                        <% if nav_item.page_type==WebPage::TYPE_LINK %>
+                            <a href="<%= nav_item.external_url %>" <% if nav_item.is_open_new %>target='_blank'<% end %>><%= model_name(nav_item) %></a>
+                        <% elsif nav_item.page_type==WebPage::TYPE_FIX %>
+                            <% fixed_leaf = ContentLeaf.find_by_hash_key(nav_item.content_key) %>
+                            <% unless fixed_leaf.blank? %>
+                                <%= link_to model_title(fixed_leaf), :action=>nav_item.action_name, :id=>fixed_leaf, :wkey=>@website.wsite_hash_key %>
+                            <% end %>
+                        <% else %>
+                            <% if nav_item.content_type.blank? %>
+                                <%= link_to model_name(nav_item), :action=>nav_item.action_name, :wkey=>@website.wsite_hash_key %>
+                            <% else %>
+                                <%= link_to model_name(nav_item), :action=>nav_item.action_name, :id=>nav_item.content_category.id, :wkey=>@website.wsite_hash_key %>
+                            <% end %>
+                        <% end %>
+                            </li>
+                    <% end %>
+                    <% if @website.enable_inquiry? %>
+                        <li><a href="<%= url_for(action: 'kick', name: 'home', anchor: 'five', wkey: @website.wsite_hash_key)%>">お問い合わせ</a></li>
+                    <% end %>
+                </ul>
+            </li>
+            <% if @author_mode %>
+                <li><a href="<%= url_for(:controller=>'bs_authoring', :action=>'manage_widget')%>">表示設定</a></li>
+                <li>
+                    <% 
+                        back_2_url = (current_user.is_fuga_3?)? url_for(:controller=>'bs_config', :action=>'shop_show_website', id:  @website.id): \
+                                                                url_for(:controller=>'admin_config', :action=>'company_show_shop', id:  @website.id)
+                    %>
+                    <a href='<%= back_2_url %>'>
+                        <span class="up">
+                            swifty
+                        </span>
+                        <span class="under">
+                            サイト編集終了
+                        </span>
+                    </a>
+                </li>
+            <% end %>
+        </ul>
+    </nav>
+</header>

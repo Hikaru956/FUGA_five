@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<%= render :partial=>"#{LayoutScheme.asset_root}/parallax_one/head" %>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<%= render :partial=>"#{LayoutScheme.asset_root}/parallax_one/header" %>
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<%
+                        staffs = @website.staffs.where("staffs.staff_status !=?", Staff::STAFF_BLOCKED)
+					%>
+					<div class="container">
+						<header class="major">
+							<h2><%= model_title(@seed) %></h2>
+						</header>
+							<div class="row gtr-150">
+								<% staffs.each do |staff| %>
+                                    <% staff_url = url_for(:action=>'staff', :id=>staff, :wkey=>@website.wsite_hash_key) %>
+									<div class="col-4 col-12-medium">
+										<section>
+											<h3><%= model_name(staff) %></h3>
+											<div class="img-box">
+												<% key_photo = (key_photo(staff).blank?)? nil: key_photo(staff).clip.url(:thumb) %>
+												<figure>
+													<% unless key_photo.blank? %>
+														<a href="<%= staff_url %>"><img src="<%= key_photo %>" alt="<%= model_title(staff) %>"></a>
+													<% end %>
+												</figure>
+											</div>
+											<footer>
+												<ul class="actions">
+													<li><a href="<%= staff_url %>" class="button">Learn More</a></li>
+												</ul>
+											</footer>
+										</section>
+									</div>
+								<% end %>
+							</div>
+					</div>
+				</div>
+
+			<!-- Footer -->
+				<%= render :partial=>"#{LayoutScheme.asset_root}/parallax_one/footer" %>
+
+		</div>
+		
+		<!-- Scripts -->
+		<script src="/assets/parallax_one/js/jquery.min.js"></script>
+		<script src="/assets/parallax_one/js/jquery.scrolly.min.js"></script>
+		<script src="/assets/parallax_one/js/jquery.dropotron.min.js"></script>
+		<script src="/assets/parallax_one/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/parallax_one/js/browser.min.js"></script>
+		<script src="/assets/parallax_one/js/breakpoints.min.js"></script>
+		<script src="/assets/parallax_one/js/util.js"></script>
+		<script src="/assets/parallax_one/js/main.js"></script>
+	</body>
+</html>

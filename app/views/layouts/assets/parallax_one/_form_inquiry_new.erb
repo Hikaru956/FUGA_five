@@ -1,0 +1,13 @@
+<form id="contact">
+  <div class="container-form">
+    <div class="control-group">
+        <%= f.text_field  :name, :class=>"input-block-level", :placeholder=>"お名前", :autocomplete=>false%>
+    </div>
+    <div class="control-group">
+	    <%= f.text_field  :email, :class=>"input-block-level", :placeholder=>"メールアドレス", :autocomplete=>false%>
+    </div>
+    <div class="control-group">
+        <%= f.text_area  :body, :class=>"input-block-level", :placeholder=>"お問い合わせ内容", :autocomplete=>false%>
+    </div>
+  </div>
+</form>

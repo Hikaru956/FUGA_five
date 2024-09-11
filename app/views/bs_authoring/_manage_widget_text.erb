@@ -13,8 +13,8 @@
 		<%= model_title(@visual_widget) %>
 	</h4>
 	<blockquote><%= h @visual_widget.description %></blockquote>
-	<% unless @widget_bag.data_string.blank? %>
-		<pre><%= h @widget_bag.data_string %> </pre>
+	<% unless @widget_bag.data_text.blank? %>
+		<pre><%= h @widget_bag.data_text %> </pre>
 	<% end %>
 	<%= form_tag url_for(:action=>"update_widget_bag", :id=>@widget_bag, method: :post), {:class=>"modal hide fade form-horizontal", :id=>"modalEdit_#{@widget_bag.id}"} do -%>
 		<div class="modal-header">

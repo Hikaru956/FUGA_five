@@ -1,0 +1,24 @@
+<% leaves = cat.public_leafs.order(position: :asc) %>
+<% unless leaves.blank? %>
+    <h3><%= model_name(cat) %></h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th width='20%'>Name</th>
+                    <th width='60%'>Description</th>
+                    <th width='20%'>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% leaves.each do | leaf | %>
+                    <tr>
+                        <td style="vertical-align: middle;"><%= model_title(leaf) %></td>
+                        <td style="vertical-align: middle;"><%= raw leaf.description %></td>
+                        <td style="vertical-align: middle;"><%= raw leaf.description_2 %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+<% end %>

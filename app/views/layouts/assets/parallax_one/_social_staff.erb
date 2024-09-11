@@ -1,0 +1,25 @@
+<% unless magic.social_twitter_uri.blank? %>
+    <li><a href="<%= magic.social_twitter_uri %>" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+<% end %>
+<% unless magic.social_facebook_uri.blank? %>
+    <li><a href="<%= magic.social_facebook_uri %>" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+<% end %>
+<% unless magic.social_line_uri.blank? %>
+    <li><a href="<%= magic.social_line_uri %>" class="icon brands alt fa-line"><span class="label">LINE</span></a></li>
+<% end %>
+<% unless magic.social_instagram_uri.blank? %>
+    <li><a href="<%= magic.social_instagram_uri %>" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+<% end %>
+<% unless magic.social_pinterest_uri.blank? %>
+    <li><a href="<%= magic.social_pinterest_uri %>" class="icon brands alt fa-pinterest"><span class="label">pinterest</span></a></li>
+<% end %>
+<% unless magic.social_tumblr_uri.blank? %>
+    <li><i href="<%= magic.social_tumblr_uri %>" class="icon brands alt fa-tumblr"><span class="label">tumblr</span></i></li>
+<% end %>
+<% unless magic.web_reservation_uri.blank? %>
+    <li><a href="<%= magic.web_reservation_uri %>" class="icon alt fa-calendar-days"></a></li>
+<% end %>
+<%= hotpepper_staff_banner(magic, false, 'vertical-align: top; padding-top: 1px;') %>
+<% unless magic.social_youtube_uri.blank? %>
+    <li><a href="<%= magic.social_youtube_uri %>" class="icon brands alt fa-youtube"></a></li>
+<% end %>

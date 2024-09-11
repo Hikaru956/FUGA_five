@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<%= render :partial=>"#{LayoutScheme.asset_root}/parallax_one/head" %>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<%= render :partial=>"#{LayoutScheme.asset_root}/parallax_one/header" %>
+                <%
+                    cat_staff = ContentCategory.type_root(@website, ContentCategory::TYPE_INFO)
+                    staff_url = url_for(:action=>'staff', :id=>@seed, :wkey=>@website.wsite_hash_key)
+                %>
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+                        <header class="major">
+							<h2><%= model_name(cat_staff.web_page) %></h2>
+						</header>
+                        <ul class="actions">
+                            <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+                            <li>/<a href="<%= url_for(:action=>'contact', :id=>cat_staff, :wkey=>@website.wsite_hash_key) %>"><%= model_name(cat_staff.web_page) %></a></li>
+                            <li>/<%= model_name(@seed) %></li>
+                        </ul>
+
+						<!-- Content -->
+							<section id="content">
+                                <h3><%= model_name(@seed) %> <span><%= h @seed.job_title %></span></h3>
+                                <div class="row">
+									<div class="col-6 col-12-xsmall">
+                                        <% key_photo = key_photo(@seed) %>
+                                        <% unless key_photo.blank? %>
+                                            <%= image_tag key_photo.clip.url(:panel) %>
+                                        <% else %>
+                                            <img src="//placehold.jp/480x360.jpg?text=No Face Photo">
+                                        <% end %>
+                                        <br/>
+                                        <ul class="actions">
+                                            <%= render :partial=>"#{LayoutScheme.asset_root}/parallax_one/social_staff", locals:{magic: @seed}  %>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-12-xsmall">
+                                        <% unless @seed.description.blank? %>
+                                            <p><%= raw @seed.description %></p>
+                                        <% end %>
+                                    </div>
+                                </div>
+							</section>
+
+					</div>
+				</div>
+
+			<!-- Footer -->
+				<%= render :partial=>"#{LayoutScheme.asset_root}/parallax_one/footer" %>
+
+		</div>
+		
+		<!-- Scripts -->
+		<script src="/assets/parallax_one/js/jquery.min.js"></script>
+		<script src="/assets/parallax_one/js/jquery.scrolly.min.js"></script>
+		<script src="/assets/parallax_one/js/jquery.dropotron.min.js"></script>
+		<script src="/assets/parallax_one/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/parallax_one/js/browser.min.js"></script>
+		<script src="/assets/parallax_one/js/breakpoints.min.js"></script>
+		<script src="/assets/parallax_one/js/util.js"></script>
+		<script src="/assets/parallax_one/js/main.js"></script>
+	</body>
+</html>
