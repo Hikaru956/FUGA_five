@@ -45,17 +45,21 @@
 				</section>
 
 			<!-- One -->
-				<% photos = slide_photos.photos.to_a %>
 				<section id="one" class="spotlight style1 bottom">
 					<span class="image fit main">
-						<img src="<%= photos[0].clip.url()%>" alt="" />
+						<% if slide_photos.blank? %>
+							<img src="/assets/parallax_one_speed/images/pic07.jpg" alt="" />
+						<% else %>
+							<% photos = slide_photos.photos.to_a %>
+							<img src="<%= photos[0].clip.url()%>" alt="" />
+						<% end %>
 					</span>
 					<div class="content">
 						<div class="container">
 							<div class="row">
 								<div class="col-4 col-12-medium">
 									<header>
-										<h2><%= sec1_title.data_string%></h2>
+										<h2><%= sec1_title.data_string unless sec1_title.blank? %></h2>
 									</header>
 								</div>
 								<div class="col-4 col-12-medium">
