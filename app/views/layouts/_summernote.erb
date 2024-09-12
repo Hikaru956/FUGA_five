@@ -1,6 +1,16 @@
 <style>
-    .note-editable.panel-body {
-        overflow-y: scroll;
+    @media (max-width: 400px) {
+        .note-toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .note-editable {
+            margin-top: 50px; /* ツールバーの高さに合わせて調整 */
+        }
     }
 </style>
 <script type="text/javascript" src="/javascripts/summernote/bootstrap5/summernote-image-attributes.js"></script>
