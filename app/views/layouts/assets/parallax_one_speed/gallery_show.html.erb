@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<%= render :partial=>"#{LayoutScheme.asset_root}/parallax_one_speed/head" %>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<%= render :partial=>"#{LayoutScheme.asset_root}/parallax_one_speed/header" %>
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2><%= category_title(@seed.content_category) %></h2>
+						</header>
+                        <ul class="actions">
+                            <li><a href="/home?wkey=<%= @website.wsite_hash_key %>"><i class="fa fa-home"></i></a></li>
+							<% @seed.content_category.category_path(true).each do | category | %>
+								<li>/<a href="<%= url_for(:action=>'gallery_index', :id=>category.my_type_root_category, :wkey=>@website.wsite_hash_key) %>"><%= model_title(category.my_type_root_category) %></a></li>
+                            	<li>/<a href="<%= url_for(:action=>'gallery_list', :id=>category, :wkey=>@website.wsite_hash_key) %>"><%= category.category_label %></a></li>
+							<% end %>
+                            <li>/<%= model_title(@seed) %></li>
+                        </ul>
+
+						<!-- Content -->
+							<section id="content">
+								<h3><%= model_title(@seed) %></h3>
+                            	<time><%= @seed.publish_from.strftime('%Y.%m.%d') %></time>
+								<p><%= raw @seed.description %></p>
+								<% prev_leaf = @seed.prev_leaf(@seed) %>
+								<% next_leaf = @seed.next_leaf(@seed) %>
+								<br/>
+									<div style="font-size:1em;">
+										<%= leaf_navigation(@seed) %>
+									</div>
+								<br/>
+							</section>
+
+					</div>
+				</div>
+
+			<!-- Footer -->
+				<%= render :partial=>"#{LayoutScheme.asset_root}/parallax_one_speed/footer" %>
+
+		</div>
+		
+		<!-- Scripts -->
+		<script src="/assets/parallax_one_speed/js/jquery.min.js"></script>
+		<script src="/assets/parallax_one_speed/js/jquery.scrolly.min.js"></script>
+		<script src="/assets/parallax_one_speed/js/jquery.dropotron.min.js"></script>
+		<script src="/assets/parallax_one_speed/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/parallax_one_speed/js/browser.min.js"></script>
+		<script src="/assets/parallax_one_speed/js/breakpoints.min.js"></script>
+		<script src="/assets/parallax_one_speed/js/util.js"></script>
+		<script src="/assets/parallax_one_speed/js/main.js"></script>
+	</body>
+</html>
