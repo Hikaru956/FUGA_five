@@ -48,7 +48,7 @@
 				<section id="one" class="spotlight style1 bottom">
 					<span class="image fit main">
 						<% if slide_photos.blank? %>
-							<img src="/assets/parallax_one_speed/images/pic07.jpg" alt="" />
+							<img src="/assets/parallax_one/images/pic07.jpg" alt="" />
 						<% else %>
 							<% photos = slide_photos.photos.to_a %>
 							<img src="<%= photos[0].clip.url()%>" alt="" />
@@ -78,7 +78,7 @@
 				<section id="two" class="spotlight style2 right">
 					<span class="image fit main">
 						<% if slide_photos.blank? %>
-							<img src="/assets/parallax_one_speed/images/pic07.jpg" alt="" />
+							<img src="/assets/parallax_one/images/pic07.jpg" alt="" />
 						<% else %>
 							<% photos = slide_photos.photos.to_a %>
 							<img src="<%= photos[1].clip.url()%>" alt="" />
@@ -97,7 +97,7 @@
 				<section id="three" class="spotlight style3 left">
 					<span class="image fit main bottom">
 						<% if slide_photos.blank? %>
-							<img src="/assets/parallax_one_speed/images/pic07.jpg" alt="" />
+							<img src="/assets/parallax_one/images/pic07.jpg" alt="" />
 						<% else %>
 							<% photos = slide_photos.photos.to_a %>
 							<img src="<%= photos[2].clip.url()%>" alt="" />

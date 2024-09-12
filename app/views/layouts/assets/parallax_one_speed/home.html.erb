@@ -33,7 +33,7 @@
 						</header>
 						<span class="image">
 							<% if top_circle_image.blank? %>
-								<img src="/assets/parallax_one_speed/images/pic01.jpg" alt="" />
+								<img src="/assets/parallax_one/images/pic01.jpg" alt="" />
 							<% else %>
 								<% top_circle_image.photos.each do | photo | %>
 									<img src="<%= photo.clip.url() %>">
@@ -48,7 +48,7 @@
 				<section id="one" class="spotlight style1 bottom">
 					<span class="image fit main">
 						<% if slide_photos.blank? %>
-							<img src="/assets/parallax_one_speed/images/pic07.jpg" alt="" />
+							<img src="/assets/parallax_one/images/pic07.jpg" alt="" />
 						<% else %>
 							<% photos = slide_photos.photos.to_a %>
 							<img src="<%= photos[0].clip.url()%>" alt="" />
@@ -63,10 +63,10 @@
 									</header>
 								</div>
 								<div class="col-4 col-12-medium">
-									<p><%= sec1_row1.data_text %></p>
+									<p><%= sec1_row1.data_text unless sec1_row1.blank? %></p>
 								</div>
 								<div class="col-4 col-12-medium">
-									<p><%= sec1_row2.data_text %></p>
+									<p><%= sec1_row2.data_text unless sec1_row2.blank? %></p>
 								</div>
 							</div>
 						</div>
@@ -77,13 +77,18 @@
 			<!-- Two -->
 				<section id="two" class="spotlight style2 right">
 					<span class="image fit main">
-						<img src="<%= photos[1].clip.url()%>" alt="" />
+						<% if slide_photos.blank? %>
+							<img src="/assets/parallax_one/images/pic07.jpg" alt="" />
+						<% else %>
+							<% photos = slide_photos.photos.to_a %>
+							<img src="<%= photos[1].clip.url()%>" alt="" />
+						<% end %>
 					</span>
 					<div class="content">
 						<header>
-							<h2><%= sec2_title.data_string%></h2>
+							<h2><%= sec2_title.data_string unless sec2_title.blank? %></h2>
 						</header>
-						<p><%= sec2_row.data_text %></p>
+						<p><%= sec2_row.data_text unless sec2_row.blank? %></p>
 					</div>
 					<a href="#three" class="goto-next scrolly">Next</a>
 				</section>
@@ -91,13 +96,18 @@
 			<!-- Three -->
 				<section id="three" class="spotlight style3 left">
 					<span class="image fit main bottom">
-						<img src="<%= photos[2].clip.url()%>" alt="" />
+						<% if slide_photos.blank? %>
+							<img src="/assets/parallax_one/images/pic07.jpg" alt="" />
+						<% else %>
+							<% photos = slide_photos.photos.to_a %>
+							<img src="<%= photos[2].clip.url()%>" alt="" />
+						<% end %>
 					</span>
 					<div class="content">
 						<header>
-							<h2><%= sec3_title.data_string%></h2>
+							<h2><%= sec3_title.data_string unless sec3_title.blank? %></h2>
 						</header>
-						<p><%= sec3_row.data_text %></p>
+						<p><%= sec3_row.data_text unless sec3_row.blank? %></p>
 					</div>
 					<a href="#four" class="goto-next scrolly">Next</a>
 				</section>
@@ -106,8 +116,8 @@
 				<section id="four" class="wrapper style1 special fade-up">
 					<div class="container">
 						<header class="major">
-							<h2><%= sec4_title.data_string %></h2>
-							<p><%= sec4_row.data_text %></p>
+							<h2><%= sec4_title.data_string unless sec4_title.blank? %></h2>
+							<p><%= sec4_row.data_text unless sec4_row.blank? %></p>
 						</header>
 						<div class="box alt">
 							<div class="row gtr-uniform">
