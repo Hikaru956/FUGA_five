@@ -1,0 +1,42 @@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
+<section id="six" class="wrapper style1 special fade-up">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-12-xsmall">
+                <% if @website.gps? %>
+                <div id="map"></div>
+                <% end %>
+            </div>
+            <div class="col-6 col-12-xsmall">
+                <h1><%= model_name(@website) %></h1>
+                <% unless @website.wsite_description_business.blank? %>
+                <%= raw @website.wsite_description_business %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+  function initMap() {
+    var location = { lat: <%= @website.lat %>, lng: <%= @website.lng %> };
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: location
+    });
+
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+  }
+</script>
+
+<style>
+  #map {
+    width: 100%;
+    height: 400px; /* 必要に応じて高さを調整 */
+  }
+</style>
