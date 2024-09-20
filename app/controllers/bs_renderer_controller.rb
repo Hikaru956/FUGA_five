@@ -243,9 +243,7 @@ class BsRendererController < ApplicationController
     @seed.title = "お問い合わせ"
     @item = Inquiry.new(inquiry_params)
     @item.save!
-    if @item.shop.name = 'pg13'
-      InquiryMailer.send_mail(@item).deliver_later
-    end
+    InquiryMailer.send_mail(@item).deliver_later
     render :layout=>((is_sp?||@website.wsite_layout_pc_specific_basename.blank?)? "#{@website.renderer_layout}/inquiry_commited":  "#{@website.layout_pc_specific_basename}/inquiry_commited")
   end
 
