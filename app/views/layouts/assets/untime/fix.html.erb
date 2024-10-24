@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>untime / みずとそらの美容室</title>
+  <link rel="icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="/assets/untime/css/bootstrap-reboot.css" rel="stylesheet" type="text/css">
+  <link href="/assets/untime/css/style.css" rel="stylesheet" type="text/css">
+  <link href="/assets/untime/css/pctb.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)">
+  <link href="/assets/untime/css/sp.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)">
+  <script src="/assets/untime/js/jquery-3.7.1.min.js"></script>
+  <script src="/assets/untime/js/main.js"></script>
+</head>
+
+<body class="page">
+  <div id="body-cover"></div>
+  <a id="page-top"></a>
+  <%= render :partial=>"#{LayoutScheme.asset_root}/untime/header" %>
+  <div id="btn-menu-container">
+    <div id="btn-menu">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <main id="page-main">
+    <article>
+      <header class="header-article">
+      </header>
+      <section id="content-single">
+        <header class="header-sect">
+          <div class="container-ss">
+            <h3><%= model_title(@seed) %></h3>
+          </div>
+        </header>
+        <div class="container-ss">
+          <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+        </div>
+      </section>
+    </article>
+  </main>
+  <footer id="page-footer" class="bk-cl-wh">
+    <div class="copyContainer container">
+      <p class="copy">Copyright&copy;untime All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>
