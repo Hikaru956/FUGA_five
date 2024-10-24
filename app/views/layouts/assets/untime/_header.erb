@@ -36,12 +36,14 @@
           <ul>
             <li> <a href="https://www.bibe.work/shop/untime/">求人ページ</a> </li>
           </ul>
-          <ul>
-            <li> <a href="/fix?id=37347&wkey=<%= @website.wsite_hash_key %>">トレーニングカリキュラム</a> </li>
-          </ul>
-          <ul>
-            <li> <a href="/fix?id=37348&wkey=<%= @website.wsite_hash_key %>">会社概要</a> </li>
-          </ul>
+          <% if false %>
+            <ul>
+              <li> <a href="/fix?id=37347&wkey=<%= @website.wsite_hash_key %>">トレーニングカリキュラム</a> </li>
+            </ul>
+            <ul>
+              <li> <a href="/fix?id=37348&wkey=<%= @website.wsite_hash_key %>">会社概要</a> </li>
+            </ul>
+          <% end %>
         </div>
         <% if @author_mode %>
             <div class="item-salon">
