@@ -23,7 +23,7 @@
 			                </div>
 			            </div>
 <%  else %>
-			            <script src="//maps.google.com/maps/api/js?sensor=true&language=ja&key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer>>
+			            <script src="//maps.google.com/maps/api/js?sensor=true&language=ja&key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer>
 			            </script>
 			            <div class="col-lg-6 col-md-6 col-sm-6">
 			                <% if @website.gps? %>
