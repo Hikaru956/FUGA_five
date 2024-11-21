@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://untime.jp/fix?id=37347&wkey=aefbfd5c82b66f9bed4f442d3e09f887 -->
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>untime / みずとそらの美容室</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="/assets/untime/css/bootstrap-reboot.css" rel="stylesheet" type="text/css">
+    <link href="/assets/untime/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/assets/untime/css/pctb.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)">
+    <link href="/assets/untime/css/sp.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)">
+    <script src="/assets/untime/js/jquery-3.7.1.min.js"></script>
+    <script src="/assets/untime/js/main.js"></script>
+</head>
+
+<body class="page">
+    <div id="body-cover"></div>
+    <a id="page-top"></a>
+    <header id="page-header">
+        <%= render :partial=>"#{LayoutScheme.asset_root}/untime/header" %>
+    </header>
+    <div id="btn-menu-container">
+        <div id="btn-menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <main id="page-main">
+        <article>
+            <header class="header-article"> 
+              <a href="/home?wkey=<%= @website.wsite_hash_key %>">
+                <h2><img src="/assets/untime/images/logo_all_salons_bk_gray.png" width="1200" height="450" alt="ロゴ"></h2>
+              </a>
+            </header>
+            <section class="sect-training">
+                <header class="header-sect">
+                    <div class="container-ss">
+                        <h2><span class="txt">TRAINING CURRICULUM</span></h2>
+                        <p>「習うより慣れろ」は昔の話。<br>
+                            アンティム にはしっかりした育成システムが<br class="sp">あるから心配いりません。<br>
+                            入社後はカリキュラムにそって<br class="sp">計画的に学べるので、着実にスキルをつけて<br>
+                            3年目の現場デビューを目指せます。</p>
+                    </div>
+                </header>
+            </section>
+            <section class="sect-training">
+                <div class="container-s">
+                    <h3><span class="txt">入社半年</span></h3>
+                    <div class="d-pctb-flex">
+                        <figure> <img src="/assets/untime/images/1st_year.png" alt="シャンプーやカラーで指名をもらえるチャンス！" width="480" height="300"> </figure>
+                        <div class="txt">
+                            <h4>まずはアシスタント業務</h4>
+                            <p>アシスタントとして、シャンプー、カラーなど基本の業務からスタート。<br>
+                                シャンプー、カラー、カット、パーマと各部門の教育担当が中心となって<br>
+                                丁寧に教えていくので、安心してくださいね。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="sect-training">
+                <div class="container-s">
+                    <h3><span class="txt">入社1年目</span></h3>
+                    <div class="d-pctb-flex">
+                        <figure><img src="/assets/untime/images/2nd_year.png" alt="再現性の高いスタイルを作る。職人技が学べる。" width="480" height="295"></figure>
+                        <div class="txt">
+                            <h4>じっくりカット技術の基礎</h4>
+                            <p>シャンプー、カラーなど基本のアシスタント業務をやりながら、<br>
+                                いよいよウィッグを使って少しずつカットの練習を始めていきます。<br>
+                                日々の練習もできるだけ先輩が横についてアドバイスします。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="sect-training">
+                <div class="container-s">
+                    <h3><span class="txt">入社2年目</span></h3>
+                    <div class="d-pctb-flex">
+                        <figure><img src="/assets/untime/images/3rd_year.png" alt="スタイリストが丁寧なアドバイス。数よりも質が大事" width="480" height="295"></figure>
+                        <div class="txt">
+                            <h4>モデルカットが自信に</h4>
+                            <p>月ごとに、できるペースでモデルさんのカットにチャレンジ。頭の形や髪質の違いなど、<br>
+                                本物の髪を扱う難しさにぶつかると思いますが、あせらないで大丈夫。<br>
+                                段階ごとに幹部社員によるチェックがあるので、「もっとこうしたほうがいい」というポイントが明確に。<br>
+                                カットしたモデルの実績が確かな自信になります。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="sect-training">
+                <div class="container-s">
+                    <h3><span class="txt">現場デビュー</span></h3>
+                    <div class="d-pctb-flex">
+                        <figure><img src="/assets/untime/images/debut.png" alt="先輩に見守られながらお客様の担当をスタート" width="480" height="295"></figure>
+                        <div class="txt">
+                            <h4>お客さまの担当をスタート</h4>
+                            <p>Jr.スタイリストとして、いよいよ現場デビュー。<br>
+                                実際にお客さまを担当していきます。<br>
+                                スタートしてからも不安なことがあれば、先輩がフォローするので安心してください。<br>
+                                月1〜2回、店長と振り返りのミーティングを行いながら、仕事に慣れていきましょう。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="sect-training">
+                <div class="container-s">
+                    <h3><span class="txt">ひとり立ち</span></h3>
+                    <div class="d-pctb-flex">
+                        <figure><img src="/assets/untime/images/independent.png" alt="サロンの顔として一緒に頑張りましょう！" width="640" height="295"></figure>
+                        <div class="txt">
+                            <h4>一人前のスタイリストに</h4>
+                            <p>ひとり立ち後も困らない、確かなスキルを身につけてほしい。<br>
+                                だからスタイリストを名乗れるのは業界平均よりあえて高めの、<br>
+                                指名売上月70万円を超えたタイミングとしています。<br>
+                                もちろんみんなで全力サポート！一人前のスタイリストとして長く活躍してください。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="sect-support">
+                <div class="container-ss">
+                    <h3><span class="txt">SUPPORT</span></h3>
+                    <h4>外部研修の費用をサポート</h4>
+                    <p>スタイリストになった後も、引き続きあなたの成長を応援！<br>
+                        メイク、まつ毛エクステ、ネイルを学びたいなど、<br>
+                        希望があれば外部研修の費用を一部負担します。</p>
+                </div>
+            </section>
+        </article>
+    </main>
+    <footer id="page-footer" class="bk-cl-wh">
+        <div class="copyContainer container">
+            <p class="copy">Copyright©untime All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

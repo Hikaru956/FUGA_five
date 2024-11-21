@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)https://www.untime.jp/fix?id=37348&wkey=aefbfd5c82b66f9bed4f442d3e09f887 -->
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>untime / みずとそらの美容室</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="/assets/untime/css/bootstrap-reboot.css" rel="stylesheet" type="text/css">
+    <link href="/assets/untime/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/assets/untime/css/pctb.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)">
+    <link href="/assets/untime/css/sp.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)">
+    <script src="/assets/untime/js/jquery-3.7.1.min.js"></script>
+    <script src="/assets/untime/js/main.js"></script>
+</head>
+
+<body class="page">
+    <div id="body-cover"></div>
+    <a id="page-top"></a>
+    <header id="page-header">
+        <%= render :partial=>"#{LayoutScheme.asset_root}/untime/header" %>
+    </header>
+    <div id="btn-menu-container">
+        <div id="btn-menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <main id="page-main">
+        <article>
+            <header class="header-article">
+                <a href="/home?wkey=<%= @website.wsite_hash_key %>">
+                    <h2><img src="/assets/untime/images/logo_all_salons_bk_gray.png" width="1200" height="450" alt="ロゴ"></h2>
+                </a>
+            </header>
+            <section class="sect-company">
+                <header class="header-sect">
+                    <div class="container-ss">
+                        <h2>会社概要</h2>
+                    </div>
+                </header>
+            </section>
+            <section class="sect-company">
+                <div class="container-ss">
+                    <figure class="logo"> <img src="/assets/untime/images/logo_untime_black.svg" alt="untimeロゴ" width="240" height="80"> </figure>
+                    <h3><span class="txt">私たちはこんな会社です</span></h3>
+                    <div class="inner-sect-company philosophy">
+                        <h4>経営理念</h4>
+                        <p>『「地域」を通じて感謝・感動・喜びの創造』<br>
+                            人々が集える場所を創り<br>
+                            そこで地域の人、働く人、来店される人、<br>
+                            幸せになってもらうためにつくし<br>
+                            「笑顔の輪」を創ります。</p>
+                        <h4>経営方針</h4>
+                        『社員とその家族を幸せにする「社員、家族、お客様」』<br>
+                        私たちに関わる全ての人が<br>
+                        幸せになれる行動と創造をし、<br>
+                        それができる「人」を育成していきます。
+                        </p>
+                    </div>
+                    <div class="inner-sect-company">
+                        <table class="sp-block">
+                            <tr>
+                                <th>社会保障制度</th>
+                                <td>健康保険、厚生年金（R7、1月1日より加入）、雇用保険、労働保険</td>
+                            </tr>
+                            <tr>
+                                <th>休暇制度</th>
+                                <td>週休2日制＋1日（月9日）/ 年末年始休暇4～5日 / 年休113日<br>
+                                    その他、スタイリスト休暇　年5日、有給休暇（勤続年数に応じて付与）</td>
+                            </tr>
+                            <tr>
+                                <th>営業時間、勉強会</th>
+                                <td>18:00完全終了制、営業時間内勉強</td>
+                            </tr>
+                            <tr>
+                                <th>育児支援制度</th>
+                                <td>フレックス勤務制度、短時間勤務制度</td>
+                            </tr>
+                            <tr>
+                                <th>各種手当</th>
+                                <td>通勤手当（5キロ以上）、住宅手当（役職に応じて）、店販手当</td>
+                            </tr>
+                            <tr>
+                                <th>そのほか</th>
+                                <td>健康診断、パスタ支給、レトルト支給（昼食）<br>
+                                    サロン取扱製品社員割引（バイカルテ、ヴィラロドラ、エステシモなど）</td>
+                            </tr>
+                        </table>
+                    </div>
+            </section>
+        </article>
+    </main>
+    <footer id="page-footer" class="bk-cl-wh">
+        <div class="copyContainer container">
+            <p class="copy">Copyright©untime All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
