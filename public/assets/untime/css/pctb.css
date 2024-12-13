@@ -9,12 +9,12 @@ p, li {
   display: none !important
 }
 #btn-menu {
-  top: 64px;
+  top: 32px;
   right: 48px
 }
 #nav-main {
   min-width: 20vw;
-  padding: 128px 64px 8px
+  padding: 96px 64px 8px;
 }
 #nav-main li, #nav-main h3 {
   margin-bottom: 16px
