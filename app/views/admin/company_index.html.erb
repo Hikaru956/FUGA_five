@@ -41,6 +41,7 @@
 				<th xclass='table-dark' width='20%'>
 					店舗<div class='d-none d-md-inline'><small> 公開/登録</small></div>
 				</th>
+				<% if false %>
 				<th class='d-none d-md-table-cell' width='30%'>
 					ディスク
 					<div class='d-none d-md-inline'>
@@ -54,7 +55,6 @@
 					</span>
 					</div>
 				</th>
-				<% if false %>
 				<th class='d-none d-md-table-cell' width='15%'>固定<div class='d-none d-md-inline'>ページ</div></th>
 				<% end %>
 			</tr>
@@ -107,6 +107,7 @@
 						pbar_tx_class = "text-light"	if rate>80
 						pbar_tx_class = "text-light"	if rate>100
 					%>
+					<% if false %>
 					<td class='d-none d-md-table-cell' style=" vertical-align: middle; text-align:right">
 						<% url = url_for(:action=>"company_list_shop", :id=>@company) %>
 						<small>
@@ -129,7 +130,6 @@
 						</div>
 
 					</td>
-					<% if false %>
 					<td class='d-none d-md-table-cell' style=" vertical-align: middle; text-align:right">
 						<%
 						 	f_pages = 0
