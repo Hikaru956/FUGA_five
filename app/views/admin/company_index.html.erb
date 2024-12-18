@@ -1,100 +1,101 @@
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">レジストリー</li>
-  </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">レジストリー</li>
+    </ol>
 </nav>
 
 <!-- === Masthead === -->
 <header class="subhead" id="overview">
-	<% if current_user.role >= User::ROLE_OPERATOR %>
-		<span class="float-right">
-			<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
-				<%= new_icon %>&nbsp;登録…
-			</button>
-			|
-			<a class="btn btn-sm btn-outline-primary" href='<%= url_for(action: 'info') %>'>
-				<%= info_icon %>&nbsp;<span class='d-none d-md-inline'>システム</span>情報
-			</a>
-			|
-		    <% seach_btn_class = (@search_word.blank?)? 'btn btn-sm btn-info': 'btn btn-sm btn-warning' %>
-			<button type="button" class="<%= seach_btn_class %>" data-bs-toggle="modal" data-bs-target="#modalSearch">
-				<%= search_icon %>&nbsp;検索…
-			</button>
-		</span>
-	<% end %>
-	<h4>
-		レジストリー
-	</h4>
+    <% if current_user.role >= User::ROLE_OPERATOR %>
+    <span class="float-right">
+        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalNew">
+            <%= new_icon %>&nbsp;登録…
+        </button>
+        |
+        <a class="btn btn-sm btn-outline-primary" href='<%= url_for(action: 'info') %>'>
+            <%= info_icon %>&nbsp;<span class='d-none d-md-inline'>システム</span>情報
+        </a>
+        |
+        <% seach_btn_class = (@search_word.blank?)? 'btn btn-sm btn-info': 'btn btn-sm btn-warning' %>
+        <button type="button" class="<%= seach_btn_class %>" data-bs-toggle="modal" data-bs-target="#modalSearch">
+            <%= search_icon %>&nbsp;検索…
+        </button>
+    </span>
+    <% end %>
+    <h4>
+        レジストリー
+    </h4>
 </header>
 
 <% if @items.blank? %>
-	<p class="text-error">レジストリーが見つかりません。</p>
+<p class="text-error">レジストリーが見つかりません。</p>
 <% else %>
-	<%= paginate @items, theme: 'bootstrap-5' %>
+<%= paginate @items, theme: 'bootstrap-5' %>
 
-	<table class="table table-hover table-sm table-bordered xtable-striped">
-		<thead>
-			<tr>
-				<th xclass='table-dark' width='50%'>
-					名称
-				</th>
-				<th xclass='table-dark' width='20%'>
-					店舗<div class='d-none d-md-inline'><small> 公開/登録</small></div>
-				</th>
-				<% if false %>
-				<th class='d-none d-md-table-cell' width='30%'>
-					ディスク
-					<div class='d-none d-md-inline'>
-					<span class='float-right'>
-						<small>
-							使用量
-							/
-							設定量
-							(使用率)
-						</small>
-					</span>
-					</div>
-				</th>
-				<th class='d-none d-md-table-cell' width='15%'>固定<div class='d-none d-md-inline'>ページ</div></th>
-				<% end %>
-			</tr>
-		<head>
-		<tbody>
-			<% @items.each do | company | @company = company %>
-				<tr>
-					<td style="vertical-align: middle">
-						<% url = url_for(:action=>"company_show", :id=>@company) %>
-						<a href="<%=url%>" class='text-primary'>
-							<%= model_name(@company) %>
-							<%= link_to_6_icon %>
-						</a>
+<table class="table table-hover table-sm table-bordered xtable-striped">
+    <thead>
+        <tr>
+            <th xclass='table-dark' width='50%'>
+                名称
+            </th>
+            <th xclass='table-dark' width='20%'>
+                店舗<div class='d-none d-md-inline'><small> 公開/登録</small></div>
+            </th>
+            <% if false %>
+            <th class='d-none d-md-table-cell' width='30%'>
+                ディスク
+                <div class='d-none d-md-inline'>
+                    <span class='float-right'>
+                        <small>
+                            使用量
+                            /
+                            設定量
+                            (使用率)
+                        </small>
+                    </span>
+                </div>
+            </th>
+            <th class='d-none d-md-table-cell' width='15%'>固定<div class='d-none d-md-inline'>ページ</div>
+            </th>
+            <% end %>
+        </tr>
+        <head>
+    <tbody>
+        <% @items.each do | company | @company = company %>
+        <tr>
+            <td style="vertical-align: middle">
+                <% url = url_for(:action=>"company_show", :id=>@company) %>
+                <a href="<%=url%>" class='text-primary'>
+                    <%= model_name(@company) %>
+                    <%= link_to_6_icon %>
+                </a>
 
-						<span class='float-right'>
-							<%= editor_six_icon if company.is_new_editor_available? %>
-							<%= attendance_six_icon if company.is_attendance_available? %>
-							<%= reservation_six_icon if company.is_reservation_available? %>
-						</span>
+                <span class='float-right'>
+                    <%= editor_six_icon if company.is_new_editor_available? %>
+                    <%= attendance_six_icon if company.is_attendance_available? %>
+                    <%= reservation_six_icon if company.is_reservation_available? %>
+                </span>
 
-						<% if false %>
-							<span class='float-right text-danger'>
-								<%
+                <% if false %>
+                <span class='float-right text-danger'>
+                    <%
 									e_cat = ContentCategory.where('shop_id IN (?) AND content_categories.id = content_categories.parent_id', @company.shops.map{|s| s.id})
 								%>
-								<% unless e_cat.blank? %>
-									<i class="fas fa-exclamation-triangle" title='カテゴリー設定エラー'></i>
-								<% end %>
-							</span>
-						<% end %>
-					</td>
-					<td style="vertical-align: middle; text-align:right">
-						<% deploys = @company.shops.where('wsite_run_mode=?',Shop::WSITE_PUBLISHED) %>
-						<%= site_status_icon(Shop::WSITE_PUBLISHED) unless deploys.blank? %>
-						<%= deploys.size %>
-						/
-						<%= @company.shops.size %>
-					</td>
-
-					<%
+                    <% unless e_cat.blank? %>
+                    <i class="fas fa-exclamation-triangle" title='カテゴリー設定エラー'></i>
+                    <% end %>
+                </span>
+                <% end %>
+            </td>
+            <td style="vertical-align: middle; text-align:right">
+                <% deploys = @company.shops.where('wsite_run_mode=?',Shop::WSITE_PUBLISHED) %>
+                <%= site_status_icon(Shop::WSITE_PUBLISHED) unless deploys.blank? %>
+                <%= deploys.size %>
+                /
+                <%= @company.shops.size %>
+            </td>
+            <% if false %>
+            <%
 						company_room_size_mb = @company.room_size_mb
 						company_photo_size 	 = @company.photo_size
 						rate = (company_room_size_mb.blank?||company_room_size_mb==0)? 0 : (company_photo_size*100)/(company_room_size_mb*1024*1024)
@@ -107,156 +108,155 @@
 						pbar_tx_class = "text-light"	if rate>80
 						pbar_tx_class = "text-light"	if rate>100
 					%>
-					<% if false %>
-					<td class='d-none d-md-table-cell' style=" vertical-align: middle; text-align:right">
-						<% url = url_for(:action=>"company_list_shop", :id=>@company) %>
-						<small>
-							<a href="<%=url%>">
-								<span class='text-primary'>
-									<%= number_to_human_size(company_photo_size)  %>
-								</span>
-								/
-								<span class='text-info'>
-									<%= (company_room_size_mb.blank?)? "無制限": number_to_human_size(company_room_size_mb*1024*1024) %>
-								</span>
-							</a>
-							<span class="label">(<%= rate.to_i%>%)</span>
-						</small>
+            <td class='d-none d-md-table-cell' style=" vertical-align: middle; text-align:right">
+                <% url = url_for(:action=>"company_list_shop", :id=>@company) %>
+                <small>
+                    <a href="<%=url%>">
+                        <span class='text-primary'>
+                            <%= number_to_human_size(company_photo_size)  %>
+                        </span>
+                        /
+                        <span class='text-info'>
+                            <%= (company_room_size_mb.blank?)? "無制限": number_to_human_size(company_room_size_mb*1024*1024) %>
+                        </span>
+                    </a>
+                    <span class="label">(<%= rate.to_i%>%)</span>
+                </small>
 
-						<div class='d-none d-md-inline'>
-							<div class="progress" style="height: 5px;">
-								<div class="progress-bar progress-bar-striped progress-bar-animated <%= pbar_tx_class %> <%= pbar_class %>" role="progressbar" style="width: <%= rate %>%;" aria-valuenow="<%= rate %>" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-						</div>
+                <div class='d-none d-md-inline'>
+                    <div class="progress" style="height: 5px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated <%= pbar_tx_class %> <%= pbar_class %>" role="progressbar" style="width: <%= rate %>%;" aria-valuenow="<%= rate %>" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
 
-					</td>
-					<td class='d-none d-md-table-cell' style=" vertical-align: middle; text-align:right">
-						<%
+            </td>
+            <td class='d-none d-md-table-cell' style=" vertical-align: middle; text-align:right">
+                <%
 						 	f_pages = 0
 						 	@company.shops.each do | shop |
 					 		fix_pages_bag = ContentBag.retrieve_fixed_page_bag(shop)
 					 		f_pages += fix_pages_bag.content_leafs.size
 					 		end
 						%>
-						<%= f_pages %>
-						ページ
-					</td>
-					<% end %>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
-	<%= paginate @items, theme: 'bootstrap-5' %>
+                <%= f_pages %>
+                ページ
+            </td>
+            <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<%= paginate @items, theme: 'bootstrap-5' %>
 <% end %>
 
 <!-- modalNewShop -->
 <div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
-	  <div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<% item = Company.new %>
-			<%= form_for item, url: admin_company_create_path, method: :post do |f| %>
-				<div class="modal-header">
-					<h5 class="modal-title">新規レジストリー登録</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<%= render partial: "form_company", locals: {f: f, item: item } %>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
-					<button type="submit" class="btn btn-sm btn-success"><%= new_icon %>&nbsp;登録</button>
-				</div>
-			<% end %>
-		</div>
-	</div>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <% item = Company.new %>
+            <%= form_for item, url: admin_company_create_path, method: :post do |f| %>
+            <div class="modal-header">
+                <h5 class="modal-title">新規レジストリー登録</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <%= render partial: "form_company", locals: {f: f, item: item } %>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
+                <button type="submit" class="btn btn-sm btn-success"><%= new_icon %>&nbsp;登録</button>
+            </div>
+            <% end %>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="xmodalNew" tabindex="-1" aria-labelledby="modalNew" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<% item = Company.new %>
-			<%= form_for item, url: dashboard_company_create_path, method: :post do |f| -%>
-				<div class="modal-header">
-					<h5 class="modal-title">新規レジストリー登録</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<%= render partial: "form_company", locals: {f: f, item: item } %>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-					<button type="submit" class="btn btn-sm btn-success"><%= new_icon('新規登録') %>&nbsp;登録</button>
-				</div>
-			<% end %>
-		</div>
-	</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <% item = Company.new %>
+            <%= form_for item, url: dashboard_company_create_path, method: :post do |f| -%>
+            <div class="modal-header">
+                <h5 class="modal-title">新規レジストリー登録</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <%= render partial: "form_company", locals: {f: f, item: item } %>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                <button type="submit" class="btn btn-sm btn-success"><%= new_icon('新規登録') %>&nbsp;登録</button>
+            </div>
+            <% end %>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="modalSearch" aria-hidden="true">
-	  <div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<%= form_tag(admin_index_path, :method => 'get') do %>
-				<div class="modal-header">
-					<h5 class="modal-title">レジストリー検索</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<%= text_field_tag :search_word, @search_word,{class: "form-control form-control-lg", placeholder: "検索文字列", autofocus: true} %>
-				</div>
-				<div class="modal-footer">
-					<% unless @search_word.blank? %>
-			            <%= link_to reset_search_icon+' リセット', admin_index_path, class: 'btn btn-outline-dark' %>
-						|
-					<% end %>
-					<button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
-					<button type="submit" class="btn btn-sm btn-info"><%= search_icon %>&nbsp;検索</button>
-				</div>
-			<% end %>
-		</div>
-	</div>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <%= form_tag(admin_index_path, :method => 'get') do %>
+            <div class="modal-header">
+                <h5 class="modal-title">レジストリー検索</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <%= text_field_tag :search_word, @search_word,{class: "form-control form-control-lg", placeholder: "検索文字列", autofocus: true} %>
+            </div>
+            <div class="modal-footer">
+                <% unless @search_word.blank? %>
+                <%= link_to reset_search_icon+' リセット', admin_index_path, class: 'btn btn-outline-dark' %>
+                |
+                <% end %>
+                <button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal"><%= cancel_icon('キャンセル') %>&nbsp;キャンセル</button>
+                <button type="submit" class="btn btn-sm btn-info"><%= search_icon %>&nbsp;検索</button>
+            </div>
+            <% end %>
+        </div>
+    </div>
 </div>
 
 <% if false && current_user.has_permission?(User::ROLE_SUPER) %>
-<hr/>
+<hr />
 <h4>DISPLAY Break Point</h4>
 <div class='d-sm-none'>
-	<p class='text-info'>'d-sm-none'  ... Detecting xs or less smaller</p>
+    <p class='text-info'>'d-sm-none' ... Detecting xs or less smaller</p>
 </div>
 
 <div class='d-none d-sm-block d-md-none'>
-	<p class='text-primary'>'d-none d-sm-block d-md-none'  ... Detecting sm</p>
+    <p class='text-primary'>'d-none d-sm-block d-md-none' ... Detecting sm</p>
 </div>
 
 <div class='d-none d-md-block d-lg-none'>
-	<p class='text-warning'>'d-none d-md-block d-lg-none'  ... Detecting md</p>
+    <p class='text-warning'>'d-none d-md-block d-lg-none' ... Detecting md</p>
 </div>
 
 <div class='d-none d-lg-block'>
-	<p class='text-danger'>'d-none d-lg-block'  ... Detecting lg or more bigger</p>
+    <p class='text-danger'>'d-none d-lg-block' ... Detecting lg or more bigger</p>
 </div>
 
-<hr/>
+<hr />
 <h4>Missing Shop Info Categories</h4>
 <% missing_cats = ContentCategory.where('shop_id IS NULL') %>
 <table class='table table-sm - table-bordered'>
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Title</th>
-			<th>ParentShop</th>
-			<th>Fix</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% missing_cats.each do |cat| %>
-			<tr>
-				<td><%= cat.id %></td>
-				<td><%= cat.title %></td>
-				<td><%= cat.parent.shop.name %></td>
-				<td></td>
-			</tr>
-		<% end %>
-	</tbody>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>ParentShop</th>
+            <th>Fix</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% missing_cats.each do |cat| %>
+        <tr>
+            <td><%= cat.id %></td>
+            <td><%= cat.title %></td>
+            <td><%= cat.parent.shop.name %></td>
+            <td></td>
+        </tr>
+        <% end %>
+    </tbody>
 </table>
 
 
