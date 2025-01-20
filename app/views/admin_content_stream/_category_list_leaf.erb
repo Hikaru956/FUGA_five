@@ -1,7 +1,8 @@
 <style>
     .image-container img {
-        width: 100px;
-        height: 100px;
+        max-width: 200px;
+        width: auto;
+        height: auto;
     }
 </style>
 <% @leafs.each do |leaf | %>
@@ -15,7 +16,7 @@
                             <%= image_tag key_photo.clip.url(:thumb) %>
                         </div>
                     <% else %>
-                        <img src="https://placehold.jp/22/cfcfcf/ffffff/100x100.png?text=No%20Photo%0A">
+                        <img src="https://placehold.jp/22/cfcfcf/ffffff/150x150.png?text=No%20Photo%0A">
                     <% end %>
                 </div>
                 <div class="flex-grow-1 ms-3">

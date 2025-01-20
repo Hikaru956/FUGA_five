@@ -1,6 +1,14 @@
 <style>
+    .note-editable {
+    width: 100%;      /* 親コンテナの幅に適応 */
+    /* 必要に応じて最大幅を設定 max-width: 800px;  */
+    },
     .note-editable.panel-body {
         overflow-y: scroll;
+    },
+    .note-editable img {
+        max-width: 100%; /* 画像が領域を超えない */
+        height: auto;   /* アスペクト比を維持 */
     }
 </style>
 <script type="text/javascript" src="/javascripts/summernote/bootstrap5/summernote-image-attributes.js"></script>
@@ -154,6 +162,11 @@
                 var img = document.createElement('img');
                 img.src = data.url;
                 img.setAttribute('id', data.id);
+
+                // ここでサイズを設定
+                img.style.width = "100%"; // 編集エリアの幅に合わせる
+                img.style.height = "auto"; // アスペクト比を維持
+
                 $('#summernote').summernote('insertNode', img);
             },
             error: function(xhr, status, error) {
