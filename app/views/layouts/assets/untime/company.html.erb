@@ -3,6 +3,9 @@
 <html lang="ja">
 
 <head>
+    <% unless @website.analytics_code.blank? %>
+    <%= raw @website.analytics_code %>
+    <% end %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>untime / みずとそらの美容室</title>
     <link rel="icon" href="favicon.ico">
