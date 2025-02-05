@@ -2,69 +2,72 @@
 <html lang="ja">
 
 <head>
-  <meta charset="utf-8">
-  <title>untime / みずとそらの美容室</title>
-  <link rel="icon" href="favicon.ico">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="/assets/untime/css/bootstrap-reboot.css" rel="stylesheet" type="text/css">
-  <link href="/assets/untime/css/style.css" rel="stylesheet" type="text/css">
-  <link href="/assets/untime/css/pctb.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)">
-  <link href="/assets/untime/css/sp.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)">
-  <script src="/assets/untime/js/jquery-3.7.1.min.js"></script>
-  <script src="/assets/untime/js/main.js"></script>
+    <% unless @website.analytics_code.blank? %>
+    <%= raw @website.analytics_code %>
+    <% end %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>untime / みずとそらの美容室</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="/assets/untime/css/bootstrap-reboot.css" rel="stylesheet" type="text/css">
+    <link href="/assets/untime/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/assets/untime/css/pctb.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)">
+    <link href="/assets/untime/css/sp.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)">
+    <script src="/assets/untime/js/jquery-3.7.1.min.js"></script>
+    <script src="/assets/untime/js/main.js"></script>
 </head>
 
 <body class="page">
-  <div id="body-cover"></div>
-  <a id="page-top"></a>
-  <%= render :partial=>"#{LayoutScheme.asset_root}/untime/header" %>
-  <div id="btn-menu-container">
-    <div id="btn-menu">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <main id="page-main">
-    <article>
-      <header class="header-article">
-        <h2><img src="/assets/untime/images/logo_all_salons_bk_gray.png" width="1200" height="450" alt="ロゴ">
-          <a href="/news_list?wkey=<%= @website.wsite_hash_key %>">お知らせ</a>
-        </h2>
-      </header>
-      <section id="content-single">
-        <header class="header-sect">
-          <div class="container-ss">
-            <h3><%= model_title(@seed) %></h3>
-            <time><%= publish_label(@seed) %></time>
-          </div>
-        </header>
-        <div class="container-ss">
-          <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
-            <% tag_cloud(@seed.tags.order(name: :asc), %w(css1 css2 css3 css4)) do |tag| %>
-              <% @seed.content_category.category_path(true).each do | category | %>
-              <% cat_url = url_for(:action=>'news_list', :id=>category, search_tags: [tag.name])%>
-                <a href='<%= cat_url %>'>
-                    <span class='badge badge-primary '>
-                        #<%= tag3_icon %>&nbsp;<%= tag_name(tag) %>
-                    </span>
-                </a>
-            <% end %>
-          <% end %>
+    <div id="body-cover"></div>
+    <a id="page-top"></a>
+    <%= render :partial=>"#{LayoutScheme.asset_root}/untime/header" %>
+    <div id="btn-menu-container">
+        <div id="btn-menu">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-      </section>
-      <nav id="nav-page-single">
-        <ul class="ls-none container-ss">
-          <%= leaf_navigation_untime(@seed) %>
-        </ul>
-      </nav>
-    </article>
-  </main>
-  <footer id="page-footer" class="bk-cl-wh">
-    <div class="copyContainer container">
-      <p class="copy">Copyright&copy;untime All Rights Reserved.</p>
     </div>
-  </footer>
+    <main id="page-main">
+        <article>
+            <header class="header-article">
+                <h2><img src="/assets/untime/images/logo_all_salons_bk_gray.png" width="1200" height="450" alt="ロゴ">
+                    <a href="/news_list?wkey=<%= @website.wsite_hash_key %>">お知らせ</a>
+                </h2>
+            </header>
+            <section id="content-single">
+                <header class="header-sect">
+                    <div class="container-ss">
+                        <h3><%= model_title(@seed) %></h3>
+                        <time><%= publish_label(@seed) %></time>
+                    </div>
+                </header>
+                <div class="container-ss">
+                    <% unless @seed.description.blank? %><%= raw @seed.description %><% end %>
+                    <% tag_cloud(@seed.tags.order(name: :asc), %w(css1 css2 css3 css4)) do |tag| %>
+                    <% @seed.content_category.category_path(true).each do | category | %>
+                    <% cat_url = url_for(:action=>'news_list', :id=>category, search_tags: [tag.name])%>
+                    <a href='<%= cat_url %>'>
+                        <span class='badge badge-primary '>
+                            #<%= tag3_icon %>&nbsp;<%= tag_name(tag) %>
+                        </span>
+                    </a>
+                    <% end %>
+                    <% end %>
+                </div>
+            </section>
+            <nav id="nav-page-single">
+                <ul class="ls-none container-ss">
+                    <%= leaf_navigation_untime(@seed) %>
+                </ul>
+            </nav>
+        </article>
+    </main>
+    <footer id="page-footer" class="bk-cl-wh">
+        <div class="copyContainer container">
+            <p class="copy">Copyright&copy;untime All Rights Reserved.</p>
+        </div>
+    </footer>
 </body>
 
 </html>

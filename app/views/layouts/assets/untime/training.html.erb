@@ -3,7 +3,10 @@
 <html lang="ja">
 
 <head>
-    <meta charset="utf-8">
+    <% unless @website.analytics_code.blank? %>
+    <%= raw @website.analytics_code %>
+    <% end %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>untime / みずとそらの美容室</title>
     <link rel="icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -30,10 +33,10 @@
     </div>
     <main id="page-main">
         <article>
-            <header class="header-article"> 
-              <a href="/home?wkey=<%= @website.wsite_hash_key %>">
-                <h2><img src="/assets/untime/images/logo_all_salons_bk_gray.png" width="1200" height="450" alt="ロゴ"></h2>
-              </a>
+            <header class="header-article">
+                <a href="/home?wkey=<%= @website.wsite_hash_key %>">
+                    <h2><img src="/assets/untime/images/logo_all_salons_bk_gray.png" width="1200" height="450" alt="ロゴ"></h2>
+                </a>
             </header>
             <section class="sect-training">
                 <header class="header-sect">
