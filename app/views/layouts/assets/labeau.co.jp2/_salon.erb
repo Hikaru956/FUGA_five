@@ -3,18 +3,20 @@
                 <h1>Our Salons</h1>
                 <div id="home_salon">
                     <ul class="wrapper">
-<!-- LA BEAU 駒込店 -->
-                        <li class="col-1p6">
-                            <div class="col-in">
-                                <div class="text-center">
-<% if true || request.host == 'sr2.swifty.jp' %>
-                                    <a href="/fix?id=966&wkey=<%= @website.wsite_hash_key %>"><img src="/photo/image/clip/3950/original/komagome.png" alt="駒込店"></a>
-<% else %>
-                                    <a href="/fix?id=966"><img src="/photo/image/clip/14894/original/komagome.png" alt="駒込店"></a>
-<% end %>
+                        <% if false %>
+                            <!-- LA BEAU 駒込店 -->
+                            <li class="col-1p6">
+                                <div class="col-in">
+                                    <div class="text-center">
+                                        <% if true || request.host == 'sr2.swifty.jp' %>
+                                            <a href="/fix?id=966&wkey=<%= @website.wsite_hash_key %>"><img src="/photo/image/clip/3950/original/komagome.png" alt="駒込店"></a>
+                                        <% else %>
+                                            <a href="/fix?id=966"><img src="/photo/image/clip/14894/original/komagome.png" alt="駒込店"></a>
+                                        <% end %>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        <% end %>
 <!-- LA BEAU 赤羽店 -->
                         <li class="col-1p6">
                             <div class="col-in">
