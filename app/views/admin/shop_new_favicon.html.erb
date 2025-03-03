@@ -30,7 +30,7 @@
         </a>
     </span>
     <h4>
-        FAVICON.ICO
+        FAVICON
     </h4>
 </header>
 
@@ -45,7 +45,7 @@
     Dropzone.options.dropzone = {
         paramName: "photo[clip]",
         maxFilesize: 20,
-        acceptedFiles: "image/ico, image/x-icon", // ← .ico を追加
+        acceptedFiles: "image/png, image/ico, image/x-icon", // ← .ico を追加
         init: function() {
             this.on('complete', function(file) {
                 //location.reload();
@@ -56,6 +56,6 @@
 <% end %>
 
 <div class="alert alert-info">
-    画像のファイル名は'favicon.ico'。
+    画像のファイル名は'favicon.ico / .png'。
     画像のサイズは「32×32ピクセル」のものを指定してください。
 </div>
