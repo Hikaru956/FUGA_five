@@ -312,10 +312,10 @@
 	<tbody>
 		<% @icon = @shop.favicon %>
 		<tr>
-			<th width='25%'>favicon.png</th>
+			<th width='25%'>favicon.png / ico</th>
 			<td width='75%'>
 				<% if @icon.blank? %>
-					<small class='text-danger'>画像のファイル名は'favicon.png'。画像の種類は「PNG形式」。</small>
+					<small class='text-danger'>画像のファイル名は'favicon.png / .ico'。画像の種類は「PNG形式」。</small>
 					<span class="float-right">
 						<a class="btn btn-sm btn-outline-primary" href="<%= url_for(:action=>'shop_new_favicon', :id=>@shop) %>">
 							<%= share_icon('設定')%>&nbsp;
@@ -331,7 +331,7 @@
 					</span>
 					<%= image_tag @icon.clip.url() %>
 					<% unless @icon.clip_file_name == 'favicon.png' || @icon.clip_file_name == 'favicon.ico' %>
-						<small>ファイル名が「favicon.png」ではありません</small>
+						<small>ファイル名が「favicon.png, favicon.ico」ではありません</small>
 					<% end %>
 				<% end %>
 			</td>
@@ -374,7 +374,7 @@
 				</span>
 				<%= raw "<a href=#{@shop.social_facebook_uri} target='_blank' title=#{@shop.social_facebook_uri}><i class='fa-brands fa-facebook fa-2x'></i></a>"		unless @shop.social_facebook_uri.blank? %>
 				
-				<%= raw "<a href=#{@shop.social_twitter_uri} target='_blank' title=#{@shop.social_twitter_uri}><i class='fa-brands fa-twitter fa-2x'></i></a>"		unless @shop.social_twitter_uri.blank? %>
+				<%= raw "<a href=#{@shop.social_twitter_uri} target='_blank' title=#{@shop.social_twitter_uri}><i class='fa-brands fa-x-twitter fa-2x'></i></a>"		unless @shop.social_twitter_uri.blank? %>
 				<%= raw "<a href=#{@shop.social_instagram_uri} target='_blank' title=#{@shop.social_instagram_uri}><i class='fa-brands fa-instagram fa-2x'></i></a>"		unless @shop.social_instagram_uri.blank? %>
 				<%= raw "<a href=#{@shop.social_pinterest_uri} target='_blank' title=#{@shop.social_pinterest_uri}><i class='fa-brands fa-pinterest fa-2x'></i></a>"	unless @shop.social_pinterest_uri.blank? %>
 				<%= raw "<a href=#{@shop.social_tumblr_uri} target='_blank' title=#{@shop.social_tumblr_uri}><i class='fa-brands fa-tumblr fa-2x'></i></a>"			unless @shop.social_tumblr_uri.blank? %>

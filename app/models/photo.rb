@@ -19,12 +19,23 @@ class Photo < ApplicationRecord
 
 
   has_attached_file :clip,
-                    styles: { large: "4096x4096>", thumb: "320x180>", panel: "640x480" },
+                    styles: lambda { |a| 
+                      if a.respond_to?(:original_filename) && a.original_filename&.end_with?('.ico')
+                        {} # .ico はリサイズしない
+                      else
+                        { large: "4096x4096>", thumb: "320x180>", panel: "640x480" } # .ico 以外はリサイズ
+                      end
+                    },
                     url: "/photo/image/clip/:id/:style/:filename",
-                    path: "#{Rails.root}/public/photo/image/clip/:id/:style/:filename"
+                    path: "#{Rails.root}/public/photo/image/clip/:id/:style/:filename",
+                    processors: lambda { |a| 
+                      a.respond_to?(:original_filename) && a.original_filename&.end_with?('.ico') ? [] : [:thumbnail]
+                    }
+
   validates_attachment_content_type :clip, content_type: [/\Aimage\/.*\z/, "image/x-icon", "image/jpeg", "image/gif", "image/png", "image/webp", "application/octet-stream"]
 
   before_validation :override_mime_type
+
 
   #has_attached_file :clip,
   #                  styles: { large: "4096x4096>", thumb: "320x180>", panel: "640x480" },
