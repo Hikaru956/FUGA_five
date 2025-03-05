@@ -15,7 +15,7 @@
 
 			<%= raw("<a href=#{@website.social_facebook_uri} target='_blank' 	title=#{@website.social_facebook_uri}>	<i class='icon-facebook-sign  icon-2x'></i></a>")		unless @website.social_facebook_uri.blank? %>
 			
-			<%= raw("<a href=#{@website.social_twitter_uri} target='_blank' 	title=#{@website.social_twitter_uri}>	<i class='icon-twitter-sign  icon-2x'></i></a>")		unless @website.social_twitter_uri.blank? %>
+			<%= raw("<a href=#{@website.social_twitter_uri} target='_blank' 	title=#{@website.social_twitter_uri}>	<img src='/images/assets/x-logo-black-16x16.jpeg' alt='X' style='vertical-align: middle; padding-bottom: 15px;' /></a>")		unless @website.social_twitter_uri.blank? %>
 			<%= raw("<a href=#{@website.social_instagram_uri} target='_blank' 	title=#{@website.social_instagram_uri}>	<i class='icon-instagram  icon-2x'></i></a>")			unless @website.social_instagram_uri.blank? %>
 			<%= raw("<a href=#{@website.social_pinterest_uri} target='_blank' 	title=#{@website.social_pinterest_uri}>	<i class='icon-pinterest-sign  icon-2x'></i></a>")		unless @website.social_pinterest_uri.blank? %>
 			<%= raw("<a href=#{@website.social_tumblr_uri} target='_blank' 		title=#{@website.social_tumblr_uri}>	<i class='icon-tumblr-sign  icon-2x'></i></a>")			unless @website.social_tumblr_uri.blank? %>
